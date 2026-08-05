@@ -34,7 +34,7 @@ from timezone_field import TimeZoneField
 from cosinnus.conf import settings
 from cosinnus.conf import settings as cosinnus_settings
 from cosinnus.core import signals
-from cosinnus.core.mail import convert_html_to_plaintext, send_mail_or_fail_threaded
+from cosinnus.core.mail import send_mail_or_fail_threaded
 from cosinnus.dynamic_fields.dynamic_fields import CosinnusDynamicFieldsModelMixin
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignmentModelMixin
@@ -43,6 +43,7 @@ from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from cosinnus.models.tagged import LikeableObjectMixin, LikeObject
 from cosinnus.utils.files import get_avatar_filename, image_thumbnail, image_thumbnail_url
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.html import convert_html_to_plaintext
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.user import get_newly_registered_user_email, is_user_active
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
@@ -197,6 +198,12 @@ class BaseUserProfile(
         help_text=(
             'Extra userprofile fields for each portal, as defined in `settings.COSINNUS_USERPROFILE_EXTRA_FIELDS`'
         ),
+    )
+    inactivity_notification_sent_at = models.DateTimeField(
+        _('Inactivity notification sent at'),
+        default=None,
+        blank=True,
+        null=True,
     )
     scheduled_for_deletion_at = models.DateTimeField(
         _('Scheduled for Deletion at'),
@@ -787,6 +794,9 @@ class GlobalUserNotificationSettingManager(models.Manager):
     _NOTIFICATION_CACHE_KEY = (
         'cosinnus/core/portal/%d/user/%d/globalnotificationsetting'  # portal_id, user_id  --> setting value (int)
     )
+    _PORTAL_GROUP_NOTIFICATION_CACHE_KEY = (
+        'cosinnus/core/portal/%d/user/%d/portalgroupnotificationsetting'  # portal_id, user_id  --> setting value (int)
+    )
     _ROCKETCHAT_NOTIFICATION_CACHE_KEY = (
         'cosinnus/core/portal/%d/user/%d/rocketchatnotificationsetting'  # portal_id, user_id  --> setting value (int)
     )
@@ -798,6 +808,18 @@ class GlobalUserNotificationSettingManager(models.Manager):
             setting = self.get_object_for_user(user).setting
             cache.set(
                 self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id),
+                setting,
+                settings.COSINNUS_GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT,
+            )
+        return setting
+
+    def get_portal_group_setting_for_user(self, user):
+        """Returns the cached setting value for this user's global notification setting."""
+        setting = cache.get(self._PORTAL_GROUP_NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
+        if setting is None:
+            setting = self.get_object_for_user(user).portal_group_setting
+            cache.set(
+                self._PORTAL_GROUP_NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id),
                 setting,
                 settings.COSINNUS_GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT,
             )
@@ -826,6 +848,7 @@ class GlobalUserNotificationSettingManager(models.Manager):
 
     def clear_cache_for_user(self, user):
         cache.delete(self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
+        cache.delete(self._PORTAL_GROUP_NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
         cache.delete(self._ROCKETCHAT_NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
 
 
@@ -845,25 +868,31 @@ class GlobalUserNotificationSetting(models.Model):
     # notifications are sent out based on settings for each project/group, sends other mail immediately
     SETTING_GROUP_INDIVIDUAL = 4
 
-    SETTING_CHOICES = (
+    # choices for portal-wide default-groups
+    PORTAL_GROUP_SETTING_CHOICES = (
         (
             SETTING_NEVER,
             pgettext_lazy(
-                'answer to "i wish to receive notification emails:"', 'Never (we will not send you any emails)'
+                'answer to "i wish to receive email notifications:"', 'Never (we will not send you any emails)'
             ),
         ),
         (
             SETTING_NOW,
             pgettext_lazy(
-                'answer to "i wish to receive notification emails:"', 'Immediately (an individual email per event)'
+                'answer to "i wish to receive email notifications:"', 'Immediately (an individual email per event)'
             ),
         ),
-        (SETTING_DAILY, pgettext_lazy('answer to "i wish to receive notification emails:"', 'In a Daily Report')),
-        (SETTING_WEEKLY, pgettext_lazy('answer to "i wish to receive notification emails:"', 'In a Weekly Report')),
+        (SETTING_DAILY, pgettext_lazy('answer to "i wish to receive email notifications:"', 'In a Daily Report')),
+        (SETTING_WEEKLY, pgettext_lazy('answer to "i wish to receive email notifications:"', 'In a Weekly Report')),
+    )
+
+    # choices for user-created groups, acts as a global cut-off switch to disable all notifications
+    # same choices as PORTAL_GROUP_SETTING_CHOICES + one choice for individual settings per group
+    SETTING_CHOICES = PORTAL_GROUP_SETTING_CHOICES + (
         (
             SETTING_GROUP_INDIVIDUAL,
             pgettext_lazy(
-                'answer to "i wish to receive notification emails:"', 'Individual settings for each Project/Group...'
+                'answer to "i wish to receive email notifications:"', 'Individual settings for each Project/Group...'
             ),
         ),
     )
@@ -877,17 +906,22 @@ class GlobalUserNotificationSetting(models.Model):
         (
             ROCKETCHAT_SETTING_OFF,
             pgettext_lazy(
-                'answer to "i wish to receive rocketchat notification emails:"', 'No E-Mails for RocketChat messages'
+                'answer to "i wish to receive rocketchat email notifications:"', 'No E-Mails for RocketChat messages'
             ),
         ),
         (
             ROCKETCHAT_SETTING_MENTIONS,
             pgettext_lazy(
-                'answer to "i wish to receive rocketchat notification emails:"',
+                'answer to "i wish to receive rocketchat email notifications:"',
                 'E-Mails for all direct messages and mentions',
             ),
         ),
     )
+
+    # valid values as sets for convenience
+    SETTING_VALID_VALUES = {value for value, label in SETTING_CHOICES}
+    PORTAL_GROUP_SETTING_VALID_VALUES = {value for value, label in PORTAL_GROUP_SETTING_CHOICES}
+    ROCKETCHAT_SETTING_VALID_VALUES = {value for value, label in ROCKETCHAT_SETTING_CHOICES}
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -911,10 +945,17 @@ class GlobalUserNotificationSetting(models.Model):
             'Determines if the user wants no mail, immediate mails,s aggregated mails, or group specific settings'
         ),
     )
+    portal_group_setting = models.PositiveSmallIntegerField(
+        choices=PORTAL_GROUP_SETTING_CHOICES,
+        default=settings.COSINNUS_DEFAULT_GLOBAL_NOTIFICATION_SETTING_PORTAL_GROUP,
+        help_text=(
+            'Determines if the user wants no mail, immediate mails, aggregated mails for portal-wide default groups'
+        ),
+    )
     rocketchat_setting = models.PositiveSmallIntegerField(
         choices=ROCKETCHAT_SETTING_CHOICES,
         default=settings.COSINNUS_DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING,
-        help_text='Determines if the user wants rocketchat notification emails',
+        help_text='Determines if the user wants rocketchat email notifications',
     )
     last_modified = models.DateTimeField(_('Last modified'), auto_now=True, editable=False)
 

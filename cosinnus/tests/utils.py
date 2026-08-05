@@ -2,12 +2,32 @@
 from __future__ import unicode_literals
 
 import sys
+from contextlib import contextmanager
 from importlib import import_module, reload
+from typing import Callable, TypeVar
 from unittest import skipIf, skipUnless
+from unittest.mock import MagicMock
 
+import django.dispatch
+from django.contrib.messages import get_messages
 from django.urls import clear_url_caches
 
 from cosinnus.conf import settings
+
+T = TypeVar('T', bound=Callable)
+
+# hide the functions in this module from unittest Assert-Error Trace
+# Exceptions are still shown
+__unittest = True
+
+
+def skipIfFlag(flag: str) -> Callable[[T], T]:
+    """
+    Skip a test if a commandline flag is present.
+    :param flag: the commandline flag, with dashes, e.g. `--flag`
+    :return: skipIf with parameters filled in
+    """
+    return skipIf(flag in sys.argv, f'commandline argument "{flag}" is present')
 
 
 def _is_custom_userprofile():
@@ -65,6 +85,7 @@ def reload_urlconf(urlconf=None):
 class CeleryTaskTestMixin:
     """Mixin to run Celery Tasks in test cases."""
 
+    @classmethod
     def runCeleryTasks(cls):
         """
         Our CeleryThreadTasks use on_commit callbacks that are not triggered in (non-transitional) test-cases.
@@ -72,3 +93,40 @@ class CeleryTaskTestMixin:
         better test readability.
         """
         return cls.captureOnCommitCallbacks(execute=True)
+
+
+@contextmanager
+def catch_signal(signal: django.dispatch.Signal, sender=None) -> MagicMock:
+    """Catch signals temporarily and return them."""
+    handler = MagicMock()
+    signal.connect(handler)
+    try:
+        yield handler
+    finally:
+        signal.disconnect(handler)
+
+
+# noinspection PyPep8Naming
+class CosinnusAssertsMixin:
+    def assertMessages(self, response, expected_messages, *, ordered=True):
+        """
+        adapted from
+        https://docs.djangoproject.com/en/5.0/_modules/django/contrib/messages/test/#MessagesTestMixin.assertMessages
+        """
+        request_messages = list(get_messages(response.wsgi_request))
+        string_messages = list(map(str, request_messages))
+        assertion = self.assertEqual if ordered else self.assertCountEqual
+        assertion(string_messages, expected_messages)
+
+    def assertUserLoggedIn(self, response, user_id):
+        self.assertTrue(response.wsgi_request.user.is_authenticated)
+        self.assertEqual(response.wsgi_request.user.id, user_id)
+
+    def assertUserNotLoggedIn(self, response):
+        self.assertFalse(response.wsgi_request.user.is_authenticated)
+        self.assertTrue(response.wsgi_request.user.is_anonymous)
+
+    def assertNoFormErrors(self, form):
+        errors = form.errors.as_data()
+        errors_flat = [f"'{field}': {error_list}" for field, error_list in errors.items()]
+        self.assertListEqual([], errors_flat)

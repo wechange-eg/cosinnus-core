@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_file package &#8212; Cosinnus 2.0.0 documentation</title>
+    <title>cosinnus_file package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -195,7 +195,7 @@ if has_more == False, the receiving widget will assume no further data can be lo
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_file.dashboard.Latest.title">
-<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Latest</span> <span class="pre">Files'</span></em><a class="headerlink" href="#cosinnus_file.dashboard.Latest.title" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Neueste</span> <span class="pre">Dateien'</span></em><a class="headerlink" href="#cosinnus_file.dashboard.Latest.title" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -778,7 +778,7 @@ and delete the media-image copy of the file if it was an image.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus_file.views.FileDeleteElementView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_file.views.</span></span><span class="sig-name descname"><span class="pre">FileDeleteElementView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_file.views.FileDeleteElementView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.common.DeleteElementView" title="cosinnus.views.common.DeleteElementView"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteElementView</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_file.views.RedirectIfSoftDisabledMixin" title="cosinnus_file.views.RedirectIfSoftDisabledMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectIfSoftDisabledMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.html#cosinnus.views.common.DeleteElementView" title="cosinnus.views.common.DeleteElementView"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteElementView</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_file.views.FileDeleteElementView.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_file.views.FileDeleteElementView.model" title="Permalink to this definition">¶</a></dt>
@@ -900,7 +900,7 @@ template rendered with the given context.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus_file.views.FileHybridListView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_file.views.</span></span><span class="sig-name descname"><span class="pre">FileHybridListView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_file.views.FileHybridListView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadWriteHybridMixin" title="cosinnus.views.mixins.group.RequireReadWriteHybridMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadWriteHybridMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.tagged.HierarchyPathMixin" title="cosinnus.views.mixins.tagged.HierarchyPathMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">HierarchyPathMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.hierarchy.HierarchicalListCreateViewMixin" title="cosinnus.views.mixins.hierarchy.HierarchicalListCreateViewMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">HierarchicalListCreateViewMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.filters.CosinnusFilterMixin" title="cosinnus.views.mixins.filters.CosinnusFilterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusFilterMixin</span></code></a>, <a class="reference internal" href="#cosinnus_file.views.FileFormMixin" title="cosinnus_file.views.FileFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileFormMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">AjaxFormsCreateViewMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateView</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadWriteHybridMixin" title="cosinnus.views.mixins.group.RequireReadWriteHybridMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadWriteHybridMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.tagged.HierarchyPathMixin" title="cosinnus.views.mixins.tagged.HierarchyPathMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">HierarchyPathMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.hierarchy.HierarchicalListCreateViewMixin" title="cosinnus.views.mixins.hierarchy.HierarchicalListCreateViewMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">HierarchicalListCreateViewMixin</span></code></a>, <a class="reference internal" href="#cosinnus_file.views.RedirectIfSoftDisabledMixin" title="cosinnus_file.views.RedirectIfSoftDisabledMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectIfSoftDisabledMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.filters.CosinnusFilterMixin" title="cosinnus.views.mixins.filters.CosinnusFilterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusFilterMixin</span></code></a>, <a class="reference internal" href="#cosinnus_file.views.FileFormMixin" title="cosinnus_file.views.FileFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileFormMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">AjaxFormsCreateViewMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateView</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_file.views.FileHybridListView.ajax_form_partial">
 <span class="sig-name descname"><span class="pre">ajax_form_partial</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus_file/file_form_core.html'</span></em><a class="headerlink" href="#cosinnus_file.views.FileHybridListView.ajax_form_partial" title="Permalink to this definition">¶</a></dt>
@@ -941,7 +941,7 @@ template rendered with the given context.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_file.views.FileHybridListView.message_success_folder">
-<span class="sig-name descname"><span class="pre">message_success_folder</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Folder</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">was</span> <span class="pre">created</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_file.views.FileHybridListView.message_success_folder" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success_folder</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Ordner</span> <span class="pre">„%(title)s“</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">erstellt.'</span></em><a class="headerlink" href="#cosinnus_file.views.FileHybridListView.message_success_folder" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -960,7 +960,7 @@ template rendered with the given context.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus_file.views.FileIndexView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_file.views.</span></span><span class="sig-name descname"><span class="pre">FileIndexView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_file.views.FileIndexView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectView</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <a class="reference internal" href="#cosinnus_file.views.RedirectIfSoftDisabledMixin" title="cosinnus_file.views.RedirectIfSoftDisabledMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectIfSoftDisabledMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectView</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus_file.views.FileIndexView.get_redirect_url">
 <span class="sig-name descname"><span class="pre">get_redirect_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_file.views.FileIndexView.get_redirect_url" title="Permalink to this definition">¶</a></dt>
@@ -1019,7 +1019,7 @@ method.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus_file.views.FileMoveElementView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_file.views.</span></span><span class="sig-name descname"><span class="pre">FileMoveElementView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_file.views.FileMoveElementView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="cosinnus.views.html#cosinnus.views.hierarchy.MoveElementView" title="cosinnus.views.hierarchy.MoveElementView"><code class="xref py py-class docutils literal notranslate"><span class="pre">MoveElementView</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_file.views.RedirectIfSoftDisabledMixin" title="cosinnus_file.views.RedirectIfSoftDisabledMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectIfSoftDisabledMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.html#cosinnus.views.hierarchy.MoveElementView" title="cosinnus.views.hierarchy.MoveElementView"><code class="xref py py-class docutils literal notranslate"><span class="pre">MoveElementView</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_file.views.FileMoveElementView.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus_file.views.FileMoveElementView.model" title="Permalink to this definition">¶</a></dt>
@@ -1031,7 +1031,12 @@ method.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus_file.views.FileUpdateView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_file.views.</span></span><span class="sig-name descname"><span class="pre">FileUpdateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_file.views.FileUpdateView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="#cosinnus_file.views.FileFormMixin" title="cosinnus_file.views.FileFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileFormMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateView</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireWriteMixin" title="cosinnus.views.mixins.group.RequireWriteMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteMixin</span></code></a>, <a class="reference internal" href="#cosinnus_file.views.RedirectIfSoftDisabledMixin" title="cosinnus_file.views.RedirectIfSoftDisabledMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectIfSoftDisabledMixin</span></code></a>, <a class="reference internal" href="#cosinnus_file.views.FileFormMixin" title="cosinnus_file.views.FileFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileFormMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_file.views.FileUpdateView.ALLOW_VIEW_ACCESS_WHEN_GROUP_APP_DEACTIVATED">
+<span class="sig-name descname"><span class="pre">ALLOW_VIEW_ACCESS_WHEN_GROUP_APP_DEACTIVATED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#cosinnus_file.views.FileUpdateView.ALLOW_VIEW_ACCESS_WHEN_GROUP_APP_DEACTIVATED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_file.views.FileUpdateView.form_class">
 <span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus_file.views.FileUpdateView.form_class" title="Permalink to this definition">¶</a></dt>
@@ -1051,12 +1056,12 @@ method.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_file.views.FileUpdateView.message_error">
-<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'File</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">be</span> <span class="pre">updated.'</span></em><a class="headerlink" href="#cosinnus_file.views.FileUpdateView.message_error" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Datei</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">konnte</span> <span class="pre">nicht</span> <span class="pre">geändert</span> <span class="pre">werden.'</span></em><a class="headerlink" href="#cosinnus_file.views.FileUpdateView.message_error" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_file.views.FileUpdateView.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'File</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">was</span> <span class="pre">updated</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_file.views.FileUpdateView.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Datei</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">geändert.'</span></em><a class="headerlink" href="#cosinnus_file.views.FileUpdateView.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1075,7 +1080,7 @@ method.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus_file.views.FolderDownloadView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_file.views.</span></span><span class="sig-name descname"><span class="pre">FolderDownloadView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_file.views.FolderDownloadView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireReadMixin" title="cosinnus.views.mixins.group.RequireReadMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireReadMixin</span></code></a>, <a class="reference internal" href="#cosinnus_file.views.RedirectIfSoftDisabledMixin" title="cosinnus_file.views.RedirectIfSoftDisabledMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RedirectIfSoftDisabledMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.FilterGroupMixin" title="cosinnus.views.mixins.group.FilterGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroupMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code></p>
 <p>Lets the user download a FileEntry file (file is determined by slug),
 while the user never gets to see the server file path.
 Mime type is guessed based on the file.</p>
@@ -1101,6 +1106,19 @@ Example: /download/?files=123&amp;files=377</p>
 template rendered with the given context.</p>
 <p>Pass response_kwargs to the constructor of the response class.</p>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_file.views.RedirectIfSoftDisabledMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_file.views.</span></span><span class="sig-name descname"><span class="pre">RedirectIfSoftDisabledMixin</span></span><a class="headerlink" href="#cosinnus_file.views.RedirectIfSoftDisabledMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Views with this mixin will redirect the user to their dashboard if <cite>COSINNUS_SOFT_DISABLE_COSINNUS_FILE_APP</cite>
+is active. This is in lieu of completely disabling the app.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_file.views.RedirectIfSoftDisabledMixin.dispatch">
+<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_file.views.RedirectIfSoftDisabledMixin.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -1140,7 +1158,7 @@ template rendered with the given context.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_file.views.delete_element_view">
-<span class="sig-prename descclassname"><span class="pre">cosinnus_file.views.</span></span><span class="sig-name descname"><span class="pre">delete_element_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_file.views.delete_element_view" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">cosinnus_file.views.</span></span><span class="sig-name descname"><span class="pre">delete_element_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_file.views.delete_element_view" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
@@ -1213,7 +1231,7 @@ Example: /download/?files=123&amp;files=377</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_file.views.move_element_view">
-<span class="sig-prename descclassname"><span class="pre">cosinnus_file.views.</span></span><span class="sig-name descname"><span class="pre">move_element_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_file.views.move_element_view" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">cosinnus_file.views.</span></span><span class="sig-name descname"><span class="pre">move_element_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_file.views.move_element_view" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">

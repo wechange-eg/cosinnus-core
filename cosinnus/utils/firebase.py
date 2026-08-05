@@ -99,6 +99,7 @@ if settings.COSINNUS_FIREBASE_ENABLED:
     @receiver(signals.users_received_notification_alert)
     def users_received_notification_alert_hook(sender, user_ids, **kwargs):
         """A signal receiver that sends out empty firebase messages to each user that has just received
-        a new `NotificationAlert`."""
+        a new `NotificationAlert`.
+        @param sender: may be None (for a notification event that has no originating user)"""
         if user_ids:
             send_firebase_message_threaded(user_ids)

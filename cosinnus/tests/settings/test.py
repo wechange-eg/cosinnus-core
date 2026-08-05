@@ -1,7 +1,10 @@
+from unittest.mock import MagicMock
+
 from config.settings.base import *  # noqa
 
 SITE_ID = 1
 COSINNUS_PORTAL_URL = 'localhost'
+COSINNUS_ENV_FILE = '.env.test'
 
 # import the settings from this project's "config.base"
 # the settings hierarchy is:
@@ -38,8 +41,15 @@ LANGUAGE_CODE = 'en'
 TESTING = True
 TEMPLATE_DEBUG = False
 
+# disable threading for worker threads, so we get proper error messages
+COSINNUS_WORKER_THREADS_DISABLE_THREADING = True
+
 # add test app
 INSTALLED_APPS += ['cosinnus.tests']  # noqa
+
+# add unused wagtail app to mitigate django bug with db-flush in tests
+# see https://github.com/wagtail/wagtail/issues/1824#issuecomment-1271840741
+INSTALLED_APPS += ['wagtail.contrib.search_promotions']  # noqa
 
 # disable services
 COSINNUS_CLOUD_ENABLED = False
@@ -47,6 +57,9 @@ COSINNUS_CONFERENCES_ENABLED = False
 COSINNUS_ROCKET_ENABLED = False
 COSINNUS_ETHERPAD_DISABLE_HOOKS = True
 COSINNUS_PAYMENTS_ENABLED = False
+COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS = False
+COSINNUS_DECK_ENABLED = False
+COSINNUS_EVENT_V3_CALENDAR_ENABLED = False
 
 # enable tested features
 COSINNUS_USER_GUEST_ACCOUNTS_ENABLED = True
@@ -54,3 +67,65 @@ COSINNUS_ADMIN_USER_APIS_ENABLED = True
 
 # set elastic to run without threads during testing
 COSINNUS_ELASTIC_BACKEND_RUN_THREADED = False
+
+
+# turn off V3 Frontend to disable redirects on requests
+COSINNUS_V3_FRONTEND_ENABLED = False
+
+# Add dummy opencage key, as the API calls are mocked.
+COSINNUS_GEOCODE_OPENCAGE_KEY = 'dummy-test-key'
+
+# Add settings for mocked goecode latitude and longitude to be checked in tests (geocode for "Berlin")
+TEST_GEOCODE_MOCKED_LAT = 52.5173885
+TEST_GEOCODE_MOCKED_LON = 13.3951309
+
+# Use non-persistent process-local cache to start every test-run with clean cache
+# and not interfere with `normal` cache. This separates caches from parallel processes.
+# see https://code.djangoproject.com/ticket/11505#comment:25
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
+
+
+def monkey_patch_global_cache_cleanup():
+    # monkey patch SimpleTestCase run method to force cache reset globally after every test
+    # this should be done in a pytest autoload-fixture:
+    # https://code.djangoproject.com/ticket/11505#comment:25
+    from django.conf import settings
+    from django.core.cache import cache
+    from django.test import SimpleTestCase
+
+    original_run = SimpleTestCase.run
+
+    def patched_run(self, result=None):
+        def global_cache_cleanup():
+            if settings.CACHES['default']['BACKEND'] == 'django.core.cache.backends.locmem.LocMemCache':
+                cache.clear()
+
+        self.addCleanup(global_cache_cleanup)
+
+        return original_run(self, result)
+
+    if not getattr(SimpleTestCase, '_cache_cleanup_patched', False):
+        SimpleTestCase._cache_cleanup_patched = True
+        SimpleTestCase.run = patched_run
+
+
+monkey_patch_global_cache_cleanup()
+
+
+def monkey_patch_geocode_opencage_api():
+    # Patch the OpenCage geocode function returning a mock with fixed latitude and longitude from test settings.
+    from geopy import OpenCage
+
+    OpenCage.geocode = MagicMock(
+        return_value=MagicMock(
+            latitude=TEST_GEOCODE_MOCKED_LAT,
+            longitude=TEST_GEOCODE_MOCKED_LON,
+        )
+    )
+
+
+monkey_patch_geocode_opencage_api()

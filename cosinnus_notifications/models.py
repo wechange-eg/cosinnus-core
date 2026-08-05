@@ -170,6 +170,7 @@ class NotificationEvent(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('User who caused this notification event'),
+        null=True,
         on_delete=models.CASCADE,
         related_name='+',
     )
@@ -262,6 +263,7 @@ class NotificationAlert(models.Model):
     action_user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('Last user who caused this notification event'),
+        null=True,
         help_text='For multi-user alerts, this points to the last user who changed anything about this alert.',
         on_delete=models.CASCADE,
         related_name='+',
@@ -336,7 +338,7 @@ class NotificationAlert(models.Model):
         self.user = user
         self.target_object = target_object
         self.group = group
-        self.action_user = action_user
+        self.action_user = action_user  # Note: may be `None`!
         self.notification_id = notification_id
         # fill default values
         self.type = NotificationAlert.TYPE_SINGLE_ALERT
@@ -366,7 +368,7 @@ class NotificationAlert(models.Model):
 
         notification_event = NotificationEvent(
             group=self.group,
-            user=self.action_user,
+            user=self.action_user,  # Note: may be `None`
             notification_id=self.notification_id,
             target_object=self.target_object,
         )
@@ -449,7 +451,7 @@ class NotificationAlert(models.Model):
     def get_alert_bundle_hash(self):
         """Generates the bundle hash for an alert.
         Consists of [portal-id]/[group-id]/[item-model]/[notification-id]/[action-user-id]"""
-        return self._get_alert_base_hash() + str(self.action_user.id)
+        return self._get_alert_base_hash() + str(self.action_user and self.action_user.id or 'unk')
 
     def add_new_multi_action_user(self, new_action_user):
         """Adds a new action_user to the multi_user_list"""
@@ -476,13 +478,15 @@ class NotificationAlert(models.Model):
 
     def __str__(self):
         return (
-            '<NotificationAlert: %(user)s, group: %(group)s, item_hash: %(item_hash)s, last_event_at: '
-            '%(last_event_at)s>'
+            '<NotificationAlert %(id)s: %(user)s, group: %(group)s, item_hash: %(item_hash)s, last_event_at: '
+            '%(last_event_at)s, action_user: %(action_user)s>'
         ) % {
+            'id': str(self.id),
             'user': self.user,
             'group': str(self.group),
             'item_hash': self.item_hash,
             'last_event_at': str(self.last_event_at),
+            'action_user': str(self.action_user),
         }
 
 
@@ -505,20 +509,20 @@ class SerializedNotificationAlert(DashboardItem):
         from cosinnus.templatetags.cosinnus_tags import full_name
 
         if not action_user:
-            logger.warn(
-                '>>>>>>>> No action_user supplied for `SerializedNotificationAlert`, retrieving with singular query!'
-            )
-            action_user = alert.action_user
-        if not action_user_profile:
-            logger.warn(
-                '>>>>>>>> No action_user_profile supplied for `SerializedNotificationAlert`, retrieving with singular '
-                'query!'
-            )
+            action_user = alert.action_user  # Note: `action_user` can still be None as alert.action_user is nullable!
+        if action_user and not action_user_profile:
             action_user_profile = action_user.cosinnus_profile
+
+        mark_sender_bold = True
+        if action_user:
+            action_user_name = full_name(action_user)
+        else:
+            action_user_name = pgettext_lazy('An unknown user placeholder', 'Unknown')
+            mark_sender_bold = False
 
         # translate the label using current variables
         string_variables = {
-            'sender_name': '<b>%s</b>' % escape(full_name(action_user)),
+            'sender_name': '<b>%s</b>' % escape(action_user_name) if mark_sender_bold else escape(action_user_name),
             'team_name': '<b>%s</b>' % (escape(alert.group.name) if alert.group else '*unknowngroup*'),
             'portal_name': escape(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS)),
             'object_name': '<b>%s</b>' % escape(alert.target_title),

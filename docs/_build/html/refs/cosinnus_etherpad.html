@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_etherpad package &#8212; Cosinnus 2.0.0 documentation</title>
+    <title>cosinnus_etherpad package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -291,7 +291,7 @@ if has_more == False, the receiving widget will assume no further data can be lo
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_etherpad.dashboard.Latest.title">
-<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Last</span> <span class="pre">accessed</span> <span class="pre">Etherpads'</span></em><a class="headerlink" href="#cosinnus_etherpad.dashboard.Latest.title" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Zuletzt</span> <span class="pre">bearbeitete</span> <span class="pre">Pads'</span></em><a class="headerlink" href="#cosinnus_etherpad.dashboard.Latest.title" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -957,7 +957,7 @@ customize the behavior of the Manager.</p>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cosinnus_etherpad.models.TYPE_CHOICES">
-<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.models.</span></span><span class="sig-name descname"><span class="pre">TYPE_CHOICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">((0,</span> <span class="pre">'Pad'),</span> <span class="pre">(1,</span> <span class="pre">'Ethercalc'))</span></em><a class="headerlink" href="#cosinnus_etherpad.models.TYPE_CHOICES" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">cosinnus_etherpad.models.</span></span><span class="sig-name descname"><span class="pre">TYPE_CHOICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">((0,</span> <span class="pre">'Pad'),</span> <span class="pre">(1,</span> <span class="pre">'Tabelle'))</span></em><a class="headerlink" href="#cosinnus_etherpad.models.TYPE_CHOICES" title="Permalink to this definition">¶</a></dt>
 <dd><p>Choices for <code class="xref py py-attr docutils literal notranslate"><span class="pre">visibility</span></code>: <code class="docutils literal notranslate"><span class="pre">(int,</span> <span class="pre">str)</span></code></p>
 </dd></dl>
 
@@ -1277,12 +1277,12 @@ template rendered with the given context.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadFormMixin.message_error">
-<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pad</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">be</span> <span class="pre">edited.'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadFormMixin.message_error" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pad</span> <span class="pre">„%(title)s“</span> <span class="pre">konnte</span> <span class="pre">nicht</span> <span class="pre">bearbeitet</span> <span class="pre">werden.'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadFormMixin.message_error" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadFormMixin.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pad</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">was</span> <span class="pre">edited</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadFormMixin.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pad</span> <span class="pre">„%(title)s“</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">bearbeitet.'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadFormMixin.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1330,17 +1330,17 @@ slug over to the non-editable field</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadHybridListView.message_error">
-<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pad</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">be</span> <span class="pre">added.'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.message_error" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pad</span> <span class="pre">„%(title)s“</span> <span class="pre">konnte</span> <span class="pre">nicht</span> <span class="pre">hinzugefügt</span> <span class="pre">werden.'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.message_error" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadHybridListView.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pad</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">was</span> <span class="pre">added</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Pad</span> <span class="pre">„%(title)s“</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">hinzugefügt.'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_etherpad.views.EtherpadHybridListView.message_success_folder">
-<span class="sig-name descname"><span class="pre">message_success_folder</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Folder</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">was</span> <span class="pre">created</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.message_success_folder" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success_folder</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Ordner</span> <span class="pre">„%(title)s“</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">erstellt.'</span></em><a class="headerlink" href="#cosinnus_etherpad.views.EtherpadHybridListView.message_success_folder" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

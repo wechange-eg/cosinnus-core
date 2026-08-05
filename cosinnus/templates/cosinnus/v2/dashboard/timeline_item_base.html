@@ -29,19 +29,23 @@
 				        </form>
 			        {% endblock %}
 	        	{% endif %}
-				<li>
-					<a href="#" {% cosinnus_report_object_action item %}>
-						{% trans "Report offensive content" %}
-					</a>
-				</li>
+                {% block report_button_frame %}
+                    <li>
+                        <a href="#" {% cosinnus_report_object_action item %}>
+                            {% trans "Report offensive content" %}
+                        </a>
+                    </li>
+                {% endblock %}
 	        </ul>
 		</div>
 		
 		<div class="timeline-item-row header flex-row">
 			<div class="avatar">
-				<a href="{{ item.creator|profile_url }}">
-					{% include "cosinnus/user/user_avatar_image.html" with user=item.creator %}
-				</a>
+                {% block avatar %}
+                    <a href="{{ item.creator|profile_url }}">
+                        {% include "cosinnus/user/user_avatar_image.html" with user=item.creator %}
+                    </a>
+                {% endblock %}
 			</div>
 			<div class="header-info flex-grow">
 				<div class="item-info">
@@ -130,7 +134,7 @@
 				
 				<div class="timeline-item-row meta-row text-small flex-row plain-links remove-if-empty">
 					<div class="timeline-tags flex-grow">
-						{% if comments %}
+						{% if item.show_comments_on_dashboard and comments %}
 							{% with comments_filtered=comments|filter_comments_for_user:request.user %}
                                 {% with comment_count=comments_filtered.count %}
                                     {% if comment_count > 0 %}
@@ -162,15 +166,15 @@
 						{% endblock %}
 					</div>
 					{% if SETTINGS.COSINNUS_SHOW_LIKES_BOOKMARKS_FOLLOWS_BUTTONS and request.user.is_authenticated and not request.user.is_guest %}
-						<div class="action-buttons">
+						<div class="action-buttons remove-if-empty">
 							{% block action_buttons %}{% endblock %}
 						</div>
 					{% endif %}
 				</div>
 				
-				<hr class="seperator {% if not comments %}remove-if-prev-empty{% endif %}" />
+				<hr class="seperator {% if not item.show_comments_on_dashboard or not comments %}remove-if-prev-empty{% endif %}" />
 			
-				{% if comments %}
+				{% if item.show_comments_on_dashboard and comments %}
 					{% include 'cosinnus/v2/dashboard/timeline_item_comments.html' with item=item comments=comments.all|filter_comments_for_user:request.user %}
 				{% endif %}
 			{% endwith %}

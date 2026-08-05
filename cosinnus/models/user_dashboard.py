@@ -41,7 +41,7 @@ class DashboardItem(dict):
     group_icon = None  # group type icon
     avatar = None
 
-    def __init__(self, obj=None, is_emphasized=False, user=None):
+    def __init__(self, obj=None, is_emphasized=False, user=None, url=None):
         if obj:
             # Support for `TranslateableFieldsModelMixin
             if hasattr(obj, 'get_translated_readonly_instance'):
@@ -112,6 +112,8 @@ class DashboardItem(dict):
                             self['subtext'] = date_dict
                         else:
                             self['subtext'] = date_dict.get('date')
+        if url:
+            self['url'] = url
 
     def as_menu_item(self):
         image = self['avatar'] if 'avatar' in self else None

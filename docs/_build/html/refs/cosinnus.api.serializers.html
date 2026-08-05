@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.api.serializers package &#8212; Cosinnus 2.0.0 documentation</title>
+    <title>cosinnus.api.serializers package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -100,7 +100,7 @@
 <dd><p>Bases: <a class="reference internal" href="#cosinnus.api.serializers.group.CosinnusSocietySerializer.Meta" title="cosinnus.api.serializers.group.CosinnusSocietySerializer.Meta"><code class="xref py py-class docutils literal notranslate"><span class="pre">Meta</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.api.serializers.group.CosinnusProjectSerializer.Meta.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('url',</span> <span class="pre">'name',</span> <span class="pre">'slug',</span> <span class="pre">'description',</span> <span class="pre">'description_long',</span> <span class="pre">'contact_info',</span> <span class="pre">'avatar',</span> <span class="pre">'website',</span> <span class="pre">'related',</span> <span class="pre">'child_projects',</span> <span class="pre">'topics',</span> <span class="pre">'tags',</span> <span class="pre">'locations',</span> <span class="pre">'created',</span> <span class="pre">'last_modified',</span> <span class="pre">'is_open_for_cooperation',</span> <span class="pre">'parent')</span></em><a class="headerlink" href="#cosinnus.api.serializers.group.CosinnusProjectSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('url',</span> <span class="pre">'name',</span> <span class="pre">'slug',</span> <span class="pre">'id',</span> <span class="pre">'description',</span> <span class="pre">'description_long',</span> <span class="pre">'contact_info',</span> <span class="pre">'avatar',</span> <span class="pre">'website',</span> <span class="pre">'related',</span> <span class="pre">'child_projects',</span> <span class="pre">'topics',</span> <span class="pre">'tags',</span> <span class="pre">'locations',</span> <span class="pre">'created',</span> <span class="pre">'last_modified',</span> <span class="pre">'is_open_for_cooperation',</span> <span class="pre">'background_image_small',</span> <span class="pre">'background_image_large',</span> <span class="pre">'parent')</span></em><a class="headerlink" href="#cosinnus.api.serializers.group.CosinnusProjectSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -123,7 +123,7 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.api.serializers.group.CosinnusSocietySerializer.Meta.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('url',</span> <span class="pre">'name',</span> <span class="pre">'slug',</span> <span class="pre">'description',</span> <span class="pre">'description_long',</span> <span class="pre">'contact_info',</span> <span class="pre">'avatar',</span> <span class="pre">'website',</span> <span class="pre">'related',</span> <span class="pre">'child_projects',</span> <span class="pre">'topics',</span> <span class="pre">'tags',</span> <span class="pre">'locations',</span> <span class="pre">'created',</span> <span class="pre">'last_modified',</span> <span class="pre">'is_open_for_cooperation')</span></em><a class="headerlink" href="#cosinnus.api.serializers.group.CosinnusSocietySerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('url',</span> <span class="pre">'name',</span> <span class="pre">'slug',</span> <span class="pre">'id',</span> <span class="pre">'description',</span> <span class="pre">'description_long',</span> <span class="pre">'contact_info',</span> <span class="pre">'avatar',</span> <span class="pre">'website',</span> <span class="pre">'related',</span> <span class="pre">'child_projects',</span> <span class="pre">'topics',</span> <span class="pre">'tags',</span> <span class="pre">'locations',</span> <span class="pre">'created',</span> <span class="pre">'last_modified',</span> <span class="pre">'is_open_for_cooperation',</span> <span class="pre">'background_image_small',</span> <span class="pre">'background_image_large')</span></em><a class="headerlink" href="#cosinnus.api.serializers.group.CosinnusSocietySerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -132,6 +132,18 @@
 <dd><p>alias of <a class="reference internal" href="cosinnus.models.html#cosinnus.models.group_extra.CosinnusSociety" title="cosinnus.models.group_extra.CosinnusSociety"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusSociety</span></code></a></p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.serializers.group.CosinnusSocietySerializer.get_background_image_large">
+<span class="sig-name descname"><span class="pre">get_background_image_large</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.serializers.group.CosinnusSocietySerializer.get_background_image_large" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the large wallpaper thumbnail url the same size as used by the map tiles.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.serializers.group.CosinnusSocietySerializer.get_background_image_small">
+<span class="sig-name descname"><span class="pre">get_background_image_small</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.serializers.group.CosinnusSocietySerializer.get_background_image_small" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the small wallpaper thumbnail url the same size as used by the map tiles.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -202,7 +214,7 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.api.serializers.portal.PortalSettingsSerializer.Meta.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('name',</span> <span class="pre">'background_image',</span> <span class="pre">'logo_image',</span> <span class="pre">'top_color',</span> <span class="pre">'bottom_color',</span> <span class="pre">'extra_css')</span></em><a class="headerlink" href="#cosinnus.api.serializers.portal.PortalSettingsSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('name',</span> <span class="pre">'display_name',</span> <span class="pre">'background_image',</span> <span class="pre">'logo_image',</span> <span class="pre">'top_color',</span> <span class="pre">'bottom_color',</span> <span class="pre">'extra_css')</span></em><a class="headerlink" href="#cosinnus.api.serializers.portal.PortalSettingsSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -212,6 +224,11 @@
 </dd></dl>
 
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api.serializers.portal.PortalSettingsSerializer.get_display_name">
+<span class="sig-name descname"><span class="pre">get_display_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api.serializers.portal.PortalSettingsSerializer.get_display_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.api.serializers.portal.PortalSettingsSerializer.get_logo_image">
@@ -277,7 +294,7 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.api.serializers.user.UserSerializer.Meta.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'username',</span> <span class="pre">'first_name',</span> <span class="pre">'last_name',</span> <span class="pre">'profile')</span></em><a class="headerlink" href="#cosinnus.api.serializers.user.UserSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'username',</span> <span class="pre">'first_name',</span> <span class="pre">'last_name',</span> <span class="pre">'is_guest',</span> <span class="pre">'profile')</span></em><a class="headerlink" href="#cosinnus.api.serializers.user.UserSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

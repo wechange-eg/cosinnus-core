@@ -4,6 +4,8 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from rest_framework.test import APIClient, APITestCase
 
+from cosinnus.conf import settings
+
 
 class UserProfileTestView(APITestCase):
     def setUp(self):
@@ -77,7 +79,7 @@ class UserProfileTestView(APITestCase):
         self.assertEqual(response_json['data']['user']['contact_infos'], user_contact_infos)
         self.assertEqual(self.user_profile.dynamic_fields['contact_infos'], user_contact_infos)
 
-    def test_user_location(self):
+    def test_user_location_geocode(self):
         user_location = 'Alabama'
         self.user_data.update({'location': user_location})
 
@@ -86,7 +88,11 @@ class UserProfileTestView(APITestCase):
         self.user_profile.refresh_from_db()
 
         self.assertEqual(response_json['data']['user']['location'], user_location)
+        self.assertEqual(response_json['data']['user']['location_lat'], settings.TEST_GEOCODE_MOCKED_LAT)
+        self.assertEqual(response_json['data']['user']['location_lon'], settings.TEST_GEOCODE_MOCKED_LON)
         self.assertEqual(self.user_profile.media_tag.location, user_location)
+        self.assertEqual(self.user_profile.media_tag.location_lat, settings.TEST_GEOCODE_MOCKED_LAT)
+        self.assertEqual(self.user_profile.media_tag.location_lon, settings.TEST_GEOCODE_MOCKED_LON)
 
     def test_user_tags(self):
         user_tags = ['Alabama', 'Buenos Aires']

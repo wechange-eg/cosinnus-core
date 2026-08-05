@@ -3,9 +3,7 @@ from __future__ import print_function, unicode_literals
 
 import logging
 import sys
-from threading import Thread
 
-import html2text
 from django.core.mail import EmailMessage, get_connection
 from django.core.mail.message import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -17,7 +15,8 @@ from django.utils.translation import gettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.utils.html import replace_non_portal_urls
+from cosinnus.utils.html import convert_html_to_plaintext, replace_non_portal_urls
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import get_list_unsubscribe_url
 
 logger = logging.getLogger('cosinnus')
@@ -106,25 +105,6 @@ def deliver_mail(to, subject, message, from_email, bcc=None, is_html=False, head
     return ret
 
 
-def convert_html_to_plaintext(html_message):
-    """Converts a cosinnus HTML rendered message to useful plaintext"""
-
-    htmler = html2text.HTML2Text()
-    htmler.ignore_images = True
-    htmler.body_width = 0
-    text_message = htmler.handle(html_message)
-    # clean text message from any lines containing ONLY '-' or '|' in any order, but preserve newlines
-    clean_text = ''
-    for line in text_message.split('\n'):
-        line = line.strip()
-        if len(line) > 0 and len(line.replace('|', '').replace('-', '').replace(' ', '')) == 0:
-            continue
-        if line.startswith('| '):
-            continue
-        clean_text += line + '\n'
-    return clean_text
-
-
 def _mail_print(to, subject, template, data, from_email=None, bcc=None, is_html=False):
     """DEBUG ONLY"""
     if settings.DEBUG:
@@ -137,7 +117,7 @@ def _mail_print(to, subject, template, data, from_email=None, bcc=None, is_html=
         print(render_to_string(template, data))
 
 
-def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
+def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is_html=False, raise_on_error=False):
     # remove newlines from header
     subject = subject.replace('\n', ' ').replace('\r', ' ')
 
@@ -154,13 +134,17 @@ def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is
         except Exception:
             extra.update({'sys_except': 'could not print'})
         logger.warn('Cosinnus.core.mail: Failed to send mail!', extra=extra)
+        if raise_on_error:
+            raise
         if settings.DEBUG:
             print(('>> extra:', extra))
             raise
             _mail_print(to, subject, template, data, from_email, bcc, is_html)
 
 
-def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc=None, is_html=False):
+def send_mail_or_fail_threaded(
+    to, subject, template, data, from_email=None, bcc=None, is_html=False, raise_on_error=False
+):
     if False and settings.COSINNUS_USE_CELERY:
         # We enabled Celery to RocketChat tasks. But we do not want to enable email tasks with it.
         # TODO: Remove the "False" check to enable the email task.
@@ -173,7 +157,7 @@ def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc
         mail_thread.start()
 
 
-def send_html_mail(to_user, subject, html_content, topic_instead_of_subject=None, threaded=False):
+def send_html_mail(to_user, subject, html_content, topic_instead_of_subject=None, threaded=False, raise_on_error=False):
     """Sends out a pretty html to an email-address.
     The given `html_content` will be placed inside the notification html template,
     and the style will be a "from-portal" style (instead of a "from-group" style.
@@ -189,7 +173,7 @@ def send_html_mail(to_user, subject, html_content, topic_instead_of_subject=None
         send_mail_func = send_mail_or_fail_threaded
     else:
         send_mail_func = send_mail_or_fail
-    send_mail_func(to_user.email, subject, template, data, is_html=True)
+    send_mail_func(to_user.email, subject, template, data, is_html=True, raise_on_error=raise_on_error)
 
 
 def send_html_mail_threaded(to_user, subject, html_content, topic_instead_of_subject=None):
@@ -276,7 +260,7 @@ def get_common_mail_context(request, group=None, user=None):
     return context
 
 
-class MailThread(Thread):
+class MailThread(CosinnusWorkerThread):
     def __init__(self, *args, **kwargs):
         self.to = []
         self.subject = []
@@ -307,3 +291,25 @@ class MailThread(Thread):
                 self.bcc[i],
                 is_html=self.is_html[i],
             )
+
+
+def send_system_mail_to_support(subject, template, data, request=None, group=None, user=None, is_html=False):
+    """
+    Send system messages to current portal's support email.
+    Does nothing if no support email is set in the current portal.
+
+    Note: ``template`` can be None, if so we are looking for a ``content`` key in ``data`` to fill the email message.
+    """
+    support_email = CosinnusPortal.get_current().support_email
+    if not support_email:
+        return
+
+    context = get_common_mail_context(request=request, group=group, user=user)
+    context.update(data)
+    context.update(
+        {
+            'unsubscribe_url': None,
+        }
+    )
+
+    send_mail_or_fail(to=support_email, subject=subject, template=template, data=context, is_html=is_html)

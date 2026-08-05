@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
+from django.test import override_settings
 from django.urls import reverse
 from rest_framework.test import APITestCase
 
@@ -208,6 +209,7 @@ class UserAdminUpdateViewTest(APITestCase):
         response = self.client.post(self.user_update_url, {}, format='json')
         self.assertEqual(response.status_code, 403)
 
+    @override_settings(COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME=True)
     def test_user_update_get(self):
         self.user.cosinnus_profile.description = 'Test Description'
         self.user.cosinnus_profile.save()

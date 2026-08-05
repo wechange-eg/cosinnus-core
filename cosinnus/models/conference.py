@@ -2,12 +2,11 @@
 from __future__ import unicode_literals
 
 import logging
+from _collections import defaultdict
 from builtins import object
 from copy import copy, deepcopy
-from threading import Thread
 
 import six
-from _collections import defaultdict
 from annoying.functions import get_object_or_None
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
@@ -31,6 +30,7 @@ from cosinnus.utils.files import get_conference_conditions_filename, get_present
 from cosinnus.utils.functions import clean_single_line_text, unique_aware_slugify, update_dict_recursive
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_superuser
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.validators import validate_file_infection
 from cosinnus.views.mixins.group import ModelInheritsGroupReadWritePermissionsMixin
@@ -306,6 +306,12 @@ class CosinnusConferenceSettings(models.Model):
 
         return setting_obj
 
+    @classmethod
+    def clear_get_for_object_cache(cls, source_object):
+        """Clear the cache for get_for_object."""
+        cache_key = cls.CACHE_KEY % (source_object.__class__.__name__, source_object.id)
+        cache.delete(cache_key)
+
     def merge_in_inherited_settings_object(self, inherit_target):
         """Merges this object "on top" of the `inherit_target` CosinnusConferenceSettings object
         to inherit all values from the target, that aren't set in this object
@@ -440,7 +446,12 @@ class CosinnusConferenceSettings(models.Model):
                     if self.bbb_nature:
                         call_key = f'{call_key}__{self.bbb_nature}'
                     update_dict[call_key] = call_param_dict
-                bbb_params.update(update_dict)
+                # merge field parameter into bbb_params
+                for call_key, call_param_dict in update_dict.items():
+                    if call_key in bbb_params:
+                        bbb_params[call_key].update(call_param_dict)
+                    else:
+                        bbb_params[call_key] = call_param_dict
             elif field_name in settings.BBB_PRESET_FORM_FIELD_TEXT_PARAMS and choice_value is not None:
                 # Add text parameter.
                 call_key, call_param = settings.BBB_PRESET_FORM_FIELD_TEXT_PARAMS[field_name]
@@ -728,6 +739,9 @@ class CosinnusConferenceRoom(
             if self.target_result_group and self.target_result_group != self._target_result_group:
                 self.refresh_memberships_for_result_group()
 
+        # update cached field so it is not stale for next changes to this instance
+        self._target_result_group = self.target_result_group
+
     def get_admin_change_url(self):
         """Returns the django admin edit page for this object."""
         return reverse('admin:cosinnus_cosinnusconferenceroom_change', kwargs={'object_id': self.id})
@@ -820,7 +834,7 @@ class CosinnusConferenceRoom(
         room_self = self
 
         # we're Threading this entire hook as it might take a while
-        class MembershipUpdateHookThread(Thread):
+        class MembershipUpdateHookThread(CosinnusWorkerThread):
             def run(self):
                 for conference_membership in CosinnusGroupMembership.objects.filter(group=room_self.group):
                     result_group_membership = get_object_or_None(

@@ -16,6 +16,8 @@ from haystack.exceptions import SearchFieldError
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroup
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.models.map import SEARCH_MODEL_NAMES
 from cosinnus.utils.files import image_thumbnail_url
 from cosinnus.utils.functions import ensure_list_of_ints, normalize_within_stddev
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
@@ -180,6 +182,8 @@ class StoredDataIndexMixin(indexes.SearchIndex):
     group_slug = indexes.CharField(stored=True, indexed=True)
     # group name for linking, subject to implementing indexed
     group_name = indexes.CharField(stored=True, indexed=False)
+    # group type of related group for linking (e.g. projects parent group, base-taggle-object project/group)
+    group_type = indexes.CharField(stored=True, indexed=False)
     # attendees for events, projects for groups
     participant_count = indexes.IntegerField(stored=True, indexed=False)
     # member count for projects/groups, group-member count for events, memberships for users
@@ -205,6 +209,13 @@ class StoredDataIndexMixin(indexes.SearchIndex):
 
     def prepare_group_name(self, obj):
         """Stub, overridden by individual indexes"""
+        return None
+
+    def prepare_group_type(self, obj):
+        """
+        Stub, overridden by individual indexes.
+        Should return related group search type as used in SEARCH_MODEL_NAMES.
+        """
         return None
 
     def prepare_title(self, obj):
@@ -378,6 +389,18 @@ class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObje
         if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) and obj.group.slug in get_default_user_group_slugs():
             return None
         return obj.group.name
+
+    def prepare_group_type(self, obj):
+        """Return the type of the taggable object group."""
+        group_search_model_name = None
+        group_models_by_type = {
+            CosinnusGroup.TYPE_SOCIETY: CosinnusSociety,
+            CosinnusGroup.TYPE_PROJECT: CosinnusProject,
+        }
+        group_model = group_models_by_type.get(obj.group.type)
+        if group_model:
+            group_search_model_name = SEARCH_MODEL_NAMES.get(group_model)
+        return group_search_model_name
 
     def prepare_group_members(self, obj):
         if not hasattr(obj, '_group_members'):

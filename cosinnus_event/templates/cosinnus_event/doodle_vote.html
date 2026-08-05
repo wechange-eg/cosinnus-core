@@ -117,7 +117,7 @@
 				        {% endfor %}
 		            </div>
 		            
-		            {% if user|has_write_access:event and event.state == 2 %}
+		            {% if user|has_write_access:event and event.state == 2 and not SETTINGS.COSINNUS_EVENT_V3_CALENDAR_ENABLED %}
 			            <h2>{% trans "Create an event from one of the suggestions" %}</h2>
 			            <div>
 			                <div></div>

@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from datetime import date
 
 from django.contrib.auth.models import User
-from django.contrib.sites.models import Site
 from django.core.cache import cache
 from django.test import override_settings
 from django.urls import reverse
@@ -24,10 +23,6 @@ class UserDayOnlineTest(APITestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.api_url = reverse('cosinnus:frontend-api:api-navigation-profile')
-        # recreate portal, as objects created by migrations are droped by the TransactionTestCase teardown.
-        CosinnusPortal.objects.get_or_create(
-            id=1, defaults={'name': 'default portal', 'slug': 'default', 'public': True, 'site': Site.objects.first()}
-        )
         cls.portal = CosinnusPortal.get_current()
         cls.credential = 'admin'
         cls.test_user = User.objects.create(**TEST_USER_DATA)

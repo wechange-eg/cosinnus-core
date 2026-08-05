@@ -112,6 +112,7 @@ from cosinnus.utils.user import (
     get_user_select2_pills,
 )
 from cosinnus.views.mixins.group import EndlessPaginationMixin, RequireLoggedInMixin
+from cosinnus_notifications.views import apply_global_notification_settings
 
 logger = logging.getLogger('cosinnus')
 
@@ -556,32 +557,10 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         self.get_data()
         with transaction.atomic():
-            # save language preference:
-            notification_setting = request.POST.get('notification_setting', None)
-            if notification_setting is not None and int(notification_setting) in (
-                choice for choice, label in self.notification_choices
-            ):
-                self.notification_setting.setting = int(notification_setting)
-                # rocketchat: on a global "never", we always set the rocketchat setting to "off"
-                if (
-                    settings.COSINNUS_ROCKET_ENABLED
-                    and self.notification_setting.setting == GlobalUserNotificationSetting.SETTING_NEVER
-                ):
-                    from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException
-                    from cosinnus_message.utils.utils import (
-                        save_rocketchat_mail_notification_preference_for_user_setting,  # noqa
-                    )
-
-                    self.notification_setting.rocketchat_setting = GlobalUserNotificationSetting.ROCKETCHAT_SETTING_OFF
-                    try:
-                        save_rocketchat_mail_notification_preference_for_user_setting(
-                            self.request.user, self.notification_setting.rocketchat_setting
-                        )
-                    except RocketChatDownException:
-                        logger.error(RocketChatConnection.ROCKET_CHAT_DOWN_ERROR)
-                    except Exception as e:
-                        logger.exception(e)
-                self.notification_setting.save()
+            # save global notification setting
+            notification_setting = int(request.POST.get('notification_setting', '-1'))
+            # the error-messages are ignored here
+            apply_global_notification_settings(request.user, global_setting=notification_setting)
 
             # save visibility setting:
             visibility_setting = request.POST.get('visibility_setting', None)
@@ -869,11 +848,36 @@ def approve_user(request, user_id):
                 tag = CosinnusManagedTag.objects.get(slug=tagslug)
                 CosinnusManagedTagAssignment.assign_managed_tag_to_object(user.cosinnus_profile, tag.slug)
                 added_tags.append(tag)
-            except Exception:
+            except CosinnusManagedTag.DoesNotExist:
+                # catch nonexistant tags attempted to be added
                 failed_tag_slugs.append(tagslug)
-                if settings.DEBUG:
-                    raise
+                logger.error(
+                    'User verification: A configured managed tags could not be added when verifying a user. '
+                    'This tag was probably renamed in the admin. Check the configuration for '
+                    'COSINNUS_MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_DIRECT_ASSIGN and '
+                    'compare if those tags exist in the DB!',
+                    extra={'verified_user': user.pk, 'admin_user': request.user.pk, 'tagslug': tagslug},
+                )
+            except Exception as e:
+                # catch any tagging errors, so the user at least gets verified
+                failed_tag_slugs.append(tagslug)
+                logger.error(
+                    'User verification: unexpected error when adding a tag while verifying a user. '
+                    'User was verified but extra tag could not be added!',
+                    extra={
+                        'verified_user': user.pk,
+                        'admin_user': request.user.pk,
+                        'tagslug': tagslug,
+                        'exception': force_str(e),
+                    },
+                )
         if added_tags:
+            # change the userprofile visibility field if it is locked for any of the assigned tags
+            locked_visibility = get_locked_profile_visibility_setting_for_user(user)
+            if locked_visibility is not None:
+                user.cosinnus_profile.media_tag.visibility = locked_visibility
+                user.cosinnus_profile.media_tag.save()
+
             tag_urls = ', '.join([f'[{tag.name}]({tag.get_user_management_url()})' for tag in added_tags])
             messages.success(request, str(_('The following roles were assigned to the account:')) + ' ' + tag_urls)
         if failed_tag_slugs:

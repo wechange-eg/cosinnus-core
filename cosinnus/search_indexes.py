@@ -11,6 +11,7 @@ from haystack.fields import SearchField
 from cosinnus.conf import settings
 from cosinnus.models.group_extra import CosinnusConference, CosinnusProject, CosinnusSociety
 from cosinnus.models.idea import CosinnusIdea
+from cosinnus.models.map import SEARCH_MODEL_NAMES
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.functions import normalize_within_stddev, resolve_class
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids
@@ -226,6 +227,10 @@ class CosinnusProjectIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
     def prepare_group_name(self, obj):
         """Stub, overridden by individual indexes"""
         return obj.parent and obj.parent.name or None
+
+    def prepare_group_type(self, obj):
+        """Return "groups" as the project parent is always a group."""
+        return SEARCH_MODEL_NAMES.get(CosinnusSociety)
 
 
 class CosinnusSocietyIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexes.Indexable):

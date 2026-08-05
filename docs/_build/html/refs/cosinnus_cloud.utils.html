@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_cloud.utils package &#8212; Cosinnus 2.0.0 documentation</title>
+    <title>cosinnus_cloud.utils package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -39,11 +39,37 @@
 <section id="module-cosinnus_cloud.utils.cosinnus">
 <span id="cosinnus-cloud-utils-cosinnus-module"></span><h2>cosinnus_cloud.utils.cosinnus module<a class="headerlink" href="#module-cosinnus_cloud.utils.cosinnus" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.utils.cosinnus.is_calendar_enabled_for_group">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.cosinnus.</span></span><span class="sig-name descname"><span class="pre">is_calendar_enabled_for_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.utils.cosinnus.is_calendar_enabled_for_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if calendar NC integration is enabled in the group using the integration handler.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_cloud.utils.cosinnus.is_cloud_enabled_for_group">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.cosinnus.</span></span><span class="sig-name descname"><span class="pre">is_cloud_enabled_for_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.utils.cosinnus.is_cloud_enabled_for_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if a CosinnusGroup should have a nextcloud folder.
 I.e., the group is of a type that should have cloud files and
 the cloud app is active for it</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.utils.cosinnus.is_cloud_group_required_for_group">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.cosinnus.</span></span><span class="sig-name descname"><span class="pre">is_cloud_group_required_for_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.utils.cosinnus.is_cloud_group_required_for_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if a CosinnusGroup should have a nextcloud group.
+This is the case if:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>cloud app is enabled</p></li>
+<li><p>deck app is enabled</p></li>
+<li><p>the NC calendar is enabled in the events app</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.utils.cosinnus.is_deck_enabled_for_group">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.cosinnus.</span></span><span class="sig-name descname"><span class="pre">is_deck_enabled_for_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.utils.cosinnus.is_deck_enabled_for_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the deck app is enabled in the group using the integration handler.</p>
 </dd></dl>
 
 </section>
@@ -95,6 +121,11 @@ Returns True if successful</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.add_user_to_admin_group">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">add_user_to_admin_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cosinnus_cloud.utils.nextcloud.OCSResponse" title="cosinnus_cloud.utils.nextcloud.OCSResponse"><span class="pre">OCSResponse</span></a></span></span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.add_user_to_admin_group" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.add_user_to_group">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">add_user_to_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groupid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cosinnus_cloud.utils.nextcloud.OCSResponse" title="cosinnus_cloud.utils.nextcloud.OCSResponse"><span class="pre">OCSResponse</span></a></span></span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.add_user_to_group" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -102,7 +133,8 @@ Returns True if successful</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.apply_nextcloud_settings">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">apply_nextcloud_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">print_to_console</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.apply_nextcloud_settings" title="Permalink to this definition">¶</a></dt>
-<dd><p>Applies configured settings from conf <cite>COSINNUS_CLOUD_NEXTCLOUD_SETTINGS</cite> via OCS</p>
+<dd><p>Applies configured settings from conf <cite>COSINNUS_CLOUD_NEXTCLOUD_SETTINGS</cite> via OCS
+DEPRECATED: now handled by Ansible.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -176,21 +208,15 @@ the admin user, or from a specified folder.
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.find_files">
-<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">find_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">also_search_content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.find_files" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds files by name, unlike “perform_fulltext_search”, by default, this function does only search in the filename,
-not the content</p>
+<dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.get_group_folder_last_modified">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">get_group_folder_last_modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groupfolder_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.get_group_folder_last_modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the last-modified timestamp of a group folder.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.find_newest_files">
-<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">find_newest_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">also_search_content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.find_newest_files" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.get_groupfiles_match_list">
-<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">get_groupfiles_match_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="cosinnus_cloud.html#cosinnus_cloud.models.SimpleCloudFile" title="cosinnus_cloud.models.SimpleCloudFile"><span class="pre">SimpleCloudFile</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.get_groupfiles_match_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convenience function that calls “find_newest_files” and returns a SimpleCloudFile object.</p>
+<dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.get_groupfolder_groups">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">get_groupfolder_groups</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.get_groupfolder_groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves a group folder groups for a given id (int). Returns a list of group IDs.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -245,15 +271,31 @@ Returns True if successful</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.remove_user_from_admin_group">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">remove_user_from_admin_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cosinnus_cloud.utils.nextcloud.OCSResponse" title="cosinnus_cloud.utils.nextcloud.OCSResponse"><span class="pre">OCSResponse</span></a></span></span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.remove_user_from_admin_group" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.remove_user_from_group">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">remove_user_from_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groupid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cosinnus_cloud.utils.nextcloud.OCSResponse" title="cosinnus_cloud.utils.nextcloud.OCSResponse"><span class="pre">OCSResponse</span></a></span></span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.remove_user_from_group" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.rename_group_and_group_folder">
-<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">rename_group_and_group_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.rename_group_and_group_folder" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.rename_group_folder">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">rename_group_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.rename_group_folder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renames a group folder for a given id (int)</p>
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.set_group_display_name">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">set_group_display_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.set_group_display_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the display name for a group.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.update_user_avatar">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">update_user_avatar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">userid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avatar_b64_encoded</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cosinnus_cloud.utils.nextcloud.OCSResponse" title="cosinnus_cloud.utils.nextcloud.OCSResponse"><span class="pre">OCSResponse</span></a></span></span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.update_user_avatar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.update_user_email">

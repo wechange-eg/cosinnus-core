@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
+import logging
 from functools import partial
-from threading import Thread
 
 import celery
 from django.db import transaction
@@ -8,6 +8,11 @@ from django.db import transaction
 from cosinnus.celery import app as celery_app
 from cosinnus.conf import settings
 from cosinnus.core.mail import deliver_mail
+from cosinnus.utils.threading import CosinnusWorkerThread
+from cosinnus.models import CosinnusGroupMembership
+from cosinnus.models.membership import PENDING_STATUS
+
+logger = logging.getLogger('cosinnus')
 
 
 class CeleryThreadTask(celery.Task):
@@ -27,7 +32,7 @@ class CeleryThreadTask(celery.Task):
             task_run = super(CeleryThreadTask, self).__call__
 
             def run_task_threaded():
-                class TaskThread(Thread):
+                class TaskThread(CosinnusWorkerThread):
                     def run(self):
                         task_run(*args, **kwargs)
 
@@ -39,3 +44,20 @@ class CeleryThreadTask(celery.Task):
 @celery_app.task
 def deliver_mail_task(to, subject, message, from_email, bcc=None, is_html=False, headers=None):
     deliver_mail(to, subject, message, from_email, bcc, is_html, headers)
+
+
+@celery_app.task(base=CeleryThreadTask)
+def remove_pending_memberships_for_user_task(user_id: int):
+    """
+    Deletes all membership objects in type `PENDING_STATUS` for a given user.
+    """
+    try:
+        CosinnusGroupMembership.objects.filter(user__id=user_id, status__in=PENDING_STATUS).delete()
+    except Exception as e:
+        logger.error(
+            (
+                'An error occurred during deletion of stale pending group memberships for deactivated user. '
+                'Exception in extra'
+            ),
+            extra={'exc': e},
+        )

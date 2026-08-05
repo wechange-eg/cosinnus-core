@@ -18,357 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-msgid "Sender and Recipient cannot be both undefined."
-msgstr "Expéditeur et Destinataire ne peuvent pas être indéfinis tous les deux."
-
-msgid "Visitor's email is in excess."
-msgstr "Le courriel du visiteur est en trop."
-
-msgid "Visitor's email is missing."
-msgstr "Le courriel du visiteur est manquant."
-
-msgid "Reading date must be later than sending date."
-msgstr "La date de lecture doit être postérieure à la date d'envoi."
-
-msgid "Deletion date by sender must be later than sending date."
-msgstr "La date de suppression par l'expéditeur doit être postérieure à la date d'envoi."
-
-msgid "Deletion date by recipient must be later than sending date."
-msgstr "La date de suppression par le destinataire doit être postérieure à la date d'envoi."
-
-msgid "Response date must be later than sending date."
-msgstr "La date de réponse doit être postérieure à la date d'envoi."
-
-msgid "The message cannot be replied without having been read."
-msgstr "Le message ne peut pas être répondu sans avoir été lu."
-
-msgid "Response date must be later than reading date."
-msgstr "La date de réponse doit être postérieure à la date de lecture."
-
-msgid "Response date cannot be set without at least one reply."
-msgstr "La date de réponse ne peut pas être positionnée sans au moins une réponse."
-
-msgid "The message cannot be replied without being in a conversation."
-msgstr "Le message ne peut pas être répondu sans être dans une conversation."
-
-msgid "Message"
-msgstr "Message"
-
-msgid "Dates"
-msgstr "Dates"
-
-msgid "Moderation"
-msgstr "Modération"
-
-#, python-brace-format
-msgid "Some usernames are unknown or no longer active: {users}."
-msgstr "Des noms d'utilisateur sont inconnus ou ne sont plus actifs : {users}."
-
-#, python-brace-format
-msgid "Ensure this value has at most {limit_value} distinct items (it has {show_value})."
-msgstr "Assurez-vous que cette valeur a au plus {limit_value} éléments distincts (elle en a {show_value})."
-
-#, python-brace-format
-msgid "Ensure this value has at least {limit_value} distinct items (it has {show_value})."
-msgstr "Assurez-vous que cette valeur a au moins {limit_value} éléments distincts (elle en a {show_value})."
-
-#, python-brace-format
-msgid "Some usernames are rejected: {users}."
-msgstr "Des noms d'utilisateur sont rejetés : {users}."
-
-#, python-brace-format
-msgid "{username}"
-msgstr "{username}"
-
-#, python-brace-format
-msgid "{username} ({reason})"
-msgstr "{username} ({reason})"
-
-#, python-brace-format
-msgid "Writing to some users is not possible: {users}."
-msgstr "Écrire à certains utilisateurs n'est pas possible : {users}."
-
-msgid "Recipients"
-msgstr "Destinataires"
-
-msgid "Recipient"
-msgstr "Destinataire"
-
-msgid "Email"
-msgstr "Courriel"
-
-msgid "Undefined recipient."
-msgstr "Destinataire indéfini."
-
-msgid "Additional recipients"
-msgstr "Destinataires supplémentaires"
-
-msgid "Additional recipient"
-msgstr "Destinataire supplémentaire"
-
-msgid "Message Rejected"
-msgstr "Message Rejeté"
-
-msgid "Your message has been rejected"
-msgstr "Votre message a été rejeté"
-
-msgid "Message Received"
-msgstr "Message Reçu"
-
-msgid "You have received a message"
-msgstr "Vous avez reçu un message"
-
-msgid "Reply Received"
-msgstr "Réponse Reçue"
-
-msgid "You have received a reply"
-msgstr "Vous avez reçu une réponse"
-
-msgid "Pending"
-msgstr "En attente"
-
-msgid "Accepted"
-msgstr "Accepté"
-
-msgid "Rejected"
-msgstr "Rejeté"
-
-msgid "subject"
-msgstr "objet"
-
-msgid "body"
-msgstr "contenu"
-
-msgid "sender"
-msgstr "expéditeur"
-
-msgid "recipient"
-msgstr "destinataire"
-
-msgid "visitor"
-msgstr "visiteur"
-
-msgid "parent message"
-msgstr "message parent"
-
-msgid "root message"
-msgstr "message racine"
-
-msgid "sent at"
-msgstr "envoyé le"
-
-msgid "read at"
-msgstr "lu le"
-
-msgid "replied at"
-msgstr "répondu le"
-
-msgid "archived by sender"
-msgstr "archivé par l'expéditeur"
-
-msgid "archived by recipient"
-msgstr "archivé par le destinataire"
-
-msgid "deleted by sender at"
-msgstr "supprimé par l'expéditeur le"
-
-msgid "deleted by recipient at"
-msgstr "supprimé par le destinataire le"
-
-msgid "status"
-msgstr "état"
-
-msgid "moderator"
-msgstr "modérateur"
-
-msgid "moderated at"
-msgstr "modéré le"
-
-msgid "rejection reason"
-msgstr "motif de rejet"
-
-msgid "Direct Reply Hash"
-msgstr ""
-
-msgid "message"
-msgstr "message"
-
-msgid "messages"
-msgstr "messages"
-
-msgid "Undefined sender."
-msgstr "Expéditeur indéfini."
-
-msgid "pending message"
-msgstr "message en attente"
-
-msgid "pending messages"
-msgstr "messages en attente"
-
-msgid "Please correct the error below."
-msgid_plural "Please correct the errors below."
-msgstr[0] "Corrigez l'erreur suivante."
-msgstr[1] "Corrigez les erreurs suivantes."
-
-msgid "Accept"
-msgstr "Accepter"
-
-msgid "Reject"
-msgstr "Rejeter"
-
-msgid "Archived Messages"
-msgstr "Messages archivés"
-
-msgid "Messages in this folder will never be removed. You can use this folder for long term storage."
-msgstr "Les messages dans ce dossier ne seront jamais supprimés. Vous pouvez utiliser ce dossier pour un stockage à long terme."
-
-msgid "Messaging"
-msgstr "Messagerie"
-
-msgid "Inbox"
-msgstr "Boîte de réception"
-
-msgid "Sent Messages"
-msgstr "Messages envoyés"
-
-msgid "Write"
-msgstr "Écrire"
-
-msgid "Archives"
-msgstr "Archives"
-
-msgid "Trash"
-msgstr "Corbeille"
-
-msgid "Sorry, this page number is invalid."
-msgstr "Désolé, ce numéro de page est invalide."
-
-msgid "by conversation"
-msgstr "par conversation"
-
-msgid "by message"
-msgstr "par message"
-
-msgid "Delete"
-msgstr "Supprimer"
-
-msgid "Archive"
-msgstr "Archiver"
-
-msgid "Undelete"
-msgstr "Restaurer"
-
-msgid "Action"
-msgstr "Action"
-
-msgid "Sender"
-msgstr "Expéditeur"
-
-msgid "Subject"
-msgstr "Objet"
-
-msgid "Date"
-msgstr "Date"
-
-msgid "g:i A,M j,n/j/y"
-msgstr "G:i,j b,j/n/y"
-
-msgid "No messages."
-msgstr "Pas de message."
-
-msgid "Send"
-msgstr "Envoyer"
-
-msgid "Dear user,"
-msgstr "Cher utilisateur,"
-
-#, python-format
-msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
-msgstr "Le %(date)s, vous avez sollicité l'envoi d'un message à l'utilisateur '%(recipient)s'."
-
-msgid "Your message has been rejected by the moderator"
-msgstr "Votre message a été rejeté par le modérateur"
-
-msgid ", for the following reason:"
-msgstr ", pour le motif suivant :"
-
-#, python-format
-msgid "On %(date)s, you sent a message to the user '%(sender)s'."
-msgstr "Le %(date)s, vous avez envoyé un message à l'utilisateur '%(sender)s'."
-
-msgid "Your correspondent has given you an answer."
-msgstr "Votre correspondant vous a donné une réponse."
-
-#, python-format
-msgid "You have received a copy of a response from the user '%(sender)s'."
-msgstr "Vous avez reçu une copie d'une réponse de l'utilisateur '%(sender)s'."
-
-#, python-format
-msgid "You have received a message from the user '%(sender)s'."
-msgstr "Vous avez reçu un message de l'utilisateur '%(sender)s'."
-
-msgid "Thank you again for your interest in our services."
-msgstr "Merci encore pour l'intérêt que vous portez à nos services."
-
-msgid "The site administrator"
-msgstr "L'administrateur du site"
-
-msgid ""
-"Note: This message is issued by an automated system.\n"
-"Do not reply, this would not be taken into account."
-msgstr ""
-"NB: Ce message est émis par un automate. Ne faites\n"
-"pas de réponse, elle ne serait pas prise en compte."
-
-#, python-format
-msgid "Message \"%(subject)s\" on the site %(sitename)s"
-msgstr "Message \"%(subject)s\" sur le site %(sitename)s"
-
-msgid "Dear visitor,"
-msgstr "Cher visiteur,"
-
-msgid "As a reminder, please find below the content of your message."
-msgstr "Pour rappel, veuillez trouver ci-dessous le contenu de votre message."
-
-msgid "Please find below the answer from your correspondent."
-msgstr "Veuillez trouver ci-dessous la réponse de votre correspondant."
-
-msgid "For more comfort, we encourage you to open an account on the site."
-msgstr "Pour plus de confort, nous vous encourageons à ouvrir un compte sur le site."
-
-msgid "Received Messages"
-msgstr "Messages reçus"
-
-msgid "Received"
-msgstr "Reçu"
-
-msgid "Reply"
-msgstr "Répondre"
-
-msgid "Sent"
-msgstr "Envoyé"
-
-msgid "Deleted Messages"
-msgstr "Messages effacés"
-
-msgid "Messages in this folder can be removed from time to time. For long term storage, use instead the archive folder."
-msgstr "Les messages dans ce dossier peuvent être retirés de temps en temps. Pour un stockage à long terme, utilisez plutôt le dossier d'archivage."
-
-msgid "Conversation"
-msgstr "Conversation"
-
-msgid ":"
-msgstr " :"
-
-msgid "Back"
-msgstr "Retour"
-
-msgid "<me>"
-msgstr "<moi>"
-
-msgid "> "
-msgstr "> "
-
 #, python-brace-format
 msgid ""
 "\n"
@@ -381,21 +30,119 @@ msgstr ""
 "{sender} a écrit :\n"
 "{body}\n"
 
-#, python-brace-format
-msgid "Re: {subject}"
-msgstr "Re: {subject}"
+msgid ", for the following reason:"
+msgstr ", pour le motif suivant :"
 
-msgid "Message successfully sent."
-msgstr "Message envoyé avec succès."
+msgid ":"
+msgstr " :"
+
+msgid "<me>"
+msgstr "<moi>"
+
+msgid "> "
+msgstr "> "
+
+msgid "Accept"
+msgstr "Accepter"
+
+msgid "Accepted"
+msgstr "Accepté"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Additional recipient"
+msgstr "Destinataire supplémentaire"
+
+msgid "Additional recipients"
+msgstr "Destinataires supplémentaires"
+
+msgid "Archive"
+msgstr "Archiver"
+
+msgid "Archived Messages"
+msgstr "Messages archivés"
+
+msgid "Archives"
+msgstr "Archives"
+
+msgid "As a reminder, please find below the content of your message."
+msgstr "Pour rappel, veuillez trouver ci-dessous le contenu de votre message."
+
+msgid "Back"
+msgstr "Retour"
+
+msgid "Conversation"
+msgstr "Conversation"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Dates"
+msgstr "Dates"
+
+msgid "Dear user,"
+msgstr "Cher utilisateur,"
+
+msgid "Dear visitor,"
+msgstr "Cher visiteur,"
+
+msgid "Delete"
+msgstr "Supprimer"
+
+msgid "Deleted Messages"
+msgstr "Messages effacés"
+
+msgid "Deletion date by recipient must be later than sending date."
+msgstr "La date de suppression par le destinataire doit être postérieure à la date d'envoi."
+
+msgid "Deletion date by sender must be later than sending date."
+msgstr "La date de suppression par l'expéditeur doit être postérieure à la date d'envoi."
+
+msgid "Direct Reply Hash"
+msgstr ""
+
+msgid "Email"
+msgstr "Courriel"
+
+#, python-brace-format
+msgid "Ensure this value has at least {limit_value} distinct items (it has {show_value})."
+msgstr "Assurez-vous que cette valeur a au moins {limit_value} éléments distincts (elle en a {show_value})."
+
+#, python-brace-format
+msgid "Ensure this value has at most {limit_value} distinct items (it has {show_value})."
+msgstr "Assurez-vous que cette valeur a au plus {limit_value} éléments distincts (elle en a {show_value})."
+
+msgid "For more comfort, we encourage you to open an account on the site."
+msgstr "Pour plus de confort, nous vous encourageons à ouvrir un compte sur le site."
+
+msgid "Inbox"
+msgstr "Boîte de réception"
+
+msgid "Message"
+msgstr "Message"
+
+#, python-format
+msgid "Message \"%(subject)s\" on the site %(sitename)s"
+msgstr "Message \"%(subject)s\" sur le site %(sitename)s"
+
+msgid "Message Received"
+msgstr "Message Reçu"
+
+msgid "Message Rejected"
+msgstr "Message Rejeté"
 
 msgid "Message rejected for at least one recipient."
 msgstr "Message rejeté pour au moins un destinataire."
 
-msgid "Only Administrators may send a message to this project/group!"
-msgstr ""
+msgid "Message successfully sent."
+msgstr "Message envoyé avec succès."
 
-msgid "Select at least one object."
-msgstr "Sélectionner au moins un objet."
+msgid "Messages in this folder can be removed from time to time. For long term storage, use instead the archive folder."
+msgstr "Les messages dans ce dossier peuvent être retirés de temps en temps. Pour un stockage à long terme, utilisez plutôt le dossier d'archivage."
+
+msgid "Messages in this folder will never be removed. You can use this folder for long term storage."
+msgstr "Les messages dans ce dossier ne seront jamais supprimés. Vous pouvez utiliser ce dossier pour un stockage à long terme."
 
 msgid "Messages or conversations successfully archived."
 msgstr "Messages ou conversations archivés avec succès."
@@ -405,3 +152,256 @@ msgstr "Messages ou conversations supprimés avec succès."
 
 msgid "Messages or conversations successfully recovered."
 msgstr "Messages ou conversations restaurés avec succès."
+
+msgid "Messaging"
+msgstr "Messagerie"
+
+msgid "Moderation"
+msgstr "Modération"
+
+msgid "No messages."
+msgstr "Pas de message."
+
+msgid ""
+"Note: This message is issued by an automated system.\n"
+"Do not reply, this would not be taken into account."
+msgstr ""
+"NB: Ce message est émis par un automate. Ne faites\n"
+"pas de réponse, elle ne serait pas prise en compte."
+
+#, python-format
+msgid "On %(date)s, you asked to send a message to the user '%(recipient)s'."
+msgstr "Le %(date)s, vous avez sollicité l'envoi d'un message à l'utilisateur '%(recipient)s'."
+
+#, python-format
+msgid "On %(date)s, you sent a message to the user '%(sender)s'."
+msgstr "Le %(date)s, vous avez envoyé un message à l'utilisateur '%(sender)s'."
+
+msgid "Only Administrators may send a message to this project/group!"
+msgstr ""
+
+msgid "Pending"
+msgstr "En attente"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] "Corrigez l'erreur suivante."
+msgstr[1] "Corrigez les erreurs suivantes."
+
+msgid "Please find below the answer from your correspondent."
+msgstr "Veuillez trouver ci-dessous la réponse de votre correspondant."
+
+#, python-brace-format
+msgid "Re: {subject}"
+msgstr "Re: {subject}"
+
+msgid "Reading date must be later than sending date."
+msgstr "La date de lecture doit être postérieure à la date d'envoi."
+
+msgid "Received"
+msgstr "Reçu"
+
+msgid "Received Messages"
+msgstr "Messages reçus"
+
+msgid "Recipient"
+msgstr "Destinataire"
+
+msgid "Recipients"
+msgstr "Destinataires"
+
+msgid "Reject"
+msgstr "Rejeter"
+
+msgid "Rejected"
+msgstr "Rejeté"
+
+msgid "Reply"
+msgstr "Répondre"
+
+msgid "Reply Received"
+msgstr "Réponse Reçue"
+
+msgid "Response date cannot be set without at least one reply."
+msgstr "La date de réponse ne peut pas être positionnée sans au moins une réponse."
+
+msgid "Response date must be later than reading date."
+msgstr "La date de réponse doit être postérieure à la date de lecture."
+
+msgid "Response date must be later than sending date."
+msgstr "La date de réponse doit être postérieure à la date d'envoi."
+
+msgid "Select at least one object."
+msgstr "Sélectionner au moins un objet."
+
+msgid "Send"
+msgstr "Envoyer"
+
+msgid "Sender"
+msgstr "Expéditeur"
+
+msgid "Sender and Recipient cannot be both undefined."
+msgstr "Expéditeur et Destinataire ne peuvent pas être indéfinis tous les deux."
+
+msgid "Sent"
+msgstr "Envoyé"
+
+msgid "Sent Messages"
+msgstr "Messages envoyés"
+
+#, python-brace-format
+msgid "Some usernames are rejected: {users}."
+msgstr "Des noms d'utilisateur sont rejetés : {users}."
+
+#, python-brace-format
+msgid "Some usernames are unknown or no longer active: {users}."
+msgstr "Des noms d'utilisateur sont inconnus ou ne sont plus actifs : {users}."
+
+msgid "Sorry, this page number is invalid."
+msgstr "Désolé, ce numéro de page est invalide."
+
+msgid "Subject"
+msgstr "Objet"
+
+msgid "Thank you again for your interest in our services."
+msgstr "Merci encore pour l'intérêt que vous portez à nos services."
+
+msgid "The message cannot be replied without being in a conversation."
+msgstr "Le message ne peut pas être répondu sans être dans une conversation."
+
+msgid "The message cannot be replied without having been read."
+msgstr "Le message ne peut pas être répondu sans avoir été lu."
+
+msgid "The site administrator"
+msgstr "L'administrateur du site"
+
+msgid "Trash"
+msgstr "Corbeille"
+
+msgid "Undefined recipient."
+msgstr "Destinataire indéfini."
+
+msgid "Undefined sender."
+msgstr "Expéditeur indéfini."
+
+msgid "Undelete"
+msgstr "Restaurer"
+
+msgid "Visitor's email is in excess."
+msgstr "Le courriel du visiteur est en trop."
+
+msgid "Visitor's email is missing."
+msgstr "Le courriel du visiteur est manquant."
+
+msgid "Write"
+msgstr "Écrire"
+
+#, python-brace-format
+msgid "Writing to some users is not possible: {users}."
+msgstr "Écrire à certains utilisateurs n'est pas possible : {users}."
+
+#, python-format
+msgid "You have received a copy of a response from the user '%(sender)s'."
+msgstr "Vous avez reçu une copie d'une réponse de l'utilisateur '%(sender)s'."
+
+msgid "You have received a message"
+msgstr "Vous avez reçu un message"
+
+#, python-format
+msgid "You have received a message from the user '%(sender)s'."
+msgstr "Vous avez reçu un message de l'utilisateur '%(sender)s'."
+
+msgid "You have received a reply"
+msgstr "Vous avez reçu une réponse"
+
+msgid "Your correspondent has given you an answer."
+msgstr "Votre correspondant vous a donné une réponse."
+
+msgid "Your message has been rejected"
+msgstr "Votre message a été rejeté"
+
+msgid "Your message has been rejected by the moderator"
+msgstr "Votre message a été rejeté par le modérateur"
+
+msgid "archived by recipient"
+msgstr "archivé par le destinataire"
+
+msgid "archived by sender"
+msgstr "archivé par l'expéditeur"
+
+msgid "body"
+msgstr "contenu"
+
+msgid "by conversation"
+msgstr "par conversation"
+
+msgid "by message"
+msgstr "par message"
+
+msgid "deleted by recipient at"
+msgstr "supprimé par le destinataire le"
+
+msgid "deleted by sender at"
+msgstr "supprimé par l'expéditeur le"
+
+msgid "g:i A,M j,n/j/y"
+msgstr "G:i,j b,j/n/y"
+
+msgid "message"
+msgstr "message"
+
+msgid "messages"
+msgstr "messages"
+
+msgid "moderated at"
+msgstr "modéré le"
+
+msgid "moderator"
+msgstr "modérateur"
+
+msgid "parent message"
+msgstr "message parent"
+
+msgid "pending message"
+msgstr "message en attente"
+
+msgid "pending messages"
+msgstr "messages en attente"
+
+msgid "read at"
+msgstr "lu le"
+
+msgid "recipient"
+msgstr "destinataire"
+
+msgid "rejection reason"
+msgstr "motif de rejet"
+
+msgid "replied at"
+msgstr "répondu le"
+
+msgid "root message"
+msgstr "message racine"
+
+msgid "sender"
+msgstr "expéditeur"
+
+msgid "sent at"
+msgstr "envoyé le"
+
+msgid "status"
+msgstr "état"
+
+msgid "subject"
+msgstr "objet"
+
+msgid "visitor"
+msgstr "visiteur"
+
+#, python-brace-format
+msgid "{username}"
+msgstr "{username}"
+
+#, python-brace-format
+msgid "{username} ({reason})"
+msgstr "{username} ({reason})"

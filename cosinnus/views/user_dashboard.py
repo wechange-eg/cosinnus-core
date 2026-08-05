@@ -646,13 +646,11 @@ class TimelineView(ModelRetrievalMixin, View):
         'todos',
         'files',
         'pads',
-        'events',
         'notes',
+        'events',
     ]
-
     if settings.COSINNUS_IDEAS_ENABLED:
         content_types += ['ideas']
-
     if settings.COSINNUS_V2_DASHBOARD_SHOW_MARKETPLACE:
         content_types += ['offers']
 

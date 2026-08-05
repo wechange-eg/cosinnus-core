@@ -15,7 +15,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.validators import validate_comma_separated_integer_list
 from django.db import models
-from django.db.models import Q
+from django.db.models import JSONField, Q
 from django.template.loader import render_to_string
 from django.utils import translation
 from django.utils.encoding import force_str
@@ -178,6 +178,33 @@ class BaseTagObject(models.Model):
     # e.g. used when migrating todos to the deck app.
     migrated = models.BooleanField(default=False)
 
+    LOCATION_TYPE_ONLINE = 'online'
+    LOCATION_TYPE_ONSITE = 'onsite'
+    LOCATION_TYPE_HYBRID = 'hybrid'
+    LOCATION_TYPE_CHOICES = (
+        (LOCATION_TYPE_ONLINE, _('Online')),
+        (LOCATION_TYPE_ONSITE, _('Onsite')),
+        (LOCATION_TYPE_HYBRID, _('Hybrid')),
+    )
+    location_type = models.CharField(max_length=8, null=True, blank=True, verbose_name=_('Location Type'))
+
+    external_video_conference_url = models.URLField(
+        null=True, blank=True, verbose_name=_('External Video Conference URL')
+    )
+
+    show_bbb_guest_access_outside_of_conference = models.BooleanField(
+        default=False,
+        verbose_name=_('Show BBB guest access outside of conference.'),
+    )
+
+    dynamic_fields = JSONField(
+        default=dict,
+        blank=True,
+        encoder=DjangoJSONEncoder,
+        verbose_name=_('Dynamic extra fields'),
+        help_text=('Extra tagged object fields for each portal, as defined in `settings.COSINNUS_TAGGED_EXTRA_FIELDS`'),
+    )
+
     def save(self, *args, **kwargs):
         # update like count
         if self.pk:
@@ -226,6 +253,28 @@ class BaseTagObject(models.Model):
         if not self.location_lat or not self.location_lon:
             return None
         return 'https://openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
+
+    @property
+    def location_type_has_video_conference(self):
+        """Helper to check if location_type allows a video conference."""
+        return self.location_type in [self.LOCATION_TYPE_ONLINE, self.LOCATION_TYPE_HYBRID]
+
+    @property
+    def location_type_has_location(self):
+        """Helper to check if location_type allows an on-site location."""
+        return self.location_type in [self.LOCATION_TYPE_ONSITE, self.LOCATION_TYPE_HYBRID]
+
+    def get_video_conference_url(self):
+        """Get the video conference url considering BBB and external_video_conference_url."""
+        from cosinnus.models import CosinnusPortal, get_domain_for_portal
+
+        video_conference_url = None
+        if self.bbb_room:
+            domain = get_domain_for_portal(CosinnusPortal.get_current())
+            video_conference_url = domain + self.bbb_room.get_absolute_url()
+        elif self.external_video_conference_url:
+            video_conference_url = self.external_video_conference_url
+        return video_conference_url
 
     class Meta(object):
         abstract = True
@@ -312,6 +361,18 @@ class AttachableObjectModel(models.Model):
             if attached_file.model_name == 'cosinnus_cloud.LinkedCloudFile' and attached_file.target_object is not None:
                 cloud_files.append(attached_file.target_object)
         return cloud_files
+
+    @cached_property
+    def file_attachments(self):
+        """Return the attached objects filtered by files."""
+        file_attachments = []
+        for attached_object in self.attached_objects.all():
+            if (
+                attached_object.model_name in ['cosinnus_file.FileEntry', 'cosinnus_cloud.LinkedCloudFile']
+                and attached_object.target_object is not None
+            ):
+                file_attachments.append(attached_object)
+        return file_attachments
 
     def get_attached_objects_hash(self):
         """Returns a hashable tuple of sorted list of ids of all attached objects.
@@ -472,7 +533,6 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
         return '<tagged object {0} {1} (ID: {2})>'.format(self.__class__.__name__, self.title, self.pk)
 
     def save(self, *args, **kwargs):
-        created = bool(self.pk) is False
         unique_aware_slugify(self, 'title', 'slug', group=self.group)
         self.title = clean_single_line_text(self.title)
         if hasattr(self, '_media_tag_cache'):
@@ -488,8 +548,9 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
         if not getattr(self, 'media_tag', None):
             self.media_tag = get_tag_object_model().objects.create()
             self.save()
-        if created:
-            pass
+
+        # set last activity for the object's group on any update
+        self.group.update_last_activity()
 
     def on_save_added_tagged_persons(self, set_users):
         """Called by the taggable form whenever this object is saved and -new- persons
@@ -584,6 +645,11 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
         An overridable replacement for the title, to be used by extending models
         that may not have a well-readable title."""
         return self.title
+
+    def show_comments_on_dashboard(self):
+        """Overridable in implementing models.
+        Whether to show comments on user dashbaord if the new calendar is enabled."""
+        return True
 
 
 class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):

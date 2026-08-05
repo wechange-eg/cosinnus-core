@@ -3,9 +3,28 @@
 
 {% block container_class %}timeline-item-event{% endblock %}
 
+{% block report_button_frame %}
+    {# Only show report button for calendar events and doodles, not synced events #}
+    {% if item.state <= 2 %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
+
+{% block avatar %}
+    {% if not item.creator %}
+        <a href="{{ item.get_absolute_url }}">
+            {% include "cosinnus/group/group_avatar_image.html" with group=item.group %}
+        </a>
+    {% else %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
+
 {% block creation_label %}
-	{% if item.creator == user %}
-		{% trans "You created an event" %}
+	{% if item.creator == user and not item.state == 5 %}
+        {% trans "You created an event" %}
+    {% elif item.state == 5 or not item.creator %}
+        {% trans "A new meeting was scheduled" %}
 	{% else %}
 		{% trans "created an event" context "This appears next to new items in the timeline, as in '<Jane> created a new item'" %}
 	{% endif %}
@@ -27,21 +46,28 @@
 {% endblock %}
 
 {% block body %}
-	{{ item.note|textfield }}
+    {% if SETTINGS.COSINNUS_EVENT_V3_CALENDAR_ENABLED %}
+	    {{ item.note|textfield_with_html }}
+    {% else %}
+        {{ item.note|textfield }}
+    {% endif %}
 {% endblock %}
 
 {% block action_buttons %}
-	{% include 'cosinnus/v2/dashboard/timeline_button_like.html' with item=item %}
-	{% include 'cosinnus/v2/dashboard/timeline_button_star.html' with item=item %}
-	{% include 'cosinnus/v2/dashboard/timeline_button_follow.html' with item=item %}
-	{% with attendants_count=item.get_attendants_count %}
-		{% if attendants_count > 0 %}
-			<a href="{{ item.get_absolute_url }}" class="action-button action-button-non-interactive" 
-					title="{{ attendants_count }} {% blocktrans context "one or many people are going" count counter=attendants_count %}Going{% plural %}Going{% endblocktrans %}">
-				<i class="fas fa-fw fa-user"></i>
-				{{ attendants_count }}
-			</a>
-		{% endif %}
-	{% endwith %}
+    {# Action buttons for events are active only in the old calendar is enabled #}
+    {% if not SETTINGS.COSINNUS_EVENT_V3_CALENDAR_ENABLED %}
+        {% include 'cosinnus/v2/dashboard/timeline_button_like.html' with item=item %}
+        {% include 'cosinnus/v2/dashboard/timeline_button_star.html' with item=item %}
+        {% include 'cosinnus/v2/dashboard/timeline_button_follow.html' with item=item %}
+        {% with attendants_count=item.get_attendants_count %}
+            {% if attendants_count > 0 %}
+                <a href="{{ item.get_absolute_url }}" class="action-button action-button-non-interactive"
+                        title="{{ attendants_count }} {% blocktrans context "one or many people are going" count counter=attendants_count %}Going{% plural %}Going{% endblocktrans %}">
+                    <i class="fas fa-fw fa-user"></i>
+                    {{ attendants_count }}
+                </a>
+            {% endif %}
+        {% endwith %}
+    {% endif %}
 {% endblock %}
 {% block delete_button_frame %}{% endblock %}

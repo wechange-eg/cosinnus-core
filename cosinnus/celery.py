@@ -21,3 +21,8 @@ app.config_from_object('cosinnus.conf:settings', namespace='CELERY')
 
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
+
+""" SETTINGS HERE ARE IMPORTED IN CELERY.PY SETTINGS MODULE VIA IMPORT * """
+
+# don't use Threads inside celery tasks
+COSINNUS_WORKER_THREADS_DISABLE_THREADING = True

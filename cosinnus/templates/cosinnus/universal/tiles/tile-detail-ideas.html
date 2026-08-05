@@ -26,8 +26,9 @@
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Author" %}:
             </span> 
-            {% if not cosinnus_active_user %}
-                <a href="/signup/?acc_req_msg=1&next=/map/" target="_blank">{{ creator_name }}</a>
+            {% if not cosinnus_active_user and not creator_is_public %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                <a href="/signup/?acc_req_msg=1&next=/map/" target="_blank">{%  trans "Login required" %}</a>
             {% else %}
                 {{ macros.resultLink(portal, creator_slug, creator_name, "people") }}
             {% endif %}
@@ -68,10 +69,10 @@
                     <a class="rounded-button button-action button-star">
                         <span class="rounded-button-inner">
                             {% if starred %}
-                                <i class="fas fa-star"></i>
+                                <i class="fas fa-bookmark"></i>
                                 {{ starringLabel }}
                             {% else %}
-                                <i class="far fa-star"></i>
+                                <i class="far fa-bookmark"></i>
                                 {{ starLabel }}
                             {% endif %}
                         </span>

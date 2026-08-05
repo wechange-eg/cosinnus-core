@@ -7,6 +7,7 @@ from django.test import SimpleTestCase
 from django.urls import path, re_path
 
 from cosinnus.core.registries import apps, attached_objects, base, urls, widgets
+from cosinnus.core.registries.group_models import UnsupportedGroupTypeError, group_model_registry
 from cosinnus.utils.compat import OrderedDict
 
 
@@ -155,3 +156,28 @@ class TestWidgetRegistry(SimpleTestCase):
     @unittest.skip('Not implemented yet')
     def test_register(self):
         raise NotImplementedError()
+
+
+class TestGroupModelsRegistry(SimpleTestCase):
+    def test_group_model_registry_not_empty(self):
+        self.assertGreater(len(group_model_registry.group_type_index), 0, 'Group Model Registry is empty.')
+
+    def test_get_url_name_prefix_by_type_return_type(self):
+        try:
+            prefix = group_model_registry.get_url_name_prefix_by_type(0)
+        except UnsupportedGroupTypeError:
+            self.fail('Known group type not found')
+
+        self.assertTrue(isinstance(prefix, str), 'group model registry url prefix should be a string')
+
+    def test_get_url_name_prefix_by_type_unknown_type(self):
+        unsupported_group_type = len(group_model_registry.group_type_index)
+        with self.assertRaises(UnsupportedGroupTypeError) as context_manager:
+            group_model_registry.get_url_name_prefix_by_type(unsupported_group_type)
+
+        exception = context_manager.exception
+        self.assertEqual(
+            exception.group_type,
+            unsupported_group_type,
+            'the unsupported group type should be set in the exception instance',
+        )

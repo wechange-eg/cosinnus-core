@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.core.middleware package &#8212; Cosinnus 2.0.0 documentation</title>
+    <title>cosinnus.core.middleware package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -125,6 +125,18 @@ unless the request is directed at a login URL.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.core.middleware.cosinnus_middleware.DeprecatedAppMiddleware">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.core.middleware.cosinnus_middleware.</span></span><span class="sig-name descname"><span class="pre">DeprecatedAppMiddleware</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">get_response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.middleware.cosinnus_middleware.DeprecatedAppMiddleware" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.core.middleware.cosinnus_middleware.GroupResolvingMiddlewareMixin" title="cosinnus.core.middleware.cosinnus_middleware.GroupResolvingMiddlewareMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">GroupResolvingMiddlewareMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">MiddlewareMixin</span></code></p>
+<p>Makes apps readonly and shows migration related messages.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.core.middleware.cosinnus_middleware.DeprecatedAppMiddleware.process_request">
+<span class="sig-name descname"><span class="pre">process_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.middleware.cosinnus_middleware.DeprecatedAppMiddleware.process_request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.core.middleware.cosinnus_middleware.ExternalEmailLinkRedirectNoticeMiddleware">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.core.middleware.cosinnus_middleware.</span></span><span class="sig-name descname"><span class="pre">ExternalEmailLinkRedirectNoticeMiddleware</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">get_response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.middleware.cosinnus_middleware.ExternalEmailLinkRedirectNoticeMiddleware" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MiddlewareMixin</span></code></p>
@@ -194,6 +206,19 @@ anonymous users, even if the portal is blocked from anonymous access?</p>
 <span class="sig-name descname"><span class="pre">is_url_for_publicly_visible_group_microsite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.middleware.cosinnus_middleware.GroupResolvingMiddlewareMixin.is_url_for_publicly_visible_group_microsite" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is this a URL for a valid group that is publicly visible?</p>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.core.middleware.cosinnus_middleware.ManagedTagBlockURLsMiddleware">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.core.middleware.cosinnus_middleware.</span></span><span class="sig-name descname"><span class="pre">ManagedTagBlockURLsMiddleware</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">get_response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.middleware.cosinnus_middleware.ManagedTagBlockURLsMiddleware" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Blocks some URLs for users with assigned managed tags,
+as defined in setting <cite>MANAGED_TAGS_RESTRICT_URLS_BLOCKED</cite></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.core.middleware.cosinnus_middleware.ManagedTagBlockURLsMiddleware.get_user_restricted_tag_urls">
+<span class="sig-name descname"><span class="pre">get_user_restricted_tag_urls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.middleware.cosinnus_middleware.ManagedTagBlockURLsMiddleware.get_user_restricted_tag_urls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -274,6 +299,24 @@ Set up at least one device at &lt;host&gt;/two_factor_auth/settings/setup/ befor
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.core.middleware.cosinnus_middleware.UserOTPMiddleware.process_request">
 <span class="sig-name descname"><span class="pre">process_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.middleware.cosinnus_middleware.UserOTPMiddleware.process_request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.core.middleware.cosinnus_middleware.UserOnlineStatisticsMiddleware">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.core.middleware.cosinnus_middleware.</span></span><span class="sig-name descname"><span class="pre">UserOnlineStatisticsMiddleware</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">get_response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.middleware.cosinnus_middleware.UserOnlineStatisticsMiddleware" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MiddlewareMixin</span></code></p>
+<p>On a successful request for a logged-in user, create a daily statistics entry for a user.
+Do the check for that only if there is no cache entry created</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.core.middleware.cosinnus_middleware.UserOnlineStatisticsMiddleware.CACHE_KEY">
+<span class="sig-name descname"><span class="pre">CACHE_KEY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus/core/statistics/useronline/createdtoday/%d'</span></em><a class="headerlink" href="#cosinnus.core.middleware.cosinnus_middleware.UserOnlineStatisticsMiddleware.CACHE_KEY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.core.middleware.cosinnus_middleware.UserOnlineStatisticsMiddleware.process_response">
+<span class="sig-name descname"><span class="pre">process_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.core.middleware.cosinnus_middleware.UserOnlineStatisticsMiddleware.process_response" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

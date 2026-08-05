@@ -4,7 +4,7 @@ import re
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
-from django.db.models import Case, Count, When
+from django.db.models import Case, Count, Q, When
 from django.templatetags.static import static
 from django.urls.base import reverse
 from django.utils.encoding import force_str
@@ -598,8 +598,8 @@ class UnreadAlertsView(APIView):
 
     def _get_unread_notification_count(self, user):
         """Get the unread notification count"""
-        alerts_qs = NotificationAlert.objects.filter(
-            portal=CosinnusPortal.get_current(), user=user, action_user__is_active=True
+        alerts_qs = NotificationAlert.objects.filter(portal=CosinnusPortal.get_current(), user=user).filter(
+            Q(action_user__is_active=True) | Q(action_user__isnull=True)
         )
         # support for user blocking, filter out all audience members that have the sending user blocked
         if settings.COSINNUS_ENABLE_USER_BLOCK:
@@ -824,8 +824,8 @@ class AlertsView(APIView):
             for alert in alerts:
                 serialized_alert = SerializedNotificationAlert(
                     alert,
-                    action_user=user_cache[alert.action_user_id][0],
-                    action_user_profile=user_cache[alert.action_user_id][1],
+                    action_user=user_cache[alert.action_user_id][0] if alert.action_user_id else None,
+                    action_user_profile=user_cache[alert.action_user_id][1] if alert.action_user_id else None,
                 )
                 # split "icon_or_image_url"
                 self._split_icon_or_image_url(serialized_alert, 'item_')
@@ -870,8 +870,8 @@ class AlertsView(APIView):
 
     def get_queryset(self):
         alerts_qs = NotificationAlert.objects.filter(
-            portal=CosinnusPortal.get_current(), user=self.request.user, action_user__is_active=True
-        )
+            portal=CosinnusPortal.get_current(), user=self.request.user
+        ).filter(Q(action_user__is_active=True) | Q(action_user__isnull=True))
         # support for user blocking, filter out all audience members that have the sending user blocked
         if settings.COSINNUS_ENABLE_USER_BLOCK:
             blocked_user_ids = UserBlock.get_blocked_user_ids_for_user(self.request.user)
@@ -886,7 +886,7 @@ class AlertsView(APIView):
         return alerts_qs
 
     def get_user_cache(self, alerts):
-        user_ids = list(set([alert.action_user_id for alert in alerts]))
+        user_ids = list(set([alert.action_user_id for alert in alerts if alert.action_user_id]))
         users = get_user_model().objects.filter(id__in=user_ids).prefetch_related('cosinnus_profile')
         user_cache = dict(((user.id, (user, user.cosinnus_profile)) for user in users))
         return user_cache
@@ -973,7 +973,7 @@ class AlertsMarkAllReadView(APIView):
     def get_queryset(self):
         """Returns all unseen alerts for the user"""
         alerts_qs = NotificationAlert.objects.filter(
-            portal=CosinnusPortal.get_current(), user=self.request.user, seen=False, action_user__is_active=True
+            portal=CosinnusPortal.get_current(), user=self.request.user, seen=False
         )
         return alerts_qs
 
@@ -1088,11 +1088,15 @@ class MembershipAlertsView(APIView):
         projects_invited = CosinnusProject.objects.get_for_user_invited(user)
         conferences_invited = CosinnusConference.objects.get_for_user_invited(user)
 
-        groups_invited = [DashboardItem(group).as_menu_item() for group in societies_invited]
-        groups_invited += [DashboardItem(group).as_menu_item() for group in projects_invited]
+        groups_invited = [
+            DashboardItem(group, url=group.get_microsite_url()).as_menu_item() for group in societies_invited
+        ]
+        groups_invited += [
+            DashboardItem(group, url=group.get_microsite_url()).as_menu_item() for group in projects_invited
+        ]
         # for conferences, only show invites if becoming a member is currently possible
         groups_invited += [
-            DashboardItem(conference).as_menu_item()
+            DashboardItem(conference, url=conference.get_microsite_url()).as_menu_item()
             for conference in conferences_invited
             if conference.membership_applications_possible
         ]

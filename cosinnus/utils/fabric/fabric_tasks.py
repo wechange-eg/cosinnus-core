@@ -136,8 +136,6 @@ def enablegitremoteoncore(_ctx):
         with c.cd(f'{env.cosinnus_src_path}'):
             c.run('git config --local --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*')
             c.run('git fetch')
-            c.run(f'git checkout {env.cosinnus_pull_branch}')
-            c.run('git pull')
 
 
 @task
@@ -212,6 +210,8 @@ def restart(_ctx, skip_check=False):
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
             c.run(f'{env.path}/manage.py check')
     c.run(env.reload_command)
+    if env.uses_celery:
+        restartcelery(_ctx)
     clearportalcache(_ctx)
 
 
@@ -403,6 +403,32 @@ def updatedjango(_ctx):
             c.run('pip install Django==4.2.24')
             c.run('pip freeze | grep Django=')
     restart(_ctx)
+
+
+@task
+def updatepip27to29(_ctx):
+    """A temporary task used to "silently" update the pip requirements introduced from cosinnus version 2.7.12
+    to 2.7.8. Can be done before a portal hotdeploy so that no fulldeploy is neccessary.
+    - python-dateutil==2.9.0.post0 was python-dateutil==2.4.1
+    - icalendar==6.3.2 was icalendar==5.0.12
+    - all else are new dependencies"""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        foldername = f'_DELETEME_backuped_env_{get_random_string(length=6).lower()}'
+        # backup venv and poetry.lock
+        with c.cd(env.path):
+            c.run(f'mkdir ~/{foldername}')
+            c.run('mkdir -p .venv')  # create if not exists
+            c.run(f'cp -R .venv ~/{foldername}/copiedvenv.venv')
+            c.run('touch poetry.lock')  # create if not exists
+            c.run(f'cp -R poetry.lock ~/{foldername}/copiedpoetry.lock')
+        # update/install new reqs from setup.py in diff from 2.7.12 --> 2.8.0
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run(
+                'pip install tblib==3.0.0 django_extended_makemessages==1.7.1 caldav==2.1.2 nh3==0.3.5 freezegun==1.5.1 python-dateutil==2.9.0.post0 icalendar==6.3.2 factory-boy==3.3.3'
+            )
+            c.run('pip freeze | grep dateutil')
 
 
 @task

@@ -1,5 +1,4 @@
 import re
-from urllib.parse import unquote
 
 from django.core.cache import cache
 from django.shortcuts import redirect
@@ -88,13 +87,6 @@ class FrontendMiddleware(MiddlewareMixin):
                 # set session flag in request, so we know this is a v3 content context and can change
                 # HTML content and save some DB queries accordingly
                 setattr(request, REQUEST_KEY_V3_API_CONTENT_CONTEXT_ACTIVE, True)
-                return
-
-            # currently do not affect login requests within the oauth flow
-            if (
-                '/o/authorize' in request.build_absolute_uri()
-                or any(['/o/authorize' in unquote(request_token) for request_token in request_tokens])
-            ) and not request_tokens[3] == 'signup':
                 return
 
             # check if v3 redirects are disabled specifically for this user

@@ -19,6 +19,82 @@ UPDATES includes release notes for each version shown to the users with:
 _REDESIGN_FULL_IS_ENABLED = settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
 
 UPDATES = {
+    '2.9.0': {
+        'datetime': datetime(2026, 8, 4, tzinfo=pytz.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.9.0'),
+        'short_text': _('This update includes several features and bugfixes:'),
+        'full_text': [
+            _(
+                '- Added a notification setting that allows users to configure different notification frequencies '
+                'for portal-wide groups versus user-created groups and projects.\n'
+            ),
+            _(
+                '- Fixed a bug where some linked user profiles were not accessible from content on the map. '
+                'Also improved the display of creators for map content and of the groups/project they belong to.\n'
+            ),
+            _(
+                '- Improved some error messages on the login page to better explain the reason for '
+                'failed login attempts.\n'
+            ),
+            _('- Fixed several typos across the page. \n'),
+        ],
+    },
+    '2.8.0-calendar': {
+        'datetime': datetime(2026, 6, 30, tzinfo=pytz.utc),
+        'title': _('Calendar Redesign'),
+        'short_text': _('The fully redesigned calendar with a mobile-optimized interface has been launched!'),
+        'full_text': _(
+            'The new calendar in groups and projects has improvements regarding displaying and sharing public events '
+            'as well as advanced features for internal meetings, including recurring events and CalDAV synchronization.'
+        ),
+        'display_conditional': _REDESIGN_FULL_IS_ENABLED and settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED,
+    },
+    '2.8.0': {
+        'datetime': datetime(2026, 6, 29, tzinfo=pytz.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.8.0'),
+        'short_text': _('This update includes several features and bugfixes:'),
+        'full_text': [
+            _(
+                '- Added easy-to-use tools to simplify GDPR-related processes. '
+                'You can now permanently delete groups/projects you are an admin in from their respective '
+                'settings pages. '
+                'To honour the "Right to be forgotten", user accounts and groups/projects will now also '
+                'be deleted after a long period of inactivity. '
+                "Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
+            ),
+            _(
+                '- Membership requests for groups/projects by users who deleted their accounts '
+                'are now no longer shown in the membership area.\n'
+            ),
+            _(
+                '- Improved the error handling when uploading unsupported images types and formats. '
+                'Trying to upload unsupported image types will now result in an informative error message.\n'
+            ),
+            _(
+                '- Fixed a bug where event polls were sometimes shown in the map listings where only scheduled '
+                'events should be shown.\n'
+            ),
+            _(
+                '- Fixed a bug where the button to delete ideas was not shown. '
+                'It can now always be found on the bottom of the "Edit Idea" page.\n'
+            ),
+            _(
+                '- Fixed a bug where users could sometimes not be invited to groups/projects depending on their '
+                'profile visibility settings.\n'
+            ),
+            _('- Fixed a bug where usernames were sometimes not correctly formatted in notification e-mails.\n'),
+            # Ethercalcs disabled message
+            _(
+                '- The creation of new Ethercalcs is now disabled. '
+                'Please use spreadsheets in the cloud app as a modern alternative. '
+                'Your existing Ethercalcs can still be accessed and downloaded or exported.\n'
+            )
+            if settings.COSINNUS_ETHERPAD_ETHERCALC_READONLY
+            and 'cosinnus_etherpad' not in settings.COSINNUS_DISABLED_COSINNUS_APPS
+            else '',
+            _('- Further minor bugfixes and stability improvements have been made.'),
+        ],
+    },
     '2.7.12': {
         'datetime': datetime(2026, 4, 26, tzinfo=pytz.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.12'),

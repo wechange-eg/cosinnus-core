@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.core package &#8212; Cosinnus 2.0.0 documentation</title>
+    <title>cosinnus.core package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -92,6 +92,10 @@
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.DenyAnonymousAccessMiddleware.process_request"><code class="docutils literal notranslate"><span class="pre">DenyAnonymousAccessMiddleware.process_request()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.DeprecatedAppMiddleware"><code class="docutils literal notranslate"><span class="pre">DeprecatedAppMiddleware</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.DeprecatedAppMiddleware.process_request"><code class="docutils literal notranslate"><span class="pre">DeprecatedAppMiddleware.process_request()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.ExternalEmailLinkRedirectNoticeMiddleware"><code class="docutils literal notranslate"><span class="pre">ExternalEmailLinkRedirectNoticeMiddleware</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.ExternalEmailLinkRedirectNoticeMiddleware.process_request"><code class="docutils literal notranslate"><span class="pre">ExternalEmailLinkRedirectNoticeMiddleware.process_request()</span></code></a></li>
 </ul>
@@ -109,6 +113,10 @@
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.GroupResolvingMiddlewareMixin.is_anonymous_block_exempted_group_url"><code class="docutils literal notranslate"><span class="pre">GroupResolvingMiddlewareMixin.is_anonymous_block_exempted_group_url()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.GroupResolvingMiddlewareMixin.is_url_for_group_ical_token_feed"><code class="docutils literal notranslate"><span class="pre">GroupResolvingMiddlewareMixin.is_url_for_group_ical_token_feed()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.GroupResolvingMiddlewareMixin.is_url_for_publicly_visible_group_microsite"><code class="docutils literal notranslate"><span class="pre">GroupResolvingMiddlewareMixin.is_url_for_publicly_visible_group_microsite()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.ManagedTagBlockURLsMiddleware"><code class="docutils literal notranslate"><span class="pre">ManagedTagBlockURLsMiddleware</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.ManagedTagBlockURLsMiddleware.get_user_restricted_tag_urls"><code class="docutils literal notranslate"><span class="pre">ManagedTagBlockURLsMiddleware.get_user_restricted_tag_urls()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.MovedTemporarilyRedirectFallbackMiddleware"><code class="docutils literal notranslate"><span class="pre">MovedTemporarilyRedirectFallbackMiddleware</span></code></a><ul>
@@ -130,6 +138,11 @@
 <li class="toctree-l3"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware"><code class="docutils literal notranslate"><span class="pre">StartupMiddleware</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.UserOTPMiddleware"><code class="docutils literal notranslate"><span class="pre">UserOTPMiddleware</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.UserOTPMiddleware.process_request"><code class="docutils literal notranslate"><span class="pre">UserOTPMiddleware.process_request()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.UserOnlineStatisticsMiddleware"><code class="docutils literal notranslate"><span class="pre">UserOnlineStatisticsMiddleware</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.UserOnlineStatisticsMiddleware.CACHE_KEY"><code class="docutils literal notranslate"><span class="pre">UserOnlineStatisticsMiddleware.CACHE_KEY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.UserOnlineStatisticsMiddleware.process_response"><code class="docutils literal notranslate"><span class="pre">UserOnlineStatisticsMiddleware.process_response()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus.core.middleware.html#cosinnus.core.middleware.cosinnus_middleware.initialize_cosinnus_after_startup"><code class="docutils literal notranslate"><span class="pre">initialize_cosinnus_after_startup()</span></code></a></li>
@@ -256,13 +269,19 @@ Note: <code class="docutils literal notranslate"><span class="pre">template</spa
 <dl class="py data">
 <dt class="sig sig-object py" id="cosinnus.core.signals.group_membership_has_changed">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.core.signals.</span></span><span class="sig-name descname"><span class="pre">group_membership_has_changed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.core.signals.group_membership_has_changed" title="Permalink to this definition">¶</a></dt>
-<dd><p>Called when a group was invited to an organization</p>
+<dd><p>Called after the nextcloud group has been initialized</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cosinnus.core.signals.group_moved_to_portal">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.core.signals.</span></span><span class="sig-name descname"><span class="pre">group_moved_to_portal</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.core.signals.group_moved_to_portal" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called after a CosinnusGroup, or one of its extending models was deactivated</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="cosinnus.core.signals.group_nextcloud_group_initialized">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.signals.</span></span><span class="sig-name descname"><span class="pre">group_nextcloud_group_initialized</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.core.signals.group_nextcloud_group_initialized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when a group was invited to an organization</p>
 </dd></dl>
 
 <dl class="py data">
@@ -291,6 +310,12 @@ Note: <code class="docutils literal notranslate"><span class="pre">template</spa
 <dt class="sig sig-object py" id="cosinnus.core.signals.idea_object_created">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.core.signals.</span></span><span class="sig-name descname"><span class="pre">idea_object_created</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.core.signals.idea_object_created" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called after a new user and their profile is freshly created</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="cosinnus.core.signals.managed_tags_changed">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.signals.</span></span><span class="sig-name descname"><span class="pre">managed_tags_changed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.core.signals.managed_tags_changed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called after a new user voluntarily signs up on the portal, using the web frontend</p>
 </dd></dl>
 
 <dl class="py data">
@@ -351,6 +376,12 @@ Can be used to delete/disconnect any external linked accounts.</p>
 </dd></dl>
 
 <dl class="py data">
+<dt class="sig sig-object py" id="cosinnus.core.signals.user_demoted_from_superuser">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.signals.</span></span><span class="sig-name descname"><span class="pre">user_demoted_from_superuser</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.core.signals.user_demoted_from_superuser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called after a new user properly joined a group as member (invites or join-requests do not trigger this!)</p>
+</dd></dl>
+
+<dl class="py data">
 <dt class="sig sig-object py" id="cosinnus.core.signals.user_group_invitation_accepted">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.core.signals.</span></span><span class="sig-name descname"><span class="pre">user_group_invitation_accepted</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.core.signals.user_group_invitation_accepted" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called when an admin declines a group invitation</p>
@@ -389,7 +420,9 @@ Can be used to delete/disconnect any external linked accounts.</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="cosinnus.core.signals.user_group_recruited">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.core.signals.</span></span><span class="sig-name descname"><span class="pre">user_group_recruited</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.core.signals.user_group_recruited" title="Permalink to this definition">¶</a></dt>
-<dd><p>Called when a group is moved to the current portal, serves as a notifcation message for users</p>
+<dd><p>Called after a notification event has been completey processed and
+one or more users have just received a new <cite>NotificationAlert</cite>.
+<cite>sender</cite> is the user that caused the notification event.</p>
 </dd></dl>
 
 <dl class="py data">
@@ -407,13 +440,19 @@ Can be used to delete/disconnect any external linked accounts.</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="cosinnus.core.signals.user_logged_in_first_time">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.core.signals.</span></span><span class="sig-name descname"><span class="pre">user_logged_in_first_time</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.core.signals.user_logged_in_first_time" title="Permalink to this definition">¶</a></dt>
-<dd><p>Called after a new user properly joined a group as member (invites or join-requests do not trigger this!)</p>
+<dd><p>Called after a user made is superuser</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="cosinnus.core.signals.user_password_changed">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.core.signals.</span></span><span class="sig-name descname"><span class="pre">user_password_changed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.core.signals.user_password_changed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called when the user logs in for the first time ever</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="cosinnus.core.signals.user_promoted_to_superuser">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.signals.</span></span><span class="sig-name descname"><span class="pre">user_promoted_to_superuser</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.core.signals.user_promoted_to_superuser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called after a user is demoted from superuser</p>
 </dd></dl>
 
 <dl class="py data">
@@ -424,9 +463,21 @@ Can be used to delete/disconnect any external linked accounts.</p>
 </dd></dl>
 
 <dl class="py data">
+<dt class="sig sig-object py" id="cosinnus.core.signals.userprofile_avatar_updated">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.signals.</span></span><span class="sig-name descname"><span class="pre">userprofile_avatar_updated</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.core.signals.userprofile_avatar_updated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called after the assigned managed tags for any object changed</p>
+</dd></dl>
+
+<dl class="py data">
 <dt class="sig sig-object py" id="cosinnus.core.signals.userprofile_created">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.core.signals.</span></span><span class="sig-name descname"><span class="pre">userprofile_created</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.core.signals.userprofile_created" title="Permalink to this definition">¶</a></dt>
-<dd><p>Called after a new user voluntarily signs up on the portal, using the web frontend</p>
+<dd><p>Called after a user profile avatar is changed</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="cosinnus.core.signals.users_received_notification_alert">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.core.signals.</span></span><span class="sig-name descname"><span class="pre">users_received_notification_alert</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.dispatch.dispatcher.Signal</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus.core.signals.users_received_notification_alert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when a group is moved to the current portal, serves as a notifcation message for users</p>
 </dd></dl>
 
 </section>

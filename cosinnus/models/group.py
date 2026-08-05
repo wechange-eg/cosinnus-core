@@ -9,7 +9,7 @@ import re
 import shutil
 from builtins import object
 from collections import OrderedDict
-from threading import Thread
+from typing import Optional
 
 import six
 from annoying.functions import get_object_or_None
@@ -80,9 +80,12 @@ from cosinnus.utils.functions import (
     unique_aware_slugify,
 )
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
+from cosinnus.utils.validators import validate_image_format
 from cosinnus.views.mixins.media import FlickrEmbedFieldMixin, VideoEmbedFieldMixin
 from cosinnus_deck.models import DeckMigrationMixin
+from cosinnus_event.calendar.models import CalendarMigrationMixin
 from cosinnus_event.mixins import BBBRoomMixin  # noqa
 
 logger = logging.getLogger('cosinnus')
@@ -539,6 +542,10 @@ class CosinnusGroupMembership(BaseMembership):
         changed_to_membership = bool(not created and self._status not in MEMBER_STATUS and self.status in MEMBER_STATUS)
         if created_as_membership or changed_to_membership or force_joined_signal:
             signals.user_joined_group.send(sender=self, user=self.user, group=self.group)
+        if created_as_membership or changed_to_membership:
+            self.group.update_last_activity()
+        # update cached field so it is not stale for next changes to this instance
+        self._status = self.status
 
     def delete(self, *args, **kwargs):
         """Checks and fires `user_left_group` signal if a user has hereby left this group"""
@@ -830,7 +837,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModel
         css_path = os.path.join(self._get_static_folder(), 'css', self._CUSTOM_CSS_FILENAME % self.slug)
         css_file = open(css_path, 'w')
         css_file.write(custom_css)
-        logger.warn(
+        logger.debug(
             'Wrote Custom Portal CSS file to:', extra={'Portal': CosinnusPortal.get_current().id, 'css_path': css_path}
         )
         css_file.close()
@@ -861,6 +868,7 @@ class CosinnusBaseGroup(
     MembersManagerMixin,
     BBBRoomMixin,
     DeckMigrationMixin,
+    CalendarMigrationMixin,
     AttachableObjectModel,
 ):
     """Abstract base group model implementation. Provides common functionality for all groups."""
@@ -893,6 +901,15 @@ class CosinnusBaseGroup(
     ]
 
     GROUP_MODEL_TYPE = TYPE_PROJECT
+
+    GROUP_PREMIUM_STATE_NONE = 0
+    """There is no active or expired booking."""
+    GROUP_PREMIUM_STATE_ACTIVE_FAR = 1
+    """There is an active booking with expiration far in the future."""
+    GROUP_PREMIUM_STATE_ACTIVE_ENDS_SOON = 2
+    """There is an active booking with expiration coming soon."""
+    GROUP_PREMIUM_STATE_EXPIRED = 3
+    """The booking has expired. There is no active booking. Expiration date may not yet be set."""
 
     NO_VIDEO_CONFERENCE = 0
     BBB_MEETING = 1
@@ -955,7 +972,14 @@ class CosinnusBaseGroup(
         blank=True,
     )
 
-    avatar = models.ImageField(_('Avatar'), null=True, blank=True, upload_to=get_group_avatar_filename, max_length=250)
+    avatar = models.ImageField(
+        _('Avatar'),
+        null=True,
+        blank=True,
+        upload_to=get_group_avatar_filename,
+        max_length=250,
+        validators=[validate_image_format],
+    )
     wallpaper = models.ImageField(
         _('Wallpaper image'),
         help_text=_('Shown as large banner image on the Microsite (1140 x 240 px)'),
@@ -963,6 +987,7 @@ class CosinnusBaseGroup(
         blank=True,
         upload_to=get_group_wallpaper_filename,
         max_length=250,
+        validators=[validate_image_format],
     )
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
     public = models.BooleanField(_('Public'), default=False)
@@ -1105,6 +1130,44 @@ class CosinnusBaseGroup(
         null=True,
         help_text='Internal ID of the nextcloud deck board for the group. Set after the deck is created.',
     )
+    nextcloud_calendar_url = models.URLField(
+        _('Nextcloud Group Calendar CalDAV URL'),
+        unique=True,
+        blank=True,
+        null=True,
+        help_text='CalDAV URL of the nextcloud calendar for the group. Set after the calendar is created.',
+    )
+    nextcloud_calendar_publish_url = models.URLField(
+        _('Nextcloud Group Calendar CalDAV Publish URL'),
+        unique=True,
+        blank=True,
+        null=True,
+        help_text='CalDAV Publish URL of the nextcloud calendar for the group. Set after the calendar is created.',
+    )
+    nextcloud_calendar_sync_token = models.CharField(
+        _('Nextcloud Group Calendar CalDAV Sync-Token'),
+        max_length=255,
+        blank=True,
+        null=True,
+        help_text=_('Clear to enforce a re-sync off all events.'),
+    )
+    nextcloud_calendar_last_sync = models.DateTimeField(
+        _('Nextcloud Group Calendar CalDAV Last Sync Timestamp'),
+        blank=True,
+        null=True,
+    )
+    # TODO: remove unused feature, if ctag sync works
+    nextcloud_calendar_sync_required = models.BooleanField(
+        _('Nextcloud Group Calendar CalDAV Sync Required'),
+        default=False,
+    )
+    nextcloud_calendar_ctag = models.CharField(
+        _('Nextcloud Group Calendar CalDAV CTag'),
+        max_length=255,
+        blank=True,
+        null=True,
+        help_text=_('Clear to enforce a re-sync off group events.'),
+    )
 
     # NOTE: deprecated, do not use!
     is_conference = models.BooleanField(
@@ -1143,7 +1206,8 @@ class CosinnusBaseGroup(
     is_premium_permanently = models.BooleanField(
         _('Conference is permanently premium'),
         help_text=(
-            'If enabled, this will always be in premium mode, independent of any bookings. WARNING: changing this may '
+            'DOES NOT AFFECT GROUPS/PROJECTS: If enabled, this will always be in premium mode, '
+            'independent of any bookings. WARNING: changing this may '
             '(depending on the event/conference/portal settings) cause new meeting connections to use the new server, '
             'even for ongoing meetings on the old server, essentially splitting a running meeting in two!'
         ),
@@ -1195,6 +1259,37 @@ class CosinnusBaseGroup(
         _('Use invite token'),
         default=False,
         help_text='If enabled, allows the creation of invite tokens in non-admin area',
+    )
+    last_activity = models.DateTimeField(
+        _('Last activity'),
+        default=None,
+        blank=True,
+        null=True,
+        help_text=_('Note: For performance reasons last activity may not be tracked precisely.'),
+    )
+    inactivity_notification_sent_at = models.DateTimeField(
+        _('Inactivity notification sent at'),
+        default=None,
+        blank=True,
+        null=True,
+    )
+    scheduled_for_deletion_at = models.DateTimeField(
+        _('Scheduled for Deletion at'),
+        default=None,
+        blank=True,
+        null=True,
+        help_text=_(
+            'The date this group is scheduled for deletion. Will be deleted after this date (ONLY IF the group is set '
+            'to inactive!)'
+        ),
+    )
+    deletion_triggered_by = models.ForeignKey(
+        get_user_model(),
+        verbose_name=_('Scheduled for Deletion by'),
+        related_name='+',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
     )
 
     managed_tag_assignments = GenericRelation('cosinnus.CosinnusManagedTagAssignment')
@@ -1293,6 +1388,10 @@ class CosinnusBaseGroup(
             self.conference_theme_color = self.conference_theme_color.replace('#', '')
 
         self.generate_or_update_invite_token(save_group=False)
+
+        # set last activity for new groups
+        if created:
+            self.update_last_activity()
 
         super(CosinnusBaseGroup, self).save(*args, **kwargs)
 
@@ -1454,6 +1553,26 @@ class CosinnusBaseGroup(
             and self.type in settings.COSINNUS_MITWIRKOMAT_ENABLED_FOR_GROUP_TYPES
         )
 
+    def update_last_activity(self, last_activity: Optional[datetime.datetime] = None):
+        """Update this group's `last_activity` to the given time or now if none supplied.
+        Performs a soft triggerless update() to not affect the group's `last_modified` field.
+        Ensures last_activity is never in the future.
+        @param last_activity: an optional DateTime or None. If not supplied, or None,
+        updates this group's last_activity to now()."""
+        # set now if no datetime is supplied
+        if not last_activity:
+            last_activity = now()
+        if last_activity <= now():
+            self.last_activity = last_activity
+            type(self).objects.filter(pk=self.pk).update(last_activity=self.last_activity)
+        else:
+            # unexpectedly got a last_activity in the future.
+            logger.error(
+                'update_group_last_activity: Attempted to set a last_activity in the future or unexpected type '
+                '(unexpected behaviour).',
+                extra={'group_id': self.id, 'last_activity': last_activity},
+            )
+
     def add_member_to_group(self, user, membership_status=MEMBERSHIP_MEMBER, is_late_invitation=False):
         """ "Makes the user a group member".
         Safely adds a membership for the given user with the given status for this group.
@@ -1540,6 +1659,14 @@ class CosinnusBaseGroup(
         return False
 
     @property
+    def group_is_bbb_restricted(self):
+        """Checks if BBB is restricted."""
+        if settings.COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED:
+            if not self.enable_user_premium_choices_until or now().date() > self.enable_user_premium_choices_until:
+                return True
+        return False
+
+    @property
     def group_can_access_recorded_meetings(self):
         """
         Returns True if this group may have BBB recordings associated with it.
@@ -1560,6 +1687,88 @@ class CosinnusBaseGroup(
         if self.settings.get('may_have_bbb_recordings', False):
             return True
         return False
+
+    @property
+    def group_premium_feature_enabled(self) -> bool:
+        """
+        Return `True` if group premium feature is enabled for this group.
+        Does not indicate, that premium-features are currently active.
+        """
+        if not self.group_is_group and not self.group_is_project:
+            return False
+        if not getattr(settings, 'COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS', False):
+            return False
+        if not getattr(settings, 'COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED', False):
+            return False
+
+        return True
+
+    @property
+    def group_premium_state(self):
+        """
+        Returns the current premium-state for this group.
+        """
+        if not self.group_premium_feature_enabled:
+            return self.GROUP_PREMIUM_STATE_NONE
+
+        if not self.enable_user_premium_choices_until and not self.group_premium_expired_on:
+            return self.GROUP_PREMIUM_STATE_NONE
+
+        # we are either ACTIVE or EXPIRED
+
+        # we stay in ACTIVE state until the cron-job deletes `enable_user_premium_choices_until`
+        if self.enable_user_premium_choices_until:
+            if self.group_premium_days_left > getattr(settings, 'COSINNUS_BBB_GROUP_PREMIUM_WARNING_DAYS', 14):
+                return self.GROUP_PREMIUM_STATE_ACTIVE_FAR
+            else:
+                return self.GROUP_PREMIUM_STATE_ACTIVE_ENDS_SOON
+
+        # we are no longer active, so we are expired
+        return self.GROUP_PREMIUM_STATE_EXPIRED
+
+    @property
+    def group_premium_expired_on(self) -> Optional[datetime.date]:
+        """
+        Returns date, when the premium-state was disabled.
+        Returns `None` if
+        - premium is active or
+        - expiry date is unknown or
+        - premium restrictions are disabled
+        """
+        if not self.group_premium_feature_enabled:
+            return None
+
+        if self.group_premium_days_left:
+            return None
+
+        date_str = self.settings.get('premium_features_expired_on')
+        if date_str:
+            return datetime.date.fromisoformat(date_str)
+
+        return None
+
+    @property
+    def group_premium_days_left(self) -> int:
+        """
+        Returns number of days left for premium (`1` means "Today is the last day.")
+        Returns `0` if
+        - enable_user_premium_choices_until is in the past or
+        - premium is inactive or
+        - premium restrictions are disabled
+        """
+
+        if not self.group_premium_feature_enabled:
+            return 0
+
+        last_day = self.enable_user_premium_choices_until
+        if not last_day:
+            return 0
+
+        today = now().date()
+        if today > last_day:
+            return 0
+
+        return (last_day - today).days + 1
 
     @property
     def conference_members(self):
@@ -1686,17 +1895,24 @@ class CosinnusBaseGroup(
     def clear_cache(self):
         self._clear_cache(group=self)
 
-    def get_all_objects_for_group(self):
-        """Returns in a list all the BaseTaggableObjects for this group"""
+    def get_registered_base_taggable_models(self):
+        """Returns a list of all registered models that inherit from BaseTaggableObjects."""
         from cosinnus.models.tagged import BaseTaggableObjectModel
 
-        base_taggable_objects = []
+        base_taggable_object_models = []
         for full_model_name in attached_object_registry:
             app_label, model_name = full_model_name.split('.')
             model = apps.get_model(app_label, model_name)
             if issubclass(model, BaseTaggableObjectModel):
-                instances = model.objects.filter(group=self)
-                base_taggable_objects.extend(list(instances))
+                base_taggable_object_models.append(model)
+        return base_taggable_object_models
+
+    def get_all_objects_for_group(self):
+        """Returns in a list all the BaseTaggableObjects for this group"""
+        base_taggable_objects = []
+        for base_taggable_model in self.get_registered_base_taggable_models():
+            instances = base_taggable_model.objects.filter(group=self)
+            base_taggable_objects.extend(list(instances))
         return base_taggable_objects
 
     def remove_index_for_all_group_objects(self):
@@ -1904,6 +2120,9 @@ class CosinnusBaseGroup(
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self})
 
+    def get_microsite_url(self):
+        return group_aware_reverse('cosinnus:group-microsite', kwargs={'group': self})
+
     def get_edit_url(self):
         return group_aware_reverse('cosinnus:group-edit', kwargs={'group': self})
 
@@ -2019,10 +2238,8 @@ class CosinnusBaseGroup(
                 )
                 # if token exists and the token's state (active/inactive, name)
                 # is stale compared to the group settings, update it
-                if (
-                    existing_invite_token
-                    and existing_invite_token.title != self.name
-                    or existing_invite_token.is_active != self.use_invite_token
+                if existing_invite_token and (
+                    existing_invite_token.title != self.name or existing_invite_token.is_active != self.use_invite_token
                 ):
                     existing_invite_token.title = self.name
                     existing_invite_token.is_active = self.use_invite_token
@@ -2479,9 +2696,9 @@ def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
     if not user_ids:
         return
 
-    class UserGroupGuestAccessDeleteThread(Thread):
+    class UserGroupGuestAccessDeleteThread(CosinnusWorkerThread):
         def run(self):
-            from cosinnus.views.profile import delete_guest_user
+            from cosinnus.views.profile_deletion import delete_guest_user
 
             for user in get_user_model().objects.filter(id__in=user_ids):
                 try:
@@ -2496,6 +2713,17 @@ def handle_user_group_guest_access_deleted(sender, instance, **kwargs):
                     )
 
     UserGroupGuestAccessDeleteThread().start()
+
+
+@receiver(signals.user_deactivated)
+def remove_stale_pending_memberships(sender, user, **kwargs):
+    """
+    Delete all pending group memberships for a user on deactivation.
+    """
+    # lazy import to prevent circular import error
+    from cosinnus.tasks import remove_pending_memberships_for_user_task
+
+    remove_pending_memberships_for_user_task.delay(user.id)
 
 
 def replace_swapped_group_model():

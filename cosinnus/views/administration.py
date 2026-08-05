@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from threading import Thread
-
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
@@ -37,6 +35,7 @@ from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.html import render_html_with_variables
 from cosinnus.utils.http import is_ajax
 from cosinnus.utils.permissions import check_user_can_receive_emails, check_user_superuser
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import check_user_has_accepted_any_tos
 from cosinnus.views.mixins.group import RequirePortalManagerMixin
 from cosinnus.views.profile import UserProfileUpdateView
@@ -366,7 +365,7 @@ class UserListView(ListView):
                 )
                 view = self
 
-                class UserLoginTokenThread(Thread):
+                class UserLoginTokenThread(CosinnusWorkerThread):
                     def run(self):
                         for user in non_tokened_users:
                             # avoid sending duplicate mails when two users click at the same time

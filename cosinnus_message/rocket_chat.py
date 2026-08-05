@@ -11,6 +11,7 @@ from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.utils.crypto import get_random_string
+from django.utils.dateparse import parse_datetime
 from django.utils.translation import gettext_lazy as _
 from oauth2_provider.models import Application
 from requests.exceptions import ConnectionError, Timeout
@@ -906,6 +907,26 @@ class RocketChatConnection:
         group_name = response.get('group', {}).get('name', None)
         return group_name
 
+    def get_group_updated_at(self, group):
+        """Return the last update timestamp for any group room."""
+        updated_at = None
+        room_keys = settings.COSINNUS_ROCKET_GROUP_ROOM_KEYS
+        room_ids = [self.get_group_id(group, room_key=room_key, create_if_not_exists=False) for room_key in room_keys]
+        for room_id in room_ids:
+            if room_id:
+                response = self.rocket.groups_info(room_id=room_id).json()
+                if not response.get('success'):
+                    logger.error(
+                        'RocketChat: groups_info' + response.get('errorType', '<No Error Type>'),
+                        extra={'response': response},
+                    )
+                    continue
+                updated_at_string = response.get('group', {}).get('_updatedAt', '')
+                room_update_at = parse_datetime(updated_at_string)
+                if room_update_at:
+                    updated_at = max(updated_at, room_update_at) if updated_at else room_update_at
+        return updated_at
+
     def _find_or_create_private_channel_for_user_and_group(self, user, group, members, create=False):
         """Used by `self.groups_request`, finds a group contact room for a user
         or creates one if it doesn't exist and `create` is True.
@@ -1554,7 +1575,7 @@ class RocketChatConnection:
         if len(words) <= word_count:
             return text
         last_word = words[word_count - 1]
-        truncated_text = f'{text[:last_word.end()]} …'
+        truncated_text = f'{text[: last_word.end()]} …'
         return truncated_text
 
     def _format_relay_message(self, instance):
@@ -1609,7 +1630,9 @@ class RocketChatConnection:
             if response.get('error', None) == 'The room id provided does not match where the message is from.':
                 # if the room has moved, we cannot reach the note anymore, ignore this error
                 return
-            logger.error('RocketChat: notes_update did not return a success response', extra={'response': response})
+            logger.error(
+                'RocketChat: relay_message_update did not return a success response', extra={'response': response}
+            )
 
     def notes_attachments_update(self, note):
         """

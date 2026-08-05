@@ -1,0 +1,15 @@
+{% load i18n cosinnus_tags %}
+{% if group.type == 0 %}
+    {% blocktrans trimmed with group_url=group.get_absolute_url group_name=group.name %}
+        Affected Project: [{{ group_name }}]({{ group_url }})
+    {% endblocktrans %}
+{% else %}
+    {% blocktrans trimmed with group_url=group.get_absolute_url group_name=group.name %}
+        Affected Group: [{{ group_name }}]({{ group_url }})
+    {% endblocktrans %}
+{% endif %}
+
+{% trans "If you would like to extend the period, you are welcome to make a new booking using the following form:" %}
+[{% trans "Extend Videoconference Pro" %}]({% spaceless %}{% include "cosinnus/v2/urls/conference_premium_booking_url.html" %}{% endspaceless%})
+
+{% blocktrans %}Your {{ site_name }} Team{% endblocktrans %}

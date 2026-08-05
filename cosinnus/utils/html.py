@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import html2text
+import nh3
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
@@ -55,6 +57,39 @@ def render_html_with_variables(user, html, variables=None):
             'user_full_name': full_name(user),
         }
     )
+    if html is None:
+        html = ''
     for variable_name, variable_value in variables.items():
         html = html.replace('[[%s]]' % variable_name, str(variable_value))
     return mark_safe(html)
+
+
+def is_html(content) -> bool:
+    """Check if content is HTML."""
+    return content and nh3.is_html(content) or False
+
+
+def sanitize_html(html):
+    """Sanitize HTML and mark is as safe."""
+    if not html:
+        return html
+    return mark_safe(nh3.clean(html))
+
+
+def convert_html_to_plaintext(html_message):
+    """Converts a cosinnus HTML rendered message to useful plaintext"""
+
+    htmler = html2text.HTML2Text()
+    htmler.ignore_images = True
+    htmler.body_width = 0
+    text_message = htmler.handle(html_message)
+    # clean text message from any lines containing ONLY '-' or '|' in any order, but preserve newlines
+    clean_text = ''
+    for line in text_message.split('\n'):
+        line = line.strip()
+        if len(line) > 0 and len(line.replace('|', '').replace('-', '').replace(' ', '')) == 0:
+            continue
+        if line.startswith('| '):
+            continue
+        clean_text += line + '\n'
+    return clean_text

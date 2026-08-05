@@ -8,7 +8,6 @@ from builtins import str
 from copy import copy
 from email.utils import formataddr
 from importlib import import_module
-from threading import Thread
 
 import sentry_sdk
 from annoying.functions import get_object_or_None
@@ -26,6 +25,7 @@ from django.utils.html import escape, strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.timezone import localtime
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import pgettext_lazy
 
 from cosinnus.conf import settings
 from cosinnus.core import signals
@@ -38,7 +38,7 @@ from cosinnus.models.tagged import BaseTaggableObjectModel
 from cosinnus.templatetags.cosinnus_tags import full_name, full_name_in_mail, textfield
 from cosinnus.utils.files import get_image_url_for_icon
 from cosinnus.utils.functions import ensure_dict_keys, resolve_attributes
-from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids, get_default_user_group_slugs
 from cosinnus.utils.html import replace_non_portal_urls
 from cosinnus.utils.permissions import (
     check_object_read_access,
@@ -47,6 +47,7 @@ from cosinnus.utils.permissions import (
     check_user_portal_admin,
     check_user_portal_moderator,
 )
+from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus_notifications.alerts import create_user_alert
 from cosinnus_notifications.models import (
     NotificationAlert,
@@ -90,7 +91,7 @@ MULTI_NOTIFICATION_IDS = {
 }
 # the option labels for the multi notifications:
 MULTI_NOTIFICATION_LABELS = {
-    'MULTI_followed_object_notification': _('For content that I am following, I wish to receive notification emails'),
+    'MULTI_followed_object_notification': _('For content that I am following, I wish to receive email notifications'),
 }
 
 NOTIFICATION_REASONS = {
@@ -414,7 +415,7 @@ def init_notifications():
     )
 
 
-class NotificationsThread(Thread):
+class NotificationsThread(CosinnusWorkerThread):
     """A thread to run on an event that causes notifications to be sent out.
     Handles both sending out mails instantly, and saving a persistent event for later
     re-creation during digest generation.
@@ -460,7 +461,7 @@ class NotificationsThread(Thread):
             self.already_emailed_user_emails = []
             self.already_alerted_user_ids = []
         self.sender = sender
-        self.user = user
+        self.user = user  # Note: may be `None`
         self.obj = obj
         self.audience = audience
         self.notification_id = notification_id
@@ -566,7 +567,21 @@ class NotificationsThread(Thread):
             # for this special check, we cancel the rest here, because only the moderation check counts
             return False
 
+        global_setting = GlobalUserNotificationSetting.objects.get_for_user(user)
+
+        # portal default user-group check
+        if self.group.id in get_default_user_group_ids():
+            # if global_setting is set to `never`, the portal_group_setting is overridden
+            if global_setting == GlobalUserNotificationSetting.SETTING_NEVER:
+                return False
+            portal_group_setting = GlobalUserNotificationSetting.objects.get_portal_group_setting_for_user(user)
+            if portal_group_setting == GlobalUserNotificationSetting.SETTING_NOW:
+                return True
+            # do not check further, emails for portal_groups are only sent if configured here explicitly
+            return False
+
         # check the specific multi-preference if this notification belongs to it
+        # this comes after the portal_group check and before the global settings-check
         multi_preference_set = notifications[notification_id].get('multi_preference_set', None)
         if multi_preference_set:
             if (
@@ -580,7 +595,6 @@ class NotificationsThread(Thread):
                 return False
 
         # global settings check, blanketing the finer grained checks
-        global_setting = GlobalUserNotificationSetting.objects.get_for_user(user)
         if global_setting in [
             GlobalUserNotificationSetting.SETTING_NEVER,
             GlobalUserNotificationSetting.SETTING_DAILY,
@@ -901,7 +915,7 @@ class NotificationsThread(Thread):
                 content_type=content_type,
                 object_id=self.obj.id,
                 group=self.group,
-                user=self.user,
+                user=self.user,  # Note: self.user may be None and still valid!
                 notification_id=self.notification_id,
                 audience=',%s,' % ','.join([str(receiver.id) for receiver in self.audience]),
             )
@@ -951,9 +965,18 @@ def render_digest_item_for_notification_event(
             """
         data_attributes = options['data_attributes']
 
-        sender_name = mark_safe(strip_tags(full_name_in_mail(notification_event.user)))
-        # add special attributes to object
+        # `notification_event.user` may be `None` for a notification event that has no originating user
+        # hopefully the notification event is configured so sender_name is not used, but to prevent errors,
+        # we print it out as the "Unknown" user
+        mark_sender_bold = True
+        if notification_event.user:
+            sender_name = mark_safe(strip_tags(full_name_in_mail(notification_event.user)))
+        else:
+            sender_name = mark_safe(pgettext_lazy('An unknown user placeholder', 'Unknown'))
+            mark_sender_bold = False
+        # add special attributes to object. these can be used in the cosinnus_notifications definition's properties
         obj._sender_name = sender_name
+        # even if `_sender` is `None`, `resolve_attributes()` will gracefully handle this if notifications reference it
         obj._sender = notification_event.user
 
         object_name = resolve_attributes(obj, data_attributes['object_name'], 'title')
@@ -973,9 +996,10 @@ def render_digest_item_for_notification_event(
 
         # make the 'sender_name' variable in event_text bold
         if event_text is not None:
-            bolded_sender_name = copy(string_variables)
-            bolded_sender_name['sender_name'] = '<b>%s</b>' % escape(sender_name)
-            event_text = mark_safe(event_text % bolded_sender_name)
+            _string_vars = copy(string_variables)
+            if mark_sender_bold:
+                _string_vars['sender_name'] = '<b>%s</b>' % escape(sender_name)
+            event_text = mark_safe(event_text % _string_vars)
 
         object_url = resolve_attributes(obj, data_attributes['object_url'], 'get_absolute_url')
         portal_url = CosinnusPortal.get_current().get_domain()
@@ -1022,7 +1046,9 @@ def render_digest_item_for_notification_event(
             'object_text': object_text,
             'user_image_url': portal_url
             + (
-                notification_event.user.cosinnus_profile.get_avatar_thumbnail_url()
+                notification_event.user
+                and hasattr(notification_event.user, 'cosinnus_profile')
+                and notification_event.user.cosinnus_profile.get_avatar_thumbnail_url()
                 or static('images/jane-doe-small.png')
             ),
             'image_url': resolve_attributes(
@@ -1070,6 +1096,9 @@ def render_digest_item_for_notification_event(
         # add user profile url
         if notification_event.user and notification_event.user.cosinnus_profile:
             data['action_user_url'] = notification_event.user.cosinnus_profile.get_absolute_url()
+        else:
+            # if no notification source user is set, link to the object itself so we don't have empty links
+            data['action_user_url'] = object_url
 
         # generate or get object icon url
         if options['object_icon_url']:
@@ -1208,7 +1237,8 @@ notification_sessions = {}
 def notification_receiver(sender, user, obj, audience, session_id=None, end_session=False, **kwargs):
     """Generic receiver function for all notifications
     sender: the main object that is being updated / created
-    user: the user that modified the object and caused the event
+    user: the user that modified the object and caused the event. Note: may be `None` for notifications with no
+        originating source user, like CalDav notifications
     audience: a list of users that are potential targets for the event
 
     Feature: Physical event de-duplication and queuing: To achieve that a single physical event,
@@ -1246,7 +1276,7 @@ def notification_receiver(sender, user, obj, audience, session_id=None, end_sess
         aud_user for aud_user in audience if ((aud_user.is_active or not aud_user.is_authenticated) and aud_user.email)
     ]
     # support for user blocking, filter out all audience members that have the sending user blocked
-    if settings.COSINNUS_ENABLE_USER_BLOCK:
+    if settings.COSINNUS_ENABLE_USER_BLOCK and user is not None:
         audience = [aud_user for aud_user in audience if not check_user_blocks_user(aud_user, user)]
 
     if not session_id:

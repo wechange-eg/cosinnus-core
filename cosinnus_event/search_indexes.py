@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.utils.timezone import now
 from haystack import indexes
 
+from cosinnus.conf import settings
 from cosinnus.utils.functions import normalize_within_stddev
 from cosinnus.utils.search import (
     BaseTaggableObjectIndex,
@@ -25,7 +26,10 @@ class EventIndex(BaseTaggableObjectIndex, StoredDataIndexMixin, indexes.Indexabl
         return Event
 
     def get_image_field_for_background(self, obj):
-        return obj.attached_image.file if obj.attached_image else None
+        if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+            return obj.image if obj.image else None
+        else:
+            return obj.attached_image.file if obj.attached_image else None
 
     def prepare_description(self, obj):
         return obj.note

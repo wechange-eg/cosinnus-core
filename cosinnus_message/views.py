@@ -17,9 +17,8 @@ from django.views.generic.edit import FormView
 
 from cosinnus.core.decorators.views import redirect_to_error_page
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.utils.permissions import check_user_can_see_user
+from cosinnus.utils.permissions import check_user_blocks_user, check_user_can_see_user
 from cosinnus.utils.urls import group_aware_reverse, safe_redirect
-from cosinnus.views.mixins.filters import DisallowBlockedUserViewMixin
 from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException, is_rocket_down
 from postman.models import Message
 from postman.views import ConversationView, MessageView, _get_referer, csrf_protect_m, login_required_m
@@ -177,11 +176,8 @@ class RocketChatIndexView(BaseRocketChatView):
     pass
 
 
-class RocketChatWriteView(DisallowBlockedUserViewMixin, BaseRocketChatView):
+class RocketChatWriteView(BaseRocketChatView):
     target_user = None
-
-    # check for user blocks with `DisallowBlockedUserViewMixin`
-    blocking_user_class_attr_name = 'target_user'
 
     def dispatch(self, request, *args, **kwargs):
         username = self.kwargs.get('username')
@@ -191,6 +187,12 @@ class RocketChatWriteView(DisallowBlockedUserViewMixin, BaseRocketChatView):
             if not check_user_can_see_user(request.user, self.target_user):
                 messages.warning(request, _('This profile is not visible to you due to its privacy settings.'))
                 return redirect_to_error_page(request, view=self)
+            # Redirect the user to an error page if they are blocked by the user they wanted to message,
+            # instead of following through to the actual URL.
+            if settings.COSINNUS_ENABLE_USER_BLOCK:
+                if self.target_user and check_user_blocks_user(self.target_user, request.user):
+                    messages.error(self.request, _('You cannot do this because this user is blocking you.'))
+                    return redirect_to_error_page(request, view=self)
         return super().dispatch(request, *args, **kwargs)
 
     def get_rocket_chat_url(self):

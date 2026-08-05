@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_notifications package &#8212; Cosinnus 2.0.0 documentation</title>
+    <title>cosinnus_notifications package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -313,7 +313,7 @@ TODO: We may want to split up the user-loop into 4 independent threads covering 
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_notifications.models.BaseUserNotificationPreference.SETTING_CHOICES">
-<span class="sig-name descname"><span class="pre">SETTING_CHOICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">((0,</span> <span class="pre">'Never'),</span> <span class="pre">(1,</span> <span class="pre">'Immediately'),</span> <span class="pre">(2,</span> <span class="pre">'Daily'),</span> <span class="pre">(3,</span> <span class="pre">'Weekly'))</span></em><a class="headerlink" href="#cosinnus_notifications.models.BaseUserNotificationPreference.SETTING_CHOICES" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">SETTING_CHOICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">((0,</span> <span class="pre">'Nie'),</span> <span class="pre">(1,</span> <span class="pre">'Sofort'),</span> <span class="pre">(2,</span> <span class="pre">'Täglich'),</span> <span class="pre">(3,</span> <span class="pre">'Wöchentlich'))</span></em><a class="headerlink" href="#cosinnus_notifications.models.BaseUserNotificationPreference.SETTING_CHOICES" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1129,7 +1129,7 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus_notifications.notifications.NotificationsThread">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_notifications.notifications.</span></span><span class="sig-name descname"><span class="pre">NotificationsThread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">audience</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notification_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_notifications.notifications.NotificationsThread" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusWorkerThread</span></code></p>
 <p>A thread to run on an event that causes notifications to be sent out.
 Handles both sending out mails instantly, and saving a persistent event for later
 re-creation during digest generation.
@@ -1266,8 +1266,11 @@ from the args and kwargs arguments, respectively.</p>
 <span class="sig-prename descclassname"><span class="pre">cosinnus_notifications.notifications.</span></span><span class="sig-name descname"><span class="pre">notification_receiver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sender</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">audience</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_notifications.notifications.notification_receiver" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic receiver function for all notifications
 sender: the main object that is being updated / created
-user: the user that modified the object and caused the event
-audience: a list of users that are potential targets for the event</p>
+user: the user that modified the object and caused the event. Note: may be <cite>None</cite> for notifications with no</p>
+<blockquote>
+<div><p>originating source user, like CalDav notifications</p>
+</div></blockquote>
+<p>audience: a list of users that are potential targets for the event</p>
 <dl class="simple">
 <dt>Feature: Physical event de-duplication and queuing: To achieve that a single physical event,</dt><dd><p>which has multiple different notification types, doesn’t end up sending the
 almost-same-but-slightly-similar mail multiple times to the same user:
@@ -1382,7 +1385,7 @@ Example: If I follow my own News Post and somebody comments on it, I will only r
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_notifications.views.NotificationPreferenceView.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">notification</span> <span class="pre">preferences</span> <span class="pre">were</span> <span class="pre">updated</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_notifications.views.NotificationPreferenceView.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Deine</span> <span class="pre">Benachrichtigungseinstellungen</span> <span class="pre">wurden</span> <span class="pre">erfolgreich</span> <span class="pre">geändert.'</span></em><a class="headerlink" href="#cosinnus_notifications.views.NotificationPreferenceView.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1428,6 +1431,32 @@ POST variables and then checked for validity.</p>
 <dd></dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_notifications.views.apply_global_notification_settings">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_notifications.views.</span></span><span class="sig-name descname"><span class="pre">apply_global_notification_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AbstractBaseUser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_setting</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">portal_group_setting</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rocketchat_setting</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Promise</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cosinnus_notifications.views.apply_global_notification_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies global notification settings for the given user. Handles system logic+side effects, enforces invariants.
+- Settings given as None or outside the valid choices will be ignored and not changed.
+- The GlobalUserNotificationSetting object is saved before returning, regardless of any errors.
+:param user: User-object
+:param global_setting: global notification setting, valid values in</p>
+<blockquote>
+<div><p>GlobalUserNotificationSetting.PORTAL_GROUP_SETTING_CHOICES</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>portal_group_setting</strong> – notification setting for portal default groups, valid values in
+GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES</p></li>
+<li><p><strong>rocketchat_setting</strong> – email notification setting for rocket chat, valid values in
+GlobalUserNotificationSetting.SETTING_CHOICES</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of Error-Messages as lazy-translated string-object on Error, empty List on success</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_notifications.views.notification_preference_view">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_notifications.views.</span></span><span class="sig-name descname"><span class="pre">notification_preference_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_notifications.views.notification_preference_view" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -1436,6 +1465,20 @@ POST variables and then checked for validity.</p>
 <dt class="sig sig-object py" id="cosinnus_notifications.views.notification_reset_view">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_notifications.views.</span></span><span class="sig-name descname"><span class="pre">notification_reset_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_notifications.views.notification_reset_view" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus_notifications.views.refresh_global_notification_rocketchat_setting">
+<span class="sig-prename descclassname"><span class="pre">cosinnus_notifications.views.</span></span><span class="sig-name descname"><span class="pre">refresh_global_notification_rocketchat_setting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Promise</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cosinnus_notifications.views.refresh_global_notification_rocketchat_setting" title="Permalink to this definition">¶</a></dt>
+<dd><p>refresh the setting from the rocketchat API, and if it differs, save it to our DB
+:param user: The user object to act on.
+:return: Tuple <cite>(is_changed, error_message)</cite>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>is_changed</cite> is <cite>True</cite> if the setting was changed. Maybe update other references.</p></li>
+<li><p><cite>error_message</cite> is <cite>None</cite> on success, otherwise an error message.</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
 
 </section>
 <section id="module-cosinnus_notifications">

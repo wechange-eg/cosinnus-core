@@ -58,7 +58,7 @@ class BBBRoomMeetingView(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         """Checks whether a room is running and restarts it if not,
         then returns the rooms join URL for the current user"""
-        redirect_url = self.room.get_direct_room_url_for_user(self.request.user, self.request)
+        redirect_url = self.room.get_direct_room_url_for_user(self.request.user, request=self.request)
         if redirect_url is None:
             return reverse('cosinnus:generic-error-page')
         return redirect_url
@@ -152,7 +152,7 @@ class BBBRoomMeetingQueueAPIView(View):
                 # deny logged in users without a guest token if they have no permission to enter the room
                 return HttpResponseBadRequest('User is not allowed to enter this room.')
 
-            room_url = bbb_room.get_direct_room_url_for_user(user, self.request)
+            room_url = bbb_room.get_direct_room_url_for_user(user, request=self.request)
 
             if room_url is None:
                 # on a None return, an error message will have been generated. we return the error page as "proper"
@@ -248,7 +248,7 @@ class BBBRoomGuestAccessView(TemplateView):
         """For the given user, directly resolve the BBB room url and return it."""
 
         resolved_room_url = None
-        direct_room_url = self.bbb_room.get_direct_room_url_for_user(user, self.request)
+        direct_room_url = self.bbb_room.get_direct_room_url_for_user(user, request=self.request)
         if direct_room_url is None:
             return redirect_to_error_page(self.request, view=self)
 

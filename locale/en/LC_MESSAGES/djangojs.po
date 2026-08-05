@@ -14,8 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 2.0.6\n"
 
 #. [conference.events.agenda]
@@ -137,8 +136,7 @@ msgstr "Filter by country"
 #. [conference.events.currentEvents]
 #. defaultMessage is:
 #. Happening now
-#: locale/src/views/CoffeeTables/list.json
-#: locale/src/views/Workshops/list.json
+#: locale/src/views/CoffeeTables/list.json locale/src/views/Workshops/list.json
 msgid "Happening now"
 msgstr "Happening now"
 
@@ -334,12 +332,8 @@ msgstr "participants"
 msgid "places left"
 msgstr "places left"
 
-msgid ""
-"Your profile is not shown here or not displayed correctly? "
-"Add to your profile or make yourself visible to other conference participants."
-msgstr ""
-"Your profile is not shown here or not displayed correctly? "
-"Add to your profile or make yourself visible to other conference participants."
+msgid "Your profile is not shown here or not displayed correctly? Add to your profile or make yourself visible to other conference participants."
+msgstr "Your profile is not shown here or not displayed correctly? Add to your profile or make yourself visible to other conference participants."
 
 msgid "You can only join this meeting if you accept being recorded. To join this meeting please reload this page to try again."
 msgstr ""

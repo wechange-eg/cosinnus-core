@@ -201,7 +201,7 @@ def get_float_or_None(s):
 
 
 def get_int_or_None(s):
-    """Attempts to return the value coerced to a float, or returns None"""
+    """Attempts to return the value coerced to an int, or returns None"""
     try:
         return int(s)
     except (ValueError, TypeError):

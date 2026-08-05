@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_event.api package &#8212; Cosinnus 2.0.0 documentation</title>
+    <title>cosinnus_event.api package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -41,14 +41,14 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus_event.api.serializers.EventListSerializer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_event.api.serializers.</span></span><span class="sig-name descname"><span class="pre">EventListSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.api.serializers.EventListSerializer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">HyperlinkedModelSerializer</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.dynamic_fields.CosinnusDynamicFieldsSerializerMixin" title="cosinnus.api_frontend.serializers.dynamic_fields.CosinnusDynamicFieldsSerializerMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusDynamicFieldsSerializerMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">HyperlinkedModelSerializer</span></code></p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus_event.api.serializers.EventListSerializer.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus_event.api.serializers.EventListSerializer.Meta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_event.api.serializers.EventListSerializer.Meta.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'title',</span> <span class="pre">'from_date',</span> <span class="pre">'to_date',</span> <span class="pre">'note',</span> <span class="pre">'image',</span> <span class="pre">'location',</span> <span class="pre">'location_lat',</span> <span class="pre">'location_lon',</span> <span class="pre">'street',</span> <span class="pre">'zipcode',</span> <span class="pre">'city',</span> <span class="pre">'timestamp',</span> <span class="pre">'url',</span> <span class="pre">'topics',</span> <span class="pre">'tags')</span></em><a class="headerlink" href="#cosinnus_event.api.serializers.EventListSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('id',</span> <span class="pre">'title',</span> <span class="pre">'from_date',</span> <span class="pre">'to_date',</span> <span class="pre">'note',</span> <span class="pre">'image',</span> <span class="pre">'location',</span> <span class="pre">'location_lat',</span> <span class="pre">'location_lon',</span> <span class="pre">'location_type',</span> <span class="pre">'street',</span> <span class="pre">'zipcode',</span> <span class="pre">'city',</span> <span class="pre">'timestamp',</span> <span class="pre">'url',</span> <span class="pre">'topics',</span> <span class="pre">'tags',</span> <span class="pre">'group_name',</span> <span class="pre">'group_url')</span></em><a class="headerlink" href="#cosinnus_event.api.serializers.EventListSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -58,6 +58,27 @@
 </dd></dl>
 
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_event.api.serializers.EventListSerializer.dynamic_fields_source">
+<span class="sig-name descname"><span class="pre">dynamic_fields_source</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'media_tag.dynamic_fields'</span></em><a class="headerlink" href="#cosinnus_event.api.serializers.EventListSerializer.dynamic_fields_source" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.api.serializers.EventListSerializer.get_dynamic_field_settings">
+<span class="sig-name descname"><span class="pre">get_dynamic_field_settings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.api.serializers.EventListSerializer.get_dynamic_field_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows to dynamically overwrite the dynamic field settings, e.g. for TAGGED_EXTRA_FIELDS.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.api.serializers.EventListSerializer.get_group_name">
+<span class="sig-name descname"><span class="pre">get_group_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.api.serializers.EventListSerializer.get_group_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.api.serializers.EventListSerializer.get_group_url">
+<span class="sig-name descname"><span class="pre">get_group_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.api.serializers.EventListSerializer.get_group_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus_event.api.serializers.EventListSerializer.get_image">
@@ -77,6 +98,11 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus_event.api.serializers.EventListSerializer.get_location_lon">
 <span class="sig-name descname"><span class="pre">get_location_lon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.api.serializers.EventListSerializer.get_location_lon" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.api.serializers.EventListSerializer.get_location_type">
+<span class="sig-name descname"><span class="pre">get_location_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.api.serializers.EventListSerializer.get_location_type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -106,12 +132,52 @@
 <section id="module-cosinnus_event.api.views">
 <span id="cosinnus-event-api-views-module"></span><h2>cosinnus_event.api.views module<a class="headerlink" href="#module-cosinnus_event.api.views" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
+<dt class="sig sig-object py" id="cosinnus_event.api.views.EventExchangeViewSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_event.api.views.</span></span><span class="sig-name descname"><span class="pre">EventExchangeViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.api.views.EventExchangeViewSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus_event.api.views.EventViewSet" title="cosinnus_event.api.views.EventViewSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventViewSet</span></code></a></p>
+<p>Adds an additional filter that excludes groups/projects with only one member,
+for use with <cite>CosinnusFilterQuerySetMixin</cite>.
+TODO: this needs further optimization/debugging, as it does not scale at all with 100k Event items in DB!</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_event.api.views.EventExchangeViewSet.additional_qs_filter_func">
+<span class="sig-name descname"><span class="pre">additional_qs_filter_func</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_event.api.views.EventExchangeViewSet.additional_qs_filter_func" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_event.api.views.EventExchangeViewSet.basename">
+<span class="sig-name descname"><span class="pre">basename</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_event.api.views.EventExchangeViewSet.basename" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_event.api.views.EventExchangeViewSet.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_event.api.views.EventExchangeViewSet.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_event.api.views.EventExchangeViewSet.detail">
+<span class="sig-name descname"><span class="pre">detail</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_event.api.views.EventExchangeViewSet.detail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_event.api.views.EventExchangeViewSet.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_event.api.views.EventExchangeViewSet.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus_event.api.views.EventExchangeViewSet.suffix">
+<span class="sig-name descname"><span class="pre">suffix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus_event.api.views.EventExchangeViewSet.suffix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="cosinnus_event.api.views.EventViewSet">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_event.api.views.</span></span><span class="sig-name descname"><span class="pre">EventViewSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.api.views.EventViewSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cosinnus_event.api.views.ScheduledFilterMixin" title="cosinnus_event.api.views.ScheduledFilterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">ScheduledFilterMixin</span></code></a>, <a class="reference internal" href="cosinnus.api.views.html#cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin" title="cosinnus.api.views.mixins.CosinnusFilterQuerySetMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusFilterQuerySetMixin</span></code></a>, <a class="reference internal" href="cosinnus.api.views.html#cosinnus.api.views.mixins.PublicTaggableObjectFilterMixin" title="cosinnus.api.views.mixins.PublicTaggableObjectFilterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">PublicTaggableObjectFilterMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ReadOnlyModelViewSet</span></code></p>
+<p>An endpoint that returns publicly visible events.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_event.api.views.EventViewSet.FILTER_CONDITION_MAP">
-<span class="sig-name descname"><span class="pre">FILTER_CONDITION_MAP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'upcoming':</span> <span class="pre">{'true':</span> <span class="pre">[&lt;Q:</span> <span class="pre">(AND:</span> <span class="pre">('to_date__gte',</span> <span class="pre">datetime.datetime(2024,</span> <span class="pre">5,</span> <span class="pre">23,</span> <span class="pre">11,</span> <span class="pre">49,</span> <span class="pre">16,</span> <span class="pre">18631,</span> <span class="pre">tzinfo=datetime.timezone.utc)))&gt;]}}</span></em><a class="headerlink" href="#cosinnus_event.api.views.EventViewSet.FILTER_CONDITION_MAP" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">FILTER_CONDITION_MAP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'upcoming':</span> <span class="pre">{'true':</span> <span class="pre">[&lt;Q:</span> <span class="pre">(AND:</span> <span class="pre">('to_date__gte',</span> <span class="pre">datetime.datetime(2026,</span> <span class="pre">8,</span> <span class="pre">5,</span> <span class="pre">10,</span> <span class="pre">13,</span> <span class="pre">10,</span> <span class="pre">994669,</span> <span class="pre">tzinfo=datetime.timezone.utc)))&gt;]}}</span></em><a class="headerlink" href="#cosinnus_event.api.views.EventViewSet.FILTER_CONDITION_MAP" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -148,6 +214,11 @@ Defaults to using <cite>self.serializer_class</cite>.</p>
 serializations depending on the incoming request.</p>
 <p>(Eg. admins get full serialization, others get basic serialization)</p>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_event.api.views.EventViewSet.list">
+<span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_event.api.views.EventViewSet.list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_event.api.views.EventViewSet.name">

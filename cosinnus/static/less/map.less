@@ -794,6 +794,14 @@
         }
     }
 
+    /** fix display of html descriptions */
+    .description {
+        /** display paragraphs inside of lists as inline **/
+        li > p {
+            display: inline;
+        }
+    }
+
     .alert {
         border-radius: 4px;
         i {
@@ -986,7 +994,7 @@
     cursor: auto;
     color: @map-text-color;
     
-    p, {
+    p {
         color: @map-pale-color;
     }
     
@@ -1415,7 +1423,7 @@
             .CodeMirror .CodeMirror-code, .CodeMirror .editor-preview, 
             .CodeMirror .editor-preview p, .CodeMirror .editor-preview ul,
             .CodeMirror .editor-preview li {
-                font-size: 14px;
+                font-size: 16px;
             }
         }
     }

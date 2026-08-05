@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_note package &#8212; Cosinnus 2.0.0 documentation</title>
+    <title>cosinnus_note package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -53,18 +53,21 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.serializers.NoteListSerializer"><code class="docutils literal notranslate"><span class="pre">NoteListSerializer</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.serializers.NoteListSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">NoteListSerializer.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.serializers.NoteListSerializer.get_tags"><code class="docutils literal notranslate"><span class="pre">NoteListSerializer.get_tags()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.serializers.NoteRetrieveSerializer"><code class="docutils literal notranslate"><span class="pre">NoteRetrieveSerializer</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cosinnus_note.api.html#module-cosinnus_note.api.views">cosinnus_note.api.views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.MyQueryParamSerializer"><code class="docutils literal notranslate"><span class="pre">MyQueryParamSerializer</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet"><code class="docutils literal notranslate"><span class="pre">NoteViewSet</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.MANAGED_TAGS_FILTER_ON_GROUP"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.MANAGED_TAGS_FILTER_ON_GROUP</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.basename"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.basename</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.description"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.description</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.detail"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.detail</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.get_serializer_class"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.get_serializer_class()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.list"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.list()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.name"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.name</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.queryset"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.queryset</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_note.api.html#cosinnus_note.api.views.NoteViewSet.suffix"><code class="docutils literal notranslate"><span class="pre">NoteViewSet.suffix</span></code></a></li>
@@ -263,7 +266,7 @@ User widget: Contains the latest news posts from all the user’s groups.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_note.dashboard.DetailedNotes.title">
-<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Write</span> <span class="pre">a</span> <span class="pre">news</span> <span class="pre">post...'</span></em><a class="headerlink" href="#cosinnus_note.dashboard.DetailedNotes.title" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Was</span> <span class="pre">gibt</span> <span class="pre">es</span> <span class="pre">Neues?'</span></em><a class="headerlink" href="#cosinnus_note.dashboard.DetailedNotes.title" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -977,7 +980,7 @@ object the first time, the query is executed.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_note.views.CommentCreateView.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">comment</span> <span class="pre">was</span> <span class="pre">added</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_note.views.CommentCreateView.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Dein</span> <span class="pre">Kommentar</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">hinzugefügt.'</span></em><a class="headerlink" href="#cosinnus_note.views.CommentCreateView.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1024,7 +1027,7 @@ POST variables and then check if it’s valid.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_note.views.CommentDeleteView.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">comment</span> <span class="pre">was</span> <span class="pre">deleted</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_note.views.CommentDeleteView.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Dein</span> <span class="pre">Kommentar</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">gelöscht.'</span></em><a class="headerlink" href="#cosinnus_note.views.CommentDeleteView.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1166,7 +1169,7 @@ POST variables and then check if it’s valid.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_note.views.NoteCreateView.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">news</span> <span class="pre">post</span> <span class="pre">was</span> <span class="pre">added</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteCreateView.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Deine</span> <span class="pre">Neuigkeit</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">erstellt.'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteCreateView.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1201,7 +1204,7 @@ POST variables and then check if it’s valid.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_note.views.NoteDeleteView.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">news</span> <span class="pre">post</span> <span class="pre">was</span> <span class="pre">deleted</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteDeleteView.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Deine</span> <span class="pre">Neuigkeit</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">gelöscht..'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteDeleteView.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1405,7 +1408,7 @@ visibility tags</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_note.views.NoteUpdateView.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">news</span> <span class="pre">post</span> <span class="pre">was</span> <span class="pre">edited</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Deine</span> <span class="pre">Neuigkeit</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">bearbeitet.'</span></em><a class="headerlink" href="#cosinnus_note.views.NoteUpdateView.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

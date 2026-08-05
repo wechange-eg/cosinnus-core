@@ -115,6 +115,10 @@ class IntDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     formfield_class = forms.IntegerField
 
 
+class FloatDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
+    formfield_class = forms.FloatField
+
+
 class BooleanDynamicFieldFormFieldGenerator(DynamicFieldFormFieldGenerator):
     formfield_class = forms.BooleanField
 
@@ -373,6 +377,7 @@ EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS = {
     dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT_AREA: TextAreaDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT_SLUG: TextSlugDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_INT: IntDynamicFieldFormFieldGenerator,
+    dynamic_fields.DYNAMIC_FIELD_TYPE_FLOAT: FloatDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_BOOLEAN: BooleanDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_DATE: DateDynamicFieldFormFieldGenerator,
     dynamic_fields.DYNAMIC_FIELD_TYPE_COUNTRY: CountryDynamicFieldFormFieldGenerator,

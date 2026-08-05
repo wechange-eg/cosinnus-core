@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.apps import AppConfig
+from django.db.models.signals import post_migrate
+
+from cosinnus.management.initialization import ensure_current_portal_object
 
 
 class CosinnusAppConfig(AppConfig):
@@ -10,6 +13,7 @@ class CosinnusAppConfig(AppConfig):
         from cosinnus.models.group import replace_swapped_group_model
 
         replace_swapped_group_model()
+
         from cosinnus.core.registries.urls import url_registry
 
         url_registry.ready()
@@ -25,3 +29,6 @@ class CosinnusAppConfig(AppConfig):
 
         from cosinnus.api import hooks  # noqa
         from cosinnus import hooks  # noqa
+
+        # make sure, the CosinnusPortal and related Objects are always present, Tests will fail otherwise
+        post_migrate.connect(ensure_current_portal_object, sender=self)

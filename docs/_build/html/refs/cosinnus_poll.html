@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_poll package &#8212; Cosinnus 2.0.0 documentation</title>
+    <title>cosinnus_poll package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -312,7 +312,7 @@ if has_more == False, the receiving widget will assume no further data can be lo
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_poll.dashboard.CurrentPolls.title">
-<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Current</span> <span class="pre">Polls'</span></em><a class="headerlink" href="#cosinnus_poll.dashboard.CurrentPolls.title" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Umfragen'</span></em><a class="headerlink" href="#cosinnus_poll.dashboard.CurrentPolls.title" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -894,7 +894,7 @@ class built by <code class="docutils literal notranslate"><span class="pre">crea
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_poll.models.Poll.STATE_CHOICES">
-<span class="sig-name descname"><span class="pre">STATE_CHOICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">((1,</span> <span class="pre">'Voting</span> <span class="pre">open'),</span> <span class="pre">(2,</span> <span class="pre">'Voting</span> <span class="pre">closed'),</span> <span class="pre">(3,</span> <span class="pre">'Poll</span> <span class="pre">archived'))</span></em><a class="headerlink" href="#cosinnus_poll.models.Poll.STATE_CHOICES" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">STATE_CHOICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">((1,</span> <span class="pre">'Umfrage'),</span> <span class="pre">(2,</span> <span class="pre">'Abstimmung</span> <span class="pre">abgeschlossen'),</span> <span class="pre">(3,</span> <span class="pre">'Umfrage</span> <span class="pre">archiviert'))</span></em><a class="headerlink" href="#cosinnus_poll.models.Poll.STATE_CHOICES" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1281,7 +1281,7 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_poll.models.Vote.VOTE_CHOICES">
-<span class="sig-name descname"><span class="pre">VOTE_CHOICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">((2,</span> <span class="pre">'Yes'),</span> <span class="pre">(1,</span> <span class="pre">'Maybe'),</span> <span class="pre">(0,</span> <span class="pre">'No'))</span></em><a class="headerlink" href="#cosinnus_poll.models.Vote.VOTE_CHOICES" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">VOTE_CHOICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">((2,</span> <span class="pre">'Ja'),</span> <span class="pre">(1,</span> <span class="pre">'Evtl'),</span> <span class="pre">(0,</span> <span class="pre">'Nein'))</span></em><a class="headerlink" href="#cosinnus_poll.models.Vote.VOTE_CHOICES" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1477,7 +1477,7 @@ or have an end date before today.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_poll.views.CommentCreateView.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">comment</span> <span class="pre">was</span> <span class="pre">added</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_poll.views.CommentCreateView.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Dein</span> <span class="pre">Kommentar</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">hinzugefügt.'</span></em><a class="headerlink" href="#cosinnus_poll.views.CommentCreateView.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1524,7 +1524,7 @@ POST variables and then check if it’s valid.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_poll.views.CommentDeleteView.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">comment</span> <span class="pre">was</span> <span class="pre">deleted</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_poll.views.CommentDeleteView.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Dein</span> <span class="pre">Kommentar</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">gelöscht.'</span></em><a class="headerlink" href="#cosinnus_poll.views.CommentDeleteView.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1656,12 +1656,12 @@ POST variables and then check if it’s valid.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_poll.views.PollAddView.message_error">
-<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Poll</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">be</span> <span class="pre">added.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollAddView.message_error" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Umfrage</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">konnte</span> <span class="pre">nicht</span> <span class="pre">hinzugefügt</span> <span class="pre">werden.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollAddView.message_error" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_poll.views.PollAddView.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Poll</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">was</span> <span class="pre">added</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollAddView.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Veranstaltung</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">hinzugefügt.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollAddView.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1751,12 +1751,12 @@ POST variables and then check if it’s valid.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_poll.views.PollDeleteView.message_error">
-<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Poll</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">be</span> <span class="pre">deleted.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollDeleteView.message_error" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Umfrage</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">konnte</span> <span class="pre">nicht</span> <span class="pre">gelöscht</span> <span class="pre">werden.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollDeleteView.message_error" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_poll.views.PollDeleteView.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Poll</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">was</span> <span class="pre">deleted</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollDeleteView.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Umfrage</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">gelöscht.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollDeleteView.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1858,12 +1858,12 @@ Subclasses can override this to return any object.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_poll.views.PollFormMixin.message_error">
-<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Poll</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">be</span> <span class="pre">edited.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollFormMixin.message_error" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Umfrage</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">konnte</span> <span class="pre">nicht</span> <span class="pre">bearbeitet</span> <span class="pre">werden.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollFormMixin.message_error" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_poll.views.PollFormMixin.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Poll</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">was</span> <span class="pre">edited</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollFormMixin.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Umfrage</span> <span class="pre">&quot;%(title)s&quot;</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">bearbeitet.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollFormMixin.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -2001,12 +2001,12 @@ data-filled formset and errors.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_poll.views.PollVoteView.message_error">
-<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">votes</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">be</span> <span class="pre">saved.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollVoteView.message_error" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_error</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Ihre</span> <span class="pre">Abstimmung</span> <span class="pre">konnte</span> <span class="pre">nicht</span> <span class="pre">gespeichert</span> <span class="pre">werden.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollVoteView.message_error" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_poll.views.PollVoteView.message_success">
-<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Your</span> <span class="pre">votes</span> <span class="pre">were</span> <span class="pre">saved</span> <span class="pre">successfully.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollVoteView.message_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Ihre</span> <span class="pre">Abstimmung</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">gespeichert.'</span></em><a class="headerlink" href="#cosinnus_poll.views.PollVoteView.message_success" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

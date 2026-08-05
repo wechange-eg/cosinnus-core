@@ -206,6 +206,7 @@ class CosinnusConf(AppConf):
     }
 
     # list of BaseTaggableObjectModels that can be reflected from groups into projects
+    # DEPRECATED: The v3 calendar does not check this setting and always allows event reflections.
     REFLECTABLE_OBJECTS = [
         'cosinnus_note.note',
         'cosinnus_event.event',
@@ -301,6 +302,12 @@ class CosinnusConf(AppConf):
     # the global notification setting for users on the plattform (3: weekly)
     DEFAULT_GLOBAL_NOTIFICATION_SETTING = 3
 
+    # the global notification setting for new users, specific for the portal-wide default groups
+    # like Forum, Events etc.
+    # (0 : never)
+    # (3 : weekly)
+    DEFAULT_GLOBAL_NOTIFICATION_SETTING_PORTAL_GROUP = 3
+
     # default rocketchat notification mails are on
     # (see `GlobalUserNotificationSetting.ROCKETCHAT_SETTING_CHOICES`)
     DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING = 1
@@ -314,6 +321,9 @@ class CosinnusConf(AppConf):
     # if True, will forbid anyone to edit an etherpad created by a user
     # whose account is inactive or deleted. view-only is still possible.
     LOCK_ETHERPAD_WRITE_MODE_ON_CREATOR_DELETE = False
+
+    # if True, will prevent creation of new ethercalcs and refer to nextcloud
+    ETHERPAD_ETHERCALC_READONLY = True
 
     # a list of cosinnus apps that are installed but are disabled for the users, e.g. ['cosinnus_marketplace', ]
     # (they are still admin accessible)
@@ -526,6 +536,9 @@ class CosinnusConf(AppConf):
     # Note! this is reflected in migration 0113! If the setting is changed afte the migration
     # has been run, previous values of all existing groups will remain unchanged!
     GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE = True
+
+    # the duration in days from which a user deletes a group until its actual deletion is triggered
+    GROUP_DELETION_SCHEDULE_DAYS = 30
 
     # if True, enables an option to choose related groups/projects in the groups/projects
     # settings showing the chosen ones on microsite and dashboard
@@ -958,6 +971,13 @@ class CosinnusConf(AppConf):
     # whether to use celery on this instance
     USE_CELERY = False
 
+    # if True, use `CosinnusWorkerThread`, otherwise use vanilla `Thread` for Worker Threads
+    USE_WORKER_THREADS = True
+
+    # whether to disable Threading for worker threads
+    # worker functions are run in the main thread
+    WORKER_THREADS_DISABLE_THREADING = False
+
     # whether to use the new style navbar
     USE_V2_NAVBAR = True
 
@@ -985,7 +1005,7 @@ class CosinnusConf(AppConf):
     V2_DASHBOARD_WELCOME_SCREEN_ENABLED = True
 
     # default duration for which the welcome screen should be shown on the user dashboard, unless clicked aways
-    V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS = 7
+    V2_DASHBOARD_WELCOME_SCREEN_EXPIRY_DAYS = 365 * 10  # 10 years
 
     # in v2, the footer is disabled by default. set this to True to enable it!
     V2_FORCE_SITE_FOOTER = False
@@ -1278,6 +1298,10 @@ class CosinnusConf(AppConf):
     # usage: see `USERPROFILE_EXTRA_FIELDS`
     GROUP_EXTRA_FIELDS = {}
 
+    # dynamic field settings (see `USERPROFILE_EXTRA_FIELDS`) for tagged objects by model.
+    # e.g. 'cosinnus_event.Event': {....},
+    TAGGED_EXTRA_FIELDS = {}
+
     # a i18n str that explains the special password rules to the user,
     # can be markdown.
     # will display default field legend if None
@@ -1525,7 +1549,7 @@ class CosinnusConf(AppConf):
     # to django's `MIDDLEWARE` setting
     MANAGED_TAGS_RESTRICT_URLS_BLOCKED = {}
 
-    # a list of managed tag slugs, whose users may not contact anyone or be contacted directly
+    # a list of managed tag slugs, whose users may not be seen or be contacted directly
     MANAGED_TAGS_RESTRICT_CONTACTING = []
 
     # a list of managed tag slugs, whose users may not start BBB rooms, but rather only join running rooms
@@ -1589,6 +1613,14 @@ class CosinnusConf(AppConf):
     # and this is set to True, admins need to enable groups/projects
     # using field `???` before the group admins can enable the BBB option
     BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED = False
+
+    # The number of days before premium expiry to send a warning email
+    # (only active if `BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED` is True).
+    BBB_GROUP_PREMIUM_WARNING_DAYS = 14
+
+    # Send Emails with an expiration warning, when the warning period starts (set by `BBB_GROUP_PREMIUM_WARNING_DAYS`).
+    # (only active if `BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED` is True).
+    BBB_GROUP_PREMIUM_SEND_EXPIRATION_WARNING_EMAILS = True
 
     STARRED_STAR_LABEL = _('Bookmark')
     STARRED_STARRING_LABEL = _('Bookmarked')
@@ -1736,6 +1768,25 @@ class CosinnusConf(AppConf):
 
     # robots.txt configuration. If True, use a deny-all robots.txt, otherwise serve static/robots.txt.
     DENY_ALL_ROBOTS = False
+    # Number of days before inactive groups and users are automatically deactivated for deletion.
+    # Note: Ignoring leap years to avoid calendar arithmetics as the exact duration is not crucial for the deactivation.
+    INACTIVE_DEACTIVATION_SCHEDULE = 365 * 10  # 10 years
+    INACTIVE_DEACTIVATION_SCHEDULE_TEXT = _('10 years')
+
+    # Notification intervals in days before automatic deactivation of users and groups.
+    # Dictionary with day value and the corresponding user text.
+    INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION = {
+        365: _('1 year'),
+        182: _('6 months'),
+        14: _('2 weeks'),
+        2: _('2 days'),
+    }
+
+    # the amount of days before any of the points in time indicated by
+    # `INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION` or `INACTIVE_DEACTIVATION_SCHEDULE`
+    # where `update_group_last_activity()` will actually run instead of skipping the
+    # expensive computation.
+    INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS = 3
 
     # enable group permissions in the django admin, including the group admin and the group field in the user admin.
     DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False
@@ -1808,6 +1859,11 @@ class CosinnusConf(AppConf):
     # a user will not receive any more empty Firebase messages beyond the first.
     # set to 0 to disable throttling for empty Firebase messages.
     FIREBASE_EMPTY_MESSAGE_USER_THROTTLE_SECONDS = 10
+
+    # Env file used by project, e.g. read .env.test in default_settings.
+    # Important: this conf setting needs to be put at the start of your project's conf file,
+    # *before* `def define_cosinnus_project_settings(...` !
+    ENV_FILE = '.env'
 
 
 class CosinnusDefaultSettings(AppConf):
@@ -1913,6 +1969,18 @@ class CosinnusDefaultSettings(AppConf):
                 },
             },
         },
+        'waiting_room': {
+            0: {
+                'create': {
+                    'guestPolicy': 'ALWAYS_ACCEPT',
+                },
+            },
+            1: {
+                'create': {
+                    'guestPolicy': 'ASK_MODERATOR',
+                },
+            },
+        },
         'record_meeting': {
             0: {
                 'create': {
@@ -1941,6 +2009,7 @@ class CosinnusDefaultSettings(AppConf):
         'create': {
             'muteOnStart': 'true',  # default preset for 'mic_starts_on': False
             'record': 'false',  # default preset for 'record_meeting'
+            'guestPolicy': 'ALWAYS_ACCEPT',  # default preset for 'waiting_room'
         },
         'join': {
             'userdata-bbb_auto_share_webcam': 'false',  # default preset for 'cam_starts_on': False
@@ -1970,12 +2039,14 @@ class CosinnusDefaultSettings(AppConf):
     BBB_PRESET_USER_FORM_FIELDS = [
         'mic_starts_on',
         'cam_starts_on',
+        'waiting_room',
         'welcome_message',
     ]
     # a complete list of all choices that could be made for BBB_PRESET_USER_FORM_FIELDS
     # __all_choices__BBB_PRESET_USER_FORM_FIELDS = [
     #    'mic_starts_on',
     #    'cam_starts_on',
+    #    'waiting_room',
     #    'record_meeting',
     # ]
 

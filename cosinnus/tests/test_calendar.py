@@ -1,0 +1,1315 @@
+import datetime
+import random
+
+from caldav.elements.dav import Owner
+from django.contrib.auth import get_user_model
+from django.core.cache import cache
+from django.test import TestCase
+from django.utils import timezone
+from rest_framework.routers import reverse
+from rest_framework.test import APITestCase, override_settings
+
+import cosinnus_cloud
+from cosinnus.conf import settings
+from cosinnus.core import signals
+from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
+from cosinnus.dynamic_fields import dynamic_fields
+from cosinnus.models.group import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, CosinnusGroupMembership
+from cosinnus.models.group_extra import CosinnusSociety
+from cosinnus.models.tagged import BaseTagObject
+from cosinnus.tests.utils import CeleryTaskTestMixin
+from cosinnus.utils.urls import group_aware_reverse
+from cosinnus_cloud.hooks import get_nc_user_id
+from cosinnus_event.calendar.nextcloud_caldav import NextcloudCaldavConnection
+from cosinnus_event.models import Event
+
+if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
+    initialize_cosinnus_after_startup()
+
+    # TODO: remove when test thread branch is merged
+    # patch nextcloud hook threading
+    def blocking_nc_call(function, *args, **kwargs):
+        function(*args, **kwargs)
+
+    cosinnus_cloud.hooks.submit_with_retry = blocking_nc_call
+
+    # patch function used to disable NC hooks
+    def disabled_nc_call(funciont, *args, **kwargs):
+        pass
+
+    class CalendarIntegrationBaseTest(CeleryTaskTestMixin, TestCase):
+        """Base setup for calendar Nextcloud integration tests providing a calendar_connection."""
+
+        deck_connection = None
+
+        @classmethod
+        def setUpClass(cls):
+            super().setUpClass()
+            cache.clear()
+            cls.calendar_connection = NextcloudCaldavConnection()
+
+        def get_group_calendar(self, group):
+            """Helper to get the group calendar by url."""
+            calendar = self.calendar_connection.caldav_client.calendar(url=group.nextcloud_calendar_url)
+            # The above method does not check the server, make an actual caldav call.
+            try:
+                calendar.get_display_name()
+            except Exception:
+                calendar = None
+            return calendar
+
+        def get_invite_prop_raw(self, group):
+            """Returns the custom invite property, using raw string for testing and not parsing the XML."""
+            body = (
+                '<x0:propfind xmlns:x0="DAV:">'
+                '    <x0:prop><x4:invite xmlns:x4="http://owncloud.org/ns"/></x0:prop>'
+                '</x0:propfind>'
+            )
+            res = self.calendar_connection.caldav_client.request(group.nextcloud_calendar_url, 'PROPFIND', body)
+            return res.raw
+
+        def get_properties_raw(self, group):
+            """Returns the raw properties for a calendar, used to check custom deletion property."""
+            calendar = self.calendar_connection.caldav_client.calendar(url=group.nextcloud_calendar_url)
+            res = calendar.get_properties(parse_response_xml=False)
+            return res.raw
+
+    class CalendarGroupIntegrationTest(CalendarIntegrationBaseTest):
+        """Test nextcloud calendar group integration."""
+
+        # Test group created in setUp
+        test_group_name = None
+        test_group = None
+
+        # Contains further test group created in individual tests, as they need to be deleted during teardown
+        custom_test_groups = []
+
+        def setUp(self):
+            super().setUp()
+            self.test_group_name = 'LocalCalendarTestGroup' + str(random.randint(1000, 9999))
+            with self.runCeleryTasks():
+                self.test_group = CosinnusSociety.objects.create(name=self.test_group_name)
+            self.test_group.refresh_from_db()
+            self.test_group_principal_name = self.test_group.nextcloud_group_id.replace(' ', '+')
+
+        def tearDown(self):
+            super().tearDown()
+            # delete default test group if not already deleted
+            if self.test_group:
+                with self.runCeleryTasks():
+                    self.test_group.delete()
+            # delete custom test groups
+            for test_group in self.custom_test_groups:
+                with self.runCeleryTasks():
+                    test_group.delete()
+            self.custom_test_groups.clear()
+
+        def test_group_create(self):
+            """Test that a calendar is created for test group created in setUp."""
+            self.assertIsNotNone(self.test_group.nextcloud_group_id)
+            self.assertIsNotNone(self.test_group.nextcloud_calendar_url)
+            self.assertIsNotNone(self.test_group.nextcloud_calendar_publish_url)
+            calendar = self.get_group_calendar(self.test_group)
+            self.assertIsNotNone(calendar)
+            self.assertEqual(calendar.get_display_name(), self.test_group.name)
+
+            # check owner
+            self.assertEqual(
+                calendar.get_property(Owner()),
+                f'/remote.php/dav/principals/users/{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/',
+            )
+
+            # check group access and permissions (not parsing XML here, checking if the string is in the raw response)
+            invite = self.get_invite_prop_raw(self.test_group)
+            self.assertIn(self.test_group_principal_name, invite)
+            self.assertIn('read-write', invite)
+
+        def test_group_delete(self):
+            """Test that calendar is deleted on group deletion."""
+            calendar_properties = self.get_properties_raw(self.test_group)
+            self.assertNotIn('x1:deleted-calendar', calendar_properties)
+            with self.runCeleryTasks():
+                self.test_group.delete()
+            calendar_properties = self.get_properties_raw(self.test_group)
+            self.assertIn('x1:deleted-calendar', calendar_properties)
+            self.test_group = None
+
+        def test_group_deactivate_reactivate(self):
+            """
+            Test that calandar is archived/unarchived when group is deactivated/reactivated.
+            Note: calendar deactivation is done by unsharing the calendar with the group.
+            """
+            # check that the calendar is shared with group
+            self.assertTrue(self.test_group.is_active)
+            invite = self.get_invite_prop_raw(self.test_group)
+            self.assertIn(self.test_group_principal_name, invite)
+
+            # deactivate group
+            with self.runCeleryTasks():
+                self.test_group.is_active = False
+                self.test_group.save()
+
+            # check that the calendar is not shared with the group
+            invite = self.get_invite_prop_raw(self.test_group)
+            self.assertNotIn(self.test_group_principal_name, invite)
+
+            # reactivate group
+            with self.runCeleryTasks():
+                self.test_group.is_active = True
+                self.test_group.save()
+
+            # check that the calendar is shared again with group
+            invite = self.get_invite_prop_raw(self.test_group)
+            self.assertIn(self.test_group_principal_name, invite)
+
+        def test_app_deactivate_reactivate(self):
+            """
+            Test that calendar is archived/unarchived when events app is deactivated/reactivated.
+            Note: calendar deactivation is done by unsharing the calendar with the group.
+            """
+            # check that the board is active
+            # check that the calendar is shared with group
+            invite = self.get_invite_prop_raw(self.test_group)
+            self.assertIn(self.test_group_principal_name, invite)
+
+            # deactivate events app
+            with self.runCeleryTasks():
+                self.test_group.deactivated_apps = 'cosinnus_event'
+                self.test_group.save()
+                signals.group_apps_deactivated.send(sender=self, group=self.test_group, apps=['cosinnus_event'])
+
+            # check that the calendar is not shared with group
+            invite = self.get_invite_prop_raw(self.test_group)
+            self.assertNotIn(self.test_group_principal_name, invite)
+
+            # reactivate calendar app
+            with self.runCeleryTasks():
+                self.test_group.deactivated_apps = None
+                self.test_group.save()
+                signals.group_apps_activated.send(sender=self, group=self.test_group, apps=['cosinnus_event'])
+
+            # check that the calendar is shared with group
+            invite = self.get_invite_prop_raw(self.test_group)
+            self.assertIn(self.test_group_principal_name, invite)
+
+        def test_app_activate_with_cloud_app_active(self):
+            """
+            Test that the calendar is created when the event app is activated for the first time in a group with an
+            active cloud app.
+            """
+            group = None
+            group_name = 'LocalCalendarTestGroup' + str(random.randint(1000, 9999))
+            with self.runCeleryTasks():
+                group = CosinnusSociety.objects.create(name=group_name, deactivated_apps='cosinnus_event')
+                self.custom_test_groups.append(group)
+            group.refresh_from_db()
+            self.assertIsNotNone(group.nextcloud_group_id)
+            self.assertIsNone(group.nextcloud_calendar_url)
+
+            # activate event app
+            with self.runCeleryTasks():
+                group.deactivated_apps = None
+                group.save()
+                signals.group_apps_activated.send(sender=self, group=group, apps=['cosinnus_event'])
+
+            group.refresh_from_db()
+            self.assertIsNotNone(group.nextcloud_calendar_url)
+            calendar = self.get_group_calendar(self.test_group)
+            self.assertIsNotNone(calendar)
+
+        def test_app_activate_with_cloud_inactive(self):
+            """
+            Test that the calendar is created when the deck app is activated for the first time in a group with an
+            inactive cloud app.
+            """
+            group = None
+            group_name = 'LocalCalendarTestGroup' + str(random.randint(1000, 9999))
+            with self.runCeleryTasks():
+                group = CosinnusSociety.objects.create(
+                    name=group_name, deactivated_apps='cosinnus_cloud,cosinnus_event'
+                )
+                self.custom_test_groups.append(group)
+            group.refresh_from_db()
+            self.assertIsNone(group.nextcloud_group_id)
+            self.assertIsNone(group.nextcloud_calendar_url)
+
+            # activate event app
+            with self.runCeleryTasks():
+                group.deactivated_apps = None
+                group.save()
+                signals.group_apps_activated.send(sender=self, group=group, apps=['cosinnus_event'])
+
+            group.refresh_from_db()
+            self.assertIsNotNone(group.nextcloud_group_id)
+            self.assertIsNotNone(group.nextcloud_calendar_url)
+            calendar = self.get_group_calendar(self.test_group)
+            self.assertIsNotNone(calendar)
+
+    class CalendarAPITestCase(APITestCase):
+        """Base setup for calendar API tests."""
+
+        # test data
+        test_user = None
+        test_admin = None
+        test_non_group_user = None
+        test_group = None
+
+        @classmethod
+        def setUpClass(cls):
+            # deactivate NC hooks not needed for the API tests
+            cosinnus_cloud.hooks.submit_with_retry = disabled_nc_call
+            super().setUpClass()
+
+        @classmethod
+        def tearDownClass(cls):
+            super().tearDownClass()
+            # restore NC hooks
+            cosinnus_cloud.hooks.submit_with_retry = blocking_nc_call
+
+        @classmethod
+        def setUpTestData(cls):
+            # create test users
+            cls.test_user = get_user_model().objects.create(
+                username=1, email='user@example.com', first_name='LocalUser'
+            )
+            cls.test_admin = get_user_model().objects.create(
+                username=2, email='admin@example.com', first_name='LocalAdmin'
+            )
+            cls.test_non_group_user = get_user_model().objects.create(
+                username=3, email='user2@example.com', first_name='LocalUser2'
+            )
+            cls.test_second_group_user = get_user_model().objects.create(
+                username=4, email='user4@example.com', first_name='LocalUser3'
+            )
+
+            # create test group
+            test_group_name = 'LocalCalendarAPITestGroup' + str(random.randint(1000, 9999))
+            cls.test_group = CosinnusSociety.objects.create(name=test_group_name)
+            CosinnusGroupMembership.objects.create(user=cls.test_user, group=cls.test_group, status=MEMBERSHIP_MEMBER)
+            CosinnusGroupMembership.objects.create(user=cls.test_admin, group=cls.test_group, status=MEMBERSHIP_ADMIN)
+            CosinnusGroupMembership.objects.create(
+                user=cls.test_second_group_user, group=cls.test_group, status=MEMBERSHIP_MEMBER
+            )
+
+    @override_settings(COSINNUS_TAGGED_EXTRA_FIELDS=None)
+    class CalendarAPITest(CalendarAPITestCase):
+        """Test public event calendar APIs"""
+
+        # test data
+        test_event = None
+
+        # api urls
+        event_list_url = None
+        event_detail_url = None
+        event_attendance_url = None
+        event_bookmark_url = None
+        event_bbb_room_url = None
+
+        # timezone for datetimes
+        tz = timezone.get_current_timezone()
+
+        @classmethod
+        def setUpTestData(cls):
+            super().setUpTestData()
+
+            # create public test event
+            cls.test_event = Event.objects.create(
+                title='Test Title',
+                from_date=datetime.datetime(2026, 1, 10, 12),
+                to_date=datetime.datetime(2026, 1, 10, 13),
+                creator=cls.test_user,
+                group=cls.test_group,
+                state=Event.STATE_SCHEDULED,
+                note='Test Description',
+            )
+            cls.test_event.media_tag.visibility = BaseTagObject.VISIBILITY_ALL
+            cls.test_event.media_tag.location = 'Berlin'
+            cls.test_event.media_tag.topics = '1,2'
+            cls.test_event.media_tag.save()
+
+            # get viewset urls
+            cls.event_list_url = reverse(
+                'cosinnus:frontend-api:calendar-api:calendar-event-list', kwargs={'group_id': cls.test_group.id}
+            )
+            cls.event_list_url_with_params = f'{cls.event_list_url}?from_date=2026-01-01&to_date=2026-02-01'
+            cls.event_detail_url = reverse(
+                'cosinnus:frontend-api:calendar-api:calendar-event-detail',
+                kwargs={'group_id': cls.test_group.id, 'pk': cls.test_event.pk},
+            )
+            cls.event_attendance_url = reverse(
+                'cosinnus:frontend-api:calendar-api:calendar-event-attendance',
+                kwargs={'group_id': cls.test_group.id, 'pk': cls.test_event.pk},
+            )
+            cls.event_bookmark_url = reverse(
+                'cosinnus:frontend-api:calendar-api:calendar-event-bookmark',
+                kwargs={'group_id': cls.test_group.id, 'pk': cls.test_event.pk},
+            )
+            cls.event_bbb_room_url = reverse(
+                'cosinnus:frontend-api:calendar-api:calendar-event-bbb-room',
+                kwargs={'group_id': cls.test_group.id, 'pk': cls.test_event.pk},
+            )
+            cls.event_reflections_url = reverse(
+                'cosinnus:frontend-api:calendar-api:calendar-event-reflections',
+                kwargs={'group_id': cls.test_group.id, 'pk': cls.test_event.pk},
+            )
+
+        def test_event_list(self):
+            # anonymous access not allowed
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 403)
+
+            # non group users are not allowed
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 403)
+
+            # event list is allowed for group user and contains test event
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 200)
+
+            data = res.json()['data']
+            self.assertEqual(
+                data,
+                [
+                    {
+                        'id': self.test_event.id,
+                        'title': self.test_event.title,
+                        'from_date': self.test_event.from_date.astimezone(self.tz).isoformat(),
+                        'to_date': self.test_event.to_date.astimezone(self.tz).isoformat(),
+                        'attending': False,
+                        'space': self.test_group.id,
+                        'space_name': self.test_group.name,
+                        'space_url': self.test_group.get_absolute_url(),
+                    }
+                ],
+            )
+
+            # event list requires from_date and to_date parameters
+            res = self.client.get(self.event_list_url)
+            self.assertEqual(res.status_code, 400)
+            data = res.json()['data']
+            self.assertEqual(data['from_date'], ['This parameter is required'])
+            self.assertEqual(data['to_date'], ['This parameter is required'])
+
+        @override_settings(
+            COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED=False,
+        )
+        def test_event_detail(self):
+            # test anonymous access
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            expected_event_data = {
+                'id': self.test_event.id,
+                'title': self.test_event.title,
+                'from_date': self.test_event.from_date.astimezone(self.tz).isoformat(),
+                'to_date': self.test_event.to_date.astimezone(self.tz).isoformat(),
+                'description': self.test_event.note,
+                'creator': None,
+                'can_edit': False,
+                'topics': [1, 2],
+                'location': 'Berlin',
+                'location_lat': None,
+                'location_lon': None,
+                'location_url': None,
+                'location_type': None,
+                'external_video_conference_url': None,
+                'ical_url': self.test_event.get_feed_url(),
+                'attending': False,
+                'attendances': [],
+                'attendances_count': 0,
+                'bookmarked': False,
+                'bbb_url': None,
+                'bbb_guest_url': None,
+                'image': None,
+                'attached_files': [],
+                'space': self.test_group.id,
+                'space_name': self.test_group.name,
+                'space_url': self.test_group.get_absolute_url(),
+            }
+            self.assertEqual(data, expected_event_data)
+
+            # test registered user can access creator
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            expected_event_data['creator'] = {
+                'name': self.test_user.cosinnus_profile.get_full_name(),
+                'avatar': self.test_user.cosinnus_profile.get_avatar_thumbnail_url(),
+                'profile_url': self.test_user.cosinnus_profile.get_absolute_url(),
+            }
+            self.assertEqual(data, expected_event_data)
+
+        def test_event_create(self):
+            event_from_date = datetime.datetime(2026, 1, 10, 12).astimezone(self.tz)
+            event_to_date = datetime.datetime(2026, 1, 10, 15).astimezone(self.tz)
+            event_post_data = {
+                'title': 'New Event',
+                'from_date': event_from_date.isoformat(),
+                'to_date': event_to_date.isoformat(),
+                'description': 'New Event Description',
+                'topics': [1],
+                'location': 'Berlin',
+            }
+
+            # anonymous user cant create events
+            res = self.client.post(self.event_list_url, data=event_post_data, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # non group user cant create events
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.post(self.event_list_url, data=event_post_data, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # group user can create events
+            self.client.force_login(self.test_user)
+            res = self.client.post(self.event_list_url, data=event_post_data, format='json')
+            self.assertEqual(res.status_code, 201)
+            data = res.json()['data']
+            self.assertIsNotNone(data['id'])
+            self.assertTrue(Event.objects.filter(pk=data['id']).exists())
+            event = Event.objects.get(pk=data['id'])
+            self.assertEqual(event.title, event_post_data['title'])
+            self.assertEqual(event.from_date, event_from_date)
+            self.assertEqual(event.to_date, event_to_date)
+            self.assertEqual(event.note, event_post_data['description'])
+
+            # check media tag
+            self.assertEqual(event.media_tag.visibility, BaseTagObject.VISIBILITY_ALL)
+            self.assertEqual(event.media_tag.topics, ','.join(str(topic) for topic in event_post_data['topics']))
+            self.assertEqual(event.media_tag.location, event_post_data['location'])
+            self.assertEqual(event.media_tag.location_lat, 52.5173885)
+            self.assertEqual(event.media_tag.location_lon, 13.3951309)
+
+        def test_event_update(self):
+            new_event_title = 'Updated Title'
+            new_event_from_date = datetime.datetime(2026, 1, 10, 12).astimezone(self.tz)
+            new_event_to_date = datetime.datetime(2026, 1, 12, 12).astimezone(self.tz)
+            event_update_data = {
+                'title': new_event_title,
+                'from_date': new_event_from_date.isoformat(),
+                'to_date': new_event_to_date.isoformat(),
+            }
+
+            # anonymous user cant update event
+            res = self.client.patch(self.event_detail_url, data=event_update_data, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # non group user cant update event
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.patch(self.event_detail_url, data=event_update_data, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # group user cant update other users event
+            self.client.force_login(self.test_second_group_user)
+            res = self.client.patch(self.event_detail_url, data=event_update_data, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # event owner cant update other users event
+            self.assertEqual(self.test_event.creator, self.test_user)
+            self.client.force_login(self.test_user)
+            res = self.client.patch(self.event_detail_url, data=event_update_data, format='json')
+            self.assertEqual(res.status_code, 200)
+
+            # group admin can update events
+            self.client.force_login(self.test_admin)
+            res = self.client.patch(self.event_detail_url, data=event_update_data, format='json')
+            self.assertEqual(res.status_code, 200)
+
+            # check that event was updated
+            self.test_event.refresh_from_db()
+            self.assertEqual(self.test_event.title, new_event_title)
+            self.assertEqual(self.test_event.from_date, new_event_from_date)
+            self.assertEqual(self.test_event.to_date, new_event_to_date)
+
+        def test_event_can_edit(self):
+            # anonymous cant edit
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertFalse(data['can_edit'])
+
+            # creator can edit
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertTrue(data['can_edit'])
+
+            # other users cant edit
+            self.client.force_login(self.test_second_group_user)
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertFalse(data['can_edit'])
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertFalse(data['can_edit'])
+
+            # admin can edit
+            self.client.force_login(self.test_admin)
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertTrue(data['can_edit'])
+
+        def test_event_media_tags(self):
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertIsNone(data['location_type'])
+            self.assertIsNone(data['external_video_conference_url'])
+
+            # change location type and external_video_conference_url
+            media_tag_data = {'location_type': BaseTagObject.LOCATION_TYPE_ONLINE}
+            res = self.client.patch(self.event_detail_url, data=media_tag_data, format='json')
+            self.assertEqual(res.status_code, 200)
+
+            # check changed location in detail API
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertEqual(data['location_type'], BaseTagObject.LOCATION_TYPE_ONLINE)
+
+        def test_event_attendance(self):
+            # anonymous user cant set attending
+            res = self.client.post(self.event_attendance_url, data={'attending': True}, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # all logged-in users can set attendance for events
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.post(self.event_attendance_url, data={'attending': True}, format='json')
+            self.assertEqual(res.status_code, 200)
+            self.client.force_login(self.test_user)
+            res = self.client.post(self.event_attendance_url, data={'attending': True}, format='json')
+            self.assertEqual(res.status_code, 200)
+
+            # check attending in detail api
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(data['attending'], True)
+
+            # check attending in list api
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(data[0]['attending'], True)
+
+            # check attendance readable by event creator
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(
+                data['attendances'],
+                [
+                    {
+                        'name': self.test_non_group_user.cosinnus_profile.get_full_name(),
+                        'avatar': self.test_non_group_user.cosinnus_profile.get_avatar_thumbnail_url(),
+                        'profile_url': self.test_non_group_user.cosinnus_profile.get_absolute_url(),
+                    },
+                    {
+                        'name': self.test_user.cosinnus_profile.get_full_name(),
+                        'avatar': self.test_user.cosinnus_profile.get_avatar_thumbnail_url(),
+                        'profile_url': self.test_user.cosinnus_profile.get_absolute_url(),
+                    },
+                ],
+            )
+            self.assertEqual(data['attendances_count'], 2)
+
+            # check attendance readable by admin
+            self.client.force_login(self.test_admin)
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertEqual(len(data['attendances']), 2)
+            self.assertEqual(data['attendances_count'], 2)
+
+            # check attendance not readable by group users
+            self.client.force_login(self.test_second_group_user)
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertEqual(data['attendances'], [])
+
+            # check attendance not readable by non-logged-in users
+            self.client.logout()
+            res = self.client.get(self.event_detail_url)
+            data = res.json()['data']
+            self.assertEqual(data['attendances'], [])
+
+            # remove attendance
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.post(self.event_attendance_url, data={'attending': False}, format='json')
+            self.assertEqual(res.status_code, 200)
+            self.client.force_login(self.test_user)
+            res = self.client.post(self.event_attendance_url, data={'attending': False}, format='json')
+            self.assertEqual(res.status_code, 200)
+
+            # check removed attending
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(data['attending'], False)
+
+            # check attending in list api
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(data[0]['attending'], False)
+
+            # check removed attendances
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(data['attendances'], [])
+            self.assertEqual(data['attendances_count'], 0)
+
+        def test_event_bookmark(self):
+            # anonymous user cant bookmark
+            res = self.client.post(self.event_bookmark_url, data={'bookmarked': True}, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # all logged-in users can set attendance for events
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.post(self.event_bookmark_url, data={'bookmarked': True}, format='json')
+            self.assertEqual(res.status_code, 200)
+
+            # check event
+            self.assertTrue(self.test_event.is_user_starring(self.test_non_group_user))
+
+            # check bookmarked in event detail
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertTrue(data['bookmarked'])
+
+            # remove bookmark
+            res = self.client.post(self.event_bookmark_url, data={'bookmarked': False}, format='json')
+            self.assertEqual(res.status_code, 200)
+            self.assertFalse(self.test_event.is_user_starring(self.test_non_group_user))
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertFalse(data['bookmarked'])
+
+        @override_settings(
+            COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS=True,
+            COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED=False,
+            BBB_PRESET_USER_FORM_FIELDS=[
+                'mic_starts_on',
+                'cam_starts_on',
+                'record_meeting',
+                'waiting_room',
+                'welcome_message',
+            ],
+            BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY=[
+                'record_meeting',
+            ],
+        )
+        def test_event_bbb_room(self):
+            # check user permissions
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 403)
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 403)
+            self.client.force_login(self.test_second_group_user)
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 403)
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 200)
+            self.client.force_login(self.test_admin)
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 200)
+
+            # check response
+            data = res.json()['data']
+            self.assertEqual(
+                data,
+                {
+                    'enabled': False,
+                    'bbb_url': None,
+                    'bbb_guest_url': None,
+                    'settings': {
+                        'bbb_params': {
+                            'mic_starts_on': False,
+                            'cam_starts_on': False,
+                            'waiting_room': False,
+                            'record_meeting': False,
+                            'welcome_message': None,
+                        },
+                        'premium_params': ['record_meeting'],
+                        'show_guest_access': False,
+                    },
+                },
+            )
+
+            # check that event has no conference settings
+            self.assertFalse(self.test_event.conference_settings_assignments.exists())
+
+            # check show_guest_access is disbaled media_tag setting
+            self.test_event.media_tag.refresh_from_db()
+            self.assertFalse(self.test_event.media_tag.show_bbb_guest_access_outside_of_conference)
+
+            # enable bbb and set some parameters
+            patch_data = {
+                'enabled': True,
+                'settings': {
+                    'bbb_params': {
+                        'mic_starts_on': True,
+                        'cam_starts_on': True,
+                        'waiting_room': True,
+                        'welcome_message': 'Test Welcome Message',
+                    },
+                    'show_guest_access': True,
+                },
+            }
+            res = self.client.patch(self.event_bbb_room_url, patch_data, format='json')
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertTrue(data['enabled'])
+            expected_bbb_params = patch_data['settings']['bbb_params']
+            expected_bbb_params['record_meeting'] = False
+            self.assertEqual(data['settings']['bbb_params'], expected_bbb_params)
+            self.assertTrue(data['settings']['show_guest_access'])
+
+            # check bbb params
+            conf_settings = self.test_event.conference_settings_assignments.first()
+            self.assertEqual(
+                conf_settings.bbb_params,
+                {
+                    'create': {
+                        'welcome': 'Test Welcome Message',
+                        'guestPolicy': 'ASK_MODERATOR',
+                        'muteOnStart': 'false',
+                    },
+                    'join': {'userdata-bbb_auto_share_webcam': 'true'},
+                },
+            )
+
+            # check show_guest_access media_tag setting
+            self.test_event.media_tag.refresh_from_db()
+            self.assertTrue(self.test_event.media_tag.show_bbb_guest_access_outside_of_conference)
+
+            # check bbb urls
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(data['bbb_url'], self.test_event.media_tag.bbb_room.get_absolute_url())
+            expected_guest_url = reverse(
+                'cosinnus:bbb-room-guest-access',
+                kwargs={'guest_token': self.test_event.media_tag.bbb_room.get_guest_token()},
+            )
+            self.assertEqual(data['bbb_guest_url'], expected_guest_url)
+
+            # disable guest link
+            patch_data = {'settings': {'show_guest_access': False}}
+            res = self.client.patch(self.event_bbb_room_url, patch_data, format='json')
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.test_event.media_tag.refresh_from_db()
+            self.assertFalse(self.test_event.media_tag.show_bbb_guest_access_outside_of_conference)
+            self.assertIsNone(data['bbb_guest_url'])
+
+            # disable bbb
+            patch_data = {'enabled': False}
+            res = self.client.patch(self.event_bbb_room_url, patch_data, format='json')
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertFalse(data['enabled'])
+            self.assertIsNone(data['bbb_url'])
+
+        @override_settings(
+            COSINNUS_TAGGED_EXTRA_FIELDS={
+                'cosinnus_event.Event': {
+                    'test_field': dynamic_fields.CosinnusDynamicField(
+                        type=dynamic_fields.DYNAMIC_FIELD_TYPE_TEXT,
+                        label='Dynamic Test Field',
+                        required=False,
+                    ),
+                }
+            }
+        )
+        def test_event_dynamic_fields(self):
+            # check dynamic field not set
+            self.assertEqual(self.test_event.media_tag.dynamic_fields, {})
+            # set dynamic field
+            self.client.force_login(self.test_user)
+            dynamic_field_data = {'test_field': 'Test Field Value'}
+            res = self.client.patch(self.event_detail_url, data=dynamic_field_data, format='json')
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            # check dynamic field value in resonse
+            self.assertIn('test_field', data)
+            self.assertEqual(data['test_field'], dynamic_field_data['test_field'])
+            # check dynamic field is set in the events media_tag
+            self.test_event.media_tag.refresh_from_db()
+            self.assertEqual(self.test_event.media_tag.dynamic_fields, dynamic_field_data)
+
+        def test_event_reflections(self):
+            # create another group for reflections
+            reflection_group_name = 'LocalCalendarAPITestGroup' + str(random.randint(1000, 9999))
+            reflection_group = CosinnusSociety.objects.create(name=reflection_group_name)
+
+            # no reflections for anonymous users
+            res = self.client.get(self.event_reflections_url)
+            self.assertEqual(res.status_code, 403)
+
+            # reflections are allowed only in user groups
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_reflections_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(data['spaces'], [])
+
+            reflection_data = {
+                'spaces': [
+                    {
+                        'id': reflection_group.id,
+                        'reflected': True,
+                    }
+                ]
+            }
+            res = self.client.patch(self.event_reflections_url, data=reflection_data, format='json')
+            self.assertEqual(res.status_code, 400)
+
+            # check reflection in user group
+            CosinnusGroupMembership.objects.create(
+                user=self.test_user, group=reflection_group, status=MEMBERSHIP_MEMBER
+            )
+            res = self.client.get(self.event_reflections_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(
+                data['spaces'],
+                [
+                    {
+                        'id': reflection_group.id,
+                        'name': reflection_group.name,
+                        'avatar': reflection_group.get_avatar_thumbnail_url(),
+                        'reflected': False,
+                    }
+                ],
+            )
+            res = self.client.patch(self.event_reflections_url, data=reflection_data, format='json')
+            self.assertEqual(res.status_code, 200)
+            res = self.client.get(self.event_reflections_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertTrue(data['spaces'][0]['reflected'])
+
+    class CalendarSyncedEventAPITest(CalendarAPITestCase):
+        """Test public event calendar APIs"""
+
+        # test data
+        test_event = None
+
+        # api urls
+        event_list_url = None
+        event_detail_url = None
+        event_attendance_url = None
+        event_bbb_room_url = None
+
+        @classmethod
+        def setUpTestData(cls):
+            super().setUpTestData()
+
+            # create synced test event
+            cls.test_event_uid = '132ac880-2375-4656-93ea-1c6ab00f127c'
+            cls.test_event = Event.objects.create(
+                title='Test Title',
+                from_date=datetime.datetime(2026, 1, 10, 12),
+                to_date=datetime.datetime(2026, 1, 10, 13),
+                group=cls.test_group,
+                state=Event.STATE_SYNCHRONIZED_EVENT,
+                note='Test Description',
+                nextcloud_calendar_uid=cls.test_event_uid,
+            )
+            cls.test_event.media_tag.visibility = BaseTagObject.VISIBILITY_GROUP
+            cls.test_event.media_tag.save()
+
+            # get viewset urls
+            cls.event_list_url = reverse(
+                'cosinnus:frontend-api:calendar-api:calendar-synced-event-list', kwargs={'group_id': cls.test_group.id}
+            )
+            cls.event_list_url_with_params = f'{cls.event_list_url}?from_date=2026-01-01&to_date=2026-02-01'
+            cls.event_detail_url = reverse(
+                'cosinnus:frontend-api:calendar-api:calendar-synced-event-detail',
+                kwargs={'group_id': cls.test_group.id, 'nextcloud_calendar_uid': cls.test_event_uid},
+            )
+            cls.event_attendance_url = reverse(
+                'cosinnus:frontend-api:calendar-api:calendar-synced-event-attendance',
+                kwargs={'group_id': cls.test_group.id, 'nextcloud_calendar_uid': cls.test_event_uid},
+            )
+            cls.event_bbb_room_url = reverse(
+                'cosinnus:frontend-api:calendar-api:calendar-synced-event-bbb-room',
+                kwargs={'group_id': cls.test_group.id, 'nextcloud_calendar_uid': cls.test_event_uid},
+            )
+            cls.group_sync_required_url = reverse(
+                'cosinnus:frontend-api:calendar-api:calendar-synced-event-sync-required',
+                kwargs={'group_id': cls.test_group.id},
+            )
+
+        def test_event_list(self):
+            # anonymous access not allowed
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 403)
+
+            # non group users are not allowed
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 403)
+
+            # event list is allowed for group user and contains test event
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(
+                data,
+                [
+                    {
+                        'uid': self.test_event.nextcloud_calendar_uid,
+                        'attending': False,
+                    }
+                ],
+            )
+
+            # event list requires from_date and to_date parameters
+            res = self.client.get(self.event_list_url)
+            self.assertEqual(res.status_code, 400)
+            data = res.json()['data']
+            self.assertEqual(data['from_date'], ['This parameter is required'])
+            self.assertEqual(data['to_date'], ['This parameter is required'])
+
+        def test_event_create(self):
+            new_event_uid = '854028a8-649e-4e01-bbdc-e9008cce6ae7'
+            event_post_data = {'uid': new_event_uid}
+
+            # anonymous user cant create events
+            res = self.client.post(self.event_list_url, data=event_post_data, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # non group user cant create events
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.post(self.event_list_url, data=event_post_data, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # group user can create events
+            self.client.force_login(self.test_user)
+            res = self.client.post(self.event_list_url, data=event_post_data, format='json')
+            self.assertEqual(res.status_code, 201)
+            data = res.json()['data']
+            self.assertEqual(data['uid'], new_event_uid)
+            self.assertTrue(Event.objects.filter(nextcloud_calendar_uid=new_event_uid).exists())
+            event = Event.objects.get(nextcloud_calendar_uid=new_event_uid)
+            self.assertEqual(event.media_tag.visibility, BaseTagObject.VISIBILITY_GROUP)
+            self.assertEqual(event.title, 'Untitled Meeting')
+            self.assertTrue(event.settings[Event.SETTINGS_IS_UNTITLED_MEETING_KEY])
+
+            # cant create another event with same uid in the same group
+            res = self.client.post(self.event_list_url, data=event_post_data, format='json')
+            self.assertEqual(res.status_code, 400)
+
+        def test_event_detail(self):
+            # anonymous not allowed
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 403)
+
+            # non-group users not allowed
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 403)
+
+            # group member allowed
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertEqual(
+                data,
+                {
+                    'uid': self.test_event.nextcloud_calendar_uid,
+                    'bbb_url': None,
+                    'bbb_guest_url': None,
+                    'external_video_conference_url': None,
+                    'attending': False,
+                    'attendances': [],
+                    'attendances_count': 0,
+                },
+            )
+
+        def test_event_update(self):
+            event_update_data = {'external_video_conference_url': 'https://external.video'}
+            # anonymous user cant update event
+            res = self.client.patch(self.event_detail_url, data=event_update_data, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # non group user cant update event
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.patch(self.event_detail_url, data=event_update_data, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # group user can update
+            self.assertIsNone(self.test_event.media_tag.external_video_conference_url)
+            self.client.force_login(self.test_second_group_user)
+            res = self.client.patch(self.event_detail_url, data=event_update_data, format='json')
+            self.assertEqual(res.status_code, 200)
+            self.test_event.media_tag.refresh_from_db()
+            self.assertEqual(
+                self.test_event.media_tag.external_video_conference_url,
+                event_update_data['external_video_conference_url'],
+            )
+
+            # changing uid is not allowed
+            event_update_data = {
+                'uid': '6d2cf133-778a-4cf7-9f7c-0b51d0997909',
+            }
+            res = self.client.patch(self.event_detail_url, data=event_update_data, format='json')
+            self.assertEqual(res.status_code, 400)
+
+        def test_event_attendance(self):
+            # anonymous user cant set attending
+            res = self.client.post(self.event_attendance_url, data={'attending': True}, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # non-group user cant set attending
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.post(self.event_attendance_url, data={'attending': True}, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # group users can set attendance for events
+            self.client.force_login(self.test_second_group_user)
+            res = self.client.post(self.event_attendance_url, data={'attending': True}, format='json')
+            self.assertEqual(res.status_code, 200)
+
+            # check attendance
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertTrue(data['attending'])
+            self.assertEqual(
+                data['attendances'],
+                [
+                    {
+                        'name': self.test_second_group_user.cosinnus_profile.get_full_name(),
+                        'avatar': self.test_second_group_user.cosinnus_profile.get_avatar_thumbnail_url(),
+                        'profile_url': self.test_second_group_user.cosinnus_profile.get_absolute_url(),
+                    },
+                ],
+            )
+            self.assertEqual(data['attendances_count'], 1)
+
+            # check attending in list api
+            res = self.client.get(self.event_list_url_with_params)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertTrue(data[0]['attending'])
+
+            # unset attendance
+            res = self.client.post(self.event_attendance_url, data={'attending': False}, format='json')
+            self.assertEqual(res.status_code, 200)
+            res = self.client.get(self.event_detail_url)
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertFalse(data['attending'])
+            self.assertEqual(data['attendances'], [])
+            self.assertEqual(data['attendances_count'], 0)
+
+        @override_settings(
+            COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS=True,
+            COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED=False,
+            BBB_PRESET_USER_FORM_FIELDS=[
+                'mic_starts_on',
+                'cam_starts_on',
+                'record_meeting',
+                'waiting_room',
+                'welcome_message',
+            ],
+            BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY=[],
+        )
+        def test_event_bbb_room(self):
+            # check user permissions
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 403)
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 403)
+            self.client.force_login(self.test_second_group_user)
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 200)
+            self.client.force_login(self.test_user)
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 200)
+            self.client.force_login(self.test_admin)
+            res = self.client.get(self.event_bbb_room_url)
+            self.assertEqual(res.status_code, 200)
+
+            # check response
+            self.client.force_login(self.test_second_group_user)
+            data = res.json()['data']
+            self.assertEqual(
+                data,
+                {
+                    'enabled': False,
+                    'bbb_url': None,
+                    'bbb_guest_url': None,
+                    'settings': {
+                        'bbb_params': {
+                            'mic_starts_on': False,
+                            'cam_starts_on': False,
+                            'waiting_room': False,
+                            'record_meeting': False,
+                            'welcome_message': None,
+                        },
+                        'premium_params': [],
+                        'show_guest_access': False,
+                    },
+                },
+            )
+
+            # enable bbb and set some parameters
+            patch_data = {
+                'enabled': True,
+                'settings': {
+                    'bbb_params': {
+                        'mic_starts_on': True,
+                        'cam_starts_on': True,
+                        'waiting_room': True,
+                        'record_meeting': True,
+                        'welcome_message': 'Test Welcome Message',
+                    },
+                    'show_guest_access': True,
+                },
+            }
+            res = self.client.patch(self.event_bbb_room_url, patch_data, format='json')
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertTrue(data['enabled'])
+            self.assertEqual(data['settings']['bbb_params'], patch_data['settings']['bbb_params'])
+            self.assertTrue(data['settings']['show_guest_access'])
+
+            # disable bbb
+            patch_data = {
+                'enabled': False,
+            }
+            res = self.client.patch(self.event_bbb_room_url, patch_data, format='json')
+            self.assertEqual(res.status_code, 200)
+            data = res.json()['data']
+            self.assertFalse(data['enabled'])
+
+        def test_group_sync_required(self):
+            # anonymous user cant set sync required flag
+            res = self.client.post(self.group_sync_required_url, data={'required': True}, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # non-group user cant set sync required flag
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.post(self.group_sync_required_url, data={'required': True}, format='json')
+            self.assertEqual(res.status_code, 403)
+
+            # check sync required flag
+            self.assertFalse(self.test_group.nextcloud_calendar_sync_required)
+            self.client.force_login(self.test_user)
+            res = self.client.post(self.group_sync_required_url, data={'required': True}, format='json')
+            self.test_group.refresh_from_db()
+            self.assertTrue(self.test_group.nextcloud_calendar_sync_required)
+
+    class CalendarViewTest(CeleryTaskTestMixin, TestCase):
+        """Test Frontend initialization view."""
+
+        test_group = None
+        calendar_view_url = None
+
+        @classmethod
+        def setUpTestData(cls):
+            cls.test_group_name = 'LocalCalendarTestGroup' + str(random.randint(1000, 9999))
+            with cls.runCeleryTasks():
+                cls.test_group = CosinnusSociety.objects.create(name=cls.test_group_name)
+            cls.test_group.refresh_from_db()
+
+            # create test users without triggering NC hooks
+            cosinnus_cloud.hooks.submit_with_retry = disabled_nc_call
+            cls.test_user = get_user_model().objects.create(
+                username=1, email='user@example.com', first_name='LocalUser'
+            )
+            cls.test_admin = get_user_model().objects.create(
+                username=2, email='admin@example.com', first_name='LocalAdmin'
+            )
+            cls.test_non_group_user = get_user_model().objects.create(
+                username=3, email='user2@example.com', first_name='LocalUser2'
+            )
+            CosinnusGroupMembership.objects.create(user=cls.test_user, group=cls.test_group, status=MEMBERSHIP_MEMBER)
+            CosinnusGroupMembership.objects.create(user=cls.test_admin, group=cls.test_group, status=MEMBERSHIP_ADMIN)
+            cosinnus_cloud.hooks.submit_with_retry = blocking_nc_call
+
+            cls.calendar_view_url = (
+                group_aware_reverse('cosinnus:event:calendar', kwargs={'group': cls.test_group}, skip_domain=True)
+                + '?v=3'
+            )
+            cls.calendar_view_url_with_public_event_params = f'{cls.calendar_view_url}&type=public&eventId=123'
+
+        @classmethod
+        def tearDownClass(cls):
+            with cls.runCeleryTasks():
+                cls.test_group.delete()
+
+        def _get_expected_user_calendar_url(self, user):
+            expected_user_calender_url = self.test_group.nextcloud_calendar_url
+            expected_user_calender_url = expected_user_calender_url.replace(
+                f'/{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/',
+                f'/{get_nc_user_id(user)}/',
+            )
+            expected_user_calender_url = expected_user_calender_url[:-1]
+            expected_user_calender_url += f'_shared_by_{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/'
+            return expected_user_calender_url
+
+        def test_calendar_view(self):
+            div_data_group_id = f'data-space-id="{self.test_group.pk}"'
+            div_data_calendar_url_empty = 'data-calendar-url=""'
+
+            # test anonymous user is redirected to dashboard if no parameters for a public event are provided
+            res = self.client.get(self.calendar_view_url)
+            self.assertEqual(res.status_code, 302)
+            self.assertEqual(
+                res.url, group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.test_group})
+            )
+
+            # test anonymous user has only access to group id for public events not the NC calendar
+            res = self.client.get(self.calendar_view_url_with_public_event_params)
+            self.assertEqual(res.status_code, 200)
+            self.assertContains(res, div_data_group_id)
+            self.assertContains(res, div_data_calendar_url_empty)
+
+            # test non-gorup user is redirected to dashboard if no parameters for a public event are provided
+            self.client.force_login(self.test_non_group_user)
+            res = self.client.get(self.calendar_view_url)
+            self.assertEqual(res.status_code, 302)
+            self.assertEqual(
+                res.url, group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.test_group})
+            )
+
+            # test non-group user has only access to group id for public events not the NC calendar
+            res = self.client.get(self.calendar_view_url_with_public_event_params)
+            self.assertEqual(res.status_code, 200)
+            self.assertContains(res, div_data_group_id)
+            self.assertContains(res, div_data_calendar_url_empty)
+
+            # test group user has access to group id for public events and NC calendar
+            self.client.force_login(self.test_user)
+            div_data_calendar_url_set = f'data-calendar-url="{self._get_expected_user_calendar_url(self.test_user)}"'
+            res = self.client.get(self.calendar_view_url)
+            self.assertEqual(res.status_code, 200)
+            self.assertContains(res, div_data_group_id)
+            self.assertContains(res, div_data_calendar_url_set)
+
+            # test group admin has access to group id for public events and NC calendar
+            self.client.force_login(self.test_admin)
+            div_data_calendar_url_set = f'data-calendar-url="{self._get_expected_user_calendar_url(self.test_admin)}"'
+            res = self.client.get(self.calendar_view_url)
+            self.assertEqual(res.status_code, 200)
+            self.assertContains(res, div_data_group_id)
+            self.assertContains(res, div_data_calendar_url_set)

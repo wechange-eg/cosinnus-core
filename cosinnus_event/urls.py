@@ -3,12 +3,42 @@ from __future__ import unicode_literals
 
 from django.urls import path, re_path
 
+from cosinnus.conf import settings
 from cosinnus_event import views
 
 app_name = 'event'
 
-cosinnus_group_patterns = [
-    re_path(r'^$', views.index_view, name='index-redirect'),
+
+cosinnus_group_patterns = []
+cosinnus_root_patterns = []
+
+if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+    # v3 calendar urls
+
+    from cosinnus.core.registries.group_models import group_model_registry
+    from cosinnus_event.calendar import views as calendar_views
+
+    cosinnus_group_patterns += [
+        re_path(r'^$', calendar_views.calendar_view, name='calendar'),
+        re_path(r'^migrate/$', calendar_views.calendar_migrate_view, name='calendar-migrate'),
+    ]
+
+    # Add /event/ to /calendar/ redirect for all group types.
+    for group_url_key in group_model_registry:
+        cosinnus_root_patterns += [
+            re_path(
+                rf'^{group_url_key}/(?P<group>[^/]+)/event/',
+                calendar_views.event_app_redirect_view,
+                name='calendar-event-redirect',
+            ),
+        ]
+else:
+    # v2 event urls
+    cosinnus_group_patterns += [
+        re_path(r'^$', views.index_view, name='index-redirect'),
+    ]
+
+cosinnus_group_patterns += [
     re_path(r'^calendar/$', views.list_view, name='index'),
     re_path(r'^calendar/$', views.list_view, name='list'),
     re_path(r'^calendar/(?P<tag>[^/]+)/$', views.list_view, name='list-filtered'),
@@ -111,7 +141,7 @@ cosinnus_group_patterns = [
 ]
 
 
-cosinnus_root_patterns = [
+cosinnus_root_patterns += [
     path('events/team/<int:team_id>/feed/', views.team_event_ical_feed, name='team-feed'),
     path('events/team/<int:team_id>/feed/<slug:slug>/', views.team_event_ical_feed_single, name='team-feed-entry'),
     path(
@@ -122,4 +152,5 @@ cosinnus_root_patterns = [
     path('events/feed/all/', views.event_ical_feed_global, name='feed-global'),
     path('events/<int:pk>/update', views.event_api_update, name='event_api_update'),
 ]
+
 urlpatterns = cosinnus_group_patterns + cosinnus_root_patterns

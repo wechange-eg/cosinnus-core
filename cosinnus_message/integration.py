@@ -397,6 +397,9 @@ class RocketChatIntegrationHandler(CosinnusBaseIntegrationHandler):
 
     def do_relay_message_create_or_update(self, sender, instance, created, **kwargs):
         """Hooks to create or update a relayed message."""
+        if isinstance(instance, Event) and instance.state != Event.STATE_SCHEDULED:
+            # do not relay polls and synced events
+            return
         if created:
             self._do_relay_message_create.delay(instance._meta.model_name, instance.pk)
         else:

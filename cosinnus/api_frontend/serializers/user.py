@@ -5,30 +5,31 @@ import requests
 from django.contrib.auth import authenticate, get_user_model, password_validation
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.validators import EmailValidator, MaxLengthValidator, MinLengthValidator, URLValidator
+from django.utils.translation import gettext_lazy as _
 from drf_extra_fields.fields import Base64ImageField
-from geopy import OpenCage
-from geopy.exc import GeocoderInsufficientPrivileges, GeopyError
-from geopy.extra.rate_limiter import RateLimiter
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from taggit.serializers import TaggitSerializer, TagListSerializerField
 
 from cosinnus.api_frontend.handlers.error_codes import (
     ERROR_LOGIN_INCORRECT_CREDENTIALS,
-    ERROR_LOGIN_USER_DISABLED,
     ERROR_SIGNUP_CAPTCHA_INVALID,
     ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN,
     ERROR_SIGNUP_EMAIL_IN_USE,
     ERROR_SIGNUP_NAME_NOT_ACCEPTABLE,
 )
 from cosinnus.api_frontend.serializers.dynamic_fields import CosinnusUserDynamicFieldsSerializerMixin
+from cosinnus.api_frontend.serializers.tagged import CosinnusMediaTagSerializerMixin
 from cosinnus.api_frontend.serializers.utils import validate_managed_tag_slugs
 from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, UserSignupFinalizeMixin
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
-from cosinnus.models.profile import PROFILE_DYNAMIC_FIELDS_CONTACTS, PROFILE_SETTINGS_AVATAR_COLOR
+from cosinnus.models.profile import (
+    PROFILE_DYNAMIC_FIELDS_CONTACTS,
+    PROFILE_SETTINGS_AVATAR_COLOR,
+    GlobalUserNotificationSetting,
+)
 from cosinnus.models.tagged import get_tag_object_model
-from cosinnus.utils.functions import is_number
 from cosinnus.utils.user import get_locked_profile_visibility_setting_for_user
 from cosinnus.utils.validators import HexColorValidator, validate_username
 
@@ -58,8 +59,11 @@ class CosinnusUserLoginSerializer(serializers.Serializer):
         user = authenticate(username=email, password=attrs['password'])
         if not user:
             raise ValidationError(ERROR_LOGIN_INCORRECT_CREDENTIALS)
-        if not user.is_active:
-            raise ValidationError(ERROR_LOGIN_USER_DISABLED)
+
+        # allowing inactive users here to handle them in the view
+        # if not user.is_active:
+        #     raise ValidationError(ERROR_LOGIN_USER_DISABLED)
+
         return {'user': user}
 
 
@@ -100,7 +104,7 @@ class CosinnusUserSignupSerializer(
     # for `CosinnusUserDynamicFieldsSerializerMixin`
     filter_included_fields_by_option_name = 'in_signup'
     DYNAMIC_FIELD_SETTINGS = settings.COSINNUS_USERPROFILE_EXTRA_FIELDS
-    used_only_for_signup = True
+    validate_unique_before_create = True
 
     # missing/not-yet-supported fields for the signup endpoint:
 
@@ -225,7 +229,9 @@ def validate_contact_info_pairs(pairs_array):
                     raise ValidationError(f'Contact_infos: A pair ({str(pair_dict)}) had an invalid URL!')
 
 
-class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSerializerMixin, serializers.Serializer):
+class CosinnusHybridUserSerializer(
+    TaggitSerializer, CosinnusUserDynamicFieldsSerializerMixin, CosinnusMediaTagSerializerMixin, serializers.Serializer
+):
     """A serializer that accepts and returns user fields as unprefixed fields,
     no matter if they are in the User, UserProfile or CosinnusTagObject models,
     so that one doesn't have to worry about database structures when changing user
@@ -397,83 +403,19 @@ class CosinnusHybridUserSerializer(TaggitSerializer, CosinnusUserDynamicFieldsSe
             last_name_fallback = instance.last_name
         instance.last_name = user_data.get('last_name', last_name_fallback)
         profile.description = profile_data.get('description', profile.description)
-        # only update the userprofile visibility field if it is not locked
-        locked_visibility = get_locked_profile_visibility_setting_for_user(user)
-        if locked_visibility is not None:
-            media_tag.visibility = locked_visibility
-        else:
-            media_tag.visibility = media_tag_data.get('visibility', media_tag.visibility)
 
         profile.avatar = profile_data.get('avatar', profile.avatar)
         avatar_color = profile_data.get('settings', {}).get(PROFILE_SETTINGS_AVATAR_COLOR, None)
         if avatar_color:
             profile.settings[PROFILE_SETTINGS_AVATAR_COLOR] = avatar_color.strip('#')
-        topics = media_tag_data.get('get_topic_ids', None)
-        if topics:
-            media_tag.topics = ','.join([str(topic) for topic in topics])
-        tags = media_tag_data.get('tags', None)
-        if tags:
-            media_tag.tags.set(*tags, clear=True)
         # allow resetting the field if an empty value is given
         if PROFILE_DYNAMIC_FIELDS_CONTACTS in profile_data.get('dynamic_fields', {}):
             contact_infos = profile_data.get('dynamic_fields', {}).get(PROFILE_DYNAMIC_FIELDS_CONTACTS, []) or []
             profile.dynamic_fields[PROFILE_DYNAMIC_FIELDS_CONTACTS] = contact_infos
-        if 'location' in media_tag_data:
-            location_str = media_tag_data['location']
-            location_lat = media_tag_data.get('location_lat', None)
-            location_lon = media_tag_data.get('location_lon', None)
-            if not location_str or not location_str.strip():
-                # reset location
-                media_tag.location = None
-                media_tag.location_lat = None
-                media_tag.location_lon = None
-            elif location_lat and location_lon and is_number(location_lat) and is_number(location_lon):
-                # if the location string and location_lat and location_lon coordinates are given, simply save them
-                media_tag.location = location_str.strip()
-                media_tag.location_lat = float(location_lat)
-                media_tag.location_lon = float(location_lon)
-            elif settings.COSINNUS_GEOCODE_OPENCAGE_KEY:
-                # use OpenCage service to determine an actual location from the given string
-                geolocator = OpenCage(api_key=settings.COSINNUS_GEOCODE_OPENCAGE_KEY, timeout=5)
-                # retry max 10 times, after between 0.5 - 1 secs randomly
-                geocode = RateLimiter(
-                    geolocator.geocode,
-                    min_delay_seconds=0.5,
-                    max_retries=10,
-                    error_wait_seconds=0.5 + random.uniform(0.0, 0.5),
-                )
 
-                location = None
-                try:
-                    location = geocode(location_str.strip())
-                except (GeocoderInsufficientPrivileges, GeopyError, Exception) as e:
-                    extra = {
-                        'user_id': user.id,
-                        'location_str': location_str,
-                        'reason': type(e),
-                        'exc': str(e),
-                    }
-                    logger.error(
-                        (
-                            'Error: A user location could not be geoceded as nominatim, the request returned an error! '
-                            'User location was not saved.'
-                        ),
-                        extra=extra,
-                    )
-                if location:
-                    media_tag.location = location_str
-                    media_tag.location_lat = location.latitude
-                    media_tag.location_lon = location.longitude
-            else:
-                # no opencage api key defined, log a waning that the location str was not saved!
-                extra = {
-                    'user_id': user.id,
-                    'location_str': location_str,
-                }
-                logger.warning(
-                    ('Warning: A user location could not be geoceded as nominatim as no geocode api key was set.'),
-                    extra=extra,
-                )
+        # Save media_tag fields. Only update the userprofile visibility field if it is not locked.
+        locked_visibility = get_locked_profile_visibility_setting_for_user(user)
+        self.save_media_tag(media_tag, media_tag_data, locked_visibility=locked_visibility, save=False)
 
         # for `CosinnusUserDynamicFieldsSerializerMixin`
         self.save_dynamic_fields(validated_data, profile, save=False)
@@ -570,4 +512,49 @@ class CosinnusSetInitialPasswordSerializer(serializers.Serializer):
 
     def validate_password(self, value):
         password_validation.validate_password(value)
+        return value
+
+
+def choices_help_text(description, choices):
+    """Build API documentation for a field with choices."""
+    values = '\n'.join(f'- `{value}`: {label}' for value, label in choices)
+    return f'{description}\n{values}'
+
+
+class CosinnusGlobalUserNotificationSettingSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the global user notification settings
+    - Only the fields `setting` and `portal_group_setting` are handled.
+    """
+
+    warnings = serializers.ListField(
+        child=serializers.CharField(),
+        read_only=True,
+        help_text=('Warnings generated while applying the settings. Empty if none occurred.'),
+    )
+
+    class Meta:
+        model = GlobalUserNotificationSetting
+        fields = ('setting', 'portal_group_setting', 'warnings')
+        extra_kwargs = {
+            'setting': {
+                'help_text': choices_help_text(
+                    'Notification setting for user-created projects and groups:',
+                    GlobalUserNotificationSetting.SETTING_CHOICES,
+                ),
+            },
+            'portal_group_setting': {
+                'help_text': choices_help_text(
+                    'Notification setting for portal-wide default groups:',
+                    GlobalUserNotificationSetting.PORTAL_GROUP_SETTING_CHOICES,
+                ),
+            },
+        }
+
+    def validate_setting(self, value):
+        if value == GlobalUserNotificationSetting.SETTING_GROUP_INDIVIDUAL:
+            raise serializers.ValidationError(
+                _('This value cannot be selected via this API. Use the Django form instead.')
+            )
+
         return value

@@ -11,7 +11,25 @@
     {% endif %}
 {% endblock header_image %}
 
-        
+{% block top_line_group %}
+    {# Note: extending top_line_group instead of additional_top_line to avoid a big gab between group and creator #}
+    {{ super() }}
+    {% if creator_name and creator_slug %}
+        <div>
+            <span class="pale-color">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Creator" %}:
+            </span>
+            {% if not cosinnus_active_user and not creator_is_public %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                <a href="/signup/?acc_req_msg=1&next=/map/" target="_blank">{%  trans "Login required" %}</a>
+            {% else %}
+                {{ macros.resultLink(portal, creator_slug, creator_name, "people") }}
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock top_line_group %}
+
 {% block additional_top_line %}
     <div class="tile-section tile-section">
         <div>
@@ -55,10 +73,10 @@
                 <a class="rounded-button button-action button-star">
                     <span class="rounded-button-inner">
                         {% if starred %}
-                            <i class="fas fa-star"></i>
+                            <i class="fas fa-bookmark"></i>
                             {{ starringLabel }}
                         {% else %}
-                            <i class="far fa-star"></i>
+                            <i class="far fa-bookmark"></i>
                             {{ starLabel }}
                         {% endif %}
                     </span>

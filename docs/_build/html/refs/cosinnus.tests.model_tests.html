@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.tests.model_tests package &#8212; Cosinnus 2.0.0 documentation</title>
+    <title>cosinnus.tests.model_tests package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=73cda6fb"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -140,6 +140,61 @@
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.model_tests.test_group.RemovePendingMembersSignalIntegrationTests">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.model_tests.test_group.</span></span><span class="sig-name descname"><span class="pre">RemovePendingMembersSignalIntegrationTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.model_tests.test_group.RemovePendingMembersSignalIntegrationTests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.tests.model_tests.test_group.RemovePendingMembershipTestMixin" title="cosinnus.tests.model_tests.test_group.RemovePendingMembershipTestMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RemovePendingMembershipTestMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TransactionTestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.model_tests.test_group.RemovePendingMembersSignalIntegrationTests.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.model_tests.test_group.RemovePendingMembersSignalIntegrationTests.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.model_tests.test_group.RemovePendingMembersSignalIntegrationTests.test_removes_pending_memberships_for_target_user">
+<span class="sig-name descname"><span class="pre">test_removes_pending_memberships_for_target_user</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.model_tests.test_group.RemovePendingMembersSignalIntegrationTests.test_removes_pending_memberships_for_target_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.model_tests.test_group.RemovePendingMembersSignalIntegrationTests.test_user_deactivation_emits_signal">
+<span class="sig-name descname"><span class="pre">test_user_deactivation_emits_signal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.model_tests.test_group.RemovePendingMembersSignalIntegrationTests.test_user_deactivation_emits_signal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.model_tests.test_group.RemovePendingMembershipTestMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.model_tests.test_group.</span></span><span class="sig-name descname"><span class="pre">RemovePendingMembershipTestMixin</span></span><a class="headerlink" href="#cosinnus.tests.model_tests.test_group.RemovePendingMembershipTestMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.model_tests.test_group.RemovePendingMembershipTestMixin.get_memberships">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_memberships</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">User</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status__in</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="cosinnus.models.html#cosinnus.models.group.CosinnusGroupMembership" title="cosinnus.models.group.CosinnusGroupMembership"><span class="pre">CosinnusGroupMembership</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cosinnus.tests.model_tests.test_group.RemovePendingMembershipTestMixin.get_memberships" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.model_tests.test_group.RemovePendingMembershipTestMixin.setUpTestData">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpTestData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.model_tests.test_group.RemovePendingMembershipTestMixin.setUpTestData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create test data once.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.tests.model_tests.test_group.RemovePendingMembershipsTaskTests">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.model_tests.test_group.</span></span><span class="sig-name descname"><span class="pre">RemovePendingMembershipsTaskTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.model_tests.test_group.RemovePendingMembershipsTaskTests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.tests.model_tests.test_group.RemovePendingMembershipTestMixin" title="cosinnus.tests.model_tests.test_group.RemovePendingMembershipTestMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RemovePendingMembershipTestMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.model_tests.test_group.RemovePendingMembershipsTaskTests.test_does_not_affect_other_users_memberships">
+<span class="sig-name descname"><span class="pre">test_does_not_affect_other_users_memberships</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.model_tests.test_group.RemovePendingMembershipsTaskTests.test_does_not_affect_other_users_memberships" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.model_tests.test_group.RemovePendingMembershipsTaskTests.test_removes_pending_memberships_for_target_user">
+<span class="sig-name descname"><span class="pre">test_removes_pending_memberships_for_target_user</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.model_tests.test_group.RemovePendingMembershipsTaskTests.test_removes_pending_memberships_for_target_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.tests.model_tests.test_group.create_multiple_groups">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.tests.model_tests.test_group.</span></span><span class="sig-name descname"><span class="pre">create_multiple_groups</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.model_tests.test_group.create_multiple_groups" title="Permalink to this definition">¶</a></dt>
@@ -178,6 +233,12 @@
 <dt class="sig sig-object py" id="cosinnus.tests.model_tests.test_profile.DefaultUserProfileTest">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.tests.model_tests.test_profile.</span></span><span class="sig-name descname"><span class="pre">DefaultUserProfileTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.model_tests.test_profile.DefaultUserProfileTest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.tests.model_tests.test_profile.DefaultUserProfileTest.setUpClass">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpClass</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.model_tests.test_profile.DefaultUserProfileTest.setUpClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up class fixture before running tests in the class.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.tests.model_tests.test_profile.DefaultUserProfileTest.test_attributes">
 <span class="sig-name descname"><span class="pre">test_attributes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.tests.model_tests.test_profile.DefaultUserProfileTest.test_attributes" title="Permalink to this definition">¶</a></dt>
