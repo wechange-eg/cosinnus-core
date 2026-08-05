@@ -728,6 +728,78 @@ class BaseUserProfile(
             objects.append(obj)
         return objects
 
+    @classmethod
+    def get_getting_started_actions(cls, user):
+        """
+        Main definition of getting started actions for the user.
+        Static method as used by the CosinnusPersonalDashboardGettingStartedWidget and CosinnusGettingStartedAPIView.
+        """
+        from cosinnus.models.map import get_map_selected_filter_params
+
+        profile = user.cosinnus_profile
+        actions = [
+            {
+                'action_id': 'verify_email',
+                'completed': profile.email_verified,
+                'cta_url': reverse('cosinnus:resend-email-validation'),
+            },
+            {
+                'action_id': 'set_avatar',
+                'completed': bool(profile.avatar),
+                'cta_url': reverse('cosinnus:v3-frontend-setup-profile'),
+            },
+            {
+                'action_id': 'set_about_me',
+                'completed': bool(profile.description),
+                'cta_url': reverse('cosinnus:v3-frontend-setup-profile'),
+            },
+            {
+                'action_id': 'set_location',
+                'completed': bool(profile.media_tag.location),
+                'cta_url': '/setup/contact',
+            },
+            {
+                'action_id': 'set_topics',
+                'completed': bool(profile.media_tag.topics),
+                'cta_url': '/setup/interests/',
+            },
+            {
+                'action_id': 'become_member',
+                'completed': user.cosinnus_memberships.filter(
+                    group__type__in=[get_cosinnus_group_model().TYPE_PROJECT, get_cosinnus_group_model().TYPE_SOCIETY]
+                ).exists(),
+                'cta_url': f'{reverse("cosinnus:map")}?{get_map_selected_filter_params(["groups", "projects"])}',
+            },
+        ]
+
+        if settings.COSINNUS_IDEAS_ENABLED:
+            actions.append(
+                {
+                    'action_id': 'create_idea',
+                    'completed': user.ideas.exists(),
+                    'cta_url': reverse('cosinnus:idea-create'),
+                }
+            )
+        if settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY and user.is_superuser:
+            from wechange_payments.models import Subscription
+
+            current_subscription = Subscription.get_current_for_user(user)
+            contribution_completed = current_subscription.amount > 0 if current_subscription else False
+            actions.append(
+                {
+                    'action_id': 'make_contribution',
+                    'completed': contribution_completed,
+                    'cta_url': reverse('wechange-payments:payment'),
+                }
+            )
+
+        # set dismissed as stored in the profile settings
+        dismissed_actions = profile.settings.get(PROFILE_SETTING_DISMISSED_GETTING_STARTED_ACTIONS, [])
+        for action in actions:
+            action['dismissed'] = action['action_id'] in dismissed_actions
+
+        return actions
+
 
 class UserProfile(BaseUserProfile):
     """Default implementation of the `BaseUserProfile`."""
