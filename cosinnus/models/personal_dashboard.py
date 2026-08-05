@@ -4,6 +4,7 @@ from cosinnus.api_frontend.serializers.group import CosinnusGroupSerializer
 from cosinnus.api_frontend.serializers.idea import CosinnusIdeaSerializer
 from cosinnus.conf import settings
 from cosinnus.models.idea import CosinnusIdea
+from cosinnus.models.profile import PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_can_create_groups
 from cosinnus.utils.urls import group_aware_reverse
@@ -44,15 +45,15 @@ class CosinnusPersonalDashboardWidget:
 
     def _get_widget_settings(self, profile):
         """Helper to get the user widget settings from the profile settings."""
-        return profile.settings.get(self.PROFILE_SETTINGS_KEY, {}).get(self.id, {})
+        return profile.settings.get(PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS, {}).get(self.id, {})
 
     def _set_widget_setting(self, profile, setting, value):
         """Helper to set the user widget settings to the profile settings."""
-        widget_settings = profile.settings.get(self.PROFILE_SETTINGS_KEY, {})
+        widget_settings = profile.settings.get(PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS, {})
         if self.id not in widget_settings:
             widget_settings[self.id] = {}
         widget_settings[self.id][setting] = value
-        profile.settings[self.PROFILE_SETTINGS_KEY] = widget_settings
+        profile.settings[PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS] = widget_settings
         type(profile).objects.filter(pk=profile.pk).update(settings=profile.settings)
 
     def is_enabled(self, user):

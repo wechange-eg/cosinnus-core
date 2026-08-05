@@ -70,6 +70,8 @@ PROFILE_SETTING_ROCKET_CHAT_CONTACT_GROUP_ROOM = 'rocket_chat_contact_group_room
 PROFILE_SETTING_WORKSHOP_PARTICIPANT = 'is_workshop_participant'
 PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME = 'workshop_participant_name'
 PROFILE_SETTING_COSINUS_OAUTH_LOGIN = 'has_logged_in_with_cosinnus_oauth'
+PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS = 'dashboard_widgets'
+PROFILE_SETTING_DISMISSED_GETTING_STARTED_ACTIONS = 'getting_started_actions_dismissed'
 # hex color code for user's chosen avatar background color
 PROFILE_SETTINGS_AVATAR_COLOR = 'avatar_color'
 # a timestamp used to force the logout all older user sessions
