@@ -2,7 +2,9 @@ from django.urls import reverse, reverse_lazy
 
 from cosinnus.api_frontend.serializers.group import CosinnusGroupSerializer
 from cosinnus.api_frontend.serializers.idea import CosinnusIdeaSerializer
+from cosinnus.api_frontend.serializers.user import CosinnusGettingStartedActionSerializer
 from cosinnus.conf import settings
+from cosinnus.models import get_user_profile_model
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.profile import PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -33,12 +35,8 @@ class CosinnusPersonalDashboardWidget:
     api_url = None
     # conf settings
     conf = None
-
-    # profile settings key
-    PROFILE_SETTINGS_KEY = 'dashboard_widgets'
-
     # limit of preloaded widget data
-    DATA_LIMIT = 3
+    data_limit = 3
 
     def __init__(self, conf=None):
         self.conf = conf
@@ -81,7 +79,9 @@ class CosinnusPersonalDashboardWidget:
     def get_data(self, user):
         """Get initial widget data."""
         if self.user_queryset_function and self.serializer_class and self.is_active(user):
-            queryset = self.user_queryset_function(user)[: self.DATA_LIMIT]
+            queryset = self.user_queryset_function(user)
+            if self.data_limit:
+                queryset = queryset[: self.data_limit]
             serializer = self.serializer_class(queryset, many=True, context={'user': user})
             return serializer.data
         return []
@@ -250,6 +250,16 @@ class CosinnusPersonalDashboardLikedIdeasWidget(CosinnusPersonalDashboardWidget)
         return settings.COSINNUS_IDEAS_ENABLED
 
 
+class CosinnusPersonalDashboardGettingStartedWidget(CosinnusPersonalDashboardWidget):
+    """Personal getting started widget"""
+
+    id = 'dashboard.getting_started'
+    user_queryset_function = get_user_profile_model().get_getting_started_actions
+    serializer_class = CosinnusGettingStartedActionSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:api-getting-started')
+    data_limit = None
+
+
 # list of all known widgets
 PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardNewsWidget,
@@ -262,6 +272,7 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardPollsWidget,
     CosinnusPersonalDashboardIdeasWidget,
     CosinnusPersonalDashboardLikedIdeasWidget,
+    CosinnusPersonalDashboardGettingStartedWidget,
 ]
 
 # initialized available dashboard widgets

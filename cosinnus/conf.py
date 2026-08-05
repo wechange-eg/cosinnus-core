@@ -1172,6 +1172,7 @@ class CosinnusConf(AppConf):
         'dashboard.polls': {},
         'dashboard.ideas': {},
         'dashboard.liked_ideas': {},
+        'dashboard.getting_started': {},
     }
 
     # default CosinnusPortal logo image url, shown in the top left navigation bar
