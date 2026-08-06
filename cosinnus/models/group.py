@@ -1265,12 +1265,7 @@ class CosinnusBaseGroup(
         default=None,
         blank=True,
         null=True,
-        help_text=_(
-            'Note: For performance reasons last activity is only re-computed very rarely! Only when inactivity becomes '
-            'DSGVO-relevant (before groups are marked for deletion or preceding  member notifications about this), '
-            'e.g. the earliest point of recalculation is before the first notification of deletion goes out, about '
-            '9 years after the last activity, 1 year before scheduled deletion (on default settings).'
-        ),
+        help_text=_('Note: For performance reasons last activity may not be tracked precisely.'),
     )
     inactivity_notification_sent_at = models.DateTimeField(
         _('Inactivity notification sent at'),
