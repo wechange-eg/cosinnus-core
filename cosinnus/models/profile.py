@@ -739,11 +739,6 @@ class BaseUserProfile(
         profile = user.cosinnus_profile
         actions = [
             {
-                'action_id': 'verify_email',
-                'completed': profile.email_verified,
-                'cta_url': reverse('cosinnus:resend-email-validation'),
-            },
-            {
                 'action_id': 'set_avatar',
                 'completed': bool(profile.avatar),
                 'cta_url': reverse('cosinnus:v3-frontend-setup-profile'),
@@ -771,6 +766,15 @@ class BaseUserProfile(
                 'cta_url': f'{reverse("cosinnus:map")}?{get_map_selected_filter_params(["groups", "projects"])}',
             },
         ]
+
+        if CosinnusPortal.get_current().email_needs_verification:
+            actions.append(
+                {
+                    'action_id': 'verify_email',
+                    'completed': profile.email_verified,
+                    'cta_url': reverse('cosinnus:resend-email-validation'),
+                }
+            )
 
         if settings.COSINNUS_IDEAS_ENABLED:
             actions.append(
