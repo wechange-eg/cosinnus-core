@@ -56,7 +56,7 @@ msgstr ""
 "\n"
 "Hinweis: Alle anstehenden Termine sowie vergangene Termine aus diesem Jahr werden\n"
 "                            übertragen. Termine aus dem Jahr 2025 und früher werden nicht in den neuen Kalender übernommen.\n"
-"                            Bitte an den Support wenden, falls ältere Daten benötigt werden."
+"                            Bitte wende dich an den Support, falls ältere Daten benötigt werden."
 
 msgid ""
 "\n"
@@ -10686,7 +10686,7 @@ msgid "Start the migration of Todos to the Task Board in the background."
 msgstr "Starte die Migration von Aufgaben zum Aufgaben-Board im Hintergrund."
 
 msgid "Start the migration the new calendar in the background."
-msgstr "Migration des neuen Kalenders im Hintergrund starten."
+msgstr "Per Klick unten startest du die Migration des neuen Kalenders im Hintergrund."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Start-Time"
@@ -13718,7 +13718,7 @@ msgid "You can directly create conference events for rooms from here by using th
 msgstr "Du kannst von hier aus direkt Tagungsveranstaltungen für Räume erstellen, indem du die Steuerelemente für das Dropdown-Menü der einzelnen Räume verwendest."
 
 msgid "You can dismiss the migration, then the migration hint want be shown anymore."
-msgstr "Sie können die Migration ausblenden. Dann wird der Migrationshinweis nicht mehr angezeigt."
+msgstr "Du kannst die Migration ausblenden. Dann wird der Migrationshinweis nicht mehr angezeigt."
 
 msgctxt "a link to click on"
 msgid "You can do this here"
