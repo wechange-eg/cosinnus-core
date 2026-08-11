@@ -14045,7 +14045,7 @@ msgid "You need to connect your user account to Facebook before you can link thi
 msgstr "Du musst dein Benutzerkonto mit Facebook verbinden bevor du diese Gruppe/Projekt verbinden kannst!"
 
 msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
-msgstr "Du musst deine Email-Adresse verifizieren bevor du dich einloggen kannst. Eine Email mit dem Verifizierungslink wurde dir gerade geschickt. Überprüfe bitte deinen Posteingang: wenn du keine Email von uns erhalten hast, überprüfe bitte deinen Spamordner."
+msgstr "Du musst deine E-Mail-Adresse verifizieren, bevor du dich einloggen kannst. Eine E-Mail mit dem Verifizierungslink wurde dir gerade geschickt. Überprüfe bitte deinen Posteingang. Wenn du keine E-Mail von uns erhalten hast, überprüfe bitte deinen Spamordner."
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr "Um diesen Teil der Webseite zu benutzen, muss deine E-Mail-Adresse erst verifiziert werden! Bitte prüfen deine eingehenden E-Mails und klicke dann auf den Link in der Verifikations-E-Mail, die du von uns erhalten hast. Alternativ kannst du eine neue Verifikations-E-Mail anfordern, indem du den Link unten klickst."
