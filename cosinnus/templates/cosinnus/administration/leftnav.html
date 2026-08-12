@@ -150,7 +150,11 @@
                     {% endif %}
                 </span>
                 <div class="media-body">
-                    {% trans "User Dashboard Announcements" %}
+                    {% if SETTINGS.COSINNUS_USE_V3_PERSONAL_DASHBOARD %}
+                        {% trans "Dashboard Announcements" %}
+                    {% else %}
+                        {% trans "User Dashboard Announcements" %}
+                    {% endif %}
                 </div>
             </li>
         </ul>

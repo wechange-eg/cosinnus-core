@@ -7,7 +7,13 @@
 
 {% block breadcrumb %}
     <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
-    <li class="active">{% trans "User Dashboard Announcements" %}</li>
+    <li class="active">
+        {% if SETTINGS.COSINNUS_USE_V3_PERSONAL_DASHBOARD %}
+            {% trans "Dashboard Announcements" %}
+        {% else %}
+            {% trans "User Dashboard Announcements" %}
+        {% endif %}
+    </li>
 {% endblock %}
 
 {% block leftnav %}
@@ -17,29 +23,53 @@
 {% block content %}
     <div class="alert alert-success">
         <i class="fa fa-info-circle fa-3x"></i>
-        <h4>{% trans "User Dashboard Announcements" %}</h4>
-        <div class="v-offset-s">
-            <p>
-                {% trans "User Dashboard Announcements are sticky posts that appear on top of each user's personal Dashboard." %}
-            </p>
-            <ul>
-                <li>
-                    {% trans "An announcement will only appear during its valid-time frame." %}
-                </li>
-                <li>
-                    {% trans "Only one announcement at a time will ever be shown to a user." %}
-                </li>
-                <li>
-                    {% trans "If the user still has not hidden their introduction-message on the dashboard, they will not see any announcements." %}
-                </li>
-                <li>
-                    {% trans "A user can dismiss an announcement, in which case it will disappear and never be shown again. On the next visit to their Dashboard, another valid announcement they have not yet hidden may be shown." %}
-                </li>
-                <li>
-                    {% trans "Only one announcement at a time will ever be shown to a user." %}
-                </li>
-            </ul>
-        </div>
+        {% if SETTINGS.COSINNUS_USE_V3_PERSONAL_DASHBOARD %}
+            <h4>{% trans "Personal Dashboard Announcements" %}</h4>
+            <div class="v-offset-s">
+                <p>
+                    {% trans "Announcements created here are displayed to all users at the very top of their Personal Dashboard." %}
+                </p>
+                <ul>
+                    <li>
+                        {% trans "An announcement is only displayed during the set period." %}
+                    </li>
+                    <li>
+                        {% trans "Only one announcement is displayed at a time. If several announcements are active at the same time, users will see the oldest active announcement." %}
+                    </li>
+                    <li>
+                        {% trans "Users can hide an announcement. It then disappears and is never displayed again. The next time they visit their Personal Dashboard, the next announcement will be displayed, if there is still an active announcement that they have not yet hidden." %}
+                    </li>
+                    <li>
+                        {# TODO add welcome link #}
+                        {% captureas welcome_admin_link %}<a href="" class="transparent">welcome announcement</a>{% endcaptureas %}
+                        {% blocktrans %}
+                            As long as a user is seeing the {{ welcome_admin_link }}, no announcement from this list will be displayed.
+                        {% endblocktrans %}
+                    </li>
+                </ul>
+            </div>
+        {% else %}
+            <h4>{% trans "User Dashboard Announcements" %}</h4>
+            <div class="v-offset-s">
+                <p>
+                    {% trans "User Dashboard Announcements are sticky posts that appear on top of each user's personal Dashboard." %}
+                </p>
+                <ul>
+                    <li>
+                        {% trans "An announcement will only appear during its valid-time frame." %}
+                    </li>
+                    <li>
+                        {% trans "Only one announcement at a time will ever be shown to a user." %}
+                    </li>
+                    <li>
+                        {% trans "If the user still has not hidden their introduction-message on the dashboard, they will not see any announcements." %}
+                    </li>
+                    <li>
+                        {% trans "A user can dismiss an announcement, in which case it will disappear and never be shown again. On the next visit to their Dashboard, another valid announcement they have not yet hidden may be shown." %}
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
     </div>
 
     <button type="button" href="{% url "cosinnus:user-dashboard-announcement-create" %}" class="btn btn-emphasized btn-autosize" title="{% trans "Create Announcement" %}">

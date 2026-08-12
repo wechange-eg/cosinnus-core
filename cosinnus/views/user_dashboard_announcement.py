@@ -9,10 +9,15 @@ from django.http.response import HttpResponseForbidden, HttpResponseNotFound
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, DeleteView, UpdateView
+from django.views.generic import DeleteView
 from django.views.generic.list import ListView
+from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
-from cosinnus.forms.user_dashboard_announcement import UserDashboardAnnouncementForm
+from cosinnus.conf import settings
+from cosinnus.forms.user_dashboard_announcement import (
+    UserDashboardAnnouncementForm,
+    UserDashboardCallToActionButtonInlineFormset,
+)
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.user_dashboard_announcement import UserDashboardAnnouncement
 from cosinnus.utils.permissions import check_user_superuser
@@ -33,6 +38,11 @@ class UserDashboardAnnouncementFormMixin(object):
     form_class = UserDashboardAnnouncementForm
     model = UserDashboardAnnouncement
     template_name = 'cosinnus/user_dashboard_announcement/user_dashboard_announcement_form.html'
+    inlines = []
+    if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
+        inlines = [
+            UserDashboardCallToActionButtonInlineFormset,
+        ]
 
 
 class UserDashboardAnnouncementListView(RequireSuperuserMixin, SamePortalGroupMixin, ListView):
@@ -49,7 +59,7 @@ list_view = UserDashboardAnnouncementListView.as_view()
 
 
 class UserDashboardAnnouncementCreateView(
-    RequireSuperuserMixin, SamePortalGroupMixin, UserDashboardAnnouncementFormMixin, CreateView
+    RequireSuperuserMixin, SamePortalGroupMixin, UserDashboardAnnouncementFormMixin, CreateWithInlinesView
 ):
     """Create View for UserDashboardAnnouncements"""
 
@@ -79,7 +89,7 @@ user_dashboard_announcement_create = UserDashboardAnnouncementCreateView.as_view
 
 
 class UserDashboardAnnouncementEditView(
-    RequireSuperuserMixin, SamePortalGroupMixin, UserDashboardAnnouncementFormMixin, UpdateView
+    RequireSuperuserMixin, SamePortalGroupMixin, UserDashboardAnnouncementFormMixin, UpdateWithInlinesView
 ):
     form_view = 'edit'
     message_success = _('Your Announcement was saved successfully.')
