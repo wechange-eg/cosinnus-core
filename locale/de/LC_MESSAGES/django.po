@@ -1692,6 +1692,9 @@ msgstr "1/4 + 1/4 + 1/2"
 msgid "10 years"
 msgstr "10 Jahre"
 
+msgid "2 columns of text"
+msgstr "2 Spalten Text"
+
 msgid "2 days"
 msgstr "2 Tage"
 
@@ -2468,6 +2471,9 @@ msgstr "Diesen Post auch auf der verbundenen Facebook-Gruppe posten"
 msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
 msgstr "Es existiert bereits ein Konto mit dieser E-Mail-Adresse. Um sicherzustellen, dass du der Eigentümer dieses Kontos bist, melde dich bitte zuerst bei diesem Konto an und verbinde dann dein Konto."
 
+msgid "An announcement is only displayed during the set period."
+msgstr "Eine Ankündigung wird nur während des eingestellten Zeitraums angezeigt."
+
 msgid "An announcement will only appear during its valid-time frame."
 msgstr "Eine Ankündigung erscheint nur während dem angegebenen Zeitrahmen."
 
@@ -2524,6 +2530,9 @@ msgstr "Ankündigung ist aktiviert"
 
 msgid "Announcements"
 msgstr "Ankündigung"
+
+msgid "Announcements created here are displayed to all users at the very top of their Personal Dashboard."
+msgstr "Die hier erstellten Ankündigungen werden allen Benutzer/innen ganz oben auf ihrem Persönlichen Dashboard angezeigt."
 
 msgid "Another export is currently running!"
 msgstr "Ein anderer Export läuft gerade!"
@@ -2693,6 +2702,10 @@ msgstr "Als Administrator/in einer Gruppe oder eines Projekts unterliegt es dein
 
 msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!"
 msgstr "Als Administrator/in einer Gruppe oder eines Projekts unterliegt es deiner Verantwortung sicherzustellen, dass die Inhalte von Mitgliedern weder Urheberrechte verletzen noch gegen Gesetze verstoßen. Bitte sei dir dessen besonders bewusst wenn du die Sichtbarkeitseinstellung auf öffentlich sichtbar einstellst!"
+
+#, python-format
+msgid "As long as a user is seeing the %(welcome_admin_link)s, no announcement from this list will be displayed."
+msgstr "Solange man als Benutzer/in die %(welcome_admin_link)s angezeigt bekommt, wird keine Ankündigung aus dieser Liste angezeigt."
 
 msgid "Assign"
 msgstr "Zuweisen"
@@ -2957,6 +2970,18 @@ msgstr "Durchsuchen..."
 msgid "Business and Law"
 msgstr "Arbeit und Recht"
 
+msgid "Button"
+msgstr "Button"
+
+msgid "Button Text"
+msgstr "Text des Buttons"
+
+msgid "Button URL"
+msgstr "URL des Buttons"
+
+msgid "Buttons"
+msgstr "Buttons"
+
 msgid ""
 "By clicking on the button below, this conference and all content posted there will be irrevocably deleted.\n"
 "\n"
@@ -3051,6 +3076,9 @@ msgstr "Aufruf zum Handeln - Microsite-Box Titel"
 msgid "Call to Action Button"
 msgstr "Aufruf zum Handeln - Microsite-Box Link"
 
+msgid "Call to Action Buttons active"
+msgstr "Call-to-Action Buttons activ"
+
 msgid "Call to Action Microsite Box active"
 msgstr "Aufruf zum Handeln - Microsite-Box aktiv"
 
@@ -3082,6 +3110,9 @@ msgstr "Captcha"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Categories"
 msgstr "Kategorien"
+
+msgid "Category"
+msgstr "Kategorie"
 
 msgid "Category for the Announcement"
 msgstr "Kategorie für die Ankündigung"
@@ -3973,6 +4004,18 @@ msgstr "Täglich"
 msgid "Dashboard"
 msgstr "Dashboard"
 
+msgid "Dashboard Announcement"
+msgstr "Dashboard-Ankündigung"
+
+msgid "Dashboard Announcement CallToAction Button"
+msgstr "Dashboard-Ankündigung CallToAction Button"
+
+msgid "Dashboard Announcement CallToAction Buttons"
+msgstr "Dashboard-Ankündigung CallToAction Buttons"
+
+msgid "Dashboard Announcements"
+msgstr "Dashboard-Ankündigungen"
+
 msgid "Data"
 msgstr "Daten"
 
@@ -4290,6 +4333,9 @@ msgstr "Diskussionen"
 
 msgid "Dismiss"
 msgstr "Schließen"
+
+msgid "Display"
+msgstr "Darstellung"
 
 msgid "Display Name"
 msgstr "Anzeigename"
@@ -6924,6 +6970,9 @@ msgstr "Ignorierte/Fehlgeschlagene Einträge"
 msgid "Image"
 msgstr "Bild"
 
+msgid "Image + 1 column of text"
+msgstr "Bild + 1 Spalte Text"
+
 msgid "Image preview"
 msgstr "Bildvorschau"
 
@@ -8790,6 +8839,9 @@ msgstr "Nur ich"
 msgid "Only one announcement at a time will ever be shown to a user."
 msgstr "Nur eine Ankündigung wird jeweils dem/r Benutzer/in angezeigt."
 
+msgid "Only one announcement is displayed at a time. If several announcements are active at the same time, users will see the oldest active announcement."
+msgstr "Es wird immer nur eine Ankündigung angezeigt. Wenn mehrere Ankündigungen gleichzeitig aktiv sind, sieht man als Benutzer/in die älteste aktive Ankündigung."
+
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieses Projekts können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
@@ -9086,6 +9138,9 @@ msgstr "فارسی"
 
 msgid "Personal Dashboard"
 msgstr "Persönliches Dashboard"
+
+msgid "Personal Dashboard Announcements"
+msgstr "Dashboard-Ankündigungen"
 
 msgid "Personal Message (optional)"
 msgstr "Persönliche Nachricht (optional)"
@@ -10346,6 +10401,9 @@ msgstr "Registrieren Button anzeigen"
 msgid "Show Tokens"
 msgstr "Tokens anzeigen"
 
+msgid "Show a Button"
+msgstr "Zeige einen Button an"
+
 msgid "Show all"
 msgstr "Alle anzeigen"
 
@@ -10910,11 +10968,20 @@ msgstr "Test email wurde gesendet."
 msgid "Text"
 msgstr "Text"
 
+msgid "Text (1. column)"
+msgstr "Text (1. Spalte)"
+
+msgid "Text (2. column)"
+msgstr "Text (2. Spalte)"
+
 msgid "Text Editor"
 msgstr "Text-Editor"
 
 msgid "Text Topics"
 msgstr "Themen (Freitext)"
+
+msgid "Text of the Button"
+msgstr "Text des Buttons"
 
 msgid "Thank you again for your interest in our services."
 msgstr "Vielen Dank nochmal für dein Interesse an unseren Dienstleistungen."
@@ -11068,6 +11135,9 @@ msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für dein Projekt endet na
 msgid "The booked period for Video Conference Pro for this project has ended on %(end_date)s."
 msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für dein Projekt ist am %(end_date)s abgelaufen."
 
+msgid "The category is displayed as a label."
+msgstr "Die Kategorie wird als Label angezeigt."
+
 msgid "The complete request can only be sent via POST!"
 msgstr "The complete request can only be sent via POST!"
 
@@ -11212,6 +11282,9 @@ msgstr "Der Export läuft gerade..."
 
 msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
 msgstr "Die von Ihnen hochgeladene Datei war zu groß und der Dateityp war ungültig fürs Upload!"
+
+msgid "The first text column of the announcement."
+msgstr "Erste Text-Spalte der Dashboard-Ankündigung."
 
 msgid "The first uploaded image will be displayed as a wallpaper"
 msgstr "Das erste hochgeladene Bild wird als Hintergrundbild angezeigt"
@@ -11417,6 +11490,9 @@ msgstr "Raum erfolgreich gelöscht."
 
 msgid "The room was saved successfully."
 msgstr "Raum erfolgreich gespeichert."
+
+msgid "The second text column of the announcement."
+msgstr "Zweite Text-Spalte der Dashboard-Ankündigung."
 
 msgid "The selected choice was not found or invalid! Please choose a different value!"
 msgstr "Die gewählte Auswahl wurde nicht gefunden oder ist ungültig! Bitte wähle einen anderen Wert!"
@@ -12377,6 +12453,9 @@ msgstr "URL"
 msgid "URL Link"
 msgstr "URL Link"
 
+msgid "URL of the Button"
+msgstr "URL des Buttons"
+
 msgid "Ukrainian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Українська"
 
@@ -12788,6 +12867,9 @@ msgstr "Bestätigung für neue Benutzer/innen"
 #, python-format
 msgid "Users can filter their results in the Volunteer-O-Matic by distance so that only groups and projects in their area are suggested. For this, the first location you specified in your %(group_settings_label)s is used."
 msgstr "Die Nutzer/innen können ihre Ergebnisse im Mitwirk-O-Mat nach Entfernung filtern, damit nur Gruppen und Projekte in der Nähe vorgeschlagen werden. Hierfür wird der Standort verwendet, den ihr in euren %(group_settings_label)s angegeben habt."
+
+msgid "Users can hide an announcement. It then disappears and is never displayed again. The next time they visit their Personal Dashboard, the next announcement will be displayed, if there is still an active announcement that they have not yet hidden."
+msgstr "Man kann als Benutzer/in eine Ankündigung wegklicken, woraufhin diese verschwindet und nie wieder angezeigt wird. Beim nächsten Besuch des Persönlichen Dashboards wird dann die nächste Ankündigung angezeigt, falls es noch eine aktive Ankündigung gibt, die man noch nicht weggeklickt hat."
 
 #, python-format
 msgid "Users in organization %(group)s"
@@ -15183,6 +15265,9 @@ msgstr "view"
 #. Translators: __INCLUDE_JS_PO__
 msgid "website"
 msgstr "Webseite"
+
+msgid "welcome announcement"
+msgstr "Willkommens-Ankündigung"
 
 msgid "yes"
 msgstr "Ja"
