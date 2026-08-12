@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import logging
 
 from django.core.exceptions import ValidationError
+from django.core.validators import MaxLengthValidator
 from django.db import models
 from django.urls.base import reverse
 from django.utils.timezone import now
@@ -39,6 +40,13 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
         (3, _('Update')),
         (4, _('Technical Issues')),
         (5, _('Miscellaneous')),
+    )
+
+    DISPLAY_IMAGE_AND_TEXT = 0
+    DISPLAY_TWO_TEXT_COLUMS = 1
+    DISPLAY_CHOICES = (
+        (DISPLAY_IMAGE_AND_TEXT, _('Image + 1 column of text')),
+        (DISPLAY_TWO_TEXT_COLUMS, _('2 columns of text')),
     )
 
     image_attr_name = 'image'
@@ -116,6 +124,16 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
 
     url = models.URLField(_('URL'), blank=True, null=True, help_text='For the "read more" button')
 
+    display = models.PositiveSmallIntegerField(
+        blank=True, choices=DISPLAY_CHOICES, default=DISPLAY_IMAGE_AND_TEXT, verbose_name=_('Display')
+    )
+    text_col_1 = models.TextField(verbose_name=_('Text (1. column)'), blank=True)
+    text_col_2 = models.TextField(verbose_name=_('Text (2. column)'), blank=True)
+    call_to_action_active = models.BooleanField(
+        _('Call to Action Buttons active'),
+        default=False,
+    )
+
     created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL, verbose_name=_('Creator'), on_delete=models.CASCADE, null=True, related_name='+'
@@ -191,3 +209,23 @@ def get_hidden_user_dashboard_announcements_for_user(user):
         return []
     ui_prefs = get_ui_prefs_for_user(user)
     return ui_prefs[UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS]
+
+
+class UserDashboardCallToActionButton(models.Model):
+    """Call-to-action button for the v3 personal dashboard announcements."""
+
+    label = models.CharField(_('Button Text'), max_length=250, null=False, blank=False)
+    url = models.URLField(
+        _('Button URL'), max_length=200, blank=False, null=False, validators=[MaxLengthValidator(200)]
+    )
+
+    dashboard_announcement = models.ForeignKey(
+        UserDashboardAnnouncement,
+        verbose_name=_('Dashboard Announcement'),
+        on_delete=models.CASCADE,
+        related_name='call_to_action_buttons',
+    )
+
+    class Meta(object):
+        verbose_name = _('Dashboard Announcement CallToAction Button')
+        verbose_name_plural = _('Dashboard Announcement CallToAction Buttons')
