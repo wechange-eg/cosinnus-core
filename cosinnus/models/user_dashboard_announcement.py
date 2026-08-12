@@ -16,7 +16,11 @@ from cosinnus.models.mixins.images import ThumbnailableImageMixin
 from cosinnus.utils.files import get_user_dashboard_announcement_image_filename
 from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus.utils.urls import get_domain_for_portal
-from cosinnus.views.ui_prefs import UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS, get_ui_prefs_for_user
+from cosinnus.views.ui_prefs import (
+    UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS,
+    USERPROFILE_UI_PREF_KEY,
+    get_ui_prefs_for_user,
+)
 
 logger = logging.getLogger('cosinnus')
 
@@ -200,6 +204,16 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
         if len(candidates) > 0:
             return candidates[0]
         return None
+
+    @classmethod
+    def hide_next_for_user(cls, user, announcement_id):
+        """Hide a UserDashboardAnnouncement by adding it to the ui_pref in the profile settings."""
+        profile = user.cosinnus_profile
+        ui_pref = USERPROFILE_UI_PREF_KEY % UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS
+        hidden_announcements = profile.settings.get(ui_pref, [])
+        hidden_announcements = list(set(hidden_announcements + [announcement_id]))
+        profile.settings[ui_pref] = hidden_announcements
+        type(profile).objects.filter(pk=profile.pk).update(settings=profile.settings)
 
 
 def get_hidden_user_dashboard_announcements_for_user(user):

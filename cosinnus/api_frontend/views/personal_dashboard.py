@@ -22,7 +22,9 @@ class CosinnusPersonalDashboardAPIView(APIView):
 
     @swagger_auto_schema(responses={200: openapi.Response('User dashboard data', CosinnusPersonalDashboardSerializer)})
     def get(self, request):
-        serializer = CosinnusPersonalDashboardSerializer(context={'user': request.user})
+        serializer = CosinnusPersonalDashboardSerializer(
+            context={'user': request.user, 'query_params': request.query_params}
+        )
         return Response(serializer.data)
 
     @swagger_auto_schema(request_body=CosinnusPersonalDashboardSerializer)
