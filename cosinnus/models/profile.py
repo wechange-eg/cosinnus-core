@@ -737,36 +737,9 @@ class BaseUserProfile(
         from cosinnus.models.map import get_map_selected_filter_params
 
         profile = user.cosinnus_profile
-        actions = [
-            {
-                'action_id': 'set_avatar',
-                'completed': bool(profile.avatar),
-                'cta_url': reverse('cosinnus:v3-frontend-setup-profile'),
-            },
-            {
-                'action_id': 'set_about_me',
-                'completed': bool(profile.description),
-                'cta_url': reverse('cosinnus:v3-frontend-setup-profile'),
-            },
-            {
-                'action_id': 'set_location',
-                'completed': bool(profile.media_tag.location),
-                'cta_url': '/setup/contact',
-            },
-            {
-                'action_id': 'set_topics',
-                'completed': bool(profile.media_tag.topics),
-                'cta_url': '/setup/interests/',
-            },
-            {
-                'action_id': 'become_member',
-                'completed': user.cosinnus_memberships.filter(
-                    group__type__in=[get_cosinnus_group_model().TYPE_PROJECT, get_cosinnus_group_model().TYPE_SOCIETY]
-                ).exists(),
-                'cta_url': f'{reverse("cosinnus:map")}?{get_map_selected_filter_params(["groups", "projects"])}',
-            },
-        ]
 
+        # actions settings, sorted as displayed in the dashboard widget
+        actions = []
         if CosinnusPortal.get_current().email_needs_verification:
             actions.append(
                 {
@@ -776,14 +749,40 @@ class BaseUserProfile(
                 }
             )
 
-        if settings.COSINNUS_IDEAS_ENABLED:
-            actions.append(
+        actions.extend(
+            [
                 {
-                    'action_id': 'create_idea',
-                    'completed': user.ideas.exists(),
-                    'cta_url': reverse('cosinnus:idea-create'),
-                }
-            )
+                    'action_id': 'set_avatar',
+                    'completed': bool(profile.avatar),
+                    'cta_url': reverse('cosinnus:v3-frontend-setup-profile'),
+                },
+                {
+                    'action_id': 'set_about_me',
+                    'completed': bool(profile.description),
+                    'cta_url': reverse('cosinnus:v3-frontend-setup-profile'),
+                },
+                {
+                    'action_id': 'set_location',
+                    'completed': bool(profile.media_tag.location),
+                    'cta_url': '/setup/contact',
+                },
+                {
+                    'action_id': 'set_topics',
+                    'completed': bool(profile.media_tag.topics),
+                    'cta_url': '/setup/interests/',
+                },
+                {
+                    'action_id': 'become_member',
+                    'completed': user.cosinnus_memberships.filter(
+                        group__type__in=[
+                            get_cosinnus_group_model().TYPE_PROJECT,
+                            get_cosinnus_group_model().TYPE_SOCIETY,
+                        ]
+                    ).exists(),
+                    'cta_url': f'{reverse("cosinnus:map")}?{get_map_selected_filter_params(["groups", "projects"])}',
+                },
+            ]
+        )
         if settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY and user.is_superuser:
             from wechange_payments.models import Subscription
 
@@ -794,6 +793,14 @@ class BaseUserProfile(
                     'action_id': 'make_contribution',
                     'completed': contribution_completed,
                     'cta_url': reverse('wechange-payments:payment'),
+                }
+            )
+        if settings.COSINNUS_IDEAS_ENABLED:
+            actions.append(
+                {
+                    'action_id': 'create_idea',
+                    'completed': user.ideas.exists(),
+                    'cta_url': reverse('cosinnus:idea-create'),
                 }
             )
 
