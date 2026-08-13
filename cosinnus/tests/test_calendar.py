@@ -4,7 +4,7 @@ import random
 from caldav.elements.dav import Owner
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
-from django.test import TestCase
+from django.test import TransactionTestCase
 from django.utils import timezone
 from rest_framework.routers import reverse
 from rest_framework.test import APITestCase, override_settings
@@ -17,7 +17,6 @@ from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.models.group import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, CosinnusGroupMembership
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.tagged import BaseTagObject
-from cosinnus.tests.utils import CeleryTaskTestMixin
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus_cloud.hooks import get_nc_user_id
 from cosinnus_event.calendar.nextcloud_caldav import NextcloudCaldavConnection
@@ -26,7 +25,6 @@ from cosinnus_event.models import Event
 if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
     initialize_cosinnus_after_startup()
 
-    # TODO: remove when test thread branch is merged
     # patch nextcloud hook threading
     def blocking_nc_call(function, *args, **kwargs):
         function(*args, **kwargs)
@@ -37,7 +35,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
     def disabled_nc_call(funciont, *args, **kwargs):
         pass
 
-    class CalendarIntegrationBaseTest(CeleryTaskTestMixin, TestCase):
+    class CalendarIntegrationBaseTest(TransactionTestCase):
         """Base setup for calendar Nextcloud integration tests providing a calendar_connection."""
 
         deck_connection = None
@@ -87,21 +85,17 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
         def setUp(self):
             super().setUp()
             self.test_group_name = 'LocalCalendarTestGroup' + str(random.randint(1000, 9999))
-            with self.runCeleryTasks():
-                self.test_group = CosinnusSociety.objects.create(name=self.test_group_name)
-            self.test_group.refresh_from_db()
+            self.test_group = CosinnusSociety.objects.create(name=self.test_group_name)
             self.test_group_principal_name = self.test_group.nextcloud_group_id.replace(' ', '+')
 
         def tearDown(self):
             super().tearDown()
             # delete default test group if not already deleted
             if self.test_group:
-                with self.runCeleryTasks():
-                    self.test_group.delete()
+                self.test_group.delete()
             # delete custom test groups
             for test_group in self.custom_test_groups:
-                with self.runCeleryTasks():
-                    test_group.delete()
+                test_group.delete()
             self.custom_test_groups.clear()
 
         def test_group_create(self):
@@ -128,8 +122,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             """Test that calendar is deleted on group deletion."""
             calendar_properties = self.get_properties_raw(self.test_group)
             self.assertNotIn('x1:deleted-calendar', calendar_properties)
-            with self.runCeleryTasks():
-                self.test_group.delete()
+            self.test_group.delete()
             calendar_properties = self.get_properties_raw(self.test_group)
             self.assertIn('x1:deleted-calendar', calendar_properties)
             self.test_group = None
@@ -145,18 +138,16 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertIn(self.test_group_principal_name, invite)
 
             # deactivate group
-            with self.runCeleryTasks():
-                self.test_group.is_active = False
-                self.test_group.save()
+            self.test_group.is_active = False
+            self.test_group.save()
 
             # check that the calendar is not shared with the group
             invite = self.get_invite_prop_raw(self.test_group)
             self.assertNotIn(self.test_group_principal_name, invite)
 
             # reactivate group
-            with self.runCeleryTasks():
-                self.test_group.is_active = True
-                self.test_group.save()
+            self.test_group.is_active = True
+            self.test_group.save()
 
             # check that the calendar is shared again with group
             invite = self.get_invite_prop_raw(self.test_group)
@@ -173,20 +164,18 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.assertIn(self.test_group_principal_name, invite)
 
             # deactivate events app
-            with self.runCeleryTasks():
-                self.test_group.deactivated_apps = 'cosinnus_event'
-                self.test_group.save()
-                signals.group_apps_deactivated.send(sender=self, group=self.test_group, apps=['cosinnus_event'])
+            self.test_group.deactivated_apps = 'cosinnus_event'
+            self.test_group.save()
+            signals.group_apps_deactivated.send(sender=self, group=self.test_group, apps=['cosinnus_event'])
 
             # check that the calendar is not shared with group
             invite = self.get_invite_prop_raw(self.test_group)
             self.assertNotIn(self.test_group_principal_name, invite)
 
             # reactivate calendar app
-            with self.runCeleryTasks():
-                self.test_group.deactivated_apps = None
-                self.test_group.save()
-                signals.group_apps_activated.send(sender=self, group=self.test_group, apps=['cosinnus_event'])
+            self.test_group.deactivated_apps = None
+            self.test_group.save()
+            signals.group_apps_activated.send(sender=self, group=self.test_group, apps=['cosinnus_event'])
 
             # check that the calendar is shared with group
             invite = self.get_invite_prop_raw(self.test_group)
@@ -197,22 +186,17 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             Test that the calendar is created when the event app is activated for the first time in a group with an
             active cloud app.
             """
-            group = None
             group_name = 'LocalCalendarTestGroup' + str(random.randint(1000, 9999))
-            with self.runCeleryTasks():
-                group = CosinnusSociety.objects.create(name=group_name, deactivated_apps='cosinnus_event')
-                self.custom_test_groups.append(group)
-            group.refresh_from_db()
+            group = CosinnusSociety.objects.create(name=group_name, deactivated_apps='cosinnus_event')
+            self.custom_test_groups.append(group)
             self.assertIsNotNone(group.nextcloud_group_id)
             self.assertIsNone(group.nextcloud_calendar_url)
 
             # activate event app
-            with self.runCeleryTasks():
-                group.deactivated_apps = None
-                group.save()
-                signals.group_apps_activated.send(sender=self, group=group, apps=['cosinnus_event'])
+            group.deactivated_apps = None
+            group.save()
+            signals.group_apps_activated.send(sender=self, group=group, apps=['cosinnus_event'])
 
-            group.refresh_from_db()
             self.assertIsNotNone(group.nextcloud_calendar_url)
             calendar = self.get_group_calendar(self.test_group)
             self.assertIsNotNone(calendar)
@@ -222,28 +206,27 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             Test that the calendar is created when the deck app is activated for the first time in a group with an
             inactive cloud app.
             """
-            group = None
             group_name = 'LocalCalendarTestGroup' + str(random.randint(1000, 9999))
-            with self.runCeleryTasks():
-                group = CosinnusSociety.objects.create(
-                    name=group_name, deactivated_apps='cosinnus_cloud,cosinnus_event'
-                )
-                self.custom_test_groups.append(group)
-            group.refresh_from_db()
+            group = CosinnusSociety.objects.create(name=group_name, deactivated_apps='cosinnus_cloud,cosinnus_event')
+            self.custom_test_groups.append(group)
             self.assertIsNone(group.nextcloud_group_id)
             self.assertIsNone(group.nextcloud_calendar_url)
 
             # activate event app
-            with self.runCeleryTasks():
-                group.deactivated_apps = None
-                group.save()
-                signals.group_apps_activated.send(sender=self, group=group, apps=['cosinnus_event'])
+            group.deactivated_apps = None
+            group.save()
+            signals.group_apps_activated.send(sender=self, group=group, apps=['cosinnus_event'])
 
-            group.refresh_from_db()
             self.assertIsNotNone(group.nextcloud_group_id)
             self.assertIsNotNone(group.nextcloud_calendar_url)
             calendar = self.get_group_calendar(self.test_group)
             self.assertIsNotNone(calendar)
+
+        def test_group_rename(self):
+            self.test_group.name = self.test_group.name + 'Renamed'
+            self.test_group.save()
+            calendar = self.get_group_calendar(self.test_group)
+            self.assertEqual(calendar.get_display_name(), self.test_group.name)
 
     class CalendarAPITestCase(APITestCase):
         """Base setup for calendar API tests."""
@@ -750,7 +733,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             # check that event has no conference settings
             self.assertFalse(self.test_event.conference_settings_assignments.exists())
 
-            # check show_guest_access is disbaled media_tag setting
+            # check show_guest_access is disabled media_tag setting
             self.test_event.media_tag.refresh_from_db()
             self.assertFalse(self.test_event.media_tag.show_bbb_guest_access_outside_of_conference)
 
@@ -1218,17 +1201,16 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.test_group.refresh_from_db()
             self.assertTrue(self.test_group.nextcloud_calendar_sync_required)
 
-    class CalendarViewTest(CeleryTaskTestMixin, TestCase):
+    class CalendarViewTest(TransactionTestCase):
         """Test Frontend initialization view."""
 
         test_group = None
         calendar_view_url = None
 
         @classmethod
-        def setUpTestData(cls):
+        def setUpClass(cls):
             cls.test_group_name = 'LocalCalendarTestGroup' + str(random.randint(1000, 9999))
-            with cls.runCeleryTasks():
-                cls.test_group = CosinnusSociety.objects.create(name=cls.test_group_name)
+            cls.test_group = CosinnusSociety.objects.create(name=cls.test_group_name)
             cls.test_group.refresh_from_db()
 
             # create test users without triggering NC hooks
@@ -1254,8 +1236,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
 
         @classmethod
         def tearDownClass(cls):
-            with cls.runCeleryTasks():
-                cls.test_group.delete()
+            cls.test_group.delete()
 
         def _get_expected_user_calendar_url(self, user):
             expected_user_calender_url = self.test_group.nextcloud_calendar_url
