@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import logging
+from datetime import timedelta
 
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
@@ -18,6 +19,7 @@ from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus.utils.urls import get_domain_for_portal
 from cosinnus.views.ui_prefs import (
     UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS,
+    UI_PREF_DASHBOARD_TIMELINE_HIDE_WELCOME_SCREEN,
     USERPROFILE_UI_PREF_KEY,
     get_ui_prefs_for_user,
 )
@@ -25,7 +27,54 @@ from cosinnus.views.ui_prefs import (
 logger = logging.getLogger('cosinnus')
 
 
-class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
+class UserDashboardBaseAnnouncement(ThumbnailableImageMixin, models.Model):
+    """Base class for UserDashboardAnnouncements and UserDashboardWelcomeAnnouncements."""
+
+    DISPLAY_IMAGE_AND_TEXT = 0
+    DISPLAY_TWO_TEXT_COLUMS = 1
+    DISPLAY_CHOICES = (
+        (DISPLAY_IMAGE_AND_TEXT, _('Image + 1 column of text')),
+        (DISPLAY_TWO_TEXT_COLUMS, _('2 columns of text')),
+    )
+
+    image_attr_name = 'image'
+
+    is_active = models.BooleanField(
+        _('Is active'),
+        help_text='If an idea is not active, it counts as non-existent for all purposes and views on the website.',
+        default=False,
+    )
+    title = models.CharField(_('Title'), max_length=250, help_text='Internal title field only.')
+    display = models.PositiveSmallIntegerField(
+        blank=True, choices=DISPLAY_CHOICES, default=DISPLAY_IMAGE_AND_TEXT, verbose_name=_('Display')
+    )
+    text = models.TextField(verbose_name=_('Text'), help_text=_('Main text of this announcement.'), blank=True)
+    image = models.ImageField(
+        _('Image'),
+        help_text='Shown as large banner image',
+        null=True,
+        blank=True,
+        upload_to=get_user_dashboard_announcement_image_filename,
+        max_length=250,
+    )
+    text_col_1 = models.TextField(verbose_name=_('Text (1. column)'), blank=True)
+    text_col_2 = models.TextField(verbose_name=_('Text (2. column)'), blank=True)
+    call_to_action_active = models.BooleanField(
+        _('Call to Action Buttons active'),
+        default=False,
+    )
+
+    created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL, verbose_name=_('Creator'), on_delete=models.CASCADE, null=True, related_name='+'
+    )
+    last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
+class UserDashboardAnnouncement(UserDashboardBaseAnnouncement):
     """A sticky-type post shown seperately on top of the user-dashboard for all users.
     Can be hidden by each user with a "don't show this again" button.
     Created by portal admins in the portal administration backend area."""
@@ -46,15 +95,6 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
         (5, _('Miscellaneous')),
     )
 
-    DISPLAY_IMAGE_AND_TEXT = 0
-    DISPLAY_TWO_TEXT_COLUMS = 1
-    DISPLAY_CHOICES = (
-        (DISPLAY_IMAGE_AND_TEXT, _('Image + 1 column of text')),
-        (DISPLAY_TWO_TEXT_COLUMS, _('2 columns of text')),
-    )
-
-    image_attr_name = 'image'
-
     class Meta(object):
         ordering = ('-valid_from',)
         unique_together = (
@@ -72,11 +112,6 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
         on_delete=models.CASCADE,
     )  # port_id 1 is created in a datamigration!
 
-    is_active = models.BooleanField(
-        _('Is active'),
-        help_text='If an idea is not active, it counts as non-existent for all purposes and views on the website.',
-        default=False,
-    )
     type = models.PositiveSmallIntegerField(
         _('Announcement Display Type'),
         blank=False,
@@ -98,7 +133,6 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
         help_text='The announcement will not be shown after this date.',
     )
 
-    title = models.CharField(_('Title'), max_length=250, help_text='Internal title field only.')
     slug = models.SlugField(
         _('Slug'),
         help_text=_(
@@ -114,35 +148,8 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
         choices=ANNOUNCEMENT_CATEGORIES,
         help_text='A selection of text headlines to display as header',
     )
-    text = models.TextField(verbose_name=_('Text'), help_text=_('Main text of this announcement.'), blank=True)
     raw_html = models.TextField(verbose_name=_('Raw HTML'), help_text=_('Raw HTML for this announcement.'), blank=True)
-
-    image = models.ImageField(
-        _('Image'),
-        help_text='Shown as large banner image',
-        null=True,
-        blank=True,
-        upload_to=get_user_dashboard_announcement_image_filename,
-        max_length=250,
-    )
-
     url = models.URLField(_('URL'), blank=True, null=True, help_text='For the "read more" button')
-
-    display = models.PositiveSmallIntegerField(
-        blank=True, choices=DISPLAY_CHOICES, default=DISPLAY_IMAGE_AND_TEXT, verbose_name=_('Display')
-    )
-    text_col_1 = models.TextField(verbose_name=_('Text (1. column)'), blank=True)
-    text_col_2 = models.TextField(verbose_name=_('Text (2. column)'), blank=True)
-    call_to_action_active = models.BooleanField(
-        _('Call to Action Buttons active'),
-        default=False,
-    )
-
-    created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
-    creator = models.ForeignKey(
-        settings.AUTH_USER_MODEL, verbose_name=_('Creator'), on_delete=models.CASCADE, null=True, related_name='+'
-    )
-    last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
 
     def __str__(self):
         return 'UserDashboardAnnouncement "%s" (Portal %d)' % (self.slug, self.portal_id)
@@ -206,7 +213,7 @@ class UserDashboardAnnouncement(ThumbnailableImageMixin, models.Model):
         return None
 
     @classmethod
-    def hide_next_for_user(cls, user, announcement_id):
+    def hide_for_user(cls, user, announcement_id):
         """Hide a UserDashboardAnnouncement by adding it to the ui_pref in the profile settings."""
         profile = user.cosinnus_profile
         ui_pref = USERPROFILE_UI_PREF_KEY % UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS
@@ -225,7 +232,7 @@ def get_hidden_user_dashboard_announcements_for_user(user):
     return ui_prefs[UI_PREF_DASHBOARD_HIDDEN_ANNOUNCEMENTS]
 
 
-class UserDashboardCallToActionButton(models.Model):
+class UserDashboardAnnouncementCallToActionButton(models.Model):
     """Call-to-action button for the v3 personal dashboard announcements."""
 
     label = models.CharField(_('Button Text'), max_length=250, null=False, blank=False)
@@ -236,6 +243,58 @@ class UserDashboardCallToActionButton(models.Model):
     dashboard_announcement = models.ForeignKey(
         UserDashboardAnnouncement,
         verbose_name=_('Dashboard Announcement'),
+        on_delete=models.CASCADE,
+        related_name='call_to_action_buttons',
+    )
+
+    class Meta(object):
+        verbose_name = _('Dashboard Announcement CallToAction Button')
+        verbose_name_plural = _('Dashboard Announcement CallToAction Buttons')
+
+
+class UserDashboardWelcomeAnnouncement(UserDashboardBaseAnnouncement):
+    """Welcome announcement for the v3 personal dashboard."""
+
+    display_duration = models.SmallIntegerField(verbose_name=_('Display duration in days'), default=30)
+
+    def show_to_user(self, user):
+        """
+        Checks if the welcome announcement is shown to a user.
+        Note: Reusing the UI_PREF_DASHBOARD_TIMELINE_HIDE_WELCOME_SCREEN setting for backwards compatibility.
+        """
+        if not self.is_active:
+            return False
+        if user.date_joined + timedelta(days=self.display_duration) < now():
+            return False
+        ui_prefs = get_ui_prefs_for_user(user)
+        return not ui_prefs.get(UI_PREF_DASHBOARD_TIMELINE_HIDE_WELCOME_SCREEN, False)
+
+    @staticmethod
+    def hide_for_user(user):
+        """
+        Hides the welcome announcement for a user.
+        Note: Reusing the UI_PREF_DASHBOARD_TIMELINE_HIDE_WELCOME_SCREEN setting for backwards compatibility.
+        """
+        profile = user.cosinnus_profile
+        ui_pref = USERPROFILE_UI_PREF_KEY % UI_PREF_DASHBOARD_TIMELINE_HIDE_WELCOME_SCREEN
+        profile.settings[ui_pref] = True
+        type(profile).objects.filter(pk=profile.pk).update(settings=profile.settings)
+
+    def get_preview_url(self):
+        return reverse('cosinnus:user-dashboard') + '?show_welcome_announcement=true'
+
+
+class UserDashboardWelcomeAnnouncementCallToActionButton(models.Model):
+    """Call-to-action button for the v3 personal dashboard welcome announcement."""
+
+    label = models.CharField(_('Button Text'), max_length=250, null=False, blank=False)
+    url = models.URLField(
+        _('Button URL'), max_length=200, blank=False, null=False, validators=[MaxLengthValidator(200)]
+    )
+
+    welcome_announcement = models.ForeignKey(
+        UserDashboardWelcomeAnnouncement,
+        verbose_name=_('Welcome Announcement'),
         on_delete=models.CASCADE,
         related_name='call_to_action_buttons',
     )
