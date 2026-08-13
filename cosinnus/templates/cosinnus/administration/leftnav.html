@@ -137,6 +137,27 @@
         </button>
     {% endif %}
 
+    {% if SETTINGS.COSINNUS_USE_V3_PERSONAL_DASHBOARD %}
+        {% url 'cosinnus:user-dashboard-welcome-announcement-edit' as url_welcome_announcement %}
+        <button type="button" class="btn w100 btn-emphasized fine-space" href="{{ url_welcome_announcement }}">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left">
+                        <i class="fa fa-comment"></i>
+                    </span>
+                    <span class="pull-right">
+                        {% if request.path|startswith:url_welcome_announcement %}
+                            <i class="fa fa-caret-right"></i>
+                        {% endif %}
+                    </span>
+                    <div class="media-body">
+                        {% trans "Welcome Announcement" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+    {% endif %}
+
     {% url 'cosinnus:user-dashboard-announcement-list' as url_announcements %}
     <button type="button" class="btn w100 btn-emphasized fine-space" href="{{ url_announcements }}">
         <ul class="media-list">

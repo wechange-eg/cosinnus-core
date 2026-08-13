@@ -1,0 +1,206 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
+
+{% block page_title %}
+    {% trans "Welcome Announcements" %} {{ block.super }}
+{% endblock page_title %}
+
+{% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
+    <li>
+        <a href="{% url 'cosinnus:user-dashboard-welcome-announcement-edit' %}">
+            {% trans "Welcome Announcement" %}
+        </a>
+    </li>
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.text.id_for_label %}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.text_col_1.id_for_label %}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.text_col_2.id_for_label %}
+{% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/administration/leftnav.html" %}
+{% endblock leftnav %}
+
+{% block content %}
+    <div class="alert alert-success">
+        <i class="fa fa-info-circle fa-3x"></i>
+        <h4>{% trans "Welcome announcement for new users" %}</h4>
+        <div class="v-offset-s">
+            <p>
+                {% trans "This announcement will be displayed to new users who have just registered at the very top of their Personal Dashboards." %}
+            </p>
+            <ul>
+                <li>
+                    {% trans "Users can hide the welcome announcement. It then disappears and is never displayed again." %}
+                </li>
+                <li>
+                    {% captureas announcement_admin_link %}<a href="{% url 'cosinnus:user-dashboard-announcement-list' %}" class="transparent">{% trans "dashboard announcements" %}</a>{% endcaptureas %}
+                    {% blocktrans %}As long as a user is seeing the welcome announcement, no {{ announcement_admin_link }} will be displayed.{% endblocktrans %}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    {% if form.errors %}
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+        </div>
+    {% endif %}
+    
+    <form action=".{% if request.GET.next %}?next={{ request.GET.next|urlencode }}{% endif %}" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.non_field_errors }}
+        
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
+        
+	        {# Checkbox Field #}
+	        {% trans "Welcome Announcement is enabled" as active_label %}
+	        {% include 'cosinnus/fields/checkbox_field.html' with field=form.is_active label=active_label checkbox_label=active_label hide_optional=True %}
+
+            {# Display duration #}
+            {% trans "Display duration in days" as duration_label %}
+            {% trans "Select how many days after registration the welcome message should automatically disappear (in case the user does not actively hide it)." as duration_legend %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.display_duration label=duration_label legend=duration_legend %}
+
+            {# Title Field #}
+            {% trans "Title" as title_label %}
+            {% trans "Title" as title_placeholder %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.title label=title_label placeholder=title_placeholder %}
+
+            {# Display Field #}
+            {% trans "Display" as display_label %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.display label=display_label %}
+            <script type="text/javascript">
+                {# show or hide the type-dependant fields #}
+                $(function(){
+                    $('#id_display').on('change', function(){
+                        var val = $(this).val();
+                        $('#display-type-frame-0').toggle(val == 0);
+                        $('#display-type-frame-1').toggle(val == 1);
+                    });
+                });
+            </script>
+
+            <div id="display-type-frame-0" {% if object and object.display != 0 %}style="display: none;"{% endif %}>
+                {# image and 1 column of text #}
+
+                {# Image field #}
+                {% captureas image_label %}{% trans "Image" %} ({% trans "max. 10 MB" %}){% endcaptureas %}
+                {% captureas image_html %}
+                {{ form.image.errors }}
+
+                {% if object.image %}
+                    <div class="row">
+                    <div class="col-xs-4 col-sm-2">
+                        <img class="image" style="width: 120px;" src="{% thumbnail object.image 200x110 crop=1 upscale=1 %}"></img>
+                    </div>
+                    <div class="col-xs-8 col-sm-10">
+                {% endif %}
+                <div class="file-input">
+                    <input class="form-control" id="fileToUpload" name="image" placeholder="{% trans "Upload an image." %}" type="file">
+                </div>
+                {% if object.image %}
+                    </div>
+                    </div>
+                {% endif %}
+
+                {% endcaptureas %}
+                {% captureas image_extra_html %}
+                    {% if object.image %}
+                        <div class="btn btn-default btn-small btn-no-float regular-space">
+                            <ul class="media-list">
+                                <li class="media">
+                            <span class="pull-left">
+                                <i class="fa fa-square-o"></i>
+                                <input type="hidden" id="image-clear_id" name="image-clear">
+                            </span>
+                                    <div class="media-body click-previous-input">
+                                        {% trans "Reset" %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endcaptureas %}
+                {% include 'cosinnus/fields/default_field.html' with label=image_label field_html=image_html extra_html=image_extra_html first=True large_field=True %}
+
+                {# Text field #}
+                {% trans "Text" as text_label %}
+                {% captureas text_placeholder %}{% trans "The main text of the announcement." %}{% endcaptureas %}
+                {% include 'cosinnus/fields/default_field.html' with field=form.text label=text_label legend=text_legend large_field=True hide_optional=True %}
+
+            </div>
+
+            <div id="display-type-frame-1" {% if not object or object.display != 1 %}style="display: none;"{% endif %}>
+                {# 2 columns of text #}
+
+                {# Text Column 1 field #}
+                {% trans "Text (1. column)" as text_col_1_label %}
+                {% captureas text_col_1_placeholder %}{% trans "The first text column of the announcement." %}{% endcaptureas %}
+                {% include 'cosinnus/fields/default_field.html' with field=form.text_col_1 label=text_col_1_label legend=text_col_1_legend large_field=True hide_optional=True %}
+
+                {# Text Column 2 field #}
+                {% trans "Text (2. column)" as text_col_2_label %}
+                {% captureas text_col_2_placeholder %}{% trans "The second text column of the announcement." %}{% endcaptureas %}
+                {% include 'cosinnus/fields/default_field.html' with field=form.text_col_2 label=text_col_2_label legend=text_col_2_legend large_field=True hide_optional=True %}
+            </div>
+
+            {% trans "Buttons" as cta_label %}
+            {% trans "Show a Button" as cta_active_label %}
+            {% include 'cosinnus/fields/checkbox_field.html' with field=form.call_to_action_active label=cta_label checkbox_label=cta_active_label %}
+
+            <script type="text/javascript">
+                {# hide and show motivation questions depending on the information_field_enabled setting #}
+                $("#id_call_to_action_active").on("click", function(){
+                    if($("#id_call_to_action_active").is(':checked'))
+                        $("#cta-buttons").show('slow');
+                    else
+                        $("#cta-buttons").hide('slow');
+                });
+            </script>
+
+            <div id="cta-buttons" {% if not object or not object.call_to_action_active %}style="display: none;"{% endif %}>
+                {% trans "Remove button" as  ctab_rm_label %}
+                {% captureas  ctab_ab_label %}{% trans "Add button" %}{% endcaptureas %}
+                {% include 'cosinnus/fields/inlineform_field.html' with  inline_form=inlines.0 content_template='cosinnus/fields/inlineform_welcome_announcement_call_to_action_button_content.html'  unique_id='ctab'   add_button_label=ctab_ab_label remove_button_label=ctab_rm_label %}
+            </div>
+        </div>
+        
+        <button type="button" class="btn btn-autosize {% if object %}btn-emphasized{% else %}btn-default{% endif %} pull-left no-margin"
+                {% if object %}href="{{ object.get_preview_url }}" target="_blank"{% endif %}>
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left">
+                        <i class="fa fa-eye"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans "Open Preview" %} ({% trans "requires a Save before" %})
+                    </div>
+                </li>
+            </ul>
+        </button>
+        
+        <button type="submit" class="btn btn-emphasized">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-left">
+                        <i class="fa fa-check"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans "Save" %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+    
+    </form>
+
+{% endblock %}
+

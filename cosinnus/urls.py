@@ -416,6 +416,11 @@ if getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
 if getattr(settings, 'COSINNUS_USE_V3_PERSONAL_DASHBOARD', False):
     urlpatterns += [
         path('dashboard/', user_dashboard.personal_dashboard_view, name='user-dashboard'),
+        path(
+            'administration/welcome_announcement/',
+            user_dashboard_announcement.user_dashboard_welcome_announcement_edit,
+            name='user-dashboard-welcome-announcement-edit',
+        ),
     ]
 elif getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(
     settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False

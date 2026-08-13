@@ -15,11 +15,13 @@ from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
 from cosinnus.conf import settings
 from cosinnus.forms.user_dashboard_announcement import (
+    UserDashboardAnnouncementCallToActionButtonInlineFormset,
     UserDashboardAnnouncementForm,
-    UserDashboardCallToActionButtonInlineFormset,
+    UserDashboardWelcomeAnnouncementCallToActionButtonInlineFormset,
+    UserDashboardWelcomeAnnouncementForm,
 )
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.user_dashboard_announcement import UserDashboardAnnouncement
+from cosinnus.models.user_dashboard_announcement import UserDashboardAnnouncement, UserDashboardWelcomeAnnouncement
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.views.mixins.group import RequireSuperuserMixin
 
@@ -41,7 +43,7 @@ class UserDashboardAnnouncementFormMixin(object):
     inlines = []
     if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
         inlines = [
-            UserDashboardCallToActionButtonInlineFormset,
+            UserDashboardAnnouncementCallToActionButtonInlineFormset,
         ]
 
 
@@ -138,3 +140,27 @@ def user_dashboard_announcement_activate(request, slug):
     else:
         messages.success(request, _('Your Announcement was deactivated successfully.'))
     return redirect('cosinnus:user-dashboard-announcement-list')
+
+
+class UserDashboardWelcomeAnnouncementEditView(RequireSuperuserMixin, UpdateWithInlinesView):
+    form_class = UserDashboardWelcomeAnnouncementForm
+    model = UserDashboardWelcomeAnnouncement
+    template_name = 'cosinnus/user_dashboard_announcement/user_dashboard_welcome_announcement_form.html'
+    inlines = [
+        UserDashboardWelcomeAnnouncementCallToActionButtonInlineFormset,
+    ]
+    message_success = _('The Welcome Announcement was saved successfully.')
+
+    def get_object(self, queryset=None):
+        """Get welcome announcement, create if it does not exist."""
+        welcome_announcement = UserDashboardWelcomeAnnouncement.objects.first()
+        if not welcome_announcement:
+            welcome_announcement = UserDashboardWelcomeAnnouncement.objects.create()
+        return welcome_announcement
+
+    def get_success_url(self):
+        messages.success(self.request, self.message_success)
+        return reverse('cosinnus:user-dashboard-welcome-announcement-edit')
+
+
+user_dashboard_welcome_announcement_edit = UserDashboardWelcomeAnnouncementEditView.as_view()

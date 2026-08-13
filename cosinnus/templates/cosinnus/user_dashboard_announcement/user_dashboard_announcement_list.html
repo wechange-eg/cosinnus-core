@@ -40,8 +40,7 @@
                         {% trans "Users can hide an announcement. It then disappears and is never displayed again. The next time they visit their Personal Dashboard, the next announcement will be displayed, if there is still an active announcement that they have not yet hidden." %}
                     </li>
                     <li>
-                        {# TODO add welcome link #}
-                        {% captureas welcome_admin_link %}<a href="" class="transparent">{% trans "welcome announcement" %}</a>{% endcaptureas %}
+                        {% captureas welcome_admin_link %}<a href="{% url 'cosinnus:user-dashboard-welcome-announcement-edit' %}" class="transparent">{% trans "welcome announcement" %}</a>{% endcaptureas %}
                         {% blocktrans %}As long as a user is seeing the {{ welcome_admin_link }}, no announcement from this list will be displayed.{% endblocktrans %}
                     </li>
                 </ul>
