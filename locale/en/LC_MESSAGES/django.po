@@ -2549,6 +2549,10 @@ msgstr ""
 msgid "As long as a user is seeing the %(welcome_admin_link)s, no announcement from this list will be displayed."
 msgstr ""
 
+#, python-format
+msgid "As long as a user is seeing the welcome announcement, no %(announcement_admin_link)s will be displayed."
+msgstr ""
+
 msgid "Assign"
 msgstr ""
 
@@ -4147,6 +4151,9 @@ msgid "Display Name"
 msgstr ""
 
 msgid "Display contact form."
+msgstr ""
+
+msgid "Display duration in days"
 msgstr ""
 
 msgid "Display name"
@@ -9641,6 +9648,9 @@ msgstr ""
 msgid "Select at least one object."
 msgstr ""
 
+msgid "Select how many days after registration the welcome message should automatically disappear (in case the user does not actively hide it)."
+msgstr ""
+
 msgid "Select one of your Facebook pages to connect to"
 msgstr ""
 
@@ -10490,6 +10500,9 @@ msgstr ""
 msgid "The WE-Cloud is here!"
 msgstr ""
 
+msgid "The Welcome Announcement was saved successfully."
+msgstr ""
+
 msgid "The Winner is"
 msgstr ""
 
@@ -11209,6 +11222,9 @@ msgid "This action is not available directly!"
 msgstr ""
 
 msgid "This action is not permitted for this poll at this stage!"
+msgstr ""
+
+msgid "This announcement will be displayed to new users who have just registered at the very top of their Personal Dashboards."
 msgstr ""
 
 msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
@@ -12169,6 +12185,9 @@ msgstr ""
 msgid "Users can hide an announcement. It then disappears and is never displayed again. The next time they visit their Personal Dashboard, the next announcement will be displayed, if there is still an active announcement that they have not yet hidden."
 msgstr ""
 
+msgid "Users can hide the welcome announcement. It then disappears and is never displayed again."
+msgstr ""
+
 #, python-format
 msgid "Users in organization %(group)s"
 msgstr ""
@@ -12507,7 +12526,19 @@ msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "Welcome"
 msgstr ""
 
+msgid "Welcome Announcement"
+msgstr ""
+
+msgid "Welcome Announcement is enabled"
+msgstr ""
+
+msgid "Welcome Announcements"
+msgstr ""
+
 msgid "Welcome Message"
+msgstr ""
+
+msgid "Welcome announcement for new users"
 msgstr ""
 
 #, python-format
@@ -14042,6 +14073,9 @@ msgid "created an offer"
 msgstr ""
 
 msgid "cut"
+msgstr ""
+
+msgid "dashboard announcements"
 msgstr ""
 
 msgid "deactivate"

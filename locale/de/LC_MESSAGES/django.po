@@ -2707,6 +2707,10 @@ msgstr "Als Administrator/in einer Gruppe oder eines Projekts unterliegt es dein
 msgid "As long as a user is seeing the %(welcome_admin_link)s, no announcement from this list will be displayed."
 msgstr "Solange man als Benutzer/in die %(welcome_admin_link)s angezeigt bekommt, wird keine Ankündigung aus dieser Liste angezeigt."
 
+#, python-format
+msgid "As long as a user is seeing the welcome announcement, no %(announcement_admin_link)s will be displayed."
+msgstr "Solange man als Benutzer/in die Willkommens-Ankündigung angezeigt bekommt, werden keine %(announcement_admin_link)s angezeigt."
+
 msgid "Assign"
 msgstr "Zuweisen"
 
@@ -4342,6 +4346,9 @@ msgstr "Anzeigename"
 
 msgid "Display contact form."
 msgstr "Kontaktformular anzeigen."
+
+msgid "Display duration in days"
+msgstr "Anzeigedauer in Tagen"
 
 msgid "Display name"
 msgstr "Anzeigename"
@@ -10234,6 +10241,9 @@ msgstr "Wähle links eine Seite aus."
 msgid "Select at least one object."
 msgstr "Wählen sie mindestens einen Empfänger aus."
 
+msgid "Select how many days after registration the welcome message should automatically disappear (in case the user does not actively hide it)."
+msgstr "Wähle aus, wie viele Tage nach der Registrierung die Willkommens-Ankündigung automatisch verschwinden soll (für den Fall, dass der/die Benutzer/in sie nicht aktiv wegklickt)."
+
 msgid "Select one of your Facebook pages to connect to"
 msgstr "Wähle eine deiner Facebook Seiten zum Verbinden"
 
@@ -11093,6 +11103,9 @@ msgstr "Der Mitwirk-O-Mat ist %(here_link)s veröffentlicht. Nutzer/innen beantw
 msgid "The WE-Cloud is here!"
 msgstr "Die WE-Cloud ist da!"
 
+msgid "The Welcome Announcement was saved successfully."
+msgstr "Die Willkommens-Ankündigung wurde erfolgreich gespeichert."
+
 msgid "The Winner is"
 msgstr "Der Sieger ist"
 
@@ -11865,6 +11878,9 @@ msgstr "Diese Aktion ist nicht direkt verfügbar!"
 
 msgid "This action is not permitted for this poll at this stage!"
 msgstr "Die Aktion ist für diese Umfrage momentan nicht möglich!"
+
+msgid "This announcement will be displayed to new users who have just registered at the very top of their Personal Dashboards."
+msgstr "Diese Ankündigung wird neuen Benutzer/innen, die sich frisch registriert haben, ganz oben auf ihrem Persönlichen Dashboard angezeigt."
 
 msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
 msgstr "Dieser Kalendar zeigt all die Tagungen in der aktuellen Ansicht, alle Premium-Blöcke, die momentan für die Tagungen gebucht sind, sowie die gesamte Kapazität der bestimmten Premium-Servers."
@@ -12871,6 +12887,9 @@ msgstr "Die Nutzer/innen können ihre Ergebnisse im Mitwirk-O-Mat nach Entfernun
 msgid "Users can hide an announcement. It then disappears and is never displayed again. The next time they visit their Personal Dashboard, the next announcement will be displayed, if there is still an active announcement that they have not yet hidden."
 msgstr "Man kann als Benutzer/in eine Ankündigung wegklicken, woraufhin diese verschwindet und nie wieder angezeigt wird. Beim nächsten Besuch des Persönlichen Dashboards wird dann die nächste Ankündigung angezeigt, falls es noch eine aktive Ankündigung gibt, die man noch nicht weggeklickt hat."
 
+msgid "Users can hide the welcome announcement. It then disappears and is never displayed again."
+msgstr "Man kann die Willkommens-Ankündigung als Benutzer/in wegklicken, woraufhin sie verschwindet und nie wieder angezeigt wird."
+
 #, python-format
 msgid "Users in organization %(group)s"
 msgstr "Admins in Organisation %(group)s"
@@ -13209,8 +13228,20 @@ msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "Welcome"
 msgstr "Willkommen"
 
+msgid "Welcome Announcement"
+msgstr "Willkommens-Ankündigung"
+
+msgid "Welcome Announcement is enabled"
+msgstr "Willkommens-Ankündigung ist aktiviert."
+
+msgid "Welcome Announcements"
+msgstr "Willkommens-Ankündigungen"
+
 msgid "Welcome Message"
 msgstr "Begrüßungsnachricht"
+
+msgid "Welcome announcement for new users"
+msgstr "Willkommens-Ankündigung für neue Benutzer/innen"
 
 #, python-format
 msgid "Welcome to %(portal_name)s!"
@@ -14802,6 +14833,9 @@ msgstr "hat ein Inserat erstellt"
 
 msgid "cut"
 msgstr "cut"
+
+msgid "dashboard announcements"
+msgstr "Dashboard-Ankündigungen"
 
 msgid "deactivate"
 msgstr "Deaktivieren"
