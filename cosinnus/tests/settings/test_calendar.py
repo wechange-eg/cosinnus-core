@@ -15,6 +15,5 @@ COSINNUS_CLOUD_NEXTCLOUD_AUTH = (
     env('WECHANGE_COSINNUS_CLOUD_PASSWORD', default=''),
 )
 
-# enable testing of Celery tasks. Eager tasks are executed immediately when delay is called.
-COSINNUS_USE_CELERY = True
-CELERY_TASK_ALWAYS_EAGER = True
+# use threads for tests
+COSINNUS_USE_CELERY = False
