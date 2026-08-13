@@ -5,7 +5,12 @@ from cosinnus.models.personal_dashboard import (
     get_personal_dashboard_widget_ids,
     get_personal_dashboard_widgets,
 )
-from cosinnus.models.user_dashboard_announcement import UserDashboardAnnouncement, UserDashboardCallToActionButton
+from cosinnus.models.user_dashboard_announcement import (
+    UserDashboardAnnouncement,
+    UserDashboardAnnouncementCallToActionButton,
+    UserDashboardWelcomeAnnouncement,
+    UserDashboardWelcomeAnnouncementCallToActionButton,
+)
 
 
 class CosinnusPersonalDashboardWidgetSerializer(serializers.Serializer):
@@ -46,15 +51,36 @@ class CosinnusPersonalDashboardAnnouncementCallToActionButtonSerializer(serializ
     """Serializer for dashboard announcement call-to-action buttons."""
 
     class Meta:
-        model = UserDashboardCallToActionButton
+        model = UserDashboardAnnouncementCallToActionButton
         fields = (
             'label',
             'url',
         )
 
 
-class CosinnusPersonalDashboardAnnouncementSerializer(serializers.ModelSerializer):
-    """Serializer for the dashboard usr announcements."""
+class CosinnusPersonalDashboardAnnouncementSerializerMixin:
+    """Mixin for dashboard and welcome announcement."""
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        # reset image and text field depending on display option
+        if instance.display == UserDashboardAnnouncement.DISPLAY_IMAGE_AND_TEXT:
+            data['text_col_1'] = None
+            data['text_col_2'] = None
+        else:
+            data['image'] = None
+            data['text'] = None
+
+        # hide cta buttons if disabled
+        if not instance.call_to_action_active:
+            data['cta_buttons'] = None
+        return data
+
+
+class CosinnusPersonalDashboardAnnouncementSerializer(
+    CosinnusPersonalDashboardAnnouncementSerializerMixin, serializers.ModelSerializer
+):
+    """Serializer for the dashboard user announcements."""
 
     id = serializers.IntegerField()
     category = serializers.CharField(source='get_category_display', read_only=True)
@@ -79,7 +105,7 @@ class CosinnusPersonalDashboardAnnouncementSerializer(serializers.ModelSerialize
         )
 
     def validate(self, attrs):
-        # check widget id is valid
+        # check announcement id is passed for dismissing
         announcement_id = attrs.get('id')
         if not announcement_id:
             raise serializers.ValidationError({'id': 'This field is required.'})
@@ -87,19 +113,45 @@ class CosinnusPersonalDashboardAnnouncementSerializer(serializers.ModelSerialize
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-
         # handle "none" category type
         if instance.category == 0:
             data['category'] = None
-
-        # reset image and text field depending on display option
-        if instance.display == UserDashboardAnnouncement.DISPLAY_IMAGE_AND_TEXT:
-            data['text_col_1'] = None
-            data['text_col_2'] = None
-        else:
-            data['image'] = None
-            data['text'] = None
         return data
+
+
+class CosinnusPersonalDashboardWelcomeAnnouncementCallToActionButtonSerializer(serializers.ModelSerializer):
+    """Serializer for dashboard welcome announcement call-to-action buttons."""
+
+    class Meta:
+        model = UserDashboardWelcomeAnnouncementCallToActionButton
+        fields = (
+            'label',
+            'url',
+        )
+
+
+class CosinnusPersonalDashboardWelcomeAnnouncementSerializer(
+    CosinnusPersonalDashboardAnnouncementSerializerMixin, serializers.ModelSerializer
+):
+    """Serializer for the dashboard welcome announcements."""
+
+    cta_buttons = CosinnusPersonalDashboardWelcomeAnnouncementCallToActionButtonSerializer(
+        source='call_to_action_buttons', many=True
+    )
+    dismissed = serializers.BooleanField(write_only=True)
+
+    class Meta:
+        model = UserDashboardAnnouncement
+        fields = (
+            'title',
+            'display',
+            'image',
+            'text',
+            'text_col_1',
+            'text_col_2',
+            'cta_buttons',
+            'dismissed',
+        )
 
 
 class CosinnusPersonalDashboardSerializer(serializers.Serializer):
@@ -107,18 +159,28 @@ class CosinnusPersonalDashboardSerializer(serializers.Serializer):
 
     widgets = CosinnusPersonalDashboardWidgetSerializer(many=True)
     announcement = CosinnusPersonalDashboardAnnouncementSerializer()
+    welcome_announcement = CosinnusPersonalDashboardWelcomeAnnouncementSerializer()
 
     def __init__(self, instance=None, context=None, **kwargs):
         if 'data' not in kwargs and context:
             # initialize using widgets
             user = context['user']
+            # get widgets
             widgets = [widget for widget in get_personal_dashboard_widgets() if widget.is_enabled(user)]
+
+            # get announcement
             preview_announcement_id = context['query_params'].get('show_announcement')
             if preview_announcement_id:
                 announcement = UserDashboardAnnouncement.objects.filter(pk=preview_announcement_id).first()
             else:
                 announcement = UserDashboardAnnouncement.get_next_for_user(user)
-            instance = {'widgets': widgets, 'announcement': announcement}
+
+            # get welcome announcement
+            welcome_announcement = UserDashboardWelcomeAnnouncement.objects.first()
+            preview_welcome_announcement = context['query_params'].get('show_welcome_announcement') is not None
+            if not preview_welcome_announcement and not welcome_announcement.show_to_user(user):
+                welcome_announcement = None
+            instance = {'widgets': widgets, 'announcement': announcement, 'welcome_announcement': welcome_announcement}
         super().__init__(instance, context=context, **kwargs)
 
     def save(self, **kwargs):
@@ -136,4 +198,9 @@ class CosinnusPersonalDashboardSerializer(serializers.Serializer):
         # handle dismissing an announcement
         announcement_data = self.validated_data.get('announcement')
         if announcement_data and announcement_data['dismissed']:
-            UserDashboardAnnouncement.hide_next_for_user(user, announcement_data['id'])
+            UserDashboardAnnouncement.hide_for_user(user, announcement_data['id'])
+
+        # handle dismissing welcome announcement
+        welcome_announcement_data = self.validated_data.get('welcome_announcement')
+        if welcome_announcement_data and welcome_announcement_data['dismissed']:
+            UserDashboardWelcomeAnnouncement.hide_for_user(user)
