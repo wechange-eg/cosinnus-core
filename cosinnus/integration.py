@@ -46,6 +46,7 @@ class CosinnusBaseIntegrationHandler:
     # As we cant trigger tasks in pre_save hooks but want to check changes. Changes to fields defined in
     # "integrated_instance_fields" are checked in the pre_save hooks (e.g. _check_group_updated) and stored here.
     # An update task is triggered only for changed instances in the post_save hooks  (e.g. _handle_group_updated).
+    # typing: {<model-instance: instance>: [<str: fieldname>, ...], ...}
     _changed_instance_fields = {}
 
     # helper to populate integrated_group_types and active_group_types
@@ -360,9 +361,9 @@ class CosinnusBaseIntegrationHandler:
 
     def _check_membership_updated(self, sender, instance, **kwargs):
         """Check group membership change.
-        If group or user changed, delete old membership and store the membership change to create a new membership in
-        the _handle_membership_updated hook.
-        If status changed store tghe change to update membership.
+        If group or user changed, trigger the delete handler for the old membership and store the membership change to
+        trigger the create handler for a new membership in the _handle_membership_updated hook.
+        If status changed store the change to update membership.
         """
         if instance.pk is not None and self._is_integrated_membership(instance):
             old_instance = CosinnusGroupMembership.objects.get(pk=instance.id)
@@ -381,8 +382,9 @@ class CosinnusBaseIntegrationHandler:
 
     def _handle_membership_updated(self, sender, instance, **kwargs):
         """Handle membership update depending on the storer changed fields.
-        If group or user has changed, the previous membership has been deleted, so create a new membership.
-        If status changed, tigger update task.
+        If group or user has changed, the previous membership has been deleted, so trigger the create handler for
+        a new membership.
+        If status changed, trigger update task.
         """
         if instance.pk is not None and self._is_integrated_membership(instance):
             changed_fields = self._pop_change(instance)

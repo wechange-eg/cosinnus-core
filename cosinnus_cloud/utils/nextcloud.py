@@ -245,6 +245,10 @@ def create_group(groupid: str) -> Optional[OCSResponse]:
 
 
 def delete_group(groupid: str) -> Optional[OCSResponse]:
+    """Note: in rare edge cases with race conditions, the group delete will have worked but this method will return
+    a response that is not `response.ok`, with status 404 that is the response of the checking if the group was
+    actually deleted after an initial error response. If returned responses are ever used, this needs to be fixed.
+    In any case, if the delete didn't work, this method will always throw an exception."""
     try:
         return _response_or_raise(
             requests.delete(
