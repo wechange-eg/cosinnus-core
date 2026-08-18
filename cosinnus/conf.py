@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
 from builtins import object
 
 from appconf import AppConf
 from django.conf import settings  # noqa
 from django.utils.translation import gettext_lazy as _
+
+logger = logging.getLogger('cosinnus')
 
 
 class CosinnusConf(AppConf):
@@ -2055,6 +2058,15 @@ class CosinnusDefaultSettings(AppConf):
     # be changed by users if a conference is premium at some point.
     # NOTE: the field names appearing here must also appear in `BBB_PRESET_USER_FORM_FIELDS`!
     BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = []
+
+    def configure_bbb_preset_user_form_fields_premium_only(self, value):
+        """Ignore legacy portal configuration and keep the deprecated setting disabled."""
+        if value:
+            logger.warning(
+                'The setting BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY is deprecated '
+                'and its configured value is ignored. Remove it from the portal configuration.'
+            )
+        return []
 
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60 * 60
