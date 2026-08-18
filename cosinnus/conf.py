@@ -2050,12 +2050,11 @@ class CosinnusDefaultSettings(AppConf):
     #    'record_meeting',
     # ]
 
+    # DEPRECATED - leave empty!
     # a list of field names from `BBB_PRESET_USER_FORM_FIELDS` that can only
     # be changed by users if a conference is premium at some point.
     # NOTE: the field names appearing here must also appear in `BBB_PRESET_USER_FORM_FIELDS`!
-    BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = [
-        'record_meeting',
-    ]
+    BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = []
 
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60 * 60
