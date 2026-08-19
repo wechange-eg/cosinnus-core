@@ -2033,35 +2033,45 @@ class CosinnusDefaultSettings(AppConf):
         },
     }
 
+    # DEPRECATED - remove this setting from portal configuration
     # a list of field names from fields in fields in `CosinnusConferenceSettings`
     # that will be shown to the users in the frontend Event forms as choices
     # for presets for BBB rooms
-    # note that 'record_meeting' is disabled by default, as it
-    # requires setting up the BBB servers correctly for it, and should
-    # only be enabled for a portal specifically after that has been done
-    BBB_PRESET_USER_FORM_FIELDS = [
-        'mic_starts_on',
-        'cam_starts_on',
-        'waiting_room',
-        'welcome_message',
-    ]
+    # None is a sentinel used to detect legacy portal configuration in the hook below.
+    BBB_PRESET_USER_FORM_FIELDS = None
     # a complete list of all choices that could be made for BBB_PRESET_USER_FORM_FIELDS
     # __all_choices__BBB_PRESET_USER_FORM_FIELDS = [
     #    'mic_starts_on',
     #    'cam_starts_on',
     #    'waiting_room',
+    #    'welcome_message',
     #    'record_meeting',
     # ]
 
-    # DEPRECATED - leave empty!
+    def configure_bbb_preset_user_form_fields(self, value):
+        """Ignore legacy portal configuration and always expose all supported fields."""
+        if value is not None:
+            logger.warning(
+                'The setting BBB_PRESET_USER_FORM_FIELDS is deprecated '
+                'and its configured value is ignored. Remove it from the portal configuration.'
+            )
+        return [
+            'mic_starts_on',
+            'cam_starts_on',
+            'waiting_room',
+            'welcome_message',
+            'record_meeting',
+        ]
+
+    # DEPRECATED - remove this setting from portal configuration
     # a list of field names from `BBB_PRESET_USER_FORM_FIELDS` that can only
     # be changed by users if a conference is premium at some point.
     # NOTE: the field names appearing here must also appear in `BBB_PRESET_USER_FORM_FIELDS`!
-    BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = []
+    BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = None
 
     def configure_bbb_preset_user_form_fields_premium_only(self, value):
         """Ignore legacy portal configuration and keep the deprecated setting disabled."""
-        if value:
+        if value is not None:
             logger.warning(
                 'The setting BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY is deprecated '
                 'and its configured value is ignored. Remove it from the portal configuration.'
