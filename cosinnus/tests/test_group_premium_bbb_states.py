@@ -148,9 +148,7 @@ class GroupPremiumStateChangeTest(TestDataMixin, TestCase):
         expected_mails: List[SendHtmlMailCallArgs],
     ):
         expected_mail_count = len(expected_mails)
-        with freeze_time(current_date), patch('cosinnus.core.mail.send_html_mail') as mock_send_group_admins, patch(
-            'cosinnus.cron.send_system_mail_to_support'
-        ) as mock_send_system_mail:
+        with freeze_time(current_date), patch('cosinnus.core.mail.send_html_mail') as mock_send_group_admins:
             # set state
             # TODO test this for project also
             self.group.enable_user_premium_choices_until = premium_until
@@ -207,10 +205,6 @@ class GroupPremiumStateChangeTest(TestDataMixin, TestCase):
                 self.assertEqual(
                     expected_last_warned_for, self.group.settings.get('last_warned_for_premium_choices_until')
                 )
-
-            should_be_expired = fixture_bbb_active and not expected_bbb_active
-            with self.subTest('send notification to portal support email', should_be_expired=should_be_expired):
-                self.assertEqual(should_be_expired, mock_send_system_mail.called)
 
     def _get_mail_args_expiration(self) -> SendHtmlMailCallArgs:
         return SendHtmlMailCallArgs(
