@@ -11,6 +11,19 @@ from django.utils.translation import gettext_lazy as _
 logger = logging.getLogger('cosinnus')
 
 
+def _convert_legacy_v3_menu_links_to_items(legacy_links):
+    """Convert legacy menu link tuples to menu item dictionaries."""
+    return [
+        {
+            'id': id,
+            'label': label,
+            'url': url,
+            'icon': icon,
+        }
+        for id, label, url, icon in legacy_links
+    ]
+
+
 class CosinnusConf(AppConf):
     """Cosinnus settings, any of these values here will be included in the settings,
     with name prefix 'COSINNUS_'.
@@ -1142,14 +1155,42 @@ class CosinnusConf(AppConf):
     # Enable to add links to paired groups of managed tags of the user cosinnus_profile as community links.
     V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS = True
 
-    # Additional menu items for the community space in the v3 main navigation.
-    # Format: List of (<id-string>, <label>, <url>, <icon>),
-    # e.g.: [('ExternalLink', 'External Link', 'https://external-link.com', 'fa-group')]
+    # Deprecated tuple-based configuration for additional community space menu items.
+    # Format: List of (<id-string>, <label>, <url>, <icon>) tuples.
     V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS = []
 
-    # List of help items to be included in the v3 main navigation.
-    # Format: (<label>, <url>, <icon>), e.g.: (_('FAQ'), 'https://wechange.de/cms/help/', 'fa-question-circle'),
+    # Additional menu items for the community space in the v3 main navigation.
+    # Format: List of dictionaries containing MenuItem arguments.
+    # If None, V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS is used as a fallback.
+    V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS = None
+
+    def configure_v3_menu_spaces_community_additional_items(self, value):
+        if value is not None:
+            return value
+        legacy_value = getattr(settings, 'COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS', [])
+        if legacy_value:
+            logger.warning(
+                'The setting V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS is deprecated. '
+                'Use V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS instead.'
+            )
+        return _convert_legacy_v3_menu_links_to_items(legacy_value)
+
+    # Deprecated tuple-based configuration for help items in the v3 main navigation.
+    # Format: List of (<id-string>, <label>, <url>, <icon>) tuples.
     V3_MENU_HELP_LINKS = []
+
+    # List of help items to be included in the v3 main navigation.
+    # Format: List of dictionaries containing MenuItem arguments.
+    # If None, V3_MENU_HELP_LINKS is used as a fallback.
+    V3_MENU_HELP_ITEMS = None
+
+    def configure_v3_menu_help_items(self, value):
+        if value is not None:
+            return value
+        legacy_value = getattr(settings, 'COSINNUS_V3_MENU_HELP_LINKS', [])
+        if legacy_value:
+            logger.warning('The setting V3_MENU_HELP_LINKS is deprecated. Use V3_MENU_HELP_ITEMS instead.')
+        return _convert_legacy_v3_menu_links_to_items(legacy_value)
 
     # a class dropin to replace CosinnusNavigationPortalLinksBase as class that modifies or provides additional
     # navbar links returned in various v3 navigation API endpoints
