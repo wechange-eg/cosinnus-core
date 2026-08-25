@@ -344,12 +344,9 @@ class SpacesView(FilterBlacklistedItemsMixin, MyGroupsClusteredMixin, APIView):
             community_space_items.append(
                 MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-map', id='Map')
             )
-        if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS:
+        if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS:
             community_space_items.extend(
-                [
-                    MenuItem(label, url, icon, id=id)
-                    for id, label, url, icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS
-                ]
+                [MenuItem(**config) for config in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS]
             )
         if community_space_items:
             community_space_actions = [
@@ -1202,10 +1199,7 @@ class HelpView(APIView):
         }
     )
     def get(self, request):
-        help_items = [
-            MenuItem(label, url, icon, is_external=True, id=id)
-            for id, label, url, icon in settings.COSINNUS_V3_MENU_HELP_LINKS
-        ]
+        help_items = [MenuItem(**{'is_external': True, **config}) for config in settings.COSINNUS_V3_MENU_HELP_ITEMS]
         return Response(help_items)
 
 
