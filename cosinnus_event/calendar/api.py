@@ -1,10 +1,16 @@
-from rest_framework import mixins, viewsets
+import logging
+
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import NotFound
 from rest_framework.parsers import MultiPartParser
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
+from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.attached_objects import (
     CosinnusAttachFileSerializer,
@@ -16,6 +22,10 @@ from cosinnus.models import BaseTagObject
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import IsCosinnusGroupUser
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
+from cosinnus_cloud.hooks import get_nc_user_id
+from cosinnus_cloud.utils import nextcloud
+from cosinnus_cloud.utils.cosinnus import is_calendar_enabled_for_group
+from cosinnus_event.calendar.nextcloud_caldav import NextcloudCaldavConnection
 from cosinnus_event.calendar.permissions import CosinnusCalendarPermissions
 from cosinnus_event.calendar.serializers import (
     CosinnusCalendarBBBRoomUrlsSerializer,
@@ -30,6 +40,8 @@ from cosinnus_event.calendar.serializers import (
     CosinnusCalendarSynceRequiredSerializer,
 )
 from cosinnus_event.models import Event
+
+logger = logging.getLogger('cosinnus')
 
 
 class ViewSetActionMixin:
@@ -346,3 +358,101 @@ class CosinnusCalendarSyncedEventsViewSet(
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+
+
+class CalendarRepairMembershipView(APIView):
+    """
+    Attempts to repair a missing or faulty user group membership in the nextcloud group for the given CosinnusGroup.
+    Also re-shares the nextcloud calendar for the group.
+    """
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    permission_classes = (IsCosinnusGroupUser,)
+
+    group = None
+
+    def initial(self, request, *args, **kwargs):
+        # get group
+        group_id = kwargs.get('group_id')
+        self.group = get_cosinnus_group_model().objects.filter(is_active=True, pk=group_id).first()
+        if not self.group:
+            raise NotFound()
+        return super().initial(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        responses={
+            200: openapi.Response(
+                description='Success.',
+                examples={
+                    'application/json': {
+                        'data': {'status': 'ok'},
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            ),
+            403: openapi.Response(
+                description='Bad Request',
+                examples={
+                    'application/json': {
+                        'data': {'detail': 'Rate-limited.'},
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            ),
+            503: openapi.Response(
+                description='Internal cloud error',
+                examples={
+                    'application/json': {
+                        'data': {'error': 'Internal cloud error', 'message': '(passed through message)'},
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            ),
+        }
+    )
+    def post(self, request, group_id):
+        if not is_calendar_enabled_for_group(self.group):
+            return Response(status=status.HTTP_403_FORBIDDEN, data={'detail': 'Calendar not enabled for group.'})
+        if not self.group.is_active or 'cosinnus_event' in self.group.get_deactivated_apps():
+            return Response(
+                status=status.HTTP_403_FORBIDDEN, data={'detail': 'Group or group event app is not active.'}
+            )
+        if not self.group.nextcloud_group_id or not self.group.nextcloud_calendar_url:
+            return Response(status=status.HTTP_403_FORBIDDEN, data={'detail': 'Calendar not initialized for group.'})
+
+        # log this so we can track the number of repairs happening
+        logger.warning(
+            'Info: CalendarRepairMembershipView has been called to repair a group membership',
+            extra={
+                'user_id': request.user.id,
+                'group_id': group_id,
+            },
+        )
+
+        is_rate_limited = False
+        if is_rate_limited:
+            return Response(status=status.HTTP_403_FORBIDDEN, data={'error': 'Rate-limited.'})
+
+        nc_uid = get_nc_user_id(request.user)
+        nc_group_id = self.group.nextcloud_group_id
+
+        try:
+            # add user to NC group. group member checks have been done by permission_classes `IsCosinnusGroupUser`.
+            nextcloud.add_user_to_group(nc_uid, nc_group_id)
+
+            # re-do calendar share for the group. will have no effect if the calendar is properly shared already
+            calendar = NextcloudCaldavConnection()
+            calendar.group_calendar_share(self.group)
+        except Exception as e:
+            return Response(
+                status=status.HTTP_503_SERVICE_UNAVAILABLE, data={'error': 'Internal cloud error', 'message': str(e)}
+            )
+
+        return Response(data={'status': 'ok'})
