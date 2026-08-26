@@ -1,6 +1,7 @@
 import logging
 from copy import copy
 
+import sentry_sdk
 from django.core.cache import cache
 from django.db.models.aggregates import Count
 from django.db.models.query_utils import Q
@@ -780,13 +781,19 @@ class PortalErrorLogView(GenericAPIView):
         # add each line from the stacktrace as extra variable with numerical ordering, makes reading it easier in sentry
         if data.get('stacktrace', None):
             for i, line in enumerate(data['stacktrace'].split('\n')):
-                extra[f'stacktrace_line_{i}'] = line
+                extra[f'stacktrace_line_{i:04d}'] = line
 
         # add all members of the supplied extra dict as prefixed variables
         for key, val in data.get('extra', {}).items():
             extra[f'extra_{key}'] = val
 
-        # log the error with a searchable message prefix
-        logger.error(f'Frontend: {data["message"]}', extra=extra)
+        with sentry_sdk.configure_scope() as scope:
+            scope.set_context(
+                'additional_data',
+                extra,
+            )
+            scope.set_tag('service', 'frontend')
+            # log the error with a searchable message prefix
+            sentry_sdk.capture_message(f'Frontend: {data["message"]}', level='error')
 
         return Response(data={})
