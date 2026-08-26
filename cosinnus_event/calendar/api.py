@@ -1,5 +1,6 @@
 import logging
 
+from django.core.cache import cache
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import mixins, status, viewsets
@@ -375,6 +376,9 @@ class CalendarRepairMembershipView(APIView):
 
     group = None
 
+    RATELIMIT_CALENDER_REPAIR_CACHE_KEY = 'cosinnus/core/v3/calendar/repair/userid/%d/'
+    RATELIMIT_CALENDER_REPAIR_SECONDS = 60
+
     def initial(self, request, *args, **kwargs):
         # get group
         group_id = kwargs.get('group_id')
@@ -436,7 +440,9 @@ class CalendarRepairMembershipView(APIView):
             },
         )
 
-        is_rate_limited = False
+        # check the cache for a rate limit for this user
+        cache_key = self.RATELIMIT_CALENDER_REPAIR_CACHE_KEY % request.user.id
+        is_rate_limited = bool(cache.get(cache_key, False))
         if is_rate_limited:
             return Response(status=status.HTTP_403_FORBIDDEN, data={'error': 'Rate-limited.'})
 
@@ -454,5 +460,8 @@ class CalendarRepairMembershipView(APIView):
             return Response(
                 status=status.HTTP_503_SERVICE_UNAVAILABLE, data={'error': 'Internal cloud error', 'message': str(e)}
             )
+
+        # set cache rate limit after successful repair
+        cache.set(cache_key, True, self.RATELIMIT_CALENDER_REPAIR_SECONDS)
 
         return Response(data={'status': 'ok'})
