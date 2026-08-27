@@ -1,6 +1,7 @@
 import logging
 from copy import copy
 
+import sentry_sdk
 from django.core.cache import cache
 from django.db.models.aggregates import Count
 from django.db.models.query_utils import Q
@@ -14,8 +15,9 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
+from rest_framework.throttling import UserRateThrottle
 from rest_framework.views import APIView
-from taggit.models import Tag, TaggedItem
+from taggit.models import Tag
 
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
@@ -114,13 +116,12 @@ class PortalTagsView(APIView):
         limit = int(limit)
         if limit < 0 or limit > 50:
             limit = 10
-        print(limit)
+
         page = 1
         start = (page - 1) * limit
         end = page * limit
         qs = Tag.objects.all()
-        TaggedItem
-        # TaggedItem.tag
+
         if term:
             q = Q(name__icontains=term)
             qs = qs.filter(q)
@@ -747,10 +748,16 @@ class PortalTaggedDynamicFieldsView(PortalDynamicFieldsBaseView):
         return settings.COSINNUS_TAGGED_EXTRA_FIELDS.get(self.tagged_model, {})
 
 
+class PortalErrorLogUserThrottle(UserRateThrottle):
+    scope = 'portal_error_log_view'
+    rate = '100/hour'
+
+
 class PortalErrorLogView(GenericAPIView):
     """
     A view that logs custom error messages to sentry for a logged in user.
     Used to log frontend errors via the server.
+    This is a throttled endpoint.
     """
 
     serializer_class = CosinnusPortalErrorLogSerializer
@@ -760,12 +767,14 @@ class PortalErrorLogView(GenericAPIView):
     )
     authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
+    throttle_classes = [PortalErrorLogUserThrottle]
 
     @swagger_auto_schema(
         operation_description="""
         Log a custom error message to sentry for a logged in user. Used to log frontend errors via the server.""",
         responses={
-            '200': openapi.Response(description='No data will be included in the response'),
+            '200': openapi.Response(description='No data will be included in the response.'),
+            '429': openapi.Response(description='Rate-limited.'),
         },
     )
     def post(self, request):
@@ -780,13 +789,18 @@ class PortalErrorLogView(GenericAPIView):
         # add each line from the stacktrace as extra variable with numerical ordering, makes reading it easier in sentry
         if data.get('stacktrace', None):
             for i, line in enumerate(data['stacktrace'].split('\n')):
-                extra[f'stacktrace_line_{i}'] = line
+                extra[f'stacktrace_line_{i:04d}'] = line
 
         # add all members of the supplied extra dict as prefixed variables
         for key, val in data.get('extra', {}).items():
             extra[f'extra_{key}'] = val
 
-        # log the error with a searchable message prefix
-        logger.error(f'Frontend: {data["message"]}', extra=extra)
-
+        with sentry_sdk.configure_scope() as scope:
+            scope.set_context(
+                'additional_data',
+                extra,
+            )
+            scope.set_tag('service', 'frontend')
+            # log the error with a searchable message prefix
+            sentry_sdk.capture_message(f'Frontend: {data["message"]}', level='error')
         return Response(data={})

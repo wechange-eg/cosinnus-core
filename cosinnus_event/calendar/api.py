@@ -376,7 +376,7 @@ class CalendarRepairMembershipView(APIView):
 
     group = None
 
-    RATELIMIT_CALENDER_REPAIR_CACHE_KEY = 'cosinnus/core/v3/calendar/repair/userid/%d/'
+    RATELIMIT_CALENDER_REPAIR_CACHE_KEY = 'cosinnus/core/v3/calendar/repair/userid/%d/groupid/%d/'
     RATELIMIT_CALENDER_REPAIR_SECONDS = 60
 
     def initial(self, request, *args, **kwargs):
@@ -413,7 +413,7 @@ class CalendarRepairMembershipView(APIView):
                 description='Internal cloud error',
                 examples={
                     'application/json': {
-                        'data': {'error': 'Internal cloud error', 'message': '(passed through message)'},
+                        'data': {'error': 'Internal cloud error'},
                         'version': COSINNUS_VERSION,
                         'timestamp': 1658414865.057476,
                     }
@@ -422,29 +422,44 @@ class CalendarRepairMembershipView(APIView):
         }
     )
     def post(self, request, group_id):
+        error_response = None
         if not is_calendar_enabled_for_group(self.group):
-            return Response(status=status.HTTP_403_FORBIDDEN, data={'detail': 'Calendar not enabled for group.'})
+            error_response = Response(
+                status=status.HTTP_403_FORBIDDEN, data={'detail': 'Calendar not enabled for group.'}
+            )
         if not self.group.is_active or 'cosinnus_event' in self.group.get_deactivated_apps():
-            return Response(
+            error_response = Response(
                 status=status.HTTP_403_FORBIDDEN, data={'detail': 'Group or group event app is not active.'}
             )
         if not self.group.nextcloud_group_id or not self.group.nextcloud_calendar_url:
-            return Response(status=status.HTTP_403_FORBIDDEN, data={'detail': 'Calendar not initialized for group.'})
+            error_response = Response(
+                status=status.HTTP_403_FORBIDDEN, data={'detail': 'Calendar not initialized for group.'}
+            )
 
         # log this so we can track the number of repairs happening
+        extra = {
+            'user_id': request.user.id,
+            'group_id': group_id,
+        }
+        # add info if we blocked the actual repair
+        if error_response:
+            extra['error_that_prevented_repair'] = error_response.data['detail']
         logger.warning(
             'Info: CalendarRepairMembershipView has been called to repair a group membership',
-            extra={
-                'user_id': request.user.id,
-                'group_id': group_id,
-            },
+            extra=extra,
         )
 
+        if error_response:
+            return error_response
+
         # check the cache for a rate limit for this user
-        cache_key = self.RATELIMIT_CALENDER_REPAIR_CACHE_KEY % request.user.id
+        cache_key = self.RATELIMIT_CALENDER_REPAIR_CACHE_KEY % (request.user.id, self.group.id)
         is_rate_limited = bool(cache.get(cache_key, False))
         if is_rate_limited:
             return Response(status=status.HTTP_403_FORBIDDEN, data={'error': 'Rate-limited.'})
+
+        # set cache rate limit before repair attempt so we don't overwhelm the cloud with failing requests
+        cache.set(cache_key, True, self.RATELIMIT_CALENDER_REPAIR_SECONDS)
 
         nc_uid = get_nc_user_id(request.user)
         nc_group_id = self.group.nextcloud_group_id
@@ -457,11 +472,10 @@ class CalendarRepairMembershipView(APIView):
             calendar = NextcloudCaldavConnection()
             calendar.group_calendar_share(self.group)
         except Exception as e:
-            return Response(
-                status=status.HTTP_503_SERVICE_UNAVAILABLE, data={'error': 'Internal cloud error', 'message': str(e)}
+            logger.error(
+                'Error: CalendarRepairMembershipView had an error when trying to repair a group membership',
+                extra={'exception': str(e)},
             )
-
-        # set cache rate limit after successful repair
-        cache.set(cache_key, True, self.RATELIMIT_CALENDER_REPAIR_SECONDS)
+            return Response(status=status.HTTP_503_SERVICE_UNAVAILABLE, data={'error': 'Internal cloud error'})
 
         return Response(data={'status': 'ok'})
