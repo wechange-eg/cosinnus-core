@@ -64,11 +64,13 @@ def do_things(c):
 @task
 def hotdeploy(_ctx):
     """Fast deploy with poetry update and soft server restarts. No downtime-banner raised.
-    Recommended only for hotfixes that do not require dependency package updates."""
+    Recommended only for hotfixes that do not require dependency package updates.
+    Will also clear memcached."""
     check_confirmation()
     _pull_and_update(_ctx)
     migrate(_ctx)
     restart(_ctx, skip_check=True)
+    restartmemcached(_ctx)
     compilewebpack(_ctx)
     collectstatic(_ctx)
     compileless(_ctx)
@@ -160,7 +162,7 @@ def fulldeploy(_ctx):
     text = input(
         f'\n     **************   \n\n\tEXTRA\n\n\tWARNING!!!\n\n   ************* \n\nThis will do a complete deploy to the Server """{env.host}""", including a server stop, maintenance banner and DESTROY the poetry virtual env and CREATE IT FROM SCRATCH.\nIf you are sure you want this, type "YES" to continue: '
     )
-    if not text == 'YES':
+    if not (text == 'YES' or text == 'Y'):
         print('Canceled deploy with resetting the virtualenv.')
         exit()
 
@@ -177,6 +179,7 @@ def fulldeploy(_ctx):
     _pull_and_update(_ctx, fresh_install=True)
     migrate(_ctx)
     restart(_ctx, skip_check=True)
+    restartmemcached(_ctx)
     compilewebpack(_ctx)
     collectstatic(_ctx)
     compileless(_ctx)
@@ -196,7 +199,7 @@ def check_confirmation():
         text = input(
             f'\n     **************   WARNING!   ************* \n\nYou are about to deploy to the Server """{env.host}""".\nIf you are sure you want this, type "YES" to continue: '
         )
-        if not text == 'YES':
+        if not (text == 'YES' or text == 'Y'):
             print('Canceled deploy.')
             exit()
 
@@ -403,32 +406,7 @@ def updatedjango(_ctx):
             c.run('pip install Django==4.2.24')
             c.run('pip freeze | grep Django=')
     restart(_ctx)
-
-
-@task
-def updatepip27to29(_ctx):
-    """A temporary task used to "silently" update the pip requirements introduced from cosinnus version 2.7.12
-    to 2.7.8. Can be done before a portal hotdeploy so that no fulldeploy is neccessary.
-    - python-dateutil==2.9.0.post0 was python-dateutil==2.4.1
-    - icalendar==6.3.2 was icalendar==5.0.12
-    - all else are new dependencies"""
-    env = get_env()
-    c = CosinnusFabricConnection(host=env.host)
-    with c.cd(env.path):
-        foldername = f'_DELETEME_backuped_env_{get_random_string(length=6).lower()}'
-        # backup venv and poetry.lock
-        with c.cd(env.path):
-            c.run(f'mkdir ~/{foldername}')
-            c.run('mkdir -p .venv')  # create if not exists
-            c.run(f'cp -R .venv ~/{foldername}/copiedvenv.venv')
-            c.run('touch poetry.lock')  # create if not exists
-            c.run(f'cp -R poetry.lock ~/{foldername}/copiedpoetry.lock')
-        # update/install new reqs from setup.py in diff from 2.7.12 --> 2.8.0
-        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
-            c.run(
-                'pip install tblib==3.0.0 django_extended_makemessages==1.7.1 caldav==2.1.2 nh3==0.3.5 freezegun==1.5.1 python-dateutil==2.9.0.post0 icalendar==6.3.2 factory-boy==3.3.3'
-            )
-            c.run('pip freeze | grep dateutil')
+    restartmemcached(_ctx)
 
 
 @task
@@ -601,6 +579,7 @@ def _pull_and_update(ctx, use_poetry_update=False, fresh_install=False):
                     c.run(f'{env.poetry_binary} update')
                 else:
                     with c.cd(f'{env.cosinnus_src_path}'):
+                        enablegitremoteoncore(ctx)
                         c.run('git fetch --all')
                         c.run('git stash')
                         c.run(
