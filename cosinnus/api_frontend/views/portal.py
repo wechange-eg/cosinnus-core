@@ -17,7 +17,7 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.throttling import UserRateThrottle
 from rest_framework.views import APIView
-from taggit.models import Tag, TaggedItem
+from taggit.models import Tag
 
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
@@ -116,13 +116,12 @@ class PortalTagsView(APIView):
         limit = int(limit)
         if limit < 0 or limit > 50:
             limit = 10
-        print(limit)
+
         page = 1
         start = (page - 1) * limit
         end = page * limit
         qs = Tag.objects.all()
-        TaggedItem
-        # TaggedItem.tag
+
         if term:
             q = Q(name__icontains=term)
             qs = qs.filter(q)
