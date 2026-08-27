@@ -15,6 +15,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
+from rest_framework.throttling import UserRateThrottle
 from rest_framework.views import APIView
 from taggit.models import Tag, TaggedItem
 
@@ -748,10 +749,16 @@ class PortalTaggedDynamicFieldsView(PortalDynamicFieldsBaseView):
         return settings.COSINNUS_TAGGED_EXTRA_FIELDS.get(self.tagged_model, {})
 
 
+class PortalErrorLogUserThrottle(UserRateThrottle):
+    scope = 'portal_error_log_view'
+    rate = '100/hour'
+
+
 class PortalErrorLogView(GenericAPIView):
     """
     A view that logs custom error messages to sentry for a logged in user.
     Used to log frontend errors via the server.
+    This is a throttled endpoint.
     """
 
     serializer_class = CosinnusPortalErrorLogSerializer
@@ -761,12 +768,14 @@ class PortalErrorLogView(GenericAPIView):
     )
     authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
+    throttle_classes = [PortalErrorLogUserThrottle]
 
     @swagger_auto_schema(
         operation_description="""
         Log a custom error message to sentry for a logged in user. Used to log frontend errors via the server.""",
         responses={
-            '200': openapi.Response(description='No data will be included in the response'),
+            '200': openapi.Response(description='No data will be included in the response.'),
+            '429': openapi.Response(description='Rate-limited.'),
         },
     )
     def post(self, request):
@@ -795,5 +804,4 @@ class PortalErrorLogView(GenericAPIView):
             scope.set_tag('service', 'frontend')
             # log the error with a searchable message prefix
             sentry_sdk.capture_message(f'Frontend: {data["message"]}', level='error')
-
         return Response(data={})
