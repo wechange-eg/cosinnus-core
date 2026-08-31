@@ -720,7 +720,7 @@ class CosinnusConf(AppConf):
     USERDASHBOARD_USE_LIVE_MAP_WIDGET = True
 
     # switch to the German version of OpenStreetMap tileset
-    MAP_USE_MODERN_TILESET = False
+    MAP_USE_MODERN_TILESET = True
 
     # OpenCage geocode api key. if unset, no location strings provided in v3 apis
     # can be coded to actual location coordinates and thus will not be saved in v3 apis

@@ -1156,13 +1156,17 @@ def get_past_event_filter_expression(include_days_past=0):
 def upcoming_event_filter(queryset, include_days_past=0):
     """Filters a queryset of events for events that begin in the future,
     or have an end date in the future. Will always show all events that ended today as well."""
-    return queryset.exclude(get_past_event_filter_expression(include_days_past=include_days_past))
+    return queryset.exclude(get_past_event_filter_expression(include_days_past=include_days_past)).filter(
+        **{f'settings__{Event.SETTINGS_IS_UNTITLED_MEETING_KEY}__isnull': True}
+    )
 
 
 def past_event_filter(queryset):
     """Filters a queryset of events for events that began before today,
     or have an end date before today."""
-    return queryset.filter(get_past_event_filter_expression())
+    return queryset.filter(get_past_event_filter_expression()).filter(
+        **{f'settings__{Event.SETTINGS_IS_UNTITLED_MEETING_KEY}__isnull': True}
+    )
 
 
 def annotate_attendants_count(qs):
