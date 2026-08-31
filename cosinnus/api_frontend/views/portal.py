@@ -1,5 +1,7 @@
+import logging
 from copy import copy
 
+import sentry_sdk
 from django.core.cache import cache
 from django.db.models.aggregates import Count
 from django.db.models.query_utils import Q
@@ -9,15 +11,17 @@ from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
+from rest_framework.throttling import UserRateThrottle
 from rest_framework.views import APIView
-from taggit.models import Tag, TaggedItem
+from taggit.models import Tag
 
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
-from cosinnus.api_frontend.serializers.portal import CosinnusManagedTagSerializer
+from cosinnus.api_frontend.serializers.portal import CosinnusManagedTagSerializer, CosinnusPortalErrorLogSerializer
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
 from cosinnus.dynamic_fields import dynamic_fields
@@ -27,6 +31,8 @@ from cosinnus.models.managed_tags import MANAGED_TAG_LABELS, CosinnusManagedTag
 from cosinnus.utils.functions import clean_single_line_text, is_number, update_dict_recursive
 from cosinnus.utils.user import get_locked_profile_visibility_setting_for_user
 from cosinnus.views.common import SwitchLanguageView
+
+logger = logging.getLogger('cosinnus')
 
 
 class PortalTopicsView(APIView):
@@ -110,13 +116,12 @@ class PortalTagsView(APIView):
         limit = int(limit)
         if limit < 0 or limit > 50:
             limit = 10
-        print(limit)
+
         page = 1
         start = (page - 1) * limit
         end = page * limit
         qs = Tag.objects.all()
-        TaggedItem
-        # TaggedItem.tag
+
         if term:
             q = Q(name__icontains=term)
             qs = qs.filter(q)
@@ -741,3 +746,61 @@ class PortalTaggedDynamicFieldsView(PortalDynamicFieldsBaseView):
         if not settings.COSINNUS_TAGGED_EXTRA_FIELDS:
             return {}
         return settings.COSINNUS_TAGGED_EXTRA_FIELDS.get(self.tagged_model, {})
+
+
+class PortalErrorLogUserThrottle(UserRateThrottle):
+    scope = 'portal_error_log_view'
+    rate = '100/hour'
+
+
+class PortalErrorLogView(GenericAPIView):
+    """
+    A view that logs custom error messages to sentry for a logged in user.
+    Used to log frontend errors via the server.
+    This is a throttled endpoint.
+    """
+
+    serializer_class = CosinnusPortalErrorLogSerializer
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    throttle_classes = [PortalErrorLogUserThrottle]
+
+    @swagger_auto_schema(
+        operation_description="""
+        Log a custom error message to sentry for a logged in user. Used to log frontend errors via the server.""",
+        responses={
+            '200': openapi.Response(description='No data will be included in the response.'),
+            '429': openapi.Response(description='Rate-limited.'),
+        },
+    )
+    def post(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.validated_data
+
+        # add current user id and url as extra variable
+        extra = {'user_id': request.user.id}
+        if data.get('url', None):
+            extra['url'] = data['url']
+        # add each line from the stacktrace as extra variable with numerical ordering, makes reading it easier in sentry
+        if data.get('stacktrace', None):
+            for i, line in enumerate(data['stacktrace'].split('\n')):
+                extra[f'stacktrace_line_{i:04d}'] = line
+
+        # add all members of the supplied extra dict as prefixed variables
+        for key, val in data.get('extra', {}).items():
+            extra[f'extra_{key}'] = val
+
+        with sentry_sdk.configure_scope() as scope:
+            scope.set_context(
+                'additional_data',
+                extra,
+            )
+            scope.set_tag('service', 'frontend')
+            # log the error with a searchable message prefix
+            sentry_sdk.capture_message(f'Frontend: {data["message"]}', level='error')
+        return Response(data={})

@@ -46,10 +46,12 @@
 {% endblock %}
 
 {% block body %}
-    {% if SETTINGS.COSINNUS_EVENT_V3_CALENDAR_ENABLED %}
-	    {{ item.note|textfield_with_html }}
-    {% else %}
-        {{ item.note|textfield }}
+    {% if item.note %}
+        {% if SETTINGS.COSINNUS_EVENT_V3_CALENDAR_ENABLED %}
+            {{ item.note|textfield_with_html }}
+        {% else %}
+            {{ item.note|textfield }}
+        {% endif %}
     {% endif %}
 {% endblock %}
 
