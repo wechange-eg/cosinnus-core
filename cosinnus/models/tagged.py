@@ -33,7 +33,7 @@ from cosinnus.core.registries import app_registry
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.utils.dates import timestamp_from_datetime
 from cosinnus.utils.functions import clean_single_line_text, unique_aware_slugify
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids
 from cosinnus.utils.lanugages import MultiLanguageFieldMagicMixin
 
 logger = logging.getLogger('cosinnus')
@@ -486,6 +486,36 @@ class BaseTaggableObjectManager(models.Manager):
 
         # consider blocked users
         queryset = filter_base_taggable_qs_for_blocked_user_content(queryset, user)
+        return queryset
+
+    def get_recommendations(self, user):
+        from cosinnus.models import BaseTagObject
+        from cosinnus.utils.permissions import filter_base_taggable_qs_for_blocked_user_content
+
+        queryset = self.prefetch_related('group', 'creator', 'media_tag')
+
+        # only active groups with app active
+        queryset = queryset.filter(group__is_active=True)
+
+        # exclude user groups, except default groups
+        user_group_ids = get_cosinnus_group_model().objects.get_for_user_without_default_groups_pks(user)
+        queryset = queryset.exclude(group__pk__in=user_group_ids)
+
+        # filter public items or items from default groups
+        default_group_ids = get_default_user_group_ids()
+        queryset = queryset.filter(
+            Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL) | Q(group__id__in=default_group_ids)
+        )
+
+        # exclude own content
+        queryset = queryset.exclude(creator_id=user.pk)
+
+        # consider blocked users
+        queryset = filter_base_taggable_qs_for_blocked_user_content(queryset, user)
+
+        # order by created date
+        queryset = queryset.order_by('-created')
+
         return queryset
 
 

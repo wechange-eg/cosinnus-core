@@ -101,7 +101,7 @@ class CosinnusPersonalDashboardNewsWidget(CosinnusPersonalDashboardWidget):
 
 
 class CosinnusPersonalDashboardCreateNewWidget(CosinnusPersonalDashboardWidget):
-    """News/notes widget"""
+    """Create new widget"""
 
     id = 'dashboard.create_new'
 
@@ -251,13 +251,24 @@ class CosinnusPersonalDashboardLikedIdeasWidget(CosinnusPersonalDashboardWidget)
 
 
 class CosinnusPersonalDashboardGettingStartedWidget(CosinnusPersonalDashboardWidget):
-    """Personal getting started widget"""
+    """Getting started widget"""
 
     id = 'dashboard.getting_started'
     user_queryset_function = get_user_profile_model().get_getting_started_actions
     serializer_class = CosinnusGettingStartedActionSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:api-getting-started')
     data_limit = None
+
+
+class CosinnusPersonalDashboardNewsRecommendationsWidget(CosinnusPersonalDashboardWidget):
+    """News recommendations widget"""
+
+    id = 'dashboard.news_recommendations'
+    cosinnus_app = 'cosinnus_note'
+    user_queryset_function = Note.objects.get_recommendations
+    serializer_class = CosinnusNoteSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:personal-note-recommendations')
+    data_limit = 10
 
 
 # list of all known widgets
@@ -273,6 +284,7 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardIdeasWidget,
     CosinnusPersonalDashboardLikedIdeasWidget,
     CosinnusPersonalDashboardGettingStartedWidget,
+    CosinnusPersonalDashboardNewsRecommendationsWidget,
 ]
 
 # initialized available dashboard widgets
