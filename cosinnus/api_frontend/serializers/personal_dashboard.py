@@ -177,9 +177,10 @@ class CosinnusPersonalDashboardSerializer(serializers.Serializer):
 
             # get welcome announcement
             welcome_announcement = UserDashboardWelcomeAnnouncement.objects.first()
-            preview_welcome_announcement = context['query_params'].get('show_welcome_announcement') is not None
-            if not preview_welcome_announcement and not welcome_announcement.show_to_user(user):
-                welcome_announcement = None
+            if welcome_announcement:
+                preview_welcome_announcement = context['query_params'].get('show_welcome_announcement') is not None
+                if not preview_welcome_announcement and not welcome_announcement.show_to_user(user):
+                    welcome_announcement = None
             instance = {'widgets': widgets, 'announcement': announcement, 'welcome_announcement': welcome_announcement}
         super().__init__(instance, context=context, **kwargs)
 
