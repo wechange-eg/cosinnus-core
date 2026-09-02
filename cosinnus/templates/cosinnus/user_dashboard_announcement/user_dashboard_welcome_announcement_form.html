@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    {% if form.errors %}
+    {% if form.errors or inlines.0.errors %}
         <div class="alert alert-danger alert-dismissable">
             <i class="fa fa-exclamation-triangle fa-3x"></i>
             <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
@@ -88,7 +88,7 @@
                 });
             </script>
 
-            <div id="display-type-frame-0" {% if object and object.display != 0 %}style="display: none;"{% endif %}>
+            <div id="display-type-frame-0" {% if form.display.value|intify != 0 %}style="display: none;"{% endif %}>
                 {# image and 1 column of text #}
 
                 {# Image field #}
@@ -138,7 +138,7 @@
 
             </div>
 
-            <div id="display-type-frame-1" {% if not object or object.display != 1 %}style="display: none;"{% endif %}>
+            <div id="display-type-frame-1" {% if form.display.value|intify != 1 %}style="display: none;"{% endif %}>
                 {# 2 columns of text #}
 
                 {# Text Column 1 field #}
@@ -166,7 +166,7 @@
                 });
             </script>
 
-            <div id="cta-buttons" {% if not object or not object.call_to_action_active %}style="display: none;"{% endif %}>
+            <div id="cta-buttons" {% if not form.call_to_action_active.value %}style="display: none;"{% endif %}>
                 {% trans "Remove button" as  ctab_rm_label %}
                 {% captureas  ctab_ab_label %}{% trans "Add button" %}{% endcaptureas %}
                 {% include 'cosinnus/fields/inlineform_field.html' with  inline_form=inlines.0 content_template='cosinnus/fields/inlineform_welcome_announcement_call_to_action_button_content.html'  unique_id='ctab'   add_button_label=ctab_ab_label remove_button_label=ctab_rm_label %}
