@@ -271,6 +271,16 @@ class CosinnusPersonalDashboardNewsRecommendationsWidget(CosinnusPersonalDashboa
     data_limit = 10
 
 
+class CosinnusPersonalDashboardOffersRecommendationsWidget(CosinnusPersonalDashboardWidget):
+    """Offer recommendations widget"""
+
+    id = 'dashboard.offer_recommendations'
+    cosinnus_app = 'cosinnus_marketplace'
+    user_queryset_function = Offer.objects.get_recommendations
+    serializer_class = CosinnusOfferSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:personal-offer-recommendations')
+
+
 # list of all known widgets
 PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardNewsWidget,
@@ -285,6 +295,7 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardLikedIdeasWidget,
     CosinnusPersonalDashboardGettingStartedWidget,
     CosinnusPersonalDashboardNewsRecommendationsWidget,
+    CosinnusPersonalDashboardOffersRecommendationsWidget,
 ]
 
 # initialized available dashboard widgets
