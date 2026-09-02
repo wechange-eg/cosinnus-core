@@ -33,7 +33,7 @@ UPDATES = {
         ],
     },
     '2.9.0': {
-        'datetime': datetime(2026, 8, 4, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 8, 4, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.9.0'),
         'short_text': _('This update includes several features and bugfixes:'),
         'full_text': [
@@ -53,7 +53,7 @@ UPDATES = {
         ],
     },
     '2.8.0-calendar': {
-        'datetime': datetime(2026, 6, 30, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 6, 30, tzinfo=timezone.utc),
         'title': _('Calendar Redesign'),
         'short_text': _('The fully redesigned calendar with a mobile-optimized interface has been launched!'),
         'full_text': _(
@@ -63,7 +63,7 @@ UPDATES = {
         'display_conditional': _REDESIGN_FULL_IS_ENABLED and settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED,
     },
     '2.8.0': {
-        'datetime': datetime(2026, 6, 29, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 6, 29, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.8.0'),
         'short_text': _('This update includes several features and bugfixes:'),
         'full_text': [
@@ -109,7 +109,7 @@ UPDATES = {
         ],
     },
     '2.7.12': {
-        'datetime': datetime(2026, 4, 26, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 4, 26, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.12'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
