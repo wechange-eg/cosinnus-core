@@ -173,7 +173,7 @@ setup(
         # (dev requirements were moved to pyproject.toml dev-dependencies)
         # test requirements
         'factory-boy==3.3.3',
-        'freezegun==1.5.1',
+        'freezegun==1.5.5',
         'nh3==0.3.5',
         # requirements loaded in from github
         'django-awesome-avatar @ git+https://github.com/wechange-eg/django-awesome-avatar.git@python-3-12#egg=django-awesome-avatar',
