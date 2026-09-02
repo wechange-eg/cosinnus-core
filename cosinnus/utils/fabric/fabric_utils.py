@@ -166,8 +166,8 @@ def setup_env(
 
     # poetry binary usage has changed for all post Server-Move servers
     if new_poetry_binary:
-        env.poetry_binary = '~/.local/bin/poetry'
+        env.poetry_binary = '~/.bin/poetry'
     else:
-        env.poetry_binary = 'poetry'
+        env.poetry_binary = '~/.local/bin/poetry'
 
     return env
