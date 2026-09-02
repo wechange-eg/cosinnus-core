@@ -1,11 +1,27 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
 from builtins import object
 
 from appconf import AppConf
 from django.conf import settings  # noqa
 from django.utils.translation import gettext_lazy as _
+
+logger = logging.getLogger('cosinnus')
+
+
+def _convert_legacy_v3_menu_links_to_items(legacy_links):
+    """Convert legacy menu link tuples to menu item dictionaries."""
+    return [
+        {
+            'id': id,
+            'label': label,
+            'url': url,
+            'icon': icon,
+        }
+        for id, label, url, icon in legacy_links
+    ]
 
 
 class CosinnusConf(AppConf):
@@ -704,7 +720,7 @@ class CosinnusConf(AppConf):
     USERDASHBOARD_USE_LIVE_MAP_WIDGET = True
 
     # switch to the German version of OpenStreetMap tileset
-    MAP_USE_MODERN_TILESET = False
+    MAP_USE_MODERN_TILESET = True
 
     # OpenCage geocode api key. if unset, no location strings provided in v3 apis
     # can be coded to actual location coordinates and thus will not be saved in v3 apis
@@ -1139,14 +1155,42 @@ class CosinnusConf(AppConf):
     # Enable to add links to paired groups of managed tags of the user cosinnus_profile as community links.
     V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS = True
 
-    # Additional menu items for the community space in the v3 main navigation.
-    # Format: List of (<id-string>, <label>, <url>, <icon>),
-    # e.g.: [('ExternalLink', 'External Link', 'https://external-link.com', 'fa-group')]
+    # Deprecated tuple-based configuration for additional community space menu items.
+    # Format: List of (<id-string>, <label>, <url>, <icon>) tuples.
     V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS = []
 
-    # List of help items to be included in the v3 main navigation.
-    # Format: (<label>, <url>, <icon>), e.g.: (_('FAQ'), 'https://wechange.de/cms/help/', 'fa-question-circle'),
+    # Additional menu items for the community space in the v3 main navigation.
+    # Format: List of dictionaries containing MenuItem arguments.
+    # If None, V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS is used as a fallback.
+    V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS = None
+
+    def configure_v3_menu_spaces_community_additional_items(self, value):
+        if value is not None:
+            return value
+        legacy_value = getattr(settings, 'COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS', [])
+        if legacy_value:
+            logger.warning(
+                'The setting V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS is deprecated. '
+                'Use V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS instead.'
+            )
+        return _convert_legacy_v3_menu_links_to_items(legacy_value)
+
+    # Deprecated tuple-based configuration for help items in the v3 main navigation.
+    # Format: List of (<id-string>, <label>, <url>, <icon>) tuples.
     V3_MENU_HELP_LINKS = []
+
+    # List of help items to be included in the v3 main navigation.
+    # Format: List of dictionaries containing MenuItem arguments.
+    # If None, V3_MENU_HELP_LINKS is used as a fallback.
+    V3_MENU_HELP_ITEMS = None
+
+    def configure_v3_menu_help_items(self, value):
+        if value is not None:
+            return value
+        legacy_value = getattr(settings, 'COSINNUS_V3_MENU_HELP_LINKS', [])
+        if legacy_value:
+            logger.warning('The setting V3_MENU_HELP_LINKS is deprecated. Use V3_MENU_HELP_ITEMS instead.')
+        return _convert_legacy_v3_menu_links_to_items(legacy_value)
 
     # a class dropin to replace CosinnusNavigationPortalLinksBase as class that modifies or provides additional
     # navbar links returned in various v3 navigation API endpoints
@@ -2030,32 +2074,50 @@ class CosinnusDefaultSettings(AppConf):
         },
     }
 
+    # DEPRECATED - remove this setting from portal configuration
     # a list of field names from fields in fields in `CosinnusConferenceSettings`
     # that will be shown to the users in the frontend Event forms as choices
     # for presets for BBB rooms
-    # note that 'record_meeting' is disabled by default, as it
-    # requires setting up the BBB servers correctly for it, and should
-    # only be enabled for a portal specifically after that has been done
-    BBB_PRESET_USER_FORM_FIELDS = [
-        'mic_starts_on',
-        'cam_starts_on',
-        'waiting_room',
-        'welcome_message',
-    ]
+    # None is a sentinel used to detect legacy portal configuration in the hook below.
+    BBB_PRESET_USER_FORM_FIELDS = None
     # a complete list of all choices that could be made for BBB_PRESET_USER_FORM_FIELDS
     # __all_choices__BBB_PRESET_USER_FORM_FIELDS = [
     #    'mic_starts_on',
     #    'cam_starts_on',
     #    'waiting_room',
+    #    'welcome_message',
     #    'record_meeting',
     # ]
 
+    def configure_bbb_preset_user_form_fields(self, value):
+        """Ignore legacy portal configuration and always expose all supported fields."""
+        if value is not None:
+            logger.warning(
+                'The setting BBB_PRESET_USER_FORM_FIELDS is deprecated '
+                'and its configured value is ignored. Remove it from the portal configuration.'
+            )
+        return [
+            'mic_starts_on',
+            'cam_starts_on',
+            'waiting_room',
+            'welcome_message',
+            'record_meeting',
+        ]
+
+    # DEPRECATED - remove this setting from portal configuration
     # a list of field names from `BBB_PRESET_USER_FORM_FIELDS` that can only
     # be changed by users if a conference is premium at some point.
     # NOTE: the field names appearing here must also appear in `BBB_PRESET_USER_FORM_FIELDS`!
-    BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = [
-        'record_meeting',
-    ]
+    BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = None
+
+    def configure_bbb_preset_user_form_fields_premium_only(self, value):
+        """Ignore legacy portal configuration and keep the deprecated setting disabled."""
+        if value is not None:
+            logger.warning(
+                'The setting BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY is deprecated '
+                'and its configured value is ignored. Remove it from the portal configuration.'
+            )
+        return []
 
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60 * 60

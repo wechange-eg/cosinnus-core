@@ -1,6 +1,3 @@
-from datetime import date
-
-
 class CalendarMigrationMixin:
     """Group model mixin to store the calendar public event migration status in the settings field."""
 
@@ -13,18 +10,20 @@ class CalendarMigrationMixin:
     CALENDAR_MIGRATION_STATUS_SUCCESS = 'success'
     CALENDAR_MIGRATION_STATUS_FAILED = 'failed'
 
-    def calendar_migration_queryset(self):
+    def calendar_migration_queryset(self, migrate_all_events=False):
         from cosinnus.models import BaseTagObject
         from cosinnus_event.models import Event
 
-        current_year = date.today().year
         queryset = Event.objects.filter(
             group=self,
             media_tag__visibility=BaseTagObject.VISIBILITY_GROUP,
             state=Event.STATE_SCHEDULED,
             is_hidden_group_proxy=False,
-            from_date__year__gte=current_year,
         ).prefetch_related('media_tag')
+        if not migrate_all_events:
+            queryset = queryset.filter(
+                from_date__year__gte=2026,
+            )
         return queryset
 
     def calendar_migration_required(self):
