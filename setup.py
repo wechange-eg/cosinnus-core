@@ -154,7 +154,7 @@ setup(
         'requests-oauthlib==2.0.0',  # TODO: PY UPGRADE CHECK
         'rocketchat-API==1.30.0',
         'six==1.17.0',
-        'sqlparse==0.5.0',
+        'sqlparse==0.6.0',
         'sentry-sdk==1.45.1',
         'tblib==3.0.0',  # for parallelized testing
         'python-dateutil==2.9.0.post0',
