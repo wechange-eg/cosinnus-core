@@ -734,7 +734,7 @@ class BaseUserProfile(
         Main definition of getting started actions for the user.
         Static method as used by the CosinnusPersonalDashboardGettingStartedWidget and CosinnusGettingStartedAPIView.
         """
-        from cosinnus.models.map import get_map_selected_filter_params
+        from cosinnus.models.map import get_map_url_with_selected_filter_params
 
         profile = user.cosinnus_profile
 
@@ -779,7 +779,7 @@ class BaseUserProfile(
                             get_cosinnus_group_model().TYPE_SOCIETY,
                         ]
                     ).exists(),
-                    'cta_url': f'{reverse("cosinnus:map")}?{get_map_selected_filter_params(["groups", "projects"])}',
+                    'cta_url': get_map_url_with_selected_filter_params(['groups', 'projects']),
                 },
             ]
         )
