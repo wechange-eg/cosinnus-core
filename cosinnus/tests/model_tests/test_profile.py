@@ -68,7 +68,6 @@ class DefaultUserProfileTest(TestCase):
             'avatar',
             'description',
             'dynamic_fields',
-            'inactivity_notification_sent_at',
             'language',
             'may_be_contacted',
             'timezone',
