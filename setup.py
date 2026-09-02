@@ -89,6 +89,7 @@ setup(
         'Django>=5.2.12,<5.3',
         'MarkupSafe==2.1.5',
         'Pillow==12.3.0',
+        'caldav==2.1.2',
         'channels==4.3.2',  # TODO: PY UPGRADE CHECK, # Moved from pyproject.toml
         'celery==5.6.2',  # TODO: PY UPGRADE CHECK, 3.13 last supported
         'dataclasses',
@@ -170,14 +171,10 @@ setup(
         # requirements for documentation
         'sphinx==7.1.2',
         # (dev requirements were moved to pyproject.toml dev-dependencies)
-        'fcm-django==2.2.1',
-        'tblib==3.0.0',
-        'django_extended_makemessages==1.7.1',
-        'caldav==2.1.2',
-        'nh3==0.3.5',
-        'factory-boy==3.3.3',
         # test requirements
+        'factory-boy==3.3.3',
         'freezegun==1.5.1',
+        'nh3==0.3.5',
         # requirements loaded in from github
         'django-awesome-avatar @ git+https://github.com/wechange-eg/django-awesome-avatar.git@python-3-12#egg=django-awesome-avatar',
         'django-multiform @ git+https://github.com/wechange-eg/django-multiform.git@master#egg=django-multiform',
