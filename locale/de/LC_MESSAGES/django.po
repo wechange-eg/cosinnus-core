@@ -2250,7 +2250,7 @@ msgid "Add an Address"
 msgstr "Adresse hinzufügen"
 
 msgid "Add button"
-msgstr "Link hinzufügen"
+msgstr "Button hinzufügen"
 
 msgid "Add choice"
 msgstr "Wahlmöglichkeit hinzufügen"
