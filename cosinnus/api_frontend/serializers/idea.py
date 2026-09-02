@@ -17,6 +17,7 @@ class CosinnusIdeaSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'title',
+            'description',
             'creator',
             'created',
             'url',

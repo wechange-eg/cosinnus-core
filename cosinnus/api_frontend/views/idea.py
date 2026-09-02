@@ -33,8 +33,24 @@ class CosinnusIdeaViewSet(viewsets.ReadOnlyModelViewSet):
         permission_classes=[IsAuthenticated],
     )
     def liked(self, request):
-        """Return open polls where the user has not voted yet."""
+        """Return liked ideas."""
         queryset = CosinnusIdea.objects.get_personal_liked_items(request.user)
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+    @action(
+        detail=False,
+        methods=['get'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[IsAuthenticated],
+    )
+    def recommendations(self, request):
+        """Return recommended ideas."""
+        queryset = CosinnusIdea.objects.get_recommendations(request.user)
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)

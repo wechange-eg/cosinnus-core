@@ -6,6 +6,7 @@ from cosinnus.api_frontend.serializers.user import CosinnusGettingStartedActionS
 from cosinnus.conf import settings
 from cosinnus.models import get_user_profile_model
 from cosinnus.models.idea import CosinnusIdea
+from cosinnus.models.map import get_map_url_with_selected_filter_params
 from cosinnus.models.profile import PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_can_create_groups
@@ -271,7 +272,7 @@ class CosinnusPersonalDashboardNewsRecommendationsWidget(CosinnusPersonalDashboa
     data_limit = 10
 
 
-class CosinnusPersonalDashboardOffersRecommendationsWidget(CosinnusPersonalDashboardWidget):
+class CosinnusPersonalDashboardOfferRecommendationsWidget(CosinnusPersonalDashboardWidget):
     """Offer recommendations widget"""
 
     id = 'dashboard.offer_recommendations'
@@ -279,6 +280,25 @@ class CosinnusPersonalDashboardOffersRecommendationsWidget(CosinnusPersonalDashb
     user_queryset_function = Offer.objects.get_recommendations
     serializer_class = CosinnusOfferSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:personal-offer-recommendations')
+
+
+class CosinnusPersonalDashboardIdeaRecommendationsWidget(CosinnusPersonalDashboardWidget):
+    """Idea recommendations widget"""
+
+    id = 'dashboard.idea_recommendations'
+    user_queryset_function = CosinnusIdea.objects.get_recommendations
+    serializer_class = CosinnusIdeaSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:personal-idea-recommendations')
+
+    def is_enabled(self, user):
+        return settings.COSINNUS_IDEAS_ENABLED
+
+    def get_conf(self, user):
+        data = super().get_conf(user)
+        data['cta_url'] = (
+            get_map_url_with_selected_filter_params(['ideas'], topics=user.cosinnus_profile.media_tag.topics),
+        )
+        return data
 
 
 # list of all known widgets
@@ -295,7 +315,8 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardLikedIdeasWidget,
     CosinnusPersonalDashboardGettingStartedWidget,
     CosinnusPersonalDashboardNewsRecommendationsWidget,
-    CosinnusPersonalDashboardOffersRecommendationsWidget,
+    CosinnusPersonalDashboardOfferRecommendationsWidget,
+    CosinnusPersonalDashboardIdeaRecommendationsWidget,
 ]
 
 # initialized available dashboard widgets

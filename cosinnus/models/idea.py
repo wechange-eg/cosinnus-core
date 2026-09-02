@@ -165,6 +165,16 @@ class IdeaManager(models.Manager):
         queryset = queryset.exclude(creator__id=user.pk)
         return queryset
 
+    def get_recommendations(self, user):
+        """Returns ideas not created or liked by the user."""
+        content_type = ContentType.objects.get_for_model(self.model)
+        user_idea_like_pks = LikeObject.objects.filter(content_type=content_type, user=user, liked=True).values_list(
+            'object_id', flat=True
+        )
+        queryset = self.exclude(pk__in=user_idea_like_pks).order_by('-created')
+        queryset = queryset.exclude(creator__id=user.pk)
+        return queryset
+
 
 @six.python_2_unicode_compatible
 class CosinnusIdea(IndexingUtilsMixin, LikeableObjectMixin, models.Model):
