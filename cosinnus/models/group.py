@@ -529,8 +529,13 @@ class CosinnusGroupManager(models.Manager):
         """
         from cosinnus.models import LastVisitedObject
 
-        # get user groups exluding default groups
+        # get user groups excluding default groups
         user_groups = self.get_for_user_without_default_groups(user)
+
+        # consider only projects and groups
+        user_groups = [
+            group for group in user_groups if group.type in [self.model.TYPE_PROJECT, self.model.TYPE_SOCIETY]
+        ]
 
         # get group visits
         group_ct = ContentType.objects.get_for_model(get_cosinnus_group_model())
