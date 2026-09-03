@@ -38,11 +38,12 @@ from cosinnus.core.mail import send_mail_or_fail_threaded
 from cosinnus.dynamic_fields.dynamic_fields import CosinnusDynamicFieldsModelMixin
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignmentModelMixin
+from cosinnus.models.membership import MEMBER_STATUS
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from cosinnus.models.tagged import LikeableObjectMixin, LikeObject
 from cosinnus.utils.files import get_avatar_filename, image_thumbnail, image_thumbnail_url
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids
 from cosinnus.utils.html import convert_html_to_plaintext
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.user import get_newly_registered_user_email, is_user_active
@@ -771,14 +772,21 @@ class BaseUserProfile(
                     'completed': bool(profile.media_tag.topics),
                     'cta_url': '/setup/interests/',
                 },
+            ]
+        )
+
+        # become member action
+        default_user_group_ids = get_default_user_group_ids()
+        become_member_completed_qs = user.cosinnus_memberships.filter(
+            group__type__in=[get_cosinnus_group_model().TYPE_PROJECT, get_cosinnus_group_model().TYPE_SOCIETY],
+            status__in=MEMBER_STATUS,
+        )
+        become_member_completed_qs = become_member_completed_qs.exclude(group_id__in=default_user_group_ids)
+        actions.extend(
+            [
                 {
                     'action_id': 'become_member',
-                    'completed': user.cosinnus_memberships.filter(
-                        group__type__in=[
-                            get_cosinnus_group_model().TYPE_PROJECT,
-                            get_cosinnus_group_model().TYPE_SOCIETY,
-                        ]
-                    ).exists(),
+                    'completed': become_member_completed_qs.exists(),
                     'cta_url': get_map_url_with_selected_filter_params(['groups', 'projects']),
                 },
             ]
