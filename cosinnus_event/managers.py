@@ -72,7 +72,7 @@ class EventManager(BaseTaggableObjectManager):
         queryset = queryset.exclude(group__deactivated_apps__contains='cosinnus_event')
         queryset = queryset.filter(state=self.model.STATE_SCHEDULED)
         queryset = queryset.filter(from_date__gte=timezone.now())
-        queryset = queryset.exclude(note=None)
+        queryset = queryset.exclude(note=None).exclude(note='')
         queryset = queryset.exclude(attendances__user__id=user.id)
         queryset = queryset.order_by('from_date')
         return queryset

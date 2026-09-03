@@ -173,7 +173,7 @@ class IdeaManager(models.Manager):
         )
         queryset = self.exclude(pk__in=user_idea_like_pks).order_by('-created')
         queryset = queryset.exclude(creator__id=user.pk)
-        queryset = queryset.exclude(description=None)
+        queryset = queryset.exclude(description=None).exclude(description='')
         return queryset
 
 
