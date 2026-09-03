@@ -114,6 +114,21 @@ def diffbase(_ctx):
 
 
 @task
+def diffcore(_ctx):
+    """Prints out the diff of cosinnus-core - basically the changes that would happen if hotdeploy would be executed
+    right now.
+    This can be executed safely and does not cause any changes on the server."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        with c.cd(f'{env.cosinnus_src_path}'):
+            c.run('git fetch --all')
+            c.run(f'git log HEAD..origin/{env.cosinnus_pull_branch}')
+            c.run(f'git diff HEAD...origin/{env.cosinnus_pull_branch}')
+    print('\n\n>> diffcore has finished successfully.\n')
+
+
+@task
 def deployfrontend(_ctx):
     """Only does a git pull on the base project repository"""
     check_confirmation()
@@ -185,7 +200,12 @@ def restart(_ctx, skip_check=False):
     if not skip_check:
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
             c.run(f'{env.path}/manage.py check')
-    c.run(env.reload_command)
+
+    for i in range(20):
+        print('!!!!!!!!!!!!!!!!!!! TEMPORARILY NOT RESSTARTING')
+
+    # c.run(env.reload_command)
+
     if env.uses_celery:
         restartcelery(_ctx)
     clearportalcache(_ctx)
@@ -296,61 +316,6 @@ def clearportalcache(_ctx):
     with c.cd(env.path):
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
             c.run('./manage.py clear_portal_cache')
-
-
-@task
-def rocketsyncupdatesetting(_ctx):
-    """A temporary task used to update a single rocketchat setting. Can be removed after it has run on all portals."""
-    env = get_env()
-    c = CosinnusFabricConnection(host=env.host)
-    with c.cd(env.path):
-        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
-            c.run('./manage.py rocket_sync_settings --only-settings Update_EnableChecker')
-            c.run('./manage.py rocket_sync_settings --only-settings Custom_Script_Logged_In')
-
-
-@task
-def nextcloudupdateusers(_ctx):
-    """A temporary task used to run the management command `update_nextcloud_users` on the server
-    and write the output to a log file.
-    This fabric task can be started from your local shell and the shell can be closed (if you do not send ctrl+c),
-    so it can run overnight. Run `nextcloudupdateusersresults` the next day to check the logs."""
-    env = get_env()
-    c = CosinnusFabricConnection(host=env.host)
-    with c.cd(env.path):
-        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
-            c.run('echo "yes" | ./manage.py update_nextcloud_users  > ~/nextcloudsynclog.log 2>&1')
-
-
-@task
-def nextcloudupdateusersresults(_ctx):
-    """Checks and prints the last lines of the logs written for task `nextcloudupdateusers`."""
-    env = get_env()
-    c = CosinnusFabricConnection(host=env.host)
-    c.run('tail ~/nextcloudsynclog.log')
-
-
-@task
-def rocketupdateusernotifications(_ctx):
-    """A temporary task used to run the management command `rocketupdateusernotifications` on the server
-    and write the output to a log file.
-    This fabric task can be started from your local shell and the shell can be closed (if you do not send ctrl+c),
-    so it can run overnight. Run `rocketupdateusernotificationsresults` the next day to check the logs."""
-    env = get_env()
-    c = CosinnusFabricConnection(host=env.host)
-    with c.cd(env.path):
-        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
-            c.run(
-                'echo "yes" | ./manage.py rocket_force_update_portal_notification_settings  > ~/rocketupdatelog.log 2>&1'
-            )
-
-
-@task
-def rocketupdateusernotificationsresults(_ctx):
-    """Checks and prints the last lines of the logs written for task `rocketupdateusernotifications`."""
-    env = get_env()
-    c = CosinnusFabricConnection(host=env.host)
-    c.run('tail ~/rocketupdatelog.log')
 
 
 @task
@@ -517,23 +482,19 @@ def pipfreeze(_ctx):
 
 def _pull_and_update(ctx, fresh_install=False):
     """
-    Does a git pull on the main project repository, then performs
-    a poetry update to update dependencies.
-    (Not a task, this is a helper function called from other tasks.)
+    Does a git pull on the main project repository, then:
+      - fresh_install=True: performs a poetry update to install/update all dependencies. This is a very slow operation
+        and used when there are possible dependency updates (django, others) or for a fresh install.
+      - fresh_install=False: `git pull`s the two editable source repos (cosinnus-core and wechange-payments)
+        without updating any of the poetry dependencies. This is a very fast operation and used for a quick update of
+        cosinnus-core or wechange-payments, when we absolutely know that there are no required dependency updates.
 
-    Currently, `poetry update` doesn't work on editable dependencies,
-    see issue https://github.com/python-poetry/poetry/issues/7113.
-    So we can either only do:
-        - a fresh install **on a non-existing venv**
-            (because the name mismatch won't even let us reinstall without
-            deleting the venv)
-            Use tas `deployresetvirtualenv()` for this.
-        - or a manual update from git in the editable cosinnus repo. this
-            is fine als long as no dependencies in cosinnus's setup.py
-            have changed. it does however require us to know which
-            upstream branch cosinnus-core is using, as poetry creates its
-            own, disconnected 'master' branch instead of a locally named
-            version of the branch it checked out.
+    Why we do not use `poetry update`:
+    Currently, `poetry update` is extremely slow and will download the entirety of the cosinnus-core repo with a
+    fresh clone every time (200+mb) and *then* do the entire dependency resolution to check if all requirements are
+    still fulfilled and compatible. This may take from 20s to upwards of 3 minutes.
+
+    (This is not a task, this is a helper function called from other tasks.)
     """
     env = get_env()
     c = CosinnusFabricConnection(host=env.host)
@@ -541,10 +502,36 @@ def _pull_and_update(ctx, fresh_install=False):
         c.run('git fetch')
         c.run(f'git checkout {env.pull_branch}')
         c.run('git pull')
+
         if fresh_install:
+            # Install the entirety of requirements (despite the wording, also works as a fresh install)
             c.run(f'{env.poetry_binary} update')
         else:
-            c.run(f'{env.poetry_binary} update cosinnus wechange-payments')
+            # Install the actual source directory that got pulled into .venv/src/<repo> as base directory
+            # for a fully in-place editable source. otherwise, with poetry's approach, this gets copied into
+            # site-packages and is not truly editable anymore.
+            # This allows us to do a quick `git pull` on the source repo.
+            # Note: this really only needs to be done once after the `poetry update` and could optimally only be run
+            #   after the fresh_install run above. But to always have `hotdeploy` work, even after an installation
+            #   that wasn't done with this fab script, we run it here.
+            installeditablesourcerepos(ctx)
+            # stash changes that might be on the server (so dev changes on the dev server aren't risked to be lost)
+            with c.cd(f'{env.cosinnus_src_path}'):
+                c.run('git fetch --all')
+                c.run('git stash')
+                c.run(
+                    f'git checkout -B {env.cosinnus_pull_branch} {env.cosinnus_pull_remote}/{env.cosinnus_pull_branch}'
+                )
+                c.run('git pull')
+            if env.payments_pull_branch:
+                with c.cd(f'{env.payments_src_path}'):
+                    c.run('git fetch --all')
+                    c.run('git stash')
+                    c.run(
+                        f'git checkout -B {env.payments_pull_branch} '
+                        f'{env.payments_pull_remote}/{env.payments_pull_branch}'
+                    )
+                    c.run('git pull')
 
 
 def _pull_and_update_frontend(ctx):
@@ -563,3 +550,33 @@ def _pull_and_update_frontend(ctx):
         c.run('pnpm run build')
         # not necessary any more: make newly built next dist files that will be served as static accessible by nginx
         # c.run(f'chown {env.username}:www-data -R .next/')
+
+
+@task
+def enablegitremoteoncore(_ctx):
+    """Enables the cosinnus-core git to read properly from the remote.
+    This was neccessary for editable dependencies on older poetry versions after a fresh install
+    because poetry didn't configures remote.origin.fetch in the editable repos."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(f'{env.cosinnus_src_path}'):
+        c.run('git config --local --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*')
+    with c.cd(f'{env.payments_src_path}'):
+        c.run('git config --local --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/*')
+
+
+@task
+def installeditablesourcerepos(_ctx):
+    """Install the actual source directory that got pulled into .venv/src/<repo> as base directory
+    for a fully in-place editable source. otherwise, with poetry's approach, this gets copied into
+    site-packages and is not truly editable anymore.
+    This allows us to do a quick `git pull` on the source repo."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    # Inside the virtualenv, install the sources for cosinnus-core and wechange-payments as a
+    # linked editable develop build.
+    with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+        with c.cd(f'{env.cosinnus_src_path}'):
+            c.run('pip install --no-deps -e .')  # this is the modern version of `python setup.py develop --no-deps`.
+        with c.cd(f'{env.payments_src_path}'):
+            c.run('pip install --no-deps -e .')  # this is the modern version of `python setup.py develop --no-deps`.

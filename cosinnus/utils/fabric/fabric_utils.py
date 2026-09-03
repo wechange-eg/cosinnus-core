@@ -96,9 +96,12 @@ def setup_env(
     confirm=False,
     base_path=None,
     pull_remote='origin',
+    cosinnus_pull_branch='main',
+    cosinnus_pull_remote='origin',
+    payments_pull_branch=None,
+    payments_pull_remote='origin',
     frontend_pull_branch='main',
     frontend_pull_remote='origin',
-    new_unit_commands=DEPRECATED,
     command_unit_directly=True,
     new_poetry_binary=False,
     uses_celery=False,
@@ -110,22 +113,23 @@ def setup_env(
     @param domain: the URL domain for the portal, for SSH connections and
         on-server paths
     @param pull_branch: the branch that the main repo will be pulled from
-        (see `hotdeploy()` for further explanations)
-    @param base_path: if the on-server file location path for the portal
-        is non-default, use this argument to override it
+        (see `_pull_and_update()` for further explanations)
     @param pull_remote: used to override non-origin git pulls
-    @param new_unit_commands: DEPRECATED and ignored, the former True value is now default.
-    @param command_unit_directly: default True (new method) of restarting the django backend by restarting
-        the entire unit service instead of just the django backend (old method).
-        set to False to use the old method
-    @param new_poetry_binary if True, will use the poetry binary the way the new post Server-Move devops setup requires.
+    @param cosinnus_pull_branch: the branch that the cosinnus repo will be pulled from for a hotdeploy quick update
+        (see `_pull_and_update()` for further explanations)
+    @param payments_pull_branch: the branch that the wechange-payments repo will be pulled from for a hotdeploy for a
+        quick update. if `None` is supplied here, the payments repo will *not* be updated!
+        (see `_pull_and_update()` for further explanations)
+    @param frontend_pull_branch: the branch that the frontend repo will be pulled from.
+        (see `deployfrontend()` for further explanations)
+    @param base_path: if the on-server file location path for the portal is non-default, this argument can override it
+    @param new_poetry_binary DEPRECATED and ignored! used to swap:
+        if True, will use the poetry binary the way the new post Server-Move devops setup requires.
     @uses_celery if True, will add additional tasks to other tasks, like restarting celery on django restart
 
     """
     if not base_path and domain:
         base_path = f'/srv/http/{domain}'
-    # if not base_path:
-    #    raise ImproperlyConfigured('`setup_env()` did not receive all necessary arguments!')
 
     env = get_env()
     env.portal_name = portal_name
@@ -135,12 +139,19 @@ def setup_env(
     env.frontend_path = f'{base_path}/frontend'
     env.virtualenv_path = f'{env.path}/.venv'
     env.cosinnus_src_path = f'{env.virtualenv_path}/src/cosinnus-core'
+    env.payments_src_path = f'{env.virtualenv_path}/src/wechange-payments'
     env.backup_path = f'{base_path}/backups'
     env.maintenance_mode_path = base_path
+
     env.pull_branch = pull_branch
     env.pull_remote = pull_remote
+    env.cosinnus_pull_branch = cosinnus_pull_branch
+    env.cosinnus_pull_remote = cosinnus_pull_remote
+    env.payments_pull_branch = payments_pull_branch
+    env.payments_pull_remote = payments_pull_remote
     env.frontend_pull_branch = frontend_pull_branch
     env.frontend_pull_remote = frontend_pull_remote
+
     env.lessc_binary = '~/node_modules/.bin/lessc'
     env.skip_compile_webpack = True
 
@@ -163,11 +174,6 @@ def setup_env(
     env.db_username = portal_name
     env.confirm = confirm
     env.uses_celery = uses_celery
-
-    # poetry binary usage has changed for all post Server-Move servers
-    if new_poetry_binary:
-        env.poetry_binary = '~/.bin/poetry'
-    else:
-        env.poetry_binary = '~/.local/bin/poetry'
+    env.poetry_binary = '~/.local/bin/poetry'
 
     return env
