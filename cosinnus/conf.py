@@ -1176,6 +1176,7 @@ class CosinnusConf(AppConf):
         'dashboard.news_recommendations': {},
         'dashboard.offer_recommendations': {},
         'dashboard.idea_recommendations': {},
+        'dashboard.event_recommendations': {},
     }
 
     # default CosinnusPortal logo image url, shown in the top left navigation bar

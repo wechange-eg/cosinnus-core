@@ -64,3 +64,14 @@ class CosinnusEventViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
         """Return attending upcoming user events."""
         queryset = Event.objects.get_personal_attending_events(request.user)
         return self.list_action_response(queryset)
+
+    @action(
+        detail=False,
+        methods=['get'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[IsAuthenticated],
+    )
+    def recommendations(self, request):
+        """Return user public event recommendations."""
+        queryset = Event.objects.get_recommendations(request.user)
+        return self.list_action_response(queryset)

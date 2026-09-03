@@ -301,6 +301,16 @@ class CosinnusPersonalDashboardIdeaRecommendationsWidget(CosinnusPersonalDashboa
         return data
 
 
+class CosinnusPersonalDashboardEventRecommendationsWidget(CosinnusPersonalDashboardWidget):
+    """Event recommendations widget"""
+
+    id = 'dashboard.event_recommendations'
+    cosinnus_app = 'cosinnus_event'
+    user_queryset_function = Event.objects.get_recommendations
+    serializer_class = CosinnusEventSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:personal-event-recommendations')
+
+
 # list of all known widgets
 PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardNewsWidget,
@@ -317,6 +327,7 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardNewsRecommendationsWidget,
     CosinnusPersonalDashboardOfferRecommendationsWidget,
     CosinnusPersonalDashboardIdeaRecommendationsWidget,
+    CosinnusPersonalDashboardEventRecommendationsWidget,
 ]
 
 # initialized available dashboard widgets
