@@ -311,6 +311,15 @@ class CosinnusPersonalDashboardEventRecommendationsWidget(CosinnusPersonalDashbo
     api_url = reverse_lazy('cosinnus:frontend-api:personal-event-recommendations')
 
 
+class CosinnusPersonalDashboardGroupRecommendationsWidget(CosinnusPersonalDashboardWidget):
+    """Group recommendations widget"""
+
+    id = 'dashboard.space_recommendations'
+    user_queryset_function = get_cosinnus_group_model().objects.get_recommendations
+    serializer_class = CosinnusGroupSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:api-group-recommendations')
+
+
 # list of all known widgets
 PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardNewsWidget,
@@ -328,6 +337,7 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardOfferRecommendationsWidget,
     CosinnusPersonalDashboardIdeaRecommendationsWidget,
     CosinnusPersonalDashboardEventRecommendationsWidget,
+    CosinnusPersonalDashboardGroupRecommendationsWidget,
 ]
 
 # initialized available dashboard widgets

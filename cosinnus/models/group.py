@@ -26,6 +26,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.core.validators import MaxLengthValidator, MinLengthValidator, RegexValidator
 from django.db import IntegrityError, models
 from django.db.models import F, Max, Min, Q
+from django.db.models.aggregates import Count
 from django.db.models.fields.json import KeyTextTransform
 from django.db.models.functions import Cast
 from django.db.models.signals import pre_delete
@@ -552,6 +553,25 @@ class CosinnusGroupManager(models.Manager):
             user_groups, key=lambda group: group_last_visited.get(group.id, default_date), reverse=True
         )
         return user_groups
+
+    def get_recommendations(self, user):
+        queryset = self.filter(is_active=True)
+
+        # exclude user groups
+        user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
+        queryset = queryset.exclude(pk__in=user_group_ids)
+
+        # exclude groups without description
+        queryset = queryset.exclude(description=None).exclude(description='')
+
+        # exclude groups with 1 member
+        queryset = queryset.annotate(
+            count_members=Count('memberships', filter=Q(memberships__status__in=MEMBER_STATUS))
+        ).filter(count_members__gt=1)
+
+        # order by last-activity
+        queryset = queryset.order_by('-created')
+        return queryset
 
 
 class RelatedGroups(models.Model):

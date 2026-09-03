@@ -139,4 +139,5 @@ class CosinnusGroupSerializer(serializers.ModelSerializer):
             'avatar',
             'url',
             'member_count',
+            'description',
         ]

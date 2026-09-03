@@ -6,7 +6,11 @@ from rest_framework import routers
 
 from cosinnus.api_frontend.views.content import MainContentView
 from cosinnus.api_frontend.views.feedback import CosinnusReportView
-from cosinnus.api_frontend.views.group import CosinnusGroupPersonalView, CosinnusGroupSettingsView
+from cosinnus.api_frontend.views.group import (
+    CosinnusGroupPersonalView,
+    CosinnusGroupRecommendationsView,
+    CosinnusGroupSettingsView,
+)
 from cosinnus.api_frontend.views.idea import CosinnusIdeaViewSet
 from cosinnus.api_frontend.views.navigation import (
     AlertsMarkAllReadView,
@@ -118,7 +122,6 @@ urlpatterns += [
         VersionHistoryUnreadCountView.as_view(),
         name='api-navigation-unread-version-history',
     ),
-    path('api/v3/spaces/personal/', CosinnusGroupPersonalView.as_view(), name='api-group-personal'),
     path('api/v3/spaces/<int:group_id>/settings/', CosinnusGroupSettingsView.as_view(), name='api-group-settings'),
     path(
         'api/v3/report/event/', CosinnusReportView.as_view(model_name='cosinnus_event.Event'), name='api-report-event'
@@ -148,6 +151,12 @@ if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
     urlpatterns += [
         path('api/v3/dashboard/', CosinnusPersonalDashboardAPIView.as_view(), name='api-peronsal-dashboard'),
         path('api/v3/user/getting_started/', CosinnusGettingStartedAPIView.as_view(), name='api-getting-started'),
+        path('api/v3/spaces/personal/', CosinnusGroupPersonalView.as_view(), name='api-group-personal'),
+        path(
+            'api/v3/spaces/recommendations/',
+            CosinnusGroupRecommendationsView.as_view(),
+            name='api-group-recommendations',
+        ),
         path('', include('cosinnus_note.urls_api_frontend')),
         path('', include('cosinnus_marketplace.urls_api_frontend')),
         path('', include('cosinnus_event.urls_api_frontend')),

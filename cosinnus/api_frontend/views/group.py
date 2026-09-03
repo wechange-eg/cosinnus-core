@@ -52,3 +52,20 @@ class CosinnusGroupPersonalView(ListAPIView):
         user = self.request.user
         queryset = get_cosinnus_group_model().objects.get_personal_items(user)
         return queryset
+
+
+class CosinnusGroupRecommendationsView(ListAPIView):
+    """API to list group recommendations for a user."""
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    serializer_class = CosinnusGroupSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = get_cosinnus_group_model().objects.get_recommendations(user)
+        return queryset
