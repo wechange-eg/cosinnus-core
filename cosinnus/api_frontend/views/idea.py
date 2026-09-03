@@ -2,15 +2,15 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
-from rest_framework.response import Response
 
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.idea import CosinnusIdeaSerializer
+from cosinnus.api_frontend.views.mixins import ViewSetActionMixin
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.models.idea import CosinnusIdea
 
 
-class CosinnusIdeaViewSet(viewsets.ReadOnlyModelViewSet):
+class CosinnusIdeaViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
     """Idea api for v3."""
 
     renderer_classes = (
@@ -35,12 +35,7 @@ class CosinnusIdeaViewSet(viewsets.ReadOnlyModelViewSet):
     def liked(self, request):
         """Return liked ideas."""
         queryset = CosinnusIdea.objects.get_personal_liked_items(request.user)
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        return self.list_action_response(queryset)
 
     @action(
         detail=False,
@@ -51,9 +46,4 @@ class CosinnusIdeaViewSet(viewsets.ReadOnlyModelViewSet):
     def recommendations(self, request):
         """Return recommended ideas."""
         queryset = CosinnusIdea.objects.get_recommendations(request.user)
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        return self.list_action_response(queryset)

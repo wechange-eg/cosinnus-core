@@ -2,15 +2,15 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
-from rest_framework.response import Response
 
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
+from cosinnus.api_frontend.views.mixins import ViewSetActionMixin
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus_event.api_frontend.serializers import CosinnusEventPollSerializer, CosinnusEventSerializer
 from cosinnus_event.models import Event
 
 
-class CosinnusEventPollViewSet(viewsets.ReadOnlyModelViewSet):
+class CosinnusEventPollViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
     """Event poll api for v3."""
 
     renderer_classes = (
@@ -35,15 +35,10 @@ class CosinnusEventPollViewSet(viewsets.ReadOnlyModelViewSet):
     def open(self, request):
         """Return open polls where the user has not voted yet."""
         queryset = Event.objects.get_personal_open_polls(request.user)
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        return self.list_action_response(queryset)
 
 
-class CosinnusEventViewSet(viewsets.ReadOnlyModelViewSet):
+class CosinnusEventViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
     """Event api for v3."""
 
     renderer_classes = (
@@ -68,9 +63,4 @@ class CosinnusEventViewSet(viewsets.ReadOnlyModelViewSet):
     def attending(self, request):
         """Return attending upcoming user events."""
         queryset = Event.objects.get_personal_attending_events(request.user)
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        return self.list_action_response(queryset)

@@ -2,15 +2,15 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
-from rest_framework.response import Response
 
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
+from cosinnus.api_frontend.views.mixins import ViewSetActionMixin
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus_marketplace.api_frontend.serializers import CosinnusOfferSerializer
 from cosinnus_marketplace.models import Offer
 
 
-class CosinnusOfferViewSet(viewsets.ReadOnlyModelViewSet):
+class CosinnusOfferViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
     """Marketplace offer api for v3."""
 
     renderer_classes = (
@@ -35,9 +35,4 @@ class CosinnusOfferViewSet(viewsets.ReadOnlyModelViewSet):
     def recommendations(self, request):
         """Return recommendations for user."""
         queryset = Offer.objects.get_recommendations(request.user)
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        return self.list_action_response(queryset)

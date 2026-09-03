@@ -11,6 +11,7 @@ from cosinnus.api_frontend.serializers.attached_objects import (
     CosinnusDeleteAttachedFileSerializer,
 )
 from cosinnus.api_frontend.serializers.tagged import CosinnusTagObjectBookmarkSerializer
+from cosinnus.api_frontend.views.mixins import ViewSetActionMixin
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.models import BaseTagObject
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -30,24 +31,6 @@ from cosinnus_event.calendar.serializers import (
     CosinnusCalendarSynceRequiredSerializer,
 )
 from cosinnus_event.models import Event
-
-
-class ViewSetActionMixin:
-    """Viewset mixin for generic serializer based action processing."""
-
-    def process_action(self, request, partial=False):
-        """
-        Generic helper to handle viewset actions using the serializer set in get_serializer_class.
-        @return: serialized data
-        """
-        instance = self.get_object()
-        if request.method == 'GET':
-            serializer = self.get_serializer(instance)
-        else:
-            serializer = self.get_serializer(instance, data=request.data, partial=partial)
-            serializer.is_valid(raise_exception=True)
-            serializer.save()
-        return serializer.data
 
 
 class ListQueryParamsMixin:
@@ -149,8 +132,7 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
         Note: Implemented as extra action and not a field in the event serializer, because of different permissions.
               Users with only read permissions to the event should be able to set it.
         """
-        data = self.process_action(request)
-        return Response(data)
+        return self.detail_action_response(request)
 
     @action(
         detail=True,
@@ -161,8 +143,7 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
     )
     def attach_file(self, request, group_id, pk=None):
         """Action to upload an attachment for an event."""
-        data = self.process_action(request)
-        return Response(data)
+        return self.detail_action_response(request)
 
     @action(
         detail=True,
@@ -172,8 +153,7 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
     )
     def delete_attached_file(self, request, group_id, pk=None):
         """Action to delete an attachment."""
-        data = self.process_action(request)
-        return Response(data)
+        return self.detail_action_response(request)
 
     @action(
         detail=True,
@@ -183,8 +163,7 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
     )
     def bbb_room(self, request, group_id, pk=None):
         """BBB Room and conference settings API."""
-        data = self.process_action(request, partial=True)
-        return Response(data)
+        return self.detail_action_response(request, partial=True)
 
     @action(
         detail=True,
@@ -194,8 +173,7 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
     )
     def bbb_room_urls(self, request, group_id, pk=None):
         """API for BBB room Urls, used for periodic pull during BBB room creation"""
-        data = self.process_action(request)
-        return Response(data)
+        return self.detail_action_response(request)
 
     @action(
         detail=True,
@@ -205,8 +183,7 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
     )
     def bookmark(self, request, group_id, pk=None):
         """API to bookmark the event."""
-        data = self.process_action(request)
-        return Response(data)
+        return self.detail_action_response(request)
 
     @action(
         detail=True,
@@ -216,8 +193,7 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
     )
     def reflections(self, request, group_id, pk=None):
         """API to handle event reflection in user groups"""
-        data = self.process_action(request)
-        return Response(data)
+        return self.detail_action_response(request)
 
 
 class CosinnusCalendarSyncedEventsViewSet(
@@ -308,8 +284,7 @@ class CosinnusCalendarSyncedEventsViewSet(
         Note: Implemented as extra action and not a field in the event serializer, because of different permissions.
               Users with only read permissions to the event should be able to set it.
         """
-        data = self.process_action(request)
-        return Response(data)
+        return self.detail_action_response(request)
 
     @action(
         detail=True,
@@ -319,8 +294,7 @@ class CosinnusCalendarSyncedEventsViewSet(
     )
     def bbb_room(self, request, group_id, nextcloud_calendar_uid):
         """BBB Room and conference settings API."""
-        data = self.process_action(request, partial=True)
-        return Response(data)
+        return self.detail_action_response(request, partial=True)
 
     @action(
         detail=True,
@@ -330,8 +304,7 @@ class CosinnusCalendarSyncedEventsViewSet(
     )
     def bbb_room_urls(self, request, group_id, nextcloud_calendar_uid):
         """API for BBB room Urls, used for periodic pull during BBB room creation"""
-        data = self.process_action(request)
-        return Response(data)
+        return self.detail_action_response(request)
 
     @action(
         detail=False,
