@@ -474,7 +474,11 @@ class CalendarRepairMembershipView(APIView):
         except Exception as e:
             logger.error(
                 'Error: CalendarRepairMembershipView had an error when trying to repair a group membership',
-                extra={'exception': str(e)},
+                extra={
+                    'exception': str(e),
+                    'user_id': request.user.id,
+                    'group_id': group_id,
+                },
             )
             return Response(status=status.HTTP_503_SERVICE_UNAVAILABLE, data={'error': 'Internal cloud error'})
 

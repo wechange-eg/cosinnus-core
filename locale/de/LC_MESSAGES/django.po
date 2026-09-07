@@ -6715,7 +6715,7 @@ msgstr "Ich möchte Moderator für dieses Portal sein"
 
 #, python-format
 msgid "I wish to delete „%(title)s“."
-msgstr "I möchte „%(title)s“ löschen."
+msgstr "Ich möchte „%(title)s“ löschen."
 
 msgid "I wish to receive email notifications"
 msgstr "Ich möchte E-Mail-Benachrichtigungen erhalten"
