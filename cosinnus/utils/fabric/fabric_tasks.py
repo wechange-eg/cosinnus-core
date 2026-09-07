@@ -200,12 +200,7 @@ def restart(_ctx, skip_check=False):
     if not skip_check:
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
             c.run(f'{env.path}/manage.py check')
-
-    for i in range(20):
-        print('!!!!!!!!!!!!!!!!!!! TEMPORARILY NOT RESSTARTING')
-
-    # c.run(env.reload_command)
-
+    c.run(env.reload_command)
     if env.uses_celery:
         restartcelery(_ctx)
     clearportalcache(_ctx)
