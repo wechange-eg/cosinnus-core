@@ -46,7 +46,7 @@ from cosinnus.utils.files import get_avatar_filename, image_thumbnail, image_thu
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids
 from cosinnus.utils.html import convert_html_to_plaintext
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.utils.user import get_newly_registered_user_email, is_user_active
+from cosinnus.utils.user import filter_active_users, get_newly_registered_user_email, is_user_active
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
 from cosinnus_deck.models import DeckMigrationMixin
 
@@ -104,6 +104,36 @@ class BaseUserProfileManager(models.Manager):
                 profile = self.create(user_id=user.id)
             return profile
         raise TypeError('user must be of type int or Model but is %s' % type(user))
+
+    def get_recommendations(self, user):
+        from django.contrib.auth import get_user_model
+
+        from cosinnus.utils.permissions import check_user_can_see_user
+
+        # prefetch user
+        queryset = self.prefetch_related('user', 'user__cosinnus_memberships')
+
+        # exclude self
+        queryset = queryset.exclude(user_id=user.pk)
+
+        # filter active user
+        queryset = filter_active_users(queryset, filter_on_user_profile_model=True)
+
+        # exclude empty description
+        queryset = queryset.exclude(description=None).exclude(description='')
+
+        # check visibility
+        users = get_user_model().objects.filter(cosinnus_profile__in=queryset)
+        users = users.prefetch_related('cosinnus_profile', 'cosinnus_profile__media_tag')
+        checked_for_visibility_users = [
+            recommended_user for recommended_user in users if check_user_can_see_user(user, recommended_user)
+        ]
+        queryset = queryset.filter(user_id__in=checked_for_visibility_users)
+
+        # order by signup date
+        queryset = queryset.order_by('-user__date_joined')
+
+        return queryset
 
 
 @six.python_2_unicode_compatible

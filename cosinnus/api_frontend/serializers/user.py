@@ -23,7 +23,7 @@ from cosinnus.api_frontend.serializers.tagged import CosinnusMediaTagSerializerM
 from cosinnus.api_frontend.serializers.utils import validate_managed_tag_slugs
 from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, UserSignupFinalizeMixin
-from cosinnus.models import PROFILE_SETTING_DISMISSED_GETTING_STARTED_ACTIONS
+from cosinnus.models import PROFILE_SETTING_DISMISSED_GETTING_STARTED_ACTIONS, get_user_profile_model
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.models.profile import (
     PROFILE_DYNAMIC_FIELDS_CONTACTS,
@@ -582,3 +582,13 @@ class CosinnusGettingStartedActionSerializer(serializers.Serializer):
                 dismissed_actions.remove(action_id)
         profile.settings[PROFILE_SETTING_DISMISSED_GETTING_STARTED_ACTIONS] = dismissed_actions
         type(profile).objects.filter(pk=profile.pk).update(settings=profile.settings)
+
+
+class CosinnusUserProfileRecommendationSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(source='get_full_name', read_only=True)
+    avatar = serializers.URLField(source='avatar_url', read_only=True)
+    url = serializers.URLField(source='get_absolute_url', read_only=True)
+
+    class Meta:
+        model = get_user_profile_model()
+        fields = ('name', 'description', 'avatar', 'url')

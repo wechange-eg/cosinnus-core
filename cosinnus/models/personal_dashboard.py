@@ -2,7 +2,10 @@ from django.urls import reverse, reverse_lazy
 
 from cosinnus.api_frontend.serializers.group import CosinnusGroupSerializer
 from cosinnus.api_frontend.serializers.idea import CosinnusIdeaSerializer
-from cosinnus.api_frontend.serializers.user import CosinnusGettingStartedActionSerializer
+from cosinnus.api_frontend.serializers.user import (
+    CosinnusGettingStartedActionSerializer,
+    CosinnusUserProfileRecommendationSerializer,
+)
 from cosinnus.conf import settings
 from cosinnus.models import get_user_profile_model
 from cosinnus.models.idea import CosinnusIdea
@@ -327,6 +330,20 @@ class CosinnusPersonalDashboardGroupRecommendationsWidget(CosinnusPersonalDashbo
         return data
 
 
+class CosinnusPersonalDashboardUserRecommendationsWidget(CosinnusPersonalDashboardWidget):
+    """User recommendations widget"""
+
+    id = 'dashboard.user_recommendations'
+    user_queryset_function = get_user_profile_model().objects.get_recommendations
+    serializer_class = CosinnusUserProfileRecommendationSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:api-user-recommendations')
+
+    def get_conf(self, user):
+        data = super().get_conf(user)
+        data['cta_url'] = reverse('cosinnus:user-match') if settings.COSINNUS_ENABLE_USER_MATCH else None
+        return data
+
+
 # list of all known widgets
 PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardNewsWidget,
@@ -345,6 +362,7 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardIdeaRecommendationsWidget,
     CosinnusPersonalDashboardEventRecommendationsWidget,
     CosinnusPersonalDashboardGroupRecommendationsWidget,
+    CosinnusPersonalDashboardUserRecommendationsWidget,
 ]
 
 # initialized available dashboard widgets

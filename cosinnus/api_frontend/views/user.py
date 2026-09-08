@@ -14,6 +14,7 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import authentication, serializers, status
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.generics import ListAPIView
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
@@ -37,6 +38,7 @@ from cosinnus.api_frontend.serializers.user import (
     CosinnusHybridUserSerializer,
     CosinnusSetInitialPasswordSerializer,
     CosinnusUserLoginSerializer,
+    CosinnusUserProfileRecommendationSerializer,
     CosinnusUserSignupSerializer,
 )
 from cosinnus.conf import settings
@@ -1089,3 +1091,18 @@ class CosinnusGettingStartedAPIView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return self.get(request)
+
+
+class CosinnusUserRecommendationsAPIView(ListAPIView):
+    """User recommendations v3 API."""
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    serializer_class = CosinnusUserProfileRecommendationSerializer
+
+    def get_queryset(self):
+        return get_user_profile_model().objects.get_recommendations(self.request.user)

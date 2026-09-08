@@ -38,6 +38,7 @@ from cosinnus.api_frontend.views.portal import (
 )
 from cosinnus.api_frontend.views.user import (
     CosinnusGettingStartedAPIView,
+    CosinnusUserRecommendationsAPIView,
     GroupInviteTokenView,
     GuestAccessTokenView,
     GuestLoginView,
@@ -151,6 +152,11 @@ if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
     urlpatterns += [
         path('api/v3/dashboard/', CosinnusPersonalDashboardAPIView.as_view(), name='api-peronsal-dashboard'),
         path('api/v3/user/getting_started/', CosinnusGettingStartedAPIView.as_view(), name='api-getting-started'),
+        path(
+            'api/v3/user/recommendations/',
+            CosinnusUserRecommendationsAPIView.as_view(),
+            name='api-user-recommendations',
+        ),
         path('api/v3/spaces/personal/', CosinnusGroupPersonalView.as_view(), name='api-group-personal'),
         path(
             'api/v3/spaces/recommendations/',
