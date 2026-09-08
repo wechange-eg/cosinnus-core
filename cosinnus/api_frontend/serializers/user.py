@@ -586,7 +586,7 @@ class CosinnusGettingStartedActionSerializer(serializers.Serializer):
 
 class CosinnusUserProfileRecommendationSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source='get_full_name', read_only=True)
-    avatar = serializers.URLField(source='avatar_url', read_only=True)
+    avatar = serializers.URLField(source='get_avatar_thumbnail_url', read_only=True)
     url = serializers.URLField(source='get_absolute_url', read_only=True)
 
     class Meta:
