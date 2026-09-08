@@ -569,7 +569,7 @@ class CosinnusGroupManager(models.Manager):
             count_members=Count('memberships', filter=Q(memberships__status__in=MEMBER_STATUS))
         ).filter(count_members__gt=1)
 
-        # order by last-activity
+        # order by created
         queryset = queryset.order_by('-created')
         return queryset
 

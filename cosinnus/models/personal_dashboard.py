@@ -295,8 +295,8 @@ class CosinnusPersonalDashboardIdeaRecommendationsWidget(CosinnusPersonalDashboa
 
     def get_conf(self, user):
         data = super().get_conf(user)
-        data['cta_url'] = (
-            get_map_url_with_selected_filter_params(['ideas'], topics=user.cosinnus_profile.media_tag.topics),
+        data['cta_url'] = get_map_url_with_selected_filter_params(
+            ['ideas'], topics=user.cosinnus_profile.media_tag.topics
         )
         return data
 
@@ -318,6 +318,13 @@ class CosinnusPersonalDashboardGroupRecommendationsWidget(CosinnusPersonalDashbo
     user_queryset_function = get_cosinnus_group_model().objects.get_recommendations
     serializer_class = CosinnusGroupSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:api-group-recommendations')
+
+    def get_conf(self, user):
+        data = super().get_conf(user)
+        data['cta_url'] = get_map_url_with_selected_filter_params(
+            ['groups', 'projects'], topics=user.cosinnus_profile.media_tag.topics
+        )
+        return data
 
 
 # list of all known widgets
