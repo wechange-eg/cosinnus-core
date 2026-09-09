@@ -111,7 +111,7 @@ class BaseUserProfileManager(models.Manager):
         from cosinnus.utils.permissions import check_user_can_see_user
 
         # prefetch user
-        queryset = self.prefetch_related('user', 'user__cosinnus_memberships')
+        queryset = self.prefetch_related('user')
 
         # exclude self
         queryset = queryset.exclude(user_id=user.pk)
