@@ -35,4 +35,4 @@ class CosinnusOfferViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
     def recommendations(self, request):
         """Return recommendations for user."""
         queryset = Offer.objects.get_recommendations(request.user)
-        return self.list_action_response(queryset)
+        return self.list_action_response(request, queryset)

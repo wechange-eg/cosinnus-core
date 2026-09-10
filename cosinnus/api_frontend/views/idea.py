@@ -35,7 +35,7 @@ class CosinnusIdeaViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
     def liked(self, request):
         """Return liked ideas."""
         queryset = CosinnusIdea.objects.get_personal_liked_items(request.user)
-        return self.list_action_response(queryset)
+        return self.list_action_response(request, queryset)
 
     @action(
         detail=False,
@@ -46,4 +46,4 @@ class CosinnusIdeaViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
     def recommendations(self, request):
         """Return recommended ideas."""
         queryset = CosinnusIdea.objects.get_recommendations(request.user)
-        return self.list_action_response(queryset)
+        return self.list_action_response(request, queryset)
