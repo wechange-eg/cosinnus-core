@@ -12,7 +12,7 @@ from cosinnus.models import BaseTaggableObjectModel
 from cosinnus.utils.functions import is_number
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import check_user_can_see_user
-from cosinnus.views.common import apply_star_object
+from cosinnus.views.common import apply_like_object, apply_star_object
 
 logger = logging.getLogger('cosinnus')
 
@@ -138,6 +138,21 @@ class CosinnusTagObjectBookmarkSerializer(serializers.Serializer):
     def update(self, instance, validated_data):
         user = self.context['request'].user
         apply_star_object(instance, user, star=validated_data['bookmarked'])
+        return instance
+
+
+class CosinnusTagObjectLikeSerializer(serializers.Serializer):
+    """Serializer to handle liking of tagged objects."""
+
+    liked = serializers.BooleanField(required=True)
+
+    def to_representation(self, instance):
+        user = self.context['request'].user
+        return {'liked': instance.is_user_liking(user)}
+
+    def update(self, instance, validated_data):
+        user = self.context['request'].user
+        apply_like_object(instance, user, like=validated_data['liked'])
         return instance
 
 

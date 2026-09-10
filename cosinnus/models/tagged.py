@@ -473,6 +473,29 @@ class LastVisitedMixin(object):
 
 
 class BaseTaggableObjectManager(models.Manager):
+    def get_readable_items(self, user):
+        """Return tagged objects that can be read by the user."""
+        from cosinnus.models import BaseTagObject
+        from cosinnus.utils.permissions import filter_base_taggable_qs_for_blocked_user_content
+
+        queryset = self.prefetch_related('group', 'creator', 'media_tag')
+
+        # filter active groups
+        queryset = queryset.filter(group__is_active=True)
+
+        # exclude groups where app is deactivated
+        queryset = queryset.exclude(group__deactivated_apps__contains=self.model._meta.app_label)
+
+        # get public objects or objects from users groups
+        user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
+        queryset = queryset.filter(
+            Q(group__pk__in=user_group_ids) | Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+        )
+
+        # consider blocked users
+        queryset = filter_base_taggable_qs_for_blocked_user_content(queryset, user)
+        return queryset
+
     def get_personal_items(self, user):
         """Returns tagged objects from the user groups, excluding default groups."""
         from cosinnus.utils.permissions import filter_base_taggable_qs_for_blocked_user_content
@@ -984,8 +1007,7 @@ class LikeableObjectMixin(models.Model):
         return len(self.get_followed_user_ids())
 
     def is_user_liking(self, user):
-        return user.email
-        """ Returns True is the user likes this object, else False. """
+        """Returns True is the user likes this object, else False."""
         return user.id in self.get_liked_user_ids()
 
     def is_user_following(self, user):
