@@ -7,8 +7,16 @@ from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResp
 from cosinnus.api_frontend.serializers.tagged import CosinnusTagObjectLikeSerializer
 from cosinnus.api_frontend.views.mixins import ViewSetActionMixin
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
-from cosinnus_note.api_frontend.permissions import CosinnusNoteForumPostPermissions, CosinnusNoteLikePermissions
-from cosinnus_note.api_frontend.serializers import CosinnusNoteForumPostSerializer, CosinnusNoteSerializer
+from cosinnus_note.api_frontend.permissions import (
+    CosinnusNoteCommentPermissions,
+    CosinnusNoteForumPostPermissions,
+    CosinnusNoteLikePermissions,
+)
+from cosinnus_note.api_frontend.serializers import (
+    CosinnusNoteCommentSerializer,
+    CosinnusNoteForumPostSerializer,
+    CosinnusNoteSerializer,
+)
 from cosinnus_note.models import Note
 
 
@@ -33,6 +41,7 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
         action_serializers = {
             'forum_post': CosinnusNoteForumPostSerializer,
             'like': CosinnusTagObjectLikeSerializer,
+            'comment': CosinnusNoteCommentSerializer,
         }
         if self.action in action_serializers:
             return action_serializers[self.action]
@@ -78,4 +87,14 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     )
     def like(self, request, pk):
         """Like / unlike a note."""
+        return self.detail_action_response(request)
+
+    @action(
+        detail=True,
+        methods=['post'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[CosinnusNoteCommentPermissions],
+    )
+    def comment(self, request, pk):
+        """Comment a note."""
         return self.detail_action_response(request)

@@ -2,7 +2,7 @@ from rest_framework.permissions import BasePermission
 
 from cosinnus.conf import settings
 from cosinnus.utils.group import get_cosinnus_group_model
-from cosinnus.utils.permissions import check_object_likefollowstar_access
+from cosinnus.utils.permissions import check_group_create_objects_access, check_object_likefollowstar_access
 
 
 def check_user_can_post_to_forum(user):
@@ -41,3 +41,11 @@ class CosinnusNoteLikePermissions(BasePermission):
     def has_object_permission(self, request, view, obj):
         user = request.user
         return user.is_authenticated and check_object_likefollowstar_access(obj, user)
+
+
+class CosinnusNoteCommentPermissions(BasePermission):
+    """Permission class for Note comment action."""
+
+    def has_object_permission(self, request, view, obj):
+        user = request.user
+        return user.is_authenticated and check_group_create_objects_access(obj.group, user)
