@@ -35,4 +35,4 @@ class CosinnusPollViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
     def open(self, request):
         """Return open polls where the user has not voted yet."""
         queryset = Poll.objects.get_personal_open_polls(request.user)
-        return self.list_action_response(request, queryset, context={'user': request.user})
+        return self.list_action_response(request, queryset)
