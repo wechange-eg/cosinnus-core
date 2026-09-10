@@ -4,8 +4,18 @@ from rest_framework import serializers
 from cosinnus.api_frontend.serializers.generic import CosinnusCreatorSerializer
 from cosinnus.api_frontend.serializers.tagged import CosinnusBaseTaggableObjectSerializer
 from cosinnus.conf import settings
+from cosinnus.templatetags.cosinnus_tags import filter_comments_for_user
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_note.models import Comment, Note
+
+
+class CosinnusNoteCommentListSerializer(serializers.ListSerializer):
+    """A custom list serializer used to filter comments for a user."""
+
+    def to_representation(self, data):
+        user = self.context['request'].user
+        data = filter_comments_for_user(data, user)
+        return super().to_representation(data)
 
 
 class CosinnusNoteCommentSerializer(serializers.ModelSerializer):
@@ -15,6 +25,7 @@ class CosinnusNoteCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ('text', 'created_on', 'creator')
+        list_serializer_class = CosinnusNoteCommentListSerializer
 
     def update(self, instance, validated_data):
         user = self.context['request'].user
