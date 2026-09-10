@@ -477,8 +477,13 @@ class BaseTaggableObjectManager(models.Manager):
         """Returns tagged objects from the user groups, excluding default groups."""
         from cosinnus.utils.permissions import filter_base_taggable_qs_for_blocked_user_content
 
-        queryset = self.filter(group__is_active=True)
-        queryset = queryset.prefetch_related('group', 'creator', 'media_tag')
+        queryset = self.prefetch_related('group', 'creator', 'media_tag')
+
+        # filter active groups
+        queryset = queryset.filter(group__is_active=True)
+
+        # exclude groups where app is deactivated
+        queryset = queryset.exclude(group__deactivated_apps__contains=self.model._meta.app_label)
 
         # filter by user groups without default groups
         user_group_ids = get_cosinnus_group_model().objects.get_for_user_without_default_groups_pks(user)
@@ -494,8 +499,11 @@ class BaseTaggableObjectManager(models.Manager):
 
         queryset = self.prefetch_related('group', 'creator', 'media_tag')
 
-        # only active groups with app active
+        # only active groups
         queryset = queryset.filter(group__is_active=True)
+
+        # exclude groups where app is deactivated
+        queryset = queryset.exclude(group__deactivated_apps__contains=self.model._meta.app_label)
 
         # exclude user groups, except default groups
         user_group_ids = get_cosinnus_group_model().objects.get_for_user_without_default_groups_pks(user)

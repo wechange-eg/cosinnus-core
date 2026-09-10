@@ -23,11 +23,6 @@ class PollManager(BaseTaggableObjectManager):
 
         return tag_names
 
-    def get_personal_items(self, user):
-        queryset = super().get_personal_items(user)
-        queryset = queryset.exclude(group__deactivated_apps__contains='cosinnus_poll')
-        return queryset
-
     def get_personal_open_polls(self, user):
         """Return open polls where the user has not voted yet."""
         queryset = self.get_personal_items(user)

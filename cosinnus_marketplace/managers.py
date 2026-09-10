@@ -26,14 +26,12 @@ class OfferManager(BaseTaggableObjectManager):
 
     def get_personal_items(self, user):
         queryset = super().get_personal_items(user)
-        queryset = queryset.exclude(group__deactivated_apps__contains='cosinnus_marketplace')
         # consider only active offers
         queryset = queryset.filter(is_active=True)
         return queryset
 
     def get_recommendations(self, user):
         queryset = super().get_recommendations(user)
-        queryset = queryset.exclude(group__deactivated_apps__contains='cosinnus_marketplace')
         # consider only active offers
         queryset = queryset.filter(is_active=True)
         return queryset
