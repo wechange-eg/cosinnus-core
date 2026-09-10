@@ -18,6 +18,7 @@ from cosinnus_event.api_frontend.serializers import CosinnusEventPollSerializer,
 from cosinnus_event.models import Event
 from cosinnus_marketplace.api_frontend.serializers import CosinnusOfferSerializer
 from cosinnus_marketplace.models import Offer
+from cosinnus_note.api_frontend.permissions import check_user_can_post_to_forum
 from cosinnus_note.api_frontend.serializers import CosinnusNoteSerializer
 from cosinnus_note.models import Note
 from cosinnus_poll.api_frontend.serializers import CosinnusPollSerializer
@@ -273,6 +274,12 @@ class CosinnusPersonalDashboardNewsRecommendationsWidget(CosinnusPersonalDashboa
     serializer_class = CosinnusNoteSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:personal-note-recommendations')
     data_limit = 10
+
+    def get_conf(self, user):
+        conf = super().get_conf(user)
+        forum_post_api = reverse_lazy('cosinnus:frontend-api:personal-note-forum-post')
+        conf.update({'forum_post_api': forum_post_api if check_user_can_post_to_forum(user) else None})
+        return conf
 
 
 class CosinnusPersonalDashboardOfferRecommendationsWidget(CosinnusPersonalDashboardWidget):
