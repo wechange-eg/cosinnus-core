@@ -277,8 +277,7 @@ class CosinnusPersonalDashboardNewsRecommendationsWidget(CosinnusPersonalDashboa
 
     def get_conf(self, user):
         conf = super().get_conf(user)
-        forum_post_api = reverse_lazy('cosinnus:frontend-api:note-forum-post')
-        conf.update({'forum_post_api': forum_post_api if check_user_can_post_to_forum(user) else None})
+        conf.update({'forum_post_allowed': check_user_can_post_to_forum(user)})
         return conf
 
 
