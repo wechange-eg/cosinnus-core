@@ -10,7 +10,7 @@ from cosinnus_marketplace.api_frontend.serializers import CosinnusOfferSerialize
 from cosinnus_marketplace.models import Offer
 
 
-class CosinnusOfferViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
+class CosinnusOfferViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     """Marketplace offer api for v3."""
 
     renderer_classes = (
@@ -22,9 +22,18 @@ class CosinnusOfferViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        user = self.request.user
-        queryset = Offer.objects.get_personal_items(user)
-        return queryset
+        return Offer.objects.none()
+
+    @action(
+        detail=False,
+        methods=['get'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[IsAuthenticated],
+    )
+    def personal(self, request):
+        """Return personal offers for user."""
+        queryset = Offer.objects.get_personal_items(request.user)
+        return self.list_action_response(request, queryset)
 
     @action(
         detail=False,

@@ -10,7 +10,7 @@ from cosinnus_poll.api_frontend.serializers import CosinnusPollSerializer
 from cosinnus_poll.models import Poll
 
 
-class CosinnusPollViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
+class CosinnusPollViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     """Poll api for v3."""
 
     renderer_classes = (
@@ -22,9 +22,7 @@ class CosinnusPollViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        user = self.request.user
-        queryset = Poll.objects.get_personal_items(user)
-        return queryset
+        return Poll.objects.none()
 
     @action(
         detail=False,

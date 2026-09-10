@@ -6,6 +6,6 @@ from cosinnus_event.api_frontend.views import CosinnusEventPollViewSet, Cosinnus
 urlpatterns = []
 
 router = routers.SimpleRouter()
-router.register('events', CosinnusEventViewSet, 'personal-event')
-router.register('event_polls', CosinnusEventPollViewSet, 'personal-event-poll')
+router.register('events', CosinnusEventViewSet, 'event')
+router.register('event_polls', CosinnusEventPollViewSet, 'event-poll')
 urlpatterns += [path('api/v3/', include(router.urls))]

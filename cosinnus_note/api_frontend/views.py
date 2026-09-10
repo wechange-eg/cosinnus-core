@@ -11,7 +11,7 @@ from cosinnus_note.api_frontend.serializers import CosinnusNoteForumPostSerializ
 from cosinnus_note.models import Note
 
 
-class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
+class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     """Note api for v3."""
 
     renderer_classes = (
@@ -35,6 +35,17 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
         if self.action in action_serializers:
             return action_serializers[self.action]
         return self.serializer_class
+
+    @action(
+        detail=False,
+        methods=['get'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[IsAuthenticated],
+    )
+    def personal(self, request):
+        """Return personal notes for user."""
+        queryset = Note.objects.get_personal_items(request.user)
+        return self.list_action_response(request, queryset)
 
     @action(
         detail=False,

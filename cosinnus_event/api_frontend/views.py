@@ -10,7 +10,7 @@ from cosinnus_event.api_frontend.serializers import CosinnusEventPollSerializer,
 from cosinnus_event.models import Event
 
 
-class CosinnusEventPollViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
+class CosinnusEventPollViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     """Event poll api for v3."""
 
     renderer_classes = (
@@ -22,9 +22,7 @@ class CosinnusEventPollViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        user = self.request.user
-        queryset = Event.objects.get_personal_items(user).filter(state=Event.STATE_VOTING_OPEN)
-        return queryset
+        return Event.objects.none()
 
     @action(
         detail=False,
@@ -38,7 +36,7 @@ class CosinnusEventPollViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet
         return self.list_action_response(request, queryset)
 
 
-class CosinnusEventViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
+class CosinnusEventViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     """Event api for v3."""
 
     renderer_classes = (
@@ -50,9 +48,7 @@ class CosinnusEventViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        user = self.request.user
-        queryset = Event.objects.get_personal_items(user).filter(state=Event.STATE_SCHEDULED)
-        return queryset
+        return Event.objects.none()
 
     @action(
         detail=False,

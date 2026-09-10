@@ -10,7 +10,7 @@ from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.models.idea import CosinnusIdea
 
 
-class CosinnusIdeaViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
+class CosinnusIdeaViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     """Idea api for v3."""
 
     renderer_classes = (
@@ -22,9 +22,18 @@ class CosinnusIdeaViewSet(ViewSetActionMixin, viewsets.ReadOnlyModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        user = self.request.user
-        queryset = CosinnusIdea.objects.get_personal_items(user)
-        return queryset
+        return CosinnusIdea.objects.none()
+
+    @action(
+        detail=False,
+        methods=['get'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[IsAuthenticated],
+    )
+    def personal(self, request):
+        """Return personal ideas."""
+        queryset = CosinnusIdea.objects.get_personal_items(request.user)
+        return self.list_action_response(request, queryset)
 
     @action(
         detail=False,

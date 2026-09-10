@@ -169,5 +169,5 @@ if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
         path('', include('cosinnus_poll.urls_api_frontend')),
     ]
     router = routers.SimpleRouter()
-    router.register('ideas', CosinnusIdeaViewSet, 'personal-idea')
+    router.register('ideas', CosinnusIdeaViewSet, 'idea')
     urlpatterns += [path('api/v3/', include(router.urls))]

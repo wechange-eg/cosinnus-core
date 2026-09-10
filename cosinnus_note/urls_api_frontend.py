@@ -6,5 +6,5 @@ from cosinnus_note.api_frontend.views import CosinnusNoteViewSet
 urlpatterns = []
 
 router = routers.SimpleRouter()
-router.register('notes', CosinnusNoteViewSet, 'personal-note')
+router.register('notes', CosinnusNoteViewSet, 'note')
 urlpatterns += [path('api/v3/', include(router.urls))]
