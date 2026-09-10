@@ -1,17 +1,16 @@
 import logging
 import random
 
-from django.contrib.auth import get_user_model
 from geopy import OpenCage
 from geopy.exc import GeocoderInsufficientPrivileges, GeopyError
 from geopy.extra.rate_limiter import RateLimiter
 from rest_framework import serializers
 
+from cosinnus.api_frontend.serializers.generic import CosinnusCreatorSerializer
 from cosinnus.conf import settings
 from cosinnus.models import BaseTaggableObjectModel
 from cosinnus.utils.functions import is_number
 from cosinnus.utils.group import get_cosinnus_group_model
-from cosinnus.utils.permissions import check_user_can_see_user
 from cosinnus.views.common import apply_like_object, apply_star_object
 
 logger = logging.getLogger('cosinnus')
@@ -156,33 +155,6 @@ class CosinnusTagObjectLikeSerializer(serializers.Serializer):
         return instance
 
 
-class CosinnusTaggableObjectCreatorSerializer(serializers.ModelSerializer):
-    """Readonly serializer for the taggable object creator."""
-
-    name = serializers.CharField(source='cosinnus_profile.get_full_name', read_only=True)
-    avatar = serializers.URLField(source='cosinnus_profile.get_avatar_thumbnail_url', read_only=True)
-    profile_url = serializers.URLField(source='cosinnus_profile.get_absolute_url', read_only=True)
-
-    class Meta:
-        model = get_user_model()
-        fields = (
-            'name',
-            'avatar',
-            'profile_url',
-        )
-
-    def to_representation(self, instance):
-        """Check view permissions for creator."""
-        user = None
-        if 'user' in self.context:
-            user = self.context['user']
-        if 'request' in self.context:
-            user = self.context['request'].user
-        if not user or not check_user_can_see_user(user, instance):
-            return None
-        return super().to_representation(instance)
-
-
 class CosinnusTaggableObjectGroupSerializer(serializers.ModelSerializer):
     """Readonly serializer for the taggable object group."""
 
@@ -196,7 +168,7 @@ class CosinnusTaggableObjectGroupSerializer(serializers.ModelSerializer):
 class CosinnusBaseTaggableObjectSerializer(serializers.ModelSerializer):
     """Readonly base serializer for taggable objects"""
 
-    creator = CosinnusTaggableObjectCreatorSerializer(read_only=True)
+    creator = CosinnusCreatorSerializer(read_only=True)
     group = CosinnusTaggableObjectGroupSerializer(read_only=True)
     url = serializers.URLField(source='get_absolute_url', read_only=True)
 
