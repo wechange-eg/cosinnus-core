@@ -90,8 +90,8 @@ setup(
         'MarkupSafe==2.1.5',
         'Pillow==12.3.0',
         'caldav==2.1.2',
-        'channels==4.3.2',  # TODO: PY UPGRADE CHECK, # Moved from pyproject.toml
-        'celery==5.6.2',  # TODO: PY UPGRADE CHECK, 3.13 last supported
+        'channels==4.3.2',
+        'celery==5.6.2',
         'dataclasses',
         'beautifulsoup4==4.14.3',
         'chardet==3.0.4',
@@ -99,7 +99,6 @@ setup(
         'django-annoying==0.7.6',
         'django-appconf==1.2.0',
         'django-bootstrap3==21.1',
-        # 'django-classy-tags==2.0.0',  # TODO: REMOVED!! check!
         'django-countries==8.2.0',
         'django-cron-django5==0.6.2',
         'django-embed-video==1.4.10',
@@ -114,11 +113,9 @@ setup(
         'django-ical==1.7.1',
         'django-mailbox==4.9.0',
         'django-model-utils==5.0.0',
-        # 'django-mptt==0.8.7',  # TODO: REMOVED!! check!
         'django-oauth-toolkit==2.3.0',
         'django-otp==1.1.1',
         'django-phonenumber-field==6.4.0',
-        # 'django-polymorphic==0.7.2',  # TODO: REMOVED!! check!
         'django-prometheus==2.4.1',
         'django-reverse-admin==2.9.4',
         'django-sekizai==2.0.0',
@@ -149,9 +146,9 @@ setup(
         'paramiko==2.11.0',
         'pycountry==20.7.3',
         'raven==6.10.0',
-        'redis==5.3.1',  # TODO: PY UPGRADE CHECK, 3.12 last supported - required for celery
+        'redis==5.3.1',
         'requests==2.33.1',
-        'requests-oauthlib==2.0.0',  # TODO: PY UPGRADE CHECK
+        'requests-oauthlib==2.0.0',
         'rocketchat-API==1.30.0',
         'six==1.17.0',
         'sqlparse==0.6.0',
