@@ -52,4 +52,5 @@ class CosinnusEventSerializer(CosinnusBaseTaggableObjectSerializer):
             'url',
             'location_type',
             'location',
+            'image',
         )
