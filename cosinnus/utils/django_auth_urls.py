@@ -20,7 +20,9 @@ if not is_integrated_portal():
 
     urlpatterns = [
         path('login/', common.cosinnus_login, name='login'),
-        path('logout/', common.cosinnus_logout, {'next_page': '/'}, name='logout'),
+        path('logout/', common.cosinnus_logout_direct, {'next_page': '/'}, name='logout'),
+        # if we no longer want to support GET-logouts, use this url definition instead:
+        # path('logout/', common.cosinnus_logout, {'next_page': '/'}, name='logout'),
     ]
 
     # password change URLs are disabled for SSO-Portals
