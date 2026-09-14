@@ -13,7 +13,7 @@ class IndexTest(ViewTestCase):
         """
         self.client.login(username=self.credential, password=self.credential)
         kwargs = {'group': self.group.slug}
-        url = reverse('cosinnus:etherpad:index', kwargs=kwargs)
+        url = reverse('cosinnus:etherpad:index-redirect', kwargs=kwargs)
         response = self.client.get(url)
 
         # should redirect to list view

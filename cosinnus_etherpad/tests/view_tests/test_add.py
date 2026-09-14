@@ -66,11 +66,10 @@ class AddTest(ViewTestCase):
         pad.delete()
 
     @patch('cosinnus_etherpad.models.EtherCalcClient', autospec=True)
-    @override_settings(COSINNUS_ETHERPAD_ETHERCALC_READONLY=False)
+    @override_settings(COSINNUS_ETHERPAD_ETHERCALC_READONLY=True)
     def test_ethercalc_forbidden(self, mock_client):
         """
-        Should return 302 to pad detail on successful POST and have a pad
-        with given title
+        Test ethercalc readonly mode blocking the creation of new calcs.
         """
 
         self.client.login(username=self.credential, password=self.credential)
