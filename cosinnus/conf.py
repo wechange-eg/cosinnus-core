@@ -1917,6 +1917,10 @@ class CosinnusConf(AppConf):
         'activity_computation_window_days': 3,
     }
 
+    # If enabled, inactivity cron jobs only report users and groups that would be notified or deactivated.
+    # Already scheduled deletions are not affected.
+    INACTIVITY_DRY_RUN = False
+
     # TODO delete these hooks, when deprecated settings are removed
     def configure_user_inactivity(self, value):
         # `value` does not preserve whether it came from the AppConf default or

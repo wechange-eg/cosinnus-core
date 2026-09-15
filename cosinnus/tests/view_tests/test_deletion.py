@@ -158,6 +158,24 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
                     SendUserInactivityNotifications().do()
                     self.assertFalse(send_mail_mock.called)
 
+    @override_settings(COSINNUS_INACTIVITY_DRY_RUN=True)
+    @patch('cosinnus.views.profile_deletion.send_html_mail')
+    def test_inactivity_notification_dry_run(self, send_mail_mock):
+        warning_days = next(iter(settings.COSINNUS_USER_INACTIVITY['warnings']))
+        self.test_user.last_login = datetime(2014, 1, 1)
+        self.test_user.save()
+        notification_date = self.test_user.last_login + timedelta(
+            days=settings.COSINNUS_USER_INACTIVITY['days'] - warning_days
+        )
+
+        with freeze_time(notification_date):
+            result = SendUserInactivityNotifications().do()
+
+        self.assertEqual(result, '1 users would be notified (dry run).')
+        send_mail_mock.assert_not_called()
+        self.test_user.cosinnus_profile.refresh_from_db()
+        self.assertIsNone(self.test_user.cosinnus_profile.inactivity_notification_sent_at)
+
     @patch('cosinnus.views.profile_deletion.send_html_mail')
     def test_scheduled_deletion(self, send_mail_mock):
         last_login = datetime(2014, 1, 1, tzinfo=timezone.utc)
@@ -196,6 +214,44 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
             MarkInactiveUsersForDeletion().do()
             self.test_user.cosinnus_profile.refresh_from_db()
             self.assertEqual(self.test_user.cosinnus_profile.scheduled_for_deletion_at, expected_deletion)
+
+    @override_settings(COSINNUS_INACTIVITY_DRY_RUN=True)
+    @patch('cosinnus.views.profile_deletion.send_html_mail')
+    def test_inactivity_deactivation_dry_run(self, send_mail_mock):
+        self.test_user.last_login = datetime(2014, 1, 1, tzinfo=timezone.utc)
+        self.test_user.save()
+        deactivation_date = self.test_user.last_login + timedelta(
+            days=settings.COSINNUS_USER_INACTIVITY['days'], seconds=1
+        )
+
+        with freeze_time(deactivation_date):
+            result = MarkInactiveUsersForDeletion().do()
+
+        self.assertEqual(result, '1 users would be scheduled for deletion (dry run).')
+        send_mail_mock.assert_not_called()
+        self.test_user.refresh_from_db()
+        self.assertTrue(self.test_user.is_active)
+        self.assertIsNone(self.test_user.cosinnus_profile.scheduled_for_deletion_at)
+
+    @override_settings(LANGUAGES=(('de', 'Deutsch'), ('en', 'English')))
+    def test_inactivity_preview(self):
+        self.test_user.is_superuser = True
+        self.test_user.save()
+        self.client.force_login(self.test_user)
+
+        response = self.client.get(reverse('cosinnus:housekeeping-inactivity-preview'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'data-language="de"')
+        self.assertContains(response, 'data-language="en"')
+        self.assertContains(response, 'Users due for deactivation')
+
+    def test_inactivity_preview_requires_superuser(self):
+        self.client.force_login(self.test_user)
+
+        response = self.client.get(reverse('cosinnus:housekeeping-inactivity-preview'))
+
+        self.assertEqual(response.status_code, 403)
 
     @patch('cosinnus.views.profile_deletion.send_html_mail', side_effect=Exception)
     def test_scheduled_deletion_email_exception(self, send_mail_mock):
@@ -691,6 +747,26 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
                     SendGroupsInactivityNotifications().do()
                     self.assertFalse(send_mail_mock.called)
 
+    @override_settings(COSINNUS_INACTIVITY_DRY_RUN=True)
+    @patch('cosinnus.views.group_deletion.send_html_mail')
+    def test_inactivity_notification_dry_run(self, send_mail_mock):
+        warning_days = next(iter(settings.COSINNUS_GROUP_INACTIVITY['warnings']))
+        last_activity = datetime(2014, 1, 1)
+        with freeze_time(last_activity):
+            self.test_group.last_activity = last_activity
+            self.test_group.save()
+        notification_date = self.test_group.last_activity + timedelta(
+            days=settings.COSINNUS_GROUP_INACTIVITY['days'] - warning_days
+        )
+
+        with freeze_time(notification_date):
+            result = SendGroupsInactivityNotifications().do()
+
+        self.assertEqual(result, '1 groups would be notified (dry run).')
+        send_mail_mock.assert_not_called()
+        self.test_group.refresh_from_db()
+        self.assertIsNone(self.test_group.inactivity_notification_sent_at)
+
     @patch('cosinnus.views.group_deletion.send_html_mail')
     def test_scheduled_deletion(self, send_mail_mock):
         last_activity = datetime(2014, 1, 1, tzinfo=timezone.utc)
@@ -729,6 +805,24 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             MarkInactiveGroupsForDeletion().do()
             self.test_group.refresh_from_db()
             self.assertEqual(self.test_group.scheduled_for_deletion_at, expected_deletion)
+
+    @override_settings(COSINNUS_INACTIVITY_DRY_RUN=True)
+    @patch('cosinnus.views.group_deletion.send_html_mail')
+    def test_inactivity_deactivation_dry_run(self, send_mail_mock):
+        self.test_group.last_activity = datetime(2014, 1, 1, tzinfo=timezone.utc)
+        self.test_group.save()
+        deactivation_date = self.test_group.last_activity + timedelta(
+            days=settings.COSINNUS_GROUP_INACTIVITY['days'], seconds=1
+        )
+
+        with freeze_time(deactivation_date):
+            result = MarkInactiveGroupsForDeletion().do()
+
+        self.assertEqual(result, '1 groups would be scheduled for deletion (dry run).')
+        send_mail_mock.assert_not_called()
+        self.test_group.refresh_from_db()
+        self.assertTrue(self.test_group.is_active)
+        self.assertIsNone(self.test_group.scheduled_for_deletion_at)
 
     @patch('cosinnus.views.group_deletion.send_html_mail')
     def test_scheduled_deletion_of_inactive_groups(self, send_mail_mock):
