@@ -17,6 +17,7 @@ from cosinnus.models.group_extra import ensure_group_type
 from cosinnus.models.membership import MEMBER_STATUS
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_portal_group_slugs
+from cosinnus.utils.inactivity import render_inactivity_mail
 from cosinnus.utils.permissions import check_ug_admin, check_user_can_receive_emails
 from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
 from cosinnus_cloud.utils.nextcloud import get_group_folder_last_modified
@@ -285,8 +286,7 @@ def send_group_inactivity_deactivation_notifications():
     groups = get_cosinnus_group_model().objects.filter(is_active=True).exclude(last_activity=None)
     groups = groups.exclude(slug__in=get_default_portal_group_slugs())
     config = settings.COSINNUS_GROUP_INACTIVITY
-    for days_before_deactivation, warning in config['warnings'].items():
-        time_message = warning['text']
+    for days_before_deactivation in config['warnings']:
         # get groups that are notified according to the configured interval
         days_after_last_activity = config['days'] - days_before_deactivation
         group_last_activity_date = (now() - datetime.timedelta(days=days_after_last_activity)).date()
@@ -296,23 +296,19 @@ def send_group_inactivity_deactivation_notifications():
         )
         for group in notify_groups:
             for admin in group.actual_admins.all():
-                mail_subject = _('%(group_type)s %(group_name)s will be deleted due to inactivity') % {
-                    'group_type': group.trans.VERBOSE_NAME,
-                    'group_name': group.name,
-                }
                 delete_url = group_aware_reverse('cosinnus:group-schedule-delete', kwargs={'group': group})
-                mail_content = _(
-                    '%(group_type)s %(group_name)s will be deactivated %(deactivation_after)s after the last activity '
-                    'and then permanently deleted. This will happen in %(deactivation_in)s.\n\n'
-                    'If you do not wish for the group/project to be deactivated, just create some content there.\n\n'
-                    'If an earlier deletion is desired, you can delete the group/project under %(delete_group_url)s.'
-                ) % {
-                    'group_type': group.trans.VERBOSE_NAME,
-                    'group_name': group.name,
-                    'deactivation_after': config['text'],
-                    'deactivation_in': time_message,
-                    'delete_group_url': delete_url,
-                }
+                mail_subject, mail_content = render_inactivity_mail(
+                    'group',
+                    admin,
+                    days_before_deactivation,
+                    {
+                        'group': group,
+                        'group_type': group.trans.VERBOSE_NAME,
+                        'group_name': group.name,
+                        'delete_group_url': delete_url,
+                        'deleted_after_days': settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS,
+                    },
+                )
                 html_content = textfield(mail_content)
                 send_html_mail(admin, mail_subject, html_content)
 

@@ -17,6 +17,7 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.utils.inactivity import render_inactivity_mail
 from cosinnus.views.group import mark_group_for_deletion
 
 logger = logging.getLogger('cosinnus')
@@ -217,8 +218,7 @@ def send_user_inactivity_deactivation_notifications():
     # exclude superuser, as they are never deleted
     users = users.exclude(is_superuser=True)
     config = settings.COSINNUS_USER_INACTIVITY
-    for days_before_deactivation, warning in config['warnings'].items():
-        time_message = warning['text']
+    for days_before_deactivation in config['warnings']:
         # get users that are notified according to the configured interval
         days_after_last_activity = config['days'] - days_before_deactivation
         user_last_activity_date = (now() - timedelta(days=days_after_last_activity)).date()
@@ -231,27 +231,12 @@ def send_user_inactivity_deactivation_notifications():
             | Q(cosinnus_profile__inactivity_notification_sent_at__date__lt=today)
         )
         for user in notify_users:
-            # send notification email
-            mail_subject = _('Your account will be deleted due to inactivity')
-            mail_content = _(
-                'Your entire account, profile and personal information will be deactivated in %(deactivation_in)s and '
-                'then irrevocably deleted.\n\n'
-                'If you do not wish for you account to be deactivated, just log in once.\n\n'
-                'Your pads, news, uploaded files and other content will remain on the website. However, your name will '
-                'no longer be displayed and your profile will no longer be linked to the content. On Rocket Chat, your '
-                'profile direct messages will be deleted, but content within discussions and channels will remain. If '
-                'you still want to delete content from yourself, you can do this now by deleting the content on the '
-                'relevant pages.\n\n'
-                'Your profile will first be deactivated and completely removed from the platform. After deactivation, '
-                'it will be deleted from our database after %(deleted_after_days)s days and only then permanently.\n\n'
-                'The account may be stored in our backup systems for up to 6 months after deletion. If this is too '
-                'long for you, please contact the support team of this platform for immediate deletion.\n\n'
-                'During this %(deleted_after_days)s-day period after deactivation, the e-mail address of your account '
-                'is reserved and cannot be used to register a new account.'
-            ) % {
-                'deleted_after_days': settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS,
-                'deactivation_in': time_message,
-            }
+            mail_subject, mail_content = render_inactivity_mail(
+                'user',
+                user,
+                days_before_deactivation,
+                {'deleted_after_days': settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS},
+            )
             html_content = textfield(mail_content)
             send_html_mail(user, mail_subject, html_content)
 

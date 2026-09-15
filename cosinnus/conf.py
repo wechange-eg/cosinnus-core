@@ -1854,7 +1854,11 @@ class CosinnusConf(AppConf):
 
     # Independent user/group policies. Configure hooks import explicitly configured legacy values when the respective
     # new setting is absent.
-    # Example: {'days': 365 * 5, 'text': _('5 years'), 'warnings': {21: {'text': _('21 days')}}}
+    # Example: {'days': 365 * 5, 'text': _('5 years'), 'warnings': {21: {
+    #     'text': _('21 days'),
+    #     'subject_template': 'myportal/mail/first_warning_subject.txt',
+    #     'body_template': 'myportal/mail/first_warning_body.txt',
+    # }}}
     # GROUP_INACTIVITY additionally requires `activity_computation_window_days`
     #   This limits the expensive full group-activity calculation to the configured number of days immediately before
     #   each warning and the automatic deactivation. A larger window catches activity more reliably if cron runs are
@@ -1863,20 +1867,52 @@ class CosinnusConf(AppConf):
         'days': 365 * 10,
         'text': _('10 years'),
         'warnings': {
-            365: {'text': _('1 year')},
-            182: {'text': _('6 months')},
-            14: {'text': _('2 weeks')},
-            2: {'text': _('2 days')},
+            365: {
+                'text': _('1 year'),
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
+            182: {
+                'text': _('6 months'),
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
+            14: {
+                'text': _('2 weeks'),
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
+            2: {
+                'text': _('2 days'),
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
         },
     }
     GROUP_INACTIVITY = {
         'days': 365 * 10,
         'text': _('10 years'),
         'warnings': {
-            365: {'text': _('1 year')},
-            182: {'text': _('6 months')},
-            14: {'text': _('2 weeks')},
-            2: {'text': _('2 days')},
+            365: {
+                'text': _('1 year'),
+                'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/group_body.txt',
+            },
+            182: {
+                'text': _('6 months'),
+                'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/group_body.txt',
+            },
+            14: {
+                'text': _('2 weeks'),
+                'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/group_body.txt',
+            },
+            2: {
+                'text': _('2 days'),
+                'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/group_body.txt',
+            },
         },
         'activity_computation_window_days': 3,
     }
@@ -1907,7 +1943,17 @@ class CosinnusConf(AppConf):
         config.update({key: legacy_value for key, legacy_value in legacy_values.items() if legacy_value is not None})
         legacy_warnings = getattr(settings, 'COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION', None)
         if legacy_warnings is not None:
-            config['warnings'] = {days: {'text': text} for days, text in legacy_warnings.items()}
+            templates = {
+                'user': {
+                    'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                    'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+                },
+                'group': {
+                    'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
+                    'body_template': 'cosinnus/mail/inactivity/group_body.txt',
+                },
+            }[kind]
+            config['warnings'] = {days: dict(templates, text=text) for days, text in legacy_warnings.items()}
 
         if kind == 'group':
             computation_window = getattr(

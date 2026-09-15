@@ -1,0 +1,1 @@
+{% if language == 'de' %}Dein Konto wird wegen Inaktivität gelöscht{% else %}Your account will be deleted due to inactivity{% endif %}
