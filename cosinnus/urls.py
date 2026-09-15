@@ -414,13 +414,15 @@ if getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
     ]
 
 if getattr(settings, 'COSINNUS_USE_V3_PERSONAL_DASHBOARD', False):
+    dashboard_url = getattr(settings, 'COSINNUS_V2_DASHBOARD_URL_FRAGMENT', 'dashboard')
     urlpatterns += [
-        path('dashboard/', user_dashboard.personal_dashboard_view, name='user-dashboard'),
+        path('personal/dashboard/', user_dashboard.personal_dashboard_view, name='user-dashboard'),
         path(
             'administration/welcome_announcement/',
             user_dashboard_announcement.user_dashboard_welcome_announcement_edit,
             name='user-dashboard-welcome-announcement-edit',
         ),
+        path(f'{dashboard_url}/', RedirectView.as_view(url='/personal/dashboard/', permanent=False)),
     ]
 elif getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(
     settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False
