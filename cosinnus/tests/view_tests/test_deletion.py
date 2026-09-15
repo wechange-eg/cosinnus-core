@@ -39,6 +39,7 @@ def create_active_test_user(username='user'):
     test_user.save()
     test_user.cosinnus_profile.tos_accepted = True
     test_user.cosinnus_profile.email_verified = True
+    test_user.cosinnus_profile.language = 'en'
     test_user.cosinnus_profile.save()
     return test_user
 
@@ -673,7 +674,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             with freeze_time(notification_date):
                 SendGroupsInactivityNotifications().do()
                 send_mail_mock.assert_called_once_with(
-                    self.test_admin, f'Group {self.test_group.name} will be deleted due to inactivity', ANY
+                    self.test_admin, f'Group/project {self.test_group.name} will be deleted due to inactivity', ANY
                 )
                 send_mail_mock.reset_mock()
 

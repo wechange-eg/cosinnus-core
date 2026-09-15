@@ -1,9 +1,11 @@
+from types import SimpleNamespace
 from unittest import mock
 
 from django.conf import settings
 from django.test import SimpleTestCase, override_settings
 
 from cosinnus.conf import CosinnusConf
+from cosinnus.utils.inactivity import render_inactivity_mail
 
 
 @override_settings(
@@ -23,7 +25,17 @@ class InactivitySettingsTest(SimpleTestCase):
         try:
             self.assertEqual(
                 conf.configure_user_inactivity(default),
-                {'days': 3650, 'text': '10 years', 'warnings': {14: {'text': '2 weeks'}}},
+                {
+                    'days': 3650,
+                    'text': '10 years',
+                    'warnings': {
+                        14: {
+                            'text': '2 weeks',
+                            'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                            'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+                        }
+                    },
+                },
             )
 
             group_default = dict(default, activity_computation_window_days=3)
@@ -32,7 +44,13 @@ class InactivitySettingsTest(SimpleTestCase):
                 {
                     'days': 3650,
                     'text': '10 years',
-                    'warnings': {14: {'text': '2 weeks'}},
+                    'warnings': {
+                        14: {
+                            'text': '2 weeks',
+                            'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
+                            'body_template': 'cosinnus/mail/inactivity/group_body.txt',
+                        }
+                    },
                     'activity_computation_window_days': 4,
                 },
             )
@@ -61,3 +79,65 @@ class InactivitySettingsTest(SimpleTestCase):
                 with mock.patch('cosinnus.conf.logger.warning') as warning:
                     self.assertIsNone(hook(None))
                     warning.assert_not_called()
+
+
+class InactivityMailTemplateTest(SimpleTestCase):
+    def render_user_mail(self, days, language='en'):
+        recipient = SimpleNamespace(cosinnus_profile=SimpleNamespace(language=language))
+        return render_inactivity_mail(
+            'user',
+            recipient,
+            days,
+            {'deleted_after_days': 30},
+        )
+
+    @override_settings(
+        COSINNUS_USER_INACTIVITY={
+            'days': 1825,
+            'text': '5 Jahre',
+            'warnings': {
+                21: {
+                    'text': '21 Tage',
+                    'subject_template': 'test/first_subject.txt',
+                    'body_template': 'test/first_body.txt',
+                },
+                10: {
+                    'text': '10 Tage',
+                    'subject_template': 'test/last_subject.txt',
+                    'body_template': 'test/last_body.txt',
+                },
+            },
+        }
+    )
+    @mock.patch('cosinnus.utils.inactivity.render_to_string')
+    def test_each_warning_selects_its_template(self, render_to_string_mock):
+        render_to_string_mock.side_effect = ['First', 'First body', 'Last', 'Last body']
+
+        self.assertEqual(self.render_user_mail(21), ('First', 'First body'))
+        self.assertEqual(self.render_user_mail(10), ('Last', 'Last body'))
+        self.assertEqual(
+            [call.args[0] for call in render_to_string_mock.call_args_list],
+            ['test/first_subject.txt', 'test/first_body.txt', 'test/last_subject.txt', 'test/last_body.txt'],
+        )
+
+    @override_settings(
+        COSINNUS_USER_INACTIVITY={
+            'days': 1825,
+            'text': '5 Jahre',
+            'warnings': {
+                21: {
+                    'text': '21 Tage',
+                    'subject_template': 'missing/subject.txt',
+                    'body_template': 'missing/body.txt',
+                }
+            },
+        }
+    )
+    def test_missing_portal_template_uses_localized_core_template(self):
+        with self.assertLogs('cosinnus', level='WARNING'):
+            german_subject, german_body = self.render_user_mail(21, 'de')
+            english_subject, english_body = self.render_user_mail(21)
+        self.assertEqual(german_subject, 'Dein Konto wird wegen Inaktivität gelöscht')
+        self.assertIn('Verbleibende Zeit: 21 Tage', german_body)
+        self.assertEqual(english_subject, 'Your account will be deleted due to inactivity')
+        self.assertIn('Time remaining:', english_body)
