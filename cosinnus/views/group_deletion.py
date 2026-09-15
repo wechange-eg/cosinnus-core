@@ -275,17 +275,13 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
             )
 
 
-def send_group_inactivity_deactivation_notifications():
-    """Sends notifications before automatic group deactivation due inactivity.
-    Notification are send at the exact interval. This means that if an interval is missed (e.g. due to cron jobs not
-    running for a day) the notification is not resend. This is considered non-critical as we make sure
-    to send a notification when actually scheduling the deletion.
-    """
-    groups_notified_count = 0
+def get_group_inactivity_notification_candidates():
+    """Return groups due for an inactivity warning, grouped by warning stage."""
     today = now().date()
     groups = get_cosinnus_group_model().objects.filter(is_active=True).exclude(last_activity=None)
     groups = groups.exclude(slug__in=get_default_portal_group_slugs())
     config = settings.COSINNUS_GROUP_INACTIVITY
+    candidates = {}
     for days_before_deactivation in config['warnings']:
         # get groups that are notified according to the configured interval
         days_after_last_activity = config['days'] - days_before_deactivation
@@ -294,7 +290,32 @@ def send_group_inactivity_deactivation_notifications():
         notify_groups = inactive_groups.filter(
             Q(inactivity_notification_sent_at=None) | Q(inactivity_notification_sent_at__date__lt=today)
         )
+        candidates[days_before_deactivation] = notify_groups
+    return candidates
+
+
+def get_groups_due_for_inactivity_deactivation():
+    """Return groups whose configured inactivity period has elapsed."""
+    inactivity_threshold = now() - datetime.timedelta(days=settings.COSINNUS_GROUP_INACTIVITY['days'])
+    groups = get_cosinnus_group_model().objects.filter(
+        scheduled_for_deletion_at=None, last_activity__lt=inactivity_threshold
+    )
+    return groups.exclude(slug__in=get_default_portal_group_slugs())
+
+
+def send_group_inactivity_deactivation_notifications(dry_run: bool = False) -> int:
+    """Send due inactivity warnings, or only count groups during a dry run.
+
+    Notifications are sent only at the exact configured interval. A missed interval is not retried; the final
+    deactivation notification remains the safety net.
+    """
+    groups_notified_count = 0
+    for days_before_deactivation, notify_groups in get_group_inactivity_notification_candidates().items():
         for group in notify_groups:
+            if dry_run:
+                groups_notified_count += 1
+                continue
+
             for admin in group.actual_admins.all():
                 delete_url = group_aware_reverse('cosinnus:group-schedule-delete', kwargs={'group': group})
                 mail_subject, mail_content = render_inactivity_mail(

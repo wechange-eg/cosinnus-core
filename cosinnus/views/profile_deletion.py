@@ -211,13 +211,13 @@ def delete_userprofile(user):
     user.save()
 
 
-def send_user_inactivity_deactivation_notifications():
-    """Sends notifications before automatic user deactivation due inactivity."""
-    users_notified_count = 0
+def get_user_inactivity_notification_candidates():
+    """Return users due to receive an inactivity warning, grouped by warning stage."""
     users = get_user_model().objects.filter(is_active=True)
     # exclude superuser, as they are never deleted
     users = users.exclude(is_superuser=True)
     config = settings.COSINNUS_USER_INACTIVITY
+    candidates = {}
     for days_before_deactivation in config['warnings']:
         # get users that are notified according to the configured interval
         days_after_last_activity = config['days'] - days_before_deactivation
@@ -230,7 +230,29 @@ def send_user_inactivity_deactivation_notifications():
             Q(cosinnus_profile__inactivity_notification_sent_at=None)
             | Q(cosinnus_profile__inactivity_notification_sent_at__date__lt=today)
         )
+        candidates[days_before_deactivation] = notify_users
+    return candidates
+
+
+def get_users_due_for_inactivity_deactivation():
+    """Return users whose configured inactivity period has elapsed."""
+    inactivity_threshold = now() - timedelta(days=settings.COSINNUS_USER_INACTIVITY['days'])
+    users = get_user_model().objects.filter(cosinnus_profile__scheduled_for_deletion_at=None)
+    users = users.filter(
+        Q(last_login__lt=inactivity_threshold) | Q(last_login=None, date_joined__lt=inactivity_threshold)
+    )
+    return users.exclude(is_superuser=True)
+
+
+def send_user_inactivity_deactivation_notifications(dry_run: bool = False) -> int:
+    """Send due inactivity warnings, or only count recipients during a dry run."""
+    users_notified_count = 0
+    for days_before_deactivation, notify_users in get_user_inactivity_notification_candidates().items():
         for user in notify_users:
+            if dry_run:
+                users_notified_count += 1
+                continue
+
             mail_subject, mail_content = render_inactivity_mail(
                 'user',
                 user,
