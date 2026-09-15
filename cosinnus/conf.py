@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import logging
 from builtins import object
+from typing import Literal
 
 from appconf import AppConf
 from django.conf import settings  # noqa
@@ -1817,25 +1818,104 @@ class CosinnusConf(AppConf):
 
     # robots.txt configuration. If True, use a deny-all robots.txt, otherwise serve static/robots.txt.
     DENY_ALL_ROBOTS = False
-    # Number of days before inactive groups and users are automatically deactivated for deletion.
-    # Note: Ignoring leap years to avoid calendar arithmetics as the exact duration is not crucial for the deactivation.
-    INACTIVE_DEACTIVATION_SCHEDULE = 365 * 10  # 10 years
-    INACTIVE_DEACTIVATION_SCHEDULE_TEXT = _('10 years')
 
-    # Notification intervals in days before automatic deactivation of users and groups.
-    # Dictionary with day value and the corresponding user text.
-    INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION = {
-        365: _('1 year'),
-        182: _('6 months'),
-        14: _('2 weeks'),
-        2: _('2 days'),
+    # DEPRECATED - use USER_INACTIVITY and GROUP_INACTIVITY instead.
+    INACTIVE_DEACTIVATION_SCHEDULE = None
+    INACTIVE_DEACTIVATION_SCHEDULE_TEXT = None
+
+    # DEPRECATED - use the warnings mappings in USER_INACTIVITY and GROUP_INACTIVITY instead.
+    INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION = None
+
+    # DEPRECATED - use GROUP_INACTIVITY['activity_computation_window_days'] instead.
+    INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS = None
+
+    # TODO delete these hooks, when deprecated settings are removed
+    def configure_inactive_deactivation_schedule(self, value):
+        return self._configure_deprecated_inactivity_setting(value, 'INACTIVE_DEACTIVATION_SCHEDULE')
+
+    def configure_inactive_deactivation_schedule_text(self, value):
+        return self._configure_deprecated_inactivity_setting(value, 'INACTIVE_DEACTIVATION_SCHEDULE_TEXT')
+
+    def configure_inactive_notifications_before_deactivation(self, value):
+        return self._configure_deprecated_inactivity_setting(value, 'INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION')
+
+    def configure_inactive_deactivation_activity_computation_window_days(self, value):
+        return self._configure_deprecated_inactivity_setting(
+            value, 'INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS'
+        )
+
+    @staticmethod
+    def _configure_deprecated_inactivity_setting(value, setting_name: str):
+        if value is not None:
+            logger.warning(
+                'The setting %s is deprecated. Use USER_INACTIVITY and GROUP_INACTIVITY instead.', setting_name
+            )
+        return value
+
+    # Independent user/group policies. Configure hooks import explicitly configured legacy values when the respective
+    # new setting is absent.
+    # Example: {'days': 365 * 5, 'text': _('5 years'), 'warnings': {21: {'text': _('21 days')}}}
+    # GROUP_INACTIVITY additionally requires `activity_computation_window_days`
+    #   This limits the expensive full group-activity calculation to the configured number of days immediately before
+    #   each warning and the automatic deactivation. A larger window catches activity more reliably if cron runs are
+    #   missed, but causes more database work and external Rocket.Chat/Nextcloud requests.
+    USER_INACTIVITY = {
+        'days': 365 * 10,
+        'text': _('10 years'),
+        'warnings': {
+            365: {'text': _('1 year')},
+            182: {'text': _('6 months')},
+            14: {'text': _('2 weeks')},
+            2: {'text': _('2 days')},
+        },
+    }
+    GROUP_INACTIVITY = {
+        'days': 365 * 10,
+        'text': _('10 years'),
+        'warnings': {
+            365: {'text': _('1 year')},
+            182: {'text': _('6 months')},
+            14: {'text': _('2 weeks')},
+            2: {'text': _('2 days')},
+        },
+        'activity_computation_window_days': 3,
     }
 
-    # the amount of days before any of the points in time indicated by
-    # `INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION` or `INACTIVE_DEACTIVATION_SCHEDULE`
-    # where `update_group_last_activity()` will actually run instead of skipping the
-    # expensive computation.
-    INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS = 3
+    # TODO delete these hooks, when deprecated settings are removed
+    def configure_user_inactivity(self, value):
+        # `value` does not preserve whether it came from the AppConf default or
+        # an explicit portal setting, so check the settings holder directly.
+        if hasattr(settings, 'COSINNUS_USER_INACTIVITY'):
+            return value
+        return self._apply_legacy_inactivity_settings(dict(value), 'user')
+
+    def configure_group_inactivity(self, value):
+        # `value` does not preserve whether it came from the AppConf default or
+        # an explicit portal setting, so check the settings holder directly.
+        if hasattr(settings, 'COSINNUS_GROUP_INACTIVITY'):
+            return value
+        return self._apply_legacy_inactivity_settings(dict(value), 'group')
+
+    @staticmethod
+    def _apply_legacy_inactivity_settings(config, kind: Literal['user', 'group']):
+        legacy_values = {
+            'days': getattr(settings, 'COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE', None),
+            'text': getattr(settings, 'COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE_TEXT', None),
+        }
+
+        # apply legacy values as override on top of default config
+        config.update({key: legacy_value for key, legacy_value in legacy_values.items() if legacy_value is not None})
+        legacy_warnings = getattr(settings, 'COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION', None)
+        if legacy_warnings is not None:
+            config['warnings'] = {days: {'text': text} for days, text in legacy_warnings.items()}
+
+        if kind == 'group':
+            computation_window = getattr(
+                settings, 'COSINNUS_INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS', None
+            )
+            if computation_window is not None:
+                config['activity_computation_window_days'] = computation_window
+        return config
 
     # enable group permissions in the django admin, including the group admin and the group field in the user admin.
     DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.apps import AppConfig
+from django.core.exceptions import ImproperlyConfigured
 from django.db.models.signals import post_migrate
 
 from cosinnus.management.initialization import ensure_current_portal_object
@@ -21,6 +22,10 @@ class CosinnusAppConfig(AppConfig):
         # register system checks
         import cosinnus.checks  # noqa: F401
         from cosinnus.conf import settings
+
+        for setting_name in ('COSINNUS_USER_INACTIVITY', 'COSINNUS_GROUP_INACTIVITY'):
+            if getattr(settings, setting_name, None) is None:
+                raise ImproperlyConfigured(f'{setting_name} must not be None.')
 
         if settings.COSINNUS_USE_CELERY:
             from cosinnus import init_celery_app
