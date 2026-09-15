@@ -439,6 +439,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'name': self.test_user.cosinnus_profile.get_full_name(),
                 'avatar': self.test_user.cosinnus_profile.get_avatar_thumbnail_url(),
                 'profile_url': self.test_user.cosinnus_profile.get_absolute_url(),
+                'is_mine': False,
             }
             self.assertEqual(data, expected_event_data)
 
