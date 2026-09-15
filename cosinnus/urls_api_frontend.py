@@ -149,7 +149,6 @@ if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
     ]
 
 if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
-    # TODO: check if apps are activated
     urlpatterns += [
         path('api/v3/dashboard/', CosinnusPersonalDashboardAPIView.as_view(), name='api-peronsal-dashboard'),
         path('api/v3/user/getting_started/', CosinnusGettingStartedAPIView.as_view(), name='api-getting-started'),
@@ -170,5 +169,6 @@ if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
         path('', include('cosinnus_poll.urls_api_frontend')),
     ]
     router = routers.SimpleRouter()
-    router.register('ideas', CosinnusIdeaViewSet, 'idea')
+    if settings.COSINNUS_IDEAS_ENABLED:
+        router.register('ideas', CosinnusIdeaViewSet, 'idea')
     urlpatterns += [path('api/v3/', include(router.urls))]
