@@ -127,6 +127,7 @@ urlpatterns += [
     path(
         'api/v3/report/event/', CosinnusReportView.as_view(model_name='cosinnus_event.Event'), name='api-report-event'
     ),
+    path('api/v3/report/note/', CosinnusReportView.as_view(model_name='cosinnus_note.Note'), name='api-report-note'),
 ]
 
 if settings.COSINNUS_ADMIN_USER_APIS_ENABLED:
