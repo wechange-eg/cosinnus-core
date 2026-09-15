@@ -42,7 +42,7 @@ def mark_group_for_deletion(group, triggered_by_user=None):
 
     if automatic_deletion:
         # ensure last activity threshold has passed
-        last_activity_threshold = now() - datetime.timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
+        last_activity_threshold = now() - datetime.timedelta(days=settings.COSINNUS_GROUP_INACTIVITY['days'])
         if group.last_activity > last_activity_threshold:
             logger.warning(
                 'Automatic group deletion due to inactivity scheduled to early!', extra={'group_id': group.id}
@@ -68,7 +68,7 @@ def mark_group_for_deletion(group, triggered_by_user=None):
             'group_type': group.trans.VERBOSE_NAME,
             'group_name': group.name,
             'deleted_after_days': settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS,
-            'deactivation_after': settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE_TEXT,
+            'deactivation_after': settings.COSINNUS_GROUP_INACTIVITY['text'],
             'deactivated_groups_url': deactivated_groups_url,
         }
         if automatic_deletion:
@@ -158,9 +158,6 @@ def delete_group(group):
     group.delete()
 
 
-_COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW = None
-
-
 def update_group_last_activity(group, force_ignore_compution_window=False):
     """Updates the group activity field.
     - Groups without a last_activity date will always be calculated.
@@ -170,21 +167,17 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
         activity date, e.g. a notification would be sent out or the group would be marked as deleted.
     :param group: Group to be updated.
     :param force_ignore_compution_window: Ignore the computation window set with
-        `INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS` and do the computation regardless.
+        `GROUP_INACTIVITY['activity_computation_window_days']` and do the computation regardless.
     """
 
     # Ignore forum, events and default user groups
     if group.slug in get_default_portal_group_slugs():
         return
 
-    # gather the timepoints as days from now() where any notification or deletion activity might happen to the group.
-    # only just before those timepoints will we actually re-calculate the last activity
-    global _COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW
-    if _COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW is None:
-        _COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW = [
-            settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE - days_before
-            for days_before in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.keys()
-        ] + [settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE]
+    # Gather the inactivity-age thresholds at which a warning or deactivation occurs.
+    # Only shortly before these thresholds do we recalculate the group's last activity.
+    config = settings.COSINNUS_GROUP_INACTIVITY
+    relevance_timepoint_days = [config['days'] - days_before for days_before in config['warnings']] + [config['days']]
 
     # ignore groups that have their activity calculated and are inactive themselves
     # (nothing should happen to refresh those)
@@ -197,9 +190,9 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
     else:
         # check if we're in a time window for recalculation
         is_within_recalculation_window = False
-        for days_of_event in _COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW:
+        for days_of_event in relevance_timepoint_days:
             a_bit_before_days_of_event = group.last_activity + datetime.timedelta(
-                days_of_event - settings.COSINNUS_INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS
+                days_of_event - config['activity_computation_window_days']
             )
             time_of_event = group.last_activity + datetime.timedelta(days_of_event)
             if a_bit_before_days_of_event <= now() <= time_of_event:
@@ -244,10 +237,7 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
     # in time where any notification about the deactivation would happen.
     # if any of the checks finds a younger datetime, we save it and stop checking further, because it would not result
     # in any actions taken for the group anyways
-    last_activity_cutoff_days_from_now = (
-        min(_COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW)
-        - settings.COSINNUS_INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS
-    )
+    last_activity_cutoff_days_from_now = min(relevance_timepoint_days) - config['activity_computation_window_days']
     last_activity_cutoff = now() - datetime.timedelta(days=last_activity_cutoff_days_from_now)
     if group.last_activity > last_activity_cutoff:
         # Abort further computation
@@ -294,15 +284,16 @@ def send_group_inactivity_deactivation_notifications():
     today = now().date()
     groups = get_cosinnus_group_model().objects.filter(is_active=True).exclude(last_activity=None)
     groups = groups.exclude(slug__in=get_default_portal_group_slugs())
-    for days_before_deactivation, time_message in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.items():
+    config = settings.COSINNUS_GROUP_INACTIVITY
+    for days_before_deactivation, warning in config['warnings'].items():
+        time_message = warning['text']
         # get groups that are notified according to the configured interval
-        days_after_last_activity = settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE - days_before_deactivation
+        days_after_last_activity = config['days'] - days_before_deactivation
         group_last_activity_date = (now() - datetime.timedelta(days=days_after_last_activity)).date()
         inactive_groups = groups.filter(last_activity__date=group_last_activity_date)
         notify_groups = inactive_groups.filter(
             Q(inactivity_notification_sent_at=None) | Q(inactivity_notification_sent_at__date__lt=today)
         )
-
         for group in notify_groups:
             for admin in group.actual_admins.all():
                 mail_subject = _('%(group_type)s %(group_name)s will be deleted due to inactivity') % {
@@ -318,7 +309,7 @@ def send_group_inactivity_deactivation_notifications():
                 ) % {
                     'group_type': group.trans.VERBOSE_NAME,
                     'group_name': group.name,
-                    'deactivation_after': settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE_TEXT,
+                    'deactivation_after': config['text'],
                     'deactivation_in': time_message,
                     'delete_group_url': delete_url,
                 }
