@@ -216,9 +216,11 @@ def send_user_inactivity_deactivation_notifications():
     users = get_user_model().objects.filter(is_active=True)
     # exclude superuser, as they are never deleted
     users = users.exclude(is_superuser=True)
-    for days_before_deactivation, time_message in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.items():
+    config = settings.COSINNUS_USER_INACTIVITY
+    for days_before_deactivation, warning in config['warnings'].items():
+        time_message = warning['text']
         # get users that are notified according to the configured interval
-        days_after_last_activity = settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE - days_before_deactivation
+        days_after_last_activity = config['days'] - days_before_deactivation
         user_last_activity_date = (now() - timedelta(days=days_after_last_activity)).date()
         inactive_users = users.filter(
             Q(last_login__date=user_last_activity_date) | Q(last_login=None, date_joined__date=user_last_activity_date)
@@ -228,7 +230,6 @@ def send_user_inactivity_deactivation_notifications():
             Q(cosinnus_profile__inactivity_notification_sent_at=None)
             | Q(cosinnus_profile__inactivity_notification_sent_at__date__lt=today)
         )
-
         for user in notify_users:
             # send notification email
             mail_subject = _('Your account will be deleted due to inactivity')

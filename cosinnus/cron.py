@@ -120,7 +120,7 @@ class SendUserInactivityNotifications(CosinnusCronJobBase):
 
 
 class MarkInactiveUsersForDeletion(CosinnusCronJobBase):
-    """Marks inactive users for deletion afters COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE day since last login."""
+    """Mark users for deletion after the configured user inactivity duration since last login."""
 
     RUN_EVERY_MINS = 60 * 24  # every day
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
@@ -130,7 +130,7 @@ class MarkInactiveUsersForDeletion(CosinnusCronJobBase):
     def do(self):
         users_scheduled = 0
         errors_occurred = False
-        inactivity_deactivation_threshold = now() - timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
+        inactivity_deactivation_threshold = now() - timedelta(days=settings.COSINNUS_USER_INACTIVITY['days'])
         inactive_users = get_user_model().objects.filter(cosinnus_profile__scheduled_for_deletion_at=None)
         inactive_users = inactive_users.filter(
             Q(last_login__lt=inactivity_deactivation_threshold)
@@ -487,7 +487,7 @@ class SendGroupsInactivityNotifications(CosinnusCronJobBase):
 
 
 class MarkInactiveGroupsForDeletion(CosinnusCronJobBase):
-    """Marks inactive groups for deletion afters COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE days of inactivity."""
+    """Mark groups for deletion after the configured group inactivity duration."""
 
     RUN_EVERY_MINS = 60 * 24  # every day
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
@@ -497,7 +497,7 @@ class MarkInactiveGroupsForDeletion(CosinnusCronJobBase):
     def do(self):
         groups_scheduled = 0
         errors_occurred = False
-        inactivity_deactivation_threshold = now() - timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
+        inactivity_deactivation_threshold = now() - timedelta(days=settings.COSINNUS_GROUP_INACTIVITY['days'])
         inactive_groups = get_cosinnus_group_model().objects.filter(
             scheduled_for_deletion_at=None, last_activity__lt=inactivity_deactivation_threshold
         )
