@@ -212,6 +212,7 @@ class BaseUserProfile(
     tos_accepted = models.BooleanField(verbose_name=_('ToS accepted'), default=False, db_index=True)
 
     avatar = models.ImageField(_('Avatar'), null=True, blank=True, upload_to=get_avatar_filename)
+    is_avatar_generated = models.BooleanField(_('Avatar is generated'), default=False)
     description = models.TextField(verbose_name=_('Description'), blank=True, null=True)
     media_tag = models.OneToOneField(
         settings.COSINNUS_TAG_OBJECT_MODEL, blank=True, null=True, editable=False, on_delete=models.SET_NULL
@@ -288,6 +289,9 @@ class BaseUserProfile(
         'tos_accepted',
         'email_verified',
         'account_verified',
+        'is_avatar_generated',
+        'inactivity_notification_sent_at',
+        'scheduled_for_deletion_at',
     ] + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
 
     # this indicates that objects of this model are in some way always visible by registered users
@@ -784,7 +788,7 @@ class BaseUserProfile(
             [
                 {
                     'action_id': 'set_avatar',
-                    'completed': bool(profile.avatar),
+                    'completed': bool(profile.avatar) and not profile.is_avatar_generated,
                     'cta_url': reverse('cosinnus:v3-frontend-setup-profile'),
                 },
                 {

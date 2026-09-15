@@ -251,6 +251,7 @@ class CosinnusHybridUserSerializer(
         validators=[HexColorValidator()],
         help_text='A hex color string. Represented without a leading "#", but can be input with one.',
     )
+    is_avatar_generated = serializers.BooleanField(source='cosinnus_profile.is_avatar_generated')
     contact_infos = serializers.JSONField(
         source=f'cosinnus_profile.dynamic_fields.{PROFILE_DYNAMIC_FIELDS_CONTACTS}',
         required=False,
@@ -360,19 +361,22 @@ class CosinnusHybridUserSerializer(
         return email
 
     def validate(self, attrs):
+        profile_data = attrs.get('cosinnus_profile', {})
         # validate managed tags
         if (
             settings.COSINNUS_MANAGED_TAGS_ENABLED
             and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF
             and settings.COSINNUS_MANAGED_TAGS_IN_UPDATE_FORM
         ):
-            profile_data = attrs.get('cosinnus_profile', {})
             if 'get_managed_tag_slugs' in profile_data:
                 managed_tag_slugs = profile_data.get('get_managed_tag_slugs', [])
                 validate_managed_tag_slugs(
                     managed_tag_slugs, settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED
                 )
-
+        # validate avatar and is_avatar_generated
+        if profile_data:
+            if 'is_avatar_generated' in profile_data and 'avatar' not in profile_data:
+                raise ValidationError('"avatar" must be submitted together with "is_avatar_generated".')
         attrs = super().validate(attrs)
         return attrs
 
@@ -409,6 +413,7 @@ class CosinnusHybridUserSerializer(
         avatar_color = profile_data.get('settings', {}).get(PROFILE_SETTINGS_AVATAR_COLOR, None)
         if avatar_color:
             profile.settings[PROFILE_SETTINGS_AVATAR_COLOR] = avatar_color.strip('#')
+        profile.is_avatar_generated = profile_data.get('is_avatar_generated', profile.is_avatar_generated)
         # allow resetting the field if an empty value is given
         if PROFILE_DYNAMIC_FIELDS_CONTACTS in profile_data.get('dynamic_fields', {}):
             contact_infos = profile_data.get('dynamic_fields', {}).get(PROFILE_DYNAMIC_FIELDS_CONTACTS, []) or []
