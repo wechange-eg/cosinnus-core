@@ -1133,7 +1133,7 @@ class CosinnusConf(AppConf):
     V3_MENU_SPACES_ADD_FORUM_EVENTS_LINK_LABEL = None
 
     # Map space label in the v3 main navigation. Set to None to exclude the map from the community space.
-    V3_MENU_SPACES_MAP_LABEL = _('Discover')
+    V3_MENU_SPACES_MAP_LABEL = _('Map')
 
     # Enable to add links to paired groups of managed tags of the user cosinnus_profile as community links.
     V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS = True

@@ -339,7 +339,7 @@ class SpacesView(FilterBlacklistedItemsMixin, MyGroupsClusteredMixin, APIView):
                             id='EventsForum',
                         )
                     )
-        # "Discover" link in community section of spaces menu
+        # "Map" link in community section of spaces menu
         if settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL:
             community_space_items.append(
                 MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-map', id='Map')
