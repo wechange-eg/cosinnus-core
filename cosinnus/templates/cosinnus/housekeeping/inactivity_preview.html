@@ -1,0 +1,65 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ request.LANGUAGE_CODE|default:'en' }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% trans "Inactivity preview" %}</title>
+</head>
+<body>
+<main>
+    <div class="content-box">
+        <h1>{% trans "Inactivity preview" %}</h1>
+        <p>{% trans "This page is read-only and shows the objects affected if the inactivity jobs run now." %}</p>
+        <p>
+            {% trans "Warning counts include only candidates whose configured warning date is today; candidates between warning dates are not included. In contrast, deactivation counts include all candidates whose inactivity period has elapsed and who have not yet been scheduled for deletion." %}
+        </p>
+        <p>
+            {% trans "Dry run" %}:
+            {% if dry_run %}<strong>{% trans "enabled" %}</strong>{% else %}{% trans "disabled" %}{% endif %}
+        </p>
+        <ul>
+            <li>{% trans "Users due for deactivation" %}: {{ users_due_for_deactivation }}</li>
+            <li>{% trans "Groups due for deactivation" %}: {{ groups_due_for_deactivation }}</li>
+        </ul>
+    </div>
+
+    {% for section in sections %}
+        <div class="content-box">
+            <h2>
+                {% if section.kind == 'user' %}{% trans "User warnings" %}{% else %}{% trans "Group warnings" %}{% endif %}
+            </h2>
+            <p>{% trans "Deactivation after" %}: {{ section.text }} ({{ section.days }} {% trans "days" %})</p>
+
+            {% for warning in section.warnings %}
+                <hr>
+                <h3>{{ warning.text }} ({{ warning.days }} {% trans "days" %})</h3>
+                <p><strong>{% trans "Current candidates" %}:</strong> {{ warning.count }}</p>
+                <p>
+                    <strong>{% trans "Subject template" %}:</strong> <code>{{ warning.subject_template }}</code><br>
+                    <strong>{% trans "Body template" %}:</strong> <code>{{ warning.body_template }}</code>
+                </p>
+
+                {% for preview in warning.previews %}
+                    <div class="panel panel-default" data-language="{{ preview.language }}">
+                        <div class="panel-heading">
+                            <strong>{{ preview.language_label }} ({{ preview.language }})</strong>
+                        </div>
+                        <div class="panel-body">
+                            {% if preview.error %}
+                                <div class="alert alert-danger">{{ preview.error }}</div>
+                            {% else %}
+                                <p><strong>{% trans "Subject" %}:</strong> {{ preview.subject }}</p>
+                                <pre style="white-space: pre-wrap">{{ preview.body }}</pre>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% empty %}
+                <p>{% trans "No warning stages configured." %}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</main>
+</body>
+</html>

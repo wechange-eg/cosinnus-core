@@ -1,7 +1,7 @@
 """Rendering helpers for inactivity warning emails."""
 
 import logging
-from typing import Literal, Tuple
+from typing import Literal, Optional, Tuple
 
 from django.conf import settings
 from django.template import TemplateDoesNotExist, TemplateSyntaxError
@@ -30,7 +30,12 @@ def _render_template_pair(subject_template, body_template, context):
 
 
 def render_inactivity_mail(
-    kind: Literal['user', 'group'], recipient, days_before_deactivation: int, context
+    kind: Literal['user', 'group'],
+    recipient,
+    days_before_deactivation: int,
+    context,
+    *,
+    language_override: Optional[str] = None,
 ) -> Tuple[str, str]:
     """Render a localized inactivity warning, falling back to the core templates."""
     if kind == 'user':
@@ -41,7 +46,7 @@ def render_inactivity_mail(
     warning = config['warnings'][days_before_deactivation]
 
     profile = getattr(recipient, 'cosinnus_profile', None)
-    language = getattr(profile, 'language', None) or 'en'
+    language = language_override or getattr(profile, 'language', None) or 'en'
 
     template_context = dict(
         context,
