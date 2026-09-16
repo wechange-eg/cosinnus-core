@@ -112,7 +112,9 @@ def inactivity_preview(request):
 
 
 def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, languages, recipient):
-    config = settings.COSINNUS_USER_INACTIVITY if kind == 'user' else settings.COSINNUS_GROUP_INACTIVITY
+    config = (
+        settings.COSINNUS_USER_INACTIVITY_SCHEDULE if kind == 'user' else settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE
+    )
     inactivity_durations = [
         {
             'language': language,

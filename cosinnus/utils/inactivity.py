@@ -67,9 +67,9 @@ def render_inactivity_mail(
 ) -> Tuple[str, str]:
     """Render a localized warning; optionally record effective template paths and fallback status for previews."""
     if kind == 'user':
-        config = settings.COSINNUS_USER_INACTIVITY
+        config = settings.COSINNUS_USER_INACTIVITY_SCHEDULE
     else:
-        config = settings.COSINNUS_GROUP_INACTIVITY
+        config = settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE
 
     warning = config['warnings'][days_before_deactivation]
 

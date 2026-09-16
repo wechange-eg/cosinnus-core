@@ -44,7 +44,7 @@ def mark_group_for_deletion(group, triggered_by_user=None):
 
     if automatic_deletion:
         # ensure last activity threshold has passed
-        last_activity_threshold = now() - datetime.timedelta(days=settings.COSINNUS_GROUP_INACTIVITY['days'])
+        last_activity_threshold = now() - datetime.timedelta(days=settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'])
         if group.last_activity > last_activity_threshold:
             logger.warning(
                 'Automatic group deletion due to inactivity scheduled to early!', extra={'group_id': group.id}
@@ -73,8 +73,8 @@ def mark_group_for_deletion(group, triggered_by_user=None):
                 'group_name': group.name,
                 'deleted_after_days': settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS,
                 'deactivation_after': format_inactivity_duration(
-                    settings.COSINNUS_GROUP_INACTIVITY['days'],
-                    settings.COSINNUS_GROUP_INACTIVITY,
+                    settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'],
+                    settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE,
                     language,
                 ),
                 'deactivated_groups_url': deactivated_groups_url,
@@ -178,7 +178,7 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
         activity date, e.g. a notification would be sent out or the group would be marked as deleted.
     :param group: Group to be updated.
     :param force_ignore_compution_window: Ignore the computation window set with
-        `GROUP_INACTIVITY['activity_computation_window_days']` and do the computation regardless.
+        `GROUP_INACTIVITY_SCHEDULE['activity_computation_window_days']` and do the computation regardless.
     """
 
     # Ignore forum, events and default user groups
@@ -187,7 +187,7 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
 
     # Gather the inactivity-age thresholds at which a warning or deactivation occurs.
     # Only shortly before these thresholds do we recalculate the group's last activity.
-    config = settings.COSINNUS_GROUP_INACTIVITY
+    config = settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE
     relevance_timepoint_days = [config['days'] - days_before for days_before in config['warnings']] + [config['days']]
 
     # ignore groups that have their activity calculated and are inactive themselves
@@ -290,7 +290,7 @@ def get_group_inactivity_notification_candidates():
     today = now().date()
     groups = get_cosinnus_group_model().objects.filter(is_active=True).exclude(last_activity=None)
     groups = groups.exclude(slug__in=get_default_portal_group_slugs())
-    config = settings.COSINNUS_GROUP_INACTIVITY
+    config = settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE
     candidates = {}
     for days_before_deactivation in config['warnings']:
         # get groups that are notified according to the configured interval
@@ -306,7 +306,7 @@ def get_group_inactivity_notification_candidates():
 
 def get_groups_due_for_inactivity_deactivation():
     """Return groups whose configured inactivity period has elapsed."""
-    inactivity_threshold = now() - datetime.timedelta(days=settings.COSINNUS_GROUP_INACTIVITY['days'])
+    inactivity_threshold = now() - datetime.timedelta(days=settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'])
     groups = get_cosinnus_group_model().objects.filter(
         scheduled_for_deletion_at=None, last_activity__lt=inactivity_threshold
     )

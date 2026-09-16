@@ -22,13 +22,13 @@ class InactivitySettingsTest(SimpleTestCase):
     def test_legacy_settings_are_converted_for_users_and_groups(self):
         conf = CosinnusConf()
         default = {'days': 3650, 'unit': 'year', 'text': 'default', 'warnings': {}}
-        configured_user_inactivity = settings.COSINNUS_USER_INACTIVITY
-        configured_group_inactivity = settings.COSINNUS_GROUP_INACTIVITY
-        del settings.COSINNUS_USER_INACTIVITY
-        del settings.COSINNUS_GROUP_INACTIVITY
+        configured_user_inactivity = settings.COSINNUS_USER_INACTIVITY_SCHEDULE
+        configured_group_inactivity = settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE
+        del settings.COSINNUS_USER_INACTIVITY_SCHEDULE
+        del settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE
         try:
             self.assertEqual(
-                conf.configure_user_inactivity(default),
+                conf.configure_user_inactivity_schedule(default),
                 {
                     'days': 3650,
                     'text': '10 years',
@@ -44,7 +44,7 @@ class InactivitySettingsTest(SimpleTestCase):
 
             group_default = dict(default, activity_computation_window_days=3)
             self.assertEqual(
-                conf.configure_group_inactivity(group_default),
+                conf.configure_group_inactivity_schedule(group_default),
                 {
                     'days': 3650,
                     'text': '10 years',
@@ -59,13 +59,13 @@ class InactivitySettingsTest(SimpleTestCase):
                 },
             )
         finally:
-            settings.COSINNUS_USER_INACTIVITY = configured_user_inactivity
-            settings.COSINNUS_GROUP_INACTIVITY = configured_group_inactivity
+            settings.COSINNUS_USER_INACTIVITY_SCHEDULE = configured_user_inactivity
+            settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE = configured_group_inactivity
 
     def test_explicit_new_setting_is_used_as_is(self):
         config = {'days': 1825, 'text': '5 years', 'warnings': {21: {'text': '21 days'}}}
-        with override_settings(COSINNUS_USER_INACTIVITY=config):
-            self.assertIs(CosinnusConf().configure_user_inactivity(config), config)
+        with override_settings(COSINNUS_USER_INACTIVITY_SCHEDULE=config):
+            self.assertIs(CosinnusConf().configure_user_inactivity_schedule(config), config)
 
     @override_settings(
         COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE=14,
@@ -159,7 +159,7 @@ class InactivityMailTemplateTest(SimpleTestCase):
             for error in (TemplateDoesNotExist('missing'), TemplateSyntaxError('invalid')):
                 with self.subTest(kind=kind, error=type(error).__name__):
                     template_info = {}
-                    with override_settings(**{f'COSINNUS_{kind.upper()}_INACTIVITY': config}):
+                    with override_settings(**{f'COSINNUS_{kind.upper()}_INACTIVITY_SCHEDULE': config}):
                         with mock.patch(
                             'cosinnus.utils.inactivity.render_to_string',
                             side_effect=[error, 'Core subject', 'Core body'],
@@ -172,7 +172,7 @@ class InactivityMailTemplateTest(SimpleTestCase):
                     self.assertTrue(template_info['fallback'])
 
     @override_settings(
-        COSINNUS_USER_INACTIVITY={
+        COSINNUS_USER_INACTIVITY_SCHEDULE={
             'days': 3650,
             'unit': 'year',
             'warnings': {14: {'unit': 'week', 'subject_template': 'portal/subject.txt'}},
@@ -199,7 +199,7 @@ class InactivityMailTemplateTest(SimpleTestCase):
         )
 
     @override_settings(
-        COSINNUS_USER_INACTIVITY={
+        COSINNUS_USER_INACTIVITY_SCHEDULE={
             'days': 1825,
             'text': '5 Jahre',
             'warnings': {
@@ -237,7 +237,7 @@ class InactivityMailTemplateTest(SimpleTestCase):
         )
 
     @override_settings(
-        COSINNUS_USER_INACTIVITY={
+        COSINNUS_USER_INACTIVITY_SCHEDULE={
             'days': 1825,
             'text': '5 Jahre',
             'warnings': {
