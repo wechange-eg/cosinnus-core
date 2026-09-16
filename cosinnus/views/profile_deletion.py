@@ -216,7 +216,7 @@ def get_user_inactivity_notification_candidates():
     users = get_user_model().objects.filter(is_active=True)
     # exclude superuser, as they are never deleted
     users = users.exclude(is_superuser=True)
-    config = settings.COSINNUS_USER_INACTIVITY
+    config = settings.COSINNUS_USER_INACTIVITY_SCHEDULE
     candidates = {}
     for days_before_deactivation in config['warnings']:
         # get users that are notified according to the configured interval
@@ -236,7 +236,7 @@ def get_user_inactivity_notification_candidates():
 
 def get_users_due_for_inactivity_deactivation():
     """Return users whose configured inactivity period has elapsed."""
-    inactivity_threshold = now() - timedelta(days=settings.COSINNUS_USER_INACTIVITY['days'])
+    inactivity_threshold = now() - timedelta(days=settings.COSINNUS_USER_INACTIVITY_SCHEDULE['days'])
     users = get_user_model().objects.filter(cosinnus_profile__scheduled_for_deletion_at=None)
     users = users.filter(
         Q(last_login__lt=inactivity_threshold) | Q(last_login=None, date_joined__lt=inactivity_threshold)

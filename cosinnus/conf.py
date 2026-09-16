@@ -1775,14 +1775,14 @@ class CosinnusConf(AppConf):
     # robots.txt configuration. If True, use a deny-all robots.txt, otherwise serve static/robots.txt.
     DENY_ALL_ROBOTS = False
 
-    # DEPRECATED - use USER_INACTIVITY and GROUP_INACTIVITY instead.
+    # DEPRECATED - use USER_INACTIVITY_SCHEDULE and GROUP_INACTIVITY_SCHEDULE instead.
     INACTIVE_DEACTIVATION_SCHEDULE = None
     INACTIVE_DEACTIVATION_SCHEDULE_TEXT = None
 
-    # DEPRECATED - use the warnings mappings in USER_INACTIVITY and GROUP_INACTIVITY instead.
+    # DEPRECATED - use the warnings mappings in USER_INACTIVITY_SCHEDULE and GROUP_INACTIVITY_SCHEDULE instead.
     INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION = None
 
-    # DEPRECATED - use GROUP_INACTIVITY['activity_computation_window_days'] instead.
+    # DEPRECATED - use GROUP_INACTIVITY_SCHEDULE['activity_computation_window_days'] instead.
     INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS = None
 
     # TODO delete these hooks, when deprecated settings are removed
@@ -1804,10 +1804,12 @@ class CosinnusConf(AppConf):
     def _configure_deprecated_inactivity_setting(value, setting_name: str):
         if value is not None:
             logger.warning(
-                'The setting %s is deprecated. Use USER_INACTIVITY and GROUP_INACTIVITY instead.', setting_name
+                'The setting %s is deprecated. Use USER_INACTIVITY_SCHEDULE and GROUP_INACTIVITY_SCHEDULE instead.',
+                setting_name,
             )
         return value
 
+    # Automatically warn inactive users/group admins, then deactivate and schedule deletion after the inactivity limit.
     # Independent user/group policies. An explicit new setting replaces the whole default (no partial merge).
     # Required: `days` (positive integer inactivity threshold) and `warnings` (mapping; {} disables warning emails).
     # Warning keys are positive integer days before deactivation, smaller than `days`.
@@ -1820,12 +1822,12 @@ class CosinnusConf(AppConf):
     #   Use lazy gettext for multilingual overrides. Templates receive `inactivity_text` and `warning_text`.
     # Language branches in templates must be maintained by developers; missing translations are not detected.
     #
-    # GROUP_INACTIVITY also requires `activity_computation_window_days` (positive integer). Full group activity checks
-    # (including Rocket.Chat/Nextcloud) run only within this window before warnings/deactivation, not after it.
+    # GROUP_INACTIVITY_SCHEDULE also requires `activity_computation_window_days` (positive integer).
+    # Full activity checks (including Rocket.Chat/Nextcloud) run only within this window before warnings/deactivation.
     # Larger windows increase external requests and database work.
     # Warnings run only on their configured calendar day, without catch-up. Shorter thresholds can deactivate
     # overdue objects without prior warnings. Legacy settings are imported only if the respective new setting is absent.
-    USER_INACTIVITY = {
+    USER_INACTIVITY_SCHEDULE = {
         'days': 365 * 10,
         'unit': 'year',
         'warnings': {
@@ -1851,7 +1853,7 @@ class CosinnusConf(AppConf):
             },
         },
     }
-    GROUP_INACTIVITY = {
+    GROUP_INACTIVITY_SCHEDULE = {
         'days': 365 * 10,
         'unit': 'year',
         'warnings': {
@@ -1884,17 +1886,17 @@ class CosinnusConf(AppConf):
     INACTIVITY_DRY_RUN = False
 
     # TODO delete these hooks, when deprecated settings are removed
-    def configure_user_inactivity(self, value):
+    def configure_user_inactivity_schedule(self, value):
         # `value` does not preserve whether it came from the AppConf default or
         # an explicit portal setting, so check the settings holder directly.
-        if hasattr(settings, 'COSINNUS_USER_INACTIVITY'):
+        if hasattr(settings, 'COSINNUS_USER_INACTIVITY_SCHEDULE'):
             return value
         return self._apply_legacy_inactivity_settings(dict(value), 'user')
 
-    def configure_group_inactivity(self, value):
+    def configure_group_inactivity_schedule(self, value):
         # `value` does not preserve whether it came from the AppConf default or
         # an explicit portal setting, so check the settings holder directly.
-        if hasattr(settings, 'COSINNUS_GROUP_INACTIVITY'):
+        if hasattr(settings, 'COSINNUS_GROUP_INACTIVITY_SCHEDULE'):
             return value
         return self._apply_legacy_inactivity_settings(dict(value), 'group')
 

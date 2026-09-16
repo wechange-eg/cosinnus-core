@@ -125,7 +125,7 @@ class UserManualDeletionTest(TestUserMixin, TestCase):
 
 class UserInactivityDeletionTest(TestUserMixin, TestCase):
     @override_settings(
-        COSINNUS_USER_INACTIVITY={
+        COSINNUS_USER_INACTIVITY_SCHEDULE={
             'days': 10,
             'unit': 'day',
             'warnings': {3: {'unit': 'day'}, 1: {'unit': 'day'}},
@@ -158,8 +158,8 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         self.test_user.last_login = last_login
         self.test_user.save()
 
-        deactivation_date = last_login + timedelta(days=settings.COSINNUS_USER_INACTIVITY['days'])
-        for days_before_deactivation, _ in settings.COSINNUS_USER_INACTIVITY['warnings'].items():
+        deactivation_date = last_login + timedelta(days=settings.COSINNUS_USER_INACTIVITY_SCHEDULE['days'])
+        for days_before_deactivation, _ in settings.COSINNUS_USER_INACTIVITY_SCHEDULE['warnings'].items():
             notification_date = deactivation_date - timedelta(days=days_before_deactivation)
 
             # no notification is sent the day before scheduled date
@@ -181,7 +181,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
                 self.assertFalse(send_mail_mock.called)
 
             # no notification is sent the day after scheduled date, if not enabled by settings
-            if (days_before_deactivation - 1) not in settings.COSINNUS_USER_INACTIVITY['warnings']:
+            if (days_before_deactivation - 1) not in settings.COSINNUS_USER_INACTIVITY_SCHEDULE['warnings']:
                 day_after_notification = notification_date + timedelta(days=1)
                 with freeze_time(day_after_notification):
                     SendUserInactivityNotifications().do()
@@ -190,11 +190,11 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
     @override_settings(COSINNUS_INACTIVITY_DRY_RUN=True)
     @patch('cosinnus.views.profile_deletion.send_html_mail')
     def test_inactivity_notification_dry_run(self, send_mail_mock):
-        warning_days = next(iter(settings.COSINNUS_USER_INACTIVITY['warnings']))
+        warning_days = next(iter(settings.COSINNUS_USER_INACTIVITY_SCHEDULE['warnings']))
         self.test_user.last_login = datetime(2014, 1, 1)
         self.test_user.save()
         notification_date = self.test_user.last_login + timedelta(
-            days=settings.COSINNUS_USER_INACTIVITY['days'] - warning_days
+            days=settings.COSINNUS_USER_INACTIVITY_SCHEDULE['days'] - warning_days
         )
 
         with freeze_time(notification_date):
@@ -211,7 +211,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         self.test_user.last_login = last_login
         self.test_user.save()
 
-        deactivation_date = last_login + timedelta(days=settings.COSINNUS_USER_INACTIVITY['days'], seconds=1)
+        deactivation_date = last_login + timedelta(days=settings.COSINNUS_USER_INACTIVITY_SCHEDULE['days'], seconds=1)
 
         # do not schedule before date
         day_before_deactivation = deactivation_date - timedelta(days=1)
@@ -250,7 +250,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         self.test_user.last_login = datetime(2014, 1, 1, tzinfo=timezone.utc)
         self.test_user.save()
         deactivation_date = self.test_user.last_login + timedelta(
-            days=settings.COSINNUS_USER_INACTIVITY['days'], seconds=1
+            days=settings.COSINNUS_USER_INACTIVITY_SCHEDULE['days'], seconds=1
         )
 
         with freeze_time(deactivation_date):
@@ -264,7 +264,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
 
     @override_settings(
         LANGUAGES=(('de', 'Deutsch'), ('en', 'English')),
-        COSINNUS_USER_INACTIVITY={
+        COSINNUS_USER_INACTIVITY_SCHEDULE={
             'days': 3650,
             'unit': 'year',
             'warnings': {
@@ -301,7 +301,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
 
     @override_settings(
         LANGUAGES=(('en', 'English'),),
-        COSINNUS_USER_INACTIVITY={
+        COSINNUS_USER_INACTIVITY_SCHEDULE={
             'days': 3650,
             'unit': 'year',
             'text': 'custom inactivity period',
@@ -338,7 +338,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         self.assertContains(response, '<strong>custom warning period</strong>', html=True)
 
     @override_settings(
-        COSINNUS_USER_INACTIVITY={
+        COSINNUS_USER_INACTIVITY_SCHEDULE={
             'days': 3650,
             'unit': 'year',
             'warnings': {
@@ -375,7 +375,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         self.test_user.last_login = last_login
         self.test_user.save()
 
-        deactivation_date = last_login + timedelta(days=settings.COSINNUS_USER_INACTIVITY['days'], seconds=1)
+        deactivation_date = last_login + timedelta(days=settings.COSINNUS_USER_INACTIVITY_SCHEDULE['days'], seconds=1)
         with freeze_time(deactivation_date):
             MarkInactiveUsersForDeletion().do()
             self.test_user.cosinnus_profile.refresh_from_db()
@@ -400,7 +400,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         self.test_user.last_login = last_login
         self.test_user.save()
 
-        deactivation_date = last_login + timedelta(days=settings.COSINNUS_USER_INACTIVITY['days'], seconds=1)
+        deactivation_date = last_login + timedelta(days=settings.COSINNUS_USER_INACTIVITY_SCHEDULE['days'], seconds=1)
         with freeze_time(deactivation_date):
             MarkInactiveUsersForDeletion().do()
             test_group.refresh_from_db()
@@ -416,7 +416,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         self.test_user.last_login = last_login
         self.test_user.save()
 
-        deactivation_date = last_login + timedelta(days=settings.COSINNUS_USER_INACTIVITY['days'], seconds=1)
+        deactivation_date = last_login + timedelta(days=settings.COSINNUS_USER_INACTIVITY_SCHEDULE['days'], seconds=1)
         expected_deletion = deactivation_date + timedelta(days=settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS)
         with freeze_time(deactivation_date):
             self.assertTrue(test_group.is_active)
@@ -436,7 +436,7 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         self.test_user.last_login = last_login
         self.test_user.save()
 
-        deactivation_date = last_login + timedelta(days=settings.COSINNUS_USER_INACTIVITY['days'], seconds=1)
+        deactivation_date = last_login + timedelta(days=settings.COSINNUS_USER_INACTIVITY_SCHEDULE['days'], seconds=1)
         with freeze_time(deactivation_date):
             self.assertTrue(test_group.is_active)
             self.assertIn(second_admin.pk, test_group.admins)
@@ -543,8 +543,8 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         super().setUp()
 
     @override_settings(
-        COSINNUS_USER_INACTIVITY={'days': 10, 'text': '10 days', 'warnings': {}},
-        COSINNUS_GROUP_INACTIVITY={
+        COSINNUS_USER_INACTIVITY_SCHEDULE={'days': 10, 'text': '10 days', 'warnings': {}},
+        COSINNUS_GROUP_INACTIVITY_SCHEDULE={
             'days': 20,
             'text': '20 days',
             'warnings': {},
@@ -566,7 +566,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         mark_group_mock.assert_not_called()
 
     @override_settings(
-        COSINNUS_GROUP_INACTIVITY={
+        COSINNUS_GROUP_INACTIVITY_SCHEDULE={
             'days': _DEACTIVATION_DAYS,
             'text': '10 years',
             'warnings': {
@@ -640,7 +640,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             )
 
     @override_settings(
-        COSINNUS_GROUP_INACTIVITY={
+        COSINNUS_GROUP_INACTIVITY_SCHEDULE={
             'days': _DEACTIVATION_DAYS,
             'text': '10 years',
             'warnings': {
@@ -751,7 +751,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             )
 
     @override_settings(
-        COSINNUS_GROUP_INACTIVITY={
+        COSINNUS_GROUP_INACTIVITY_SCHEDULE={
             'days': _DEACTIVATION_DAYS,
             'text': '10 years',
             'warnings': {
@@ -832,8 +832,8 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             self.test_group.last_activity = last_activity
             self.test_group.save()
 
-        deactivation_date = last_activity + timedelta(days=settings.COSINNUS_GROUP_INACTIVITY['days'])
-        for days_before_deactivation, _ in settings.COSINNUS_GROUP_INACTIVITY['warnings'].items():
+        deactivation_date = last_activity + timedelta(days=settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'])
+        for days_before_deactivation, _ in settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['warnings'].items():
             notification_date = deactivation_date - timedelta(days=days_before_deactivation)
 
             # no notification is sent the day before scheduled date
@@ -857,7 +857,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             # no notification is sent the day after scheduled date, if not enabled by settings
             # CHECKS BEFORE/AFTER
 
-            if (days_before_deactivation - 1) not in settings.COSINNUS_GROUP_INACTIVITY['warnings']:
+            if (days_before_deactivation - 1) not in settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['warnings']:
                 day_after_notification = notification_date + timedelta(days=1)
                 with freeze_time(day_after_notification):
                     SendGroupsInactivityNotifications().do()
@@ -866,13 +866,13 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
     @override_settings(COSINNUS_INACTIVITY_DRY_RUN=True)
     @patch('cosinnus.views.group_deletion.send_html_mail')
     def test_inactivity_notification_dry_run(self, send_mail_mock):
-        warning_days = next(iter(settings.COSINNUS_GROUP_INACTIVITY['warnings']))
+        warning_days = next(iter(settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['warnings']))
         last_activity = datetime(2014, 1, 1)
         with freeze_time(last_activity):
             self.test_group.last_activity = last_activity
             self.test_group.save()
         notification_date = self.test_group.last_activity + timedelta(
-            days=settings.COSINNUS_GROUP_INACTIVITY['days'] - warning_days
+            days=settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'] - warning_days
         )
 
         with freeze_time(notification_date):
@@ -889,7 +889,9 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         self.test_group.last_activity = last_activity
         self.test_group.save()
 
-        deactivation_date = last_activity + timedelta(days=settings.COSINNUS_GROUP_INACTIVITY['days'], seconds=1)
+        deactivation_date = last_activity + timedelta(
+            days=settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'], seconds=1
+        )
 
         # do not schedule before date
         day_before_deactivation = deactivation_date - timedelta(days=1)
@@ -923,7 +925,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             self.assertEqual(self.test_group.scheduled_for_deletion_at, expected_deletion)
 
     @override_settings(
-        COSINNUS_GROUP_INACTIVITY={
+        COSINNUS_GROUP_INACTIVITY_SCHEDULE={
             'days': 3650,
             'unit': 'year',
             'warnings': {},
@@ -961,7 +963,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         self.test_group.last_activity = datetime(2014, 1, 1, tzinfo=timezone.utc)
         self.test_group.save()
         deactivation_date = self.test_group.last_activity + timedelta(
-            days=settings.COSINNUS_GROUP_INACTIVITY['days'], seconds=1
+            days=settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'], seconds=1
         )
 
         with freeze_time(deactivation_date):
@@ -980,7 +982,9 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         self.test_group.last_activity = last_activity
         self.test_group.save()
 
-        deactivation_date = last_activity + timedelta(days=settings.COSINNUS_GROUP_INACTIVITY['days'], seconds=1)
+        deactivation_date = last_activity + timedelta(
+            days=settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'], seconds=1
+        )
 
         # deletion is scheduled after the schedule interval is passed
         expected_deletion = deactivation_date + timedelta(days=settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS)

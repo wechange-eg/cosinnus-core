@@ -23,7 +23,7 @@ class CosinnusAppConfig(AppConfig):
         import cosinnus.checks  # noqa: F401
         from cosinnus.conf import settings
 
-        for setting_name in ('COSINNUS_USER_INACTIVITY', 'COSINNUS_GROUP_INACTIVITY'):
+        for setting_name in ('COSINNUS_USER_INACTIVITY_SCHEDULE', 'COSINNUS_GROUP_INACTIVITY_SCHEDULE'):
             if getattr(settings, setting_name, None) is None:
                 raise ImproperlyConfigured(f'{setting_name} must not be None.')
 
