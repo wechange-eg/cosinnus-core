@@ -1160,26 +1160,31 @@ class CosinnusConf(AppConf):
     # enable v3 user dashboard
     USE_V3_PERSONAL_DASHBOARD = False
 
-    # v3 dashboard widget config, remove config to disable widgets
+    # v3 dashboard widget config, with the following options:
+    # active: True if the widget is enabled.
+    # frontend_conf: JSON config that is passed to the frontend.
     V3_PERSONAL_DASHBOARD_WIDGETS = {
-        'dashboard.news': {},
-        'dashboard.create_new': {},
-        'dashboard.offers': {},
-        'dashboard.my_spaces': {},
-        'dashboard.tasks': {},
-        'dashboard.events': {},
-        'dashboard.event_polls': {},
-        'dashboard.polls': {},
-        'dashboard.ideas': {},
-        'dashboard.liked_ideas': {},
-        'dashboard.getting_started': {},
-        'dashboard.news_recommendations': {},
-        'dashboard.offer_recommendations': {},
-        'dashboard.idea_recommendations': {},
-        'dashboard.event_recommendations': {},
-        'dashboard.space_recommendations': {},
-        'dashboard.user_recommendations': {},
+        'dashboard.news': {'active': True, 'frontend_conf': {'x': 100}},
+        'dashboard.create_new': {'active': True, 'frontend_conf': {}},
+        'dashboard.offers': {'active': True, 'frontend_conf': {}},
+        'dashboard.my_spaces': {'active': True, 'frontend_conf': {}},
+        'dashboard.tasks': {'active': True, 'frontend_conf': {}},
+        'dashboard.events': {'active': True, 'frontend_conf': {}},
+        'dashboard.event_polls': {'active': True, 'frontend_conf': {}},
+        'dashboard.polls': {'active': True, 'frontend_conf': {}},
+        'dashboard.ideas': {'active': True, 'frontend_conf': {}},
+        'dashboard.liked_ideas': {'active': True, 'frontend_conf': {}},
+        'dashboard.getting_started': {'active': True, 'frontend_conf': {}},
+        'dashboard.news_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.offer_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.idea_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.event_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.space_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.user_recommendations': {'active': True, 'frontend_conf': {}},
     }
+
+    # Portal specific overrides of the V3_PERSONAL_DASHBOARD_WIDGETS setting.
+    V3_PERSONAL_DASHBOARD_WIDGETS_OVERRIDES = {}
 
     # default CosinnusPortal logo image url, shown in the top left navigation bar
     # (will be used with a `static()`) call

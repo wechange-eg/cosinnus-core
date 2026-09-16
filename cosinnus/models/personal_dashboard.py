@@ -1,3 +1,4 @@
+from django.core.exceptions import ImproperlyConfigured
 from django.urls import reverse, reverse_lazy
 
 from cosinnus.api_frontend.serializers.group import CosinnusGroupSerializer
@@ -379,12 +380,24 @@ def init_personal_dashboard_widgets():
     """Initialize dashboard widgets."""
     global personal_dashboard_widgets
     for widget_cls in PERSONAL_DASHBOARD_WIDGET_CLASSES:
-        if widget_cls.id in settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS and (
-            not widget_cls.cosinnus_app or widget_cls.cosinnus_app not in settings.COSINNUS_DISABLED_COSINNUS_APPS
-        ):
+        if widget_cls.id not in settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS:
+            # make sure all widgets are present in the widget config setting.
+            raise ImproperlyConfigured(
+                f'Widget "{widget_cls.id}" configuration missing in COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS'
+            )
+
+        if widget_cls.cosinnus_app and widget_cls.cosinnus_app in settings.COSINNUS_DISABLED_COSINNUS_APPS:
+            # widget is disabled because of the disabled consinnus app
+            continue
+
+        # load widget conf considering overrides
+        widget_conf = settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS_OVERRIDES.get(
+            widget_cls.id, settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS[widget_cls.id]
+        )
+
+        if widget_conf['active']:
             # widget enabled
-            widget_conf = settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS.get(widget_cls.id)
-            widget = widget_cls(conf=widget_conf)
+            widget = widget_cls(conf=widget_conf['frontend_conf'])
             personal_dashboard_widgets[widget.id] = widget
 
 
