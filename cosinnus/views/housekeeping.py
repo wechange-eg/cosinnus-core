@@ -53,7 +53,7 @@ from cosinnus.utils.firebase import _send_firebase_message_direct, send_firebase
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus.utils.group import move_group_content as move_group_content_utils
 from cosinnus.utils.http import make_csv_response, make_xlsx_response
-from cosinnus.utils.inactivity import render_inactivity_mail
+from cosinnus.utils.inactivity import format_inactivity_duration, render_inactivity_mail
 from cosinnus.utils.permissions import check_user_can_receive_emails, check_user_superuser
 from cosinnus.utils.settings import get_obfuscated_settings_strings
 from cosinnus.utils.threading import CosinnusWorkerThread
@@ -113,6 +113,14 @@ def inactivity_preview(request):
 
 def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, languages, recipient):
     config = settings.COSINNUS_USER_INACTIVITY if kind == 'user' else settings.COSINNUS_GROUP_INACTIVITY
+    inactivity_durations = [
+        {
+            'language': language,
+            'language_label': language_label,
+            'values': _get_inactivity_duration_preview(config['days'], config, language),
+        }
+        for language, language_label in languages
+    ]
     deletion_days = (
         settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS
         if kind == 'user'
@@ -139,9 +147,11 @@ def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, 
     for days, warning in config['warnings'].items():
         previews = []
         for language, language_label in languages:
+            warning_duration = _get_inactivity_duration_preview(days, warning, language)
+            template_info = {}
             try:
                 subject, body = render_inactivity_mail(
-                    kind, recipient, days, preview_context, language_override=language
+                    kind, recipient, days, preview_context, language_override=language, template_info=template_info
                 )
                 error = None
             except Exception as exception:
@@ -151,6 +161,8 @@ def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, 
                 {
                     'language': language,
                     'language_label': language_label,
+                    'warning_duration': warning_duration,
+                    'template_info': template_info,
                     'subject': subject,
                     'body': body,
                     'error': error,
@@ -160,13 +172,30 @@ def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, 
             {
                 'days': days,
                 'count': candidates[days].count(),
-                'text': warning['text'],
                 'subject_template': warning.get('subject_template'),
                 'body_template': warning.get('body_template'),
                 'previews': previews,
             }
         )
-    return {'kind': kind, 'days': config['days'], 'text': config['text'], 'warnings': warnings}
+    return {
+        'kind': kind,
+        'days': config['days'],
+        'inactivity_durations': inactivity_durations,
+        'warnings': warnings,
+    }
+
+
+def _get_inactivity_duration_preview(days, config, language):
+    babel_config = {'unit': config.get('unit', 'day')}
+    babel_value = format_inactivity_duration(days, babel_config, language)
+    has_override = config.get('text') is not None
+    override_value = format_inactivity_duration(days, {'text': config['text']}, language) if has_override else None
+    return {
+        'babel': babel_value,
+        'override': override_value,
+        'used': override_value if has_override else babel_value,
+        'source': 'override' if has_override else 'babel',
+    }
 
 
 def ensure_group_widgets(request=None):
