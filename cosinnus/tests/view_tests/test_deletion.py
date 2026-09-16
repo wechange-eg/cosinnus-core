@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.test import TestCase
 from django.urls import reverse
+from django.utils import translation
 from django.utils.timezone import now
 from freezegun import freeze_time
 from rest_framework.test import override_settings
@@ -123,6 +124,34 @@ class UserManualDeletionTest(TestUserMixin, TestCase):
 
 
 class UserInactivityDeletionTest(TestUserMixin, TestCase):
+    @override_settings(
+        COSINNUS_USER_INACTIVITY={
+            'days': 10,
+            'unit': 'day',
+            'warnings': {3: {'unit': 'day'}, 1: {'unit': 'day'}},
+        },
+    )
+    @patch('cosinnus.views.profile_deletion.send_html_mail')
+    def test_overdue_user_is_deactivated_without_catch_up_warnings(self, send_mail_mock):
+        self.test_user.last_login = datetime(2024, 1, 18, tzinfo=timezone.utc)
+        self.test_user.save()
+
+        with freeze_time('2024-02-01'):
+            SendUserInactivityNotifications().do()
+            send_mail_mock.assert_not_called()
+            MarkInactiveUsersForDeletion().do()
+
+        send_mail_mock.assert_called_once_with(
+            self.test_user,
+            'Attention: Your profile has been deactivated and will be deleted due to inactivity',
+            ANY,
+            threaded=False,
+            raise_on_error=True,
+        )
+        self.test_user.refresh_from_db()
+        self.assertFalse(self.test_user.is_active)
+        self.assertIsNotNone(self.test_user.cosinnus_profile.scheduled_for_deletion_at)
+
     @patch('cosinnus.views.profile_deletion.send_html_mail')
     def test_inactivity_notifications(self, send_mail_mock):
         last_login = datetime(2014, 1, 1)
@@ -233,10 +262,25 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         self.assertTrue(self.test_user.is_active)
         self.assertIsNone(self.test_user.cosinnus_profile.scheduled_for_deletion_at)
 
-    @override_settings(LANGUAGES=(('de', 'Deutsch'), ('en', 'English')))
+    @override_settings(
+        LANGUAGES=(('de', 'Deutsch'), ('en', 'English')),
+        COSINNUS_USER_INACTIVITY={
+            'days': 3650,
+            'unit': 'year',
+            'warnings': {
+                14: {
+                    'unit': 'week',
+                    'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                    'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+                },
+            },
+        },
+    )
     def test_inactivity_preview(self):
         self.test_user.is_superuser = True
         self.test_user.save()
+        self.test_user.cosinnus_profile.language = 'fr'
+        self.test_user.cosinnus_profile.save()
         self.client.force_login(self.test_user)
 
         response = self.client.get(reverse('cosinnus:housekeeping-inactivity-preview'))
@@ -244,7 +288,79 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'data-language="de"')
         self.assertContains(response, 'data-language="en"')
+        self.assertContains(response, 'data-language="fr"')
         self.assertContains(response, 'Users due for deactivation')
+        self.assertContains(response, 'Babel value')
+        self.assertContains(response, 'Used value')
+        user_section = response.context['sections'][0]
+        self.assertEqual(
+            [duration['language'] for duration in user_section['inactivity_durations']], ['de', 'en', 'fr']
+        )
+        self.assertEqual(user_section['inactivity_durations'][0]['values']['babel'], '10 Jahre')
+        self.assertNotIn('inactivity_duration', user_section['warnings'][0]['previews'][0])
+
+    @override_settings(
+        LANGUAGES=(('en', 'English'),),
+        COSINNUS_USER_INACTIVITY={
+            'days': 3650,
+            'unit': 'year',
+            'text': 'custom inactivity period',
+            'warnings': {14: {'unit': 'week', 'text': 'custom warning period'}},
+        },
+    )
+    def test_inactivity_preview_shows_effective_overrides(self):
+        self.test_user.is_superuser = True
+        self.test_user.save()
+        self.client.force_login(self.test_user)
+
+        response = self.client.get(reverse('cosinnus:housekeeping-inactivity-preview'))
+
+        section = response.context['sections'][0]
+        self.assertEqual(
+            section['inactivity_durations'][0]['values'],
+            {
+                'babel': '10 years',
+                'override': 'custom inactivity period',
+                'used': 'custom inactivity period',
+                'source': 'override',
+            },
+        )
+        self.assertEqual(
+            section['warnings'][0]['previews'][0]['warning_duration'],
+            {
+                'babel': '2 weeks',
+                'override': 'custom warning period',
+                'used': 'custom warning period',
+                'source': 'override',
+            },
+        )
+        self.assertContains(response, '<strong>custom inactivity period</strong>', html=True)
+        self.assertContains(response, '<strong>custom warning period</strong>', html=True)
+
+    @override_settings(
+        COSINNUS_USER_INACTIVITY={
+            'days': 3650,
+            'unit': 'year',
+            'warnings': {
+                21: {
+                    'unit': 'day',
+                    'subject_template': 'missing/subject.txt',
+                    'body_template': 'missing/body.txt',
+                },
+            },
+        },
+    )
+    def test_inactivity_preview_shows_template_fallback(self):
+        self.test_user.is_superuser = True
+        self.test_user.save()
+        self.client.force_login(self.test_user)
+
+        with self.assertLogs('cosinnus', level='WARNING'):
+            response = self.client.get(reverse('cosinnus:housekeeping-inactivity-preview'))
+
+        self.assertContains(response, 'This preview uses the core fallback templates.')
+        self.assertContains(response, 'cosinnus/mail/inactivity/user_subject.txt')
+        self.assertContains(response, 'cosinnus/mail/inactivity/user_body.txt')
 
     def test_inactivity_preview_requires_superuser(self):
         self.client.force_login(self.test_user)
@@ -805,6 +921,39 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             MarkInactiveGroupsForDeletion().do()
             self.test_group.refresh_from_db()
             self.assertEqual(self.test_group.scheduled_for_deletion_at, expected_deletion)
+
+    @override_settings(
+        COSINNUS_GROUP_INACTIVITY={
+            'days': 3650,
+            'unit': 'year',
+            'warnings': {},
+            'activity_computation_window_days': 3,
+        },
+    )
+    @patch('cosinnus.views.group_deletion.send_html_mail')
+    def test_deactivation_mail_uses_recipient_language(self, send_mail_mock):
+        self.test_admin.cosinnus_profile.language = 'de'
+        self.test_admin.cosinnus_profile.save()
+        self.test_group.last_activity = now() - timedelta(days=3651)
+        self.test_group.save()
+        sent_languages = []
+        send_mail_mock.side_effect = lambda *args, **kwargs: sent_languages.append(translation.get_language())
+
+        with translation.override('en'):
+            mark_group_for_deletion(self.test_group)
+            self.assertEqual(translation.get_language(), 'en')
+
+        self.assertCountEqual(sent_languages, ['de', 'en'])
+        self.assertEqual(send_mail_mock.call_count, 2)
+        for call in send_mail_mock.call_args_list:
+            recipient, subject, body = call.args
+            language = recipient.cosinnus_profile.language
+            with translation.override(language):
+                expected_subject = translation.gettext(
+                    '%(group_type)s %(group_name)s has been deactivated and will be deleted'
+                ) % {'group_type': self.test_group.trans.VERBOSE_NAME, 'group_name': self.test_group.name}
+            self.assertEqual(subject, expected_subject)
+            self.assertIn('10 Jahre' if language == 'de' else '10 years', body)
 
     @override_settings(COSINNUS_INACTIVITY_DRY_RUN=True)
     @patch('cosinnus.views.group_deletion.send_html_mail')
