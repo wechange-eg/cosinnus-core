@@ -34,22 +34,24 @@ def deactivate_user(user):
 
 
 def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactivity_deletion=False):
-    """Deactivates a user account and marks them for deletion in 30 days"""
+    """Deactivate a user account and schedule deletion after the configured profile deletion period."""
 
     # do not delete superusers due to inactivity as we might and up with a portal without any admins.
     if user.is_superuser:
         return
 
+    deletion_days = settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS
     if triggered_by_self:
         # send a notification email ignoring notification settings for a user triggered deletion
         text = _(
             'Your platform profile stored with us under this email has been deactivated by you and was approved for '
-            'deletion. The profile has been removed from the website and we will delete the account completely in 30 '
-            'days.\n\nIf this has happened without your knowledge or if you change your mind in the meantime, please '
+            'deletion. The profile has been removed from the website and we will delete the account completely in '
+            '%(deleted_after_days)s days.\n\n'
+            'If this has happened without your knowledge or if you change your mind in the meantime, please '
             'contact the portal administrators or the email address given in our imprint. Please note that the '
             'response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would '
             'like to keep your profile.'
-        )
+        ) % {'deleted_after_days': deletion_days}
         body_text = textfield(text)
         send_html_mail(user, _('Information about the deletion of your user account'), body_text, threaded=False)
     elif inactivity_deletion:
@@ -57,10 +59,10 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactiv
         subject = _('Attention: Your profile has been deactivated and will be deleted due to inactivity')
         text = _(
             'Your platform profile belonging to this email address has been deactivated by us. Your account '
-            'will be deleted completely in 30 days.\n\n'
+            'will be deleted completely in %(deleted_after_days)s days.\n\n'
             'If you want to keep your profile, please contact the portal administrators. Please note that the response '
             'time by e-mail may take longer in some cases.'
-        )
+        ) % {'deleted_after_days': deletion_days}
         body_text = textfield(text)
         # When errors occur when sending the notification for inactivity deletions do not deactivate the user.
         try:
@@ -74,7 +76,7 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactiv
 
     if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile:
         # add a marked-for-deletion flag and a cronjob, deleting the profile using this
-        deletion_schedule_time = now() + timedelta(days=settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS)
+        deletion_schedule_time = now() + timedelta(days=deletion_days)
         user.cosinnus_profile.scheduled_for_deletion_at = deletion_schedule_time
         user.cosinnus_profile.deletion_triggered_by_self = triggered_by_self
         user.cosinnus_profile.save()

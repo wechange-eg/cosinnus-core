@@ -26,7 +26,7 @@ from cosinnus.models.group import MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, CosinnusG
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.group_deletion import mark_group_for_deletion
-from cosinnus.views.profile_deletion import delete_userprofile
+from cosinnus.views.profile_deletion import deactivate_user_and_mark_for_deletion, delete_userprofile
 from cosinnus_note.models import Note
 
 # Patch threads as threads do not work with Django tests as they don't get the correct test database connection.
@@ -51,6 +51,21 @@ class TestUserMixin:
 
 
 class UserDeletionTest(TestUserMixin, TestCase):
+    @override_settings(COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS=45)
+    @freeze_time('2024-01-01')
+    @patch('cosinnus.views.profile_deletion.send_html_mail')
+    def test_deactivation_mail_uses_configured_deletion_period(self, send_mail_mock):
+        for triggered_by_self in (False, True):
+            with self.subTest(triggered_by_self=triggered_by_self), translation.override('en'):
+                send_mail_mock.reset_mock()
+                deactivate_user_and_mark_for_deletion(
+                    self.test_user, triggered_by_self=triggered_by_self, inactivity_deletion=not triggered_by_self
+                )
+                send_mail_mock.assert_called_once()
+                self.assertIn('45 days', send_mail_mock.call_args.args[2])
+                self.assertNotIn('30 days', send_mail_mock.call_args.args[2])
+                self.assertEqual(self.test_user.cosinnus_profile.scheduled_for_deletion_at, now() + timedelta(days=45))
+
     def test_user_fields(self):
         self.test_user.is_active = False
         self.test_user.save()
