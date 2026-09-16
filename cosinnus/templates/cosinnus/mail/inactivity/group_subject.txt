@@ -1,0 +1,1 @@
+{% if language == 'de' %}Gruppe/Projekt {{ group_name }} wird wegen Inaktivität gelöscht{% else %}Group/project {{ group_name }} will be deleted due to inactivity{% endif %}

@@ -14214,18 +14214,20 @@ msgstr "Ваш пароль успішно встановлено! Тепер в
 msgid "Your phone number is only visible for registered users"
 msgstr "Ваш номер телефону відображається тільки для зареєстрованих користувачів"
 
+#, python-format
 msgid ""
-"Your platform profile belonging to this email address has been deactivated by us. Your account will be deleted completely in 30 days.\n"
+"Your platform profile belonging to this email address has been deactivated by us. Your account will be deleted completely in %(deleted_after_days)s days.\n"
 "\n"
 "If you want to keep your profile, please contact the portal administrators. Please note that the response time by e-mail may take longer in some cases."
 msgstr ""
 
+#, python-format
 msgid ""
-"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in 30 days.\n"
+"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in %(deleted_after_days)s days.\n"
 "\n"
 "If this has happened without your knowledge or if you change your mind in the meantime, please contact the portal administrators or the email address given in our imprint. Please note that the response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would like to keep your profile."
 msgstr ""
-"Ваш профіль платформи, що зберігається у нас під цим електронним листом, Ви деактивували та схвалили для видалення. Профіль видалено з веб -сайту, і ми повністю видалимо обліковий запис через 30 днів. \n"
+"Ваш профіль платформи, що зберігається у нас під цим електронним листом, Ви деактивували та схвалили для видалення. Профіль видалено з веб -сайту, і ми повністю видалимо обліковий запис через %(deleted_after_days)s днів. \n"
 "\n"
 "If Якщо це сталося без вашого відома або якщо Ви тим часом передумали, зверніться до адміністраторів порталу або на вказану електронну адресу. Зверніть увагу, що час відповіді електронною поштою в деяких випадках може зайняти більше часу. Будь ласка, зв'яжіться з нами якомога швидше, якщо хочете зберегти свій профіль."
 

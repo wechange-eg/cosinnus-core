@@ -14292,18 +14292,20 @@ msgstr "¡Su contraseña se ha configurado correctamente! Ahora puede iniciar se
 msgid "Your phone number is only visible for registered users"
 msgstr "Tu número de teléfono solo es visible para usarios registrados"
 
+#, python-format
 msgid ""
-"Your platform profile belonging to this email address has been deactivated by us. Your account will be deleted completely in 30 days.\n"
+"Your platform profile belonging to this email address has been deactivated by us. Your account will be deleted completely in %(deleted_after_days)s days.\n"
 "\n"
 "If you want to keep your profile, please contact the portal administrators. Please note that the response time by e-mail may take longer in some cases."
 msgstr ""
 
+#, python-format
 msgid ""
-"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in 30 days.\n"
+"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in %(deleted_after_days)s days.\n"
 "\n"
 "If this has happened without your knowledge or if you change your mind in the meantime, please contact the portal administrators or the email address given in our imprint. Please note that the response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would like to keep your profile."
 msgstr ""
-"Su perfil de plataforma almacenado con nosotros bajo este correo electrónico ha sido desactivado por usted y fue aprobado para su eliminación. El perfil ha sido eliminado del sitio web y eliminaremos la cuenta por completo en 30 días.\n"
+"Su perfil de plataforma almacenado con nosotros bajo este correo electrónico ha sido desactivado por usted y fue aprobado para su eliminación. El perfil ha sido eliminado del sitio web y eliminaremos la cuenta por completo en %(deleted_after_days)s días.\n"
 "\n"
 "Si esto ha sucedido sin su conocimiento o si cambia de opinión en el ínterin, póngase en contacto con los administradores del portal o la dirección de correo electrónico dada en nuestra impresión. Tenga en cuenta que el tiempo de respuesta por correo electrónico puede tardar más en algunos casos. Póngase en contacto con nosotros lo antes posible si desea conservar su perfil."
 
