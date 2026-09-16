@@ -1852,38 +1852,44 @@ class CosinnusConf(AppConf):
             )
         return value
 
-    # Independent user/group policies. Configure hooks import explicitly configured legacy values when the respective
-    # new setting is absent.
-    # Example: {'days': 365 * 5, 'text': _('5 years'), 'warnings': {21: {
-    #     'text': _('21 days'),
-    #     'subject_template': 'myportal/mail/first_warning_subject.txt',
-    #     'body_template': 'myportal/mail/first_warning_body.txt',
-    # }}}
-    # GROUP_INACTIVITY additionally requires `activity_computation_window_days`
-    #   This limits the expensive full group-activity calculation to the configured number of days immediately before
-    #   each warning and the automatic deactivation. A larger window catches activity more reliably if cron runs are
-    #   missed, but causes more database work and external Rocket.Chat/Nextcloud requests.
+    # Independent user/group policies. An explicit new setting replaces the whole default (no partial merge).
+    # Required: `days` (positive integer inactivity threshold) and `warnings` (mapping; {} disables warning emails).
+    # Warning keys are positive integer days before deactivation, smaller than `days`.
+    # Each warning specifies `subject_template` and `body_template` as a pair, using core or portal template paths.
+    # Missing/incomplete pairs or TemplateSyntaxError fall back to core templates; other rendering errors propagate.
+    #
+    # Optional at the top level and per warning:
+    # - `unit`: day (default), week, month or year. Babel rounds to this display unit; cron thresholds remain in days.
+    # - `text`: explicit display override instead of Babel; None uses Babel, even an empty string overrides it.
+    #   Use lazy gettext for multilingual overrides. Templates receive `inactivity_text` and `warning_text`.
+    # Language branches in templates must be maintained by developers; missing translations are not detected.
+    #
+    # GROUP_INACTIVITY also requires `activity_computation_window_days` (positive integer). Full group activity checks
+    # (including Rocket.Chat/Nextcloud) run only within this window before warnings/deactivation, not after it.
+    # Larger windows increase external requests and database work.
+    # Warnings run only on their configured calendar day, without catch-up. Shorter thresholds can deactivate
+    # overdue objects without prior warnings. Legacy settings are imported only if the respective new setting is absent.
     USER_INACTIVITY = {
         'days': 365 * 10,
-        'text': _('10 years'),
+        'unit': 'year',
         'warnings': {
             365: {
-                'text': _('1 year'),
+                'unit': 'year',
                 'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
                 'body_template': 'cosinnus/mail/inactivity/user_body.txt',
             },
             182: {
-                'text': _('6 months'),
+                'unit': 'month',
                 'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
                 'body_template': 'cosinnus/mail/inactivity/user_body.txt',
             },
             14: {
-                'text': _('2 weeks'),
+                'unit': 'week',
                 'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
                 'body_template': 'cosinnus/mail/inactivity/user_body.txt',
             },
             2: {
-                'text': _('2 days'),
+                'unit': 'day',
                 'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
                 'body_template': 'cosinnus/mail/inactivity/user_body.txt',
             },
@@ -1891,25 +1897,25 @@ class CosinnusConf(AppConf):
     }
     GROUP_INACTIVITY = {
         'days': 365 * 10,
-        'text': _('10 years'),
+        'unit': 'year',
         'warnings': {
             365: {
-                'text': _('1 year'),
+                'unit': 'year',
                 'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
                 'body_template': 'cosinnus/mail/inactivity/group_body.txt',
             },
             182: {
-                'text': _('6 months'),
+                'unit': 'month',
                 'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
                 'body_template': 'cosinnus/mail/inactivity/group_body.txt',
             },
             14: {
-                'text': _('2 weeks'),
+                'unit': 'week',
                 'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
                 'body_template': 'cosinnus/mail/inactivity/group_body.txt',
             },
             2: {
-                'text': _('2 days'),
+                'unit': 'day',
                 'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
                 'body_template': 'cosinnus/mail/inactivity/group_body.txt',
             },
@@ -1945,6 +1951,11 @@ class CosinnusConf(AppConf):
 
         # apply legacy values as override on top of default config
         config.update({key: legacy_value for key, legacy_value in legacy_values.items() if legacy_value is not None})
+        if legacy_values['text'] is not None:
+            config.pop('unit', None)
+        elif legacy_values['days'] is not None:
+            # Legacy durations without a display text have no unit information; represent them exactly as days.
+            config['unit'] = 'day'
         legacy_warnings = getattr(settings, 'COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION', None)
         if legacy_warnings is not None:
             templates = {
