@@ -33,8 +33,8 @@ class CosinnusPersonalDashboardWidget:
     id = None
     # cosinnus app
     cosinnus_app = None
-    # function to get the data for a user
-    user_queryset_function = None
+    # function to get the data for a user, can return a query set or list
+    user_data_function = None
     # data serializer class
     serializer_class = None
     # widget api
@@ -83,14 +83,23 @@ class CosinnusPersonalDashboardWidget:
         self._set_widget_setting(user.cosinnus_profile, 'display', display)
 
     def get_data(self, user):
-        """Get initial widget data."""
-        if self.user_queryset_function and self.serializer_class and self.is_active(user):
-            queryset = self.user_queryset_function(user)
+        """
+        Get initial widget data.
+        :return (data, has_more) tuple
+        """
+        data = []
+        has_more = False
+        if self.user_data_function and self.serializer_class and self.is_active(user):
+            user_data = self.user_data_function(user)
             if self.data_limit:
-                queryset = queryset[: self.data_limit]
-            serializer = self.serializer_class(queryset, many=True, context={'user': user})
-            return serializer.data
-        return []
+                # get count handling querysets and object lists
+                user_data_len = len(user_data) if isinstance(user_data, list) else user_data.count()
+                if user_data_len > self.data_limit:
+                    has_more = True
+                user_data = user_data[: self.data_limit]
+            serializer = self.serializer_class(user_data, many=True, context={'user': user})
+            data = serializer.data
+        return data, has_more
 
     def get_conf(self, user):
         return self.conf
@@ -101,7 +110,7 @@ class CosinnusPersonalDashboardNewsWidget(CosinnusPersonalDashboardWidget):
 
     id = 'dashboard.news'
     cosinnus_app = 'cosinnus_note'
-    user_queryset_function = Note.objects.get_personal_items
+    user_data_function = Note.objects.get_personal_items
     serializer_class = CosinnusNoteSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:note-personal')
 
@@ -138,7 +147,7 @@ class CosinnusPersonalDashboardOffersWidget(CosinnusPersonalDashboardWidget):
 
     id = 'dashboard.offers'
     cosinnus_app = 'cosinnus_marketplace'
-    user_queryset_function = Offer.objects.get_personal_items
+    user_data_function = Offer.objects.get_personal_items
     serializer_class = CosinnusOfferSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:offer-personal')
 
@@ -147,7 +156,7 @@ class CosinnusPersonalDashboardGroupsWidget(CosinnusPersonalDashboardWidget):
     """Personal groups and projects widget"""
 
     id = 'dashboard.my_spaces'
-    user_queryset_function = get_cosinnus_group_model().objects.get_personal_items
+    user_data_function = get_cosinnus_group_model().objects.get_personal_items
     serializer_class = CosinnusGroupSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:api-group-personal')
 
@@ -157,7 +166,7 @@ class CosinnusPersonalDashboardEventPollsWidget(CosinnusPersonalDashboardWidget)
 
     id = 'dashboard.event_polls'
     cosinnus_app = 'cosinnus_event'
-    user_queryset_function = Event.objects.get_personal_open_polls
+    user_data_function = Event.objects.get_personal_open_polls
     serializer_class = CosinnusEventPollSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:event-poll-open')
 
@@ -198,7 +207,7 @@ class CosinnusPersonalDashboardEventsWidget(CosinnusPersonalDashboardWidget):
 
     id = 'dashboard.events'
     cosinnus_app = 'cosinnus_event'
-    user_queryset_function = Event.objects.get_personal_attending_events
+    user_data_function = Event.objects.get_personal_attending_events
     serializer_class = CosinnusEventSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:event-attending')
 
@@ -227,7 +236,7 @@ class CosinnusPersonalDashboardPollsWidget(CosinnusPersonalDashboardWidget):
 
     id = 'dashboard.polls'
     cosinnus_app = 'cosinnus_poll'
-    user_queryset_function = Poll.objects.get_personal_open_polls
+    user_data_function = Poll.objects.get_personal_open_polls
     serializer_class = CosinnusPollSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:poll-open')
 
@@ -236,7 +245,7 @@ class CosinnusPersonalDashboardIdeasWidget(CosinnusPersonalDashboardWidget):
     """Personal ideas widget"""
 
     id = 'dashboard.ideas'
-    user_queryset_function = CosinnusIdea.objects.get_personal_items
+    user_data_function = CosinnusIdea.objects.get_personal_items
     serializer_class = CosinnusIdeaSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:idea-personal')
 
@@ -248,7 +257,7 @@ class CosinnusPersonalDashboardLikedIdeasWidget(CosinnusPersonalDashboardWidget)
     """Personal liked ideas widget"""
 
     id = 'dashboard.liked_ideas'
-    user_queryset_function = CosinnusIdea.objects.get_personal_liked_items
+    user_data_function = CosinnusIdea.objects.get_personal_liked_items
     serializer_class = CosinnusIdeaSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:idea-liked')
 
@@ -260,7 +269,7 @@ class CosinnusPersonalDashboardGettingStartedWidget(CosinnusPersonalDashboardWid
     """Getting started widget"""
 
     id = 'dashboard.getting_started'
-    user_queryset_function = get_user_profile_model().get_getting_started_actions
+    user_data_function = get_user_profile_model().get_getting_started_actions
     serializer_class = CosinnusGettingStartedActionSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:api-getting-started')
     data_limit = None
@@ -271,7 +280,7 @@ class CosinnusPersonalDashboardNewsRecommendationsWidget(CosinnusPersonalDashboa
 
     id = 'dashboard.news_recommendations'
     cosinnus_app = 'cosinnus_note'
-    user_queryset_function = Note.objects.get_recommendations
+    user_data_function = Note.objects.get_recommendations
     serializer_class = CosinnusNoteSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:note-recommendations')
     data_limit = 10
@@ -287,7 +296,7 @@ class CosinnusPersonalDashboardOfferRecommendationsWidget(CosinnusPersonalDashbo
 
     id = 'dashboard.offer_recommendations'
     cosinnus_app = 'cosinnus_marketplace'
-    user_queryset_function = Offer.objects.get_recommendations
+    user_data_function = Offer.objects.get_recommendations
     serializer_class = CosinnusOfferSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:offer-recommendations')
 
@@ -296,7 +305,7 @@ class CosinnusPersonalDashboardIdeaRecommendationsWidget(CosinnusPersonalDashboa
     """Idea recommendations widget"""
 
     id = 'dashboard.idea_recommendations'
-    user_queryset_function = CosinnusIdea.objects.get_recommendations
+    user_data_function = CosinnusIdea.objects.get_recommendations
     serializer_class = CosinnusIdeaSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:idea-recommendations')
 
@@ -316,7 +325,7 @@ class CosinnusPersonalDashboardEventRecommendationsWidget(CosinnusPersonalDashbo
 
     id = 'dashboard.event_recommendations'
     cosinnus_app = 'cosinnus_event'
-    user_queryset_function = Event.objects.get_recommendations
+    user_data_function = Event.objects.get_recommendations
     serializer_class = CosinnusEventSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:event-recommendations')
 
@@ -325,7 +334,7 @@ class CosinnusPersonalDashboardGroupRecommendationsWidget(CosinnusPersonalDashbo
     """Group recommendations widget"""
 
     id = 'dashboard.space_recommendations'
-    user_queryset_function = get_cosinnus_group_model().objects.get_recommendations
+    user_data_function = get_cosinnus_group_model().objects.get_recommendations
     serializer_class = CosinnusGroupSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:api-group-recommendations')
 
@@ -341,7 +350,7 @@ class CosinnusPersonalDashboardUserRecommendationsWidget(CosinnusPersonalDashboa
     """User recommendations widget"""
 
     id = 'dashboard.user_recommendations'
-    user_queryset_function = get_user_profile_model().objects.get_recommendations
+    user_data_function = get_user_profile_model().objects.get_recommendations
     serializer_class = CosinnusUserProfileRecommendationSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:api-user-recommendations')
 

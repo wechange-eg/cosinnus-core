@@ -21,6 +21,7 @@ class CosinnusPersonalDashboardWidgetSerializer(serializers.Serializer):
     display = serializers.JSONField(required=False)
     api_url = serializers.URLField(read_only=True)
     data = serializers.JSONField(read_only=True)
+    has_more = serializers.BooleanField(read_only=True)
     conf = serializers.JSONField(read_only=True)
 
     def validate(self, attrs):
@@ -36,11 +37,13 @@ class CosinnusPersonalDashboardWidgetSerializer(serializers.Serializer):
         user = self.context['user']
         ret = super().to_representation(instance)
         # populate user related fields from the widget
+        data, has_more = instance.get_data(user)
         ret.update(
             {
                 'active': instance.is_active(user),
                 'display': instance.get_display(user),
-                'data': instance.get_data(user),
+                'data': data,
+                'has_more': has_more,
                 'conf': instance.get_conf(user),
             }
         )
