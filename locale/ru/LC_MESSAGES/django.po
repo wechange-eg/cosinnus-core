@@ -14286,18 +14286,20 @@ msgstr "Ваш пароль успешно установлен! Теперь В
 msgid "Your phone number is only visible for registered users"
 msgstr "Ваш номер телефона виден только зарегистрированным пользователям"
 
+#, python-format
 msgid ""
-"Your platform profile belonging to this email address has been deactivated by us. Your account will be deleted completely in 30 days.\n"
+"Your platform profile belonging to this email address has been deactivated by us. Your account will be deleted completely in %(deleted_after_days)s days.\n"
 "\n"
 "If you want to keep your profile, please contact the portal administrators. Please note that the response time by e-mail may take longer in some cases."
 msgstr ""
 
+#, python-format
 msgid ""
-"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in 30 days.\n"
+"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in %(deleted_after_days)s days.\n"
 "\n"
 "If this has happened without your knowledge or if you change your mind in the meantime, please contact the portal administrators or the email address given in our imprint. Please note that the response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would like to keep your profile."
 msgstr ""
-"Ваш аккаунт будет сохранен до тех пор, пока Ваш адрес электронной почты не будет деактивирован и подтвержден к удалению. Ваш аккаунт был убран с сайта и будет удален полностью в течение 30 дней. \n"
+"Ваш аккаунт будет сохранен до тех пор, пока Ваш адрес электронной почты не будет деактивирован и подтвержден к удалению. Ваш аккаунт был убран с сайта и будет удален полностью в течение %(deleted_after_days)s дней. \n"
 "\n"
 "Если это случилось без Вашего ведома или же Вы передумаете, пожалуйста, свяжитесь с администраторами или же напишите нам на наш контактный адрес электронной почты. Пожалуйста, имейте в виду, что порой мы можем ответить не сразу. Свяжитесь с нами сразу же, как только захотите оставить свой аккаунт."
 
