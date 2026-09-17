@@ -364,6 +364,17 @@ class Event(
                 return f'{calendar_url}?eventId={self.nextcloud_calendar_uid}&type=internal&calId={self.group.pk}'
         return ''
 
+    def get_caldav_url(self, user):
+        """Returns the Nextcloud CalDAV url for the event for a user."""
+        caldav_url = None
+        if (
+            self.state == Event.STATE_SYNCHRONIZED_EVENT
+            and self.nextcloud_calendar_uid
+            and self.group.nextcloud_calendar_url
+        ):
+            caldav_url = f'{self.group.get_user_nextcloud_calendar_url(user)}{self.nextcloud_calendar_uid}.ics'
+        return caldav_url
+
     def get_feed_url(self):
         """Returns the iCal feed url. A user token as to be appended using either
         `cosinnus.utils.permission` or `cosinnus_tags.cosinnus_user_token`"""
