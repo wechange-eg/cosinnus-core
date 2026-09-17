@@ -1,8 +1,8 @@
 publiccodeYmlVersion: "0.4"
 name: "Cosinnus"
-url: "https://github.com/wechange-eg/cosinnus-core.git"
-softwareVersion: "r-WE-020.5"
-releaseDate: "2024-05-12"
+url: "https://git.wechange.de/gl/code/cosinnus.git"
+softwareVersion: "2.9.0"
+releaseDate: "2026-08-05"
 platforms:
   - web
 categories:
