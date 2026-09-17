@@ -113,7 +113,7 @@ class MainContentViewTest(APILiveServerTestCase):
         self.assertEqual(response.data['sub_navigation'], None, 'no subnavigation in dashboard')
         self.assertEqual(response.data['main_menu']['label'], 'Personal Dashboard')
         self.assertEqual(
-            response.data['main_menu']['icon'], 'fa-user', 'main menu button is present and has the user ico'
+            response.data['main_menu']['icon'], 'fa-home', 'main menu button is present and has the user ico'
         )
         self.assertIsNone(response.data['space'], 'no space element without group.')
 
