@@ -138,7 +138,7 @@ def setup_env(
     env.path = f'{base_path}/htdocs'
     env.frontend_path = f'{base_path}/frontend'
     env.virtualenv_path = f'{env.path}/.venv'
-    env.cosinnus_src_path = f'{env.virtualenv_path}/src/cosinnus-core'
+    env.cosinnus_src_path = f'{env.virtualenv_path}/src/cosinnus'
     env.payments_src_path = f'{env.virtualenv_path}/src/wechange-payments'
     env.backup_path = f'{base_path}/backups'
     env.maintenance_mode_path = base_path
