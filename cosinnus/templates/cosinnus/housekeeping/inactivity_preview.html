@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% trans "Inactivity preview" %}</title>
     <style>
+        .dry-run-status {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 2px solid;
+        }
+        .dry-run-enabled {
+            background: #eaf4ff;
+            color: #174a75;
+        }
+        .dry-run-disabled {
+            background: #fff0f0;
+            color: #8b2020;
+        }
         .duration-table {
             width: 100%;
             max-width: 900px;
@@ -31,6 +44,17 @@
 <main>
     <div class="content-box">
         <h1>{% trans "Inactivity preview" %}</h1>
+        {% if dry_run %}
+            <div class="dry-run-status dry-run-enabled" data-dry-run="enabled">
+                <strong>{% trans "Dry run" %}: {% trans "enabled" %}</strong>
+                <p>{% trans "Inactivity jobs only report candidates; no warning emails or deactivations." %}</p>
+            </div>
+        {% else %}
+            <div class="dry-run-status dry-run-disabled" data-dry-run="disabled">
+                <strong>{% trans "Dry run" %}: {% trans "disabled" %}</strong>
+                <p>{% trans "Inactivity jobs run in production mode: warning emails and deactivations are enabled. This preview remains read-only." %}</p>
+            </div>
+        {% endif %}
         <p>{% trans "This page is read-only and shows the objects affected if the inactivity jobs run now." %}</p>
         <p>
             {% trans "Warning counts include only candidates whose configured warning date is today; candidates between warning dates are not included. In contrast, deactivation counts include all candidates whose inactivity period has elapsed and who have not yet been scheduled for deletion." %}
@@ -42,10 +66,6 @@
             <li>{% trans "Emails use example data and are shown without the final HTML mail layout. Core template fallbacks are marked below." %}</li>
             <li>{% trans "Dry run applies only to inactivity warning and deactivation jobs, not to already scheduled deletions or activity updates." %}</li>
         </ul>
-        <p>
-            {% trans "Dry run" %}:
-            {% if dry_run %}<strong>{% trans "enabled" %}</strong>{% else %}{% trans "disabled" %}{% endif %}
-        </p>
         <ul>
             <li>{% trans "Users due for deactivation" %}: {{ users_due_for_deactivation }}</li>
             <li>{% trans "Groups due for deactivation" %}: {{ groups_due_for_deactivation }}</li>
