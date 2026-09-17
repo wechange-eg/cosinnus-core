@@ -2344,6 +2344,20 @@ class CosinnusBaseGroup(
         # group-cache must be cleared for the change to take effect
         self.clear_cache()
 
+    def get_user_nextcloud_calendar_url(self, user):
+        """Convert the admin nextcloud_calendar_url to the user caldav calendar url as used by the frontend."""
+        from cosinnus_cloud.hooks import get_nc_user_id
+
+        user_calendar_url = None
+        if self.nextcloud_calendar_url:
+            user_calendar_url = self.nextcloud_calendar_url.replace(
+                f'/{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/',
+                f'/{get_nc_user_id(user)}/',
+            )
+            user_calendar_url = user_calendar_url[:-1]
+            user_calendar_url += f'_shared_by_{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/'
+        return user_calendar_url
+
 
 class CosinnusGroup(CosinnusBaseGroup):
     """Swappable group model implementation."""
