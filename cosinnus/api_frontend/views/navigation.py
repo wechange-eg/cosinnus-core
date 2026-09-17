@@ -238,8 +238,7 @@ class SpacesView(FilterBlacklistedItemsMixin, MyGroupsClusteredMixin, APIView):
                 MenuItem(
                     _('Personal Dashboard'),
                     reverse('cosinnus:user-dashboard'),
-                    'fa-user',
-                    request.user.cosinnus_profile.avatar_url,
+                    'fa-home',
                     id='PersonalDashboard',
                 )
             ]
