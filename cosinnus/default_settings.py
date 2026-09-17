@@ -333,11 +333,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'wagtail.contrib.forms',
         'announcements',
         'ajax_forms',
-        # SSO
-        'allauth',
-        'allauth.account',
-        'allauth.socialaccount',
-        'allauth.socialaccount.providers.openid_connect',
         # 'django_extensions',
         'django_filters',
         'django_select2',
@@ -373,6 +368,15 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'fcm_django',
         'django_extended_makemessages',
     ]
+
+    if project_settings.get('COSINNUS_IS_OAUTH_CLIENT', False):
+        INSTALLED_APPS += [
+            # SSO
+            'allauth',
+            'allauth.account',
+            'allauth.socialaccount',
+            'allauth.socialaccount.providers.openid_connect',
+        ]
 
     """ --------------- SENTRY/RAVEN LOGGING ---------------- """
 
