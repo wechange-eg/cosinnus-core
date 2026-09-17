@@ -377,6 +377,17 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         self.assertContains(response, 'cosinnus/mail/inactivity/user_subject.txt')
         self.assertContains(response, 'cosinnus/mail/inactivity/user_body.txt')
 
+    def test_inactivity_preview_shows_dry_run_status(self):
+        self.test_user.is_superuser = True
+        self.test_user.save()
+        self.client.force_login(self.test_user)
+
+        for dry_run, status in ((True, 'enabled'), (False, 'disabled')):
+            with self.subTest(dry_run=dry_run), override_settings(COSINNUS_INACTIVITY_DRY_RUN=dry_run):
+                response = self.client.get(reverse('cosinnus:housekeeping-inactivity-preview'))
+                self.assertContains(response, f'data-dry-run="{status}"')
+                self.assertEqual(response.context['dry_run'], dry_run)
+
     def test_inactivity_preview_requires_superuser(self):
         self.client.force_login(self.test_user)
 
