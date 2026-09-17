@@ -92,6 +92,7 @@ setup(
         'Pillow==10.3.0',
         'celery==5.2.7',
         'dataclasses',
+        'Babel==2.18.0',
         'beautifulsoup4==4.8.1',
         'chardet==3.0.4',
         'django-allauth==0.60.0',

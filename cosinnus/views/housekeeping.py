@@ -10,6 +10,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from builtins import FileNotFoundError, range, str
+from typing import Literal
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
@@ -18,6 +19,7 @@ from django.core.cache import cache
 from django.core.mail.message import EmailMessage
 from django.db.models import Q
 from django.http.response import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
+from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.utils.encoding import force_str
 from django.utils.html import escape
@@ -51,17 +53,151 @@ from cosinnus.utils.firebase import _send_firebase_message_direct, send_firebase
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus.utils.group import move_group_content as move_group_content_utils
 from cosinnus.utils.http import make_csv_response, make_xlsx_response
+from cosinnus.utils.inactivity import format_inactivity_duration, render_inactivity_mail
 from cosinnus.utils.permissions import check_user_can_receive_emails, check_user_superuser
 from cosinnus.utils.settings import get_obfuscated_settings_strings
 from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import (
     accept_user_tos_for_portal,
     filter_active_users,
+    filter_portal_users,
     is_user_active,
 )
-from cosinnus.views.profile_deletion import delete_userprofile
+from cosinnus.views.group_deletion import (
+    get_group_inactivity_notification_candidates,
+    get_groups_due_for_inactivity_deactivation,
+)
+from cosinnus.views.profile_deletion import (
+    delete_userprofile,
+    get_user_inactivity_notification_candidates,
+    get_users_due_for_inactivity_deactivation,
+)
 
 logger = logging.getLogger('cosinnus')
+
+
+def inactivity_preview(request):
+    """Preview current inactivity candidates and all configured warning emails."""
+    if not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+
+    # get a list of all languages available or used by users
+    language_labels = dict(settings.LANGUAGES)
+    language_codes = list(language_labels)
+    used_languages = (
+        filter_portal_users(get_user_model().objects.all())
+        .order_by()
+        .values_list('cosinnus_profile__language', flat=True)
+        .distinct()
+    )
+    for language in used_languages:
+        language = language or 'en'
+        if language not in language_codes:
+            language_codes.append(language)
+    languages = [(code, language_labels.get(code, code)) for code in language_codes]
+
+    user_candidates = get_user_inactivity_notification_candidates()
+    group_candidates = get_group_inactivity_notification_candidates()
+    sections = [
+        _get_inactivity_preview_section('user', user_candidates, languages, request.user),
+        _get_inactivity_preview_section('group', group_candidates, languages, request.user),
+    ]
+    context = {
+        'dry_run': settings.COSINNUS_INACTIVITY_DRY_RUN,
+        'sections': sections,
+        'users_due_for_deactivation': get_users_due_for_inactivity_deactivation().count(),
+        'groups_due_for_deactivation': get_groups_due_for_inactivity_deactivation().count(),
+    }
+    return render(request, 'cosinnus/housekeeping/inactivity_preview.html', context)
+
+
+def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, languages, recipient):
+    config = (
+        settings.COSINNUS_USER_INACTIVITY_SCHEDULE if kind == 'user' else settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE
+    )
+    inactivity_durations = [
+        {
+            'language': language,
+            'language_label': language_label,
+            'values': _get_inactivity_duration_preview(config['days'], config, language),
+        }
+        for language, language_label in languages
+    ]
+    deletion_days = (
+        settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS
+        if kind == 'user'
+        else settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS
+    )
+    preview_context = {'deleted_after_days': deletion_days}
+    if kind == 'group':
+        # create a preview group dummy
+        group_name = 'Example group'
+        group_type = 'Group/project'
+        preview_group = {
+            'name': group_name,
+            'slug': 'example-group',
+            'trans': {'VERBOSE_NAME': group_type},
+        }
+        preview_context.update(
+            group=preview_group,
+            group_type=group_type,
+            group_name=group_name,
+            delete_group_url='#',
+        )
+
+    warnings = []
+    for days, warning in config['warnings'].items():
+        previews = []
+        for language, language_label in languages:
+            warning_duration = _get_inactivity_duration_preview(days, warning, language)
+            template_info = {}
+            try:
+                subject, body = render_inactivity_mail(
+                    kind, recipient, days, preview_context, language_override=language, template_info=template_info
+                )
+                error = None
+            except Exception as exception:
+                logger.exception('Could not render %s inactivity email preview.', kind)
+                subject, body, error = '', '', force_str(exception)
+            previews.append(
+                {
+                    'language': language,
+                    'language_label': language_label,
+                    'warning_duration': warning_duration,
+                    'template_info': template_info,
+                    'subject': subject,
+                    'body': body,
+                    'error': error,
+                }
+            )
+        warnings.append(
+            {
+                'days': days,
+                'count': candidates[days].count(),
+                'subject_template': warning.get('subject_template'),
+                'body_template': warning.get('body_template'),
+                'previews': previews,
+            }
+        )
+    return {
+        'kind': kind,
+        'days': config['days'],
+        'inactivity_durations': inactivity_durations,
+        'warnings': warnings,
+    }
+
+
+def _get_inactivity_duration_preview(days, config, language):
+    babel_config = {'unit': config.get('unit', 'day')}
+    babel_value = format_inactivity_duration(days, babel_config, language)
+    has_override = config.get('text') is not None
+    override_value = format_inactivity_duration(days, {'text': config['text']}, language) if has_override else None
+    return {
+        'babel': babel_value,
+        'override': override_value,
+        'used': override_value if has_override else babel_value,
+        'source': 'override' if has_override else 'babel',
+    }
 
 
 def ensure_group_widgets(request=None):

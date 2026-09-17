@@ -1,0 +1,21 @@
+{% if language == 'de' %}
+Dein Konto und Profil werden wegen Inaktivität deaktiviert. Verbleibende Zeit: {{ warning_text }}. Weitere {{ deleted_after_days }} Tage später wird dein Profil endgültig gelöscht.
+
+Wenn du dein Konto behalten möchtest, melde dich einfach noch einmal an.
+
+Deine Pads, Neuigkeiten, hochgeladenen Dateien und sonstigen Inhalte bleiben auf der Plattform erhalten. Dein Name wird nicht mehr angezeigt und dein Profil nicht mehr verlinkt. In Rocket.Chat werden deine Direktnachrichten gelöscht; Inhalte in Diskussionen und Kanälen bleiben erhalten. Eigene Inhalte kannst du vor der Deaktivierung auf den jeweiligen Seiten selbst löschen.
+
+Nach der Deaktivierung ist dein Profil auf der Plattform nicht mehr sichtbar. Während der anschließenden {{ deleted_after_days }} Tage bleibt deine E-Mail-Adresse reserviert und kann nicht für eine neue Registrierung verwendet werden.
+
+Das Konto kann nach der Löschung noch bis zu sechs Monate in Sicherungskopien gespeichert sein. Bitte kontaktiere den Support der Plattform, wenn du eine frühere Löschung benötigst.
+{% else %}
+Your account and profile will be deactivated due to inactivity. Time remaining: {{ warning_text }}. Your profile will be permanently deleted another {{ deleted_after_days }} days later.
+
+If you want to keep your account, just log in once.
+
+Your pads, news, uploaded files and other content will remain on the platform. Your name will no longer be displayed and your profile will no longer be linked. On Rocket.Chat, your direct messages will be deleted, but content in discussions and channels will remain. You can delete your own content on the relevant pages before deactivation.
+
+After deactivation, your profile will no longer be visible on the platform. During the following {{ deleted_after_days }} days, your email address remains reserved and cannot be used for a new registration.
+
+The account may remain in backups for up to six months after deletion. Please contact the platform support team if you need earlier deletion.
+{% endif %}

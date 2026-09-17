@@ -27,6 +27,7 @@ from cosinnus.utils.html import render_html_with_variables
 from cosinnus.views.group import email_group_admins
 from cosinnus.views.group_deletion import (
     delete_group,
+    get_groups_due_for_inactivity_deactivation,
     mark_group_for_deletion,
     send_group_inactivity_deactivation_notifications,
     update_group_last_activity,
@@ -34,6 +35,7 @@ from cosinnus.views.group_deletion import (
 from cosinnus.views.profile_deletion import (
     deactivate_user_and_mark_for_deletion,
     delete_userprofile,
+    get_users_due_for_inactivity_deactivation,
     reassign_admins_for_groups_of_deleted_user,
     send_user_inactivity_deactivation_notifications,
 )
@@ -106,20 +108,25 @@ class SendUserInactivityNotifications(CosinnusCronJobBase):
 
     def do(self):
         users_notified = None
+        dry_run = settings.COSINNUS_INACTIVITY_DRY_RUN
         try:
-            users_notified = send_user_inactivity_deactivation_notifications()
+            users_notified = send_user_inactivity_deactivation_notifications(dry_run=dry_run)
         except Exception as e:
             logger.exception(e)
 
         if users_notified is not None:
-            message = f'{users_notified} users notified.'
+            if dry_run:
+                message = f'{users_notified} users would be notified (dry run).'
+                logger.warning(message)
+            else:
+                message = f'{users_notified} users notified.'
         else:
             message = 'An error occurred during cron job execution.'
         return message
 
 
 class MarkInactiveUsersForDeletion(CosinnusCronJobBase):
-    """Marks inactive users for deletion afters COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE day since last login."""
+    """Mark users for deletion after the configured user inactivity duration since last login."""
 
     RUN_EVERY_MINS = 60 * 24  # every day
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
@@ -129,14 +136,12 @@ class MarkInactiveUsersForDeletion(CosinnusCronJobBase):
     def do(self):
         users_scheduled = 0
         errors_occurred = False
-        inactivity_deactivation_threshold = now() - timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
-        inactive_users = get_user_model().objects.filter(cosinnus_profile__scheduled_for_deletion_at=None)
-        inactive_users = inactive_users.filter(
-            Q(last_login__lt=inactivity_deactivation_threshold)
-            | Q(last_login=None, date_joined__lt=inactivity_deactivation_threshold)
-        )
-        # exclude superusers, as they should never be automatically deleted
-        inactive_users = inactive_users.exclude(is_superuser=True)
+        inactive_users = get_users_due_for_inactivity_deactivation()
+        if settings.COSINNUS_INACTIVITY_DRY_RUN:
+            message = f'{inactive_users.count()} users would be scheduled for deletion (dry run).'
+            logger.warning(message)
+            return message
+
         for user in inactive_users:
             try:
                 reassign_admins_for_groups_of_deleted_user(user)
@@ -459,20 +464,25 @@ class SendGroupsInactivityNotifications(CosinnusCronJobBase):
 
     def do(self):
         groups_notified = None
+        dry_run = settings.COSINNUS_INACTIVITY_DRY_RUN
         try:
-            groups_notified = send_group_inactivity_deactivation_notifications()
+            groups_notified = send_group_inactivity_deactivation_notifications(dry_run=dry_run)
         except Exception as e:
             logger.exception(e)
 
         if groups_notified is not None:
-            message = f'{groups_notified} groups notified.'
+            if dry_run:
+                message = f'{groups_notified} groups would be notified (dry run).'
+                logger.warning(message)
+            else:
+                message = f'{groups_notified} groups notified.'
         else:
             message = 'An error occurred during cron job execution.'
         return message
 
 
 class MarkInactiveGroupsForDeletion(CosinnusCronJobBase):
-    """Marks inactive groups for deletion afters COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE days of inactivity."""
+    """Mark groups for deletion after the configured group inactivity duration."""
 
     RUN_EVERY_MINS = 60 * 24  # every day
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
@@ -482,12 +492,12 @@ class MarkInactiveGroupsForDeletion(CosinnusCronJobBase):
     def do(self):
         groups_scheduled = 0
         errors_occurred = False
-        inactivity_deactivation_threshold = now() - timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
-        inactive_groups = get_cosinnus_group_model().objects.filter(
-            scheduled_for_deletion_at=None, last_activity__lt=inactivity_deactivation_threshold
-        )
-        # ignore forum and other default groups
-        inactive_groups = inactive_groups.exclude(slug__in=get_default_portal_group_slugs())
+        inactive_groups = get_groups_due_for_inactivity_deactivation()
+        if settings.COSINNUS_INACTIVITY_DRY_RUN:
+            message = f'{inactive_groups.count()} groups would be scheduled for deletion (dry run).'
+            logger.warning(message)
+            return message
+
         for group in inactive_groups:
             try:
                 mark_group_for_deletion(group)
