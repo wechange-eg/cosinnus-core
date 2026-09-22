@@ -41,6 +41,7 @@ class CosinnusNoteCommentSerializer(serializers.ModelSerializer):
 class CosinnusNoteSerializer(CosinnusBaseTaggableObjectSerializer):
     """Readonly v3 note serializer."""
 
+    liked = serializers.SerializerMethodField()
     comment_count = serializers.SerializerMethodField()
     comments = CosinnusNoteCommentSerializer(read_only=True, many=True)
 
@@ -55,9 +56,14 @@ class CosinnusNoteSerializer(CosinnusBaseTaggableObjectSerializer):
             'group',
             'url',
             'like_count',
+            'liked',
             'comment_count',
             'comments',
         )
+
+    def get_liked(self, obj):
+        user = self.context['request'].user
+        return obj.is_user_liking(user)
 
     def get_comment_count(self, obj):
         return obj.comments.count()
