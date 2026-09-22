@@ -164,7 +164,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
         'wagtail.contrib.redirects.middleware.RedirectMiddleware',
-        'allauth.account.middleware.AccountMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.ConditionalRedirectMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.ForceInactiveUserLogoutMiddleware',
@@ -177,6 +176,10 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.core.middleware.cosinnus_middleware.ExternalEmailLinkRedirectNoticeMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.DeprecatedAppMiddleware',
     ]
+    if project_settings.get('COSINNUS_IS_OAUTH_CLIENT', False):
+        MIDDLEWARE += [
+            'allauth.account.middleware.AccountMiddleware',
+        ]
 
     TEMPLATES = [
         {
@@ -333,11 +336,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'wagtail.contrib.forms',
         'announcements',
         'ajax_forms',
-        # SSO
-        'allauth',
-        'allauth.account',
-        'allauth.socialaccount',
-        'allauth.socialaccount.providers.openid_connect',
         # 'django_extensions',
         'django_filters',
         'django_select2',
@@ -373,6 +371,15 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'fcm_django',
         'django_extended_makemessages',
     ]
+
+    if project_settings.get('COSINNUS_IS_OAUTH_CLIENT', False):
+        INSTALLED_APPS += [
+            # SSO
+            'allauth',
+            'allauth.account',
+            'allauth.socialaccount',
+            'allauth.socialaccount.providers.openid_connect',
+        ]
 
     """ --------------- SENTRY/RAVEN LOGGING ---------------- """
 
@@ -634,8 +641,11 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
 
     AUTHENTICATION_BACKENDS = [
         'cosinnus.backends.EmailAuthBackend',
-        'allauth.account.auth_backends.AuthenticationBackend',
     ]
+    if project_settings.get('COSINNUS_IS_OAUTH_CLIENT', False):
+        AUTHENTICATION_BACKENDS += [
+            'allauth.account.auth_backends.AuthenticationBackend',
+        ]
 
     # basic password validators
     if not DEBUG:
@@ -805,7 +815,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     }
 
     # PIWIK settings. set individually for each portal. won't load if PIWIK_SITE_ID is not set
-    PIWIK_SERVER_URL = '//stats.wechange.de/'
+    PIWIK_SERVER_URL = 'https://stats.wechange.de/'
     PIWIK_SITE_ID = None
 
     # honeypot field name shouldn't be too obvious, but also not trigger browsers' autofill
