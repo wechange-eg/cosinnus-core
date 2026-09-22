@@ -815,7 +815,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     }
 
     # PIWIK settings. set individually for each portal. won't load if PIWIK_SITE_ID is not set
-    PIWIK_SERVER_URL = '//stats.wechange.de/'
+    PIWIK_SERVER_URL = 'https://stats.wechange.de/'
     PIWIK_SITE_ID = None
 
     # honeypot field name shouldn't be too obvious, but also not trigger browsers' autofill
