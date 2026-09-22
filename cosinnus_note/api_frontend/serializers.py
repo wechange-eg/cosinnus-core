@@ -24,7 +24,7 @@ class CosinnusNoteCommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('text', 'created_on', 'creator')
+        fields = ('id', 'text', 'created_on', 'creator')
         list_serializer_class = CosinnusNoteCommentListSerializer
 
     def update(self, instance, validated_data):
