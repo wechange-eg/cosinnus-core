@@ -39,8 +39,9 @@ class CosinnusNoteCommentSerializer(serializers.ModelSerializer):
 
 
 class CosinnusNoteSerializer(CosinnusBaseTaggableObjectSerializer):
-    """Readonly v3 note serializer."""
+    """v3 note serializer."""
 
+    title = serializers.CharField(required=False)
     liked = serializers.SerializerMethodField()
     comment_count = serializers.SerializerMethodField()
     comments = CosinnusNoteCommentSerializer(read_only=True, many=True)
@@ -69,11 +70,7 @@ class CosinnusNoteSerializer(CosinnusBaseTaggableObjectSerializer):
         return obj.comments.count()
 
 
-class CosinnusNoteForumPostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Note
-        fields = ('text',)
-
+class CosinnusNoteForumPostSerializer(CosinnusNoteSerializer):
     def save(self, **kwargs):
         user = self.context['request'].user
         forum_group = get_cosinnus_group_model().objects.get(slug=settings.NEWW_FORUM_GROUP_SLUG)

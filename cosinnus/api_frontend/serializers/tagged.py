@@ -166,7 +166,7 @@ class CosinnusTaggableObjectGroupSerializer(serializers.ModelSerializer):
 
 
 class CosinnusBaseTaggableObjectSerializer(serializers.ModelSerializer):
-    """Readonly base serializer for taggable objects"""
+    """Base v3 serializer for taggable objects"""
 
     creator = CosinnusCreatorSerializer(read_only=True)
     group = CosinnusTaggableObjectGroupSerializer(read_only=True)
