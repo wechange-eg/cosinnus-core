@@ -74,4 +74,5 @@ class CosinnusNoteForumPostSerializer(CosinnusNoteSerializer):
     def save(self, **kwargs):
         user = self.context['request'].user
         forum_group = get_cosinnus_group_model().objects.get(slug=settings.NEWW_FORUM_GROUP_SLUG)
-        return super().save(group=forum_group, creator=user)
+        title = self.validated_data.get('title', Note.EMPTY_TITLE_PLACEHOLDER)
+        return super().save(group=forum_group, creator=user, title=title)
