@@ -63,7 +63,7 @@ class CosinnusNoteSerializer(CosinnusBaseTaggableObjectSerializer):
         )
 
     def get_liked(self, obj):
-        user = self.context['request'].user
+        user = self.context['user'] if 'user' in self.context else self.context['request'].user
         return obj.is_user_liking(user)
 
     def get_comment_count(self, obj):
