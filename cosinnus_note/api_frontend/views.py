@@ -87,7 +87,7 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     )
     def like(self, request, pk):
         """Like / unlike a note."""
-        return self.detail_action_response(request)
+        return self.detail_action_response(request, use_base_serializer_for_response=True)
 
     @action(
         detail=True,
@@ -97,4 +97,4 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     )
     def comment(self, request, pk):
         """Comment a note."""
-        return self.detail_action_response(request)
+        return self.detail_action_response(request, use_base_serializer_for_response=True)
