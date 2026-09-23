@@ -71,6 +71,8 @@
         {% if not topics_label %}{% trans "Select topic" as topics_label %}{% endif %}
         {% trans "Select topic" as topics_placeholder %}
         {% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.media_tag.topics label=topics_label icon="fa-lightbulb-o" placeholder=topics_placeholder %}
+        {# Include an empty value always here, so the field is included in the POST and the field becomes clearable. Otherwise the django form ignores it as unchanged #}
+        <input type="hidden" name="media_tag-topics" value="">
     </div>
 {% endif %}
 

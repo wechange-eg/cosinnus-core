@@ -14,6 +14,8 @@ from django_select2.widgets import (
 )
 from taggit.models import Tag
 
+from cosinnus.utils.functions import get_int_or_None
+
 
 class CommaSeparatedSelect2MultipleWidget(Select2MultipleWidget):
     def value_from_datadict(self, data, files, name):
@@ -37,7 +39,9 @@ class CommaSeparatedSelect2MultipleChoiceField(forms.MultipleChoiceField):
         Value is stored and retrieved as a string of comma separated
         integers. We don't want to do processing to convert the value to
         a list like the normal MultipleChoiceField does.
+        We filter out empty choices though, to support clearing the field.
         """
+        value = ','.join([elem for elem in value.split(',') if get_int_or_None(elem) is not None])
         return value
 
     def validate(self, value):
