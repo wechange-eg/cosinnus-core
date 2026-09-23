@@ -11,6 +11,7 @@ from cosinnus.models.user_dashboard_announcement import (
     UserDashboardWelcomeAnnouncement,
     UserDashboardWelcomeAnnouncementCallToActionButton,
 )
+from cosinnus.utils.permissions import check_user_superuser
 
 
 class CosinnusPersonalDashboardWidgetSerializer(serializers.Serializer):
@@ -173,7 +174,7 @@ class CosinnusPersonalDashboardSerializer(serializers.Serializer):
 
             # get announcement
             preview_announcement_id = context['query_params'].get('show_announcement')
-            if preview_announcement_id:
+            if preview_announcement_id and check_user_superuser(user):
                 announcement = UserDashboardAnnouncement.objects.filter(pk=preview_announcement_id).first()
             else:
                 announcement = UserDashboardAnnouncement.get_next_for_user(user)
@@ -181,7 +182,9 @@ class CosinnusPersonalDashboardSerializer(serializers.Serializer):
             # get welcome announcement
             welcome_announcement = UserDashboardWelcomeAnnouncement.objects.first()
             if welcome_announcement:
-                preview_welcome_announcement = context['query_params'].get('show_welcome_announcement') is not None
+                preview_welcome_announcement = context['query_params'].get(
+                    'show_welcome_announcement'
+                ) is not None and check_user_superuser(user)
                 if not preview_welcome_announcement and not welcome_announcement.show_to_user(user):
                     welcome_announcement = None
             instance = {'widgets': widgets, 'announcement': announcement, 'welcome_announcement': welcome_announcement}
