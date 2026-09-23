@@ -296,6 +296,8 @@ class CosinnusCalendarEventSerializer(
             self.save_media_tag(instance.media_tag, media_tag_data)
         # save dynamic fields data
         self.save_dynamic_fields(complete_validated_data, instance.media_tag)
+        # update event in index after all changes have been saved
+        instance.update_index()
         return instance
 
     def create(self, validated_data):
