@@ -63,6 +63,7 @@ class EventManager(BaseTaggableObjectManager):
         queryset = queryset.exclude(group__deactivated_apps__contains='cosinnus_event')
         queryset = queryset.filter(state=self.model.STATE_SCHEDULED)
         queryset = queryset.filter(attendances__state=EventAttendance.ATTENDANCE_GOING, attendances__user__id=user.id)
+        queryset = queryset.order_by('from_date')
         return queryset
 
     def get_recommendations(self, user):

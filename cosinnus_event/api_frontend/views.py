@@ -7,6 +7,7 @@ from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResp
 from cosinnus.api_frontend.views.mixins import ViewSetActionMixin
 from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus_event.api_frontend.serializers import CosinnusEventPollSerializer, CosinnusEventSerializer
+from cosinnus_event.calendar.serializers import CosinnusEventDateRangeQueryParameterSerializer
 from cosinnus_event.models import Event
 
 
@@ -50,6 +51,12 @@ class CosinnusEventViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     def get_queryset(self):
         return Event.objects.none()
 
+    def paginate_queryset(self, queryset):
+        if self.action == 'attending':
+            # don't paginate attending events that are filtered by date range
+            return None
+        return super().paginate_queryset(queryset)
+
     @action(
         detail=False,
         methods=['get'],
@@ -58,7 +65,13 @@ class CosinnusEventViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     )
     def attending(self, request):
         """Return attending upcoming user events."""
+        query_params_serializer = CosinnusEventDateRangeQueryParameterSerializer(data=request.query_params)
+        query_params_serializer.is_valid(raise_exception=True)
+        query_params = query_params_serializer.validated_data
         queryset = Event.objects.get_personal_attending_events(request.user)
+        queryset = queryset.filter(
+            from_date__date__gte=query_params['from_date'], to_date__date__lte=query_params['to_date']
+        )
         return self.list_action_response(request, queryset)
 
     @action(

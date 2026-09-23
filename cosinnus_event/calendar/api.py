@@ -24,35 +24,35 @@ from cosinnus_event.calendar.serializers import (
     CosinnusCalendarEventBBBRoomSerializer,
     CosinnusCalendarEventReflectSerializer,
     CosinnusCalendarEventSerializer,
-    CosinnusCalendarListQueryParameterSerializer,
     CosinnusCalendarListSerializer,
     CosinnusCalendarSyncedEventListSerializer,
     CosinnusCalendarSyncedEventSerializer,
     CosinnusCalendarSynceRequiredSerializer,
+    CosinnusEventDateRangeQueryParameterSerializer,
 )
 from cosinnus_event.models import Event
 
 
-class ListQueryParamsMixin:
+class CosinnusCalendarListDateRangeQueryParamsMixin:
     """Filters the list view queryset by "from_date" and "to_date" query parameters."""
 
     query_params = None
 
     def list(self, request, *args, **kwargs):
         # validate and set query parameters
-        query_params_serializer = CosinnusCalendarListQueryParameterSerializer(data=request.query_params)
+        query_params_serializer = CosinnusEventDateRangeQueryParameterSerializer(data=request.query_params)
         query_params_serializer.is_valid(raise_exception=True)
         self.query_params = query_params_serializer.validated_data
         return super().list(request, *args, **kwargs)
 
-    def filter_by_query_params(self, queryset):
+    def filter_by_date_range_query_params(self, queryset):
         # apply query parameter to queryset
         return queryset.filter(
             from_date__date__gte=self.query_params['from_date'], to_date__date__lte=self.query_params['to_date']
         )
 
 
-class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets.ModelViewSet):
+class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQueryParamsMixin, viewsets.ModelViewSet):
     """
     Viewset for public events for the v3 calendar app.
     """
@@ -110,7 +110,7 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
         )
         if self.action == 'list':
             # apply query parameters
-            queryset = self.filter_by_query_params(queryset)
+            queryset = self.filter_by_date_range_query_params(queryset)
         return queryset
 
     def get_object(self):
@@ -198,7 +198,7 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
 
 class CosinnusCalendarSyncedEventsViewSet(
     ViewSetActionMixin,
-    ListQueryParamsMixin,
+    CosinnusCalendarListDateRangeQueryParamsMixin,
     mixins.CreateModelMixin,
     mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
@@ -262,7 +262,7 @@ class CosinnusCalendarSyncedEventsViewSet(
         )
         if self.action == 'list':
             # apply query parameters
-            queryset = self.filter_by_query_params(queryset)
+            queryset = self.filter_by_date_range_query_params(queryset)
         return queryset
 
     def get_object(self):

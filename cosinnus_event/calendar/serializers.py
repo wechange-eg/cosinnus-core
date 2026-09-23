@@ -19,7 +19,7 @@ from cosinnus.utils.permissions import check_object_write_access
 from cosinnus_event.models import Event, EventAttendance
 
 
-class CosinnusCalendarListQueryParameterSerializer(serializers.Serializer):
+class CosinnusEventDateRangeQueryParameterSerializer(serializers.Serializer):
     """Serializer for the list API query parameters."""
 
     from_date = serializers.DateField(required=True, error_messages={'required': 'This parameter is required'})
