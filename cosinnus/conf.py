@@ -592,6 +592,11 @@ class CosinnusConf(AppConf):
         #'cosinnus.userprofile': 0,
     }
 
+    # whether Elasticsearch search analyzers should normalize accents/diacritics
+    # Note: changing this requires recreating the Elasticsearch index, e.g.:
+    # `python manage.py rebuild_index`
+    HAYSTACK_ASCII_FOLDING_ENABLED = True
+
     # widgets listed here will be created for the user dashboard upon user creation.
     # this will check if the cosinnus app is installed and if the widget is registered, so
     # invalid entries do not produce errors
@@ -1474,6 +1479,7 @@ class CosinnusConf(AppConf):
     # set to True if you want to enable oauth2 social login with another instance (this other instance then has to have
     # IS_OAUTH_PROVIDER to True). Add the url of the other instane as OAUTH_SERVER_BASEURL
     # Also supports other SSO client behaviour via the allauth SOCIALACCOUNT_PROVIDERS setting.
+    # NOTE: this needs to be defined in conf before `define_cosinnus_project_settings()`!
     IS_OAUTH_CLIENT = False
     OAUTH_SERVER_BASEURL = None
     OAUTH_SERVER_PROVIDER_NAME = 'wechange'
