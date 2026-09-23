@@ -226,7 +226,12 @@ class CosinnusPersonalDashboardEventsWidget(CosinnusPersonalDashboardWidget):
                 if self.cosinnus_app not in group.get_deactivated_apps() and group.nextcloud_calendar_url
             ]
             for group in user_calendar_groups:
-                calendars.append(group.nextcloud_calendar_url)
+                calendars.append(
+                    {
+                        'space_id': group.pk,
+                        'calendar_url': group.get_user_nextcloud_calendar_url(user),
+                    }
+                )
             conf['calendars'] = calendars
         return conf
 
