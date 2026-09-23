@@ -47,7 +47,7 @@ class SpacesViewTest(APITestCase):
         self.assertDictEqual(
             response.data['personal'],
             {
-                'header': 'My Personal Space',
+                'header': 'Personal Space',
                 'items': [MenuItem('Personal Dashboard', '/dashboard/', 'fa-home', id='PersonalDashboard')],
                 'actions': [],
             },

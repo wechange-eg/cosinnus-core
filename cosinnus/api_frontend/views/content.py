@@ -488,7 +488,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
 
         # match personal dashboard
         if not self.main_menu_label and url.startswith(reverse('cosinnus:user-dashboard')):
-            self.main_menu_label = _('Personal Dashboard')
+            self.main_menu_label = _('Personal Space')
             self.main_menu_icon = 'fa-home'
 
         # match map

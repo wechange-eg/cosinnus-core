@@ -2788,6 +2788,9 @@ msgstr "Die möglichen Optionen waren"
 msgid "Avatar"
 msgstr "Avatar"
 
+msgid "Avatar is generated"
+msgstr "Avatar automatisch generiert"
+
 msgid "Avatar will be deleted once you save."
 msgstr "Bild wird beim speichern gelöscht."
 
@@ -8120,9 +8123,6 @@ msgstr "Meine Inserate"
 msgid "My Organizations"
 msgstr "Meine Organisationen"
 
-msgid "My Personal Space"
-msgstr "Mein persönlicher Space"
-
 msgid "My Profile"
 msgstr "Mein Profil"
 
@@ -9151,6 +9151,9 @@ msgstr "Dashboard-Ankündigungen"
 
 msgid "Personal Message (optional)"
 msgstr "Persönliche Nachricht (optional)"
+
+msgid "Personal Space"
+msgstr "Persönlicher Space"
 
 msgid "Personal info"
 msgstr "Persönliche Informationen"
@@ -16053,6 +16056,9 @@ msgstr "Ja"
 
 #~ msgid "Motivation"
 #~ msgstr "Motivation"
+
+#~ msgid "My Personal Space"
+#~ msgstr "Mein persönlicher Space"
 
 #~ msgid "Name of educational institution"
 #~ msgstr "Name der Bildungseinrichtung"

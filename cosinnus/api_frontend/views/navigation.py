@@ -115,7 +115,7 @@ class SpacesView(FilterBlacklistedItemsMixin, MyGroupsClusteredMixin, APIView):
                     'application/json': {
                         'data': {
                             'personal': {
-                                'header': 'My Personal Space',
+                                'header': 'Personal Space',
                                 'items': [
                                     {
                                         'id': 'PersonalDashboard',
@@ -243,7 +243,7 @@ class SpacesView(FilterBlacklistedItemsMixin, MyGroupsClusteredMixin, APIView):
                 )
             ]
             personal_space = {
-                'header': _('My Personal Space'),
+                'header': _('Personal Space'),
                 'items': self.filter_items_for_blacklisted_urls(personal_space_items),
                 'actions': [],
             }

@@ -111,7 +111,7 @@ class MainContentViewTest(APILiveServerTestCase):
         self.assertIn('<meta ', response.data['meta'], 'at least one meta item in meta response')
         self.assertIn('rel="apple-touch-icon"', response.data['meta'], 'one rel-link in meta response')
         self.assertEqual(response.data['sub_navigation'], None, 'no subnavigation in dashboard')
-        self.assertEqual(response.data['main_menu']['label'], 'Personal Dashboard')
+        self.assertEqual(response.data['main_menu']['label'], 'Personal Space')
         self.assertEqual(
             response.data['main_menu']['icon'], 'fa-home', 'main menu button is present and has the user ico'
         )

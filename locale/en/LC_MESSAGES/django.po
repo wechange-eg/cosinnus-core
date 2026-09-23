@@ -2630,6 +2630,9 @@ msgstr ""
 msgid "Avatar"
 msgstr ""
 
+msgid "Avatar is generated"
+msgstr ""
+
 msgid "Avatar will be deleted once you save."
 msgstr ""
 
@@ -7533,9 +7536,6 @@ msgstr ""
 msgid "My Organizations"
 msgstr ""
 
-msgid "My Personal Space"
-msgstr ""
-
 msgid "My Profile"
 msgstr ""
 
@@ -8559,6 +8559,9 @@ msgid "Personal Dashboard Announcements"
 msgstr ""
 
 msgid "Personal Message (optional)"
+msgstr ""
+
+msgid "Personal Space"
 msgstr ""
 
 msgid "Personal info"
