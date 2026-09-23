@@ -23,7 +23,6 @@ class CosinnusEventPollSerializer(CosinnusBaseTaggableObjectSerializer):
 class CosinnusEventSerializer(CosinnusBaseTaggableObjectSerializer):
     """Readonly v3 event serializer."""
 
-    type = serializers.SerializerMethodField()
     location = serializers.CharField(
         source='media_tag.location',
         required=False,
@@ -39,13 +38,11 @@ class CosinnusEventSerializer(CosinnusBaseTaggableObjectSerializer):
         allow_null=True,
         choices=get_tag_object_model().LOCATION_TYPE_CHOICES,
     )
-    caldav_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Event
         fields = (
             'id',
-            'type',
             'title',
             'from_date',
             'to_date',
@@ -56,19 +53,4 @@ class CosinnusEventSerializer(CosinnusBaseTaggableObjectSerializer):
             'location_type',
             'location',
             'image',
-            'caldav_url',
         )
-
-    def get_type(self, obj):
-        state_type_map = {
-            Event.STATE_SCHEDULED: 'public',
-            Event.STATE_SYNCHRONIZED_EVENT: 'internal',
-        }
-        return state_type_map.get(obj.state)
-
-    def get_caldav_url(self, obj):
-        caldav_url = None
-        user = self.context['user'] if 'user' in self.context else self.context['request'].user
-        if user:
-            caldav_url = obj.get_caldav_url(user)
-        return caldav_url

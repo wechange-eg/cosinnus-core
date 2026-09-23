@@ -55,17 +55,14 @@ class EventManager(BaseTaggableObjectManager):
         return queryset
 
     def get_personal_attending_events(self, user):
-        """Return scheduled and internal events where the user is attending."""
+        """Return scheduled events where the user is attending."""
         from cosinnus_event.models import EventAttendance
 
         queryset = self.all_upcoming()
         queryset = queryset.filter(group__is_active=True)
         queryset = queryset.exclude(group__deactivated_apps__contains='cosinnus_event')
-        queryset = queryset.filter(state__in=[self.model.STATE_SCHEDULED, self.model.STATE_SYNCHRONIZED_EVENT])
+        queryset = queryset.filter(state=self.model.STATE_SCHEDULED)
         queryset = queryset.filter(attendances__state=EventAttendance.ATTENDANCE_GOING, attendances__user__id=user.id)
-        # note: this excludes empty synchronized events
-        queryset = queryset.exclude(from_date=None).exclude(to_date=None)
-        queryset = queryset.order_by('from_date')
         return queryset
 
     def get_recommendations(self, user):
