@@ -564,6 +564,9 @@ class CosinnusGroupManager(models.Manager):
         # exclude groups without description
         queryset = queryset.exclude(description=None).exclude(description='')
 
+        # exclude groups without avatar
+        queryset = queryset.exclude(avatar='')
+
         # exclude groups with 1 member
         queryset = queryset.annotate(
             count_members=Count('memberships', filter=Q(memberships__status__in=MEMBER_STATUS))
