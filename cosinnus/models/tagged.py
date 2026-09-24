@@ -374,6 +374,28 @@ class AttachableObjectModel(models.Model):
                 file_attachments.append(attached_object)
         return file_attachments
 
+    @cached_property
+    def image_attachments(self):
+        """Return the attached objects filtered by image files."""
+        file_attachments = self.file_attachments
+        file_attachments = [
+            attachment
+            for attachment in file_attachments
+            if attachment.model_name == 'cosinnus_file.FileEntry' and attachment.target_object.is_image
+        ]
+        return file_attachments
+
+    @cached_property
+    def non_image_attachments(self):
+        """Return the attached objects filtered by non-image files."""
+        file_attachments = self.file_attachments
+        file_attachments = [
+            attachment
+            for attachment in file_attachments
+            if attachment.model_name != 'cosinnus_file.FileEntry' or not attachment.target_object.is_image
+        ]
+        return file_attachments
+
     def get_attached_objects_hash(self):
         """Returns a hashable tuple of sorted list of ids of all attached objects.
         Usuable to compare equality of attached files to objects."""

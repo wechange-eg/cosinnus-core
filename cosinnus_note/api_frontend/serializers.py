@@ -1,6 +1,7 @@
 from django.utils.timezone import now
 from rest_framework import serializers
 
+from cosinnus.api_frontend.serializers.attached_objects import CosinnusAttachedFileSerializer
 from cosinnus.api_frontend.serializers.generic import CosinnusCreatorSerializer
 from cosinnus.api_frontend.serializers.tagged import CosinnusBaseTaggableObjectSerializer
 from cosinnus.conf import settings
@@ -45,6 +46,9 @@ class CosinnusNoteSerializer(CosinnusBaseTaggableObjectSerializer):
     liked = serializers.SerializerMethodField()
     comment_count = serializers.SerializerMethodField()
     comments = CosinnusNoteCommentSerializer(read_only=True, many=True)
+    attached_images = serializers.SerializerMethodField()
+    attached_file_count = serializers.SerializerMethodField()
+    attached_files = serializers.SerializerMethodField()
 
     class Meta:
         model = Note
@@ -60,6 +64,9 @@ class CosinnusNoteSerializer(CosinnusBaseTaggableObjectSerializer):
             'liked',
             'comment_count',
             'comments',
+            'attached_images',
+            'attached_file_count',
+            'attached_files',
         )
 
     def get_liked(self, obj):
@@ -68,6 +75,23 @@ class CosinnusNoteSerializer(CosinnusBaseTaggableObjectSerializer):
 
     def get_comment_count(self, obj):
         return obj.comments.count()
+
+    def get_attached_images(self, obj):
+        attached_images = []
+        for attached_object in obj.image_attachments:
+            serialized_attached_object = CosinnusAttachedFileSerializer(attached_object).data
+            attached_images.append(serialized_attached_object)
+        return attached_images
+
+    def get_attached_file_count(self, obj):
+        return len(obj.non_image_attachments)
+
+    def get_attached_files(self, obj):
+        attached_files = []
+        for attached_object in obj.non_image_attachments:
+            serialized_attached_object = CosinnusAttachedFileSerializer(attached_object).data
+            attached_files.append(serialized_attached_object)
+        return attached_files
 
 
 class CosinnusNoteForumPostSerializer(CosinnusNoteSerializer):
