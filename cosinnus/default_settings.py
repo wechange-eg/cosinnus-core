@@ -285,6 +285,11 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'sekizai',
         'apps.core',
         'django_countries',  # needed for i18n for the country list
+        # SSO
+        'allauth',
+        'allauth.account',
+        'allauth.socialaccount',
+        'allauth.socialaccount.providers.openid_connect',
     ]
 
     # Internal Apps (as defined in external project)
@@ -333,11 +338,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'wagtail.contrib.forms',
         'announcements',
         'ajax_forms',
-        # SSO
-        'allauth',
-        'allauth.account',
-        'allauth.socialaccount',
-        'allauth.socialaccount.providers.openid_connect',
         # 'django_extensions',
         'django_filters',
         'django_select2',
