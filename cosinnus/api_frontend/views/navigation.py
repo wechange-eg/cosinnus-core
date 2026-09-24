@@ -21,7 +21,6 @@ from rest_framework.views import APIView
 
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
-from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
 from cosinnus.models import UserBlock
 from cosinnus.models.conference import CosinnusConferenceApplication
@@ -100,7 +99,6 @@ class SpacesView(FilterBlacklistedItemsMixin, MyGroupsClusteredMixin, APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -408,7 +406,6 @@ class BookmarksView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -513,7 +510,6 @@ class UnreadMessagesView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -553,7 +549,6 @@ class UnreadAlertsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -652,7 +647,6 @@ class AlertsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -923,7 +917,6 @@ class AlertsMarkAllReadView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     # todo: generate proper response, by either putting the entire response into a
@@ -985,7 +978,6 @@ class MembershipAlertsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     @swagger_auto_schema(
         responses={
@@ -1156,7 +1148,6 @@ class HelpView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -1242,7 +1233,6 @@ class ProfileView(LanguageMenuItemMixin, APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -1397,7 +1387,6 @@ class MainNavigationView(FilterBlacklistedItemsMixin, LanguageMenuItemMixin, API
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -1668,7 +1657,6 @@ class VersionHistoryView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -1758,7 +1746,6 @@ class VersionHistoryUnreadCountView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand

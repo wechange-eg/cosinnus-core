@@ -264,7 +264,6 @@ class UserAuthInfoView(LoginViewAdditionalLogicMixin, APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -410,7 +409,6 @@ class SignupView(UserSignupTriggerEventsMixin, SignupApiMixin, APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # Throttle classes to be used if server configuration allows.
     #    right now, nginx reverse proxy prevents IP info from reaching django
@@ -512,7 +510,6 @@ class UserProfileView(UserSerializationMixin, APIView):
         BrowsableAPIRenderer,
     )
     parser_classes = (JSONParser, MultiPartParser, FormParser)
-    authentication_classes = (CsrfExemptSessionAuthentication, JWTAuthentication)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -714,7 +711,6 @@ class UserUIFlagsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     MAX_UI_FLAGS_LENGTH = 10000
@@ -769,7 +765,6 @@ class GuestLoginView(LoginViewAdditionalLogicMixin, GuestAccessMixin, APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     msg_invalid_token = _('Invalid guest token.')
     msg_already_logged_in = _(
@@ -854,7 +849,6 @@ class SetInitialPasswordView(SetInitialPasswordMixin, SignupApiMixin, APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsNotAuthenticated,)
 
     @swagger_auto_schema(
@@ -1026,7 +1020,6 @@ class UserNotificationSettingView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     @swagger_auto_schema(
