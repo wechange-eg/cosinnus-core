@@ -1,0 +1,180 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ request.LANGUAGE_CODE|default:'en' }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% trans "Inactivity preview" %}</title>
+    <style>
+        .dry-run-status {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 2px solid;
+        }
+        .dry-run-enabled {
+            background: #eaf4ff;
+            color: #174a75;
+        }
+        .dry-run-disabled {
+            background: #fff0f0;
+            color: #8b2020;
+        }
+        .duration-table {
+            width: 100%;
+            max-width: 900px;
+            table-layout: fixed;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        .duration-table caption {
+            text-align: left;
+            margin-bottom: 0.5rem;
+        }
+        .duration-table th,
+        .duration-table td {
+            padding: 0.5rem 1rem;
+            text-align: left;
+            vertical-align: top;
+            overflow-wrap: anywhere;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div class="content-box">
+        <h1>{% trans "Inactivity preview" %}</h1>
+        {% if dry_run %}
+            <div class="dry-run-status dry-run-enabled" data-dry-run="enabled">
+                <strong>{% trans "Dry run" %}: {% trans "enabled" %}</strong>
+                <p>{% trans "Inactivity jobs only report candidates; no warning emails or deactivations." %}</p>
+            </div>
+        {% else %}
+            <div class="dry-run-status dry-run-disabled" data-dry-run="disabled">
+                <strong>{% trans "Dry run" %}: {% trans "disabled" %}</strong>
+                <p>{% trans "Inactivity jobs run in production mode: warning emails and deactivations are enabled. This preview remains read-only." %}</p>
+            </div>
+        {% endif %}
+        <p>{% trans "This page is read-only and shows the objects affected if the inactivity jobs run now." %}</p>
+        <p>
+            {% trans "Warning counts include only candidates whose configured warning date is today; candidates between warning dates are not included. In contrast, deactivation counts include all candidates whose inactivity period has elapsed and who have not yet been scheduled for deletion." %}
+        </p>
+        <ul>
+            <li>{% trans "Missed warnings are not retried. Shortening inactivity periods can deactivate overdue accounts or groups without prior warning." %}</li>
+            <li>{% trans "Counts use stored activity dates; this preview does not refresh Rocket.Chat or Nextcloud activity. Group counts are not email counts and may include groups without admins." %}</li>
+            <li>{% trans "Babel rounds durations to the configured unit. Check wording in every language manually; missing language branches are not detected." %}</li>
+            <li>{% trans "Emails use example data and are shown without the final HTML mail layout. Core template fallbacks are marked below." %}</li>
+            <li>{% trans "Dry run applies only to inactivity warning and deactivation jobs, not to already scheduled deletions or activity updates." %}</li>
+        </ul>
+        <ul>
+            <li>{% trans "Users due for deactivation" %}: {{ users_due_for_deactivation }}</li>
+            <li>{% trans "Groups due for deactivation" %}: {{ groups_due_for_deactivation }}</li>
+        </ul>
+    </div>
+
+    {% for section in sections %}
+        <div class="content-box">
+            <h2>
+                {% if section.kind == 'user' %}{% trans "User warnings" %}{% else %}{% trans "Group warnings" %}{% endif %}
+            </h2>
+            <p>
+                {% trans "Deactivation after" %}: {{ section.days }} {% trans "days" %}
+            </p>
+            <table class="duration-table">
+                <caption><strong>{% trans "Inactivity period" %}</strong></caption>
+                <thead>
+                    <tr>
+                        <th>{% trans "Language" %}</th>
+                        <th>{% trans "Babel value" %}</th>
+                        <th>{% trans "Text override" %}</th>
+                        <th>{% trans "Used value" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for duration in section.inactivity_durations %}
+                        <tr>
+                            <th>{{ duration.language_label }} ({{ duration.language }})</th>
+                            <td>{{ duration.values.babel }}</td>
+                            <td>
+                                {% if duration.values.override is not None %}
+                                    {{ duration.values.override }}
+                                {% else %}
+                                    <em>{% trans "not configured" %}</em>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <strong>{{ duration.values.used }}</strong>
+                                ({% if duration.values.source == 'override' %}{% trans "text override" %}{% else %}Babel{% endif %})
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% for warning in section.warnings %}
+                <hr>
+                <h3>{{ warning.days }} {% trans "days before deactivation" %}</h3>
+                <p><strong>{% trans "Current candidates" %}:</strong> {{ warning.count }}</p>
+                <p>
+                    <strong>{% trans "Subject template" %}:</strong> <code>{{ warning.subject_template }}</code><br>
+                    <strong>{% trans "Body template" %}:</strong> <code>{{ warning.body_template }}</code>
+                </p>
+
+                {% for preview in warning.previews %}
+                    <div class="panel panel-default" data-language="{{ preview.language }}">
+                        <div class="panel-heading">
+                            <strong>{{ preview.language_label }} ({{ preview.language }})</strong>
+                        </div>
+                        <div class="panel-body">
+                            <table class="duration-table">
+                                <caption><strong>{% trans "Warning period" %}</strong></caption>
+                                <thead>
+                                    <tr>
+                                        <th>{% trans "Babel value" %}</th>
+                                        <th>{% trans "Text override" %}</th>
+                                        <th>{% trans "Used value" %}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ preview.warning_duration.babel }}</td>
+                                        <td>
+                                            {% if preview.warning_duration.override is not None %}
+                                                {{ preview.warning_duration.override }}
+                                            {% else %}
+                                                <em>{% trans "not configured" %}</em>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <strong>{{ preview.warning_duration.used }}</strong>
+                                            ({% if preview.warning_duration.source == 'override' %}{% trans "text override" %}{% else %}Babel{% endif %})
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            {% if preview.error %}
+                                <div class="alert alert-danger">{{ preview.error }}</div>
+                            {% else %}
+                                {% if preview.template_info.fallback %}
+                                    <div class="alert alert-warning">
+                                        <p><strong>{% trans "Configured templates could not be used. This preview uses the core fallback templates." %}</strong></p>
+                                        <p>
+                                            {% trans "Subject template" %}: <code>{{ preview.template_info.subject_template }}</code><br>
+                                            {% trans "Body template" %}: <code>{{ preview.template_info.body_template }}</code>
+                                        </p>
+                                    </div>
+                                {% endif %}
+                                <p><strong>{% trans "Subject" %}:</strong> {{ preview.subject }}</p>
+                                <pre style="white-space: pre-wrap">{{ preview.body }}</pre>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% empty %}
+                <p>{% trans "No warning stages configured." %}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</main>
+</body>
+</html>
