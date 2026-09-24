@@ -14,6 +14,8 @@ from taggit.serializers import TaggitSerializer, TagListSerializerField
 from cosinnus.api_frontend.handlers.error_codes import (
     ERROR_LOGIN_INCORRECT_CREDENTIALS,
     ERROR_SIGNUP_CAPTCHA_INVALID,
+    ERROR_SIGNUP_CAPTCHA_RESPONSE_MISSING,
+    ERROR_SIGNUP_CAPTCHA_SERVICE_CONFIGURATION_ERROR,
     ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN,
     ERROR_SIGNUP_EMAIL_IN_USE,
     ERROR_SIGNUP_NAME_NOT_ACCEPTABLE,
@@ -30,6 +32,8 @@ from cosinnus.models.profile import (
     GlobalUserNotificationSetting,
 )
 from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.utils.http import get_ip_from_request
+from cosinnus.utils.logging import log_needs_attention_error
 from cosinnus.utils.user import get_locked_profile_visibility_setting_for_user
 from cosinnus.utils.validators import HexColorValidator, validate_username
 
@@ -86,8 +90,9 @@ class CosinnusUserSignupSerializer(
     )
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
         newsletter_opt_in = serializers.BooleanField(required=False, default=False)
-    # hcaptcha, required if enabled for this portal
-    hcaptcha_response = serializers.CharField(required=settings.COSINNUS_USE_HCAPTCHA)
+    # one of hcaptcha_response or eucaptcha_response is required if COSINNUS_USE_HCAPTCHA is enabled for this portal
+    hcaptcha_response = serializers.CharField(required=False)
+    eucaptcha_response = serializers.CharField(required=False)
 
     # managed tag field (see `COSINNUS_MANAGED_TAGS_IN_SIGNUP_FORM` and `_ManagedTagFormMixin`)
     if (
@@ -114,27 +119,84 @@ class CosinnusUserSignupSerializer(
     def validate(self, attrs):
         """We run validation all in one method, because we do not want to
         give out any further validation details if the captcha is incorrect"""
-        # hcaptcha. do not validate the email before the captcha has been processed as valid.
-        if 'hcaptcha_response' in attrs or settings.COSINNUS_USE_HCAPTCHA:
-            # for debugging, we allow processing hcaptcha if the param is sent in POST,
-            # even if COSINNUS_USE_HCAPTCHA is not activated
-            data = {'secret': settings.COSINNUS_HCAPTCHA_SECRET_KEY, 'response': attrs['hcaptcha_response']}
-            captcha_response = requests.post(settings.COSINNUS_HCAPTCHA_VERIFY_URL, data=data)
-            if not captcha_response.status_code == 200:
-                extra = {
-                    'status': captcha_response.status_code,
-                    'details': captcha_response.json(),
+        # hcaptcha or eucaptcha. do not validate the email before the captcha has been processed as valid.
+        if 'hcaptcha_response' in attrs or 'eucaptcha_response' in attrs or settings.COSINNUS_USE_HCAPTCHA:
+            # From here on, we need at least one valid captcha response that was supplied, preferring eucaptcha if both.
+            # For debugging, we allow processing hcaptcha if the param is sent in POST,
+            # even if COSINNUS_USE_HCAPTCHA is not activated.
+
+            if (
+                'eucaptcha_response' in attrs
+                and settings.COSINNUS_EUCAPTCHA_SITE_KEY
+                and settings.COSINNUS_EUCAPTCHA_SECRET_KEY
+            ):
+                client_ip = get_ip_from_request(self.context['request'])
+                verify_url = settings.COSINNUS_EUCAPTCHA_VERIFY_URL
+                data = {
+                    # do they use this parameter set? (used by the pypi package)
+                    # 'sitekey': settings.COSINNUS_EUCAPTCHA_SITE_KEY,
+                    # 'secret': settings.COSINNUS_EUCAPTCHA_SECRET_KEY,
+                    # 'remote': client_ip,
+                    # 'response': attrs['eucaptcha_response'],
+                    # or this? (from https://docs.eu-captcha.eu/en/api/verify/#example)
+                    'sitekey': settings.COSINNUS_EUCAPTCHA_SITE_KEY,
+                    'secret': settings.COSINNUS_EUCAPTCHA_SECRET_KEY,
+                    'client_ip': client_ip,
+                    'client_token': attrs['eucaptcha_response'],
+                    'client_user_agent': self.context['request'].META.get('HTTP_USER_AGENT', None),
                 }
+            elif 'hcaptcha_response' in attrs and settings.COSINNUS_HCAPTCHA_SECRET_KEY:
+                verify_url = settings.COSINNUS_HCAPTCHA_VERIFY_URL
+                data = {'secret': settings.COSINNUS_HCAPTCHA_SECRET_KEY, 'response': attrs['hcaptcha_response']}
+            elif not attrs.get('eucaptcha_response', None) and not attrs.get('hcaptcha_response', None):
+                raise ValidationError(ERROR_SIGNUP_CAPTCHA_RESPONSE_MISSING)
+            else:
+                log_needs_attention_error(
+                    'Captchas misconfigured! Frontend sent a different captcha response than captcha provider '
+                    'configured in the backend!',
+                    extra={
+                        'eucaptcha_response': attrs.get('eucaptcha_response'),
+                        'hcaptcha_response': attrs.get('hcaptcha_response'),
+                        'hcaptcha_set_up': bool(settings.COSINNUS_HCAPTCHA_SECRET_KEY),
+                        'eucaptcha_set_up': bool(
+                            settings.COSINNUS_EUCAPTCHA_SECRET_KEY and settings.COSINNUS_EUCAPTCHA_SITE_KEY
+                        ),
+                    },
+                )
+                raise ValidationError(ERROR_SIGNUP_CAPTCHA_SERVICE_CONFIGURATION_ERROR)
+
+            captcha_response = requests.post(verify_url, data=data)
+            if not captcha_response.status_code == 200:
                 logger.error(
                     (
-                        'User Signup could not be completed because hCaptcha could not be verified at the provider, '
+                        'User Signup could not be completed because captcha could not be verified at the provider, '
                         'response was not 200.'
                     ),
-                    extra=extra,
+                    extra={
+                        'status': captcha_response.status_code,
+                        'details': captcha_response.json(),
+                        'verify_url_used': verify_url,
+                    },
                 )
                 raise ValidationError(ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN)
             captcha_success = captcha_response.json().get('success', False)
             if not captcha_success:
+                # FIXME: REMOVE after testing is done **************************
+                extra = {
+                    'status': captcha_response.status_code,
+                    'details': captcha_response.json(),
+                    'verify_url_used': verify_url,
+                    'eucaptcha_response': attrs.get('eucaptcha_response'),
+                    'hcaptcha_response': attrs.get('hcaptcha_response'),
+                    'hcaptcha_set_up': bool(settings.COSINNUS_HCAPTCHA_SECRET_KEY),
+                    'eucaptcha_set_up': bool(
+                        settings.COSINNUS_EUCAPTCHA_SECRET_KEY and settings.COSINNUS_EUCAPTCHA_SITE_KEY
+                    ),
+                }
+                logger.warning('TEST-MSG-ONLY: Captcha validation failed at provider. Details in extra.', extra=extra)
+                if settings.DEBUG:
+                    print(extra)
+                # FIXME: ********************  END REMOVEME
                 raise ValidationError(ERROR_SIGNUP_CAPTCHA_INVALID)
 
         # email
