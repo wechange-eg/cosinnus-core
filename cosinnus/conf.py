@@ -1801,14 +1801,27 @@ class CosinnusConf(AppConf):
     # if True, the User Block feature will be enabled
     ENABLE_USER_BLOCK = False
 
-    # whether to require a valid hcaptcha on the signup API endpoint
+    # whether to require a valid hcaptcha or eucaptcha on the signup API endpoint
     USE_HCAPTCHA = True
 
-    # the secret key for the hcaptcha. set in .env
+    # the secret key for the hCaptcha. set in .env.
+    # if both hCaptcha and euCaptcha keys are set in .env, euCaptcha is preferred
     HCAPTCHA_SECRET_KEY = None
+
+    # the secret key for the euCaptcha. set in .env.
+    # this is activated by setting the key and `USE_HCAPTCHA = True`
+    # if both hCaptcha and euCaptcha keys are set in .env, euCaptcha is preferred
+    EUCAPTCHA_SECRET_KEY = None
+
+    # the site key required for eucaptcha verification requests alongside the secret key
+    # read from .env
+    EUCAPTCHA_SITE_KEY = None
 
     # the URL at which to verify the hcaptcha response
     HCAPTCHA_VERIFY_URL = 'https://hcaptcha.com/siteverify'
+
+    # the URL at which to verify the hcaptcha response
+    EUCAPTCHA_VERIFY_URL = 'https://api.eu-captcha.eu/v1/verify'
 
     # a storage for portal settings that are exposed publicy
     # via v3 API endpoint 'api/v3/portal/settings/'

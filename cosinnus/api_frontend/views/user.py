@@ -459,7 +459,7 @@ class SignupView(UserSignupTriggerEventsMixin, SignupApiMixin, APIView):
         # even though `AllowNone` permission classes are set for this case, raise again for dynamic setting test cases
         if not settings.COSINNUS_USER_SIGNUP_ENABLED:
             raise PermissionDenied('Signup is disabled')
-        serializer = CosinnusUserSignupSerializer(data=request.data)
+        serializer = CosinnusUserSignupSerializer(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         if UserSignupThrottleBurst in self.throttle_classes:
             # add a throttle point for a successful signup
