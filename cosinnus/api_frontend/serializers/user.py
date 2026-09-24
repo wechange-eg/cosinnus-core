@@ -31,6 +31,7 @@ from cosinnus.models.profile import (
     GlobalUserNotificationSetting,
 )
 from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import get_locked_profile_visibility_setting_for_user
 from cosinnus.utils.validators import HexColorValidator, validate_username
 
@@ -593,7 +594,11 @@ class CosinnusUserProfileRecommendationSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source='get_full_name', read_only=True)
     avatar = serializers.URLField(source='get_avatar_thumbnail_url', read_only=True)
     url = serializers.URLField(source='get_absolute_url', read_only=True)
+    membership_count = serializers.SerializerMethodField()
 
     class Meta:
         model = get_user_profile_model()
-        fields = ('name', 'description', 'avatar', 'url')
+        fields = ('name', 'description', 'avatar', 'url', 'membership_count')
+
+    def get_membership_count(self, obj):
+        return len(get_cosinnus_group_model().objects.get_for_user_pks(obj.user))
