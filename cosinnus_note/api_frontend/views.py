@@ -13,6 +13,7 @@ from cosinnus_note.api_frontend.permissions import (
     CosinnusNoteLikePermissions,
 )
 from cosinnus_note.api_frontend.serializers import (
+    CosinnusDeleteNoteCommentSerializer,
     CosinnusNoteCommentSerializer,
     CosinnusNoteForumPostSerializer,
     CosinnusNoteSerializer,
@@ -42,6 +43,7 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
             'forum_post': CosinnusNoteForumPostSerializer,
             'like': CosinnusTagObjectLikeSerializer,
             'comment': CosinnusNoteCommentSerializer,
+            'delete_comment': CosinnusDeleteNoteCommentSerializer,
         }
         if self.action in action_serializers:
             return action_serializers[self.action]
@@ -97,4 +99,14 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     )
     def comment(self, request, pk):
         """Comment a note."""
+        return self.detail_action_response(request, use_base_serializer_for_response=True)
+
+    @action(
+        detail=True,
+        methods=['post'],
+        authentication_classes=[CsrfExemptSessionAuthentication],
+        permission_classes=[CosinnusNoteCommentPermissions],
+    )
+    def delete_comment(self, request, pk):
+        """Delete a note comment."""
         return self.detail_action_response(request, use_base_serializer_for_response=True)

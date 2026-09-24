@@ -76,3 +76,23 @@ class CosinnusNoteForumPostSerializer(CosinnusNoteSerializer):
         forum_group = get_cosinnus_group_model().objects.get(slug=settings.NEWW_FORUM_GROUP_SLUG)
         title = self.validated_data.get('title', Note.EMPTY_TITLE_PLACEHOLDER)
         return super().save(group=forum_group, creator=user, title=title)
+
+
+class CosinnusDeleteNoteCommentSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+
+    class Meta:
+        fields = ('id',)
+
+    def validate_id(self, value):
+        if not self.instance.comments.filter(pk=value).exists():
+            raise serializers.ValidationError('Comment does not exist.')
+        comment = self.instance.comments.get(pk=value)
+        if comment.creator != self.context['request'].user:
+            raise serializers.ValidationError('User is not the creator of the comment.')
+        return value
+
+    def update(self, instance, validated_data):
+        comment_id = validated_data['id']
+        self.instance.comments.filter(pk=comment_id).delete()
+        return instance
