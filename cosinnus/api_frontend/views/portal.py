@@ -22,7 +22,6 @@ from taggit.models import Tag
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.portal import CosinnusManagedTagSerializer, CosinnusPortalErrorLogSerializer
-from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
 from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.dynamic_fields.dynamic_formfields import EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS
@@ -45,7 +44,6 @@ class PortalTopicsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -83,7 +81,6 @@ class PortalTagsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -147,7 +144,6 @@ class PortalManagedTagsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -304,7 +300,6 @@ class PortalDynamicFieldsBaseView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # if set on the view, show only dynamic fields that appear in the signup form
     field_option_filter = None
@@ -544,7 +539,6 @@ class PortalSettingsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY = 'cosinnus/core/portal/portalsettings/%s'  # key is language code
     CACHE_TIMEOUT_DEV = 30  # 30 seconds for dev servers
@@ -767,7 +761,6 @@ class PortalErrorLogView(GenericAPIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
     throttle_classes = [PortalErrorLogUserThrottle]
 

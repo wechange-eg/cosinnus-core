@@ -18,7 +18,6 @@ from cosinnus.api_frontend.serializers.attached_objects import (
     CosinnusDeleteAttachedFileSerializer,
 )
 from cosinnus.api_frontend.serializers.tagged import CosinnusTagObjectBookmarkSerializer
-from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.models import BaseTagObject
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import IsCosinnusGroupUser
@@ -92,7 +91,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
         BrowsableAPIRenderer,
     )
     serializer_class = CosinnusCalendarEventSerializer
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (CosinnusCalendarPermissions,)
     pagination_class = None
 
@@ -153,7 +151,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
     @action(
         detail=True,
         methods=['get', 'post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusCalendarPermissions],
     )
     def attendance(self, request, group_id, pk=None):
@@ -168,7 +165,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
     @action(
         detail=True,
         methods=['post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusCalendarPermissions],
         parser_classes=[MultiPartParser],
     )
@@ -180,7 +176,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
     @action(
         detail=True,
         methods=['post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusCalendarPermissions],
     )
     def delete_attached_file(self, request, group_id, pk=None):
@@ -191,7 +186,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
     @action(
         detail=True,
         methods=['get', 'patch', 'post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusCalendarPermissions],
     )
     def bbb_room(self, request, group_id, pk=None):
@@ -202,7 +196,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
     @action(
         detail=True,
         methods=['get'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusCalendarPermissions],
     )
     def bbb_room_urls(self, request, group_id, pk=None):
@@ -213,7 +206,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
     @action(
         detail=True,
         methods=['get', 'post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusCalendarPermissions],
     )
     def bookmark(self, request, group_id, pk=None):
@@ -224,7 +216,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, ListQueryParamsMixin, viewsets
     @action(
         detail=True,
         methods=['get', 'patch', 'post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusCalendarPermissions],
     )
     def reflections(self, request, group_id, pk=None):
@@ -252,7 +243,6 @@ class CosinnusCalendarSyncedEventsViewSet(
     )
     lookup_field = 'nextcloud_calendar_uid'
     serializer_class = CosinnusCalendarSyncedEventSerializer
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsCosinnusGroupUser,)
     pagination_class = None
 
@@ -312,7 +302,6 @@ class CosinnusCalendarSyncedEventsViewSet(
     @action(
         detail=True,
         methods=['get', 'post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsCosinnusGroupUser],
     )
     def attendance(self, request, group_id, nextcloud_calendar_uid):
@@ -327,7 +316,6 @@ class CosinnusCalendarSyncedEventsViewSet(
     @action(
         detail=True,
         methods=['get', 'patch', 'post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsCosinnusGroupUser],
     )
     def bbb_room(self, request, group_id, nextcloud_calendar_uid):
@@ -338,7 +326,6 @@ class CosinnusCalendarSyncedEventsViewSet(
     @action(
         detail=True,
         methods=['get'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsCosinnusGroupUser],
     )
     def bbb_room_urls(self, request, group_id, nextcloud_calendar_uid):
@@ -349,7 +336,6 @@ class CosinnusCalendarSyncedEventsViewSet(
     @action(
         detail=False,
         methods=['post', 'put'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsCosinnusGroupUser],
     )
     def sync_required(self, request, group_id):
@@ -371,7 +357,6 @@ class CalendarRepairMembershipView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsCosinnusGroupUser,)
 
     group = None

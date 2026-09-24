@@ -5,7 +5,6 @@ from rest_framework.views import APIView
 
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.group import CosinnusGroupSettingsSerializer
-from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import IsCosinnusGroupUser
 
@@ -17,7 +16,6 @@ class CosinnusGroupSettingsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsCosinnusGroupUser,)
 
     group = None
