@@ -187,8 +187,12 @@ class NextcloudCaldavConnection:
             event_time = event_time.date()
         return event_time
 
-    def group_migrate_private_events(self, group):
-        """Migrate private events to nextcloud calendar."""
+    def group_migrate_private_events(self, group, migrate_all_events=False):
+        """
+        Migrate private events to nextcloud calendar.
+        :param group: group to migrate
+        :param migrate_all_events: migrate all past events
+        """
 
         # make sure that the migration is not already running
         if group.calendar_migration_in_progress():
@@ -202,7 +206,7 @@ class NextcloudCaldavConnection:
             calendar = self.caldav_client.calendar(url=group.nextcloud_calendar_url)
 
             # migrate events starting this year to the NC calendar
-            events = group.calendar_migration_queryset()
+            events = group.calendar_migration_queryset(migrate_all_events=migrate_all_events)
             for event in events:
                 # get HTML description with attached objects and comments
                 description = migrate_description(event, event.note)

@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.api_frontend.views package &#8212; Cosinnus 2.8.0 documentation</title>
+    <title>cosinnus.api_frontend.views package &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=4b85f8b1"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -1268,6 +1268,62 @@ as info that the user is not authenticated else.</p>
 <dt class="sig sig-object py" id="cosinnus.api_frontend.views.user.UserAuthInfoView.renderer_classes">
 <span class="sig-name descname"><span class="pre">renderer_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.api_frontend.handlers.renderers.CosinnusAPIFrontendJSONResponseRenderer'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'rest_framework.renderers.BrowsableAPIRenderer'&gt;)</span></em><a class="headerlink" href="#cosinnus.api_frontend.views.user.UserAuthInfoView.renderer_classes" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.views.user.UserNotificationSettingView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api_frontend.views.user.</span></span><span class="sig-name descname"><span class="pre">UserNotificationSettingView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.views.user.UserNotificationSettingView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>Get or update the current user’s global notification settings.</p>
+<p><cite>setting</cite> controls notifications for user-created projects and groups:</p>
+<ul class="simple">
+<li><p><cite>0</cite>: Never</p></li>
+<li><p><cite>1</cite>: Immediately</p></li>
+<li><p><cite>2</cite>: Daily report</p></li>
+<li><p><cite>3</cite>: Weekly report</p></li>
+<li><p><cite>4</cite>: Individual settings for each project or group</p></li>
+</ul>
+<p>Note: Value <cite>4</cite> cannot be set in this API endpoint. Use the Django Form instead.</p>
+<p><cite>portal_group_setting</cite> controls notifications for portal-wide default groups (forum etc.):</p>
+<ul class="simple">
+<li><p><cite>0</cite>: Never</p></li>
+<li><p><cite>1</cite>: Immediately</p></li>
+<li><p><cite>2</cite>: Daily report</p></li>
+<li><p><cite>3</cite>: Weekly report</p></li>
+</ul>
+<p>The response always contains a <cite>warnings</cite> list. It is empty when no
+warnings occurred.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.views.user.UserNotificationSettingView.authentication_classes">
+<span class="sig-name descname"><span class="pre">authentication_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.api_frontend.views.user.CsrfExemptSessionAuthentication'&gt;,)</span></em><a class="headerlink" href="#cosinnus.api_frontend.views.user.UserNotificationSettingView.authentication_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.views.user.UserNotificationSettingView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.views.user.UserNotificationSettingView.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.views.user.UserNotificationSettingView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'rest_framework.permissions.IsAuthenticated'&gt;,)</span></em><a class="headerlink" href="#cosinnus.api_frontend.views.user.UserNotificationSettingView.permission_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.views.user.UserNotificationSettingView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.views.user.UserNotificationSettingView.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.views.user.UserNotificationSettingView.renderer_classes">
+<span class="sig-name descname"><span class="pre">renderer_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;class</span> <span class="pre">'cosinnus.api_frontend.handlers.renderers.CosinnusAPIFrontendJSONResponseRenderer'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'rest_framework.renderers.BrowsableAPIRenderer'&gt;)</span></em><a class="headerlink" href="#cosinnus.api_frontend.views.user.UserNotificationSettingView.renderer_classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.views.user.UserNotificationSettingView.serializer_class">
+<span class="sig-name descname"><span class="pre">serializer_class</span></span><a class="headerlink" href="#cosinnus.api_frontend.views.user.UserNotificationSettingView.serializer_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus.api_frontend.serializers.html#cosinnus.api_frontend.serializers.user.CosinnusGlobalUserNotificationSettingSerializer" title="cosinnus.api_frontend.serializers.user.CosinnusGlobalUserNotificationSettingSerializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusGlobalUserNotificationSettingSerializer</span></code></a></p>
+</dd></dl>
 
 </dd></dl>
 

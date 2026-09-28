@@ -79,7 +79,7 @@ class CosinnusCalendarIntegrationHandler(CosinnusBaseIntegrationHandler):
         if self._is_app_enabled_for_group(group):
             self._do_group_create.delay(group.pk)
 
-    def do_group_update(self, group):
+    def do_group_update(self, group, changed_fields=None):
         """Group update handler."""
         if self._is_app_enabled_for_group(group) and group.nextcloud_calendar_url:
             self._do_group_update.delay(group.pk)

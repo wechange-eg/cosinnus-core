@@ -235,6 +235,8 @@ class BaseMembership(models.Model):
                 get_user_profile_model()._default_manager.get_for_user(self.user)
             self.user.cosinnus_profile.save()
         self._clear_cache()
+        # update cached field so it is not stale for next changes to this instance
+        self._old_current_status = self.status
 
     def _clear_cache(self):
         self.clear_member_cache_for_group(self.group)

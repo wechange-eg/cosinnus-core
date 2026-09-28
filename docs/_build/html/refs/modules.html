@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Cosinnus Modules &#8212; Cosinnus 2.8.0 documentation</title>
+    <title>Cosinnus Modules &#8212; Cosinnus 2.9.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=4b85f8b1"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -742,6 +742,7 @@ full readable documentation.</p>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.DEFAULT_FOLLOWED_OBJECT_NOTIFICATION_SETTING"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.DEFAULT_FOLLOWED_OBJECT_NOTIFICATION_SETTING</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.DEFAULT_FROM_EMAIL"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.DEFAULT_FROM_EMAIL</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.DEFAULT_GLOBAL_NOTIFICATION_SETTING"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.DEFAULT_GLOBAL_NOTIFICATION_SETTING</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.DEFAULT_GLOBAL_NOTIFICATION_SETTING_PORTAL_GROUP"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.DEFAULT_GLOBAL_NOTIFICATION_SETTING_PORTAL_GROUP</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.DEFAULT_GROUP_NOTIFICATION_SETTING"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.DEFAULT_GROUP_NOTIFICATION_SETTING</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.DEFAULT_OBJECT_CACHE_TIMEOUT"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.DEFAULT_OBJECT_CACHE_TIMEOUT</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.DEFAULT_ROCKETCHAT_NOTIFICATION_SETTING</span></code></a></li>
@@ -817,6 +818,7 @@ full readable documentation.</p>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.IMAGE_MAXIMUM_SIZE_SCALE"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.IMAGE_MAXIMUM_SIZE_SCALE</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.IMAGE_THUMBNAIL_SIZE_SCALE"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.IMAGE_THUMBNAIL_SIZE_SCALE</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.IMPORT_PROJECTS_PERMITTED"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.IMPORT_PROJECTS_PERMITTED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.INACTIVE_DEACTIVATION_SCHEDULE"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.INACTIVE_DEACTIVATION_SCHEDULE</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.INACTIVE_DEACTIVATION_SCHEDULE_TEXT"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.INACTIVE_DEACTIVATION_SCHEDULE_TEXT</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.INACTIVE_LOGOUT_TIME_SECONDS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.INACTIVE_LOGOUT_TIME_SECONDS</span></code></a></li>
@@ -1225,6 +1227,7 @@ full readable documentation.</p>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cosinnus.html#module-cosinnus.hooks">cosinnus.hooks module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus.html#cosinnus.hooks.get_full_name_extended"><code class="docutils literal notranslate"><span class="pre">get_full_name_extended()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus.html#cosinnus.hooks.is_account_login_approved"><code class="docutils literal notranslate"><span class="pre">is_account_login_approved()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus.html#cosinnus.hooks.is_account_verified"><code class="docutils literal notranslate"><span class="pre">is_account_verified()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus.html#cosinnus.hooks.is_guest"><code class="docutils literal notranslate"><span class="pre">is_guest()</span></code></a></li>
 </ul>
@@ -1293,6 +1296,7 @@ full readable documentation.</p>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.search_indexes.CosinnusProjectIndex.objects"><code class="docutils literal notranslate"><span class="pre">CosinnusProjectIndex.objects</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.search_indexes.CosinnusProjectIndex.prepare_group_name"><code class="docutils literal notranslate"><span class="pre">CosinnusProjectIndex.prepare_group_name()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.search_indexes.CosinnusProjectIndex.prepare_group_slug"><code class="docutils literal notranslate"><span class="pre">CosinnusProjectIndex.prepare_group_slug()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.search_indexes.CosinnusProjectIndex.prepare_group_type"><code class="docutils literal notranslate"><span class="pre">CosinnusProjectIndex.prepare_group_type()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.search_indexes.CosinnusProjectIndex.rendered"><code class="docutils literal notranslate"><span class="pre">CosinnusProjectIndex.rendered</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.search_indexes.CosinnusProjectIndex.text"><code class="docutils literal notranslate"><span class="pre">CosinnusProjectIndex.text</span></code></a></li>
 </ul>
@@ -6207,8 +6211,10 @@ full readable documentation.</p>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus_notifications.html#cosinnus_notifications.views.alerts_mark_seen"><code class="docutils literal notranslate"><span class="pre">alerts_mark_seen()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus_notifications.html#cosinnus_notifications.views.alerts_retrieval_view"><code class="docutils literal notranslate"><span class="pre">alerts_retrieval_view()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_notifications.html#cosinnus_notifications.views.apply_global_notification_settings"><code class="docutils literal notranslate"><span class="pre">apply_global_notification_settings()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus_notifications.html#cosinnus_notifications.views.notification_preference_view"><code class="docutils literal notranslate"><span class="pre">notification_preference_view()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus_notifications.html#cosinnus_notifications.views.notification_reset_view"><code class="docutils literal notranslate"><span class="pre">notification_reset_view()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_notifications.html#cosinnus_notifications.views.refresh_global_notification_rocketchat_setting"><code class="docutils literal notranslate"><span class="pre">refresh_global_notification_rocketchat_setting()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cosinnus_notifications.html#module-cosinnus_notifications">Module contents</a><ul>

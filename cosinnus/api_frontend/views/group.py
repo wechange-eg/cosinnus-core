@@ -19,7 +19,6 @@ class CosinnusGroupSettingsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsCosinnusGroupUser,)
 
     group = None

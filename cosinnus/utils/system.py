@@ -14,7 +14,7 @@ TEST_CALENDAR_ARG = '--test-calendar'
 TEST_PRINT_TIME_ARG = '--print-time'
 
 # test apps
-TEST_APPS_BASE = ['cosinnus', 'cosinnus_event', 'cosinnus_todo']
+TEST_APPS_BASE = ['cosinnus', 'cosinnus_event', 'cosinnus_notifications', 'cosinnus_todo']
 TEST_APPS_ROCKET_CHAT = ['cosinnus.tests.test_rocketchat']
 TEST_APPS_BBB = ['cosinnus.tests.test_bbbroom']
 TEST_APPS_ETHERPAD = ['cosinnus_etherpad']

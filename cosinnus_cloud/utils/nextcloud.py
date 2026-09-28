@@ -245,16 +245,37 @@ def create_group(groupid: str) -> Optional[OCSResponse]:
 
 
 def delete_group(groupid: str) -> Optional[OCSResponse]:
+    """Note: in rare edge cases with race conditions, the group delete will have worked but this method will return
+    a response that is not `response.ok`, with status 404 that is the response of the checking if the group was
+    actually deleted after an initial error response. If returned responses are ever used, this needs to be fixed.
+    In any case, if the delete didn't work, this method will always throw an exception."""
     try:
         return _response_or_raise(
             requests.delete(
-                f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/ocs/v1.php/cloud/groups/{groupid}',
+                f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/ocs/v1.php/cloud/groups/{groupid}?format=json',
                 auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
                 headers=HEADERS,
             )
         )
-    except OCSException:
-        raise
+    except OCSException as e:
+        if e.statuscode == 996:
+            # Note: During deck tests nextcloud returned a 996 ocs error when deleting groups.
+            # If the group was still deleted, we ignore this error.
+            try:
+                # check if deletion still succeeded
+                res = OCSResponse(
+                    requests.get(
+                        f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/ocs/v1.php/cloud/groups/{groupid}?format=json',
+                        auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
+                        headers=HEADERS,
+                    ).json()
+                )
+                if res.statuscode == 404:
+                    # group was deleted
+                    return res
+            except Exception:
+                raise e
+        raise e
 
 
 def create_group_folder(name: str, group_id: str, group, raise_on_existing_name=True) -> Optional[OCSResponse]:

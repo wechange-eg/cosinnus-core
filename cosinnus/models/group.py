@@ -619,6 +619,10 @@ class CosinnusGroupMembership(BaseMembership):
         changed_to_membership = bool(not created and self._status not in MEMBER_STATUS and self.status in MEMBER_STATUS)
         if created_as_membership or changed_to_membership or force_joined_signal:
             signals.user_joined_group.send(sender=self, user=self.user, group=self.group)
+        if created_as_membership or changed_to_membership:
+            self.group.update_last_activity()
+        # update cached field so it is not stale for next changes to this instance
+        self._status = self.status
 
     def delete(self, *args, **kwargs):
         """Checks and fires `user_left_group` signal if a user has hereby left this group"""
@@ -1338,7 +1342,7 @@ class CosinnusBaseGroup(
         default=None,
         blank=True,
         null=True,
-        help_text=_('Note: For performance reasons last activity is not tracked precisely within the last month.'),
+        help_text=_('Note: For performance reasons last activity may not be tracked precisely.'),
     )
     inactivity_notification_sent_at = models.DateTimeField(
         _('Inactivity notification sent at'),
@@ -1461,6 +1465,10 @@ class CosinnusBaseGroup(
             self.conference_theme_color = self.conference_theme_color.replace('#', '')
 
         self.generate_or_update_invite_token(save_group=False)
+
+        # set last activity for new groups
+        if created:
+            self.update_last_activity()
 
         super(CosinnusBaseGroup, self).save(*args, **kwargs)
 
@@ -1621,6 +1629,26 @@ class CosinnusBaseGroup(
             settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED
             and self.type in settings.COSINNUS_MITWIRKOMAT_ENABLED_FOR_GROUP_TYPES
         )
+
+    def update_last_activity(self, last_activity: Optional[datetime.datetime] = None):
+        """Update this group's `last_activity` to the given time or now if none supplied.
+        Performs a soft triggerless update() to not affect the group's `last_modified` field.
+        Ensures last_activity is never in the future.
+        @param last_activity: an optional DateTime or None. If not supplied, or None,
+        updates this group's last_activity to now()."""
+        # set now if no datetime is supplied
+        if not last_activity:
+            last_activity = now()
+        if last_activity <= now():
+            self.last_activity = last_activity
+            type(self).objects.filter(pk=self.pk).update(last_activity=self.last_activity)
+        else:
+            # unexpectedly got a last_activity in the future.
+            logger.error(
+                'update_group_last_activity: Attempted to set a last_activity in the future or unexpected type '
+                '(unexpected behaviour).',
+                extra={'group_id': self.id, 'last_activity': last_activity},
+            )
 
     def add_member_to_group(self, user, membership_status=MEMBERSHIP_MEMBER, is_late_invitation=False):
         """ "Makes the user a group member".

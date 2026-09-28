@@ -44,7 +44,7 @@
 {% if not disable_location %}
     {% captureas loc_html %}
         {% trans "Place or adress" as loc_placeholder %}
-        {% render_field form.forms.media_tag.location placeholder=loc_placeholder class+="font14px" %}
+        {% render_field form.forms.media_tag.location placeholder=loc_placeholder class+="font16px" %}
         {{ form.forms.media_tag.location_lat }}
         {{ form.forms.media_tag.location_lon }}
         <div id="id_media_tag-location-map"></div>
@@ -71,6 +71,8 @@
         {% if not topics_label %}{% trans "Select topic" as topics_label %}{% endif %}
         {% trans "Select topic" as topics_placeholder %}
         {% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.media_tag.topics label=topics_label icon="fa-lightbulb-o" placeholder=topics_placeholder %}
+        {# Include an empty value always here, so the field is included in the POST and the field becomes clearable. Otherwise the django form ignores it as unchanged #}
+        <input type="hidden" name="media_tag-topics" value="">
     </div>
 {% endif %}
 

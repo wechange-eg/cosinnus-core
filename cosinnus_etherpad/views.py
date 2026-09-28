@@ -189,6 +189,7 @@ class EtherpadWriteView(RequireLoggedInMixin, EtherpadDetailView):
         try:
             self.object.last_accessed = now()
             self.object.save(update_fields=['last_accessed'])
+            self.object.group.update_last_activity()
         except Exception as e:
             extra = {'exception': force_str(e), 'user': self.request.user}
             logger.error('Error when trying to set last_accessed', extra=extra)

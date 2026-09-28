@@ -56,7 +56,7 @@ msgstr ""
 "\n"
 "Hinweis: Alle anstehenden Termine sowie vergangene Termine aus diesem Jahr werden\n"
 "                            übertragen. Termine aus dem Jahr 2025 und früher werden nicht in den neuen Kalender übernommen.\n"
-"                            Bitte an den Support wenden, falls ältere Daten benötigt werden."
+"                            Bitte wende dich an den Support, falls ältere Daten benötigt werden."
 
 msgid ""
 "\n"
@@ -1322,7 +1322,7 @@ msgstr ""
 "%(deactivated_groups_count)d Gruppen und Projekte wurden deaktiviert. \n"
 "%(hidden_content_count)d Inhalte wurden ausgeblendet. \n"
 "%(deleted_content_count)d Inhalte wurden sofort gelöscht. \n"
-"Die Benutzer werden nach 30 Tagen gelöscht."
+"Die Benutzer/innen werden nach 30 Tagen gelöscht."
 
 #, python-format
 msgid "%d Users rocketchat accounts were checked."
@@ -1418,7 +1418,7 @@ msgid "- (Admin-Interface) Fixed a bug in the user administration interface that
 msgstr "- (Admin-Oberfläche) Es wurde ein Fehler in der Benutzerverwaltung behoben, der auf manchen Benutzerprofilseiten zu einem Seitenfehler führte.\n"
 
 msgid "- (Admin-Interface) Fixed a bug where download links in the administration would not start the download in some cases.\n"
-msgstr "- (Admin-Oberfläche) Es wurde ein Fehler in der Benutzerverwaltung behoben, der bei manchen Benutzerprofilen zu einem Seitenfehler führte.\n"
+msgstr "- (Admin-Oberfläche) Es wurde ein Fehler in der Benutzerverwaltung behoben, der bei manchen Benutzer/innenprofilen zu einem Seitenfehler führte.\n"
 
 msgid ""
 "- (Admin-Interface) The portal statistics page has been updated and several graphs have been added.\n"
@@ -1453,8 +1453,11 @@ msgstr ""
 msgid "- Added Firebase push integration for push notifications to mobile devices.\n"
 msgstr "- Es wurde eine Firebase-Push-Integration für Push-Benachrichtigungen an mobile Geräte hinzugefügt.\n"
 
+msgid "- Added a notification setting that allows users to configure different notification frequencies for portal-wide groups versus user-created groups and projects.\n"
+msgstr "- Es wurde eine Benachrichtigungseinstellung hinzugefügt, mit der man unterschiedliche Benachrichtigungshäufigkeiten für plattformübergreifende Gruppen und für von Benutzer/innen erstellte Gruppen und Projekte festlegen kann.\n"
+
 msgid "- Added easy-to-use tools to simplify GDPR-related processes. You can now permanently delete groups/projects you are an admin in from their respective settings pages. To honour the \"Right to be forgotten\", user accounts and groups/projects will now also be deleted after a long period of inactivity. Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
-msgstr "- Es wurden benutzerfreundliche Tools hinzugefügt, um DSGVO-bezogene Vorgänge zu vereinfachen. Du kannst Gruppen/Projekte, in denen du Administrator bist, nun direkt über deren jeweilige Einstellungsseiten dauerhaft löschen. Um dem „Recht auf Vergessenwerden“ gerecht zu werden, werden Benutzerkonten und Gruppen/Projekte nun auch nach einer längeren Zeit der Inaktivität gelöscht. Keine Sorge, du erhältst lange vorher mehrere Warnungen per E-Mail, bevor dies geschieht!\\n\n"
+msgstr "- Es wurden benutzerfreundliche Tools hinzugefügt, um DSGVO-bezogene Vorgänge zu vereinfachen. Du kannst Gruppen/Projekte, in denen du Administrator/in bist, nun direkt über deren jeweilige Einstellungsseiten dauerhaft löschen. Um dem „Recht auf Vergessenwerden“ gerecht zu werden, werden Benutzerkonten und Gruppen/Projekte nun auch nach einer längeren Zeit der Inaktivität gelöscht. Keine Sorge, du erhältst lange vorher mehrere Warnungen per E-Mail, bevor dies geschieht! \n"
 
 msgid "- Added numerous user interface and accessibility improvements throughout the site.\n"
 msgstr "- Zahlreiche Verbesserungen an der Benutzeroberfläche und der Barrierefreiheit wurden auf der gesamten Website vorgenommen.\n"
@@ -1521,6 +1524,9 @@ msgstr ""
 "- (RocketChat) Es wurden Verbesserrungen für mehr Stabilität und Geschwindigkeit der Integration mit RocketChat vorgenommen (falls aktiviert).\n"
 "- Die neuesten Sicherheitsupdates wurden eingespielt und weitere kleinere Fehlerbehebungen vorgenommen.\n"
 
+msgid "- Fixed a bug where some linked user profiles were not accessible from content on the map. Also improved the display of creators for map content and of the groups/project they belong to.\n"
+msgstr "- Es wurde ein Fehler behoben, durch den manche verlinkte Benutzer/innenprofile über Inhalte auf der Karte nicht aufgerufen werden konnten. Außerdem wurde die Anzeige der Ersteller/innen von Karteninhalten sowie der Gruppen und Projekte, zu denen sie gehören, verbessert.\n"
+
 msgid "- Fixed a bug where the Nextcloud folder of a group/project could not be accessed any more when its cloud app was reactivated after it had been deactivated before.\n"
 msgstr "- Es wurde ein Fehler behoben, durch den der Nextcloud-Ordner einer Gruppe/eines Projekts nicht mehr zugänglich war, wenn die Cloud-App nach einer vorherigen Deaktivierung wieder aktiviert wurde.\n"
 
@@ -1541,7 +1547,7 @@ msgid "- Fixed a bug where usernames were sometimes not correctly formatted in n
 msgstr "- Es wurde ein Fehler behoben, bei dem der Name von Benutzer/innen in Benachrichtigungs-E-Mails nicht korrekt formatiert angezeigt wurde.\n"
 
 msgid "- Fixed a bug where users could sometimes not be invited to groups/projects depending on their profile visibility settings.\n"
-msgstr "- Es wurde ein Fehler behoben, durch den Nutzer je nach den Sichtbarkeitseinstellungen ihres Profils manchmal nicht zu Gruppen/Projekten eingeladen werden konnten.\n"
+msgstr "- Es wurde ein Fehler behoben, durch den Benutzer/innen je nach den Sichtbarkeitseinstellungen ihres Profils manchmal nicht zu Gruppen/Projekten eingeladen werden konnten.\n"
 
 msgid "- Fixed a page error during the profile setup when entering a profile location.\n"
 msgstr "- Es wurde ein Seitenfehler beim Eingeben eines Ortes im Profilsetup behoben.\n"
@@ -1585,8 +1591,14 @@ msgstr ""
 "- Es wurde ein Problem mit dem Markdown-Texteditor in einigen Formularen behoben.\n"
 "- Es wurde ein Problem behoben, bei dem bestimmte Anmelde- oder Registrierungsabläufe gelegentlich nicht korrekt weitergeleitet wurden.\n"
 
+msgid "- Fixed several typos across the page. \n"
+msgstr "- Es wurden mehrere Tippfehler auf der Seite korrigiert.\n"
+
 msgid "- Further minor bugfixes and stability improvements have been made."
 msgstr "- Weitere kleinere Fehlerbehebungen und Stabilitätsverbesserungen wurden vorgenommen."
+
+msgid "- Improved some error messages on the login page to better explain the reason for failed login attempts.\n"
+msgstr "- Einige Fehlermeldungen auf der Anmeldeseite wurden verbessert, um den Grund für fehlgeschlagene Anmeldeversuche besser zu erklären.\n"
 
 msgid "- Improved the error handling when uploading unsupported images types and formats. Trying to upload unsupported image types will now result in an informative error message.\n"
 msgstr "- Die Fehlerbehandlung beim Hochladen nicht unterstützter Bildtypen und -formate wurde verbessert. Beim Versuch, nicht unterstützte Bilddateien hochzuladen, wird nun eine aussagekräftige Fehlermeldung angezeigt.\n"
@@ -4968,7 +4980,7 @@ msgid "Enter a user name or email to find users to invite..."
 msgstr "Gib einen Benutzernamen oder E-Mail zum Einladen ein..."
 
 msgid "Enter a valid email address."
-msgstr ""
+msgstr "Gib eine gültige E-Mail-Adresse ein."
 
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "Bitte einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
@@ -5339,7 +5351,7 @@ msgid "Filter by Team?"
 msgstr "Nach Gruppe oder Projekt filtern?"
 
 msgid "Filter by authors, tags or other tagged properties?"
-msgstr "Nach Ersteller, Tags oder anderen Eigenschaften filtern?"
+msgstr "Nach Ersteller/in, Tags oder anderen Eigenschaften filtern?"
 
 msgid "Filter by item types?"
 msgstr "Nach Objekttyp filtern?"
@@ -6759,7 +6771,7 @@ msgstr "Ich möchte Moderator für dieses Portal sein"
 
 #, python-format
 msgid "I wish to delete „%(title)s“."
-msgstr "I möchte „%(title)s“ löschen."
+msgstr "Ich möchte „%(title)s“ löschen."
 
 msgid "I wish to receive email notifications"
 msgstr "Ich möchte E-Mail-Benachrichtigungen erhalten"
@@ -6808,7 +6820,7 @@ msgid "If activated, newly registered users need to be approved by a portal admi
 msgstr "Wenn gewählt müssen neue Benutzerkonten nach dem Registrieren durch einen Portaladminstrator bestätigt werden bevor sich der/die Benutzer/in einloggen kann."
 
 msgid "If activated, newly registered users will not be able to post in the Forum and other autojoin until specifically approved by an admin (checkbox `account_verified` in the user profile)."
-msgstr "Wenn aktiviert, können neu registrierte Benutzer/innen erst dann Beiträge im Forum und anderen offenen Gruppen posten, wenn sie von einem Administrator freigegeben wurden (Häkchen \"account_verified\" im Benutzerprofil)."
+msgstr "Wenn aktiviert, können neu registrierte Benutzer/innen erst dann Beiträge im Forum und anderen offenen Gruppen posten, wenn sie von einem/einer Administrator/in freigegeben wurden (Häkchen \"account_verified\" im Benutzerprofil)."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If active, searching will be restricted to the visible map area."
@@ -8564,8 +8576,8 @@ msgstr "Beachte: Änderung an einigen dieser Einstellungen kann den Neustart des
 msgid "Note: Detailed member lists for platform-wide content are not displayed."
 msgstr "Hinweis: Detaillierte Mitgliederlisten für plattformweite Inhalte werden nicht angezeigt."
 
-msgid "Note: For performance reasons last activity is not tracked precisely within the last month."
-msgstr "Hinweis: Aus Performance-Gründen wird die letzte Aktivität nicht exakt innerhalb des letzten Monats erfasst."
+msgid "Note: For performance reasons last activity may not be tracked precisely."
+msgstr "Hinweis: Aus Performance-Gründen wird die letzte Aktivität nicht ständig exakt erfasst."
 
 msgid "Note: If a slide is subsequently added to an existing event, it does not automatically appear in the event if this event was recently attended and is therefore active. This requires an active ending of the event or a 5-minute idle time without participants until the event is automatically ended. "
 msgstr "Hinweis: Wenn eine Folie nachträglich zu einer Veranstaltung hinzugefügt wird, erscheint diese nicht automatisch in der Veranstaltung, sofern diese Veranstaltung kürzlich besucht wurde und somit aktiv ist. Hierfür ist ein aktives Beenden der Veranstaltung notwendig oder ein 5 minütiges Leerlaufen ohne Teilnehmer, bis die Veranstaltung automatisch beendet wird. "
@@ -8859,7 +8871,7 @@ msgid "Only shown for registered users"
 msgstr "Nur für registrierte Mitglieder sichtbar"
 
 msgid "Only the owner and assignee of a todo can finish it!"
-msgstr "Nur der Ersteller oder zugewiesene einer Aufgabe kann sie abschließen!"
+msgstr "Nur der/die Ersteller/in oder zugewiesene einer Aufgabe kann sie abschließen!"
 
 msgid "Only users who have the Newsletter opt-in enabled in their profile will receive the newsletter."
 msgstr "Nur Nutzende, die das Newsletter-Opt-In in ihrem Profil aktiviert haben, erhalten den Newsletter."
@@ -10745,7 +10757,7 @@ msgid "Start the migration of Todos to the Task Board in the background."
 msgstr "Starte die Migration von Aufgaben zum Aufgaben-Board im Hintergrund."
 
 msgid "Start the migration the new calendar in the background."
-msgstr "Migration des neuen Kalenders im Hintergrund starten."
+msgstr "Per Klick unten startest du die Migration des neuen Kalenders im Hintergrund."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Start-Time"
@@ -11950,7 +11962,7 @@ msgid "This event has been canceled. Voting is closed."
 msgstr "Diese Veranstaltung wurde abgesagt. Die Abstimmung ist geschlossen."
 
 msgid "This field may not be blank."
-msgstr ""
+msgstr "Dieses Feld darf nicht leer sein."
 
 msgid "This function is not enabled for this conference."
 msgstr "Diese Funktion ist für diese Tagung nicht aktiviert."
@@ -12602,7 +12614,7 @@ msgid "Upload a preview image for the Conference Event"
 msgstr "Lade ein Vorschaubild für die Tagungsveranstaltung hoch"
 
 msgid "Upload a user CSV file to import user profiles"
-msgstr "Hochladen einer Benutzer/innen-CSV-Datei zum Importieren von Benutzerprofilen"
+msgstr "Hochladen einer Benutzer/innen-CSV-Datei zum Importieren von Benutzer/innenprofilen"
 
 msgid "Upload an image."
 msgstr "Lade ein Bild hoch."
@@ -13822,7 +13834,7 @@ msgid "You can directly create conference events for rooms from here by using th
 msgstr "Du kannst von hier aus direkt Tagungsveranstaltungen für Räume erstellen, indem du die Steuerelemente für das Dropdown-Menü der einzelnen Räume verwendest."
 
 msgid "You can dismiss the migration, then the migration hint want be shown anymore."
-msgstr "Sie können die Migration ausblenden. Dann wird der Migrationshinweis nicht mehr angezeigt."
+msgstr "Du kannst die Migration ausblenden. Dann wird der Migrationshinweis nicht mehr angezeigt."
 
 msgctxt "a link to click on"
 msgid "You can do this here"
@@ -14095,11 +14107,11 @@ msgstr "Deine Mitgliedsschaftsanfrage bei %(site_name)s!"
 
 #, python-format
 msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as an administrator responds to your request."
-msgstr "Dein Antrag auf Mitgliedschaft für %(team_type)s “%(team_name)s” wurde gestellt. Du erhältst eine E-Mail sobald ein Administrator den Antrag bearbeitet."
+msgstr "Dein Antrag auf Mitgliedschaft für %(team_type)s “%(team_name)s” wurde gestellt. Du erhältst eine E-Mail sobald ein/eine Administrator/in den Antrag bearbeitet."
 
 #, python-format
 msgid "You have requested to join the organization “%(name)s”. You will receive an email as soon as an administrator responds to your request."
-msgstr "Dein Antrag auf Mitgliedschaft für die Organisation \"%(name)s\" wurde gestellt. Du erhältst eine E-Mail, sobald ein Administrator den Antrag bearbeitet."
+msgstr "Dein Antrag auf Mitgliedschaft für die Organisation \"%(name)s\" wurde gestellt. Du erhältst eine E-Mail, sobald ein/eine Administrator/in den Antrag bearbeitet."
 
 msgid "You have successfully disabled two-factor authentication for your account."
 msgstr "Du hast die Zwei-Faktor-Authentifizierung für dein Benutzerkonto deaktiviert."
@@ -14149,7 +14161,7 @@ msgid "You need to connect your user account to Facebook before you can link thi
 msgstr "Du musst dein Benutzerkonto mit Facebook verbinden bevor du diese Gruppe/Projekt verbinden kannst!"
 
 msgid "You need to verify your email before logging in. We have just sent you an email with a verifcation link. Please check your inbox, and if you haven't received an email, please check your spam folder."
-msgstr "Du musst deine Email-Adresse verifizieren bevor du dich einloggen kannst. Eine Email mit dem Verifizierungslink wurde dir gerade geschickt. Überprüfe bitte deinen Posteingang: wenn du keine Email von uns erhalten hast, überprüfe bitte deinen Spamordner."
+msgstr "Du musst deine E-Mail-Adresse verifizieren, bevor du dich einloggen kannst. Eine E-Mail mit dem Verifizierungslink wurde dir gerade geschickt. Überprüfe bitte deinen Posteingang. Wenn du keine E-Mail von uns erhalten hast, überprüfe bitte deinen Spamordner."
 
 msgid "You need to verify your email before you can use this part of the site! Please check your emails and click the link in the verification email you received from us, or request a new email by clicking the link above."
 msgstr "Um diesen Teil der Webseite zu benutzen, muss deine E-Mail-Adresse erst verifiziert werden! Bitte prüfen deine eingehenden E-Mails und klicke dann auf den Link in der Verifikations-E-Mail, die du von uns erhalten hast. Alternativ kannst du eine neue Verifikations-E-Mail anfordern, indem du den Link unten klickst."
@@ -15323,7 +15335,6 @@ msgstr "Ja"
 #~ msgid " This data we received from your WECHANGE account"
 #~ msgstr " Diese Daten haben wir von deinem WECHANGE-Konto erhalten"
 
-#, python-format
 #~ msgid ""
 #~ "%(group_type)s %(group_name)s has just been deactivated after %(deactivation_after)s of inactivity.\n"
 #~ "\n"
@@ -15333,7 +15344,6 @@ msgstr "Ja"
 #~ "\n"
 #~ "%(group_type)s wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
 
-#, python-format
 #~ msgid ""
 #~ "%(group_type)s %(group_name)s has just been deactivated by the admin %(deleted_by)s.\n"
 #~ "\n"
@@ -15343,7 +15353,6 @@ msgstr "Ja"
 #~ "\n"
 #~ "%(group_type)s wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
 
-#, python-format
 #~ msgid ""
 #~ "%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since deactivation.\n"
 #~ "\n"
@@ -15411,6 +15420,12 @@ msgstr "Ja"
 
 #~ msgid "- Added easy-to-use tools to simplify GDPR-related processes. You can now permanently delete your user profile directly from your account settings and the groups/projects you are an admin in from their respective settings pages. To honour the \"Right to be forgotten\", user accounts and groups/projects will now also be deleted after a long period of inactivity. Don't worry, you will receive several warnings via e-mail a long time before this happens! \n"
 #~ msgstr "- Es wurden benutzerfreundliche Tools hinzugefügt, um DSGVO-bezogene Vorgänge zu vereinfachen. Du kannst die Gruppen/Projekte, in denen du Administrator bist, nun direkt über deren jeweilige Einstellungsseiten dauerhaft löschen. Um dem „Recht auf Vergessenwerden“ gerecht zu werden, werden Benutzerkonten und Gruppen/Projekte nun auch nach einer längeren Zeit der Inaktivität gelöscht. Keine Sorge, du erhältst lange vorher mehrere Warnungen per E-Mail, bevor dies geschieht!\n"
+
+#~ msgid "- Fixed several small bugs and made some improvements to the redesigned calendar.\n"
+#~ msgstr "- Es wurden mehrere kleinere Fehler behoben und einige Verbesserungen am neu gestalteten Kalender vorgenommen.\n"
+
+#~ msgid "- Made several small improvements to the user interface and look and feel of the redesigned calendar.\n"
+#~ msgstr "- Es wurden einige kleinere Verbesserungen an der Benutzeroberfläche und der optischen Gestaltung des neu Kalender-Redesigns vorgenommen.\n"
 
 #~ msgid "A user export is in progress. As soon as the export is finished it will be available here."
 #~ msgstr "Der Benutzer/innen-Export wird gerade erstellt.  Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
@@ -15953,11 +15968,9 @@ msgstr "Ja"
 #~ msgid "If you are not a portal administrator and wish to make any changes, please contact one of the portal administrators listed below to make these changes for you!"
 #~ msgstr "Wenn du kein/keine Portaladministrator_in bist und Änderungen vornehmen möchtest, wende dich bitte an einen der unten aufgeführten Portaladministrator_innen, um diese Änderungen für dich vorzunehmen."
 
-#, python-format
 #~ msgid "If you have not received an activation email from %(portal_name)s within a few minutes please look in your spam folder or try signing up again!"
 #~ msgstr "Wenn du noch keine Mail mit einem Bestätigungslink von %(portal_name)s bekommen hast, schaue bitte in deinem Spam-Ordner nach oder versuche, dich erneutz zu registrieren!"
 
-#, python-format
 #~ msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
 #~ msgstr "Wenn du noch keine Mail mit einem Bestätigungslink bekommen hast, registriere dich bitte erneut oder kontaktiere unseren Support unter %(email)s!"
 
@@ -16133,6 +16146,9 @@ msgstr "Ja"
 
 #~ msgid "Note: Attendance statistics might not include all attendees, as users may block tracking."
 #~ msgstr "Hinweis: Teilnahme-Statistiken könnten unvollständig sein, weil Teilnehmende Tracking blockieren können."
+
+#~ msgid "Note: For performance reasons last activity is not tracked precisely within the last month."
+#~ msgstr "Hinweis: Aus Performance-Gründen wird die letzte Aktivität nicht exakt innerhalb des letzten Monats erfasst."
 
 #~ msgid "Ok"
 #~ msgstr "Ok"
@@ -16677,7 +16693,6 @@ msgstr "Ja"
 #~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 #~ msgstr "Das Benutzerkonto wurde erfolgreich registriert. Du wirst innerhalb weniger Minuten einen Bestätigungslink von uns erhalten. Diesen musst du klicken, bevor du dich einloggen kannst."
 
-#, python-format
 #~ msgid ""
 #~ "Your entire account, profile and personal information will be deactivated and irrevocably deleted in %(deactivation_in)s.\n"
 #~ "\n"
@@ -16703,7 +16718,6 @@ msgstr "Ja"
 #~ "\n"
 #~ "In den %(deleted_after_days)s Tagen nach der Deaktivierung bleibt die E-Mail-Adresse deines Benutzerkontos reserviert und kann nicht zur Registrierung eines neuen Benutzerkontos verwendet werden."
 
-#, python-format
 #~ msgid ""
 #~ "Your entire account, profile and personal information will be deactivated in %(deactivation_in)s and then irrevocably deleted.\n"
 #~ "\n"

@@ -1,10 +1,17 @@
-from rest_framework import mixins, viewsets
+import logging
+
+from django.core.cache import cache
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import NotFound
 from rest_framework.parsers import MultiPartParser
 from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
+from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.attached_objects import (
     CosinnusAttachFileSerializer,
@@ -12,11 +19,14 @@ from cosinnus.api_frontend.serializers.attached_objects import (
 )
 from cosinnus.api_frontend.serializers.tagged import CosinnusTagObjectBookmarkSerializer
 from cosinnus.api_frontend.views.mixins import ViewSetActionMixin
-from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.models import BaseTagObject
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.permissions import IsCosinnusGroupUser
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
+from cosinnus_cloud.hooks import get_nc_user_id
+from cosinnus_cloud.utils import nextcloud
+from cosinnus_cloud.utils.cosinnus import is_calendar_enabled_for_group
+from cosinnus_event.calendar.nextcloud_caldav import NextcloudCaldavConnection
 from cosinnus_event.calendar.permissions import CosinnusCalendarPermissions
 from cosinnus_event.calendar.serializers import (
     CosinnusCalendarBBBRoomUrlsSerializer,
@@ -31,6 +41,8 @@ from cosinnus_event.calendar.serializers import (
     CosinnusEventDateRangeQueryParameterSerializer,
 )
 from cosinnus_event.models import Event
+
+logger = logging.getLogger('cosinnus')
 
 
 class CosinnusCalendarListDateRangeQueryParamsMixin:
@@ -62,7 +74,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
         BrowsableAPIRenderer,
     )
     serializer_class = CosinnusCalendarEventSerializer
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (CosinnusCalendarPermissions,)
     pagination_class = None
 
@@ -123,7 +134,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     @action(
         detail=True,
         methods=['get', 'post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusCalendarPermissions],
     )
     def attendance(self, request, group_id, pk=None):
@@ -137,7 +147,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     @action(
         detail=True,
         methods=['post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusCalendarPermissions],
         parser_classes=[MultiPartParser],
     )
@@ -148,7 +157,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     @action(
         detail=True,
         methods=['post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusCalendarPermissions],
     )
     def delete_attached_file(self, request, group_id, pk=None):
@@ -158,7 +166,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     @action(
         detail=True,
         methods=['get', 'patch', 'post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusCalendarPermissions],
     )
     def bbb_room(self, request, group_id, pk=None):
@@ -168,7 +175,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     @action(
         detail=True,
         methods=['get'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusCalendarPermissions],
     )
     def bbb_room_urls(self, request, group_id, pk=None):
@@ -178,7 +184,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     @action(
         detail=True,
         methods=['get', 'post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusCalendarPermissions],
     )
     def bookmark(self, request, group_id, pk=None):
@@ -188,7 +193,6 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     @action(
         detail=True,
         methods=['get', 'patch', 'post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusCalendarPermissions],
     )
     def reflections(self, request, group_id, pk=None):
@@ -215,7 +219,6 @@ class CosinnusCalendarSyncedEventsViewSet(
     )
     lookup_field = 'nextcloud_calendar_uid'
     serializer_class = CosinnusCalendarSyncedEventSerializer
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsCosinnusGroupUser,)
     pagination_class = None
 
@@ -275,7 +278,6 @@ class CosinnusCalendarSyncedEventsViewSet(
     @action(
         detail=True,
         methods=['get', 'post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsCosinnusGroupUser],
     )
     def attendance(self, request, group_id, nextcloud_calendar_uid):
@@ -289,7 +291,6 @@ class CosinnusCalendarSyncedEventsViewSet(
     @action(
         detail=True,
         methods=['get', 'patch', 'post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsCosinnusGroupUser],
     )
     def bbb_room(self, request, group_id, nextcloud_calendar_uid):
@@ -299,7 +300,6 @@ class CosinnusCalendarSyncedEventsViewSet(
     @action(
         detail=True,
         methods=['get'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsCosinnusGroupUser],
     )
     def bbb_room_urls(self, request, group_id, nextcloud_calendar_uid):
@@ -309,7 +309,6 @@ class CosinnusCalendarSyncedEventsViewSet(
     @action(
         detail=False,
         methods=['post', 'put'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsCosinnusGroupUser],
     )
     def sync_required(self, request, group_id):
@@ -319,3 +318,126 @@ class CosinnusCalendarSyncedEventsViewSet(
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+
+
+class CalendarRepairMembershipView(APIView):
+    """
+    Attempts to repair a missing or faulty user group membership in the nextcloud group for the given CosinnusGroup.
+    Also re-shares the nextcloud calendar for the group.
+    """
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    permission_classes = (IsCosinnusGroupUser,)
+
+    group = None
+
+    RATELIMIT_CALENDER_REPAIR_CACHE_KEY = 'cosinnus/core/v3/calendar/repair/userid/%d/groupid/%d/'
+    RATELIMIT_CALENDER_REPAIR_SECONDS = 60
+
+    def initial(self, request, *args, **kwargs):
+        # get group
+        group_id = kwargs.get('group_id')
+        self.group = get_cosinnus_group_model().objects.filter(is_active=True, pk=group_id).first()
+        if not self.group:
+            raise NotFound()
+        return super().initial(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        responses={
+            200: openapi.Response(
+                description='Success.',
+                examples={
+                    'application/json': {
+                        'data': {'status': 'ok'},
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            ),
+            403: openapi.Response(
+                description='Bad Request',
+                examples={
+                    'application/json': {
+                        'data': {'detail': 'Rate-limited.'},
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            ),
+            503: openapi.Response(
+                description='Internal cloud error',
+                examples={
+                    'application/json': {
+                        'data': {'error': 'Internal cloud error'},
+                        'version': COSINNUS_VERSION,
+                        'timestamp': 1658414865.057476,
+                    }
+                },
+            ),
+        }
+    )
+    def post(self, request, group_id):
+        error_response = None
+        if not is_calendar_enabled_for_group(self.group):
+            error_response = Response(
+                status=status.HTTP_403_FORBIDDEN, data={'detail': 'Calendar not enabled for group.'}
+            )
+        if not self.group.is_active or 'cosinnus_event' in self.group.get_deactivated_apps():
+            error_response = Response(
+                status=status.HTTP_403_FORBIDDEN, data={'detail': 'Group or group event app is not active.'}
+            )
+        if not self.group.nextcloud_group_id or not self.group.nextcloud_calendar_url:
+            error_response = Response(
+                status=status.HTTP_403_FORBIDDEN, data={'detail': 'Calendar not initialized for group.'}
+            )
+
+        # log this so we can track the number of repairs happening
+        extra = {
+            'user_id': request.user.id,
+            'group_id': group_id,
+        }
+        # add info if we blocked the actual repair
+        if error_response:
+            extra['error_that_prevented_repair'] = error_response.data['detail']
+        logger.warning(
+            'Info: CalendarRepairMembershipView has been called to repair a group membership',
+            extra=extra,
+        )
+
+        if error_response:
+            return error_response
+
+        # check the cache for a rate limit for this user
+        cache_key = self.RATELIMIT_CALENDER_REPAIR_CACHE_KEY % (request.user.id, self.group.id)
+        is_rate_limited = bool(cache.get(cache_key, False))
+        if is_rate_limited:
+            return Response(status=status.HTTP_403_FORBIDDEN, data={'error': 'Rate-limited.'})
+
+        # set cache rate limit before repair attempt so we don't overwhelm the cloud with failing requests
+        cache.set(cache_key, True, self.RATELIMIT_CALENDER_REPAIR_SECONDS)
+
+        nc_uid = get_nc_user_id(request.user)
+        nc_group_id = self.group.nextcloud_group_id
+
+        try:
+            # add user to NC group. group member checks have been done by permission_classes `IsCosinnusGroupUser`.
+            nextcloud.add_user_to_group(nc_uid, nc_group_id)
+
+            # re-do calendar share for the group. will have no effect if the calendar is properly shared already
+            calendar = NextcloudCaldavConnection()
+            calendar.group_calendar_share(self.group)
+        except Exception as e:
+            logger.error(
+                'Error: CalendarRepairMembershipView had an error when trying to repair a group membership',
+                extra={
+                    'exception': str(e),
+                    'user_id': request.user.id,
+                    'group_id': group_id,
+                },
+            )
+            return Response(status=status.HTTP_503_SERVICE_UNAVAILABLE, data={'error': 'Internal cloud error'})
+
+        return Response(data={'status': 'ok'})

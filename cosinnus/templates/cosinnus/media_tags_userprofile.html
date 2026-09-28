@@ -22,6 +22,8 @@
 {% trans "Which topics are you interested in?" as topics_label %}
 {% trans "Select topics" as topics_placeholder %}
 {% include 'cosinnus/fields/default_field.html' with field=form.forms.media_tag.topics label=topics_label placeholder=topics_placeholder large_field=True %}
+{# Include an empty value always here, so the field is included in the POST and the field becomes clearable. Otherwise the django form ignores it as unchanged #}
+<input type="hidden" name="media_tag-topics" value="">
 
 
 {% if SETTINGS.COSINNUS_TAGS_ENABLED %}
