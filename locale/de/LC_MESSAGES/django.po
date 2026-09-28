@@ -1674,9 +1674,6 @@ msgstr "--- NICHTS (Vererbt) ---"
 msgid "1 %(object)s was deleted successfully"
 msgstr "1 %(object)s wurde erfolgreich gelöscht"
 
-msgid "1 year"
-msgstr "1 Jahr"
-
 msgid "1-Column Dashboard Page"
 msgstr "1-spaltige Dashboard Seite"
 
@@ -1701,17 +1698,8 @@ msgstr "1/4 + 1/2 + 1/4"
 msgid "1/4 + 1/4 + 1/2"
 msgstr "1/4 + 1/4 + 1/2"
 
-msgid "10 years"
-msgstr "10 Jahre"
-
 msgid "2 columns of text"
 msgstr "2 Spalten Text"
-
-msgid "2 days"
-msgstr "2 Tage"
-
-msgid "2 weeks"
-msgstr "2 Wochen"
 
 msgid "2-Column Dashboard Page"
 msgstr "2-spaltige Dashboard Seite"
@@ -1733,9 +1721,6 @@ msgstr "3-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
 
 msgid "4 Random Projects Widget"
 msgstr "4 zufällige Projekte-Widget"
-
-msgid "6 months"
-msgstr "6 Monate"
 
 msgid "8 Random Projects Widget"
 msgstr "8 zufällige Projekte-Widget"
@@ -14651,21 +14636,23 @@ msgstr "Dein Passwort wurde erfolgreich gesetzt! Du kannst dich nun mit deiner E
 msgid "Your phone number is only visible for registered users"
 msgstr "Deine Telefonnummer ist nur für registrierte Benutzer/innen sichtbar"
 
+#, python-format
 msgid ""
-"Your platform profile belonging to this email address has been deactivated by us. Your account will be deleted completely in 30 days.\n"
+"Your platform profile belonging to this email address has been deactivated by us. Your account will be deleted completely in %(deleted_after_days)s days.\n"
 "\n"
 "If you want to keep your profile, please contact the portal administrators. Please note that the response time by e-mail may take longer in some cases."
 msgstr ""
-"Das zu dieser E-Mail-Adresse gehörende Profil auf unserer Plattform wurde von uns deaktiviert. Dein Benutzerkonto wird in 30 Tagen vollständig gelöscht.\n"
+"Das zu dieser E-Mail-Adresse gehörende Profil auf unserer Plattform wurde von uns deaktiviert. Dein Benutzerkonto wird in %(deleted_after_days)s Tagen vollständig gelöscht.\n"
 "\n"
 "Wenn du dein Profil behalten möchtest, wende dich bitte an die Portaladministratoren. Bitte beachte, dass die Antwort per E-Mail in manchen Fällen etwas länger dauern kann."
 
+#, python-format
 msgid ""
-"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in 30 days.\n"
+"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in %(deleted_after_days)s days.\n"
 "\n"
 "If this has happened without your knowledge or if you change your mind in the meantime, please contact the portal administrators or the email address given in our imprint. Please note that the response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would like to keep your profile."
 msgstr ""
-"Das bei uns unter dieser E-Mail gespeicherte Profil der Plattform wurde von Dir deaktiviert und zur Löschung freigegeben. Das Profil wurde von der Webseite entfernt und wir werden das Konto in 30 Tagen vollständig löschen. \n"
+"Das bei uns unter dieser E-Mail gespeicherte Profil der Plattform wurde von Dir deaktiviert und zur Löschung freigegeben. Das Profil wurde von der Webseite entfernt und wir werden das Konto in %(deleted_after_days)s Tagen vollständig löschen. \n"
 "\n"
 "Sollte dies ohne Dein Wissen geschehen sein oder falls Du es dir in der Zwischenzeit anders überlegst, hast Du die Möglichkeit Dich zügig an die Portaladministrator/innen bzw. die im Impressum angegebene E-Mail-Adresse zu wenden. Bitte beachte, dass die Reaktionszeit per Mail in manchen Fällen länger dauern kann. Bitte melde Dich daher frühzeitig, falls Du Dein Profil noch weiter behalten möchtest."
 
