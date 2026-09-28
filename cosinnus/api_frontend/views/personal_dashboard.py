@@ -7,7 +7,6 @@ from rest_framework.views import APIView
 
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.personal_dashboard import CosinnusPersonalDashboardSerializer
-from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 
 
 class CosinnusPersonalDashboardAPIView(APIView):
@@ -17,7 +16,6 @@ class CosinnusPersonalDashboardAPIView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     @swagger_auto_schema(responses={200: openapi.Response('User dashboard data', CosinnusPersonalDashboardSerializer)})

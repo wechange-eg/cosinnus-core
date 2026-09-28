@@ -6,7 +6,6 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.idea import CosinnusIdeaSerializer
 from cosinnus.api_frontend.views.mixins import ViewSetActionMixin
-from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.models.idea import CosinnusIdea
 
 
@@ -18,7 +17,6 @@ class CosinnusIdeaViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
         BrowsableAPIRenderer,
     )
     serializer_class = CosinnusIdeaSerializer
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
@@ -27,7 +25,6 @@ class CosinnusIdeaViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=False,
         methods=['get'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsAuthenticated],
     )
     def personal(self, request):
@@ -38,7 +35,6 @@ class CosinnusIdeaViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=False,
         methods=['get'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsAuthenticated],
     )
     def liked(self, request):
@@ -49,7 +45,6 @@ class CosinnusIdeaViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=False,
         methods=['get'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsAuthenticated],
     )
     def recommendations(self, request):

@@ -1130,7 +1130,6 @@ class CosinnusGettingStartedAPIView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     @swagger_auto_schema(
@@ -1159,7 +1158,6 @@ class CosinnusUserRecommendationsAPIView(ListAPIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
     serializer_class = CosinnusUserProfileRecommendationSerializer
 

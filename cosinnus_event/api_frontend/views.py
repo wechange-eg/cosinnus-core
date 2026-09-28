@@ -5,7 +5,6 @@ from rest_framework.renderers import BrowsableAPIRenderer
 
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.views.mixins import ViewSetActionMixin
-from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus_event.api_frontend.serializers import CosinnusEventPollSerializer, CosinnusEventSerializer
 from cosinnus_event.calendar.serializers import CosinnusEventDateRangeQueryParameterSerializer
 from cosinnus_event.models import Event
@@ -19,7 +18,6 @@ class CosinnusEventPollViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
         BrowsableAPIRenderer,
     )
     serializer_class = CosinnusEventPollSerializer
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
@@ -28,7 +26,6 @@ class CosinnusEventPollViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=False,
         methods=['get'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsAuthenticated],
     )
     def open(self, request):
@@ -45,7 +42,6 @@ class CosinnusEventViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
         BrowsableAPIRenderer,
     )
     serializer_class = CosinnusEventSerializer
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
@@ -60,7 +56,6 @@ class CosinnusEventViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=False,
         methods=['get'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsAuthenticated],
     )
     def attending(self, request):
@@ -77,7 +72,6 @@ class CosinnusEventViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=False,
         methods=['get'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsAuthenticated],
     )
     def recommendations(self, request):

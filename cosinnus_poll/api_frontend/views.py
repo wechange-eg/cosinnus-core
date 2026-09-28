@@ -5,7 +5,6 @@ from rest_framework.renderers import BrowsableAPIRenderer
 
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.views.mixins import ViewSetActionMixin
-from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus_poll.api_frontend.serializers import CosinnusPollSerializer
 from cosinnus_poll.models import Poll
 
@@ -18,7 +17,6 @@ class CosinnusPollViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
         BrowsableAPIRenderer,
     )
     serializer_class = CosinnusPollSerializer
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
@@ -27,7 +25,6 @@ class CosinnusPollViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=False,
         methods=['get'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsAuthenticated],
     )
     def open(self, request):

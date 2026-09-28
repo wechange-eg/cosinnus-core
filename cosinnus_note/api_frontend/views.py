@@ -6,7 +6,6 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.tagged import CosinnusTagObjectLikeSerializer
 from cosinnus.api_frontend.views.mixins import ViewSetActionMixin
-from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus_note.api_frontend.permissions import (
     CosinnusNoteCommentPermissions,
     CosinnusNoteForumPostPermissions,
@@ -29,7 +28,6 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
         BrowsableAPIRenderer,
     )
     serializer_class = CosinnusNoteSerializer
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
@@ -52,7 +50,6 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=False,
         methods=['get'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsAuthenticated],
     )
     def personal(self, request):
@@ -63,7 +60,6 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=False,
         methods=['get'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[IsAuthenticated],
     )
     def recommendations(self, request):
@@ -74,7 +70,6 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=False,
         methods=['post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusNoteForumPostPermissions],
     )
     def forum_post(self, request):
@@ -84,7 +79,6 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=True,
         methods=['post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusNoteLikePermissions],
     )
     def like(self, request, pk):
@@ -94,7 +88,6 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=True,
         methods=['post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusNoteCommentPermissions],
     )
     def comment(self, request, pk):
@@ -104,7 +97,6 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=True,
         methods=['post'],
-        authentication_classes=[CsrfExemptSessionAuthentication],
         permission_classes=[CosinnusNoteCommentPermissions],
     )
     def delete_comment(self, request, pk):
