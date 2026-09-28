@@ -122,6 +122,9 @@ class BaseUserProfileManager(models.Manager):
         # exclude empty description
         queryset = queryset.exclude(description=None).exclude(description='')
 
+        # exclude users without avatar
+        queryset = queryset.exclude(avatar='')
+
         # check visibility
         users = get_user_model().objects.filter(cosinnus_profile__in=queryset)
         users = users.prefetch_related('cosinnus_profile', 'cosinnus_profile__media_tag')
