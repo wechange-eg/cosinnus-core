@@ -3,8 +3,12 @@ from rest_framework import serializers
 
 from cosinnus.api_frontend.serializers.attached_objects import CosinnusAttachedFileSerializer
 from cosinnus.api_frontend.serializers.generic import CosinnusCreatorSerializer
-from cosinnus.api_frontend.serializers.tagged import CosinnusBaseTaggableObjectSerializer
+from cosinnus.api_frontend.serializers.tagged import (
+    CosinnusBaseTaggableObjectSerializer,
+    CosinnusMediaTagSerializerMixin,
+)
 from cosinnus.conf import settings
+from cosinnus.models import get_tag_object_model
 from cosinnus.templatetags.cosinnus_tags import filter_comments_for_user
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus_note.models import Comment, Note
@@ -39,10 +43,17 @@ class CosinnusNoteCommentSerializer(serializers.ModelSerializer):
         return instance
 
 
-class CosinnusNoteSerializer(CosinnusBaseTaggableObjectSerializer):
+class CosinnusNoteSerializer(CosinnusMediaTagSerializerMixin, CosinnusBaseTaggableObjectSerializer):
     """v3 note serializer."""
 
     title = serializers.CharField(required=False)
+    topics = serializers.MultipleChoiceField(
+        source='media_tag.get_topic_ids',
+        required=False,
+        allow_blank=True,
+        default=list,
+        choices=get_tag_object_model().TOPIC_CHOICES,
+    )
     liked = serializers.SerializerMethodField()
     comment_count = serializers.SerializerMethodField()
     comments = CosinnusNoteCommentSerializer(read_only=True, many=True)
@@ -60,6 +71,7 @@ class CosinnusNoteSerializer(CosinnusBaseTaggableObjectSerializer):
             'created',
             'group',
             'url',
+            'topics',
             'like_count',
             'liked',
             'comment_count',
@@ -98,8 +110,12 @@ class CosinnusNoteForumPostSerializer(CosinnusNoteSerializer):
     def save(self, **kwargs):
         user = self.context['request'].user
         forum_group = get_cosinnus_group_model().objects.get(slug=settings.NEWW_FORUM_GROUP_SLUG)
+        media_tag_data = self.validated_data.pop('media_tag', {})
         title = self.validated_data.get('title', Note.EMPTY_TITLE_PLACEHOLDER)
-        return super().save(group=forum_group, creator=user, title=title)
+        instance = super().save(group=forum_group, creator=user, title=title)
+        if media_tag_data:
+            self.save_media_tag(instance.media_tag, media_tag_data)
+        return instance
 
 
 class CosinnusDeleteNoteCommentSerializer(serializers.Serializer):
