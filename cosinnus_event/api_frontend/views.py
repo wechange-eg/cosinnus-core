@@ -47,12 +47,6 @@ class CosinnusEventViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     def get_queryset(self):
         return Event.objects.none()
 
-    def paginate_queryset(self, queryset):
-        if self.action == 'attending':
-            # don't paginate attending events that are filtered by date range
-            return None
-        return super().paginate_queryset(queryset)
-
     @action(
         detail=False,
         methods=['get'],
