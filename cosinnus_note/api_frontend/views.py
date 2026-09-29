@@ -1,15 +1,18 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.parsers import MultiPartParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
 
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
+from cosinnus.api_frontend.serializers.attached_objects import CosinnusAttachFileSerializer
 from cosinnus.api_frontend.serializers.tagged import CosinnusTagObjectLikeSerializer
 from cosinnus.api_frontend.views.mixins import ViewSetActionMixin
 from cosinnus_note.api_frontend.permissions import (
-    CosinnusNoteCommentPermissions,
+    CosinnusNoteCreatePermissions,
     CosinnusNoteForumPostPermissions,
     CosinnusNoteLikePermissions,
+    CosinnusNoteWritePermissions,
 )
 from cosinnus_note.api_frontend.serializers import (
     CosinnusDeleteNoteCommentSerializer,
@@ -42,6 +45,7 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
             'like': CosinnusTagObjectLikeSerializer,
             'comment': CosinnusNoteCommentSerializer,
             'delete_comment': CosinnusDeleteNoteCommentSerializer,
+            'attach_file': CosinnusAttachFileSerializer,
         }
         if self.action in action_serializers:
             return action_serializers[self.action]
@@ -88,7 +92,7 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=True,
         methods=['post'],
-        permission_classes=[CosinnusNoteCommentPermissions],
+        permission_classes=[CosinnusNoteCreatePermissions],
     )
     def comment(self, request, pk):
         """Comment a note."""
@@ -97,8 +101,18 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=True,
         methods=['post'],
-        permission_classes=[CosinnusNoteCommentPermissions],
+        permission_classes=[CosinnusNoteCreatePermissions],
     )
     def delete_comment(self, request, pk):
         """Delete a note comment."""
         return self.detail_action_response(request, use_base_serializer_for_response=True)
+
+    @action(
+        detail=True,
+        methods=['post'],
+        permission_classes=[CosinnusNoteWritePermissions],
+        parser_classes=[MultiPartParser],
+    )
+    def attach_file(self, request, pk=None):
+        """Action to upload an attachment for a note."""
+        return self.detail_action_response(request)
