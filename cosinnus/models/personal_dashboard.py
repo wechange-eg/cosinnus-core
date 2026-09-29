@@ -1,3 +1,4 @@
+from annoying.functions import get_object_or_None
 from django.core.exceptions import ImproperlyConfigured
 from django.urls import reverse, reverse_lazy
 
@@ -9,6 +10,7 @@ from cosinnus.api_frontend.serializers.user import (
 )
 from cosinnus.conf import settings
 from cosinnus.models import get_user_profile_model
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.map import get_map_url_with_selected_filter_params
 from cosinnus.models.profile import PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS
@@ -292,7 +294,18 @@ class CosinnusPersonalDashboardNewsRecommendationsWidget(CosinnusPersonalDashboa
 
     def get_conf(self, user):
         conf = super().get_conf(user)
-        conf.update({'forum_post_allowed': check_user_can_post_to_forum(user)})
+        if settings.NEWW_FORUM_GROUP_SLUG:
+            forum_group = get_object_or_None(
+                get_cosinnus_group_model(), slug=settings.NEWW_FORUM_GROUP_SLUG, portal=CosinnusPortal.get_current()
+            )
+            if forum_group:
+                conf.update(
+                    {
+                        'forum_post_allowed': check_user_can_post_to_forum(user),
+                        'forum_name': forum_group.name,
+                        'forum_url': forum_group.get_absolute_url(),
+                    }
+                )
         return conf
 
 
