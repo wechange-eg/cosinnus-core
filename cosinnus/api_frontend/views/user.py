@@ -1144,7 +1144,7 @@ class CosinnusGettingStartedAPIView(APIView):
     def post(self, request):
         serializer = CosinnusGettingStartedActionSerializer(
             data=request.data,
-            context={'user': request.user},
+            context={'request': request},
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()

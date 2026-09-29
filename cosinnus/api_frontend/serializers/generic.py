@@ -24,22 +24,13 @@ class CosinnusCreatorSerializer(serializers.ModelSerializer):
             'is_mine',
         )
 
-    def _get_user_from_context(self):
-        """Helper to get the user from the context if user or request are in the context."""
-        user = None
-        if 'user' in self.context:
-            user = self.context['user']
-        elif 'request' in self.context:
-            user = self.context['request'].user
-        return user
-
     def get_is_mine(self, obj):
-        user = self._get_user_from_context()
+        user = self.context['request'].user
         return user and obj.pk == user.pk
 
     def to_representation(self, instance):
         """Check view permissions for creator."""
-        user = self._get_user_from_context()
+        user = self.context['request'].user
         if not user or not check_user_can_see_user(user, instance):
             return None
         return super().to_representation(instance)

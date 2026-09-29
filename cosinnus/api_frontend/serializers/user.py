@@ -577,7 +577,7 @@ class CosinnusGettingStartedActionSerializer(serializers.Serializer):
 
     def save(self, **kwargs):
         # Save dismissed action is users profile settings.
-        profile = self.context['user'].cosinnus_profile
+        profile = self.context['request'].user.cosinnus_profile
         dismissed_actions = profile.settings.get(PROFILE_SETTING_DISMISSED_GETTING_STARTED_ACTIONS, [])
         action_id = self.validated_data['action_id']
         if self.validated_data['dismissed']:

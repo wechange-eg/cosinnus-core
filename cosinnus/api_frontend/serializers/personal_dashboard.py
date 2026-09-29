@@ -35,10 +35,11 @@ class CosinnusPersonalDashboardWidgetSerializer(serializers.Serializer):
         return attrs
 
     def to_representation(self, instance):
-        user = self.context['user']
+        request = self.context['request']
+        user = request.user
         ret = super().to_representation(instance)
         # populate user related fields from the widget
-        data, has_more = instance.get_data(user)
+        data, has_more = instance.get_data(request)
         ret.update(
             {
                 'active': instance.is_active(user),
@@ -168,7 +169,7 @@ class CosinnusPersonalDashboardSerializer(serializers.Serializer):
     def __init__(self, instance=None, context=None, **kwargs):
         if 'data' not in kwargs and context:
             # initialize using widgets
-            user = context['user']
+            user = context['request'].user
             # get widgets
             widgets = [widget for widget in get_personal_dashboard_widgets() if widget.is_enabled(user)]
 
@@ -191,7 +192,7 @@ class CosinnusPersonalDashboardSerializer(serializers.Serializer):
         super().__init__(instance, context=context, **kwargs)
 
     def save(self, **kwargs):
-        user = self.context['user']
+        user = self.context['request'].user
 
         # save widget settings for user
         widgets_data = self.validated_data.get('widgets', [])

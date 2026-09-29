@@ -18,7 +18,7 @@ class CosinnusNoteCommentListSerializer(serializers.ListSerializer):
     """A custom list serializer used to filter comments for a user."""
 
     def to_representation(self, data):
-        user = self.context['user'] if 'user' in self.context else self.context['request'].user
+        user = self.context['request'].user
         data = filter_comments_for_user(data, user)
         return super().to_representation(data)
 
@@ -82,7 +82,7 @@ class CosinnusNoteSerializer(CosinnusMediaTagSerializerMixin, CosinnusBaseTaggab
         )
 
     def get_liked(self, obj):
-        user = self.context['user'] if 'user' in self.context else self.context['request'].user
+        user = self.context['request'].user
         return obj.is_user_liking(user)
 
     def get_comment_count(self, obj):

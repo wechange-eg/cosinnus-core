@@ -84,13 +84,14 @@ class CosinnusPersonalDashboardWidget:
         """Set display settings for this user widget."""
         self._set_widget_setting(user.cosinnus_profile, 'display', display)
 
-    def get_data(self, user):
+    def get_data(self, request):
         """
         Get initial widget data.
         :return (data, has_more) tuple
         """
         data = []
         has_more = False
+        user = request.user
         if self.user_data_function and self.serializer_class and self.is_active(user):
             user_data = self.user_data_function(user)
             if self.data_limit:
@@ -99,7 +100,7 @@ class CosinnusPersonalDashboardWidget:
                 if user_data_len > self.data_limit:
                     has_more = True
                 user_data = user_data[: self.data_limit]
-            serializer = self.serializer_class(user_data, many=True, context={'user': user})
+            serializer = self.serializer_class(user_data, many=True, context={'request': request})
             data = serializer.data
         return data, has_more
 
