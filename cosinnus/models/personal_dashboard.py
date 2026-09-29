@@ -288,7 +288,7 @@ class CosinnusPersonalDashboardNewsRecommendationsWidget(CosinnusPersonalDashboa
     user_data_function = Note.objects.get_recommendations
     serializer_class = CosinnusNoteSerializer
     api_url = reverse_lazy('cosinnus:frontend-api:note-recommendations')
-    data_limit = 10
+    data_limit = 5
 
     def get_conf(self, user):
         conf = super().get_conf(user)
