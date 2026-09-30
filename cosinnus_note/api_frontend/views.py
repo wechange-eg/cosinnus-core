@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import mixins, viewsets
 from rest_framework.decorators import action
 from rest_framework.parsers import MultiPartParser
 from rest_framework.permissions import IsAuthenticated
@@ -9,8 +9,8 @@ from cosinnus.api_frontend.serializers.attached_objects import CosinnusAttachFil
 from cosinnus.api_frontend.serializers.tagged import CosinnusTagObjectLikeSerializer
 from cosinnus.api_frontend.views.mixins import ViewSetActionMixin
 from cosinnus_note.api_frontend.permissions import (
-    CosinnusNoteCreatePermissions,
-    CosinnusNoteForumPostPermissions,
+    CosinnusNoteCommentPermissions,
+    CosinnusNoteForumPostFromDashboardPermissions,
     CosinnusNoteLikePermissions,
     CosinnusNoteWritePermissions,
 )
@@ -23,15 +23,21 @@ from cosinnus_note.api_frontend.serializers import (
 from cosinnus_note.models import Note
 
 
-class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
-    """Note api for v3."""
+class CosinnusNoteViewSet(
+    mixins.UpdateModelMixin, mixins.DestroyModelMixin, ViewSetActionMixin, viewsets.GenericViewSet
+):
+    """
+    Note api for v3.
+    Currently, list, get and create actions are not included, as not used by the v3 dashboard.
+    Also, the permissions are set to CosinnusNoteWritePermissions to check update and delete operations.
+    """
 
     renderer_classes = (
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
     serializer_class = CosinnusNoteSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (CosinnusNoteWritePermissions,)
 
     def get_queryset(self):
         user = self.request.user
@@ -74,7 +80,7 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=False,
         methods=['post'],
-        permission_classes=[CosinnusNoteForumPostPermissions],
+        permission_classes=[CosinnusNoteForumPostFromDashboardPermissions],
     )
     def forum_post(self, request):
         """Create a forum group post."""
@@ -92,7 +98,7 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=True,
         methods=['post'],
-        permission_classes=[CosinnusNoteCreatePermissions],
+        permission_classes=[CosinnusNoteCommentPermissions],
     )
     def comment(self, request, pk):
         """Comment a note."""
@@ -101,7 +107,7 @@ class CosinnusNoteViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     @action(
         detail=True,
         methods=['post'],
-        permission_classes=[CosinnusNoteCreatePermissions],
+        permission_classes=[CosinnusNoteCommentPermissions],
     )
     def delete_comment(self, request, pk):
         """Delete a note comment."""

@@ -9,7 +9,7 @@ from cosinnus.utils.permissions import (
 )
 
 
-def check_user_can_post_to_forum(user):
+def check_user_can_post_to_forum_from_dashboard(user):
     """Helper to check if a user can post to the forum group."""
     # check user is authenticated and verified
     if not user.is_authenticated or not user.is_account_verified:
@@ -32,11 +32,11 @@ def check_user_can_post_to_forum(user):
     return True
 
 
-class CosinnusNoteForumPostPermissions(BasePermission):
-    """Permission class for Forum Post action."""
+class CosinnusNoteForumPostFromDashboardPermissions(BasePermission):
+    """Permission class for Forum Post action that is used by the dashboard."""
 
     def has_permission(self, request, view):
-        return check_user_can_post_to_forum(request.user)
+        return check_user_can_post_to_forum_from_dashboard(request.user)
 
 
 class CosinnusNoteLikePermissions(BasePermission):
@@ -47,7 +47,7 @@ class CosinnusNoteLikePermissions(BasePermission):
         return check_object_likefollowstar_access(obj, user)
 
 
-class CosinnusNoteCreatePermissions(BasePermission):
+class CosinnusNoteCommentPermissions(BasePermission):
     """Permission class for Note comment action."""
 
     def has_object_permission(self, request, view, obj):
@@ -56,7 +56,7 @@ class CosinnusNoteCreatePermissions(BasePermission):
 
 
 class CosinnusNoteWritePermissions(BasePermission):
-    """Permission class for Note changes."""
+    """Permission class for Note change actions."""
 
     def has_object_permission(self, request, view, obj):
         user = request.user

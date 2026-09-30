@@ -47,7 +47,7 @@ class CosinnusNoteCommentSerializer(serializers.ModelSerializer):
 class CosinnusNoteSerializer(CosinnusMediaTagSerializerMixin, CosinnusBaseTaggableObjectSerializer):
     """v3 note serializer."""
 
-    title = serializers.CharField(required=False)
+    title = serializers.CharField(required=False, allow_blank=True, allow_null=True)
     topics = serializers.MultipleChoiceField(
         source='media_tag.get_topic_ids',
         required=False,
@@ -82,6 +82,34 @@ class CosinnusNoteSerializer(CosinnusMediaTagSerializerMixin, CosinnusBaseTaggab
             'attached_files',
         )
 
+    def create(self, validated_data):
+        """Create a note."""
+        # use empty title placeholder
+        if not validated_data.get('title'):
+            validated_data['title'] = Note.EMPTY_TITLE_PLACEHOLDER
+        instance = super().create(validated_data)
+        # set visibility
+        instance.media_tag.visibility = get_inherited_visibility_from_group(validated_data['group'])
+        instance.media_tag.save()
+        return instance
+
+    def update(self, instance, validated_data):
+        """Update a note."""
+        # use empty title placeholder
+        if 'title' in validated_data and not validated_data['title']:
+            validated_data['title'] = Note.EMPTY_TITLE_PLACEHOLDER
+        instance = super().update(instance, validated_data)
+        return instance
+
+    def save(self, **kwargs):
+        """Save a note including media_tag data."""
+        media_tag_data = self.validated_data.pop('media_tag', {})
+        super().save(**kwargs)
+        # save media tag data
+        if media_tag_data:
+            self.save_media_tag(self.instance.media_tag, media_tag_data)
+        return self.instance
+
     def get_liked(self, obj):
         user = self.context['request'].user
         return obj.is_user_liking(user)
@@ -111,16 +139,7 @@ class CosinnusNoteForumPostSerializer(CosinnusNoteSerializer):
     def save(self, **kwargs):
         user = self.context['request'].user
         forum_group = get_cosinnus_group_model().objects.get(slug=settings.NEWW_FORUM_GROUP_SLUG)
-        media_tag_data = self.validated_data.pop('media_tag', {})
-        # use empty title placeholder if none was set
-        title = self.validated_data.get('title', Note.EMPTY_TITLE_PLACEHOLDER)
-        instance = super().save(group=forum_group, creator=user, title=title)
-        # set visibility
-        instance.media_tag.visibility = get_inherited_visibility_from_group(forum_group)
-        instance.media_tag.save()
-        # save media tag data
-        if media_tag_data:
-            self.save_media_tag(instance.media_tag, media_tag_data)
+        instance = super().save(group=forum_group, creator=user)
         return instance
 
 

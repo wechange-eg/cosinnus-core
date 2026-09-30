@@ -21,7 +21,7 @@ from cosinnus_event.api_frontend.serializers import CosinnusEventPollSerializer,
 from cosinnus_event.models import Event
 from cosinnus_marketplace.api_frontend.serializers import CosinnusOfferSerializer
 from cosinnus_marketplace.models import Offer
-from cosinnus_note.api_frontend.permissions import check_user_can_post_to_forum
+from cosinnus_note.api_frontend.permissions import check_user_can_post_to_forum_from_dashboard
 from cosinnus_note.api_frontend.serializers import CosinnusNoteSerializer
 from cosinnus_note.models import Note
 from cosinnus_poll.api_frontend.serializers import CosinnusPollSerializer
@@ -302,7 +302,7 @@ class CosinnusPersonalDashboardNewsRecommendationsWidget(CosinnusPersonalDashboa
             if forum_group:
                 conf.update(
                     {
-                        'forum_post_allowed': check_user_can_post_to_forum(user),
+                        'forum_post_allowed': check_user_can_post_to_forum_from_dashboard(user),
                         'forum_name': forum_group.name,
                         'forum_url': forum_group.get_absolute_url(),
                     }
