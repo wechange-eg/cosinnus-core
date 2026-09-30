@@ -2,6 +2,7 @@ import traceback
 from functools import wraps
 from typing import Type, Union
 
+from babel import Locale, UnknownLocaleError
 from django.core.checks import Error, Info, Warning, register
 from django.db import DatabaseError, InterfaceError, OperationalError, ProgrammingError
 from django.utils import translation
@@ -114,12 +115,33 @@ def check_settings(app_configs, **kwargs):
         errors.append(
             Error(
                 'COSINNUS_USER_FORM_SHOW_SEPARATE_LAST_NAME must be enabled to enable '
-                'COSINNUS_USER_FORM_LAST_NAME_REQUIRED.'
+                'COSINNUS_USER_FORM_LAST_NAME_REQUIRED.',
+                id='cosinnus.E002',
             )
         )
 
     if len(settings.NEWW_DEFAULT_USER_GROUPS) == 0:
-        errors.append(Warning('NEWW_DEFAULT_USER_GROUPS is empty. Expect UI breakage.'))
+        errors.append(Warning('NEWW_DEFAULT_USER_GROUPS is empty. Expect UI breakage.', id='cosinnus.W003'))
+
+    return errors
+
+
+@register()
+def check_babel_locales(app_configs, **kwargs):
+    errors = []
+    language_codes = {code for code, _label in settings.LANGUAGES}
+
+    for code in language_codes:
+        try:
+            Locale.parse(code, sep='-')
+        except (UnknownLocaleError, ValueError):
+            errors.append(
+                Error(
+                    f'Locale is not supported by Babel: {code}',
+                    hint='Use Babel-compatible language codes in settings.LANGUAGES.',
+                    id='cosinnus.E004',
+                )
+            )
 
     if (
         settings.COSINNUS_USE_HCAPTCHA
