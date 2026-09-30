@@ -11,6 +11,7 @@ from cosinnus.conf import settings
 from cosinnus.models import get_tag_object_model
 from cosinnus.templatetags.cosinnus_tags import filter_comments_for_user
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.permissions import get_inherited_visibility_from_group
 from cosinnus_note.models import Comment, Note
 
 
@@ -111,8 +112,13 @@ class CosinnusNoteForumPostSerializer(CosinnusNoteSerializer):
         user = self.context['request'].user
         forum_group = get_cosinnus_group_model().objects.get(slug=settings.NEWW_FORUM_GROUP_SLUG)
         media_tag_data = self.validated_data.pop('media_tag', {})
+        # use empty title placeholder if none was set
         title = self.validated_data.get('title', Note.EMPTY_TITLE_PLACEHOLDER)
         instance = super().save(group=forum_group, creator=user, title=title)
+        # set visibility
+        instance.media_tag.visibility = get_inherited_visibility_from_group(forum_group)
+        instance.media_tag.save()
+        # save media tag data
         if media_tag_data:
             self.save_media_tag(instance.media_tag, media_tag_data)
         return instance
