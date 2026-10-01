@@ -1,0 +1,13 @@
+{% if language == 'de' %}
+Die Gruppe/das Projekt {{ group_name }} wird wegen Inaktivität deaktiviert. Zeitraum ohne Aktivität bis zur Deaktivierung: {{ inactivity_text }}. Verbleibende Zeit: {{ warning_text }}. Weitere {{ deleted_after_days }} Tage später erfolgt die endgültige Löschung.
+
+Wenn du die Gruppe/das Projekt behalten möchtest, erstelle dort neue Inhalte.
+
+Für eine frühere Löschung: {{ delete_group_url }}
+{% else %}
+The group/project {{ group_name }} will be deactivated due to inactivity. Inactivity period before deactivation: {{ inactivity_text }}. Time remaining: {{ warning_text }}. It will be permanently deleted another {{ deleted_after_days }} days later.
+
+If you want to keep the group/project, create some content there.
+
+For earlier deletion: {{ delete_group_url }}
+{% endif %}

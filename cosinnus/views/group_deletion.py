@@ -6,6 +6,7 @@ import logging
 from django.conf import settings
 from django.db.models import Q
 from django.urls import reverse
+from django.utils import translation
 from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
@@ -17,6 +18,7 @@ from cosinnus.models.group_extra import ensure_group_type
 from cosinnus.models.membership import MEMBER_STATUS
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_portal_group_slugs
+from cosinnus.utils.inactivity import format_inactivity_duration, render_inactivity_mail
 from cosinnus.utils.permissions import check_ug_admin, check_user_can_receive_emails
 from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
 from cosinnus_cloud.utils.nextcloud import get_group_folder_last_modified
@@ -42,7 +44,7 @@ def mark_group_for_deletion(group, triggered_by_user=None):
 
     if automatic_deletion:
         # ensure last activity threshold has passed
-        last_activity_threshold = now() - datetime.timedelta(days=settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE)
+        last_activity_threshold = now() - datetime.timedelta(days=settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'])
         if group.last_activity > last_activity_threshold:
             logger.warning(
                 'Automatic group deletion due to inactivity scheduled to early!', extra={'group_id': group.id}
@@ -51,10 +53,6 @@ def mark_group_for_deletion(group, triggered_by_user=None):
 
     # send notifications
     portal = CosinnusPortal.get_current()
-    mail_subject = _('%(group_type)s %(group_name)s has been deactivated and will be deleted') % {
-        'group_type': group.trans.VERBOSE_NAME,
-        'group_name': group.name,
-    }
     for user in group.actual_members.all():
         # consider notification settings for non admin users
         if not check_ug_admin(user, group) and not check_user_can_receive_emails(user):
@@ -63,51 +61,64 @@ def mark_group_for_deletion(group, triggered_by_user=None):
         if not group.is_active and not check_ug_admin(user, group):
             continue
 
-        deactivated_groups_url = get_domain_for_portal(portal) + reverse('cosinnus:deactivated-groups')
-        mail_context = {
-            'group_type': group.trans.VERBOSE_NAME,
-            'group_name': group.name,
-            'deleted_after_days': settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS,
-            'deactivation_after': settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE_TEXT,
-            'deactivated_groups_url': deactivated_groups_url,
-        }
-        if automatic_deletion:
-            if group.is_active:
-                mail_content = (
-                    _(
-                        '%(group_type)s %(group_name)s has just been deactivated after %(deactivation_after)s of '
-                        'inactivity.\n\n'
-                        'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
-                        'Until then, reactivation is possible by the admins under %(deactivated_groups_url)s.'
+        language = getattr(getattr(user, 'cosinnus_profile', None), 'language', None) or 'en'
+        with translation.override(language):
+            mail_subject = _('%(group_type)s %(group_name)s has been deactivated and will be deleted') % {
+                'group_type': group.trans.VERBOSE_NAME,
+                'group_name': group.name,
+            }
+            deactivated_groups_url = get_domain_for_portal(portal) + reverse('cosinnus:deactivated-groups')
+            mail_context = {
+                'group_type': group.trans.VERBOSE_NAME,
+                'group_name': group.name,
+                'deleted_after_days': settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS,
+                'deactivation_after': format_inactivity_duration(
+                    settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'],
+                    settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE,
+                    language,
+                ),
+                'deactivated_groups_url': deactivated_groups_url,
+            }
+            if automatic_deletion:
+                if group.is_active:
+                    mail_content = (
+                        _(
+                            '%(group_type)s %(group_name)s has just been deactivated after %(deactivation_after)s of '
+                            'inactivity.\n\n'
+                            'The deactivated %(group_type)s will be permanently deleted after '
+                            '%(deleted_after_days)s days. '
+                            'Until then, reactivation is possible by the admins under %(deactivated_groups_url)s.'
+                        )
+                        % mail_context
                     )
-                    % mail_context
-                )
+                else:
+                    mail_content = (
+                        _(
+                            '%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since '
+                            'deactivation.\n\n'
+                            'The deactivated %(group_type)s will be permanently deleted after '
+                            '%(deleted_after_days)s days. '
+                            'Until then, reactivation is possible by the admins under %(deactivated_groups_url)s.'
+                        )
+                        % mail_context
+                    )
             else:
+                mail_context.update(
+                    {
+                        'deleted_by': triggered_by_user.get_full_name(),
+                    }
+                )
                 mail_content = (
                     _(
-                        '%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since '
-                        'deactivation.\n\n'
-                        'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
+                        '%(group_type)s %(group_name)s has just been deactivated by the admin %(deleted_by)s.\n\n'
+                        'The deactivated %(group_type)s will be permanently deleted after '
+                        '%(deleted_after_days)s days. '
                         'Until then, reactivation is possible by the admins under %(deactivated_groups_url)s.'
                     )
                     % mail_context
                 )
-        else:
-            mail_context.update(
-                {
-                    'deleted_by': triggered_by_user.get_full_name(),
-                }
-            )
-            mail_content = (
-                _(
-                    '%(group_type)s %(group_name)s has just been deactivated by the admin %(deleted_by)s.\n\n'
-                    'The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. '
-                    'Until then, reactivation is possible by the admins under %(deactivated_groups_url)s.'
-                )
-                % mail_context
-            )
-        html_content = textfield(mail_content)
-        send_html_mail(user, mail_subject, html_content)
+            html_content = textfield(mail_content)
+            send_html_mail(user, mail_subject, html_content)
 
     if group.is_active:
         # deactivate active groups
@@ -158,9 +169,6 @@ def delete_group(group):
     group.delete()
 
 
-_COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW = None
-
-
 def update_group_last_activity(group, force_ignore_compution_window=False):
     """Updates the group activity field.
     - Groups without a last_activity date will always be calculated.
@@ -170,21 +178,17 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
         activity date, e.g. a notification would be sent out or the group would be marked as deleted.
     :param group: Group to be updated.
     :param force_ignore_compution_window: Ignore the computation window set with
-        `INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS` and do the computation regardless.
+        `GROUP_INACTIVITY_SCHEDULE['activity_computation_window_days']` and do the computation regardless.
     """
 
     # Ignore forum, events and default user groups
     if group.slug in get_default_portal_group_slugs():
         return
 
-    # gather the timepoints as days from now() where any notification or deletion activity might happen to the group.
-    # only just before those timepoints will we actually re-calculate the last activity
-    global _COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW
-    if _COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW is None:
-        _COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW = [
-            settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE - days_before
-            for days_before in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.keys()
-        ] + [settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE]
+    # Gather the inactivity-age thresholds at which a warning or deactivation occurs.
+    # Only shortly before these thresholds do we recalculate the group's last activity.
+    config = settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE
+    relevance_timepoint_days = [config['days'] - days_before for days_before in config['warnings']] + [config['days']]
 
     # ignore groups that have their activity calculated and are inactive themselves
     # (nothing should happen to refresh those)
@@ -197,9 +201,9 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
     else:
         # check if we're in a time window for recalculation
         is_within_recalculation_window = False
-        for days_of_event in _COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW:
+        for days_of_event in relevance_timepoint_days:
             a_bit_before_days_of_event = group.last_activity + datetime.timedelta(
-                days_of_event - settings.COSINNUS_INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS
+                days_of_event - config['activity_computation_window_days']
             )
             time_of_event = group.last_activity + datetime.timedelta(days_of_event)
             if a_bit_before_days_of_event <= now() <= time_of_event:
@@ -244,10 +248,7 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
     # in time where any notification about the deactivation would happen.
     # if any of the checks finds a younger datetime, we save it and stop checking further, because it would not result
     # in any actions taken for the group anyways
-    last_activity_cutoff_days_from_now = (
-        min(_COMPUTATION_RELEVANCE_TIMEPOINT_DAYS_FROM_NOW)
-        - settings.COSINNUS_INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS
-    )
+    last_activity_cutoff_days_from_now = min(relevance_timepoint_days) - config['activity_computation_window_days']
     last_activity_cutoff = now() - datetime.timedelta(days=last_activity_cutoff_days_from_now)
     if group.last_activity > last_activity_cutoff:
         # Abort further computation
@@ -284,44 +285,61 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
             )
 
 
-def send_group_inactivity_deactivation_notifications():
-    """Sends notifications before automatic group deactivation due inactivity.
-    Notification are send at the exact interval. This means that if an interval is missed (e.g. due to cron jobs not
-    running for a day) the notification is not resend. This is considered non-critical as we make sure
-    to send a notification when actually scheduling the deletion.
-    """
-    groups_notified_count = 0
+def get_group_inactivity_notification_candidates():
+    """Return groups due for an inactivity warning, grouped by warning stage."""
     today = now().date()
     groups = get_cosinnus_group_model().objects.filter(is_active=True).exclude(last_activity=None)
     groups = groups.exclude(slug__in=get_default_portal_group_slugs())
-    for days_before_deactivation, time_message in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.items():
+    config = settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE
+    candidates = {}
+    for days_before_deactivation in config['warnings']:
         # get groups that are notified according to the configured interval
-        days_after_last_activity = settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE - days_before_deactivation
+        days_after_last_activity = config['days'] - days_before_deactivation
         group_last_activity_date = (now() - datetime.timedelta(days=days_after_last_activity)).date()
         inactive_groups = groups.filter(last_activity__date=group_last_activity_date)
         notify_groups = inactive_groups.filter(
             Q(inactivity_notification_sent_at=None) | Q(inactivity_notification_sent_at__date__lt=today)
         )
+        candidates[days_before_deactivation] = notify_groups
+    return candidates
 
+
+def get_groups_due_for_inactivity_deactivation():
+    """Return groups whose configured inactivity period has elapsed."""
+    inactivity_threshold = now() - datetime.timedelta(days=settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'])
+    groups = get_cosinnus_group_model().objects.filter(
+        scheduled_for_deletion_at=None, last_activity__lt=inactivity_threshold
+    )
+    return groups.exclude(slug__in=get_default_portal_group_slugs())
+
+
+def send_group_inactivity_deactivation_notifications(dry_run: bool = False) -> int:
+    """Send due inactivity warnings, or only count groups during a dry run.
+
+    Notifications are sent only at the exact configured interval. A missed interval is not retried; the final
+    deactivation notification remains the safety net.
+    """
+    groups_notified_count = 0
+    for days_before_deactivation, notify_groups in get_group_inactivity_notification_candidates().items():
         for group in notify_groups:
+            if dry_run:
+                groups_notified_count += 1
+                continue
+
             for admin in group.actual_admins.all():
-                mail_subject = _('%(group_type)s %(group_name)s will be deleted due to inactivity') % {
-                    'group_type': group.trans.VERBOSE_NAME,
-                    'group_name': group.name,
-                }
                 delete_url = group_aware_reverse('cosinnus:group-schedule-delete', kwargs={'group': group})
-                mail_content = _(
-                    '%(group_type)s %(group_name)s will be deactivated %(deactivation_after)s after the last activity '
-                    'and then permanently deleted. This will happen in %(deactivation_in)s.\n\n'
-                    'If you do not wish for the group/project to be deactivated, just create some content there.\n\n'
-                    'If an earlier deletion is desired, you can delete the group/project under %(delete_group_url)s.'
-                ) % {
-                    'group_type': group.trans.VERBOSE_NAME,
-                    'group_name': group.name,
-                    'deactivation_after': settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE_TEXT,
-                    'deactivation_in': time_message,
-                    'delete_group_url': delete_url,
-                }
+                mail_subject, mail_content = render_inactivity_mail(
+                    'group',
+                    admin,
+                    days_before_deactivation,
+                    {
+                        'group': group,
+                        'group_type': group.trans.VERBOSE_NAME,
+                        'group_name': group.name,
+                        'delete_group_url': delete_url,
+                        'deleted_after_days': settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS,
+                    },
+                )
                 html_content = textfield(mail_content)
                 send_html_mail(admin, mail_subject, html_content)
 
