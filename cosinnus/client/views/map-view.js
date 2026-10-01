@@ -62,19 +62,9 @@ module.exports = ContentControlView.extend({
     // English / International version of the OpenStreetMap tileset based on CartoDB
     layers: {
         street: {
-            url: 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png',
+            url: COSINNUS_MAP_TILESET_URL,
             options: {
-                attribution: '<a href="https://carto.com" target="_blank">CartoDB</a> | <a href="https://www.openstreetmap.org" target="_blank">&copy; OpenStreetMap contributors</a>'
-            }
-        },
-    },
-
-    // German version of the OpenStreetMap tileset
-    layersModernTileset: {
-        street: {
-            url: 'https://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png',
-            options: {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution: COSINNUS_MAP_TILESET_ATTRIBUTION_HTML
             }
         },
     },
@@ -649,21 +639,11 @@ module.exports = ContentControlView.extend({
 
     setLayer: function (layer) {
         this.state.currentLayer && this.leaflet.removeLayer(this.state.currentLayer);
-        if (COSINNUS_MAP_USE_MODERN_TILESET == true){
-            var options = _(this.layersModernTileset[layer].options).extend({
-                maxZoom: 15,
-                minZoom:3
-            });
-            this.state.currentLayer = L.tileLayer(this.layersModernTileset[layer].url, options)
-                .addTo(this.leaflet);
-        } else {
-            var options = _(this.layers[layer].options).extend({
-                maxZoom: 15,
-                minZoom:3
-            });
-            this.state.currentLayer = L.tileLayer(this.layers[layer].url, options)
-                .addTo(this.leaflet);
-        }
+        var options = _(this.layers[layer].options).extend({
+            maxZoom: 15,
+            minZoom:3
+        });
+        this.state.currentLayer = L.tileLayer(this.layers[layer].url, options).addTo(this.leaflet);
     },
 
     updateBounds: function () {
