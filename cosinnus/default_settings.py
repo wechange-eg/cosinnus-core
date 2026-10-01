@@ -158,7 +158,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.core.middleware.cosinnus_middleware.UserOTPMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
-        'wagtail.contrib.redirects.middleware.RedirectMiddleware',
         'allauth.account.middleware.AccountMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.ConditionalRedirectMiddleware',
