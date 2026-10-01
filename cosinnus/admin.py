@@ -1864,3 +1864,16 @@ if settings.DEBUG and settings.COSINNUS_DECK_ENABLED:
         pass
 
     admin.site.register(SyncedExternalObject, SyncedExternalObjectAdmin)
+
+
+# remove the allauth/socialaccount admins if the portal isn't configured as SSO portal
+# (so we effectively do not use them)
+if not settings.COSINNUS_IS_OAUTH_CLIENT:
+    from allauth.account.models import EmailAddress
+    from allauth.socialaccount.models import SocialAccount, SocialApp, SocialToken
+
+    for model in (SocialAccount, SocialApp, SocialToken, EmailAddress):
+        try:
+            admin.site.unregister(model)
+        except admin.sites.NotRegistered:
+            pass

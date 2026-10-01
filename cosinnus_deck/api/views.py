@@ -11,7 +11,6 @@ from rest_framework.renderers import BrowsableAPIRenderer, JSONRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.models.group import get_cosinnus_group_model
 from cosinnus.models.tagged import LikeObject, SyncedExternalObject
 from cosinnus.utils.permissions import IsNextCloudApiTokenValid, check_ug_admin, check_ug_membership
@@ -72,7 +71,6 @@ class DeckStacksView(DeckProxyApiMixin, APIView):
         JSONRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     @swagger_auto_schema(
@@ -114,7 +112,6 @@ class DeckStackView(DeckProxyApiMixin, APIView):
         JSONRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     @swagger_auto_schema(
@@ -175,7 +172,6 @@ class DeckLabelsView(DeckProxyApiMixin, APIView):
         JSONRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     @swagger_auto_schema(
@@ -217,7 +213,6 @@ class DeckLabelView(DeckProxyApiMixin, APIView):
         JSONRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     @swagger_auto_schema(
@@ -432,7 +427,6 @@ class DeckFollowView(DeckSyncedTaskMixin, APIView):
         JSONRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     @swagger_auto_schema(
