@@ -185,7 +185,7 @@ setup(
         'django-multiform @ git+https://github.com/wechange-eg/django-multiform.git@master#egg=django-multiform',
         'django-djajax @ git+https://github.com/wechange-eg/django-djajax.git@django-update-4-2#egg=django-djajax',
         'django_select2 @ git+https://github.com/wechange-eg/django-select2.git@django-update-4-2#egg=django-select2',
-        'django-osm-field @ git+https://github.com/wechange-eg/django-osm-field.git@django-update-4-2#egg=django-osm-field',
+        'django-osm-field @ git+https://github.com/wechange-eg/django-osm-field.git@main#egg=django-osm-field',
         'markdown2 @ git+https://github.com/wechange-eg/python-markdown2.git@2.4.8-WE#egg=markdown2',
         'pydkim @ git+https://github.com/wechange-eg/pydkim.git@master#egg=pydkim',
         'django-suit @ git+https://github.com/wechange-eg/django-suit.git@django-update-4-2#egg=django-suit',
