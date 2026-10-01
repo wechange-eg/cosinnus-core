@@ -350,7 +350,9 @@ def updatedosmfield(_ctx):
     with c.cd(env.path):
         with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
             c.run('pip freeze | grep django-osm-field')
-            c.run('pip install "django-osm-field @ git+https://github.com/wechange-eg/django-osm-field.git@main"')
+            c.run(
+                'pip install "django-osm-field @ git+https://git.wechange.de/gl/code/python-packages/django-osm-field.git@main"'
+            )
             c.run('pip freeze | grep django-osm-field')
 
 
