@@ -386,6 +386,11 @@
                     if (cosinnus_v3_calendar_enabled) {
                         var calendarTargetUrl = $('#calendarConfirmV3CalendarURLTarget').data('group-calendar-target-url');
                         if (calendarTargetUrl) {
+                            if (typeof date != "undefined" && typeof date.start != "undefined") {
+                                // Turns "2026-10-05" into "05-10-2026"
+                                var suffix = date.start.toLocaleDateString('en-CA').split('-').reverse().join('-');
+                                calendarTargetUrl += "?focusDay=" + suffix;
+                            }
                             window.location.href = calendarTargetUrl;
                         }
                         return
