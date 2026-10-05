@@ -5,6 +5,7 @@ from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
+from rest_framework.fields import empty
 
 from cosinnus.api_frontend.serializers.attached_objects import CosinnusAttachedFileSerializer
 from cosinnus.api_frontend.serializers.conference import CosinnusConferenceSettingsSerializer
@@ -29,11 +30,22 @@ class CosinnusEventDateRangeQueryParameterSerializer(serializers.Serializer):
     # the forum group).
     MAX_DATA_RANGE_DAYS = 42
 
-    def validate(self, data):
+    def __init__(self, instance=None, data=empty, **kwargs):
+        required = kwargs.pop('required', True)
+        super().__init__(instance, data, **kwargs)
+        if not required:
+            self.fields['from_date'].required = False
+            self.fields['to_date'].required = False
+
+    def validate(self, attrs):
         # Validate maximum date range
-        if (data['to_date'] - data['from_date']).days > self.MAX_DATA_RANGE_DAYS:
+        if (
+            'to_date' in attrs
+            and 'to_date' in attrs
+            and (attrs['to_date'] - attrs['from_date']).days > self.MAX_DATA_RANGE_DAYS
+        ):
             raise serializers.ValidationError(f'The maximum date range is {self.MAX_DATA_RANGE_DAYS} days.')
-        return data
+        return attrs
 
 
 class AttendingSerializerMixin:

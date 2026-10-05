@@ -48,20 +48,29 @@ logger = logging.getLogger('cosinnus')
 class CosinnusCalendarListDateRangeQueryParamsMixin:
     """Filters the list view queryset by "from_date" and "to_date" query parameters."""
 
-    query_params = None
+    # view parameter to define it the range parameters are required
+    data_range_params_required = True
+
+    # validated date range parameter
+    date_range_params = None
 
     def list(self, request, *args, **kwargs):
         # validate and set query parameters
-        query_params_serializer = CosinnusEventDateRangeQueryParameterSerializer(data=request.query_params)
-        query_params_serializer.is_valid(raise_exception=True)
-        self.query_params = query_params_serializer.validated_data
+        date_range_params_serializer = CosinnusEventDateRangeQueryParameterSerializer(
+            data=request.query_params, required=self.data_range_params_required
+        )
+        date_range_params_serializer.is_valid(raise_exception=True)
+        self.date_range_params = date_range_params_serializer.validated_data
         return super().list(request, *args, **kwargs)
 
     def filter_by_date_range_query_params(self, queryset):
         # apply query parameter to queryset
-        return queryset.filter(
-            from_date__date__gte=self.query_params['from_date'], to_date__date__lte=self.query_params['to_date']
-        )
+        if self.date_range_params:
+            queryset = queryset.filter(
+                from_date__date__gte=self.date_range_params['from_date'],
+                to_date__date__lte=self.date_range_params['to_date'],
+            )
+        return queryset
 
 
 class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQueryParamsMixin, viewsets.ModelViewSet):
@@ -78,7 +87,7 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     pagination_class = None
 
     group = None
-    query_params = None
+    date_range_params = None
 
     def get_serializer_class(self):
         """Get serializer based on viewset action."""
@@ -221,6 +230,7 @@ class CosinnusCalendarSyncedEventsViewSet(
     serializer_class = CosinnusCalendarSyncedEventSerializer
     permission_classes = (IsCosinnusGroupUser,)
     pagination_class = None
+    data_range_params_required = False
 
     group = None
 
