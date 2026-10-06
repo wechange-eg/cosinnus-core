@@ -6,9 +6,11 @@ from django.core.cache import cache
 from django.db.models.aggregates import Count
 from django.db.models.query_utils import Q
 from django.template.loader import render_to_string
+from django.utils.decorators import method_decorator
 from django.utils.encoding import force_str
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.csrf import ensure_csrf_cookie
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.generics import GenericAPIView
@@ -565,6 +567,7 @@ class PortalSettingsView(APIView):
             )
         }
     )
+    @method_decorator(ensure_csrf_cookie)
     def get(self, request):
         current_language = get_language()
         settings_dict = cache.get(self.PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY % current_language)
