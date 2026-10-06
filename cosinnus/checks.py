@@ -156,4 +156,17 @@ def check_babel_locales(app_configs, **kwargs):
             )
         )
 
+    if (
+        settings.COSINNUS_USE_HCAPTCHA
+        and not settings.COSINNUS_HCAPTCHA_SECRET_KEY
+        and not settings.COSINNUS_EUCAPTCHA_SECRET_KEY
+    ):
+        errors.append(
+            Error(
+                'COSINNUS_USE_HCAPTCHA is set to True but neither COSINNUS_HCAPTCHA_SECRET_KEY '
+                'nor COSINNUS_EUCAPTCHA_SECRET_KEY are set! Provide either WECHANGE_COSINNUS_HCAPTCHA_SECRET_KEY or '
+                'WECHANGE_COSINNUS_EUCAPTCHA_SECRET_KEY in .env or set COSINNUS_USE_HCAPTCHA=False!'
+            )
+        )
+
     return errors
