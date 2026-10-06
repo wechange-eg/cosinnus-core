@@ -436,6 +436,9 @@ class PortalSettingsView(APIView):
 
     Any returned values will be overridden by anything defined in conf dict `COSINNUS_V3_PORTAL_SETTINGS` (uncached).
 
+    Note: This API is also used to set the CSRF-Cookie, as it is always loaded by the frontend, i.e. the frontend must
+    call this API, before attempting a posting on any other v3 API.
+
     A full example string for manually configuarable settings that aren't dynamically taken from the portal config:
 
     {
