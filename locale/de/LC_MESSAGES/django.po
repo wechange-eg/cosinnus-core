@@ -342,20 +342,6 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(group_type)s %(group_name)s will be deactivated %(deactivation_after)s after the last activity and then permanently deleted. This will happen in %(deactivation_in)s.\n"
-"\n"
-"If you do not wish for the group/project to be deactivated, just create some content there.\n"
-"\n"
-"If an earlier deletion is desired, you can delete the group/project under %(delete_group_url)s."
-msgstr ""
-"%(group_type)s %(group_name)s wird nach %(deactivation_after)s seit der letzten Aktivität deaktiviert und dann endgültig gelöscht. Das passiert in %(deactivation_in)s.\n"
-"\n"
-"Wenn du nicht möchtest, dass die Gruppe/das Projekt gelöscht wird, erstelle einen Inhalt dort.\n"
-"\n"
-"Wenn eine frühere Löschung gewünscht ist, kann die Gruppe/das Projekt unter %(delete_group_url)s gelöscht werden."
-
-#, python-format
-msgid ""
 "%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since deactivation.\n"
 "\n"
 "The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
@@ -363,10 +349,6 @@ msgstr ""
 "%(group_type)s %(group_name)s wird nach %(deactivation_after)s seit Deaktivierung gelöscht.\n"
 "\n"
 "%(group_type)s wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
-
-#, python-format
-msgid "%(group_type)s %(group_name)s will be deleted due to inactivity"
-msgstr "%(group_type)s %(group_name)s wird wegen Inaktivität gelöscht"
 
 #, python-format
 msgid "%(link_start)s%(username)s%(link_end)s is looking for"
@@ -1674,9 +1656,6 @@ msgstr "--- NICHTS (Vererbt) ---"
 msgid "1 %(object)s was deleted successfully"
 msgstr "1 %(object)s wurde erfolgreich gelöscht"
 
-msgid "1 year"
-msgstr "1 Jahr"
-
 msgid "1-Column Dashboard Page"
 msgstr "1-spaltige Dashboard Seite"
 
@@ -1701,15 +1680,6 @@ msgstr "1/4 + 1/2 + 1/4"
 msgid "1/4 + 1/4 + 1/2"
 msgstr "1/4 + 1/4 + 1/2"
 
-msgid "10 years"
-msgstr "10 Jahre"
-
-msgid "2 days"
-msgstr "2 Tage"
-
-msgid "2 weeks"
-msgstr "2 Wochen"
-
 msgid "2-Column Dashboard Page"
 msgstr "2-spaltige Dashboard Seite"
 
@@ -1730,9 +1700,6 @@ msgstr "3-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
 
 msgid "4 Random Projects Widget"
 msgstr "4 zufällige Projekte-Widget"
-
-msgid "6 months"
-msgstr "6 Monate"
 
 msgid "8 Random Projects Widget"
 msgstr "8 zufällige Projekte-Widget"
@@ -2837,6 +2804,12 @@ msgstr "BBB-Meetings können direkt von Gästen besucht werden - sowohl von regi
 msgid "BBB-Room Settings"
 msgstr "BBB-Raumeinstellungen"
 
+msgid "Babel rounds durations to the configured unit. Check wording in every language manually; missing language branches are not detected."
+msgstr ""
+
+msgid "Babel value"
+msgstr ""
+
 msgid "Back"
 msgstr "Zurück"
 
@@ -2915,6 +2888,9 @@ msgstr "Boards, die bereits migriert wurden (von dir oder einem anderen User mit
 
 msgid "Body"
 msgstr "Nachrichtentext"
+
+msgid "Body template"
+msgstr ""
 
 msgid "Booked"
 msgstr "Gebucht"
@@ -3502,6 +3478,9 @@ msgstr "Tagungen mit eigenen Einstellungen"
 msgid "Confernence Application"
 msgstr "Tagung Anmeldung"
 
+msgid "Configured templates could not be used. This preview uses the core fallback templates."
+msgstr ""
+
 msgid "Confirm now!"
 msgstr "Jetzt bestätigen!"
 
@@ -3792,6 +3771,9 @@ msgctxt "Multi-Address Field Subfield"
 msgid "Country"
 msgstr "Land"
 
+msgid "Counts use stored activity dates; this preview does not refresh Rocket.Chat or Nextcloud activity. Group counts are not email counts and may include groups without admins."
+msgstr ""
+
 msgid "Create"
 msgstr "Erstellen"
 
@@ -3948,6 +3930,9 @@ msgstr "Aktuelle Inserate"
 msgid "Current Polls"
 msgstr "Umfragen"
 
+msgid "Current candidates"
+msgstr ""
+
 msgid "Currently set Email Text"
 msgstr "Aktueller E-Mail Text"
 
@@ -4021,6 +4006,9 @@ msgstr "Deaktivierte Apps"
 
 msgid "Deactivated."
 msgstr "Deaktiviert."
+
+msgid "Deactivation after"
+msgstr ""
 
 msgid "Dear user,"
 msgstr "Hallo,"
@@ -4585,6 +4573,12 @@ msgstr "Du kannst Boxen ziehen und loslassen um sie umzuordnen. Bitte beachte da
 msgid "Drag and drop one or more files into this area to upload them to this folder."
 msgstr "Ziehe eine oder mehrere Dateien in dieses Feld, um sie in den aktuellen Ordner hochzuladen."
 
+msgid "Dry run"
+msgstr ""
+
+msgid "Dry run applies only to inactivity warning and deactivation jobs, not to already scheduled deletions or activity updates."
+msgstr ""
+
 msgid "Dry run finished, errors in CSV that prevent import"
 msgstr "Testlauf beendet, Fehler in CSV, die den Import verhindern"
 
@@ -4779,6 +4773,9 @@ msgstr "Benutzermails müssen verifiziert werden"
 
 msgid "Emails to conference participants"
 msgstr "E-Mails an Tagungsteilnehmer"
+
+msgid "Emails use example data and are shown without the final HTML mail layout. Core template fallbacks are marked below."
+msgstr ""
 
 msgid "Embed Flickr Gallery"
 msgstr "Flickr Galerie einbinden"
@@ -5569,6 +5566,9 @@ msgstr "Gruppenname"
 msgid "Group settings"
 msgstr "Gruppeneinstellungen"
 
+msgid "Group warnings"
+msgstr ""
+
 msgid "Group/Project (migration target)"
 msgstr "Gruppe/Projekt (Migrations-Ziel)"
 
@@ -5579,6 +5579,9 @@ msgstr "Gruppen"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups and Projects"
 msgstr "Gruppen und Projekte"
+
+msgid "Groups due for deactivation"
+msgstr ""
 
 msgid "Groups help improve communication and collaboration in large networks or organizations. Within a Group you can bring together several smaller projects or workgroups."
 msgstr "Mit Gruppen kannst du die Kommunikation und Zusammenarbeit in großen Netzwerken oder Organisationen vereinfachen. Unter einer Gruppe könnt ihr mehrere kleine Projekte, Arbeitsgruppen oder -kreise abbilden."
@@ -7042,6 +7045,12 @@ msgstr "Inaktivitäts-Benachrichtigung versendet?"
 msgid "Inactivity notification sent at"
 msgstr "Inaktivitäts-Benachrichtigung versendet am"
 
+msgid "Inactivity period"
+msgstr ""
+
+msgid "Inactivity preview"
+msgstr ""
+
 msgid "Inbox"
 msgstr "Posteingang"
 
@@ -7958,6 +7967,9 @@ msgstr "Verschiedenes"
 msgid "Miscellaneous"
 msgstr "Verschiedenes"
 
+msgid "Missed warnings are not retried. Shortening inactivity periods can deactivate overdue accounts or groups without prior warning."
+msgstr ""
+
 msgid "Mitwirk-O-Mat Settings"
 msgstr "Mitwirk-O-Mat Einstellungen"
 
@@ -8452,6 +8464,9 @@ msgstr "Es wurde kein validierter CSV-Upload gefunden, von dem der Import gestar
 
 msgid "No video conference"
 msgstr "Keine Videokonferenz"
+
+msgid "No warning stages configured."
+msgstr ""
 
 msgid "No, do not send"
 msgstr "Nein, nicht senden"
@@ -10754,6 +10769,9 @@ msgctxt "subject of an E-Mail"
 msgid "Subject"
 msgstr "Betreff"
 
+msgid "Subject template"
+msgstr ""
+
 msgctxt "a conference application status"
 msgid "Submitted"
 msgstr "Eingereicht"
@@ -10927,6 +10945,9 @@ msgstr "Text-Editor"
 
 msgid "Text Topics"
 msgstr "Themen (Freitext)"
+
+msgid "Text override"
+msgstr ""
 
 msgid "Thank you again for your interest in our services."
 msgstr "Vielen Dank nochmal für dein Interesse an unseren Dienstleistungen."
@@ -11991,6 +12012,9 @@ msgstr "Diese Organisation soll über andere Plattformen öffentlich auffindbar 
 msgid "This pad can no longer be edited because its creator has deleted their account."
 msgstr "Dieses Pad kann nicht mehr bearbeitet werden, da das Benutzerkonto, das es erstellt hat, gelöscht wurde."
 
+msgid "This page is read-only and shows the objects affected if the inactivity jobs run now."
+msgstr ""
+
 msgid "This page will automatically refresh when the process is done."
 msgstr "Diese Seite wird automatisch aktualisiert, wenn der Vorgang abgeschlossen ist."
 
@@ -12551,6 +12575,9 @@ msgstr "Als Logo für die Navigationsleiste benutzt und für externe Links die i
 msgid "Used for the background of the landing and CMS-pages"
 msgstr "Wird als Hintergrund für die Landing-Page und die CMS-Seiten benutzt"
 
+msgid "Used value"
+msgstr ""
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "User"
 msgstr "Benutzer/in"
@@ -12767,6 +12794,9 @@ msgstr "Benutzerkonto wurde erfolgreich erstellt!"
 msgid "User token"
 msgstr "Benutzer/in-Token"
 
+msgid "User warnings"
+msgstr ""
+
 msgid "User was not created"
 msgstr "Benutzer/in wurde nicht erstellt"
 
@@ -12800,6 +12830,9 @@ msgstr "Bestätigung für neue Benutzer/innen"
 #, python-format
 msgid "Users can filter their results in the Volunteer-O-Matic by distance so that only groups and projects in their area are suggested. For this, the first location you specified in your %(group_settings_label)s is used."
 msgstr "Die Nutzer/innen können ihre Ergebnisse im Mitwirk-O-Mat nach Entfernung filtern, damit nur Gruppen und Projekte in der Nähe vorgeschlagen werden. Hierfür wird der Standort verwendet, den ihr in euren %(group_settings_label)s angegeben habt."
+
+msgid "Users due for deactivation"
+msgstr ""
 
 #, python-format
 msgid "Users in organization %(group)s"
@@ -13020,6 +13053,12 @@ msgstr "Suche"
 
 msgid "Warning"
 msgstr "Achtung!"
+
+msgid "Warning counts include only candidates whose configured warning date is today; candidates between warning dates are not included. In contrast, deactivation counts include all candidates whose inactivity period has elapsed and who have not yet been scheduled for deletion."
+msgstr ""
+
+msgid "Warning period"
+msgstr ""
 
 msgid "Warning!"
 msgstr "Achtung!"
@@ -14365,32 +14404,6 @@ msgstr "Deine E-Mail-Adresse %(email)s wurde erfolgreich bestätigt! Allerdings 
 msgid "Your email address was successfully changed to:"
 msgstr "Deine E-Mail Adresse wurde erfolgreich geändert:"
 
-#, python-format
-msgid ""
-"Your entire account, profile and personal information will be deactivated in %(deactivation_in)s and then irrevocably deleted.\n"
-"\n"
-"If you do not wish for you account to be deactivated, just log in once.\n"
-"\n"
-"Your pads, news, uploaded files and other content will remain on the website. However, your name will no longer be displayed and your profile will no longer be linked to the content. On Rocket Chat, your profile direct messages will be deleted, but content within discussions and channels will remain. If you still want to delete content from yourself, you can do this now by deleting the content on the relevant pages.\n"
-"\n"
-"Your profile will first be deactivated and completely removed from the platform. After deactivation, it will be deleted from our database after %(deleted_after_days)s days and only then permanently.\n"
-"\n"
-"The account may be stored in our backup systems for up to 6 months after deletion. If this is too long for you, please contact the support team of this platform for immediate deletion.\n"
-"\n"
-"During this %(deleted_after_days)s-day period after deactivation, the e-mail address of your account is reserved and cannot be used to register a new account."
-msgstr ""
-"Dein gesamtes Benutzerkonto, Profil und persönlichen Daten werden in %(deactivation_in)s deaktiviert und anschließend unwiderruflich gelöscht.\n"
-"\n"
-"Wenn du nicht möchtest, dass dein Benutzerkonto deaktiviert wird, melde dich einfach einmal an.\n"
-"\n"
-"Deine Pads, Neuigkeiten, hochgeladenen Dateien und sonstigen Inhalte bleiben auf der Website erhalten. Dein Name wird jedoch nicht mehr angezeigt und dein Profil wird nicht mehr mit den Inhalten verknüpft. In Rocket.Chat werden deine Direktnachrichten gelöscht, die Inhalte in Diskussionen und Kanälen bleiben jedoch erhalten. Wenn du dennoch eigene Inhalte löschen möchtest, kannst du dies jetzt tun, indem du die Inhalte auf den entsprechenden Seiten löschst.\n"
-"\n"
-"Dein Profil wird zunächst deaktiviert und vollständig von der Plattform entfernt. Nach der Deaktivierung wird es nach %(deleted_after_days)s Tagen aus unserer Datenbank gelöscht und erst dann endgültig entfernt.\n"
-"\n"
-"Dein Benutzerkonto kann nach der Löschung bis zu 6 Monate lang in unseren Backup-Systemen gespeichert bleiben. Sollte dies zu lange sein, wende dich bitte an den Support dieser Plattform, um eine sofortige Löschung zu veranlassen.\n"
-"\n"
-"In den %(deleted_after_days)s Tagen nach der Deaktivierung bleibt die E-Mail-Adresse deines Benutzerkontos reserviert und kann nicht zur Registrierung eines neuen Benutzerkontos verwendet werden."
-
 msgid "Your entry in the Volunteer-O-Matic links to the microsite of your group. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
 msgstr "Euer Eintrag im Mitwirk-O-Mat verlinkt auf die Microsite eurer Gruppe. Daher solltet ihr darauf achten, dass diese aktuell, informativ und ansprechend gestaltet ist. Ihr könnt von eurer Microsite auch auf eine externe Website verlinken."
 
@@ -14535,21 +14548,23 @@ msgstr "Dein Passwort wurde erfolgreich gesetzt! Du kannst dich nun mit deiner E
 msgid "Your phone number is only visible for registered users"
 msgstr "Deine Telefonnummer ist nur für registrierte Benutzer/innen sichtbar"
 
+#, python-format
 msgid ""
-"Your platform profile belonging to this email address has been deactivated by us. Your account will be deleted completely in 30 days.\n"
+"Your platform profile belonging to this email address has been deactivated by us. Your account will be deleted completely in %(deleted_after_days)s days.\n"
 "\n"
 "If you want to keep your profile, please contact the portal administrators. Please note that the response time by e-mail may take longer in some cases."
 msgstr ""
-"Das zu dieser E-Mail-Adresse gehörende Profil auf unserer Plattform wurde von uns deaktiviert. Dein Benutzerkonto wird in 30 Tagen vollständig gelöscht.\n"
+"Das zu dieser E-Mail-Adresse gehörende Profil auf unserer Plattform wurde von uns deaktiviert. Dein Benutzerkonto wird in %(deleted_after_days)s Tagen vollständig gelöscht.\n"
 "\n"
 "Wenn du dein Profil behalten möchtest, wende dich bitte an die Portaladministratoren. Bitte beachte, dass die Antwort per E-Mail in manchen Fällen etwas länger dauern kann."
 
+#, python-format
 msgid ""
-"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in 30 days.\n"
+"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in %(deleted_after_days)s days.\n"
 "\n"
 "If this has happened without your knowledge or if you change your mind in the meantime, please contact the portal administrators or the email address given in our imprint. Please note that the response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would like to keep your profile."
 msgstr ""
-"Das bei uns unter dieser E-Mail gespeicherte Profil der Plattform wurde von Dir deaktiviert und zur Löschung freigegeben. Das Profil wurde von der Webseite entfernt und wir werden das Konto in 30 Tagen vollständig löschen. \n"
+"Das bei uns unter dieser E-Mail gespeicherte Profil der Plattform wurde von Dir deaktiviert und zur Löschung freigegeben. Das Profil wurde von der Webseite entfernt und wir werden das Konto in %(deleted_after_days)s Tagen vollständig löschen. \n"
 "\n"
 "Sollte dies ohne Dein Wissen geschehen sein oder falls Du es dir in der Zwischenzeit anders überlegst, hast Du die Möglichkeit Dich zügig an die Portaladministrator/innen bzw. die im Impressum angegebene E-Mail-Adresse zu wenden. Bitte beachte, dass die Reaktionszeit per Mail in manchen Fällen länger dauern kann. Bitte melde Dich daher frühzeitig, falls Du Dein Profil noch weiter behalten möchtest."
 
@@ -14733,6 +14748,12 @@ msgstr "hat ein Inserat erstellt"
 msgid "cut"
 msgstr "cut"
 
+msgid "days"
+msgstr ""
+
+msgid "days before deactivation"
+msgstr ""
+
 msgid "deactivate"
 msgstr "Deaktivieren"
 
@@ -14746,6 +14767,9 @@ msgstr "Aufgaben-Board"
 
 msgid "delete"
 msgstr "delete"
+
+msgid "disabled"
+msgstr ""
 
 msgid "dislike"
 msgstr "Dislike"
@@ -14761,6 +14785,9 @@ msgstr "edit this page"
 
 msgid "email address"
 msgstr "E-Mail Adresse"
+
+msgid "enabled"
+msgstr ""
 
 msgid "ended"
 msgstr "beendet"
@@ -15024,6 +15051,9 @@ msgstr "Nein"
 msgid "no instant email has been sent yet."
 msgstr "Es wurden noch keine E-Mails geschickt."
 
+msgid "not configured"
+msgstr ""
+
 msgid "not displayed right now"
 msgstr "wird aktuell nicht angezeigt"
 
@@ -15149,6 +15179,9 @@ msgstr "Nutzerkonten erfolgreich aktiviert."
 msgid "successfully deactivated all user accounts."
 msgstr "Nutzerkonten erfolgreich deaktiviert."
 
+msgid "text override"
+msgstr ""
+
 msgid "the password set to enter the room as a attendee"
 msgstr "das eingestellte Passwort, um den Raum als Teilnehmer zu betreten"
 
@@ -15231,6 +15264,20 @@ msgstr "Ja"
 #~ "\n"
 #~ "%(group_type)s wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
 
+#, python-format
+#~ msgid ""
+#~ "%(group_type)s %(group_name)s will be deactivated %(deactivation_after)s after the last activity and then permanently deleted. This will happen in %(deactivation_in)s.\n"
+#~ "\n"
+#~ "If you do not wish for the group/project to be deactivated, just create some content there.\n"
+#~ "\n"
+#~ "If an earlier deletion is desired, you can delete the group/project under %(delete_group_url)s."
+#~ msgstr ""
+#~ "%(group_type)s %(group_name)s wird nach %(deactivation_after)s seit der letzten Aktivität deaktiviert und dann endgültig gelöscht. Das passiert in %(deactivation_in)s.\n"
+#~ "\n"
+#~ "Wenn du nicht möchtest, dass die Gruppe/das Projekt gelöscht wird, erstelle einen Inhalt dort.\n"
+#~ "\n"
+#~ "Wenn eine frühere Löschung gewünscht ist, kann die Gruppe/das Projekt unter %(delete_group_url)s gelöscht werden."
+
 #~ msgid ""
 #~ "%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since deactivation.\n"
 #~ "\n"
@@ -15239,6 +15286,10 @@ msgstr "Ja"
 #~ "%(group_type)s %(group_name)s wird nach %(deactivation_after)s seit Deaktivierung gelöscht.\n"
 #~ "\n"
 #~ "%(group_type)s wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
+
+#, python-format
+#~ msgid "%(group_type)s %(group_name)s will be deleted due to inactivity"
+#~ msgstr "%(group_type)s %(group_name)s wird wegen Inaktivität gelöscht"
 
 #~ msgid "%(numfiles)d files were deleted successfully."
 #~ msgstr "%(numfiles)d Dateien wurden erfolgreich gelöscht."
@@ -15304,6 +15355,21 @@ msgstr "Ja"
 
 #~ msgid "- Made several small improvements to the user interface and look and feel of the redesigned calendar.\n"
 #~ msgstr "- Es wurden einige kleinere Verbesserungen an der Benutzeroberfläche und der optischen Gestaltung des neu Kalender-Redesigns vorgenommen.\n"
+
+#~ msgid "1 year"
+#~ msgstr "1 Jahr"
+
+#~ msgid "10 years"
+#~ msgstr "10 Jahre"
+
+#~ msgid "2 days"
+#~ msgstr "2 Tage"
+
+#~ msgid "2 weeks"
+#~ msgstr "2 Wochen"
+
+#~ msgid "6 months"
+#~ msgstr "6 Monate"
 
 #~ msgid "A user export is in progress. As soon as the export is finished it will be available here."
 #~ msgstr "Der Benutzer/innen-Export wird gerade erstellt.  Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
@@ -16580,6 +16646,32 @@ msgstr "Ja"
 #~ "The account may be stored in our backup systems for up to 6 months after deletion. If this is too long for you, please contact the support team of this platform for immediate deletion.\n"
 #~ "\n"
 #~ "During this %(deleted_after_days)s-day period after deletion, the e-mail address of your account is reserved and cannot be used to register a new account."
+#~ msgstr ""
+#~ "Dein gesamtes Benutzerkonto, Profil und persönlichen Daten werden in %(deactivation_in)s deaktiviert und anschließend unwiderruflich gelöscht.\n"
+#~ "\n"
+#~ "Wenn du nicht möchtest, dass dein Benutzerkonto deaktiviert wird, melde dich einfach einmal an.\n"
+#~ "\n"
+#~ "Deine Pads, Neuigkeiten, hochgeladenen Dateien und sonstigen Inhalte bleiben auf der Website erhalten. Dein Name wird jedoch nicht mehr angezeigt und dein Profil wird nicht mehr mit den Inhalten verknüpft. In Rocket.Chat werden deine Direktnachrichten gelöscht, die Inhalte in Diskussionen und Kanälen bleiben jedoch erhalten. Wenn du dennoch eigene Inhalte löschen möchtest, kannst du dies jetzt tun, indem du die Inhalte auf den entsprechenden Seiten löschst.\n"
+#~ "\n"
+#~ "Dein Profil wird zunächst deaktiviert und vollständig von der Plattform entfernt. Nach der Deaktivierung wird es nach %(deleted_after_days)s Tagen aus unserer Datenbank gelöscht und erst dann endgültig entfernt.\n"
+#~ "\n"
+#~ "Dein Benutzerkonto kann nach der Löschung bis zu 6 Monate lang in unseren Backup-Systemen gespeichert bleiben. Sollte dies zu lange sein, wende dich bitte an den Support dieser Plattform, um eine sofortige Löschung zu veranlassen.\n"
+#~ "\n"
+#~ "In den %(deleted_after_days)s Tagen nach der Deaktivierung bleibt die E-Mail-Adresse deines Benutzerkontos reserviert und kann nicht zur Registrierung eines neuen Benutzerkontos verwendet werden."
+
+#, python-format
+#~ msgid ""
+#~ "Your entire account, profile and personal information will be deactivated in %(deactivation_in)s and then irrevocably deleted.\n"
+#~ "\n"
+#~ "If you do not wish for you account to be deactivated, just log in once.\n"
+#~ "\n"
+#~ "Your pads, news, uploaded files and other content will remain on the website. However, your name will no longer be displayed and your profile will no longer be linked to the content. On Rocket Chat, your profile direct messages will be deleted, but content within discussions and channels will remain. If you still want to delete content from yourself, you can do this now by deleting the content on the relevant pages.\n"
+#~ "\n"
+#~ "Your profile will first be deactivated and completely removed from the platform. After deactivation, it will be deleted from our database after %(deleted_after_days)s days and only then permanently.\n"
+#~ "\n"
+#~ "The account may be stored in our backup systems for up to 6 months after deletion. If this is too long for you, please contact the support team of this platform for immediate deletion.\n"
+#~ "\n"
+#~ "During this %(deleted_after_days)s-day period after deactivation, the e-mail address of your account is reserved and cannot be used to register a new account."
 #~ msgstr ""
 #~ "Dein gesamtes Benutzerkonto, Profil und persönlichen Daten werden in %(deactivation_in)s deaktiviert und anschließend unwiderruflich gelöscht.\n"
 #~ "\n"

@@ -17,6 +17,7 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.utils.inactivity import render_inactivity_mail
 from cosinnus.views.group import mark_group_for_deletion
 
 logger = logging.getLogger('cosinnus')
@@ -33,22 +34,24 @@ def deactivate_user(user):
 
 
 def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactivity_deletion=False):
-    """Deactivates a user account and marks them for deletion in 30 days"""
+    """Deactivate a user account and schedule deletion after the configured profile deletion period."""
 
     # do not delete superusers due to inactivity as we might and up with a portal without any admins.
     if user.is_superuser:
         return
 
+    deletion_days = settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS
     if triggered_by_self:
         # send a notification email ignoring notification settings for a user triggered deletion
         text = _(
             'Your platform profile stored with us under this email has been deactivated by you and was approved for '
-            'deletion. The profile has been removed from the website and we will delete the account completely in 30 '
-            'days.\n\nIf this has happened without your knowledge or if you change your mind in the meantime, please '
+            'deletion. The profile has been removed from the website and we will delete the account completely in '
+            '%(deleted_after_days)s days.\n\n'
+            'If this has happened without your knowledge or if you change your mind in the meantime, please '
             'contact the portal administrators or the email address given in our imprint. Please note that the '
             'response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would '
             'like to keep your profile.'
-        )
+        ) % {'deleted_after_days': deletion_days}
         body_text = textfield(text)
         send_html_mail(user, _('Information about the deletion of your user account'), body_text, threaded=False)
     elif inactivity_deletion:
@@ -56,10 +59,10 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactiv
         subject = _('Attention: Your profile has been deactivated and will be deleted due to inactivity')
         text = _(
             'Your platform profile belonging to this email address has been deactivated by us. Your account '
-            'will be deleted completely in 30 days.\n\n'
+            'will be deleted completely in %(deleted_after_days)s days.\n\n'
             'If you want to keep your profile, please contact the portal administrators. Please note that the response '
             'time by e-mail may take longer in some cases.'
-        )
+        ) % {'deleted_after_days': deletion_days}
         body_text = textfield(text)
         # When errors occur when sending the notification for inactivity deletions do not deactivate the user.
         try:
@@ -73,7 +76,7 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactiv
 
     if hasattr(user, 'cosinnus_profile') and user.cosinnus_profile:
         # add a marked-for-deletion flag and a cronjob, deleting the profile using this
-        deletion_schedule_time = now() + timedelta(days=settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS)
+        deletion_schedule_time = now() + timedelta(days=deletion_days)
         user.cosinnus_profile.scheduled_for_deletion_at = deletion_schedule_time
         user.cosinnus_profile.deletion_triggered_by_self = triggered_by_self
         user.cosinnus_profile.save()
@@ -210,15 +213,16 @@ def delete_userprofile(user):
     user.save()
 
 
-def send_user_inactivity_deactivation_notifications():
-    """Sends notifications before automatic user deactivation due inactivity."""
-    users_notified_count = 0
+def get_user_inactivity_notification_candidates():
+    """Return users due to receive an inactivity warning, grouped by warning stage."""
     users = get_user_model().objects.filter(is_active=True)
     # exclude superuser, as they are never deleted
     users = users.exclude(is_superuser=True)
-    for days_before_deactivation, time_message in settings.COSINNUS_INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION.items():
+    config = settings.COSINNUS_USER_INACTIVITY_SCHEDULE
+    candidates = {}
+    for days_before_deactivation in config['warnings']:
         # get users that are notified according to the configured interval
-        days_after_last_activity = settings.COSINNUS_INACTIVE_DEACTIVATION_SCHEDULE - days_before_deactivation
+        days_after_last_activity = config['days'] - days_before_deactivation
         user_last_activity_date = (now() - timedelta(days=days_after_last_activity)).date()
         inactive_users = users.filter(
             Q(last_login__date=user_last_activity_date) | Q(last_login=None, date_joined__date=user_last_activity_date)
@@ -228,29 +232,35 @@ def send_user_inactivity_deactivation_notifications():
             Q(cosinnus_profile__inactivity_notification_sent_at=None)
             | Q(cosinnus_profile__inactivity_notification_sent_at__date__lt=today)
         )
+        candidates[days_before_deactivation] = notify_users
+    return candidates
 
+
+def get_users_due_for_inactivity_deactivation():
+    """Return users whose configured inactivity period has elapsed."""
+    inactivity_threshold = now() - timedelta(days=settings.COSINNUS_USER_INACTIVITY_SCHEDULE['days'])
+    users = get_user_model().objects.filter(cosinnus_profile__scheduled_for_deletion_at=None)
+    users = users.filter(
+        Q(last_login__lt=inactivity_threshold) | Q(last_login=None, date_joined__lt=inactivity_threshold)
+    )
+    return users.exclude(is_superuser=True)
+
+
+def send_user_inactivity_deactivation_notifications(dry_run: bool = False) -> int:
+    """Send due inactivity warnings, or only count recipients during a dry run."""
+    users_notified_count = 0
+    for days_before_deactivation, notify_users in get_user_inactivity_notification_candidates().items():
         for user in notify_users:
-            # send notification email
-            mail_subject = _('Your account will be deleted due to inactivity')
-            mail_content = _(
-                'Your entire account, profile and personal information will be deactivated in %(deactivation_in)s and '
-                'then irrevocably deleted.\n\n'
-                'If you do not wish for you account to be deactivated, just log in once.\n\n'
-                'Your pads, news, uploaded files and other content will remain on the website. However, your name will '
-                'no longer be displayed and your profile will no longer be linked to the content. On Rocket Chat, your '
-                'profile direct messages will be deleted, but content within discussions and channels will remain. If '
-                'you still want to delete content from yourself, you can do this now by deleting the content on the '
-                'relevant pages.\n\n'
-                'Your profile will first be deactivated and completely removed from the platform. After deactivation, '
-                'it will be deleted from our database after %(deleted_after_days)s days and only then permanently.\n\n'
-                'The account may be stored in our backup systems for up to 6 months after deletion. If this is too '
-                'long for you, please contact the support team of this platform for immediate deletion.\n\n'
-                'During this %(deleted_after_days)s-day period after deactivation, the e-mail address of your account '
-                'is reserved and cannot be used to register a new account.'
-            ) % {
-                'deleted_after_days': settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS,
-                'deactivation_in': time_message,
-            }
+            if dry_run:
+                users_notified_count += 1
+                continue
+
+            mail_subject, mail_content = render_inactivity_mail(
+                'user',
+                user,
+                days_before_deactivation,
+                {'deleted_after_days': settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS},
+            )
             html_content = textfield(mail_content)
             send_html_mail(user, mail_subject, html_content)
 
