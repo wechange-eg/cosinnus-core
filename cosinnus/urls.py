@@ -249,11 +249,6 @@ urlpatterns = [
     ),
     path('statistics/simple/', statistics.simple_statistics, name='simple-statistics'),
     path(
-        'housekeeping/inactivity-preview/',
-        housekeeping.inactivity_preview,
-        name='housekeeping-inactivity-preview',
-    ),
-    path(
         'housekeeping/ensure_group_widgets/',
         housekeeping.ensure_group_widgets,
         name='housekeeping-ensure-group-widgets',
