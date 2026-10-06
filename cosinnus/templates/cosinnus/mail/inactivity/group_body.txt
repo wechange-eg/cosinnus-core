@@ -1,0 +1,5 @@
+{% load i18n %}{% blocktrans %}{{ group_type }} {{ group_name }} will be deactivated {{ deactivation_after }} after the last activity and then permanently deleted. This will happen in {{ deactivation_in }}.
+
+If you do not wish for the group/project to be deactivated, just create some content there.
+
+If an earlier deletion is desired, you can delete the group/project under {{ delete_group_url }}.{% endblocktrans %}

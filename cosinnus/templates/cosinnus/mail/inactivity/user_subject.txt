@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans %}Your account will be deleted due to inactivity{% endblocktrans %}
