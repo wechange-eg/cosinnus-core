@@ -232,6 +232,8 @@ class CosinnusPersonalDashboardEventsWidget(CosinnusPersonalDashboardWidget):
                 calendars.append(
                     {
                         'space_id': group.pk,
+                        'space_name': group.name,
+                        'space_url': group.get_absolute_url(),
                         'calendar_url': group.get_user_nextcloud_calendar_url(user),
                     }
                 )
