@@ -130,24 +130,33 @@ class CosinnusUserSignupSerializer(
                 and settings.COSINNUS_EUCAPTCHA_SITE_KEY
                 and settings.COSINNUS_EUCAPTCHA_SECRET_KEY
             ):
+                # Validate euCaptcha
+                # from https://docs.eu-captcha.eu/en/api/verify/#example
+                # and https://docs-api.eu-captcha.eu/#/Verification/verifyClientToken
                 client_ip = get_ip_from_request(self.context['request'])
                 verify_url = settings.COSINNUS_EUCAPTCHA_VERIFY_URL
                 data = {
-                    # do they use this parameter set? (used by the pypi package)
-                    # 'sitekey': settings.COSINNUS_EUCAPTCHA_SITE_KEY,
-                    # 'secret': settings.COSINNUS_EUCAPTCHA_SECRET_KEY,
-                    # 'remote': client_ip,
-                    # 'response': attrs['eucaptcha_response'],
-                    # or this? (from https://docs.eu-captcha.eu/en/api/verify/#example)
                     'sitekey': settings.COSINNUS_EUCAPTCHA_SITE_KEY,
                     'secret': settings.COSINNUS_EUCAPTCHA_SECRET_KEY,
                     'client_ip': client_ip,
                     'client_token': attrs['eucaptcha_response'],
                     'client_user_agent': self.context['request'].META.get('HTTP_USER_AGENT', None),
                 }
+                headers = {'accept': 'application/json', 'Content-Type': 'application/json'}
+                captcha_response = requests.post(verify_url, headers=headers, json=data)
+                # the eucaptcha response dict must contain `"success": true` and `"train": false|null` to be valid
+                captcha_success = (
+                    captcha_response.status_code == 200
+                    and captcha_response.json().get('success', False)
+                    and not captcha_response.json().get('train', True)
+                )
             elif 'hcaptcha_response' in attrs and settings.COSINNUS_HCAPTCHA_SECRET_KEY:
+                # Validate hCaptcha
+                # from https://docs.hcaptcha.com/#verify-the-user-response-server-side
                 verify_url = settings.COSINNUS_HCAPTCHA_VERIFY_URL
                 data = {'secret': settings.COSINNUS_HCAPTCHA_SECRET_KEY, 'response': attrs['hcaptcha_response']}
+                captcha_response = requests.post(verify_url, data=data)
+                captcha_success = captcha_response.status_code == 200 and captcha_response.json().get('success', False)
             elif not attrs.get('eucaptcha_response', None) and not attrs.get('hcaptcha_response', None):
                 raise ValidationError(ERROR_SIGNUP_CAPTCHA_RESPONSE_MISSING)
             else:
@@ -165,7 +174,6 @@ class CosinnusUserSignupSerializer(
                 )
                 raise ValidationError(ERROR_SIGNUP_CAPTCHA_SERVICE_CONFIGURATION_ERROR)
 
-            captcha_response = requests.post(verify_url, data=data)
             if not captcha_response.status_code == 200:
                 logger.error(
                     (
@@ -179,24 +187,8 @@ class CosinnusUserSignupSerializer(
                     },
                 )
                 raise ValidationError(ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN)
-            captcha_success = captcha_response.json().get('success', False)
+
             if not captcha_success:
-                # FIXME: REMOVE after testing is done **************************
-                extra = {
-                    'status': captcha_response.status_code,
-                    'details': captcha_response.json(),
-                    'verify_url_used': verify_url,
-                    'eucaptcha_response': attrs.get('eucaptcha_response'),
-                    'hcaptcha_response': attrs.get('hcaptcha_response'),
-                    'hcaptcha_set_up': bool(settings.COSINNUS_HCAPTCHA_SECRET_KEY),
-                    'eucaptcha_set_up': bool(
-                        settings.COSINNUS_EUCAPTCHA_SECRET_KEY and settings.COSINNUS_EUCAPTCHA_SITE_KEY
-                    ),
-                }
-                logger.warning('TEST-MSG-ONLY: Captcha validation failed at provider. Details in extra.', extra=extra)
-                if settings.DEBUG:
-                    print(extra)
-                # FIXME: ********************  END REMOVEME
                 raise ValidationError(ERROR_SIGNUP_CAPTCHA_INVALID)
 
         # email
