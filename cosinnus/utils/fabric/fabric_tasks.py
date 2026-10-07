@@ -410,6 +410,18 @@ def updatedjango(_ctx):
 
 
 @task
+def updatedosmfield(_ctx):
+    """A temporary task used to quickly update only djang-osm-field in the virtualenv of the server."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        with c.prefix(f'source {env.virtualenv_path}/bin/activate'):
+            c.run('pip freeze | grep django-osm-field')
+            c.run('pip install "django-osm-field @ git+https://github.com/wechange-eg/django-osm-field.git@main"')
+            c.run('pip freeze | grep django-osm-field')
+
+
+@task
 def staticown(_ctx):
     """Chowns all media files and collected-static files. Useful only after a portal transfer/copy"""
     env = get_env()

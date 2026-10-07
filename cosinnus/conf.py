@@ -725,7 +725,27 @@ class CosinnusConf(AppConf):
     USERDASHBOARD_USE_LIVE_MAP_WIDGET = True
 
     # switch to the German version of OpenStreetMap tileset
-    MAP_USE_MODERN_TILESET = True
+    # NOTE: this setting has been deprecated and is replaced by COSINNUS_MAP_TILESET_URL.
+    # MAP_USE_MODERN_TILESET = True
+
+    # the tileset URL to be used on the fullscreen map and map widgets
+    # Resolvable parameters are:
+    # - `{s}`, `{x}`, `{y}`, `{z}`: standard tileset URL parameters
+    # - `%(portalname)s: COSINNUS_PORTAL_NAME for the current portal, for optional use with proxy/CDN servers
+    #      (note the different string format on 'portalname'!)
+    MAP_TILESET_URL = 'https://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png'
+
+    def configure_map_tileset_url(self, value):
+        """Format-add the portalname to MAP_TILESET_URL"""
+        from cosinnus.conf import settings
+
+        return value % {'portalname': settings.COSINNUS_PORTAL_NAME}
+
+    # HTML string for the map attribution on the fullscreen map and map widgets.
+    # This should be fitting for the chosen MAP_TILESET_URL provider.
+    MAP_TILESET_ATTRIBUTION_HTML = (
+        '<a href="https://www.openstreetmap.de" target="_blank">&copy; OpenStreetMap contributors</a>'
+    )
 
     # OpenCage geocode api key. if unset, no location strings provided in v3 apis
     # can be coded to actual location coordinates and thus will not be saved in v3 apis
@@ -1830,14 +1850,27 @@ class CosinnusConf(AppConf):
     # if True, the User Block feature will be enabled
     ENABLE_USER_BLOCK = False
 
-    # whether to require a valid hcaptcha on the signup API endpoint
+    # whether to require a valid hcaptcha or eucaptcha on the signup API endpoint
     USE_HCAPTCHA = True
 
-    # the secret key for the hcaptcha. set in .env
+    # the secret key for the hCaptcha. set in .env.
+    # if both hCaptcha and euCaptcha keys are set in .env, euCaptcha is preferred
     HCAPTCHA_SECRET_KEY = None
+
+    # the secret key for the euCaptcha. set in .env.
+    # this is activated by setting the key and `USE_HCAPTCHA = True`
+    # if both hCaptcha and euCaptcha keys are set in .env, euCaptcha is preferred
+    EUCAPTCHA_SECRET_KEY = None
+
+    # the site key required for eucaptcha verification requests alongside the secret key
+    # read from .env
+    EUCAPTCHA_SITE_KEY = None
 
     # the URL at which to verify the hcaptcha response
     HCAPTCHA_VERIFY_URL = 'https://hcaptcha.com/siteverify'
+
+    # the URL at which to verify the hcaptcha response
+    EUCAPTCHA_VERIFY_URL = 'https://api.eu-captcha.eu/v1/verify'
 
     # a storage for portal settings that are exposed publicy
     # via v3 API endpoint 'api/v3/portal/settings/'

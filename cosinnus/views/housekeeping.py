@@ -50,7 +50,7 @@ from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.utils.firebase import _send_firebase_message_direct, send_firebase_message_threaded
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus.utils.group import move_group_content as move_group_content_utils
-from cosinnus.utils.http import make_csv_response, make_xlsx_response
+from cosinnus.utils.http import get_ip_from_request, make_csv_response, make_xlsx_response
 from cosinnus.utils.permissions import check_user_can_receive_emails, check_user_superuser
 from cosinnus.utils.settings import get_obfuscated_settings_strings
 from cosinnus.utils.threading import CosinnusWorkerThread
@@ -827,3 +827,9 @@ def firebase_send_testpush(request):
             + '<br/></pre>'
         )
     return HttpResponse(resp)
+
+
+def print_ip(request):
+    """For checking if the current client's IP is determined correctly. Also prints other request headers and meta."""
+    ip = get_ip_from_request(request)
+    return HttpResponse(f'User IP was read as: {ip}<br><br>Full request meta was: {request.META}')

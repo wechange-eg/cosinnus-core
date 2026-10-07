@@ -135,6 +135,9 @@
                 var cosinnus_report_object_url = "{% url 'cosinnus:report-object' %}";
                 var cosinnus_user_timezone = {% if COSINNUS_USER_TIMEZONE %}"{{ COSINNUS_USER_TIMEZONE }}"{% else %}null{% endif %};
                 var cosinnus_v3_calendar_enabled = {% if SETTINGS.COSINNUS_EVENT_V3_CALENDAR_ENABLED %}true{% else %}false{% endif %};
+                {# Tie-in with django-osm-field >=0.3.0, needs to be in global context for widget pages. #}
+                var COSINNUS_MAP_TILESET_URL = "{{ SETTINGS.COSINNUS_MAP_TILESET_URL }}";
+                var COSINNUS_MAP_TILESET_ATTRIBUTION_HTML = "{{ SETTINGS.COSINNUS_MAP_TILESET_ATTRIBUTION_HTML|safe|escapejs }}";
             </script>
             <script src="{% static 'js/cosinnus.js' %}?js_v={{ SETTINGS.COSINNUS_STATICFILES_VERSION }}"></script>
             {% if request.LANGUAGE_CODE in 'de,en,ru,uk,pl' %}
