@@ -10,6 +10,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from builtins import FileNotFoundError, range, str
+from typing import Literal
 
 from annoying.functions import get_object_or_None
 from django.conf import settings
@@ -18,6 +19,7 @@ from django.core.cache import cache
 from django.core.mail.message import EmailMessage
 from django.db.models import Q
 from django.http.response import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
+from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.utils.encoding import force_str
 from django.utils.html import escape
@@ -51,6 +53,7 @@ from cosinnus.utils.firebase import _send_firebase_message_direct, send_firebase
 from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
 from cosinnus.utils.group import move_group_content as move_group_content_utils
 from cosinnus.utils.http import get_ip_from_request, make_csv_response, make_xlsx_response
+from cosinnus.utils.inactivity import format_inactivity_duration, render_inactivity_mail
 from cosinnus.utils.permissions import check_user_can_receive_emails, check_user_superuser
 from cosinnus.utils.settings import get_obfuscated_settings_strings
 from cosinnus.utils.threading import CosinnusWorkerThread
@@ -59,9 +62,119 @@ from cosinnus.utils.user import (
     filter_active_users,
     is_user_active,
 )
-from cosinnus.views.profile_deletion import delete_userprofile
+from cosinnus.views.group_deletion import (
+    get_group_inactivity_notification_candidates,
+    get_groups_due_for_inactivity_deactivation,
+)
+from cosinnus.views.profile_deletion import (
+    delete_userprofile,
+    get_user_inactivity_notification_candidates,
+    get_users_due_for_inactivity_deactivation,
+)
 
 logger = logging.getLogger('cosinnus')
+
+
+def inactivity_preview(request):
+    """Preview current inactivity candidates and all configured warning emails."""
+    if not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+
+    user_candidates = get_user_inactivity_notification_candidates()
+    group_candidates = get_group_inactivity_notification_candidates()
+    sections = [
+        _get_inactivity_preview_section('user', user_candidates, request.user),
+        _get_inactivity_preview_section('group', group_candidates, request.user),
+    ]
+    context = {
+        'dry_run': settings.COSINNUS_INACTIVITY_DRY_RUN,
+        'sections': sections,
+        'users_due_for_deactivation': get_users_due_for_inactivity_deactivation().count(),
+        'groups_due_for_deactivation': get_groups_due_for_inactivity_deactivation().count(),
+    }
+    return render(request, 'cosinnus/housekeeping/inactivity_preview.html', context)
+
+
+def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, recipient):
+    """Build a preview section containing inactivity durations, warning emails, and candidate counts."""
+    if kind == 'user':
+        config = settings.COSINNUS_USER_INACTIVITY_SCHEDULE
+        preview_context = {}
+    else:
+        config = settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE
+        preview_context = {
+            'group': {
+                'name': 'Example group',
+                'slug': 'example-group',
+                'trans': {'VERBOSE_NAME': 'Group/project'},
+            },
+            'group_type': 'Group/project',
+            'group_name': 'Example group',
+            'delete_group_url': '#delete_group_url_goes_here',
+        }
+
+    inactivity_durations = [
+        {
+            'language': language,
+            'language_label': language_label,
+            'values': _get_inactivity_duration_preview(config['days'], config, language),
+        }
+        for language, language_label in settings.LANGUAGES
+    ]
+
+    warnings = []
+    for days, warning in config['warnings'].items():
+        previews = []
+        for language, language_label in settings.LANGUAGES:
+            warning_duration = _get_inactivity_duration_preview(days, warning, language)
+            try:
+                mail_subject, mail_content = render_inactivity_mail(
+                    kind, recipient, days, preview_context, language_override=language
+                )
+                error = None
+            except Exception as exception:
+                logger.exception('Could not render %s inactivity email preview.', kind)
+                mail_subject = ''
+                mail_content = ''
+                error = force_str(exception)
+            previews.append(
+                {
+                    'language': language,
+                    'language_label': language_label,
+                    'warning_duration': warning_duration,
+                    'subject': mail_subject,
+                    'body': mail_content,
+                    'error': error,
+                }
+            )
+        warnings.append(
+            {
+                'days': days,
+                'count': candidates[days].count(),
+                'subject_template': warning['subject_template'],
+                'body_template': warning['body_template'],
+                'previews': previews,
+            }
+        )
+    return {
+        'kind': kind,
+        'days': config['days'],
+        'inactivity_durations': inactivity_durations,
+        'warnings': warnings,
+    }
+
+
+def _get_inactivity_duration_preview(days, config, language):
+    babel_config = {'display_unit': config.get('display_unit', 'day')}
+    babel_value = format_inactivity_duration(days, babel_config, language)
+    has_override = config.get('text') is not None
+    override_value = format_inactivity_duration(days, {'text': config['text']}, language) if has_override else None
+    return {
+        'babel': babel_value,
+        'override': override_value,
+        'used': override_value if has_override else babel_value,
+        'source': 'override' if has_override else 'babel',
+    }
 
 
 def ensure_group_widgets(request=None):
