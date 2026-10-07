@@ -6,9 +6,12 @@ from geopy.exc import GeocoderInsufficientPrivileges, GeopyError
 from geopy.extra.rate_limiter import RateLimiter
 from rest_framework import serializers
 
+from cosinnus.api_frontend.serializers.generic import CosinnusCreatorSerializer
 from cosinnus.conf import settings
+from cosinnus.models import BaseTaggableObjectModel
 from cosinnus.utils.functions import is_number
-from cosinnus.views.common import apply_star_object
+from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.views.common import apply_like_object, apply_star_object
 
 logger = logging.getLogger('cosinnus')
 
@@ -135,3 +138,47 @@ class CosinnusTagObjectBookmarkSerializer(serializers.Serializer):
         user = self.context['request'].user
         apply_star_object(instance, user, star=validated_data['bookmarked'])
         return instance
+
+
+class CosinnusTagObjectLikeSerializer(serializers.Serializer):
+    """Serializer to handle liking of tagged objects."""
+
+    liked = serializers.BooleanField(required=True)
+
+    def to_representation(self, instance):
+        user = self.context['request'].user
+        return {'liked': instance.is_user_liking(user)}
+
+    def update(self, instance, validated_data):
+        user = self.context['request'].user
+        apply_like_object(instance, user, like=validated_data['liked'])
+        return instance
+
+
+class CosinnusTaggableObjectGroupSerializer(serializers.ModelSerializer):
+    """Readonly serializer for the taggable object group."""
+
+    url = serializers.URLField(source='get_absolute_url', read_only=True)
+
+    class Meta(object):
+        model = get_cosinnus_group_model()
+        fields = ('name', 'url')
+
+
+class CosinnusBaseTaggableObjectSerializer(serializers.ModelSerializer):
+    """Base v3 serializer for taggable objects"""
+
+    creator = CosinnusCreatorSerializer(read_only=True)
+    group = CosinnusTaggableObjectGroupSerializer(read_only=True)
+    url = serializers.URLField(source='get_absolute_url', read_only=True)
+
+    class Meta:
+        model = BaseTaggableObjectModel
+        fields = (
+            'id',
+            'title',
+            'creator',
+            'created',
+            'group',
+            'url',
+        )

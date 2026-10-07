@@ -1175,7 +1175,7 @@ class CosinnusConf(AppConf):
     V3_MENU_SPACES_ADD_FORUM_EVENTS_LINK_LABEL = None
 
     # Map space label in the v3 main navigation. Set to None to exclude the map from the community space.
-    V3_MENU_SPACES_MAP_LABEL = _('Discover')
+    V3_MENU_SPACES_MAP_LABEL = _('Map')
 
     # Enable to add links to paired groups of managed tags of the user cosinnus_profile as community links.
     V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS = True
@@ -1226,6 +1226,35 @@ class CosinnusConf(AppConf):
     # SSO provider infos used in the v3 frontend
     # Example: [{'login_url': '/oidc/keycloak/login/?process=login', 'name': 'Keycloak'}]
     V3_SSO_PROVIDER = []
+
+    # enable v3 user dashboard
+    USE_V3_PERSONAL_DASHBOARD = False
+
+    # v3 dashboard widget config, with the following options:
+    # active: True if the widget is enabled.
+    # frontend_conf: JSON config that is passed to the frontend.
+    V3_PERSONAL_DASHBOARD_WIDGETS = {
+        'dashboard.news': {'active': True, 'frontend_conf': {'x': 100}},
+        'dashboard.create_new': {'active': True, 'frontend_conf': {}},
+        'dashboard.offers': {'active': True, 'frontend_conf': {}},
+        'dashboard.my_spaces': {'active': True, 'frontend_conf': {}},
+        'dashboard.tasks': {'active': True, 'frontend_conf': {}},
+        'dashboard.events': {'active': True, 'frontend_conf': {}},
+        'dashboard.event_polls': {'active': True, 'frontend_conf': {}},
+        'dashboard.polls': {'active': True, 'frontend_conf': {}},
+        'dashboard.ideas': {'active': True, 'frontend_conf': {}},
+        'dashboard.liked_ideas': {'active': True, 'frontend_conf': {}},
+        'dashboard.getting_started': {'active': True, 'frontend_conf': {}},
+        'dashboard.news_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.offer_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.idea_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.event_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.space_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.user_recommendations': {'active': True, 'frontend_conf': {}},
+    }
+
+    # Portal specific overrides of the V3_PERSONAL_DASHBOARD_WIDGETS setting.
+    V3_PERSONAL_DASHBOARD_WIDGETS_OVERRIDES = {}
 
     # default CosinnusPortal logo image url, shown in the top left navigation bar
     # (will be used with a `static()`) call

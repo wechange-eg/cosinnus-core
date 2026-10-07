@@ -9,12 +9,19 @@ from django.http.response import HttpResponseForbidden, HttpResponseNotFound
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, DeleteView, UpdateView
+from django.views.generic import DeleteView
 from django.views.generic.list import ListView
+from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
-from cosinnus.forms.user_dashboard_announcement import UserDashboardAnnouncementForm
+from cosinnus.conf import settings
+from cosinnus.forms.user_dashboard_announcement import (
+    UserDashboardAnnouncementCallToActionButtonInlineFormset,
+    UserDashboardAnnouncementForm,
+    UserDashboardWelcomeAnnouncementCallToActionButtonInlineFormset,
+    UserDashboardWelcomeAnnouncementForm,
+)
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.user_dashboard_announcement import UserDashboardAnnouncement
+from cosinnus.models.user_dashboard_announcement import UserDashboardAnnouncement, UserDashboardWelcomeAnnouncement
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.views.mixins.group import RequireSuperuserMixin
 
@@ -33,6 +40,11 @@ class UserDashboardAnnouncementFormMixin(object):
     form_class = UserDashboardAnnouncementForm
     model = UserDashboardAnnouncement
     template_name = 'cosinnus/user_dashboard_announcement/user_dashboard_announcement_form.html'
+    inlines = []
+    if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
+        inlines = [
+            UserDashboardAnnouncementCallToActionButtonInlineFormset,
+        ]
 
 
 class UserDashboardAnnouncementListView(RequireSuperuserMixin, SamePortalGroupMixin, ListView):
@@ -49,7 +61,7 @@ list_view = UserDashboardAnnouncementListView.as_view()
 
 
 class UserDashboardAnnouncementCreateView(
-    RequireSuperuserMixin, SamePortalGroupMixin, UserDashboardAnnouncementFormMixin, CreateView
+    RequireSuperuserMixin, SamePortalGroupMixin, UserDashboardAnnouncementFormMixin, CreateWithInlinesView
 ):
     """Create View for UserDashboardAnnouncements"""
 
@@ -79,7 +91,7 @@ user_dashboard_announcement_create = UserDashboardAnnouncementCreateView.as_view
 
 
 class UserDashboardAnnouncementEditView(
-    RequireSuperuserMixin, SamePortalGroupMixin, UserDashboardAnnouncementFormMixin, UpdateView
+    RequireSuperuserMixin, SamePortalGroupMixin, UserDashboardAnnouncementFormMixin, UpdateWithInlinesView
 ):
     form_view = 'edit'
     message_success = _('Your Announcement was saved successfully.')
@@ -128,3 +140,27 @@ def user_dashboard_announcement_activate(request, slug):
     else:
         messages.success(request, _('Your Announcement was deactivated successfully.'))
     return redirect('cosinnus:user-dashboard-announcement-list')
+
+
+class UserDashboardWelcomeAnnouncementEditView(RequireSuperuserMixin, UpdateWithInlinesView):
+    form_class = UserDashboardWelcomeAnnouncementForm
+    model = UserDashboardWelcomeAnnouncement
+    template_name = 'cosinnus/user_dashboard_announcement/user_dashboard_welcome_announcement_form.html'
+    inlines = [
+        UserDashboardWelcomeAnnouncementCallToActionButtonInlineFormset,
+    ]
+    message_success = _('The Welcome Announcement was saved successfully.')
+
+    def get_object(self, queryset=None):
+        """Get welcome announcement, create if it does not exist."""
+        welcome_announcement = UserDashboardWelcomeAnnouncement.objects.first()
+        if not welcome_announcement:
+            welcome_announcement = UserDashboardWelcomeAnnouncement.objects.create()
+        return welcome_announcement
+
+    def get_success_url(self):
+        messages.success(self.request, self.message_success)
+        return reverse('cosinnus:user-dashboard-welcome-announcement-edit')
+
+
+user_dashboard_welcome_announcement_edit = UserDashboardWelcomeAnnouncementEditView.as_view()

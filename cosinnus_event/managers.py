@@ -5,12 +5,13 @@ from datetime import timedelta
 
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.contenttypes.models import ContentType
-from django.db import models
 from django.utils import timezone
 from taggit.models import TaggedItem
 
+from cosinnus.models import BaseTaggableObjectManager
 
-class EventQuerySet(models.QuerySet):
+
+class EventManager(BaseTaggableObjectManager):
     def public(self):
         from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 
@@ -43,3 +44,33 @@ class EventQuerySet(models.QuerySet):
                 tag_names.append(ti.tag.name)
 
         return tag_names
+
+    def get_personal_open_polls(self, user):
+        """Return open user polls where the has not voted yet."""
+        queryset = super().get_personal_items(user)
+        # consider only open polls
+        queryset = queryset.filter(state=self.model.STATE_VOTING_OPEN)
+        # consider only polls where the user has not voted yet
+        queryset = queryset.exclude(suggestions__votes__voter__id=user.id)
+        return queryset
+
+    def get_personal_attending_events(self, user):
+        """Return scheduled events where the user is attending."""
+        from cosinnus_event.models import EventAttendance
+
+        queryset = self.all_upcoming()
+        queryset = queryset.filter(group__is_active=True)
+        queryset = queryset.exclude(group__deactivated_apps__contains='cosinnus_event')
+        queryset = queryset.filter(state=self.model.STATE_SCHEDULED)
+        queryset = queryset.filter(attendances__state=EventAttendance.ATTENDANCE_GOING, attendances__user__id=user.id)
+        queryset = queryset.order_by('from_date')
+        return queryset
+
+    def get_recommendations(self, user):
+        queryset = super().get_recommendations(user)
+        queryset = queryset.filter(state=self.model.STATE_SCHEDULED)
+        queryset = queryset.filter(from_date__gte=timezone.now())
+        queryset = queryset.exclude(note=None).exclude(note='')
+        queryset = queryset.exclude(attendances__user__id=user.id)
+        queryset = queryset.order_by('from_date')
+        return queryset

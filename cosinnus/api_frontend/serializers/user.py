@@ -25,6 +25,7 @@ from cosinnus.api_frontend.serializers.tagged import CosinnusMediaTagSerializerM
 from cosinnus.api_frontend.serializers.utils import validate_managed_tag_slugs
 from cosinnus.conf import settings
 from cosinnus.forms.user import USER_NAME_FIELDS_MAX_LENGTH, UserSignupFinalizeMixin
+from cosinnus.models import PROFILE_SETTING_DISMISSED_GETTING_STARTED_ACTIONS, get_user_profile_model
 from cosinnus.models.managed_tags import CosinnusManagedTagAssignment
 from cosinnus.models.profile import (
     PROFILE_DYNAMIC_FIELDS_CONTACTS,
@@ -32,6 +33,7 @@ from cosinnus.models.profile import (
     GlobalUserNotificationSetting,
 )
 from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.http import get_ip_from_request
 from cosinnus.utils.logging import log_needs_attention_error
 from cosinnus.utils.user import get_locked_profile_visibility_setting_for_user
@@ -304,6 +306,7 @@ class CosinnusHybridUserSerializer(
         validators=[HexColorValidator()],
         help_text='A hex color string. Represented without a leading "#", but can be input with one.',
     )
+    is_avatar_generated = serializers.BooleanField(source='cosinnus_profile.is_avatar_generated')
     contact_infos = serializers.JSONField(
         source=f'cosinnus_profile.dynamic_fields.{PROFILE_DYNAMIC_FIELDS_CONTACTS}',
         required=False,
@@ -413,19 +416,22 @@ class CosinnusHybridUserSerializer(
         return email
 
     def validate(self, attrs):
+        profile_data = attrs.get('cosinnus_profile', {})
         # validate managed tags
         if (
             settings.COSINNUS_MANAGED_TAGS_ENABLED
             and settings.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_SELF
             and settings.COSINNUS_MANAGED_TAGS_IN_UPDATE_FORM
         ):
-            profile_data = attrs.get('cosinnus_profile', {})
             if 'get_managed_tag_slugs' in profile_data:
                 managed_tag_slugs = profile_data.get('get_managed_tag_slugs', [])
                 validate_managed_tag_slugs(
                     managed_tag_slugs, settings.COSINNUS_MANAGED_TAGS_USERPROFILE_FORMFIELD_REQUIRED
                 )
-
+        # validate avatar and is_avatar_generated
+        if profile_data:
+            if 'is_avatar_generated' in profile_data and 'avatar' not in profile_data:
+                raise ValidationError('"avatar" must be submitted together with "is_avatar_generated".')
         attrs = super().validate(attrs)
         return attrs
 
@@ -462,6 +468,7 @@ class CosinnusHybridUserSerializer(
         avatar_color = profile_data.get('settings', {}).get(PROFILE_SETTINGS_AVATAR_COLOR, None)
         if avatar_color:
             profile.settings[PROFILE_SETTINGS_AVATAR_COLOR] = avatar_color.strip('#')
+        profile.is_avatar_generated = profile_data.get('is_avatar_generated', profile.is_avatar_generated)
         # allow resetting the field if an empty value is given
         if PROFILE_DYNAMIC_FIELDS_CONTACTS in profile_data.get('dynamic_fields', {}):
             contact_infos = profile_data.get('dynamic_fields', {}).get(PROFILE_DYNAMIC_FIELDS_CONTACTS, []) or []
@@ -612,3 +619,40 @@ class CosinnusGlobalUserNotificationSettingSerializer(serializers.ModelSerialize
             )
 
         return value
+
+
+class CosinnusGettingStartedActionSerializer(serializers.Serializer):
+    """Serializer for getting actions."""
+
+    action_id = serializers.CharField()
+    cta_url = serializers.URLField(read_only=True)
+    completed = serializers.BooleanField(read_only=True)
+    dismissed = serializers.BooleanField()
+
+    def save(self, **kwargs):
+        # Save dismissed action is users profile settings.
+        profile = self.context['request'].user.cosinnus_profile
+        dismissed_actions = profile.settings.get(PROFILE_SETTING_DISMISSED_GETTING_STARTED_ACTIONS, [])
+        action_id = self.validated_data['action_id']
+        if self.validated_data['dismissed']:
+            if action_id not in dismissed_actions:
+                dismissed_actions.append(action_id)
+        else:
+            if action_id in dismissed_actions:
+                dismissed_actions.remove(action_id)
+        profile.settings[PROFILE_SETTING_DISMISSED_GETTING_STARTED_ACTIONS] = dismissed_actions
+        type(profile).objects.filter(pk=profile.pk).update(settings=profile.settings)
+
+
+class CosinnusUserProfileRecommendationSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(source='get_full_name', read_only=True)
+    avatar = serializers.URLField(source='get_avatar_thumbnail_url', read_only=True)
+    url = serializers.URLField(source='get_absolute_url', read_only=True)
+    membership_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = get_user_profile_model()
+        fields = ('name', 'description', 'avatar', 'url', 'membership_count')
+
+    def get_membership_count(self, obj):
+        return len(get_cosinnus_group_model().objects.get_for_user_pks(obj.user))
