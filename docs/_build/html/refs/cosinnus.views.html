@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.views package &#8212; Cosinnus 2.9.0b documentation</title>
+    <title>cosinnus.views package &#8212; Cosinnus 2.10.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f0bd290c"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -4288,6 +4288,12 @@ Will ignore any setting with the tag #internal in its comments.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.views.housekeeping.print_ip">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.views.housekeeping.</span></span><span class="sig-name descname"><span class="pre">print_ip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.housekeeping.print_ip" title="Permalink to this definition">¶</a></dt>
+<dd><p>For checking if the current client’s IP is determined correctly. Also prints other request headers and meta.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.housekeeping.print_settings">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.housekeeping.</span></span><span class="sig-name descname"><span class="pre">print_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.housekeeping.print_settings" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -6777,6 +6783,17 @@ the global notification setting and the userprofile visibility setting.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.user_dashboard.CosinnusPersonalDashboardView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard.</span></span><span class="sig-name descname"><span class="pre">CosinnusPersonalDashboardView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard.CosinnusPersonalDashboardView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireLoggedInMixin" title="cosinnus.views.mixins.group.RequireLoggedInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireLoggedInMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.user_dashboard.UserDashboardGuestRedirectMixin" title="cosinnus.views.user_dashboard.UserDashboardGuestRedirectMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserDashboardGuestRedirectMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TemplateView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.user_dashboard.CosinnusPersonalDashboardView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus/v3/personal_dashboard.html'</span></em><a class="headerlink" href="#cosinnus.views.user_dashboard.CosinnusPersonalDashboardView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard.FollowedObjectsWidgetView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard.</span></span><span class="sig-name descname"><span class="pre">FollowedObjectsWidgetView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard.FollowedObjectsWidgetView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cosinnus.views.user_dashboard.BaseUserDashboardWidgetView" title="cosinnus.views.user_dashboard.BaseUserDashboardWidgetView"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUserDashboardWidgetView</span></code></a></p>
@@ -7080,9 +7097,20 @@ if 0 items were returned.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.user_dashboard.UserDashboardGuestRedirectMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard.</span></span><span class="sig-name descname"><span class="pre">UserDashboardGuestRedirectMixin</span></span><a class="headerlink" href="#cosinnus.views.user_dashboard.UserDashboardGuestRedirectMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.user_dashboard.UserDashboardGuestRedirectMixin.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard.UserDashboardGuestRedirectMixin.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard.UserDashboardView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard.</span></span><span class="sig-name descname"><span class="pre">UserDashboardView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard.UserDashboardView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireLoggedInMixin" title="cosinnus.views.mixins.group.RequireLoggedInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireLoggedInMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TemplateView</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireLoggedInMixin" title="cosinnus.views.mixins.group.RequireLoggedInMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireLoggedInMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.user_dashboard.UserDashboardGuestRedirectMixin" title="cosinnus.views.user_dashboard.UserDashboardGuestRedirectMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserDashboardGuestRedirectMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TemplateView</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard.UserDashboardView.get">
 <span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard.UserDashboardView.get" title="Permalink to this definition">¶</a></dt>
@@ -7148,6 +7176,11 @@ TODO: use clever caching</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.views.user_dashboard.personal_dashboard_view">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard.</span></span><span class="sig-name descname"><span class="pre">personal_dashboard_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard.personal_dashboard_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard.user_dashboard_view">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard.</span></span><span class="sig-name descname"><span class="pre">user_dashboard_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard.user_dashboard_view" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -7170,7 +7203,7 @@ TODO: use clever caching</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementCreateView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard_announcement.</span></span><span class="sig-name descname"><span class="pre">UserDashboardAnnouncementCreateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementCreateView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireSuperuserMixin" title="cosinnus.views.mixins.group.RequireSuperuserMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireSuperuserMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.user_dashboard_announcement.SamePortalGroupMixin" title="cosinnus.views.user_dashboard_announcement.SamePortalGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamePortalGroupMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementFormMixin" title="cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserDashboardAnnouncementFormMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateView</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireSuperuserMixin" title="cosinnus.views.mixins.group.RequireSuperuserMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireSuperuserMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.user_dashboard_announcement.SamePortalGroupMixin" title="cosinnus.views.user_dashboard_announcement.SamePortalGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamePortalGroupMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementFormMixin" title="cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserDashboardAnnouncementFormMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">CreateWithInlinesView</span></code></p>
 <p>Create View for UserDashboardAnnouncements</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementCreateView.form_valid">
@@ -7228,7 +7261,7 @@ TODO: use clever caching</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementEditView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard_announcement.</span></span><span class="sig-name descname"><span class="pre">UserDashboardAnnouncementEditView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementEditView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireSuperuserMixin" title="cosinnus.views.mixins.group.RequireSuperuserMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireSuperuserMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.user_dashboard_announcement.SamePortalGroupMixin" title="cosinnus.views.user_dashboard_announcement.SamePortalGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamePortalGroupMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementFormMixin" title="cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserDashboardAnnouncementFormMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateView</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireSuperuserMixin" title="cosinnus.views.mixins.group.RequireSuperuserMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireSuperuserMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.user_dashboard_announcement.SamePortalGroupMixin" title="cosinnus.views.user_dashboard_announcement.SamePortalGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamePortalGroupMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementFormMixin" title="cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserDashboardAnnouncementFormMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateWithInlinesView</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementEditView.form_view">
 <span class="sig-name descname"><span class="pre">form_view</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'edit'</span></em><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementEditView.form_view" title="Permalink to this definition">¶</a></dt>
@@ -7262,6 +7295,11 @@ TODO: use clever caching</p>
 <span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementFormMixin.form_class" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <a class="reference internal" href="cosinnus.forms.html#cosinnus.forms.user_dashboard_announcement.UserDashboardAnnouncementForm" title="cosinnus.forms.user_dashboard_announcement.UserDashboardAnnouncementForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserDashboardAnnouncementForm</span></code></a></p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementFormMixin.inlines">
+<span class="sig-name descname"><span class="pre">inlines</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementFormMixin.inlines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementFormMixin.model">
@@ -7299,6 +7337,51 @@ TODO: use clever caching</p>
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard_announcement.</span></span><span class="sig-name descname"><span class="pre">UserDashboardWelcomeAnnouncementEditView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireSuperuserMixin" title="cosinnus.views.mixins.group.RequireSuperuserMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireSuperuserMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateWithInlinesView</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView.form_class">
+<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView.form_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus.forms.html#cosinnus.forms.user_dashboard_announcement.UserDashboardWelcomeAnnouncementForm" title="cosinnus.forms.user_dashboard_announcement.UserDashboardWelcomeAnnouncementForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserDashboardWelcomeAnnouncementForm</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView.get_object">
+<span class="sig-name descname"><span class="pre">get_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queryset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView.get_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get welcome announcement, create if it does not exist.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView.get_success_url">
+<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView.get_success_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the URL to redirect to after processing a valid form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView.inlines">
+<span class="sig-name descname"><span class="pre">inlines</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'cosinnus.forms.user_dashboard_announcement.UserDashboardWelcomeAnnouncementCallToActionButtonInlineFormset'&gt;]</span></em><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView.inlines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView.message_success">
+<span class="sig-name descname"><span class="pre">message_success</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Die</span> <span class="pre">Willkommens-Ankündigung</span> <span class="pre">wurde</span> <span class="pre">erfolgreich</span> <span class="pre">gespeichert.'</span></em><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView.message_success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus.models.html#cosinnus.models.user_dashboard_announcement.UserDashboardWelcomeAnnouncement" title="cosinnus.models.user_dashboard_announcement.UserDashboardWelcomeAnnouncement"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserDashboardWelcomeAnnouncement</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView.template_name">
+<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus/user_dashboard_announcement/user_dashboard_welcome_announcement_form.html'</span></em><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.UserDashboardWelcomeAnnouncementEditView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.list_view">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard_announcement.</span></span><span class="sig-name descname"><span class="pre">list_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.list_view" title="Permalink to this definition">¶</a></dt>
@@ -7324,6 +7407,11 @@ TODO: use clever caching</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.user_dashboard_announcement_edit">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard_announcement.</span></span><span class="sig-name descname"><span class="pre">user_dashboard_announcement_edit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.user_dashboard_announcement_edit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.user_dashboard_welcome_announcement_edit">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard_announcement.</span></span><span class="sig-name descname"><span class="pre">user_dashboard_welcome_announcement_edit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.user_dashboard_welcome_announcement_edit" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </section>

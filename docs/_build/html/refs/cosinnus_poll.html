@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_poll package &#8212; Cosinnus 2.9.0b documentation</title>
+    <title>cosinnus_poll package &#8212; Cosinnus 2.10.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f0bd290c"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -556,7 +556,13 @@ if has_more == False, the receiving widget will assume no further data can be lo
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus_poll.managers.PollManager">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_poll.managers.</span></span><span class="sig-name descname"><span class="pre">PollManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_poll.managers.PollManager" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Manager</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="cosinnus.models.html#cosinnus.models.tagged.BaseTaggableObjectManager" title="cosinnus.models.tagged.BaseTaggableObjectManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTaggableObjectManager</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus_poll.managers.PollManager.get_personal_open_polls">
+<span class="sig-name descname"><span class="pre">get_personal_open_polls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_poll.managers.PollManager.get_personal_open_polls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return open polls where the user has not voted yet.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus_poll.managers.PollManager.public">
 <span class="sig-name descname"><span class="pre">public</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_poll.managers.PollManager.public" title="Permalink to this definition">¶</a></dt>
