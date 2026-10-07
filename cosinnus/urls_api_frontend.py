@@ -37,6 +37,7 @@ from cosinnus.api_frontend.views.portal import (
     PortalUserprofileDynamicFieldsSignupView,
     PortalUserprofileDynamicFieldsView,
 )
+from cosinnus.api_frontend.views.tagged import CosinnusGeocodeView
 from cosinnus.api_frontend.views.user import (
     CosinnusGettingStartedAPIView,
     CosinnusUserRecommendationsAPIView,
@@ -135,6 +136,7 @@ urlpatterns += [
         CosinnusReportView.as_view(model_name='cosinnus_note.Comment'),
         name='api-report-note-comment',
     ),
+    path('api/v3/geocode/', CosinnusGeocodeView.as_view(), name='api-geocode'),
 ]
 
 if settings.COSINNUS_ADMIN_USER_APIS_ENABLED:

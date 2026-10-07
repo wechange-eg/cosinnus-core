@@ -1,9 +1,5 @@
 import logging
-import random
 
-from geopy import OpenCage
-from geopy.exc import GeocoderInsufficientPrivileges, GeopyError
-from geopy.extra.rate_limiter import RateLimiter
 from rest_framework import serializers
 
 from cosinnus.api_frontend.serializers.generic import CosinnusCreatorSerializer
@@ -11,6 +7,7 @@ from cosinnus.conf import settings
 from cosinnus.models import BaseTaggableObjectModel
 from cosinnus.utils.functions import is_number
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.tagged import geocode_location
 from cosinnus.views.common import apply_like_object, apply_star_object
 
 logger = logging.getLogger('cosinnus')
@@ -72,32 +69,7 @@ class CosinnusMediaTagSerializerMixin:
 
                 # use OpenCage service to determine an actual location from the given string
                 if settings.COSINNUS_GEOCODE_OPENCAGE_KEY:
-                    geolocator = OpenCage(api_key=settings.COSINNUS_GEOCODE_OPENCAGE_KEY, timeout=5)
-                    # retry max 10 times, after between 0.5 - 1 secs randomly
-                    geocode = RateLimiter(
-                        geolocator.geocode,
-                        min_delay_seconds=0.5,
-                        max_retries=10,
-                        error_wait_seconds=0.5 + random.uniform(0.0, 0.5),
-                    )
-
-                    location = None
-                    try:
-                        location = geocode(location_str.strip())
-                    except (GeocoderInsufficientPrivileges, GeopyError, Exception) as e:
-                        extra = {
-                            'media_tag_id': media_tag.id,
-                            'location_str': location_str,
-                            'reason': type(e),
-                            'exc': str(e),
-                        }
-                        logger.error(
-                            (
-                                'Error: A user location could not be geoceded as nominatim, the request returned an '
-                                'error! '
-                            ),
-                            extra=extra,
-                        )
+                    location = geocode_location(location_str, media_tag=media_tag, exactly_one=True)
                     if location:
                         media_tag.location_lat = location.latitude
                         media_tag.location_lon = location.longitude
@@ -182,3 +154,11 @@ class CosinnusBaseTaggableObjectSerializer(serializers.ModelSerializer):
             'group',
             'url',
         )
+
+
+class CosinnusGeocodeLocationSerializer(serializers.Serializer):
+    """Geolocation serializer."""
+
+    location = serializers.CharField(source='address')
+    location_lat = serializers.FloatField(source='latitude')
+    location_lon = serializers.FloatField(source='longitude')

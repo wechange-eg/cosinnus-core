@@ -76,6 +76,7 @@ COSINNUS_V3_FRONTEND_ENABLED = False
 COSINNUS_GEOCODE_OPENCAGE_KEY = 'dummy-test-key'
 
 # Add settings for mocked goecode latitude and longitude to be checked in tests (geocode for "Berlin")
+TEST_GEOCODE_MOCKED_ADDRESS = 'Berlin'
 TEST_GEOCODE_MOCKED_LAT = 52.5173885
 TEST_GEOCODE_MOCKED_LON = 13.3951309
 
@@ -120,12 +121,16 @@ def monkey_patch_geocode_opencage_api():
     # Patch the OpenCage geocode function returning a mock with fixed latitude and longitude from test settings.
     from geopy import OpenCage
 
-    OpenCage.geocode = MagicMock(
-        return_value=MagicMock(
-            latitude=TEST_GEOCODE_MOCKED_LAT,
-            longitude=TEST_GEOCODE_MOCKED_LON,
+    def geocode_mock(*args, **kwargs):
+        """Mock geocode function depending on the exactly_one parameter, returning a list or a single result."""
+        mock_result = MagicMock(
+            address=TEST_GEOCODE_MOCKED_ADDRESS, latitude=TEST_GEOCODE_MOCKED_LAT, longitude=TEST_GEOCODE_MOCKED_LON
         )
-    )
+        if kwargs.get('exactly_one', False):
+            return mock_result
+        return [mock_result]
+
+    OpenCage.geocode = MagicMock(side_effect=geocode_mock)
 
 
 monkey_patch_geocode_opencage_api()
