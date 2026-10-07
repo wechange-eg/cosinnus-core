@@ -1,10 +1,11 @@
+from rest_framework import serializers
+
 from cosinnus.api_frontend.serializers.tagged import CosinnusBaseTaggableObjectSerializer
 from cosinnus_marketplace.models import Offer
-from rest_framework_rdf import serializers
 
 
 class CosinnusOfferSerializer(CosinnusBaseTaggableObjectSerializer):
-    """Readonly v3 note serializer."""
+    """v3 offer serializer."""
 
     type = serializers.SerializerMethodField()
 

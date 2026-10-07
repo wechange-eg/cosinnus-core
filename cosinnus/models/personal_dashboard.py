@@ -35,7 +35,8 @@ class CosinnusPersonalDashboardWidget:
     id = None
     # cosinnus app
     cosinnus_app = None
-    # function to get the data for a user, can return a query set or list
+    # function to get the data for a user, can return a query set or list, should have "user" as the only argument
+    # Note: when registering a non-class function use "staticmethod(function)" to avoid self being passed
     user_data_function = None
     # data serializer class
     serializer_class = None
@@ -206,7 +207,7 @@ class CosinnusPersonalDashboardTasksWidget(CosinnusPersonalDashboardWidget):
 
 
 class CosinnusPersonalDashboardEventsWidget(CosinnusPersonalDashboardWidget):
-    """Personal events widget"""
+    """Personal attending events widget"""
 
     id = 'dashboard.events'
     cosinnus_app = 'cosinnus_event'
