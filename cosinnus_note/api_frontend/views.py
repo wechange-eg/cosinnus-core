@@ -1,0 +1,137 @@
+from rest_framework import mixins, viewsets
+from rest_framework.decorators import action
+from rest_framework.parsers import MultiPartParser
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.renderers import BrowsableAPIRenderer
+
+from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
+from cosinnus.api_frontend.serializers.attached_objects import (
+    CosinnusAttachFileSerializer,
+    CosinnusDeleteAttachedFileSerializer,
+)
+from cosinnus.api_frontend.serializers.tagged import CosinnusTagObjectLikeSerializer
+from cosinnus.api_frontend.views.mixins import ViewSetActionMixin
+from cosinnus_note.api_frontend.permissions import (
+    CosinnusNoteCommentPermissions,
+    CosinnusNoteForumPostFromDashboardPermissions,
+    CosinnusNoteLikePermissions,
+    CosinnusNoteWritePermissions,
+)
+from cosinnus_note.api_frontend.serializers import (
+    CosinnusDeleteNoteCommentSerializer,
+    CosinnusNoteCommentSerializer,
+    CosinnusNoteForumPostSerializer,
+    CosinnusNoteSerializer,
+)
+from cosinnus_note.models import Note
+
+
+class CosinnusNoteViewSet(
+    mixins.UpdateModelMixin, mixins.DestroyModelMixin, ViewSetActionMixin, viewsets.GenericViewSet
+):
+    """
+    Note api for v3.
+    Currently, list, get and create actions are not included, as not used by the v3 dashboard.
+    Also, the permissions are set to CosinnusNoteWritePermissions to check update and delete operations.
+    """
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    serializer_class = CosinnusNoteSerializer
+    permission_classes = (CosinnusNoteWritePermissions,)
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Note.objects.get_readable_items(user)
+        return queryset
+
+    def get_serializer_class(self):
+        """Get serializer based on viewset action."""
+        action_serializers = {
+            'forum_post': CosinnusNoteForumPostSerializer,
+            'like': CosinnusTagObjectLikeSerializer,
+            'comment': CosinnusNoteCommentSerializer,
+            'delete_comment': CosinnusDeleteNoteCommentSerializer,
+            'attach_file': CosinnusAttachFileSerializer,
+            'delete_attached_file': CosinnusDeleteAttachedFileSerializer,
+        }
+        if self.action in action_serializers:
+            return action_serializers[self.action]
+        return self.serializer_class
+
+    @action(
+        detail=False,
+        methods=['get'],
+        permission_classes=[IsAuthenticated],
+    )
+    def personal(self, request):
+        """Return personal notes for user."""
+        queryset = Note.objects.get_personal_items(request.user)
+        return self.list_action_response(request, queryset)
+
+    @action(
+        detail=False,
+        methods=['get'],
+        permission_classes=[IsAuthenticated],
+    )
+    def recommendations(self, request):
+        """Return recommendations for user."""
+        queryset = Note.objects.get_recommendations(request.user)
+        return self.list_action_response(request, queryset)
+
+    @action(
+        detail=False,
+        methods=['post'],
+        permission_classes=[CosinnusNoteForumPostFromDashboardPermissions],
+    )
+    def forum_post(self, request):
+        """Create a forum group post."""
+        return self.list_action_response(request)
+
+    @action(
+        detail=True,
+        methods=['post'],
+        permission_classes=[CosinnusNoteLikePermissions],
+    )
+    def like(self, request, pk):
+        """Like / unlike a note."""
+        return self.detail_action_response(request, use_base_serializer_for_response=True)
+
+    @action(
+        detail=True,
+        methods=['post'],
+        permission_classes=[CosinnusNoteCommentPermissions],
+    )
+    def comment(self, request, pk):
+        """Comment a note."""
+        return self.detail_action_response(request, use_base_serializer_for_response=True)
+
+    @action(
+        detail=True,
+        methods=['post'],
+        permission_classes=[CosinnusNoteCommentPermissions],
+    )
+    def delete_comment(self, request, pk):
+        """Delete a note comment."""
+        return self.detail_action_response(request, use_base_serializer_for_response=True)
+
+    @action(
+        detail=True,
+        methods=['post'],
+        permission_classes=[CosinnusNoteWritePermissions],
+        parser_classes=[MultiPartParser],
+    )
+    def attach_file(self, request, pk=None):
+        """Action to upload an attachment for a note."""
+        return self.detail_action_response(request, use_base_serializer_for_response=True)
+
+    @action(
+        detail=True,
+        methods=['post'],
+        permission_classes=[CosinnusNoteWritePermissions],
+    )
+    def delete_attached_file(self, request, pk=None):
+        """Action to delete an attachment."""
+        return self.detail_action_response(request, use_base_serializer_for_response=True)

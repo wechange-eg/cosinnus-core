@@ -47,8 +47,8 @@ class SpacesViewTest(APITestCase):
         self.assertDictEqual(
             response.data['personal'],
             {
-                'header': 'My Personal Space',
-                'items': [MenuItem('Personal Dashboard', '/dashboard/', 'fa-user', id='PersonalDashboard')],
+                'header': 'Personal Space',
+                'items': [MenuItem('Personal Dashboard', '/dashboard/', 'fa-home', id='PersonalDashboard')],
                 'actions': [],
             },
         )
@@ -116,8 +116,14 @@ class SpacesViewTest(APITestCase):
         )
 
     @override_settings(
-        COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS=[
-            ('ExternalID', 'External', 'https://example.com/', 'fa-group')
+        COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS=[
+            {
+                'id': 'ExternalID',
+                'label': 'External',
+                'url': 'https://example.com/',
+                'icon': 'fa-group',
+                'is_external': True,
+            }
         ]
     )
     def test_community_space_additional_links(self):
@@ -125,7 +131,7 @@ class SpacesViewTest(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             response.data['community']['items'][1],
-            MenuItem('External', 'https://example.com/', 'fa-group', id='ExternalID'),
+            MenuItem('External', 'https://example.com/', 'fa-group', is_external=True, id='ExternalID'),
         )
 
     @override_settings(COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS=True)
@@ -503,7 +509,16 @@ class HelpViewTest(APITestCase):
         cls.test_user = User.objects.create(**TEST_USER_DATA)
         cls.portal = CosinnusPortal.get_current()
 
-    @override_settings(COSINNUS_V3_MENU_HELP_LINKS=[('faqID', 'FAQ', 'https://example.com/faq/', 'fa-question-circle')])
+    @override_settings(
+        COSINNUS_V3_MENU_HELP_ITEMS=[
+            {
+                'id': 'faqID',
+                'label': 'FAQ',
+                'url': 'https://example.com/faq/',
+                'icon': 'fa-question-circle',
+            }
+        ]
+    )
     def test_help(self):
         response = self.client.get(self.api_url)
         self.assertEqual(response.status_code, 200)
@@ -663,7 +678,7 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
                 ],
                 'middle': [],
                 'services': [
-                    MenuItem('Discover', reverse('cosinnus:map'), icon='fa-map', is_external=False, id='Map'),
+                    MenuItem('Map', reverse('cosinnus:map'), icon='fa-map', is_external=False, id='Map'),
                 ],
                 'right': [
                     MenuItem('Help', icon='fa-question', id='Help'),

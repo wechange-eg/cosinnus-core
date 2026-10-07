@@ -96,11 +96,10 @@ class CosinnusAttachFileSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
         user = self.context['request'].user
-        group = self.context['group']
         file = validated_data['file']
 
         # create upload folder for attachment
-        upload_folder = get_or_create_attachment_folder(group)
+        upload_folder = get_or_create_attachment_folder(instance.group)
 
         # clean and shorten filename
         file._name = clean_single_line_text(file._name)
@@ -111,7 +110,7 @@ class CosinnusAttachFileSerializer(serializers.Serializer):
         file_entry = FileEntry(
             title=file._name,
             file=file,
-            group=group,
+            group=instance.group,
             creator=user,
             path=upload_folder.path,
             _filesize=file.size,

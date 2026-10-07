@@ -6,9 +6,11 @@ from django.core.cache import cache
 from django.db.models.aggregates import Count
 from django.db.models.query_utils import Q
 from django.template.loader import render_to_string
+from django.utils.decorators import method_decorator
 from django.utils.encoding import force_str
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.csrf import ensure_csrf_cookie
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.generics import GenericAPIView
@@ -22,7 +24,6 @@ from taggit.models import Tag
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.portal import CosinnusManagedTagSerializer, CosinnusPortalErrorLogSerializer
-from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
 from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.dynamic_fields.dynamic_formfields import EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS
@@ -45,7 +46,6 @@ class PortalTopicsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -83,7 +83,6 @@ class PortalTagsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -147,7 +146,6 @@ class PortalManagedTagsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -304,7 +302,6 @@ class PortalDynamicFieldsBaseView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # if set on the view, show only dynamic fields that appear in the signup form
     field_option_filter = None
@@ -439,6 +436,9 @@ class PortalSettingsView(APIView):
 
     Any returned values will be overridden by anything defined in conf dict `COSINNUS_V3_PORTAL_SETTINGS` (uncached).
 
+    Note: This API is also used to set the CSRF-Cookie, as it is always loaded by the frontend, i.e. the frontend must
+    call this API, before attempting a posting on any other v3 API.
+
     A full example string for manually configuarable settings that aren't dynamically taken from the portal config:
 
     {
@@ -544,7 +544,6 @@ class PortalSettingsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY = 'cosinnus/core/portal/portalsettings/%s'  # key is language code
     CACHE_TIMEOUT_DEV = 30  # 30 seconds for dev servers
@@ -571,6 +570,7 @@ class PortalSettingsView(APIView):
             )
         }
     )
+    @method_decorator(ensure_csrf_cookie)
     def get(self, request):
         current_language = get_language()
         settings_dict = cache.get(self.PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY % current_language)
@@ -627,6 +627,8 @@ class PortalSettingsView(APIView):
             'cosinnusIsSSOLoginEnabled': settings.COSINNUS_IS_OAUTH_CLIENT,
             'cosinnusSSOProvider': settings.COSINNUS_V3_SSO_PROVIDER,
             'cosinnusV3FrontendEverywhereEnabled': settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED,
+            'matomoUrl': settings.PIWIK_SERVER_URL + 'matomo.js',
+            'matomoSiteId': settings.PIWIK_SITE_ID,
             # 'setup': {'additionalSteps': ... }},  # set manually
             # 'theme': {...},  # set manually. example:
             # "theme": {"color": "blue", "loginImage": {"variant": "contained"}},
@@ -765,7 +767,6 @@ class PortalErrorLogView(GenericAPIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
     throttle_classes = [PortalErrorLogUserThrottle]
 

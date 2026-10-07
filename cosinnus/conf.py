@@ -1,11 +1,27 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
 from builtins import object
 
 from appconf import AppConf
 from django.conf import settings  # noqa
 from django.utils.translation import gettext_lazy as _
+
+logger = logging.getLogger('cosinnus')
+
+
+def _convert_legacy_v3_menu_links_to_items(legacy_links):
+    """Convert legacy menu link tuples to menu item dictionaries."""
+    return [
+        {
+            'id': id,
+            'label': label,
+            'url': url,
+            'icon': icon,
+        }
+        for id, label, url, icon in legacy_links
+    ]
 
 
 class CosinnusConf(AppConf):
@@ -574,6 +590,11 @@ class CosinnusConf(AppConf):
         'cosinnus.cosinnusidea': 0.5,
         #'cosinnus.userprofile': 0,
     }
+
+    # whether Elasticsearch search analyzers should normalize accents/diacritics
+    # Note: changing this requires recreating the Elasticsearch index, e.g.:
+    # `python manage.py rebuild_index`
+    HAYSTACK_ASCII_FOLDING_ENABLED = True
 
     # widgets listed here will be created for the user dashboard upon user creation.
     # this will check if the cosinnus app is installed and if the widget is registered, so
@@ -1154,19 +1175,47 @@ class CosinnusConf(AppConf):
     V3_MENU_SPACES_ADD_FORUM_EVENTS_LINK_LABEL = None
 
     # Map space label in the v3 main navigation. Set to None to exclude the map from the community space.
-    V3_MENU_SPACES_MAP_LABEL = _('Discover')
+    V3_MENU_SPACES_MAP_LABEL = _('Map')
 
     # Enable to add links to paired groups of managed tags of the user cosinnus_profile as community links.
     V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS = True
 
-    # Additional menu items for the community space in the v3 main navigation.
-    # Format: List of (<id-string>, <label>, <url>, <icon>),
-    # e.g.: [('ExternalLink', 'External Link', 'https://external-link.com', 'fa-group')]
+    # Deprecated tuple-based configuration for additional community space menu items.
+    # Format: List of (<id-string>, <label>, <url>, <icon>) tuples.
     V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS = []
 
-    # List of help items to be included in the v3 main navigation.
-    # Format: (<label>, <url>, <icon>), e.g.: (_('FAQ'), 'https://wechange.de/cms/help/', 'fa-question-circle'),
+    # Additional menu items for the community space in the v3 main navigation.
+    # Format: List of dictionaries containing MenuItem arguments.
+    # If None, V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS is used as a fallback.
+    V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS = None
+
+    def configure_v3_menu_spaces_community_additional_items(self, value):
+        if value is not None:
+            return value
+        legacy_value = getattr(settings, 'COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS', [])
+        if legacy_value:
+            logger.warning(
+                'The setting V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS is deprecated. '
+                'Use V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS instead.'
+            )
+        return _convert_legacy_v3_menu_links_to_items(legacy_value)
+
+    # Deprecated tuple-based configuration for help items in the v3 main navigation.
+    # Format: List of (<id-string>, <label>, <url>, <icon>) tuples.
     V3_MENU_HELP_LINKS = []
+
+    # List of help items to be included in the v3 main navigation.
+    # Format: List of dictionaries containing MenuItem arguments.
+    # If None, V3_MENU_HELP_LINKS is used as a fallback.
+    V3_MENU_HELP_ITEMS = None
+
+    def configure_v3_menu_help_items(self, value):
+        if value is not None:
+            return value
+        legacy_value = getattr(settings, 'COSINNUS_V3_MENU_HELP_LINKS', [])
+        if legacy_value:
+            logger.warning('The setting V3_MENU_HELP_LINKS is deprecated. Use V3_MENU_HELP_ITEMS instead.')
+        return _convert_legacy_v3_menu_links_to_items(legacy_value)
 
     # a class dropin to replace CosinnusNavigationPortalLinksBase as class that modifies or provides additional
     # navbar links returned in various v3 navigation API endpoints
@@ -1177,6 +1226,35 @@ class CosinnusConf(AppConf):
     # SSO provider infos used in the v3 frontend
     # Example: [{'login_url': '/oidc/keycloak/login/?process=login', 'name': 'Keycloak'}]
     V3_SSO_PROVIDER = []
+
+    # enable v3 user dashboard
+    USE_V3_PERSONAL_DASHBOARD = False
+
+    # v3 dashboard widget config, with the following options:
+    # active: True if the widget is enabled.
+    # frontend_conf: JSON config that is passed to the frontend.
+    V3_PERSONAL_DASHBOARD_WIDGETS = {
+        'dashboard.news': {'active': True, 'frontend_conf': {'x': 100}},
+        'dashboard.create_new': {'active': True, 'frontend_conf': {}},
+        'dashboard.offers': {'active': True, 'frontend_conf': {}},
+        'dashboard.my_spaces': {'active': True, 'frontend_conf': {}},
+        'dashboard.tasks': {'active': True, 'frontend_conf': {}},
+        'dashboard.events': {'active': True, 'frontend_conf': {}},
+        'dashboard.event_polls': {'active': True, 'frontend_conf': {}},
+        'dashboard.polls': {'active': True, 'frontend_conf': {}},
+        'dashboard.ideas': {'active': True, 'frontend_conf': {}},
+        'dashboard.liked_ideas': {'active': True, 'frontend_conf': {}},
+        'dashboard.getting_started': {'active': True, 'frontend_conf': {}},
+        'dashboard.news_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.offer_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.idea_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.event_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.space_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.user_recommendations': {'active': True, 'frontend_conf': {}},
+    }
+
+    # Portal specific overrides of the V3_PERSONAL_DASHBOARD_WIDGETS setting.
+    V3_PERSONAL_DASHBOARD_WIDGETS_OVERRIDES = {}
 
     # default CosinnusPortal logo image url, shown in the top left navigation bar
     # (will be used with a `static()`) call
@@ -1772,14 +1850,27 @@ class CosinnusConf(AppConf):
     # if True, the User Block feature will be enabled
     ENABLE_USER_BLOCK = False
 
-    # whether to require a valid hcaptcha on the signup API endpoint
+    # whether to require a valid hcaptcha or eucaptcha on the signup API endpoint
     USE_HCAPTCHA = True
 
-    # the secret key for the hcaptcha. set in .env
+    # the secret key for the hCaptcha. set in .env.
+    # if both hCaptcha and euCaptcha keys are set in .env, euCaptcha is preferred
     HCAPTCHA_SECRET_KEY = None
+
+    # the secret key for the euCaptcha. set in .env.
+    # this is activated by setting the key and `USE_HCAPTCHA = True`
+    # if both hCaptcha and euCaptcha keys are set in .env, euCaptcha is preferred
+    EUCAPTCHA_SECRET_KEY = None
+
+    # the site key required for eucaptcha verification requests alongside the secret key
+    # read from .env
+    EUCAPTCHA_SITE_KEY = None
 
     # the URL at which to verify the hcaptcha response
     HCAPTCHA_VERIFY_URL = 'https://hcaptcha.com/siteverify'
+
+    # the URL at which to verify the hcaptcha response
+    EUCAPTCHA_VERIFY_URL = 'https://api.eu-captcha.eu/v1/verify'
 
     # a storage for portal settings that are exposed publicy
     # via v3 API endpoint 'api/v3/portal/settings/'
@@ -2050,32 +2141,50 @@ class CosinnusDefaultSettings(AppConf):
         },
     }
 
+    # DEPRECATED - remove this setting from portal configuration
     # a list of field names from fields in fields in `CosinnusConferenceSettings`
     # that will be shown to the users in the frontend Event forms as choices
     # for presets for BBB rooms
-    # note that 'record_meeting' is disabled by default, as it
-    # requires setting up the BBB servers correctly for it, and should
-    # only be enabled for a portal specifically after that has been done
-    BBB_PRESET_USER_FORM_FIELDS = [
-        'mic_starts_on',
-        'cam_starts_on',
-        'waiting_room',
-        'welcome_message',
-    ]
+    # None is a sentinel used to detect legacy portal configuration in the hook below.
+    BBB_PRESET_USER_FORM_FIELDS = None
     # a complete list of all choices that could be made for BBB_PRESET_USER_FORM_FIELDS
     # __all_choices__BBB_PRESET_USER_FORM_FIELDS = [
     #    'mic_starts_on',
     #    'cam_starts_on',
     #    'waiting_room',
+    #    'welcome_message',
     #    'record_meeting',
     # ]
 
+    def configure_bbb_preset_user_form_fields(self, value):
+        """Ignore legacy portal configuration and always expose all supported fields."""
+        if value is not None:
+            logger.warning(
+                'The setting BBB_PRESET_USER_FORM_FIELDS is deprecated '
+                'and its configured value is ignored. Remove it from the portal configuration.'
+            )
+        return [
+            'mic_starts_on',
+            'cam_starts_on',
+            'waiting_room',
+            'welcome_message',
+            'record_meeting',
+        ]
+
+    # DEPRECATED - remove this setting from portal configuration
     # a list of field names from `BBB_PRESET_USER_FORM_FIELDS` that can only
     # be changed by users if a conference is premium at some point.
     # NOTE: the field names appearing here must also appear in `BBB_PRESET_USER_FORM_FIELDS`!
-    BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = [
-        'record_meeting',
-    ]
+    BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY = None
+
+    def configure_bbb_preset_user_form_fields_premium_only(self, value):
+        """Ignore legacy portal configuration and keep the deprecated setting disabled."""
+        if value is not None:
+            logger.warning(
+                'The setting BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY is deprecated '
+                'and its configured value is ignored. Remove it from the portal configuration.'
+            )
+        return []
 
     # limit visit creation for (user, bbb_room) pairs to a time window
     BBB_ROOM_STATISTIC_VISIT_COOLDOWN_SECONDS = 60 * 60

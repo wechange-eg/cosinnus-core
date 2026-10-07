@@ -7,7 +7,6 @@ from rest_framework.views import APIView
 
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.feedback import CosinnusReportSerializer
-from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 
 
 class CosinnusReportView(APIView):
@@ -20,7 +19,6 @@ class CosinnusReportView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     # report target model set via view parameter

@@ -35,7 +35,9 @@ ERROR_LOGIN_FIELD_REQUIRED = _('This field may not be blank.')
 ERROR_LOGIN_INVALID_EMAIL_ADDRESS = _('Enter a valid email address.')
 
 ERROR_SIGNUP_EMAIL_IN_USE = 'Email is already in use'
+ERROR_SIGNUP_CAPTCHA_RESPONSE_MISSING = 'At least one of "hcaptcha_response" or "eucaptcha_response" must be provided'
 ERROR_SIGNUP_CAPTCHA_INVALID = 'The captcha was not filled or was invalid'
+ERROR_SIGNUP_CAPTCHA_SERVICE_CONFIGURATION_ERROR = 'The captcha service could not be contacted'
 ERROR_SIGNUP_CAPTCHA_SERVICE_DOWN = 'The captcha service could not be reached'
 ERROR_SIGNUP_NAME_NOT_ACCEPTABLE = 'This first_name is not acceptable'
 ERROR_SIGNUP_ONLY_ONE_MTAG_ALLOWED = 'Only one managed tag can be assigned on this portal!'

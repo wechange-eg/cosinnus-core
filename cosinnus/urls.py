@@ -355,6 +355,7 @@ urlpatterns = [
         housekeeping.firebase_send_testpush,
         name='housekeeping-firebase-send-testpush',
     ),
+    path('housekeeping/print_ip/', housekeeping.print_ip, name='housekeeping-print_ip'),
     path('error/', common.generic_error_page_view, name='generic-error-page'),
     path('select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
     path('robots.txt', common.robots_text, name='robots-text'),
@@ -413,7 +414,18 @@ if getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
         path('administration/users/<int:pk>/edit/', administration.user_update, name='administration-user-update'),
     ]
 
-if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(
+if getattr(settings, 'COSINNUS_USE_V3_PERSONAL_DASHBOARD', False):
+    dashboard_url = getattr(settings, 'COSINNUS_V2_DASHBOARD_URL_FRAGMENT', 'dashboard')
+    urlpatterns += [
+        path('personal/dashboard/', user_dashboard.personal_dashboard_view, name='user-dashboard'),
+        path(
+            'administration/welcome_announcement/',
+            user_dashboard_announcement.user_dashboard_welcome_announcement_edit,
+            name='user-dashboard-welcome-announcement-edit',
+        ),
+        path(f'{dashboard_url}/', RedirectView.as_view(url='/personal/dashboard/', permanent=False)),
+    ]
+elif getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(
     settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False
 ):
     dashboard_url = getattr(settings, 'COSINNUS_V2_DASHBOARD_URL_FRAGMENT', 'dashboard')

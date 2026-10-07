@@ -1,0 +1,17 @@
+{% load i18n widget_tweaks thumbnail %}
+
+<p>{% trans "Button" %} #{{ forloop.counter }}</p>
+
+<div class="small-padding">
+	{{ inlineform.label.errors }}
+	{% trans "Text of the Button" as placeholder %}
+	{% render_field inlineform.label class+="form-control regular-space" placeholder=placeholder %}
+</div>
+<div class="small-padding">
+	{{ inlineform.url.errors }}
+	{% trans 'URL of the Button' as placeholder %}
+	{% render_field inlineform.url class+="form-control" placeholder=placeholder %}
+</div>
+
+{{ inlineform.welcome_announcement }}
+{{ inlineform.id }}

@@ -1547,6 +1547,9 @@ msgstr ""
 msgid "10 years"
 msgstr ""
 
+msgid "2 columns of text"
+msgstr ""
+
 msgid "2 days"
 msgstr ""
 
@@ -2322,6 +2325,9 @@ msgstr ""
 msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
 msgstr ""
 
+msgid "An announcement is only displayed during the set period."
+msgstr ""
+
 msgid "An announcement will only appear during its valid-time frame."
 msgstr ""
 
@@ -2377,6 +2383,9 @@ msgid "Announcement is enabled"
 msgstr ""
 
 msgid "Announcements"
+msgstr ""
+
+msgid "Announcements created here are displayed to all users at the very top of their Personal Dashboard."
 msgstr ""
 
 msgid "Another export is currently running!"
@@ -2548,6 +2557,14 @@ msgstr ""
 msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!"
 msgstr ""
 
+#, python-format
+msgid "As long as a user is seeing the %(welcome_admin_link)s, no announcement from this list will be displayed."
+msgstr ""
+
+#, python-format
+msgid "As long as a user is seeing the welcome announcement, no %(announcement_admin_link)s will be displayed."
+msgstr ""
+
 msgid "Assign"
 msgstr ""
 
@@ -2623,6 +2640,9 @@ msgid "Available options were"
 msgstr ""
 
 msgid "Avatar"
+msgstr ""
+
+msgid "Avatar is generated"
 msgstr ""
 
 msgid "Avatar will be deleted once you save."
@@ -2810,6 +2830,18 @@ msgstr ""
 msgid "Business and Law"
 msgstr ""
 
+msgid "Button"
+msgstr ""
+
+msgid "Button Text"
+msgstr ""
+
+msgid "Button URL"
+msgstr ""
+
+msgid "Buttons"
+msgstr ""
+
 msgid ""
 "By clicking on the button below, this conference and all content posted there will be irrevocably deleted.\n"
 "\n"
@@ -2883,6 +2915,9 @@ msgstr ""
 msgid "Call to Action Button"
 msgstr ""
 
+msgid "Call to Action Buttons active"
+msgstr ""
+
 msgid "Call to Action Microsite Box active"
 msgstr ""
 
@@ -2913,6 +2948,9 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Categories"
+msgstr ""
+
+msgid "Category"
 msgstr ""
 
 msgid "Category for the Announcement"
@@ -3796,6 +3834,18 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
+msgid "Dashboard Announcement"
+msgstr ""
+
+msgid "Dashboard Announcement CallToAction Button"
+msgstr ""
+
+msgid "Dashboard Announcement CallToAction Buttons"
+msgstr ""
+
+msgid "Dashboard Announcements"
+msgstr ""
+
 msgid "Data"
 msgstr ""
 
@@ -4109,10 +4159,16 @@ msgstr ""
 msgid "Dismiss"
 msgstr ""
 
+msgid "Display"
+msgstr ""
+
 msgid "Display Name"
 msgstr ""
 
 msgid "Display contact form."
+msgstr ""
+
+msgid "Display duration in days"
 msgstr ""
 
 msgid "Display name"
@@ -6353,6 +6409,9 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
+msgid "Image + 1 column of text"
+msgstr ""
+
 msgid "Image preview"
 msgstr ""
 
@@ -7489,9 +7548,6 @@ msgstr ""
 msgid "My Organizations"
 msgstr ""
 
-msgid "My Personal Space"
-msgstr ""
-
 msgid "My Profile"
 msgstr ""
 
@@ -8211,6 +8267,9 @@ msgstr ""
 msgid "Only one announcement at a time will ever be shown to a user."
 msgstr ""
 
+msgid "Only one announcement is displayed at a time. If several announcements are active at the same time, users will see the oldest active announcement."
+msgstr ""
+
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr ""
 
@@ -8508,7 +8567,13 @@ msgstr "فارسی"
 msgid "Personal Dashboard"
 msgstr ""
 
+msgid "Personal Dashboard Announcements"
+msgstr ""
+
 msgid "Personal Message (optional)"
+msgstr ""
+
+msgid "Personal Space"
 msgstr ""
 
 msgid "Personal info"
@@ -9598,6 +9663,9 @@ msgstr ""
 msgid "Select at least one object."
 msgstr ""
 
+msgid "Select how many days after registration the welcome message should automatically disappear (in case the user does not actively hide it)."
+msgstr ""
+
 msgid "Select one of your Facebook pages to connect to"
 msgstr ""
 
@@ -9763,6 +9831,9 @@ msgid "Show Register Button"
 msgstr ""
 
 msgid "Show Tokens"
+msgstr ""
+
+msgid "Show a Button"
 msgstr ""
 
 msgid "Show all"
@@ -10325,10 +10396,19 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
+msgid "Text (1. column)"
+msgstr ""
+
+msgid "Text (2. column)"
+msgstr ""
+
 msgid "Text Editor"
 msgstr ""
 
 msgid "Text Topics"
+msgstr ""
+
+msgid "Text of the Button"
 msgstr ""
 
 msgid "Thank you again for your interest in our services."
@@ -10435,6 +10515,9 @@ msgstr ""
 msgid "The WE-Cloud is here!"
 msgstr ""
 
+msgid "The Welcome Announcement was saved successfully."
+msgstr ""
+
 msgid "The Winner is"
 msgstr ""
 
@@ -10475,6 +10558,9 @@ msgstr ""
 
 #, python-format
 msgid "The booked period for Video Conference Pro for this project has ended on %(end_date)s."
+msgstr ""
+
+msgid "The category is displayed as a label."
 msgstr ""
 
 msgid "The complete request can only be sent via POST!"
@@ -10602,6 +10688,9 @@ msgid "The export is currently running..."
 msgstr ""
 
 msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
+msgstr ""
+
+msgid "The first text column of the announcement."
 msgstr ""
 
 msgid "The first uploaded image will be displayed as a wallpaper"
@@ -10807,6 +10896,9 @@ msgid "The room was deleted successfully."
 msgstr ""
 
 msgid "The room was saved successfully."
+msgstr ""
+
+msgid "The second text column of the announcement."
 msgstr ""
 
 msgid "The selected choice was not found or invalid! Please choose a different value!"
@@ -11145,6 +11237,9 @@ msgid "This action is not available directly!"
 msgstr ""
 
 msgid "This action is not permitted for this poll at this stage!"
+msgstr ""
+
+msgid "This announcement will be displayed to new users who have just registered at the very top of their Personal Dashboards."
 msgstr ""
 
 msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
@@ -11734,6 +11829,9 @@ msgstr ""
 msgid "URL Link"
 msgstr ""
 
+msgid "URL of the Button"
+msgstr ""
+
 msgid "Ukrainian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Українська"
 
@@ -12099,6 +12197,12 @@ msgstr ""
 msgid "Users can filter their results in the Volunteer-O-Matic by distance so that only groups and projects in their area are suggested. For this, the first location you specified in your %(group_settings_label)s is used."
 msgstr ""
 
+msgid "Users can hide an announcement. It then disappears and is never displayed again. The next time they visit their Personal Dashboard, the next announcement will be displayed, if there is still an active announcement that they have not yet hidden."
+msgstr ""
+
+msgid "Users can hide the welcome announcement. It then disappears and is never displayed again."
+msgstr ""
+
 #, python-format
 msgid "Users in organization %(group)s"
 msgstr ""
@@ -12437,7 +12541,19 @@ msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "Welcome"
 msgstr ""
 
+msgid "Welcome Announcement"
+msgstr ""
+
+msgid "Welcome Announcement is enabled"
+msgstr ""
+
+msgid "Welcome Announcements"
+msgstr ""
+
 msgid "Welcome Message"
+msgstr ""
+
+msgid "Welcome announcement for new users"
 msgstr ""
 
 #, python-format
@@ -13974,6 +14090,9 @@ msgstr ""
 msgid "cut"
 msgstr ""
 
+msgid "dashboard announcements"
+msgstr ""
+
 msgid "deactivate"
 msgstr ""
 
@@ -14425,6 +14544,9 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "website"
+msgstr ""
+
+msgid "welcome announcement"
 msgstr ""
 
 msgid "yes"

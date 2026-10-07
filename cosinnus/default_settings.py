@@ -285,6 +285,11 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'sekizai',
         'apps.core',
         'django_countries',  # needed for i18n for the country list
+        # SSO
+        'allauth',
+        'allauth.account',
+        'allauth.socialaccount',
+        'allauth.socialaccount.providers.openid_connect',
     ]
 
     # Internal Apps (as defined in external project)
@@ -333,11 +338,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'wagtail.contrib.forms',
         'announcements',
         'ajax_forms',
-        # SSO
-        'allauth',
-        'allauth.account',
-        'allauth.socialaccount',
-        'allauth.socialaccount.providers.openid_connect',
         # 'django_extensions',
         'django_filters',
         'django_select2',
@@ -539,8 +539,14 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'WECHANGE_COSINNUS_CONFERENCES_STREAMING_API_AUTH_PASSWORD', default=None
     )
 
-    # hCaptcha
+    # hCaptcha. if both captcha keys are set in .env, euCaptcha is preferred
     COSINNUS_HCAPTCHA_SECRET_KEY = env('WECHANGE_COSINNUS_HCAPTCHA_SECRET_KEY', default=None)
+
+    # euCaptcha secret key. if both captcha keys are set in .env, euCaptcha is preferred
+    COSINNUS_EUCAPTCHA_SECRET_KEY = env('WECHANGE_COSINNUS_EUCAPTCHA_SECRET_KEY', default=None)
+
+    # the site key required for eucaptcha verification requests alongside the secret key
+    COSINNUS_EUCAPTCHA_SITE_KEY = env('WECHANGE_COSINNUS_EUCAPTCHA_SITE_KEY', default=None)
 
     # Wechange Payments
     PAYMENTS_BETTERPAYMENT_API_KEY = env('WECHANGE_PAYMENTS_BETTERPAYMENT_API_KEY', default='')
@@ -805,7 +811,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     }
 
     # PIWIK settings. set individually for each portal. won't load if PIWIK_SITE_ID is not set
-    PIWIK_SERVER_URL = '//stats.wechange.de/'
+    PIWIK_SERVER_URL = 'https://stats.wechange.de/'
     PIWIK_SITE_ID = None
 
     # honeypot field name shouldn't be too obvious, but also not trigger browsers' autofill

@@ -2,10 +2,16 @@
 from __future__ import unicode_literals
 
 from django.urls import include, path
+from rest_framework import routers
 
 from cosinnus.api_frontend.views.content import MainContentView
 from cosinnus.api_frontend.views.feedback import CosinnusReportView
-from cosinnus.api_frontend.views.group import CosinnusGroupSettingsView
+from cosinnus.api_frontend.views.group import (
+    CosinnusGroupPersonalView,
+    CosinnusGroupRecommendationsView,
+    CosinnusGroupSettingsView,
+)
+from cosinnus.api_frontend.views.idea import CosinnusIdeaViewSet
 from cosinnus.api_frontend.views.navigation import (
     AlertsMarkAllReadView,
     AlertsView,
@@ -20,6 +26,7 @@ from cosinnus.api_frontend.views.navigation import (
     VersionHistoryUnreadCountView,
     VersionHistoryView,
 )
+from cosinnus.api_frontend.views.personal_dashboard import CosinnusPersonalDashboardAPIView
 from cosinnus.api_frontend.views.portal import (
     PortalErrorLogView,
     PortalManagedTagsView,
@@ -31,6 +38,8 @@ from cosinnus.api_frontend.views.portal import (
     PortalUserprofileDynamicFieldsView,
 )
 from cosinnus.api_frontend.views.user import (
+    CosinnusGettingStartedAPIView,
+    CosinnusUserRecommendationsAPIView,
     GroupInviteTokenView,
     GuestAccessTokenView,
     GuestLoginView,
@@ -120,6 +129,12 @@ urlpatterns += [
     path(
         'api/v3/report/event/', CosinnusReportView.as_view(model_name='cosinnus_event.Event'), name='api-report-event'
     ),
+    path('api/v3/report/note/', CosinnusReportView.as_view(model_name='cosinnus_note.Note'), name='api-report-note'),
+    path(
+        'api/v3/report/note_comment/',
+        CosinnusReportView.as_view(model_name='cosinnus_note.Comment'),
+        name='api-report-note-comment',
+    ),
 ]
 
 if settings.COSINNUS_ADMIN_USER_APIS_ENABLED:
@@ -139,3 +154,28 @@ if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
     urlpatterns += [
         path('', include(('cosinnus_event.calendar.urls_api_frontend', 'cosinnus'), namespace='calendar-api')),
     ]
+
+if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
+    urlpatterns += [
+        path('api/v3/dashboard/', CosinnusPersonalDashboardAPIView.as_view(), name='api-peronsal-dashboard'),
+        path('api/v3/user/getting_started/', CosinnusGettingStartedAPIView.as_view(), name='api-getting-started'),
+        path(
+            'api/v3/user/recommendations/',
+            CosinnusUserRecommendationsAPIView.as_view(),
+            name='api-user-recommendations',
+        ),
+        path('api/v3/spaces/personal/', CosinnusGroupPersonalView.as_view(), name='api-group-personal'),
+        path(
+            'api/v3/spaces/recommendations/',
+            CosinnusGroupRecommendationsView.as_view(),
+            name='api-group-recommendations',
+        ),
+        path('', include('cosinnus_note.urls_api_frontend')),
+        path('', include('cosinnus_marketplace.urls_api_frontend')),
+        path('', include('cosinnus_event.urls_api_frontend')),
+        path('', include('cosinnus_poll.urls_api_frontend')),
+    ]
+    router = routers.SimpleRouter()
+    if settings.COSINNUS_IDEAS_ENABLED:
+        router.register('ideas', CosinnusIdeaViewSet, 'idea')
+    urlpatterns += [path('api/v3/', include(router.urls))]

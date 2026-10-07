@@ -108,7 +108,7 @@ def make_xlsx_response(rows, row_names=[], file_name=None):
     Shortcut to turn a list of rows into a quick XLSX download response.
     """
     filename = '%s - %s.xlsx' % (file_name or 'export', now().strftime('%Y%m%d %H%M%S'))
-    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument' '.spreadsheetml.sheet')
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     response['Content-Disposition'] = 'attachment; filename="{}"'.format(filename)
     workbook = xlsxwriter.Workbook(response, {'in_memory': True, 'strings_to_formulas': False, 'remove_timezone': True})
     worksheet = workbook.add_worksheet()
@@ -171,3 +171,15 @@ def is_ajax(request):
     usage tends to use the JavaScript Fetch API.
     """
     return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+
+
+def get_ip_from_request(request):
+    """Attemps to get the user IP from the request, or returns None."""
+    if not request:
+        return None
+    # get ip from nginx-pass-through
+    ip = request.META.get('HTTP_X_REAL_IP', None)
+    # since all other server configurations are test- or local-only, only fall back to other means when DEBUG=True
+    if not ip and settings.DEBUG:
+        ip = request.META.get('REMOTE_ADDR', None)
+    return ip

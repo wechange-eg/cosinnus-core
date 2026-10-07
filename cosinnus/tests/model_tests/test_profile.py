@@ -72,9 +72,7 @@ class DefaultUserProfileTest(TestCase):
             'website',
             'may_be_contacted',
             'dynamic_fields',
-            'scheduled_for_deletion_at',
             'description',
-            'inactivity_notification_sent_at',
         }
         self.assertEqual(set(optional), expected_optional_fieldnames)
 
