@@ -543,7 +543,9 @@ class IsNextCloudApiTokenValid(BasePermission):
     def has_permission(self, request, view):
         if not settings.COSINNUS_CLOUD_NEXTCLOUD_API_TOKEN:
             # make sure the token is defined
-            raise ImproperlyConfigured('NextCloud API is enabled but COSINNUS_LOUD_NEXTCLOUD_API_TOKEN is not defined.')
+            raise ImproperlyConfigured(
+                'NextCloud API is enabled but COSINNUS_CLOUD_NEXTCLOUD_API_TOKEN is not defined.'
+            )
 
         auth = get_authorization_header(request).split()
         if not auth or auth[0].lower() != self.keyword.lower().encode():

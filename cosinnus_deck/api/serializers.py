@@ -35,17 +35,6 @@ class DeckLabelSerializer(serializers.Serializer):
     color = serializers.CharField()
 
 
-class DeckEventSerializer(serializers.Serializer):
-    """
-    Basic required fields in all events.
-    The type values is used to load the serializer for the enent, see get_get_deck_event_serializer below.
-    """
-
-    type = serializers.ChoiceField(choices=DECK_EVENT_TYPE_CHOICES)
-    id = serializers.CharField()
-    requestUserId = serializers.CharField()
-
-
 class DeckTaskDataSerializer(serializers.Serializer):
     """Basic fields required in the data field of all task events."""
 
@@ -54,34 +43,16 @@ class DeckTaskDataSerializer(serializers.Serializer):
     taskTitle = serializers.CharField()
 
 
-class DeckTaskEventSerializer(DeckEventSerializer):
-    """Basic task event serializer."""
-
-    data = DeckTaskDataSerializer()
-
-
 class DeckTaskStatusDataSerializer(DeckTaskDataSerializer):
     """Data of the status changed event."""
 
     done = serializers.BooleanField()
 
 
-class DeckTaskStatusChangedEventSerializer(DeckEventSerializer):
-    """Status changed event serializer."""
-
-    data = DeckTaskStatusDataSerializer()
-
-
 class DeckTaskDueDateDataSerializer(DeckTaskDataSerializer):
     """Data of the due date changed event."""
 
     duedate = serializers.DateTimeField()
-
-
-class DeckTaskDueDateChangedEventSerializer(DeckEventSerializer):
-    """Due date changed event seriolizer."""
-
-    data = DeckTaskDueDateDataSerializer()
 
 
 class DeckTaskAssigneeDataSerializer(DeckTaskDataSerializer):
@@ -91,22 +62,10 @@ class DeckTaskAssigneeDataSerializer(DeckTaskDataSerializer):
     assigned = serializers.BooleanField()
 
 
-class DeckTaskAssigneeChangedEventSerializer(DeckEventSerializer):
-    """Assignee changed event serializer."""
-
-    data = DeckTaskAssigneeDataSerializer()
-
-
 class DeckTaskCommentCreatedDataSerializer(DeckTaskDataSerializer):
     """Data of the comment created event."""
 
     mentions = serializers.ListField(child=serializers.CharField())
-
-
-class DeckTaskCommentCreatedEventSerializer(DeckEventSerializer):
-    """Comment created event serializer."""
-
-    data = DeckTaskCommentCreatedDataSerializer()
 
 
 class DeckTaskMentionDataSerializer(DeckTaskDataSerializer):
@@ -115,25 +74,33 @@ class DeckTaskMentionDataSerializer(DeckTaskDataSerializer):
     userId = serializers.CharField()
 
 
-class DeckTaskUserMentionedEventSerializer(DeckEventSerializer):
-    """User mentioned event serializer."""
+class DeckEventSerializer(serializers.Serializer):
+    """
+    Basic required fields in all events. TODO
+    The type values is used to load the serializer for the enent, see get_get_deck_event_serializer below.
+    """
 
-    data = DeckTaskMentionDataSerializer()
+    type = serializers.ChoiceField(choices=DECK_EVENT_TYPE_CHOICES)
+    id = serializers.CharField()
+    requestUserId = serializers.CharField()
+    data = serializers.JSONField()
 
-
-def get_deck_event_serializer(event_type, data):
-    """Helper to get the serialized data for a specific event type."""
-    serializer_by_type = {
-        DECK_EVENT_TYPE_TASK_CREATED: DeckTaskEventSerializer,
-        DECK_EVENT_TYPE_TASK_STATUS_CHANGED: DeckTaskStatusChangedEventSerializer,
-        DECK_EVENT_TYPE_TASK_DUE_DATE_CHANGED: DeckTaskDueDateChangedEventSerializer,
-        DECK_EVENT_TYPE_TASK_ASSIGNEE_CHANGED: DeckTaskAssigneeChangedEventSerializer,
-        DECK_EVENT_TYPE_TASK_COMMENT_CREATED: DeckTaskCommentCreatedEventSerializer,
-        DECK_EVENT_TYPE_TASK_USER_MENTIONED: DeckTaskUserMentionedEventSerializer,
-        DECK_EVENT_TYPE_TASK_DELETED: DeckTaskEventSerializer,
-    }
-    serializer = serializer_by_type[event_type]
-    return serializer(data=data)
+    def validate(self, attrs):
+        event_type = attrs['type']
+        data_serializer_by_type = {
+            DECK_EVENT_TYPE_TASK_CREATED: DeckTaskDataSerializer,
+            DECK_EVENT_TYPE_TASK_STATUS_CHANGED: DeckTaskStatusDataSerializer,
+            DECK_EVENT_TYPE_TASK_DUE_DATE_CHANGED: DeckTaskDueDateDataSerializer,
+            DECK_EVENT_TYPE_TASK_ASSIGNEE_CHANGED: DeckTaskAssigneeDataSerializer,
+            DECK_EVENT_TYPE_TASK_COMMENT_CREATED: DeckTaskCommentCreatedDataSerializer,
+            DECK_EVENT_TYPE_TASK_USER_MENTIONED: DeckTaskMentionDataSerializer,
+            DECK_EVENT_TYPE_TASK_DELETED: DeckTaskDataSerializer,
+        }
+        data_serializer_class = data_serializer_by_type[event_type]
+        data_serializer = data_serializer_class(data=attrs['data'])
+        data_serializer.is_valid(raise_exception=True)
+        attrs['data'] = data_serializer.validated_data
+        return attrs
 
 
 class DeckFollowSerializer(serializers.Serializer):
