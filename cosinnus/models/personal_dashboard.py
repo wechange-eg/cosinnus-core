@@ -12,9 +12,9 @@ from cosinnus.conf import settings
 from cosinnus.models import get_user_profile_model
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.idea import CosinnusIdea
-from cosinnus.models.map import get_map_url_with_selected_filter_params
 from cosinnus.models.profile import PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.map import get_map_url_with_selected_filter_params
 from cosinnus.utils.permissions import check_user_can_create_groups
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus_event.api_frontend.serializers import CosinnusEventPollSerializer, CosinnusEventSerializer
