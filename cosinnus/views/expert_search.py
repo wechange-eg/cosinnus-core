@@ -9,7 +9,7 @@ from django.views.generic import ListView
 
 from cosinnus.conf import settings
 from cosinnus.models.profile import get_user_profile_model
-from cosinnus.views.map_api import map_search_endpoint
+from cosinnus.utils.map import map_search
 from cosinnus.views.mixins.group import EndlessPaginationMixin, RequireLoggedInMixin
 
 
@@ -175,30 +175,13 @@ class CosinnusExpertProfileListView(RequireLoggedInMixin, EndlessPaginationMixin
 
     def get_data_from_api_endpoint(self, request):
         """Get user from the search api."""
-        if 'page' in request.GET:
-            get_params = request.GET
-            user = request.user
-            request = HttpRequest()
-            request.method = 'GET'
-            request.user = user
-            for key, value in get_params.items():
-                if not key == 'page':
-                    request.GET[key] = value
-        request.GET._mutable = True
-        if self.get_managed_tag():
-            request.GET['managed_tags'] = str(self.get_managed_tag().id)
-        request.GET['people'] = 'true'
-        request.GET['events'] = 'false'
-        request.GET['projects'] = 'false'
-        request.GET['groups'] = 'false'
-        request.GET['ideas'] = 'false'
-        request.GET['conferences'] = 'false'
-        request.GET['cloudfiles'] = 'false'
-        # we do our own pagination in this view, so set page limit to much
-        request.GET['limit'] = str(self.users.count())
-        request.GET['ignore_location'] = 'true'
-        result = map_search_endpoint(request, skip_limit_backend=True)
-        result_dict = result.data.get('results')
+        result_dict = map_search(
+            request.user,
+            people=True,
+            ignore_location=True,
+            managed_tags=self.get_managed_tag(),
+            limit=self.users.count(),
+        )
         slugs = [entry['slug'] for entry in result_dict]
         return self.users.filter(user__username__in=slugs)
 
