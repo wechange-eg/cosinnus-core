@@ -13,12 +13,15 @@ from cosinnus.models import get_user_profile_model
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.profile import PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS
+from cosinnus.trans.exchange import CosinnusExternalResourceTrans
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.map import get_map_url_with_selected_filter_params
 from cosinnus.utils.permissions import check_user_can_create_groups
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus_event.api_frontend.serializers import CosinnusEventPollSerializer, CosinnusEventSerializer
 from cosinnus_event.models import Event
+from cosinnus_exchange.api_frontend.serializers import CosinnusExternalResourceSerializer
+from cosinnus_exchange.utils import get_external_resources
 from cosinnus_marketplace.api_frontend.serializers import CosinnusOfferSerializer
 from cosinnus_marketplace.models import Offer
 from cosinnus_note.api_frontend.permissions import check_user_can_post_to_forum_from_dashboard
@@ -382,6 +385,32 @@ class CosinnusPersonalDashboardUserRecommendationsWidget(CosinnusPersonalDashboa
         return data
 
 
+class CosinnusPersonalDashboardExternalResourcesWidget(CosinnusPersonalDashboardWidget):
+    """External ressources widget"""
+
+    id = 'dashboard.external_resources'
+    user_data_function = staticmethod(get_external_resources)
+    serializer_class = CosinnusExternalResourceSerializer
+
+    def is_enabled(self, user):
+        return settings.COSINNUS_EXCHANGE_ENABLED and settings.COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED
+
+    def get_conf(self, user):
+        data = super().get_conf(user)
+        data.update(
+            {
+                'cta_url': get_map_url_with_selected_filter_params(['externalresources'], exchange=True),
+                'resource_name': CosinnusExternalResourceTrans.VERBOSE_NAME,
+                'resource_name_plural': CosinnusExternalResourceTrans.VERBOSE_NAME_PLURAL,
+                'resource_icon': CosinnusExternalResourceTrans.ICON,
+            }
+        )
+        return data
+
+    def get_data(self, request):
+        return super().get_data(request)
+
+
 # list of all known widgets
 PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardNewsWidget,
@@ -401,6 +430,7 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardEventRecommendationsWidget,
     CosinnusPersonalDashboardGroupRecommendationsWidget,
     CosinnusPersonalDashboardUserRecommendationsWidget,
+    CosinnusPersonalDashboardExternalResourcesWidget,
 ]
 
 # initialized available dashboard widgets

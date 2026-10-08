@@ -1251,6 +1251,7 @@ class CosinnusConf(AppConf):
         'dashboard.event_recommendations': {'active': True, 'frontend_conf': {}},
         'dashboard.space_recommendations': {'active': True, 'frontend_conf': {}},
         'dashboard.user_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.external_resources': {'active': True, 'frontend_conf': {}},
     }
 
     # Portal specific overrides of the V3_PERSONAL_DASHBOARD_WIDGETS setting.
