@@ -33,7 +33,7 @@ COSINNUS_ADMIN_2_FACTOR_AUTH_STRICT_MODE = False
 COSINNUS_USER_2_FACTOR_AUTH_ENABLED = False
 
 # hCaptcha is not required on dev, but 'hcaptcha_response' can still be sent
-COSINNUS_USE_HCAPTCHA = False
+COSINNUS_USE_CAPTCHA = False
 
 LANGUAGE_CODE = 'en'
 

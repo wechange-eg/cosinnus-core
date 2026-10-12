@@ -9161,6 +9161,9 @@ msgstr "Persönliches Dashboard"
 msgid "Personal Dashboard Announcements"
 msgstr "Dashboard-Ankündigungen"
 
+msgid "Personal Dashboard Redesign"
+msgstr "Redesign des persönlichen Dashboards"
+
 msgid "Personal Message (optional)"
 msgstr "Persönliche Nachricht (optional)"
 
@@ -11364,6 +11367,9 @@ msgstr "Die folgenden Nutzer/innen wurden auf die Warteliste gesetzt: %s"
 msgid "The fully redesigned calendar with a mobile-optimized interface has been launched!"
 msgstr "Der komplett neu gestaltete Kalender mit einer optimierten Benutzeroberfläche für mobile Geräte wurde veröffentlicht!"
 
+msgid "The fully redesigned personal dashboard has been launched!"
+msgstr "Das komplett überarbeitete persönliche Dashboard wurde eingeführt!"
+
 msgid "The generated 6-digit code (for example: 123456)"
 msgstr "Der generierte 6-stellige Code (zum Beispiel: 123456)"
 
@@ -11509,6 +11515,9 @@ msgstr "Die Präsentierenden werden in der Veranstaltungsübersicht angezeigt un
 
 msgid "The redesign has been launched across the platform!"
 msgstr "Das Redesign ist auf der gesamten Plattform eingeführt worden!"
+
+msgid "The redesigned personal dashboard \"For me\" offers a more concise view of recent updates from your groups and projects. The new \"Explore\" dashboard helps you discover relevant content, groups, and projects tailored for you."
+msgstr "Das neu gestaltete persönliche Dashboard „Für mich“ bietet einen präziseren Überblick über die neuesten Updates aus deinen Gruppen und Projekten. Das neue Dashboard „Entdecken“ hilft dir dabei, relevante Inhalte, Gruppen und Projekte zu finden, die zu deinen Interessen passen."
 
 msgid "The room was created successfully."
 msgstr "Raum erfolgreich erstellt."

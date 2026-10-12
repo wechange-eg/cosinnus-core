@@ -92,7 +92,7 @@ class CosinnusUserSignupSerializer(
     )
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
         newsletter_opt_in = serializers.BooleanField(required=False, default=False)
-    # one of hcaptcha_response or eucaptcha_response is required if COSINNUS_USE_HCAPTCHA is enabled for this portal
+    # one of hcaptcha_response or eucaptcha_response is required if COSINNUS_USE_CAPTCHA is enabled for this portal
     hcaptcha_response = serializers.CharField(required=False)
     eucaptcha_response = serializers.CharField(required=False)
 
@@ -122,10 +122,10 @@ class CosinnusUserSignupSerializer(
         """We run validation all in one method, because we do not want to
         give out any further validation details if the captcha is incorrect"""
         # hcaptcha or eucaptcha. do not validate the email before the captcha has been processed as valid.
-        if 'hcaptcha_response' in attrs or 'eucaptcha_response' in attrs or settings.COSINNUS_USE_HCAPTCHA:
+        if 'hcaptcha_response' in attrs or 'eucaptcha_response' in attrs or settings.COSINNUS_USE_CAPTCHA:
             # From here on, we need at least one valid captcha response that was supplied, preferring eucaptcha if both.
             # For debugging, we allow processing hcaptcha if the param is sent in POST,
-            # even if COSINNUS_USE_HCAPTCHA is not activated.
+            # even if COSINNUS_USE_CAPTCHA is not activated.
 
             if (
                 'eucaptcha_response' in attrs
@@ -184,7 +184,7 @@ class CosinnusUserSignupSerializer(
                     ),
                     extra={
                         'status': captcha_response.status_code,
-                        'details': captcha_response.json(),
+                        'details': captcha_response.text,
                         'verify_url_used': verify_url,
                     },
                 )
