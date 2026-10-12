@@ -1851,14 +1851,14 @@ class CosinnusConf(AppConf):
     ENABLE_USER_BLOCK = False
 
     # whether to require a valid hcaptcha or eucaptcha on the signup API endpoint
-    USE_HCAPTCHA = True
+    USE_CAPTCHA = True
 
     # the secret key for the hCaptcha. set in .env.
     # if both hCaptcha and euCaptcha keys are set in .env, euCaptcha is preferred
     HCAPTCHA_SECRET_KEY = None
 
     # the secret key for the euCaptcha. set in .env.
-    # this is activated by setting the key and `USE_HCAPTCHA = True`
+    # this is activated by setting the key and `USE_CAPTCHA = True`
     # if both hCaptcha and euCaptcha keys are set in .env, euCaptcha is preferred
     EUCAPTCHA_SECRET_KEY = None
 
