@@ -144,28 +144,17 @@ def check_babel_locales(app_configs, **kwargs):
             )
 
     if (
-        settings.COSINNUS_USE_HCAPTCHA
+        settings.COSINNUS_USE_CAPTCHA
         and not settings.COSINNUS_HCAPTCHA_SECRET_KEY
-        and not settings.COSINNUS_EUCAPTCHA_SECRET_KEY
+        and not (settings.COSINNUS_EUCAPTCHA_SECRET_KEY and settings.COSINNUS_EUCAPTCHA_SITE_KEY)
     ):
         errors.append(
             Error(
-                'COSINNUS_USE_HCAPTCHA is set to True but neither COSINNUS_HCAPTCHA_SECRET_KEY '
-                'nor COSINNUS_EUCAPTCHA_SECRET_KEY are set! Provide either WECHANGE_COSINNUS_HCAPTCHA_SECRET_KEY or '
-                'WECHANGE_COSINNUS_EUCAPTCHA_SECRET_KEY in .env or set COSINNUS_USE_HCAPTCHA=False!'
-            )
-        )
-
-    if (
-        settings.COSINNUS_USE_HCAPTCHA
-        and not settings.COSINNUS_HCAPTCHA_SECRET_KEY
-        and not settings.COSINNUS_EUCAPTCHA_SECRET_KEY
-    ):
-        errors.append(
-            Error(
-                'COSINNUS_USE_HCAPTCHA is set to True but neither COSINNUS_HCAPTCHA_SECRET_KEY '
-                'nor COSINNUS_EUCAPTCHA_SECRET_KEY are set! Provide either WECHANGE_COSINNUS_HCAPTCHA_SECRET_KEY or '
-                'WECHANGE_COSINNUS_EUCAPTCHA_SECRET_KEY in .env or set COSINNUS_USE_HCAPTCHA=False!'
+                'COSINNUS_USE_CAPTCHA is set to True but neither COSINNUS_HCAPTCHA_SECRET_KEY '
+                'nor COSINNUS_EUCAPTCHA_SECRET_KEY & COSINNUS_EUCAPTCHA_SITE_KEY are set! '
+                'Provide either WECHANGE_COSINNUS_HCAPTCHA_SECRET_KEY or '
+                'WECHANGE_COSINNUS_EUCAPTCHA_SECRET_KEY & COSINNUS_EUCAPTCHA_SITE_KEY in .env or '
+                'disable using captchas by setting COSINNUS_USE_CAPTCHA=False!'
             )
         )
 

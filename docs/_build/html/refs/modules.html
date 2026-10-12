@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Cosinnus Modules &#8212; Cosinnus 2.9.0b documentation</title>
+    <title>Cosinnus Modules &#8212; Cosinnus 2.10.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f0bd290c"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -766,6 +766,9 @@ full readable documentation.</p>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.ENABLE_USER_MATCH"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.ENABLE_USER_MATCH</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.ENV_FILE"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.ENV_FILE</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.ETHERPAD_ETHERCALC_READONLY"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.ETHERPAD_ETHERCALC_READONLY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.EUCAPTCHA_SECRET_KEY"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.EUCAPTCHA_SECRET_KEY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.EUCAPTCHA_SITE_KEY"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.EUCAPTCHA_SITE_KEY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.EUCAPTCHA_VERIFY_URL"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.EUCAPTCHA_VERIFY_URL</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.EVENT_MARK_CREATOR_AS_GOING"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.EVENT_MARK_CREATOR_AS_GOING</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.EXCHANGE_BACKENDS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.EXCHANGE_BACKENDS</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.EXCHANGE_ENABLED"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.EXCHANGE_ENABLED</span></code></a></li>
@@ -808,6 +811,7 @@ full readable documentation.</p>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.GROUP_PUBLICY_VISIBLE_OPTION_SHOWN"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.GROUP_PUBLICY_VISIBLE_OPTION_SHOWN</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.GROUP_TRANS_TYPED_CLASSES_DROPINS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.GROUP_TRANS_TYPED_CLASSES_DROPINS</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.GROUP_WALLPAPER_MAXIMUM_SIZE_SCALE"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.GROUP_WALLPAPER_MAXIMUM_SIZE_SCALE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.HAYSTACK_ASCII_FOLDING_ENABLED"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.HAYSTACK_ASCII_FOLDING_ENABLED</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.HAYSTACK_GLOBAL_MODEL_BOOST_MULTIPLIERS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.HAYSTACK_GLOBAL_MODEL_BOOST_MULTIPLIERS</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.HAYSTACK_GLOBAL_MODEL_BOOST_OFFSET"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.HAYSTACK_GLOBAL_MODEL_BOOST_OFFSET</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.HCAPTCHA_SECRET_KEY"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.HCAPTCHA_SECRET_KEY</span></code></a></li>
@@ -870,7 +874,8 @@ full readable documentation.</p>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.MAP_DEFAULT_RESULTS_PER_PAGE"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.MAP_DEFAULT_RESULTS_PER_PAGE</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.MAP_IMAGE_SIZE"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.MAP_IMAGE_SIZE</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.MAP_OPTIONS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.MAP_OPTIONS</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.MAP_USE_MODERN_TILESET"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.MAP_USE_MODERN_TILESET</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.MAP_TILESET_ATTRIBUTION_HTML"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.MAP_TILESET_ATTRIBUTION_HTML</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.MAP_TILESET_URL"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.MAP_TILESET_URL</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.MATCHING_DYNAMIC_FIELDS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.MATCHING_DYNAMIC_FIELDS</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.MATCHING_ENABLED"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.MATCHING_ENABLED</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.MATCHING_FIELDS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.MATCHING_FIELDS</span></code></a></li>
@@ -1010,6 +1015,7 @@ full readable documentation.</p>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.USE_V2_DASHBOARD_ADMIN_ONLY"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.USE_V2_DASHBOARD_ADMIN_ONLY</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.USE_V2_NAVBAR"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.USE_V2_NAVBAR</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.USE_V2_NAVBAR_ADMIN_ONLY"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.USE_V2_NAVBAR_ADMIN_ONLY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.USE_V3_PERSONAL_DASHBOARD"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.USE_V3_PERSONAL_DASHBOARD</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.USE_WORKER_THREADS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.USE_WORKER_THREADS</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V2_DASHBOARD_SHOW_MARKETPLACE"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V2_DASHBOARD_SHOW_MARKETPLACE</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V2_DASHBOARD_URL_FRAGMENT"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V2_DASHBOARD_URL_FRAGMENT</span></code></a></li>
@@ -1025,21 +1031,28 @@ full readable documentation.</p>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_FRONTEND_SIGNUP_VERIFICATION_WELCOME_PAGE</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_FRONTEND_SUPPORTED_LANGUAGES"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_FRONTEND_SUPPORTED_LANGUAGES</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_FRONTEND_URL_PATTERNS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_FRONTEND_URL_PATTERNS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_MENU_HELP_ITEMS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_MENU_HELP_ITEMS</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_MENU_HELP_LINKS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_MENU_HELP_LINKS</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_MENU_HOME_LINK"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_MENU_HOME_LINK</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_MENU_HOME_LINK_LABEL"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_MENU_HOME_LINK_LABEL</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_MENU_HOME_LINK_TOP_LEFT_OVERRIDE"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_MENU_HOME_LINK_TOP_LEFT_OVERRIDE</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_MENU_PORTAL_LINKS_DROPIN"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_MENU_PORTAL_LINKS_DROPIN</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_MENU_SPACES_ADD_FORUM_EVENTS_LINK_LABEL"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_MENU_SPACES_ADD_FORUM_EVENTS_LINK_LABEL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_MENU_SPACES_FORUM_LABEL"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_MENU_SPACES_FORUM_LABEL</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_MENU_SPACES_MAP_LABEL"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_MENU_SPACES_MAP_LABEL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_PERSONAL_DASHBOARD_WIDGETS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_PERSONAL_DASHBOARD_WIDGETS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_PERSONAL_DASHBOARD_WIDGETS_OVERRIDES"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_PERSONAL_DASHBOARD_WIDGETS_OVERRIDES</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_PORTAL_SETTINGS"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_PORTAL_SETTINGS</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.V3_SSO_PROVIDER"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.V3_SSO_PROVIDER</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.VIRUS_SCAN_UPLOADED_FILES"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.VIRUS_SCAN_UPLOADED_FILES</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.WELCOME_EMAIL_SUBJECT"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.WELCOME_EMAIL_SUBJECT</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.WORKER_THREADS_DISABLE_THREADING"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.WORKER_THREADS_DISABLE_THREADING</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.configure_map_tileset_url"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.configure_map_tileset_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.configure_v3_menu_help_items"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.configure_v3_menu_help_items()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusConf.configure_v3_menu_spaces_community_additional_items"><code class="docutils literal notranslate"><span class="pre">CosinnusConf.configure_v3_menu_spaces_community_additional_items()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusDefaultSettings"><code class="docutils literal notranslate"><span class="pre">CosinnusDefaultSettings</span></code></a><ul>
@@ -1059,6 +1072,8 @@ full readable documentation.</p>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusDefaultSettings.DJAJAX_ALLOWED_ACCESSES"><code class="docutils literal notranslate"><span class="pre">CosinnusDefaultSettings.DJAJAX_ALLOWED_ACCESSES</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusDefaultSettings.DJAJAX_VIEW_CLASS"><code class="docutils literal notranslate"><span class="pre">CosinnusDefaultSettings.DJAJAX_VIEW_CLASS</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusDefaultSettings.Meta"><code class="docutils literal notranslate"><span class="pre">CosinnusDefaultSettings.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusDefaultSettings.configure_bbb_preset_user_form_fields"><code class="docutils literal notranslate"><span class="pre">CosinnusDefaultSettings.configure_bbb_preset_user_form_fields()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus.html#cosinnus.conf.CosinnusDefaultSettings.configure_bbb_preset_user_form_fields_premium_only"><code class="docutils literal notranslate"><span class="pre">CosinnusDefaultSettings.configure_bbb_preset_user_form_fields_premium_only()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1528,7 +1543,6 @@ full readable documentation.</p>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.html#cosinnus_cloud.models.LinkedCloudFile.media_tag"><code class="docutils literal notranslate"><span class="pre">LinkedCloudFile.media_tag</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.html#cosinnus_cloud.models.LinkedCloudFile.media_tag_id"><code class="docutils literal notranslate"><span class="pre">LinkedCloudFile.media_tag_id</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.html#cosinnus_cloud.models.LinkedCloudFile.nextcloud_file_id"><code class="docutils literal notranslate"><span class="pre">LinkedCloudFile.nextcloud_file_id</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.html#cosinnus_cloud.models.LinkedCloudFile.objects"><code class="docutils literal notranslate"><span class="pre">LinkedCloudFile.objects</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.html#cosinnus_cloud.models.LinkedCloudFile.path"><code class="docutils literal notranslate"><span class="pre">LinkedCloudFile.path</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.html#cosinnus_cloud.models.LinkedCloudFile.resolve_attachable_object_id"><code class="docutils literal notranslate"><span class="pre">LinkedCloudFile.resolve_attachable_object_id()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_cloud.html#cosinnus_cloud.models.LinkedCloudFile.save"><code class="docutils literal notranslate"><span class="pre">LinkedCloudFile.save()</span></code></a></li>
@@ -2346,6 +2360,8 @@ full readable documentation.</p>
 <li class="toctree-l2"><a class="reference internal" href="cosinnus_marketplace.html#module-cosinnus_marketplace.managers">cosinnus_marketplace.managers module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus_marketplace.html#cosinnus_marketplace.managers.OfferManager"><code class="docutils literal notranslate"><span class="pre">OfferManager</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_marketplace.html#cosinnus_marketplace.managers.OfferManager.all_active"><code class="docutils literal notranslate"><span class="pre">OfferManager.all_active()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_marketplace.html#cosinnus_marketplace.managers.OfferManager.get_personal_items"><code class="docutils literal notranslate"><span class="pre">OfferManager.get_personal_items()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_marketplace.html#cosinnus_marketplace.managers.OfferManager.get_recommendations"><code class="docutils literal notranslate"><span class="pre">OfferManager.get_recommendations()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_marketplace.html#cosinnus_marketplace.managers.OfferManager.public"><code class="docutils literal notranslate"><span class="pre">OfferManager.public()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_marketplace.html#cosinnus_marketplace.managers.OfferManager.tags"><code class="docutils literal notranslate"><span class="pre">OfferManager.tags()</span></code></a></li>
 </ul>
@@ -3163,6 +3179,7 @@ full readable documentation.</p>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cosinnus_poll.html#module-cosinnus_poll.managers">cosinnus_poll.managers module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cosinnus_poll.html#cosinnus_poll.managers.PollManager"><code class="docutils literal notranslate"><span class="pre">PollManager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_poll.html#cosinnus_poll.managers.PollManager.get_personal_open_polls"><code class="docutils literal notranslate"><span class="pre">PollManager.get_personal_open_polls()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_poll.html#cosinnus_poll.managers.PollManager.public"><code class="docutils literal notranslate"><span class="pre">PollManager.public()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="cosinnus_poll.html#cosinnus_poll.managers.PollManager.tags"><code class="docutils literal notranslate"><span class="pre">PollManager.tags()</span></code></a></li>
 </ul>
@@ -4649,13 +4666,16 @@ full readable documentation.</p>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cosinnus_event.html#module-cosinnus_event.managers">cosinnus_event.managers module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventQuerySet"><code class="docutils literal notranslate"><span class="pre">EventQuerySet</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventQuerySet.all_upcoming"><code class="docutils literal notranslate"><span class="pre">EventQuerySet.all_upcoming()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventQuerySet.archived"><code class="docutils literal notranslate"><span class="pre">EventQuerySet.archived()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventQuerySet.conference_upcoming"><code class="docutils literal notranslate"><span class="pre">EventQuerySet.conference_upcoming()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventQuerySet.public"><code class="docutils literal notranslate"><span class="pre">EventQuerySet.public()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventQuerySet.public_upcoming"><code class="docutils literal notranslate"><span class="pre">EventQuerySet.public_upcoming()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventQuerySet.tags"><code class="docutils literal notranslate"><span class="pre">EventQuerySet.tags()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventManager"><code class="docutils literal notranslate"><span class="pre">EventManager</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventManager.all_upcoming"><code class="docutils literal notranslate"><span class="pre">EventManager.all_upcoming()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventManager.archived"><code class="docutils literal notranslate"><span class="pre">EventManager.archived()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventManager.conference_upcoming"><code class="docutils literal notranslate"><span class="pre">EventManager.conference_upcoming()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventManager.get_personal_attending_events"><code class="docutils literal notranslate"><span class="pre">EventManager.get_personal_attending_events()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventManager.get_personal_open_polls"><code class="docutils literal notranslate"><span class="pre">EventManager.get_personal_open_polls()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventManager.get_recommendations"><code class="docutils literal notranslate"><span class="pre">EventManager.get_recommendations()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventManager.public"><code class="docutils literal notranslate"><span class="pre">EventManager.public()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventManager.public_upcoming"><code class="docutils literal notranslate"><span class="pre">EventManager.public_upcoming()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cosinnus_event.html#cosinnus_event.managers.EventManager.tags"><code class="docutils literal notranslate"><span class="pre">EventManager.tags()</span></code></a></li>
 </ul>
 </li>
 </ul>

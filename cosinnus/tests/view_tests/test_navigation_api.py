@@ -47,8 +47,8 @@ class SpacesViewTest(APITestCase):
         self.assertDictEqual(
             response.data['personal'],
             {
-                'header': 'My Personal Space',
-                'items': [MenuItem('Personal Dashboard', '/dashboard/', 'fa-user', id='PersonalDashboard')],
+                'header': 'Personal Space',
+                'items': [MenuItem('Personal Dashboard', '/dashboard/', 'fa-home', id='PersonalDashboard')],
                 'actions': [],
             },
         )
@@ -678,7 +678,7 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
                 ],
                 'middle': [],
                 'services': [
-                    MenuItem('Discover', reverse('cosinnus:map'), icon='fa-map', is_external=False, id='Map'),
+                    MenuItem('Map', reverse('cosinnus:map'), icon='fa-map', is_external=False, id='Map'),
                 ],
                 'right': [
                     MenuItem('Help', icon='fa-question', id='Help'),

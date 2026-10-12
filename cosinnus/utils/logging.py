@@ -14,10 +14,10 @@ def log_needs_attention_error(message, extra=None):
         logger.critical(message, extra=extra)
 
 
-def log_with_tags(level, message, tags=dict, extra=None):
+def log_with_tags(level, message, tags=None, extra=None):
     """Logs any a message with variable level with a given set of tags.
     Level is a const taken directly from the logging package: `logging.WARNING` or `logging.CRITICAL`
-    Tags need to be in the form of `{'tag_name': 'tag_value', ...}`."""
+    @param tags: a dict, needs to be in the form of `{'tag_name': 'tag_value', ...}`."""
     with sentry_sdk.configure_scope() as scope:
         if tags:
             for key, val in tags.items():

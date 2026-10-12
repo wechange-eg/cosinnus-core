@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.api_frontend.serializers package &#8212; Cosinnus 2.9.0b documentation</title>
+    <title>cosinnus.api_frontend.serializers package &#8212; Cosinnus 2.10.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f0bd290c"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -245,9 +245,53 @@ validated data for this field.</p>
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusPortalErrorLogSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api_frontend.serializers.portal.</span></span><span class="sig-name descname"><span class="pre">CosinnusPortalErrorLogSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusPortalErrorLogSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Serializer</span></code></p>
+<p>Serializer for PortalErrorLogView. All entries will be shortened to a max length, but this is not enforced as
+ValidationError.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusPortalErrorLogSerializer.validate_extra">
+<span class="sig-name descname"><span class="pre">validate_extra</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusPortalErrorLogSerializer.validate_extra" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max length enforcement, max member count of 20 and string casting of all members</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusPortalErrorLogSerializer.validate_message">
+<span class="sig-name descname"><span class="pre">validate_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusPortalErrorLogSerializer.validate_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max length enforcement</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusPortalErrorLogSerializer.validate_stacktrace">
+<span class="sig-name descname"><span class="pre">validate_stacktrace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusPortalErrorLogSerializer.validate_stacktrace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max length enforcement</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.portal.CosinnusPortalErrorLogSerializer.validate_url">
+<span class="sig-name descname"><span class="pre">validate_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.portal.CosinnusPortalErrorLogSerializer.validate_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max length enforcement</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="module-cosinnus.api_frontend.serializers.user">
 <span id="cosinnus-api-frontend-serializers-user-module"></span><h2>cosinnus.api_frontend.serializers.user module<a class="headerlink" href="#module-cosinnus.api_frontend.serializers.user" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusGettingStartedActionSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api_frontend.serializers.user.</span></span><span class="sig-name descname"><span class="pre">CosinnusGettingStartedActionSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusGettingStartedActionSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Serializer</span></code></p>
+<p>Serializer for getting actions.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusGettingStartedActionSerializer.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusGettingStartedActionSerializer.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusGlobalUserNotificationSettingSerializer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api_frontend.serializers.user.</span></span><span class="sig-name descname"><span class="pre">CosinnusGlobalUserNotificationSettingSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusGlobalUserNotificationSettingSerializer" title="Permalink to this definition">¶</a></dt>
@@ -391,6 +435,34 @@ run validation with the given data</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusUserLoginSerializer.validate">
 <span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusUserLoginSerializer.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusUserProfileRecommendationSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.api_frontend.serializers.user.</span></span><span class="sig-name descname"><span class="pre">CosinnusUserProfileRecommendationSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusUserProfileRecommendationSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSerializer</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusUserProfileRecommendationSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusUserProfileRecommendationSerializer.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusUserProfileRecommendationSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('name',</span> <span class="pre">'description',</span> <span class="pre">'avatar',</span> <span class="pre">'url',</span> <span class="pre">'membership_count')</span></em><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusUserProfileRecommendationSerializer.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusUserProfileRecommendationSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusUserProfileRecommendationSerializer.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="cosinnus.models.html#cosinnus.models.profile.UserProfile" title="cosinnus.models.profile.UserProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserProfile</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.api_frontend.serializers.user.CosinnusUserProfileRecommendationSerializer.get_membership_count">
+<span class="sig-name descname"><span class="pre">get_membership_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.api_frontend.serializers.user.CosinnusUserProfileRecommendationSerializer.get_membership_count" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

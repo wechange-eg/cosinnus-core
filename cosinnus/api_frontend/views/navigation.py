@@ -113,7 +113,7 @@ class SpacesView(FilterBlacklistedItemsMixin, MyGroupsClusteredMixin, APIView):
                     'application/json': {
                         'data': {
                             'personal': {
-                                'header': 'My Personal Space',
+                                'header': 'Personal Space',
                                 'items': [
                                     {
                                         'id': 'PersonalDashboard',
@@ -236,13 +236,12 @@ class SpacesView(FilterBlacklistedItemsMixin, MyGroupsClusteredMixin, APIView):
                 MenuItem(
                     _('Personal Dashboard'),
                     reverse('cosinnus:user-dashboard'),
-                    'fa-user',
-                    request.user.cosinnus_profile.avatar_url,
+                    'fa-home',
                     id='PersonalDashboard',
                 )
             ]
             personal_space = {
-                'header': _('My Personal Space'),
+                'header': _('Personal Space'),
                 'items': self.filter_items_for_blacklisted_urls(personal_space_items),
                 'actions': [],
             }
@@ -337,7 +336,7 @@ class SpacesView(FilterBlacklistedItemsMixin, MyGroupsClusteredMixin, APIView):
                             id='EventsForum',
                         )
                     )
-        # "Discover" link in community section of spaces menu
+        # "Map" link in community section of spaces menu
         if settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL:
             community_space_items.append(
                 MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-map', id='Map')

@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_cloud.utils package &#8212; Cosinnus 2.9.0b documentation</title>
+    <title>cosinnus_cloud.utils package &#8212; Cosinnus 2.10.0b documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c69b84f1"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f0bd290c"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -167,7 +167,11 @@ client id and secret.
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.delete_group">
 <span class="sig-prename descclassname"><span class="pre">cosinnus_cloud.utils.nextcloud.</span></span><span class="sig-name descname"><span class="pre">delete_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groupid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cosinnus_cloud.utils.nextcloud.OCSResponse" title="cosinnus_cloud.utils.nextcloud.OCSResponse"><span class="pre">OCSResponse</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#cosinnus_cloud.utils.nextcloud.delete_group" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Note: in rare edge cases with race conditions, the group delete will have worked but this method will return
+a response that is not <cite>response.ok</cite>, with status 404 that is the response of the checking if the group was
+actually deleted after an initial error response. If returned responses are ever used, this needs to be fixed.
+In any case, if the delete didn’t work, this method will always throw an exception.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus_cloud.utils.nextcloud.delete_groupfolder">

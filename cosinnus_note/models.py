@@ -24,6 +24,7 @@ from cosinnus.utils.permissions import check_object_read_access, filter_tagged_o
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from cosinnus_note import cosinnus_notifications
+from cosinnus_note.managers import NoteManager
 
 logger = logging.getLogger('cosinnus')
 
@@ -47,6 +48,8 @@ class Note(LikeableObjectMixin, TranslateableFieldsModelMixin, RelayMessageMixin
     text = models.TextField(_('Text'))
     video = EmbedVideoField(blank=True, null=True)
     facebook_post_id = models.CharField(_('Facebook Share'), max_length=255, null=True, blank=True)
+
+    objects = NoteManager()
 
     timeline_template = 'cosinnus_note/v2/dashboard/timeline_item.html'
 

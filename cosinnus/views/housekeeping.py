@@ -944,5 +944,7 @@ def firebase_send_testpush(request):
 
 def print_ip(request):
     """For checking if the current client's IP is determined correctly. Also prints other request headers and meta."""
+    if not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
     ip = get_ip_from_request(request)
     return HttpResponse(f'User IP was read as: {ip}<br><br>Full request meta was: {request.META}')
