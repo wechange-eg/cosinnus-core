@@ -76,8 +76,8 @@ class DeckTaskMentionDataSerializer(DeckTaskDataSerializer):
 
 class DeckEventSerializer(serializers.Serializer):
     """
-    Basic required fields in all events. TODO
-    The type values is used to load the serializer for the enent, see get_get_deck_event_serializer below.
+    Serializer for all deck events.
+    The data field is serialized using the respective data serializer depending on the type value.
     """
 
     type = serializers.ChoiceField(choices=DECK_EVENT_TYPE_CHOICES)
