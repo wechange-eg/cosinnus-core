@@ -129,6 +129,7 @@
                                 <caption><strong>Warning period</strong></caption>
                                 <thead>
                                     <tr>
+                                        <th>Format</th>
                                         <th>Babel value</th>
                                         <th>Text override</th>
                                         <th>Used value</th>
@@ -136,17 +137,33 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>{{ preview.warning_duration.babel }}</td>
+                                        <th>Neutral</th>
+                                        <td>{{ preview.warning_period.babel }}</td>
                                         <td>
-                                            {% if preview.warning_duration.override is not None %}
-                                                {{ preview.warning_duration.override }}
+                                            {% if preview.warning_period.override is not None %}
+                                                {{ preview.warning_period.override }}
                                             {% else %}
                                                 <em>not configured</em>
                                             {% endif %}
                                         </td>
                                         <td>
-                                            <strong>{{ preview.warning_duration.used }}</strong>
-                                            ({% if preview.warning_duration.source == 'override' %}text override{% else %}Babel{% endif %})
+                                            <strong>{{ preview.warning_period.used }}</strong>
+                                            ({% if preview.warning_period.source == 'override' %}text override{% else %}Babel{% endif %})
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Relative</th>
+                                        <td>{{ preview.relative_warning_period.babel }}</td>
+                                        <td>
+                                            {% if preview.relative_warning_period.override is not None %}
+                                                {{ preview.relative_warning_period.override }}
+                                            {% else %}
+                                                <em>not configured</em>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <strong>{{ preview.relative_warning_period.used }}</strong>
+                                            ({% if preview.relative_warning_period.source == 'override' %}text override{% else %}Babel{% endif %})
                                         </td>
                                     </tr>
                                 </tbody>

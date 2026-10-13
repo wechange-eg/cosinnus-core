@@ -117,7 +117,7 @@ def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, 
         {
             'language': language,
             'language_label': language_label,
-            'values': _get_inactivity_duration_preview(config['days'], config, language),
+            'values': _get_inactivity_duration_preview(config['days'], config, language, add_direction=False),
         }
         for language, language_label in settings.LANGUAGES
     ]
@@ -126,7 +126,8 @@ def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, 
     for days, warning in config['warnings'].items():
         previews = []
         for language, language_label in settings.LANGUAGES:
-            warning_duration = _get_inactivity_duration_preview(days, warning, language)
+            warning_period = _get_inactivity_duration_preview(days, warning, language, add_direction=False)
+            relative_warning_period = _get_inactivity_duration_preview(days, warning, language, add_direction=True)
             try:
                 mail_subject, mail_content = render_inactivity_mail(
                     kind, recipient, days, preview_context, language_override=language
@@ -141,7 +142,8 @@ def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, 
                 {
                     'language': language,
                     'language_label': language_label,
-                    'warning_duration': warning_duration,
+                    'warning_period': warning_period,
+                    'relative_warning_period': relative_warning_period,
                     'subject': mail_subject,
                     'body': mail_content,
                     'error': error,
@@ -164,11 +166,21 @@ def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, 
     }
 
 
-def _get_inactivity_duration_preview(days, config, language):
+def _get_inactivity_duration_preview(days, config, language, *, add_direction):
     babel_config = {'display_unit': config.get('display_unit', 'day')}
-    babel_value = format_inactivity_duration(days, babel_config, language)
-    has_override = config.get('text') is not None
-    override_value = format_inactivity_duration(days, {'text': config['text']}, language) if has_override else None
+    babel_value = format_inactivity_duration(days, babel_config, language, add_direction=add_direction)
+
+    override_key = 'relative_text' if add_direction else 'text'
+    has_override = config.get(override_key) is not None
+    override_value = None
+    if has_override:
+        override_value = format_inactivity_duration(
+            days,
+            {override_key: config[override_key]},
+            language,
+            add_direction=add_direction,
+        )
+
     return {
         'babel': babel_value,
         'override': override_value,

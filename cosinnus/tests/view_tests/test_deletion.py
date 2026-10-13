@@ -425,8 +425,14 @@ class InactivityPreviewTest(TestUserMixin, TestCase):
         response = self.client.get(reverse('cosinnus:housekeeping-inactivity-preview'))
 
         self.assertEqual(response.status_code, 200)
-        previews = response.context['sections'][0]['warnings'][0]['previews']
+        section = response.context['sections'][0]
+        previews = section['warnings'][0]['previews']
         self.assertEqual([preview['language'] for preview in previews], ['de', 'en'])
+        self.assertFalse(section['inactivity_durations'][0]['values']['babel'].startswith('in '))
+        self.assertEqual(previews[0]['warning_period']['babel'], '14 Tage')
+        self.assertEqual(previews[0]['relative_warning_period']['babel'], 'in 14 Tagen')
+        self.assertEqual(previews[1]['warning_period']['babel'], '14 days')
+        self.assertEqual(previews[1]['relative_warning_period']['babel'], 'in 14 days')
 
     @override_settings(
         LANGUAGES=(('en', 'English'),),
@@ -436,6 +442,7 @@ class InactivityPreviewTest(TestUserMixin, TestCase):
             'warnings': {
                 14: {
                     'text': 'custom warning period',
+                    'relative_text': 'in custom warning period',
                     'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
                     'body_template': 'cosinnus/mail/inactivity/user_body.txt',
                 }
@@ -453,8 +460,12 @@ class InactivityPreviewTest(TestUserMixin, TestCase):
             'custom inactivity period',
         )
         self.assertEqual(
-            section['warnings'][0]['previews'][0]['warning_duration']['used'],
+            section['warnings'][0]['previews'][0]['warning_period']['used'],
             'custom warning period',
+        )
+        self.assertEqual(
+            section['warnings'][0]['previews'][0]['relative_warning_period']['used'],
+            'in custom warning period',
         )
 
     def test_inactivity_preview_requires_superuser(self):
