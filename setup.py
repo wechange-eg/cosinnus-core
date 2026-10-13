@@ -161,6 +161,7 @@ setup(
         'XlsxWriter==1.3.7',
         'django-cors-headers<3.11.0',
         'phonenumbers==8.13.28',
+        'babel==2.18.0',
         # wagtail
         'django-compressor==3.1',
         # virus file scan validator

@@ -54,7 +54,20 @@ from cosinnus.views.ui_prefs import UI_PREF_DASHBOARD_HIDDEN_DECK_MIGRATION, get
 logger = logging.getLogger('cosinnus')
 
 
-class UserDashboardView(RequireLoggedInMixin, TemplateView):
+class UserDashboardGuestRedirectMixin:
+    def get(self, request, *args, **kwargs):
+        # disable dashboard for guest user but instead redirect them to their linked group
+        if request.user.is_authenticated and request.user.is_guest:
+            return redirect(
+                group_aware_reverse(
+                    'cosinnus:group-dashboard',
+                    kwargs={'group': request.user.cosinnus_profile.guest_access_object.group},
+                )
+            )
+        return super(UserDashboardGuestRedirectMixin, self).get(request, *args, **kwargs)
+
+
+class UserDashboardView(RequireLoggedInMixin, UserDashboardGuestRedirectMixin, TemplateView):
     template_name = 'cosinnus/v2/dashboard/user_dashboard.html'
 
     def get(self, request, *args, **kwargs):
@@ -63,14 +76,6 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
             or (getattr(settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False) and request.user.is_superuser)
         ):
             return redirect('cosinnus:map')
-        # disable dashboard for user but instead redirect them to their linked group
-        if request.user.is_authenticated and request.user.is_guest:
-            return redirect(
-                group_aware_reverse(
-                    'cosinnus:group-dashboard',
-                    kwargs={'group': request.user.cosinnus_profile.guest_access_object.group},
-                )
-            )
         return super(UserDashboardView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -888,3 +893,10 @@ class TimelineView(ModelRetrievalMixin, View):
 
 
 api_timeline = TimelineView.as_view()
+
+
+class CosinnusPersonalDashboardView(RequireLoggedInMixin, UserDashboardGuestRedirectMixin, TemplateView):
+    template_name = 'cosinnus/v3/personal_dashboard.html'
+
+
+personal_dashboard_view = CosinnusPersonalDashboardView.as_view()

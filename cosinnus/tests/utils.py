@@ -82,19 +82,6 @@ def reload_urlconf(urlconf=None):
         import_module(urlconf)
 
 
-class CeleryTaskTestMixin:
-    """Mixin to run Celery Tasks in test cases."""
-
-    @classmethod
-    def runCeleryTasks(cls):
-        """
-        Our CeleryThreadTasks use on_commit callbacks that are not triggered in (non-transitional) test-cases.
-        For this case Django defines the captureOnCommitCallbacks contextmanagers. We just give it another name for
-        better test readability.
-        """
-        return cls.captureOnCommitCallbacks(execute=True)
-
-
 @contextmanager
 def catch_signal(signal: django.dispatch.Signal, sender=None) -> MagicMock:
     """Catch signals temporarily and return them."""

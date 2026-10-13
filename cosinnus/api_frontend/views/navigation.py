@@ -21,7 +21,6 @@ from rest_framework.views import APIView
 
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
-from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
 from cosinnus.conf import settings
 from cosinnus.models import UserBlock
 from cosinnus.models.conference import CosinnusConferenceApplication
@@ -100,7 +99,6 @@ class SpacesView(FilterBlacklistedItemsMixin, MyGroupsClusteredMixin, APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -115,7 +113,7 @@ class SpacesView(FilterBlacklistedItemsMixin, MyGroupsClusteredMixin, APIView):
                     'application/json': {
                         'data': {
                             'personal': {
-                                'header': 'My Personal Space',
+                                'header': 'Personal Space',
                                 'items': [
                                     {
                                         'id': 'PersonalDashboard',
@@ -238,13 +236,12 @@ class SpacesView(FilterBlacklistedItemsMixin, MyGroupsClusteredMixin, APIView):
                 MenuItem(
                     _('Personal Dashboard'),
                     reverse('cosinnus:user-dashboard'),
-                    'fa-user',
-                    request.user.cosinnus_profile.avatar_url,
+                    'fa-home',
                     id='PersonalDashboard',
                 )
             ]
             personal_space = {
-                'header': _('My Personal Space'),
+                'header': _('Personal Space'),
                 'items': self.filter_items_for_blacklisted_urls(personal_space_items),
                 'actions': [],
             }
@@ -339,17 +336,14 @@ class SpacesView(FilterBlacklistedItemsMixin, MyGroupsClusteredMixin, APIView):
                             id='EventsForum',
                         )
                     )
-        # "Discover" link in community section of spaces menu
+        # "Map" link in community section of spaces menu
         if settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL:
             community_space_items.append(
                 MenuItem(settings.COSINNUS_V3_MENU_SPACES_MAP_LABEL, reverse('cosinnus:map'), 'fa-map', id='Map')
             )
-        if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS:
+        if settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS:
             community_space_items.extend(
-                [
-                    MenuItem(label, url, icon, id=id)
-                    for id, label, url, icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS
-                ]
+                [MenuItem(**config) for config in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS]
             )
         if community_space_items:
             community_space_actions = [
@@ -411,7 +405,6 @@ class BookmarksView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -516,7 +509,6 @@ class UnreadMessagesView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -556,7 +548,6 @@ class UnreadAlertsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -655,7 +646,6 @@ class AlertsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -926,7 +916,6 @@ class AlertsMarkAllReadView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     # todo: generate proper response, by either putting the entire response into a
@@ -988,7 +977,6 @@ class MembershipAlertsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     @swagger_auto_schema(
         responses={
@@ -1159,7 +1147,6 @@ class HelpView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -1202,10 +1189,7 @@ class HelpView(APIView):
         }
     )
     def get(self, request):
-        help_items = [
-            MenuItem(label, url, icon, is_external=True, id=id)
-            for id, label, url, icon in settings.COSINNUS_V3_MENU_HELP_LINKS
-        ]
+        help_items = [MenuItem(**{'is_external': True, **config}) for config in settings.COSINNUS_V3_MENU_HELP_ITEMS]
         return Response(help_items)
 
 
@@ -1248,7 +1232,6 @@ class ProfileView(LanguageMenuItemMixin, APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -1403,7 +1386,6 @@ class MainNavigationView(FilterBlacklistedItemsMixin, LanguageMenuItemMixin, API
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -1674,7 +1656,6 @@ class VersionHistoryView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -1764,7 +1745,6 @@ class VersionHistoryUnreadCountView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand

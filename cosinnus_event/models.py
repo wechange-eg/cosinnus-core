@@ -39,7 +39,7 @@ from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from cosinnus_event import cosinnus_notifications
 from cosinnus_event.conf import settings
 from cosinnus_event.fields import RTMPURLField
-from cosinnus_event.managers import EventQuerySet
+from cosinnus_event.managers import EventManager
 from cosinnus_event.mixins import BBBRoomMixin
 from cosinnus_event.utils.bbb_streaming import trigger_streamer_status_changes
 
@@ -187,7 +187,7 @@ class Event(
         null=True,
     )
 
-    objects = EventQuerySet.as_manager()
+    objects = EventManager()
 
     timeline_template = 'cosinnus_event/v2/dashboard/timeline_item.html'
 
