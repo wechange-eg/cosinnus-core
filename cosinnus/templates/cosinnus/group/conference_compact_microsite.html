@@ -18,6 +18,14 @@
 				    </div>
 				</div>
             {% endif %}
+            {% if group.use_conference_applications %}
+                <div class="group-microsite-subheader-item">
+                    <header>{% trans "Conference Applications" %}</header>
+                    <div class="group-microsite-subheader-item-value">
+                        {{ group.conference_applications.applied.count }}
+                    </div>
+                </div>
+            {% endif %}
             {% if group.participation_management.all.first.participants_limit %}
 				<div class="group-microsite-subheader-item">
 					<header>{% trans "Maximum Number of Participants" %}</header>
