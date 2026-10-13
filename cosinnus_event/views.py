@@ -985,7 +985,7 @@ class TeamEventFeed(BaseEventFeed):
 
 
 class GlobalFeed(BaseEventFeed):
-    """A public iCal Feed that contains all publicly visible upcoming events (from the current portal only)"""
+    """A public iCal Feed that contains all publicly visible upcoming events, even if they're in a private group."""
 
     def items(self, request):
         qs = Event.get_current_for_portal()
@@ -993,12 +993,6 @@ class GlobalFeed(BaseEventFeed):
         qs = qs.filter(state=Event.STATE_SCHEDULED, from_date__isnull=False, to_date__isnull=False).order_by(
             '-from_date'
         )
-        if settings.COSINNUS_GROUP_PUBLICY_VISIBLE_OPTION_SHOWN:
-            # Filter by field value if the option is shown
-            qs = qs.filter(group__publicly_visible=True)
-        elif settings.COSINNUS_GROUP_PUBLICLY_VISIBLE_DEFAULT_VALUE is False:
-            # Return empty queryset if the option is not shown and the default value is False.
-            qs = qs.none()
         return qs
 
 
