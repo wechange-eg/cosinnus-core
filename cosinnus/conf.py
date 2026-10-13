@@ -1894,7 +1894,9 @@ class CosinnusConf(AppConf):
     #
     # Optional at the top level and per warning:
     # - `display_unit`: day (default), week, month or year. Babel rounds to this display unit;
-    # - `text`: explicit display override instead of Babel; None uses Babel, even an empty string overrides it.
+    # - `text`: explicit neutral-period override instead of Babel;
+    # - `relative_text`: explicit relative warning-period override (e.g. "in three weeks") instead of Babel.
+    # None uses Babel; an empty string overrides it.
     #
     # Warnings run only on their configured calendar day, without catch-up. Shorter thresholds can deactivate
     # overdue objects without prior warnings.

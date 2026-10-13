@@ -1,4 +1,4 @@
-{% load i18n %}{% blocktrans %}Your entire account, profile and personal information will be deactivated in {{ deactivation_in }} and then irrevocably deleted.
+{% load i18n %}{% blocktrans %}Your entire account, profile and personal information will be deactivated {{ relative_warning_period }} and then irrevocably deleted.
 
 If you do not wish for you account to be deactivated, just log in once.
 

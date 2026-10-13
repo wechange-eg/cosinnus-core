@@ -317,9 +317,9 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(group_type)s %(group_name)s will be deactivated %(deactivation_after)s "
-"after the last activity and then permanently deleted. This will happen in "
-"%(deactivation_in)s.\n"
+"%(group_type)s %(group_name)s will be deactivated %(inactivity_period)s "
+"after the last activity and then permanently deleted. This will happen "
+"%(relative_warning_period)s.\n"
 "\n"
 "If you do not wish for the group/project to be deactivated, just create some "
 "content there.\n"
@@ -15428,8 +15428,8 @@ msgstr ""
 
 #, python-format
 msgid ""
-"Your entire account, profile and personal information will be deactivated in "
-"%(deactivation_in)s and then irrevocably deleted.\n"
+"Your entire account, profile and personal information will be deactivated "
+"%(relative_warning_period)s and then irrevocably deleted.\n"
 "\n"
 "If you do not wish for you account to be deactivated, just log in once.\n"
 "\n"

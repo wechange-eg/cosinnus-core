@@ -33,6 +33,18 @@ class InactivityDurationTest(SimpleTestCase):
     def test_missing_unit_defaults_to_days(self):
         self.assertEqual(format_inactivity_duration(21, {}, 'en'), '21 days')
 
+    def test_duration_can_include_direction(self):
+        self.assertEqual(format_inactivity_duration(10, {}, 'de', add_direction=True), 'in 10 Tagen')
+        self.assertEqual(
+            format_inactivity_duration(
+                21,
+                {'text': 'three weeks', 'relative_text': 'in three weeks'},
+                'en',
+                add_direction=True,
+            ),
+            'in three weeks',
+        )
+
     def test_invalid_unit_and_language_raise(self):
         with self.assertRaises(ImproperlyConfigured):
             format_inactivity_duration(21, {'display_unit': 'invalid'}, 'en')
@@ -74,6 +86,9 @@ class InactivityMailTemplateTest(SimpleTestCase):
 
                 for call in render_to_string_mock.call_args_list:
                     self.assertEqual(call.args[1]['deleted_after_days'], expected_days)
+                    self.assertEqual(call.args[1]['warning_period'], '14 days')
+                    self.assertEqual(call.args[1]['relative_warning_period'], 'in 14 days')
+                    self.assertEqual(call.args[1]['inactivity_period'], '365 days' if kind == 'user' else '730 days')
 
     def test_rendering_errors_are_raised_for_users_and_groups(self):
         config = {

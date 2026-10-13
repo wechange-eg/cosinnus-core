@@ -14,15 +14,18 @@ from django.utils.encoding import force_str
 INACTIVITY_DURATION_UNITS = ('day', 'week', 'month', 'year')
 
 
-def format_inactivity_duration(days: int, config, language: str) -> str:
+def format_inactivity_duration(days: int, config, language: str, *, add_direction: bool = False) -> str:
     """
-    Use an explicit text override or format a duration with Babel.
+    Use the explicit 'text' or 'relative_text' override, depending on add_direction, or format with Babel.
 
-    Rounds to given 'display_unit'.  Falls back to 'day' if not set.
+    Rounds to given 'display_unit' and optionally adds past/future direction. Falls back to 'day' if not set.
+    For example, add_direction=True formats 10 days as "in 10 Tagen" instead of "10 Tage" in German.
     """
-    if 'text' in config and config['text'] is not None:
+    override_key = 'relative_text' if add_direction else 'text'
+    override = config.get(override_key)
+    if override is not None:
         with translation.override(language):
-            return force_str(config['text'])
+            return force_str(override)
 
     unit = config.get('display_unit', 'day')
     if unit not in INACTIVITY_DURATION_UNITS:
@@ -32,7 +35,13 @@ def format_inactivity_duration(days: int, config, language: str) -> str:
     locale = Locale.parse(language, sep='-')
 
     # An infinite threshold prevents Babel from promoting the explicitly configured unit to a larger one.
-    return format_timedelta(timedelta(days=days), granularity=unit, threshold=float('inf'), locale=locale)
+    return format_timedelta(
+        timedelta(days=days),
+        granularity=unit,
+        threshold=float('inf'),
+        add_direction=add_direction,
+        locale=locale,
+    )
 
 
 def render_inactivity_mail(
@@ -55,8 +64,14 @@ def render_inactivity_mail(
 
     profile = getattr(recipient, 'cosinnus_profile', None)
     language = language_override or getattr(profile, 'language', None) or settings.LANGUAGE_CODE
-    deactivation_in = format_inactivity_duration(days_before_deactivation, warning, language)
-    deactivation_after = format_inactivity_duration(config['days'], config, language)
+    # Keep the warning period neutral for templates that describe the remaining duration.
+    warning_period = format_inactivity_duration(days_before_deactivation, warning, language)
+    # Include the localized future direction because templates use this as a complete relative time expression.
+    relative_warning_period = format_inactivity_duration(
+        days_before_deactivation, warning, language, add_direction=True
+    )
+    # Keep the inactivity period neutral so templates can place it relative to the last activity.
+    inactivity_period = format_inactivity_duration(config['days'], config, language)
 
     template_context = dict(
         context or {},
@@ -64,9 +79,10 @@ def render_inactivity_mail(
         language=language,
         days_before_deactivation=days_before_deactivation,
         deleted_after_days=deletion_days,
-        deactivation_in=deactivation_in,
+        warning_period=warning_period,
+        relative_warning_period=relative_warning_period,
         inactivity_days=config['days'],
-        deactivation_after=deactivation_after,
+        inactivity_period=inactivity_period,
     )
 
     with translation.override(language):
