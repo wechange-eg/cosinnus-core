@@ -263,18 +263,12 @@ def send_user_inactivity_deactivation_notifications() -> int:
                     user.cosinnus_profile.inactivity_notification_sent_at = now()
                     user.cosinnus_profile.save()
                 users_notified_count += 1
-            except Exception as e:
-                extra = {
-                    'days_before_deactivation': days_before_deactivation,
-                    'user_id': user.pk,
-                }
-                logger.exception(e, extra=extra)
-
+            except Exception:
                 logger.critical(
-                    'Sending user inactivity notification failed. Exception logged separately.',
+                    'Sending user inactivity notification failed.',
                     extra={
-                        **extra,
-                        'exception': repr(e),
+                        'days_before_deactivation': days_before_deactivation,
+                        'user_id': user.pk,
                         'trace': traceback.format_exc(),
                     },
                 )

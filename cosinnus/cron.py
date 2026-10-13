@@ -87,17 +87,16 @@ class DeleteScheduledUserProfiles(CosinnusCronJobBase):
                     'delete_userprofile() cronjob: profile was deleted completely after 30 days',
                     extra={'user_id': user_id},
                 )
-            except Exception as e:
-                extra = {
-                    'user_id': user_id,
-                }
-                logger.exception(e, extra=extra)
+            except Exception:
                 logger.critical(
                     (
                         'delete_userprofile() cronjob: threw an exception during the DeleteScheduledUserProfiles '
                         'cronjob! (in extra)'
                     ),
-                    extra={**extra, 'exception': repr(e)},
+                    extra={
+                        'user_id': user_id,
+                        'trace': traceback.format_exc(),
+                    },
                 )
 
 
@@ -113,9 +112,13 @@ class SendUserInactivityNotifications(CosinnusCronJobBase):
         users_notified = None
         try:
             users_notified = send_user_inactivity_deactivation_notifications()
-        except Exception as e:
-            logger.exception(e)
-            logger.critical('Sending user inactivity notifications failed.', extra={'exception': repr(e)})
+        except Exception:
+            logger.critical(
+                'Sending user inactivity notifications failed.',
+                extra={
+                    'trace': traceback.format_exc(),
+                },
+            )
 
         if users_notified is not None:
             if settings.COSINNUS_INACTIVITY_DRY_RUN:
@@ -150,15 +153,12 @@ class MarkInactiveUsersForDeletion(CosinnusCronJobBase):
                 reassign_admins_for_groups_of_deleted_user(user)
                 deactivate_user_and_mark_for_deletion(user, inactivity_deletion=True)
                 users_scheduled += 1
-            except Exception as e:
-                extra = {'user_id': user.pk}
-
-                logger.exception(e, extra=extra)
+            except Exception:
                 logger.critical(
                     'Deactivating inactive user failed.',
                     extra={
-                        **extra,
-                        'exception': repr(e),
+                        'user_id': user.pk,
+                        'trace': traceback.format_exc(),
                     },
                 )
                 errors_occurred = True
@@ -429,14 +429,13 @@ class DeleteScheduledGroups(CosinnusCronJobBase):
                     'delete_group() cronjob: group was deleted completely after 30 days',
                     extra={'group_id': group_id},
                 )
-            except Exception as e:
-                extra = {
-                    'group_id': group_id,
-                }
-                logger.exception(e, extra=extra)
+            except Exception:
                 logger.critical(
-                    ('delete_group() cronjob: threw an exception during the DeleteScheduledGroups cronjob! (in extra)'),
-                    extra={**extra, 'exception': repr(e)},
+                    'delete_group() cronjob: threw an exception during the DeleteScheduledGroups cronjob! (in extra)',
+                    extra={
+                        'group_id': group_id,
+                        'trace': traceback.format_exc(),
+                    },
                 )
 
                 errors_occurred = True
@@ -487,9 +486,13 @@ class SendGroupsInactivityNotifications(CosinnusCronJobBase):
         groups_notified = None
         try:
             groups_notified = send_group_inactivity_deactivation_notifications()
-        except Exception as e:
-            logger.exception(e)
-            logger.critical('Sending group inactivity notifications failed.', extra={'exception': repr(e)})
+        except Exception:
+            logger.critical(
+                'Sending group inactivity notifications failed.',
+                extra={
+                    'trace': traceback.format_exc(),
+                },
+            )
 
         if groups_notified is not None:
             if settings.COSINNUS_INACTIVITY_DRY_RUN:
@@ -523,15 +526,12 @@ class MarkInactiveGroupsForDeletion(CosinnusCronJobBase):
             try:
                 mark_group_for_deletion(group)
                 groups_scheduled += 1
-            except Exception as e:
-                extra = {'group_id': group.pk}
-
-                logger.exception(e, extra=extra)
+            except Exception:
                 logger.critical(
                     'Deactivating inactive group failed.',
                     extra={
-                        **extra,
-                        'exception': repr(e),
+                        'group_id': group.pk,
+                        'trace': traceback.format_exc(),
                     },
                 )
                 errors_occurred = True

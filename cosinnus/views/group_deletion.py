@@ -347,19 +347,13 @@ def send_group_inactivity_deactivation_notifications() -> int:
                     )
                     html_content = textfield(mail_content)
                     send_html_mail(admin, mail_subject, html_content, raise_on_error=True)
-                except Exception as e:
-                    extra = {
-                        'days_before_deactivation': days_before_deactivation,
-                        'group_id': group.pk,
-                        'admin_id': admin.pk,
-                    }
-                    logger.exception(e, extra=extra)
-
+                except Exception:
                     logger.critical(
-                        'Sending group inactivity notifications failed. Exception logged separately.',
+                        'Sending group inactivity notifications failed.',
                         extra={
-                            **extra,
-                            'exception': repr(e),
+                            'days_before_deactivation': days_before_deactivation,
+                            'group_id': group.pk,
+                            'admin_id': admin.pk,
                             'trace': traceback.format_exc(),
                         },
                     )
