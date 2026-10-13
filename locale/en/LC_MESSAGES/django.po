@@ -10841,6 +10841,9 @@ msgstr ""
 msgid "The offer you requested is no longer active. Sorry!"
 msgstr ""
 
+msgid "The page \"For me\" offers a more concise view of recent updates from your groups and projects. The page \"Explore\" helps you discover relevant content, groups, and projects tailored for you."
+msgstr ""
+
 msgid "The page you requested is not available for this event at this time."
 msgstr ""
 
@@ -10893,9 +10896,6 @@ msgid "The presenters will be shown in order in the event and will receive Moder
 msgstr ""
 
 msgid "The redesign has been launched across the platform!"
-msgstr ""
-
-msgid "The redesigned personal dashboard \"For me\" offers a more concise view of recent updates from your groups and projects. The new \"Explore\" dashboard helps you discover relevant content, groups, and projects tailored for you."
 msgstr ""
 
 msgid "The room was created successfully."

@@ -24,8 +24,8 @@ UPDATES = {
         'title': _('Personal Dashboard Redesign'),
         'short_text': _('The fully redesigned personal dashboard has been launched!'),
         'full_text': _(
-            'The redesigned personal dashboard "For me" offers a more concise view of recent updates from your groups '
-            'and projects. The new "Explore" dashboard helps you discover relevant content, groups, and projects '
+            'The page "For me" offers a more concise view of recent updates from your groups '
+            'and projects. The page "Explore" helps you discover relevant content, groups, and projects '
             'tailored for you.'
         ),
         'display_conditional': _REDESIGN_FULL_IS_ENABLED and settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD,

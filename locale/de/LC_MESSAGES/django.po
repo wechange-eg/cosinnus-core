@@ -11462,6 +11462,9 @@ msgstr "Das Inserat wurde erfolgreich reaktiviert."
 msgid "The offer you requested is no longer active. Sorry!"
 msgstr "Das Inserat das du angefragt hast ist leider nicht mehr aktiv!"
 
+msgid "The page \"For me\" offers a more concise view of recent updates from your groups and projects. The page \"Explore\" helps you discover relevant content, groups, and projects tailored for you."
+msgstr "Die Seite \"Für mich\" bietet einen Überblick über die relevanten Inhalte aus deinen Gruppen und Projekten. Auf der Seite \"Erkunden\" werden öffentliche Inhalte aus der Community vorgeschlagen, die dich interessieren könnten."
+
 msgid "The page you requested is not available for this event at this time."
 msgstr "Die Seite die du aufgerufen hast ist zu dieser Zeit nicht verfügbar."
 
@@ -11515,9 +11518,6 @@ msgstr "Die Präsentierenden werden in der Veranstaltungsübersicht angezeigt un
 
 msgid "The redesign has been launched across the platform!"
 msgstr "Das Redesign ist auf der gesamten Plattform eingeführt worden!"
-
-msgid "The redesigned personal dashboard \"For me\" offers a more concise view of recent updates from your groups and projects. The new \"Explore\" dashboard helps you discover relevant content, groups, and projects tailored for you."
-msgstr "Das neu gestaltete persönliche Dashboard „Für mich“ bietet einen präziseren Überblick über die neuesten Updates aus deinen Gruppen und Projekten. Das neue Dashboard „Entdecken“ hilft dir dabei, relevante Inhalte, Gruppen und Projekte zu finden, die zu deinen Interessen passen."
 
 msgid "The room was created successfully."
 msgstr "Raum erfolgreich erstellt."
@@ -16395,6 +16395,9 @@ msgstr "Ja"
 
 #~ msgid "The new calendar in groups and projects features enhanced public event sharing and advanced tools for internal scheduling, including recurring events and seamless CalDAV synchronization."
 #~ msgstr "Der neue Kalender bietet in Gruppen und Projekten eine verbesserte Darstellung öffentlicher Veranstaltungen sowie erweiterte Funktionen für interne Termine, inklusive Serienterminen und CalDAV-Synchronisation."
+
+#~ msgid "The redesigned personal dashboard \"For me\" offers a more concise view of recent updates from your groups and projects. The new \"Explore\" dashboard helps you discover relevant content, groups, and projects tailored for you."
+#~ msgstr "Das neu gestaltete persönliche Dashboard „Für mich“ bietet einen präziseren Überblick über die neuesten Updates aus deinen Gruppen und Projekten. Das neue Dashboard „Entdecken“ hilft dir dabei, relevante Inhalte, Gruppen und Projekte zu finden, die zu deinen Interessen passen."
 
 #~ msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
 #~ msgstr "Die Start- und Endzeit werden für Erinnerungs-E-Mails benutzt (wenn eingesetllt). Kann mehrere Tage beinhalten."
