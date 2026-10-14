@@ -1179,6 +1179,7 @@ class UserAdmin(DjangoUserAdmin):
         'email',
         'is_active',
         'date_joined',
+        'last_login',
         'has_logged_in',
         'tos_accepted',
         'email_verified',
@@ -1193,6 +1194,7 @@ class UserAdmin(DjangoUserAdmin):
         field for field in list(DjangoUserAdmin.list_filter) if field not in _useradmin_excluded_list_filter
     ] + [
         'date_joined',
+        'last_login',
         UserHasLoggedInFilter,
         UserToSAcceptedFilter,
         EmailVerifiedFilter,
