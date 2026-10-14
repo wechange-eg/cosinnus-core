@@ -38,14 +38,14 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             self.portal.save()
 
     class RocketChatTestUserDataMixin:
-        def get_test_user_data(self, user_number=1):
+        def get_test_user_data(self):
             random_id = str(random.randint(1000, 9999))
             return {
                 'username': random_id,
                 'password': 'pwd',
-                'email': f'rockettest{user_number}-{random_id}@example.com',
+                'email': f'rockettest-{random_id}@example.com',
                 'first_name': 'Rocket',
-                'last_name': f'LocalTest{user_number}-{random_id}',
+                'last_name': f'LocalTest-{random_id}',
             }
 
     class RocketChatTestUserMixin(RocketChatTestUserDataMixin):
@@ -184,49 +184,58 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             Test that if a new user is created with the same name as an existing user a new RC user is created.
             Tests that a unique RC username is used by appending the user id.
             """
-            test_user2_data = self.get_test_user_data(2)
+            test_user2_data = self.get_test_user_data()
+            test_user2_data.update(
+                {'first_name': self.test_user_data['first_name'], 'last_name': self.test_user_data['last_name']}
+            )
             self.test_user2 = User.objects.create(**test_user2_data)
             profile1 = self.test_user.cosinnus_profile
             profile2 = self.test_user2.cosinnus_profile
             rocket_connection_user = self.rocket_connection._get_user_connection(self.test_user2)
-            user_info = rocket_connection_user.me().json()
-            self.assertEqual(user_info['_id'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
-            self.assertEqual(user_info['username'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME])
-            self.assertNotEqual(user_info['_id'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
-            self.assertNotEqual(user_info['username'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
+            user2_info = rocket_connection_user.me().json()
+            self.assertEqual(user2_info['_id'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
+            self.assertEqual(user2_info['username'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME])
+            self.assertNotEqual(user2_info['_id'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
+            self.assertNotEqual(user2_info['username'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             expected_unique_username = (
-                f'{test_user2_data["first_name"]}.{test_user2_data["last_name"]}-{self.test_user2.id}'.lower()
+                f'{self.test_user_data["first_name"]}.{self.test_user_data["last_name"]}-{self.test_user2.id}'.lower()
             )
-            self.assertEqual(user_info['username'], expected_unique_username)
+            self.assertEqual(user2_info['username'], expected_unique_username)
 
         def test_update_user_with_same_name(self):
             """
             Test that if a user is renamed with the same name as an existing user the RC users are different.
             Tests that a unique RC username is used by appending the user id.
             """
-            test_user2_data = self.get_test_user_data(2)
+            test_user2_data = self.get_test_user_data()
             self.test_user2 = User.objects.create(**test_user2_data)
-            self.test_user2.last_name = test_user2_data['last_name']
+            self.test_user2.first_name = self.test_user_data['first_name']
+            self.test_user2.last_name = self.test_user_data['last_name']
             self.test_user2.save()
+            self.test_user2.cosinnus_profile.refresh_from_db()
             profile1 = self.test_user.cosinnus_profile
             profile2 = self.test_user2.cosinnus_profile
             rocket_connection_user = self.rocket_connection._get_user_connection(self.test_user2)
-            user_info = rocket_connection_user.me().json()
-            self.assertEqual(user_info['_id'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
-            self.assertEqual(user_info['username'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME])
-            self.assertNotEqual(user_info['_id'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
-            self.assertNotEqual(user_info['username'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
+            user2_info = rocket_connection_user.me().json()
+            self.assertEqual(user2_info['_id'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
+            self.assertEqual(user2_info['username'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME])
+            self.assertNotEqual(user2_info['_id'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
+            self.assertNotEqual(user2_info['username'], profile1.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             expected_unique_username = (
-                f'{test_user2_data["first_name"]}.{test_user2_data["last_name"]}-{self.test_user2.id}'.lower()
+                f'{self.test_user_data["first_name"]}.{self.test_user_data["last_name"]}-{self.test_user2.id}'.lower()
             )
-            self.assertEqual(user_info['username'], expected_unique_username)
+            self.assertEqual(user2_info['username'], expected_unique_username)
 
         def test_create_user_with_existing_rocket_chat_username(self):
             """Tests that creating a user with a used RC username a new user is created with a unique,
             deduplicated username because of a collision on the RC server."""
             # create colliding RC user
-            test_user2_data = self.get_test_user_data(2)
-            colliding_username = f'rocket.localtest2-{test_user2_data["username"]}-100'
+            test_user2_data = self.get_test_user_data()
+            test_user2_data['pk'] = 100
+            colliding_username = (
+                f'{test_user2_data["first_name"].lower()}.{test_user2_data["last_name"].lower()}'
+                f'-{test_user2_data["pk"]}'
+            )
             colliding_user_data = {
                 'username': colliding_username,
                 'email': test_user2_data['email'],
@@ -238,7 +247,7 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             self.colliding_rocket_chat_user_id = response['user']['_id']
 
             # create user with same username, but different email
-            test_user2_data.update({'pk': 100, 'email': f'rockettest2-{test_user2_data["username"]}-2@example.com'})
+            test_user2_data.update({'email': test_user2_data['email'].replace('@', '-2@')})
             self.test_user2 = User.objects.create(**test_user2_data)
 
             profile2 = self.test_user2.cosinnus_profile
@@ -246,6 +255,7 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             user_info = rocket_connection_user.me().json()
             self.assertEqual(user_info['_id'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_ID])
             self.assertEqual(user_info['username'], profile2.settings[PROFILE_SETTING_ROCKET_CHAT_USERNAME])
+            self.assertNotEqual(profile2.settings[PROFILE_SETTING_ROCKET_CHAT_ID], self.colliding_rocket_chat_user_id)
             expected_unique_username = f'{colliding_username}_1'
 
             self.assertEqual(user_info['username'], expected_unique_username)
@@ -254,7 +264,7 @@ if getattr(settings, 'COSINNUS_ROCKET_ENABLED', False):
             """
             Test that updating a user, if a user with the same username exists in rocketchat uses a unique username.
             """
-            test_user2_data = self.get_test_user_data(2)
+            test_user2_data = self.get_test_user_data()
             self.test_user2 = User.objects.create(**test_user2_data)
             profile2 = self.test_user2.cosinnus_profile
             with patch(
