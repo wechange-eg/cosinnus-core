@@ -13,6 +13,7 @@ from typing import Optional
 
 import six
 from annoying.functions import get_object_or_None
+from dateutil.relativedelta import relativedelta
 from django.apps import apps
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -25,6 +26,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.core.validators import MaxLengthValidator, MinLengthValidator, RegexValidator
 from django.db import IntegrityError, models
 from django.db.models import F, Max, Min, Q
+from django.db.models.aggregates import Count
 from django.db.models.fields.json import KeyTextTransform
 from django.db.models.functions import Cast
 from django.db.models.signals import pre_delete
@@ -79,7 +81,7 @@ from cosinnus.utils.functions import (
     sort_key_strcoll_attr,
     unique_aware_slugify,
 )
-from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_slugs
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids, get_default_user_group_slugs
 from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.urls import get_domain_for_portal, group_aware_reverse
 from cosinnus.utils.validators import validate_image_format
@@ -497,6 +499,81 @@ class CosinnusGroupManager(models.Manager):
         queryset = queryset.filter(
             from_date__gt=now, from_date__lte=now + period[0], from_date__gte=now + period[0] - period[1]
         )
+        return queryset
+
+    def get_for_user_without_default_groups(self, user):
+        """Returns list of groups where the user is member or admin excluding default and manged tags groups."""
+        # get user groups
+        user_groups = self.get_for_user(user)
+
+        # ignore default groups
+        default_user_group_ids = get_default_user_group_ids()
+        user_groups = [group for group in user_groups if group.id not in default_user_group_ids]
+
+        # ignore managed tags groups
+        if (
+            settings.COSINNUS_V3_FRONTEND_ENABLED
+            and settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS
+        ):
+            managed_tags = user.cosinnus_profile.get_managed_tags()
+            paired_groups_ids = [tag.paired_group.id for tag in managed_tags if tag.paired_group]
+            user_groups = [group for group in user_groups if group.id not in paired_groups_ids]
+        return user_groups
+
+    def get_for_user_without_default_groups_pks(self, user):
+        return [group.pk for group in self.get_for_user_without_default_groups(user)]
+
+    def get_personal_items(self, user):
+        """
+        Returns user groups, excluding default groups, ordered by last visit.
+        Based on MyGroupsClusteredMixin.
+        """
+        from cosinnus.models import LastVisitedObject
+
+        # get user groups excluding default groups
+        user_groups = self.get_for_user_without_default_groups(user)
+
+        # consider only projects and groups
+        user_groups = [
+            group for group in user_groups if group.type in [self.model.TYPE_PROJECT, self.model.TYPE_SOCIETY]
+        ]
+
+        # get group visits
+        group_ct = ContentType.objects.get_for_model(get_cosinnus_group_model())
+        group_last_visited_qs = LastVisitedObject.objects.filter(
+            user=user, content_type=group_ct, portal=CosinnusPortal.get_current()
+        )
+        # a dict of group-id -> datetime
+        group_last_visited = dict(group_last_visited_qs.values_list('object_id', 'visited'))
+
+        # sort by last_visited
+        user_groups = list(user_groups)
+        default_date = now() - relativedelta(years=100)
+        user_groups = sorted(
+            user_groups, key=lambda group: group_last_visited.get(group.id, default_date), reverse=True
+        )
+        return user_groups
+
+    def get_recommendations(self, user):
+        queryset = self.filter(is_active=True)
+
+        # exclude user groups
+        user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
+        queryset = queryset.exclude(pk__in=user_group_ids)
+
+        # exclude groups without description
+        queryset = queryset.exclude(description=None).exclude(description='')
+
+        # exclude groups without avatar
+        queryset = queryset.exclude(avatar='')
+
+        # exclude groups with 1 member
+        queryset = queryset.annotate(
+            count_members=Count('memberships', filter=Q(memberships__status__in=MEMBER_STATUS))
+        ).filter(count_members__gt=1)
+
+        # order by created
+        queryset = queryset.order_by('-created')
         return queryset
 
 
@@ -2297,6 +2374,20 @@ class CosinnusBaseGroup(
         type(self).objects.filter(pk=self.pk).update(settings=self.settings)
         # group-cache must be cleared for the change to take effect
         self.clear_cache()
+
+    def get_user_nextcloud_calendar_url(self, user):
+        """Convert the admin nextcloud_calendar_url to the user caldav calendar url as used by the frontend."""
+        from cosinnus_cloud.hooks import get_nc_user_id
+
+        user_calendar_url = None
+        if self.nextcloud_calendar_url:
+            user_calendar_url = self.nextcloud_calendar_url.replace(
+                f'/{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/',
+                f'/{get_nc_user_id(user)}/',
+            )
+            user_calendar_url = user_calendar_url[:-1]
+            user_calendar_url += f'_shared_by_{settings.COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME}/'
+        return user_calendar_url
 
 
 class CosinnusGroup(CosinnusBaseGroup):

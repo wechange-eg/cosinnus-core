@@ -488,11 +488,8 @@ class MainContentView(LanguageMenuItemMixin, APIView):
 
         # match personal dashboard
         if not self.main_menu_label and url.startswith(reverse('cosinnus:user-dashboard')):
-            self.main_menu_label = _('Personal Dashboard')
-            if self.request.user.cosinnus_profile.avatar_url:
-                self.main_menu_image = self.request.user.cosinnus_profile.get_avatar_thumbnail_url()
-            else:
-                self.main_menu_icon = 'fa-user'
+            self.main_menu_label = _('Personal Space')
+            self.main_menu_icon = 'fa-home'
 
         # match map
         if not self.main_menu_label and url.startswith(reverse('cosinnus:map')):
@@ -500,11 +497,11 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             self.main_menu_icon = 'fa-map'
 
         # match additional community space links
-        if not self.main_menu_label and settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS:
-            for __, link_label, link_url, link_icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS:
-                if url.startswith(str(link_url)):
-                    self.main_menu_label = link_label
-                    self.main_menu_icon = link_icon
+        if not self.main_menu_label and settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS:
+            for link_config in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS:
+                if url.startswith(str(link_config['url'])):
+                    self.main_menu_label = link_config['label']
+                    self.main_menu_icon = link_config.get('icon')
 
         # unmatched urls get the "Go to" label
         if not self.main_menu_label:

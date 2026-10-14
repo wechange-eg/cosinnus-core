@@ -90,7 +90,15 @@ class _UserProfileForm(
         return description
 
     def save(self, commit=True):
-        """Set the username equal to the userid"""
+        """Save profile"""
+
+        # Set is_avatar_generated.
+        # Note: using _has_changed instead of changed_data, as calling changed_data raises an error in the timezone
+        # field.
+        if self['avatar']._has_changed() or self.data.get('avatar_clear', 'false') != 'false':
+            # avatar set or deleted, as the genera
+            self.instance.is_avatar_generated = False
+
         profile = super(_UserProfileForm, self).save(commit=True)
 
         # set the newsletter opt-in

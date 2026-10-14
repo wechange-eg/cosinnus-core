@@ -163,6 +163,10 @@ class RobustElasticSearchBackend(Elasticsearch7SearchBackend):
     def __init__(self, *args, **options):
         """Add custom default options"""
 
+        search_filters = ['lowercase']
+        if getattr(settings, 'COSINNUS_HAYSTACK_ASCII_FOLDING_ENABLED', True):
+            search_filters.append('asciifolding')
+
         self.DEFAULT_SETTINGS = {
             'settings': {
                 'index': {
@@ -172,17 +176,15 @@ class RobustElasticSearchBackend(Elasticsearch7SearchBackend):
                     'analyzer': {
                         'ngram_analyzer': {
                             'tokenizer': 'standard',
-                            'filter': [
-                                'haystack_ngram',
-                                'lowercase',
-                            ],
+                            'filter': ['haystack_ngram'] + search_filters,
                         },
                         'edgengram_analyzer': {
                             'tokenizer': 'standard',
-                            'filter': [
-                                'haystack_edgengram',
-                                'lowercase',
-                            ],
+                            'filter': ['haystack_edgengram'] + search_filters,
+                        },
+                        'standard_search_analyzer': {
+                            'tokenizer': 'standard',
+                            'filter': search_filters,
                         },
                     },
                     'filter': {
@@ -208,7 +210,7 @@ class RobustElasticSearchBackend(Elasticsearch7SearchBackend):
         content_field_name, mapping = super(RobustElasticSearchBackend, self).build_schema(*args, **kwargs)
         for _field_name, field_mapping in mapping.items():
             if 'analyzer' in field_mapping and field_mapping['analyzer'] == 'ngram_analyzer':
-                field_mapping['search_analyzer'] = 'standard'
+                field_mapping['search_analyzer'] = 'standard_search_analyzer'
             field_class = args[0].get(_field_name)
             if field_class and field_class.field_type == 'nested':
                 field_mapping['type'] = 'nested'
