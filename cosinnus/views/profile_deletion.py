@@ -19,6 +19,7 @@ from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.inactivity import render_inactivity_mail
+from cosinnus.utils.user import is_user_active
 from cosinnus.views.group import mark_group_for_deletion
 
 logger = logging.getLogger('cosinnus')
@@ -35,10 +36,15 @@ def deactivate_user(user):
 
 
 def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactivity_deletion=False):
-    """Deactivate a user account and schedule deletion after the configured profile deletion period."""
+    """Deactivate a user account and schedule deletion after the configured profile deletion period.
+    We do not email inactive users, but we still mark them for deletion."""
 
     # do not delete superusers due to inactivity as we might and up with a portal without any admins.
     if user.is_superuser:
+        return
+
+    # safety check to skip deleting the leftover user objects of already deleted users.
+    if user.email.startswith('__deleted_user__'):
         return
 
     deletion_days = settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS
@@ -55,7 +61,7 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactiv
         ) % {'deleted_after_days': deletion_days}
         body_text = textfield(text)
         send_html_mail(user, _('Information about the deletion of your user account'), body_text, threaded=False)
-    elif inactivity_deletion:
+    elif inactivity_deletion and is_user_active(user):
         # send notification for automatic deletion due to inactivity
         subject = _('Attention: Your profile has been deactivated and will be deleted due to inactivity')
         text = _(
@@ -234,6 +240,7 @@ def get_users_due_for_inactivity_deactivation():
     """Return users whose configured inactivity period has elapsed."""
     inactivity_threshold = now() - timedelta(days=settings.COSINNUS_USER_INACTIVITY_SCHEDULE['days'])
     users = get_user_model().objects.filter(cosinnus_profile__scheduled_for_deletion_at=None)
+    users = users.exclude(email__startswith='__deleted_user__')  # ignore already deleted user leftover objects
     users = users.filter(
         Q(last_login__lt=inactivity_threshold) | Q(last_login=None, date_joined__lt=inactivity_threshold)
     )
