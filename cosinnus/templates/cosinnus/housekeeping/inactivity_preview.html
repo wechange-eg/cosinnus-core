@@ -66,9 +66,33 @@
             <li>Dry run applies only to inactivity warning and deactivation jobs, not to already scheduled deletions or activity updates.</li>
         </ul>
         <ul>
-            <li>Users due for deactivation: {{ users_due_for_deactivation }}</li>
-            <li>Groups due for deactivation: {{ groups_due_for_deactivation }}</li>
+            <li>Users due for deactivation: {{ users_due_for_deactivation_count }}</li>
+            <li>Groups due for deactivation: {{ groups_due_for_deactivation_count }}</li>
         </ul>
+        <div>
+            <details>
+                <summary style="cursor: pointer;text-decoration: underline">Show users due for deactivation</summary>
+                <div>
+                    <ul>
+                        {% for user in users_due_for_deactivation %}
+                            <li><a href="/admin/auth/user/{{ user.id }}">{{ user.email }}</a> (Signed up: {{ user.date_joined }}, last login: {{ user.last_login }})</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </details>
+        </div>
+        <div>
+            <details>
+                <summary style="cursor: pointer;text-decoration: underline">Show groups due for deactivation</summary>
+                <div>
+                    <ul>
+                        {% for group in groups_due_for_deactivation %}
+                            <li><a href="{{ group.get_admin_change_url }}">{{ group.name }}</a> (Members: {{ group.member_count }})</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </details>
+        </div>
     </div>
 
     {% for section in sections %}

@@ -86,11 +86,15 @@ def inactivity_preview(request):
         _get_inactivity_preview_section('user', user_candidates, request.user),
         _get_inactivity_preview_section('group', group_candidates, request.user),
     ]
+    users_due_for_deactivation = get_users_due_for_inactivity_deactivation().order_by('date_joined')
+    groups_due_for_deactivation = get_groups_due_for_inactivity_deactivation()
     context = {
         'dry_run': settings.COSINNUS_INACTIVITY_DRY_RUN,
         'sections': sections,
-        'users_due_for_deactivation': get_users_due_for_inactivity_deactivation().count(),
-        'groups_due_for_deactivation': get_groups_due_for_inactivity_deactivation().count(),
+        'users_due_for_deactivation': users_due_for_deactivation,
+        'users_due_for_deactivation_count': users_due_for_deactivation.count(),
+        'groups_due_for_deactivation': groups_due_for_deactivation,
+        'groups_due_for_deactivation_count': groups_due_for_deactivation.count(),
     }
     return render(request, 'cosinnus/housekeeping/inactivity_preview.html', context)
 
