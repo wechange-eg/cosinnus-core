@@ -433,7 +433,10 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         # add the v3-exempt parameter to the URL so we do not actually parse the v3-served response
         v3_exempted_url = add_url_param(url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
         session = requests.Session()
-        session.headers.update(dict(request.headers))
+        request_headers = dict(request.headers)
+        if 'Content-Length' in request_headers:
+            del request_headers['Content-Length']
+        session.headers.update(request_headers)
         session.cookies.update(request.COOKIES)
         response = session.get(v3_exempted_url, allow_redirects=allow_redirects)
         for history_response in response.history:
