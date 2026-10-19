@@ -1,6 +1,6 @@
 {% if request.user.is_authenticated and not request.GET.disableextrascripts %}
 
-    {% if SETTINGS.PIWIK_SERVER_URL and SETTINGS.PIWIK_SITE_ID and not SETTINGS.DEBUG %}
+    {% if SETTINGS.PIWIK_SERVER_URL and SETTINGS.PIWIK_SITE_ID and not SETTINGS.DEBUG and not SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED %}
         <!-- Matomo -->
         <script>
             var _paq = window._paq = window._paq || [];
