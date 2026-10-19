@@ -338,7 +338,11 @@ class UserSignupTriggerEventsMixin(object):
     def trigger_events_after_user_signup(self, user, request, request_data=None, skip_messages=False):
         """Triggers all kinds of events and signals after a user has signed up and their profile creation
         has been completed. Should be called after
-        `UserSignupFinalizeMixin.finalize_user_object_after_signup`
+          `UserSignupFinalizeMixin.finalize_user_object_after_signup`.
+        Hint: new users are added to the portal default groups (defined in `get_default_user_group_slugs` /
+          `NEWW_DEFAULT_USER_GROUPS`) via the hook `ensure_user_to_default_portal_groups`, after their
+           portal membership is created, and not here!
+
         @param request_data: if the POST data is not contained in `request.POST`, supply it via this arg
         @param skip_messages: if True, will not trigger any user messages. used when this s
             called via API.
