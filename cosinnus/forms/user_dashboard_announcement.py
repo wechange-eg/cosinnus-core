@@ -72,7 +72,11 @@ class UserDashboardAnnouncementForm(AsssignPortalMixin, forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(UserDashboardAnnouncementForm, self).__init__(*args, **kwargs)
-        if not settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
+        if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
+            # make display field required and remove emtpy choice
+            self.fields['display'].choices = self.fields['display'].choices[1:]
+            self.fields['display'].required = True
+        else:
             self.fields['text'].initial = (
                 '# Enter your\n# Big Headline here\n\nDear Community,\n\nExample text.\n\n## Secondary Headline\n\n'
                 'More text'
