@@ -1294,6 +1294,7 @@ class CosinnusBaseGroup(
     parent = models.ForeignKey(
         'self', verbose_name=_('Parent Group'), related_name='groups', null=True, blank=True, on_delete=models.SET_NULL
     )
+    # hint: use `get_related_groups_active` for most usecases if you just want a listing of related groups!
     related_groups = models.ManyToManyField(
         'self',
         through='cosinnus.RelatedGroups',
@@ -2251,6 +2252,10 @@ class CosinnusBaseGroup(
             return []
         parents_children = self.get_children(for_parent_id=self.parent_id)
         return [child for child in parents_children if not child.id == self.id]
+
+    def get_related_groups_active(self):
+        """Returns all active related groups"""
+        return self.related_groups.filter(is_active=True)
 
     def get_content_type_for_last_visited(self):
         """Overriding from `LastVisitedMixin` to always use the same group ct"""
