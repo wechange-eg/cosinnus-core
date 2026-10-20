@@ -20,7 +20,6 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from announcements.models import Announcement
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.views.navigation import LanguageMenuItemMixin
@@ -29,7 +28,6 @@ from cosinnus.core.decorators.views import get_group_for_request
 from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.user_dashboard import FONT_AWESOME_CLASS_FILTER, MenuItem
-from cosinnus.utils.context_processors import email_verified as email_verified_context_processor
 from cosinnus.utils.functions import clean_single_line_text, is_number, uniquify_list
 from cosinnus.utils.http import add_url_param, remove_url_param
 from cosinnus.utils.permissions import check_object_read_access, check_ug_admin, check_ug_membership
@@ -98,10 +96,6 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         * `label`: title of the main menu dropdown
         * `icon`: icon of the main menu dropdown, exclusive vs. `main_menu_image`
         * `image`: image of the main menu dropdown, exclusive vs. `main_menu_icon`
-      * `announcements`: list of objects that contain data for the announcement banner, if one is active
-        * `[]` if None active, else a list `[{"text": "'"<str> Announcement text", "level": "<str> level-code"}, ...]`
-        * `level` can take the following values: "debug", "info", "success", "warning", "error". these levels are
-            usually reflected in the color of the announcement background
     """
 
     renderer_classes = (
@@ -143,7 +137,6 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             'icon': None,  # exclusive with `main_menu_image`, only one can be non-None!
             'image': None,  # exclusive with `main_menu_icon`, only one can be non-None!
         },
-        'announcements': [],
         'space': None,
     }
 
@@ -243,7 +236,6 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                                     '/media/cosinnus_portals/portal_saschas_local_dev/avatars/group/xj1VxzF3viA4.jpg'
                                 ),
                             },
-                            'announcements': [{'text': 'This is an example announcement', 'level': 'warning'}],
                         },
                         'version': COSINNUS_VERSION,
                         'timestamp': 1658414865.057476,
@@ -353,7 +345,6 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             'icon': self.main_menu_icon,  # exclusive with `main_menu_image`, only one can be non-None!
             'image': self.main_menu_image,  # exclusive with `main_menu_icon`, only one can be non-None!
         }
-        data['announcements'] = self._get_announcements(self.django_request)
         if self.group:
             data['space'] = self._get_space_context(request.user)
 
@@ -931,23 +922,6 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         if '?v=' in link:
             link = link[: link.find('?v=')]
         return link
-
-    def _get_announcements(self, request):
-        announcements = []
-        for announcement in Announcement.objects.active():
-            announcements.append(
-                {
-                    'text': announcement.translated_text or announcement.text,
-                    'level': announcement.level,
-                }
-            )
-        # check extra email-verified and guest user announcements
-        context = email_verified_context_processor(request)
-        if 'email_not_verified_announcement' in context:
-            announcements.append(context['email_not_verified_announcement'])
-        if 'user_guest_announcement' in context:
-            announcements.append(context['user_guest_announcement'])
-        return announcements
 
     def _get_space_context(self, user):
         if not self.group:

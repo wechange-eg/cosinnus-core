@@ -442,6 +442,20 @@ def get_user_tos_accepted_date(user):
     return datetime_or_none
 
 
+def user_tos_confirmation_required(user):
+    """Check if a ToS confirmation is required for a user."""
+    from cosinnus.models.group import CosinnusPortal
+
+    portal = CosinnusPortal.get_current()
+    tos_accepted_date = get_user_tos_accepted_date(user)
+    tos_were_updated = portal.tos_date.year > 2000 and (
+        tos_accepted_date is None or tos_accepted_date < portal.tos_date
+    )
+    # if a portal's tos_date has never moved beyond the default, we don't check the tos_accepted_date,
+    # to maintain backwards compatibility with users who have only the `settings.tos_accepted` boolean
+    return tos_were_updated or not check_user_has_accepted_portal_tos(user)
+
+
 def get_unread_message_count_for_user(user):
     """Returns the unread message count for a user, independent of which internal
     messaging system is being used (Postman, Rocketchat, etc)"""

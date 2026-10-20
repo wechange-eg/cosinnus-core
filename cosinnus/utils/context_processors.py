@@ -22,7 +22,7 @@ from cosinnus.trans.exchange import CosinnusExternalResourceTrans
 from cosinnus.trans.group import get_group_trans_by_type
 from cosinnus.utils.lanugages import get_format_safe
 from cosinnus.utils.permissions import check_user_verified
-from cosinnus.utils.user import check_user_has_accepted_portal_tos, get_user_tos_accepted_date
+from cosinnus.utils.user import user_tos_confirmation_required
 from cosinnus.utils.version_history import get_version_history_for_user
 
 logger = logging.getLogger('cosinnus')
@@ -176,17 +176,15 @@ def tos_check(request):
     Currently, `extra_body_header.html` (from `base.html`) checks if the form
     is present and renders a modal popup with it."""
 
-    portal = CosinnusPortal.get_current()
+    if SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
+        # In v3 the tos check is handled in the frontend via the 'api-user-tos' API.
+        return {}
+
     user = request.user
     if user.is_authenticated:
         try:
-            tos_accepted_date = get_user_tos_accepted_date(user)
-            tos_were_updated = portal.tos_date.year > 2000 and (
-                tos_accepted_date is None or tos_accepted_date < portal.tos_date
-            )
-            # if a portal's tos_date has never moved beyond the default, we don't check the tos_accepted_date,
-            # to maintain backwards compatibility with users who have only the `settings.tos_accepted` boolean
-            if tos_were_updated or not check_user_has_accepted_portal_tos(user):
+            if user_tos_confirmation_required(user):
+                # user did not accept the current tos
                 updated_tos_form = TermsOfServiceFormFields(
                     initial={'newsletter_opt_in': user.cosinnus_profile.settings.get('newsletter_opt_in', False)}
                 )
@@ -198,12 +196,13 @@ def tos_check(request):
     return {}
 
 
-def email_verified(request):
-    """Add additional announcements to the context which are checked for in base.html."""
-    context = dict()
+def get_email_not_verified_announcement_context(request):
+    """Get an announcement context if the user email needs verification.
+    :return: Dict with title and level
+    """
+    context = None
     portal = CosinnusPortal.get_current()
     user = request.user
-
     if (
         user.is_authenticated
         and not user.is_guest
@@ -223,16 +222,44 @@ def email_verified(request):
 
         msg += ' ' + _('Make sure your email address "%(email_address)s" is correct.') % {'email_address': user.email}
         link_label = _('Click here to receive an email with a verification link.')
-        context['email_not_verified_announcement'] = {
+        context = {
             'level': 'warning',
             'text': f'{msg} <a href="{url}">{link_label}</a>',
         }
-    elif user.is_authenticated and user.is_guest and request.path != reverse('cosinnus:guest-user-not-allowed'):
+    return context
+
+
+def get_user_guest_announcement_context(request):
+    """Get an announcement context for guest us.
+    :return: Dict with title and level
+    """
+    context = None
+    user = request.user
+    if user.is_authenticated and user.is_guest and request.path != reverse('cosinnus:guest-user-not-allowed'):
         msg = _('You are currently using the platform with a guest account provided to you by a link.')
         url = reverse('cosinnus:guest-user-not-allowed')
         link_label = _('More infos...')
-        context['user_guest_announcement'] = {
+        context = {
             'level': 'info',
             'text': f'{msg} <a href="{url}">{link_label}</a>',
         }
+    return context
+
+
+def email_verified(request):
+    """Add additional announcements to the context which are checked for in base.html."""
+    context = dict()
+
+    if SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
+        # in v3 the announcements are shown in the frontend provided by the 'api-portal-settings' API.
+        return context
+
+    email_not_verified_announcement = get_email_not_verified_announcement_context(request)
+    if email_not_verified_announcement:
+        context['email_not_verified_announcement'] = email_not_verified_announcement
+
+    user_guest_announcement = get_user_guest_announcement_context(request)
+    if user_guest_announcement:
+        context['user_guest_announcement'] = user_guest_announcement
+
     return context
