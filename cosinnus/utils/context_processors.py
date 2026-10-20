@@ -22,7 +22,7 @@ from cosinnus.trans.exchange import CosinnusExternalResourceTrans
 from cosinnus.trans.group import get_group_trans_by_type
 from cosinnus.utils.lanugages import get_format_safe
 from cosinnus.utils.permissions import check_user_verified
-from cosinnus.utils.user import check_user_has_accepted_portal_tos, get_user_tos_accepted_date
+from cosinnus.utils.user import user_tos_confirmation_required
 from cosinnus.utils.version_history import get_version_history_for_user
 
 logger = logging.getLogger('cosinnus')
@@ -176,17 +176,15 @@ def tos_check(request):
     Currently, `extra_body_header.html` (from `base.html`) checks if the form
     is present and renders a modal popup with it."""
 
-    portal = CosinnusPortal.get_current()
+    if SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
+        # In v3 the tos check is handled in the frontend via the 'api-user-tos' API.
+        return {}
+
     user = request.user
     if user.is_authenticated:
         try:
-            tos_accepted_date = get_user_tos_accepted_date(user)
-            tos_were_updated = portal.tos_date.year > 2000 and (
-                tos_accepted_date is None or tos_accepted_date < portal.tos_date
-            )
-            # if a portal's tos_date has never moved beyond the default, we don't check the tos_accepted_date,
-            # to maintain backwards compatibility with users who have only the `settings.tos_accepted` boolean
-            if tos_were_updated or not check_user_has_accepted_portal_tos(user):
+            if user_tos_confirmation_required(user):
+                # user did not accept the current tos
                 updated_tos_form = TermsOfServiceFormFields(
                     initial={'newsletter_opt_in': user.cosinnus_profile.settings.get('newsletter_opt_in', False)}
                 )

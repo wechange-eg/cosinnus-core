@@ -622,6 +622,7 @@ class PortalSettingsView(APIView):
             'portalName': settings.COSINNUS_PORTAL_NAME,
             'portalDisplayName': settings.COSINNUS_BASE_PAGE_TITLE_TRANS,
             'hasNewsletter': settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN,
+            'privacyPolicyCheckRequired': settings.COSINNUS_SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK,
             'links': {
                 'privacyPolicy': privacy_policy_url,
                 'termsOfUse': terms_of_use_url,

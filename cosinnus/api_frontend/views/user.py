@@ -15,7 +15,7 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import authentication, serializers, status
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
@@ -42,6 +42,7 @@ from cosinnus.api_frontend.serializers.user import (
     CosinnusUserMessageSerializer,
     CosinnusUserProfileRecommendationSerializer,
     CosinnusUserSignupSerializer,
+    CosinnusUserTosSerializer,
 )
 from cosinnus.conf import settings
 from cosinnus.core.middleware.login_ratelimit_middleware import check_user_login_ratelimit
@@ -1179,3 +1180,24 @@ class CosinnusUserMessagesAPIView(ListAPIView):
 
     def get_queryset(self):
         return get_messages(self.request)
+
+
+class CosinnusUserTosAPIView(GenericAPIView):
+    """API for user ToS confirmation."""
+
+    serializer_class = CosinnusUserTosSerializer
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        serializer = self.get_serializer(request.user)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = self.get_serializer(request.user, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
