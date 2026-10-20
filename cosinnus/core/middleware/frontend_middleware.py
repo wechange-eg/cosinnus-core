@@ -2,12 +2,15 @@ import re
 
 from django.core.cache import cache
 from django.shortcuts import redirect
+from django.template.defaultfilters import urlencode
+from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.utils.deprecation import MiddlewareMixin
 
 from cosinnus.conf import settings
 from cosinnus.utils.http import add_url_param, is_ajax
 from cosinnus.utils.urls import check_url_v3_everywhere_exempt
+from cosinnus.utils.user import user_tos_confirmation_required
 from cosinnus.views.common import SwitchLanguageView
 
 USERPROFILE_SETTING_FRONTEND_DISABLED = 'frontend_disabled'
@@ -44,6 +47,18 @@ class FrontendMiddleware(MiddlewareMixin):
                 if request.user.is_authenticated:
                     return redirect('cosinnus:user-dashboard')
                 return redirect('login')
+
+            # redirect to v3 ToS page if needed
+            if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
+                tos_url = '/account/tos/'
+                tos_paths = [tos_url, reverse('cosinnus:frontend-api:api-user-tos')]
+                if (
+                    request.user.is_authenticated
+                    and user_tos_confirmation_required(request.user)
+                    and not any(request.path.startswith(tos_path) for tos_path in tos_paths)
+                ):
+                    redirect_url = f'{tos_url}?next={urlencode(request.get_full_path())}'
+                    return redirect(redirect_url)
 
             request_tokens = request.build_absolute_uri().split('/')
             # if the workaround language-prefix request from the frontend has arrived at the server,
