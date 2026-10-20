@@ -5,6 +5,7 @@ from urllib.parse import unquote
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model, login, logout
 from django.contrib.humanize.templatetags.humanize import naturaltime
+from django.contrib.messages import get_messages
 from django.http import Http404
 from django.urls.base import reverse
 from django.utils.encoding import force_str
@@ -38,6 +39,7 @@ from cosinnus.api_frontend.serializers.user import (
     CosinnusHybridUserSerializer,
     CosinnusSetInitialPasswordSerializer,
     CosinnusUserLoginSerializer,
+    CosinnusUserMessageSerializer,
     CosinnusUserProfileRecommendationSerializer,
     CosinnusUserSignupSerializer,
 )
@@ -1163,3 +1165,17 @@ class CosinnusUserRecommendationsAPIView(ListAPIView):
 
     def get_queryset(self):
         return get_user_profile_model().objects.get_recommendations(self.request.user)
+
+
+class CosinnusUserMessagesAPIView(ListAPIView):
+    """API providing Django's user messages. The messages are cleared after reading."""
+
+    serializer_class = CosinnusUserMessageSerializer
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    pagination_class = None
+
+    def get_queryset(self):
+        return get_messages(self.request)

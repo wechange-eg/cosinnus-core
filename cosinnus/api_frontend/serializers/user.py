@@ -656,3 +656,20 @@ class CosinnusUserProfileRecommendationSerializer(serializers.ModelSerializer):
 
     def get_membership_count(self, obj):
         return len(get_cosinnus_group_model().objects.get_for_user_pks(obj.user))
+
+
+class CosinnusUserMessageSerializer(serializers.Serializer):
+    """Serializer for Django's user messages"""
+
+    level = serializers.CharField(source='level_tag')
+    text = serializers.CharField(source='message')
+    icon = serializers.SerializerMethodField()
+
+    def get_icon(self, obj):
+        level_tag_icon_map = {
+            'success': 'fa-check',
+            'info': 'fa-info-circle',
+            'warning': 'fa-exclamation-circle',
+            'error': 'fa-exclamation-triangle',
+        }
+        return level_tag_icon_map.get(obj.level_tag)
