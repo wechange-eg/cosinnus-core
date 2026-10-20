@@ -39,6 +39,7 @@ from cosinnus.utils.permissions import (
     check_user_can_create_conferences,
     check_user_can_create_groups,
     check_user_portal_manager,
+    check_user_superuser,
 )
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.utils.user import get_unread_message_count_for_user
@@ -1340,8 +1341,8 @@ class ProfileView(LanguageMenuItemMixin, APIView):
                 )
                 profile_menu.append(payments_item)
 
-            # administration
-            if request.user.is_superuser or check_user_portal_manager(request.user):
+            # administration: shown for portal admins, portal managers and superusers
+            if check_user_superuser(request.user) or check_user_portal_manager(request.user):
                 administration_item = MenuItem(
                     _('Administration'),
                     reverse('cosinnus:administration'),
