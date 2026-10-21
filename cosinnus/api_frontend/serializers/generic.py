@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from cosinnus.utils.permissions import check_user_can_see_user
+from cosinnus.models import BaseTagObject
 
 
 class CosinnusCreatorSerializer(serializers.ModelSerializer):
@@ -31,6 +31,7 @@ class CosinnusCreatorSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         """Check view permissions for creator."""
         user = self.context['request'].user
-        if not user or not check_user_can_see_user(user, instance):
+        if not user or (not user.is_authenticated and instance.media_tag.visibility != BaseTagObject.VISIBILITY_ALL):
+            # creator is hidden for unauthenticated users unless the visibility is set to all.
             return None
         return super().to_representation(instance)
