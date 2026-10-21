@@ -793,6 +793,7 @@ class GroupListView(EndlessPaginationMixin, ListAjaxableResponseMixin, GroupMemb
                 'unpaginated_rows': self.object_list,
                 'map_groups': self.object_list,  # unpaginated groups
                 'group_type': self.group_type,
+                'is_paginated': bool(self.paginator_class),
             }
         )
         return ctx
@@ -824,6 +825,7 @@ class GroupListMineView(RequireLoggedInMixin, GroupListView):
 
 class GroupListMineDeactivatedView(RequireLoggedInMixin, GroupListView):
     paginate_by = None
+    paginator_class = None
 
     def get_queryset(self):
         self.group_type = None
