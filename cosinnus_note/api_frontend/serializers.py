@@ -82,6 +82,13 @@ class CosinnusNoteSerializer(CosinnusMediaTagSerializerMixin, CosinnusBaseTaggab
             'attached_files',
         )
 
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        # replace empty title placeholder
+        if ret['title'] == Note.EMPTY_TITLE_PLACEHOLDER:
+            ret['title'] = ''
+        return ret
+
     def create(self, validated_data):
         """Create a note."""
         # use empty title placeholder
