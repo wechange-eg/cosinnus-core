@@ -13,8 +13,9 @@ from freezegun import freeze_time
 
 from cosinnus.cron import SendGroupPremiumExpirationWarningEmails, SwitchGroupPremiumFeatures
 from cosinnus.models import MEMBERSHIP_ADMIN
-from cosinnus.models.group import CosinnusBaseGroup, CosinnusGroupMembership
+from cosinnus.models.group import CosinnusBaseGroup, CosinnusGroupMembership, CosinnusPortal
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus_event.models import Event
 
 User = get_user_model()
 
@@ -148,9 +149,7 @@ class GroupPremiumStateChangeTest(TestDataMixin, TestCase):
         expected_mails: List[SendHtmlMailCallArgs],
     ):
         expected_mail_count = len(expected_mails)
-        with freeze_time(current_date), patch('cosinnus.core.mail.send_html_mail') as mock_send_group_admins, patch(
-            'cosinnus.cron.send_system_mail_to_support'
-        ) as mock_send_system_mail:
+        with freeze_time(current_date), patch('cosinnus.core.mail.send_html_mail') as mock_send_group_admins:
             # set state
             # TODO test this for project also
             self.group.enable_user_premium_choices_until = premium_until
@@ -208,10 +207,6 @@ class GroupPremiumStateChangeTest(TestDataMixin, TestCase):
                     expected_last_warned_for, self.group.settings.get('last_warned_for_premium_choices_until')
                 )
 
-            should_be_expired = fixture_bbb_active and not expected_bbb_active
-            with self.subTest('send notification to portal support email', should_be_expired=should_be_expired):
-                self.assertEqual(should_be_expired, mock_send_system_mail.called)
-
     def _get_mail_args_expiration(self) -> SendHtmlMailCallArgs:
         return SendHtmlMailCallArgs(
             user=self.user,
@@ -244,6 +239,19 @@ class GroupPremiumStateChangeTest(TestDataMixin, TestCase):
             expected_expired_on=None,
             expected_mails=[],
             expected_last_warned_for=None,
+        )
+
+    def test_expiration_date_today_no_deactivation_triggered(self):
+        self._execute_scenario(
+            '2026-02-01',
+            '2026-02-01',
+            fixture_bbb_active=True,
+            expected_can_have_bbb=True,
+            expected_bbb_active=True,
+            expected_premium_until='2026-02-01',
+            expected_expired_on=None,
+            expected_mails=[self._get_mail_args_warning('2026-02-01', 1)],
+            expected_last_warned_for='2026-02-01',
         )
 
     def test_active_warning_triggered(self):
@@ -298,6 +306,46 @@ class GroupPremiumStateChangeTest(TestDataMixin, TestCase):
             expected_mails=[self._get_mail_args_expiration()],
             expected_last_warned_for=None,
         )
+
+    def test_deactivation_resets_event_bbb(self):
+        event = Event.objects.create(
+            group=self.group,
+            creator=self.user,
+            public=True,
+            title='testevent',
+            video_conference_type=Event.BBB_MEETING,
+        )
+
+        self._execute_scenario(
+            '2026-02-01',
+            '2026-01-31',
+            fixture_bbb_active=True,
+            expected_can_have_bbb=False,
+            expected_bbb_active=False,
+            expected_premium_until=None,
+            expected_expired_on='2026-02-01',
+            expected_mails=[self._get_mail_args_expiration()],
+            expected_last_warned_for=None,
+        )
+
+        event.refresh_from_db()
+        self.assertEqual(event.video_conference_type, Event.NO_VIDEO_CONFERENCE)
+
+    def test_deactivation_falls_back_to_fairmeeting(self):
+        portal = CosinnusPortal.get_current()
+        portal.video_conference_server = 'https://video.example.com/'
+
+        with freeze_time('2026-02-01'), patch.object(CosinnusPortal, 'get_current', return_value=portal), patch(
+            'cosinnus.cron.email_group_admins'
+        ):
+            self.group.enable_user_premium_choices_until = '2026-01-31'
+            self.group.video_conference_type = CosinnusBaseGroup.BBB_MEETING
+            self.group.save()
+
+            SwitchGroupPremiumFeatures().do()
+            self.group.refresh_from_db()
+
+            self.assertTrue(self.group.video_conference_type == CosinnusBaseGroup.FAIRMEETING)
 
     def test_expired_no_action_needed(self):
         self._execute_scenario(

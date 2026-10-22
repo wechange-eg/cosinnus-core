@@ -38,14 +38,15 @@ from cosinnus.core.mail import send_mail_or_fail_threaded
 from cosinnus.dynamic_fields.dynamic_fields import CosinnusDynamicFieldsModelMixin
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignmentModelMixin
+from cosinnus.models.membership import MEMBER_STATUS
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.models.mixins.translations import TranslateableFieldsModelMixin
 from cosinnus.models.tagged import LikeableObjectMixin, LikeObject
 from cosinnus.utils.files import get_avatar_filename, image_thumbnail, image_thumbnail_url
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids
 from cosinnus.utils.html import convert_html_to_plaintext
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.utils.user import get_newly_registered_user_email, is_user_active
+from cosinnus.utils.user import filter_active_users, get_newly_registered_user_email, is_user_active
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
 from cosinnus_deck.models import DeckMigrationMixin
 
@@ -70,6 +71,8 @@ PROFILE_SETTING_ROCKET_CHAT_CONTACT_GROUP_ROOM = 'rocket_chat_contact_group_room
 PROFILE_SETTING_WORKSHOP_PARTICIPANT = 'is_workshop_participant'
 PROFILE_SETTING_WORKSHOP_PARTICIPANT_NAME = 'workshop_participant_name'
 PROFILE_SETTING_COSINUS_OAUTH_LOGIN = 'has_logged_in_with_cosinnus_oauth'
+PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS = 'dashboard_widgets'
+PROFILE_SETTING_DISMISSED_GETTING_STARTED_ACTIONS = 'getting_started_actions_dismissed'
 # hex color code for user's chosen avatar background color
 PROFILE_SETTINGS_AVATAR_COLOR = 'avatar_color'
 # a timestamp used to force the logout all older user sessions
@@ -101,6 +104,39 @@ class BaseUserProfileManager(models.Manager):
                 profile = self.create(user_id=user.id)
             return profile
         raise TypeError('user must be of type int or Model but is %s' % type(user))
+
+    def get_recommendations(self, user):
+        from django.contrib.auth import get_user_model
+
+        from cosinnus.utils.permissions import check_user_can_see_user
+
+        # prefetch user
+        queryset = self.prefetch_related('user')
+
+        # exclude self
+        queryset = queryset.exclude(user_id=user.pk)
+
+        # filter active user
+        queryset = filter_active_users(queryset, filter_on_user_profile_model=True)
+
+        # exclude empty description
+        queryset = queryset.exclude(description=None).exclude(description='')
+
+        # exclude users without avatar
+        queryset = queryset.exclude(avatar='')
+
+        # check visibility
+        users = get_user_model().objects.filter(cosinnus_profile__in=queryset)
+        users = users.prefetch_related('cosinnus_profile', 'cosinnus_profile__media_tag')
+        checked_for_visibility_users = [
+            recommended_user for recommended_user in users if check_user_can_see_user(user, recommended_user)
+        ]
+        queryset = queryset.filter(user_id__in=checked_for_visibility_users)
+
+        # order by signup date
+        queryset = queryset.order_by('-user__date_joined')
+
+        return queryset
 
 
 @six.python_2_unicode_compatible
@@ -179,6 +215,7 @@ class BaseUserProfile(
     tos_accepted = models.BooleanField(verbose_name=_('ToS accepted'), default=False, db_index=True)
 
     avatar = models.ImageField(_('Avatar'), null=True, blank=True, upload_to=get_avatar_filename)
+    is_avatar_generated = models.BooleanField(_('Avatar is generated'), default=False)
     description = models.TextField(verbose_name=_('Description'), blank=True, null=True)
     media_tag = models.OneToOneField(
         settings.COSINNUS_TAG_OBJECT_MODEL, blank=True, null=True, editable=False, on_delete=models.SET_NULL
@@ -255,6 +292,9 @@ class BaseUserProfile(
         'tos_accepted',
         'email_verified',
         'account_verified',
+        'is_avatar_generated',
+        'inactivity_notification_sent_at',
+        'scheduled_for_deletion_at',
     ] + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
 
     # this indicates that objects of this model are in some way always visible by registered users
@@ -725,6 +765,96 @@ class BaseUserProfile(
                     continue
             objects.append(obj)
         return objects
+
+    @classmethod
+    def get_getting_started_actions(cls, user):
+        """
+        Main definition of getting started actions for the user.
+        Static method as used by the CosinnusPersonalDashboardGettingStartedWidget and CosinnusGettingStartedAPIView.
+        """
+        from cosinnus.models.map import get_map_url_with_selected_filter_params
+
+        profile = user.cosinnus_profile
+
+        # actions settings, sorted as displayed in the dashboard widget
+        actions = []
+        if CosinnusPortal.get_current().email_needs_verification:
+            actions.append(
+                {
+                    'action_id': 'verify_email',
+                    'completed': profile.email_verified,
+                    'cta_url': reverse('cosinnus:resend-email-validation'),
+                }
+            )
+
+        actions.extend(
+            [
+                {
+                    'action_id': 'set_avatar',
+                    'completed': bool(profile.avatar) and not profile.is_avatar_generated,
+                    'cta_url': reverse('cosinnus:v3-frontend-setup-profile'),
+                },
+                {
+                    'action_id': 'set_about_me',
+                    'completed': bool(profile.description),
+                    'cta_url': reverse('cosinnus:v3-frontend-setup-profile'),
+                },
+                {
+                    'action_id': 'set_location',
+                    'completed': bool(profile.media_tag.location),
+                    'cta_url': '/setup/contact',
+                },
+                {
+                    'action_id': 'set_topics',
+                    'completed': bool(profile.media_tag.topics),
+                    'cta_url': '/setup/interests/',
+                },
+            ]
+        )
+
+        # become member action
+        default_user_group_ids = get_default_user_group_ids()
+        become_member_completed_qs = user.cosinnus_memberships.filter(
+            group__type__in=[get_cosinnus_group_model().TYPE_PROJECT, get_cosinnus_group_model().TYPE_SOCIETY],
+            status__in=MEMBER_STATUS,
+        )
+        become_member_completed_qs = become_member_completed_qs.exclude(group_id__in=default_user_group_ids)
+        actions.extend(
+            [
+                {
+                    'action_id': 'become_member',
+                    'completed': become_member_completed_qs.exists(),
+                    'cta_url': get_map_url_with_selected_filter_params(['groups', 'projects']),
+                },
+            ]
+        )
+        if settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY and user.is_superuser:
+            from wechange_payments.models import Subscription
+
+            current_subscription = Subscription.get_current_for_user(user)
+            contribution_completed = current_subscription.amount > 0 if current_subscription else False
+            actions.append(
+                {
+                    'action_id': 'make_contribution',
+                    'completed': contribution_completed,
+                    'cta_url': reverse('wechange-payments:payment'),
+                }
+            )
+        if settings.COSINNUS_IDEAS_ENABLED:
+            actions.append(
+                {
+                    'action_id': 'create_idea',
+                    'completed': user.ideas.exists(),
+                    'cta_url': reverse('cosinnus:idea-create'),
+                }
+            )
+
+        # set dismissed as stored in the profile settings
+        dismissed_actions = profile.settings.get(PROFILE_SETTING_DISMISSED_GETTING_STARTED_ACTIONS, [])
+        for action in actions:
+            action['dismissed'] = action['action_id'] in dismissed_actions
+
+        return actions
 
 
 class UserProfile(BaseUserProfile):

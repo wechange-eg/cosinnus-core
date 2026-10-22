@@ -1,7 +1,9 @@
 {% load i18n thumbnail cosinnus_tags static %}
 {% load el_pagination_tags %}
 
-{% lazy_paginate 20 rows %}
+{% if is_paginated %}
+    {% lazy_paginate 20 rows %}
+{% endif %}
 
 {% for group, members, pendings, admins, invited in rows %}
     
@@ -255,5 +257,7 @@
    {% endif %}
    {% include 'cosinnus/common/empty_button.html' with message=no_group_message %}
 {% endfor %}
-        
-{% show_more %}
+
+{% if is_paginated %}
+    {% show_more %}
+{% endif %}

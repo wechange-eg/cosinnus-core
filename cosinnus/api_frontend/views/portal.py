@@ -6,9 +6,11 @@ from django.core.cache import cache
 from django.db.models.aggregates import Count
 from django.db.models.query_utils import Q
 from django.template.loader import render_to_string
+from django.utils.decorators import method_decorator
 from django.utils.encoding import force_str
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.csrf import ensure_csrf_cookie
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.generics import GenericAPIView
@@ -19,15 +21,23 @@ from rest_framework.throttling import UserRateThrottle
 from rest_framework.views import APIView
 from taggit.models import Tag
 
+from announcements.models import Announcement
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
-from cosinnus.api_frontend.serializers.portal import CosinnusManagedTagSerializer, CosinnusPortalErrorLogSerializer
-from cosinnus.api_frontend.views.user import CsrfExemptSessionAuthentication
+from cosinnus.api_frontend.serializers.portal import (
+    CosinnusManagedTagSerializer,
+    CosinnusPortalAnnouncementSerializer,
+    CosinnusPortalErrorLogSerializer,
+)
 from cosinnus.conf import settings
 from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.dynamic_fields.dynamic_formfields import EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.managed_tags import MANAGED_TAG_LABELS, CosinnusManagedTag
+from cosinnus.utils.context_processors import (
+    get_email_not_verified_announcement_context,
+    get_user_guest_announcement_context,
+)
 from cosinnus.utils.functions import clean_single_line_text, is_number, update_dict_recursive
 from cosinnus.utils.user import get_locked_profile_visibility_setting_for_user
 from cosinnus.views.common import SwitchLanguageView
@@ -45,7 +55,6 @@ class PortalTopicsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -83,7 +92,6 @@ class PortalTagsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -147,7 +155,6 @@ class PortalManagedTagsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # todo: generate proper response, by either putting the entire response into a
     #       Serializer, or defining it by hand
@@ -304,7 +311,6 @@ class PortalDynamicFieldsBaseView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     # if set on the view, show only dynamic fields that appear in the signup form
     field_option_filter = None
@@ -439,6 +445,9 @@ class PortalSettingsView(APIView):
 
     Any returned values will be overridden by anything defined in conf dict `COSINNUS_V3_PORTAL_SETTINGS` (uncached).
 
+    Note: This API is also used to set the CSRF-Cookie, as it is always loaded by the frontend, i.e. the frontend must
+    call this API, before attempting a posting on any other v3 API.
+
     A full example string for manually configuarable settings that aren't dynamically taken from the portal config:
 
     {
@@ -544,7 +553,6 @@ class PortalSettingsView(APIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
 
     PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY = 'cosinnus/core/portal/portalsettings/%s'  # key is language code
     CACHE_TIMEOUT_DEV = 30  # 30 seconds for dev servers
@@ -571,6 +579,7 @@ class PortalSettingsView(APIView):
             )
         }
     )
+    @method_decorator(ensure_csrf_cookie)
     def get(self, request):
         current_language = get_language()
         settings_dict = cache.get(self.PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY % current_language)
@@ -590,6 +599,8 @@ class PortalSettingsView(APIView):
             }
         )
 
+        # get announcements
+        settings_dict['announcements'] = self._get_user_announcements(request)
         response = Response(settings_dict)
         # set language cookie if not present
         if settings.LANGUAGE_COOKIE_NAME not in request.COOKIES:
@@ -611,6 +622,7 @@ class PortalSettingsView(APIView):
             'portalName': settings.COSINNUS_PORTAL_NAME,
             'portalDisplayName': settings.COSINNUS_BASE_PAGE_TITLE_TRANS,
             'hasNewsletter': settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN,
+            'privacyPolicyCheckRequired': settings.COSINNUS_SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK,
             'links': {
                 'privacyPolicy': privacy_policy_url,
                 'termsOfUse': terms_of_use_url,
@@ -627,6 +639,8 @@ class PortalSettingsView(APIView):
             'cosinnusIsSSOLoginEnabled': settings.COSINNUS_IS_OAUTH_CLIENT,
             'cosinnusSSOProvider': settings.COSINNUS_V3_SSO_PROVIDER,
             'cosinnusV3FrontendEverywhereEnabled': settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED,
+            'matomoUrl': settings.PIWIK_SERVER_URL + 'matomo.js',
+            'matomoSiteId': settings.PIWIK_SITE_ID,
             # 'setup': {'additionalSteps': ... }},  # set manually
             # 'theme': {...},  # set manually. example:
             # "theme": {"color": "blue", "loginImage": {"variant": "contained"}},
@@ -727,6 +741,26 @@ class PortalSettingsView(APIView):
             }
         return field_overrides
 
+    def _get_user_announcements(self, request):
+        """Get announcements"""
+        announcements = list(Announcement.objects.active())
+
+        # check extra email-verified user announcement
+        email_not_verified_announcement_context = get_email_not_verified_announcement_context(request)
+        if email_not_verified_announcement_context:
+            # create temporary announcement for serialization
+            announcements.append(Announcement(**email_not_verified_announcement_context))
+
+        # check guest user announcement
+        user_guest_announcement_context = get_user_guest_announcement_context(request)
+        if user_guest_announcement_context:
+            # create temporary announcement for serialization
+            announcements.append(Announcement(**user_guest_announcement_context))
+
+        # serialize announcements
+        serialized_announcements = CosinnusPortalAnnouncementSerializer(announcements, many=True).data
+        return serialized_announcements
+
     @classmethod
     def clear_cache(cls):
         """Clears the portal setting dict cache entries for all languages"""
@@ -765,7 +799,6 @@ class PortalErrorLogView(GenericAPIView):
         CosinnusAPIFrontendJSONResponseRenderer,
         BrowsableAPIRenderer,
     )
-    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = (IsAuthenticated,)
     throttle_classes = [PortalErrorLogUserThrottle]
 

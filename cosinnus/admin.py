@@ -1179,6 +1179,7 @@ class UserAdmin(DjangoUserAdmin):
         'email',
         'is_active',
         'date_joined',
+        'last_login',
         'has_logged_in',
         'tos_accepted',
         'email_verified',
@@ -1193,6 +1194,7 @@ class UserAdmin(DjangoUserAdmin):
         field for field in list(DjangoUserAdmin.list_filter) if field not in _useradmin_excluded_list_filter
     ] + [
         'date_joined',
+        'last_login',
         UserHasLoggedInFilter,
         UserToSAcceptedFilter,
         EmailVerifiedFilter,
@@ -1864,3 +1866,16 @@ if settings.DEBUG and settings.COSINNUS_DECK_ENABLED:
         pass
 
     admin.site.register(SyncedExternalObject, SyncedExternalObjectAdmin)
+
+
+# remove the allauth/socialaccount admins if the portal isn't configured as SSO portal
+# (so we effectively do not use them)
+if not settings.COSINNUS_IS_OAUTH_CLIENT:
+    from allauth.account.models import EmailAddress
+    from allauth.socialaccount.models import SocialAccount, SocialApp, SocialToken
+
+    for model in (SocialAccount, SocialApp, SocialToken, EmailAddress):
+        try:
+            admin.site.unregister(model)
+        except admin.sites.NotRegistered:
+            pass

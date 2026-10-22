@@ -20,7 +20,6 @@ from rest_framework.renderers import BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from announcements.models import Announcement
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.views.navigation import LanguageMenuItemMixin
@@ -29,7 +28,6 @@ from cosinnus.core.decorators.views import get_group_for_request
 from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.user_dashboard import FONT_AWESOME_CLASS_FILTER, MenuItem
-from cosinnus.utils.context_processors import email_verified as email_verified_context_processor
 from cosinnus.utils.functions import clean_single_line_text, is_number, uniquify_list
 from cosinnus.utils.http import add_url_param, remove_url_param
 from cosinnus.utils.permissions import check_object_read_access, check_ug_admin, check_ug_membership
@@ -98,10 +96,6 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         * `label`: title of the main menu dropdown
         * `icon`: icon of the main menu dropdown, exclusive vs. `main_menu_image`
         * `image`: image of the main menu dropdown, exclusive vs. `main_menu_icon`
-      * `announcements`: list of objects that contain data for the announcement banner, if one is active
-        * `[]` if None active, else a list `[{"text": "'"<str> Announcement text", "level": "<str> level-code"}, ...]`
-        * `level` can take the following values: "debug", "info", "success", "warning", "error". these levels are
-            usually reflected in the color of the announcement background
     """
 
     renderer_classes = (
@@ -143,7 +137,6 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             'icon': None,  # exclusive with `main_menu_image`, only one can be non-None!
             'image': None,  # exclusive with `main_menu_icon`, only one can be non-None!
         },
-        'announcements': [],
         'space': None,
     }
 
@@ -243,7 +236,6 @@ class MainContentView(LanguageMenuItemMixin, APIView):
                                     '/media/cosinnus_portals/portal_saschas_local_dev/avatars/group/xj1VxzF3viA4.jpg'
                                 ),
                             },
-                            'announcements': [{'text': 'This is an example announcement', 'level': 'warning'}],
                         },
                         'version': COSINNUS_VERSION,
                         'timestamp': 1658414865.057476,
@@ -353,7 +345,6 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             'icon': self.main_menu_icon,  # exclusive with `main_menu_image`, only one can be non-None!
             'image': self.main_menu_image,  # exclusive with `main_menu_icon`, only one can be non-None!
         }
-        data['announcements'] = self._get_announcements(self.django_request)
         if self.group:
             data['space'] = self._get_space_context(request.user)
 
@@ -433,7 +424,10 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         # add the v3-exempt parameter to the URL so we do not actually parse the v3-served response
         v3_exempted_url = add_url_param(url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
         session = requests.Session()
-        session.headers.update(dict(request.headers))
+        request_headers = dict(request.headers)
+        if 'Content-Length' in request_headers:
+            del request_headers['Content-Length']
+        session.headers.update(request_headers)
         session.cookies.update(request.COOKIES)
         response = session.get(v3_exempted_url, allow_redirects=allow_redirects)
         for history_response in response.history:
@@ -488,11 +482,8 @@ class MainContentView(LanguageMenuItemMixin, APIView):
 
         # match personal dashboard
         if not self.main_menu_label and url.startswith(reverse('cosinnus:user-dashboard')):
-            self.main_menu_label = _('Personal Dashboard')
-            if self.request.user.cosinnus_profile.avatar_url:
-                self.main_menu_image = self.request.user.cosinnus_profile.get_avatar_thumbnail_url()
-            else:
-                self.main_menu_icon = 'fa-user'
+            self.main_menu_label = _('Personal Space')
+            self.main_menu_icon = 'fa-home'
 
         # match map
         if not self.main_menu_label and url.startswith(reverse('cosinnus:map')):
@@ -500,11 +491,11 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             self.main_menu_icon = 'fa-map'
 
         # match additional community space links
-        if not self.main_menu_label and settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS:
-            for __, link_label, link_url, link_icon in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_LINKS:
-                if url.startswith(str(link_url)):
-                    self.main_menu_label = link_label
-                    self.main_menu_icon = link_icon
+        if not self.main_menu_label and settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS:
+            for link_config in settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_ADDITIONAL_ITEMS:
+                if url.startswith(str(link_config['url'])):
+                    self.main_menu_label = link_config['label']
+                    self.main_menu_icon = link_config.get('icon')
 
         # unmatched urls get the "Go to" label
         if not self.main_menu_label:
@@ -931,23 +922,6 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         if '?v=' in link:
             link = link[: link.find('?v=')]
         return link
-
-    def _get_announcements(self, request):
-        announcements = []
-        for announcement in Announcement.objects.active():
-            announcements.append(
-                {
-                    'text': announcement.translated_text or announcement.text,
-                    'level': announcement.level,
-                }
-            )
-        # check extra email-verified and guest user announcements
-        context = email_verified_context_processor(request)
-        if 'email_not_verified_announcement' in context:
-            announcements.append(context['email_not_verified_announcement'])
-        if 'user_guest_announcement' in context:
-            announcements.append(context['user_guest_announcement'])
-        return announcements
 
     def _get_space_context(self, user):
         if not self.group:

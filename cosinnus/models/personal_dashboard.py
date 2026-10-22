@@ -1,0 +1,453 @@
+from annoying.functions import get_object_or_None
+from django.core.exceptions import ImproperlyConfigured
+from django.urls import reverse, reverse_lazy
+
+from cosinnus.api_frontend.serializers.group import CosinnusGroupSerializer
+from cosinnus.api_frontend.serializers.idea import CosinnusIdeaSerializer
+from cosinnus.api_frontend.serializers.user import (
+    CosinnusGettingStartedActionSerializer,
+    CosinnusUserProfileRecommendationSerializer,
+)
+from cosinnus.conf import settings
+from cosinnus.models import get_user_profile_model
+from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.idea import CosinnusIdea
+from cosinnus.models.map import get_map_url_with_selected_filter_params
+from cosinnus.models.profile import PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS
+from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.permissions import check_user_can_create_groups
+from cosinnus.utils.urls import group_aware_reverse
+from cosinnus_event.api_frontend.serializers import CosinnusEventPollSerializer, CosinnusEventSerializer
+from cosinnus_event.models import Event
+from cosinnus_marketplace.api_frontend.serializers import CosinnusOfferSerializer
+from cosinnus_marketplace.models import Offer
+from cosinnus_note.api_frontend.permissions import check_user_can_post_to_forum_from_dashboard
+from cosinnus_note.api_frontend.serializers import CosinnusNoteSerializer
+from cosinnus_note.models import Note
+from cosinnus_poll.api_frontend.serializers import CosinnusPollSerializer
+from cosinnus_poll.models import Poll
+
+
+class CosinnusPersonalDashboardWidget:
+    """Personal dashboard widget instance, as used by the personal dashboard API."""
+
+    # widget id
+    id = None
+    # cosinnus app
+    cosinnus_app = None
+    # function to get the data for a user, can return a query set or list, should have "user" as the only argument
+    # Note: when registering a non-class function use "staticmethod(function)" to avoid self being passed
+    user_data_function = None
+    # data serializer class
+    serializer_class = None
+    # widget api
+    api_url = None
+    # conf settings
+    conf = None
+    # limit of preloaded widget data
+    data_limit = 3
+
+    def __init__(self, conf=None):
+        self.conf = conf
+
+    def _get_widget_settings(self, profile):
+        """Helper to get the user widget settings from the profile settings."""
+        return profile.settings.get(PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS, {}).get(self.id, {})
+
+    def _set_widget_setting(self, profile, setting, value):
+        """Helper to set the user widget settings to the profile settings."""
+        widget_settings = profile.settings.get(PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS, {})
+        if self.id not in widget_settings:
+            widget_settings[self.id] = {}
+        widget_settings[self.id][setting] = value
+        profile.settings[PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS] = widget_settings
+        type(profile).objects.filter(pk=profile.pk).update(settings=profile.settings)
+
+    def is_enabled(self, user):
+        """Allows to disable widgets for users."""
+        return True
+
+    def is_active(self, user):
+        """Check if the widget is active for the user."""
+        widget_settings = self._get_widget_settings(user.cosinnus_profile)
+        return widget_settings.get('active', True)
+
+    def set_active(self, user, active):
+        """Activate or deactivate this widget for the user."""
+        self._set_widget_setting(user.cosinnus_profile, 'active', active)
+
+    def get_display(self, user):
+        """Get display settings for this user widget."""
+        widget_settings = self._get_widget_settings(user.cosinnus_profile)
+        return widget_settings.get('display', {})
+
+    def set_display(self, user, display):
+        """Set display settings for this user widget."""
+        self._set_widget_setting(user.cosinnus_profile, 'display', display)
+
+    def get_data(self, request):
+        """
+        Get initial widget data.
+        :return (data, has_more) tuple
+        """
+        data = []
+        has_more = False
+        user = request.user
+        if self.user_data_function and self.serializer_class and self.is_active(user):
+            user_data = self.user_data_function(user)
+            if self.data_limit:
+                # get count handling querysets and object lists
+                user_data_len = len(user_data) if isinstance(user_data, list) else user_data.count()
+                if user_data_len > self.data_limit:
+                    has_more = True
+                user_data = user_data[: self.data_limit]
+            serializer = self.serializer_class(user_data, many=True, context={'request': request})
+            data = serializer.data
+        return data, has_more
+
+    def get_conf(self, user):
+        return self.conf
+
+
+class CosinnusPersonalDashboardNewsWidget(CosinnusPersonalDashboardWidget):
+    """News/notes widget"""
+
+    id = 'dashboard.news'
+    cosinnus_app = 'cosinnus_note'
+    user_data_function = Note.objects.get_personal_items
+    serializer_class = CosinnusNoteSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:note-personal')
+
+
+class CosinnusPersonalDashboardCreateNewWidget(CosinnusPersonalDashboardWidget):
+    """Create new widget"""
+
+    id = 'dashboard.create_new'
+
+    def _get_create_new_urls(self, user):
+        create_new_urls = {}
+        if not settings.COSINNUS_LIMIT_PROJECT_AND_GROUP_CREATION_TO_ADMINS or user.is_superuser:
+            create_new_urls['project'] = reverse('cosinnus:group-add')
+            if (
+                not settings.COSINNUS_SHOW_MAIN_MENU_GROUP_CREATE_BUTTON_ONLY_FOR_PERMITTED
+                or check_user_can_create_groups(user)
+            ):
+                create_new_urls['group'] = reverse('cosinnus:group__group-add')
+        if settings.COSINNUS_IDEAS_ENABLED:
+            create_new_urls['idea'] = reverse('cosinnus:idea-create')
+        return create_new_urls
+
+    def is_enabled(self, user):
+        return bool(self._get_create_new_urls(user))
+
+    def get_conf(self, user):
+        data = super().get_conf(user)
+        data['create_new_urls'] = self._get_create_new_urls(user)
+        return data
+
+
+class CosinnusPersonalDashboardOffersWidget(CosinnusPersonalDashboardWidget):
+    """Marketplace offers widget"""
+
+    id = 'dashboard.offers'
+    cosinnus_app = 'cosinnus_marketplace'
+    user_data_function = Offer.objects.get_personal_items
+    serializer_class = CosinnusOfferSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:offer-personal')
+
+
+class CosinnusPersonalDashboardGroupsWidget(CosinnusPersonalDashboardWidget):
+    """Personal groups and projects widget"""
+
+    id = 'dashboard.my_spaces'
+    user_data_function = get_cosinnus_group_model().objects.get_personal_items
+    serializer_class = CosinnusGroupSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:api-group-personal')
+
+
+class CosinnusPersonalDashboardEventPollsWidget(CosinnusPersonalDashboardWidget):
+    """Personal open event polls widget"""
+
+    id = 'dashboard.event_polls'
+    cosinnus_app = 'cosinnus_event'
+    user_data_function = Event.objects.get_personal_open_polls
+    serializer_class = CosinnusEventPollSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:event-poll-open')
+
+
+class CosinnusPersonalDashboardTasksWidget(CosinnusPersonalDashboardWidget):
+    """Personal deck tasks widget"""
+
+    id = 'dashboard.tasks'
+    cosinnus_app = 'cosinnus_deck'
+
+    def is_enabled(self, user):
+        return settings.COSINNUS_DECK_ENABLED
+
+    def get_conf(self, user):
+        conf = super().get_conf(user)
+        if self.is_active(user):
+            # add user groups board infos
+            boards = []
+            user_deck_groups = get_cosinnus_group_model().objects.get_for_user_without_default_groups(user)
+            user_deck_groups = [
+                group
+                for group in user_deck_groups
+                if self.cosinnus_app not in group.get_deactivated_apps() and group.nextcloud_deck_board_id
+            ]
+            for group in user_deck_groups:
+                boards.append(
+                    {
+                        'board_id': group.nextcloud_deck_board_id,
+                        'board_url': group_aware_reverse('cosinnus:deck:index', kwargs={'group': group}),
+                    }
+                )
+            conf['boards'] = boards
+        return conf
+
+
+class CosinnusPersonalDashboardEventsWidget(CosinnusPersonalDashboardWidget):
+    """Personal attending events widget"""
+
+    id = 'dashboard.events'
+    cosinnus_app = 'cosinnus_event'
+    user_data_function = Event.objects.get_personal_attending_events
+    serializer_class = CosinnusEventSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:event-attending')
+
+    def is_enabled(self, user):
+        return settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED
+
+    def get_conf(self, user):
+        conf = super().get_conf(user)
+        if self.is_active(user):
+            # add user groups calendar urls
+            calendars = []
+            user_calendar_groups = get_cosinnus_group_model().objects.get_for_user_without_default_groups(user)
+            user_calendar_groups = [
+                group
+                for group in user_calendar_groups
+                if self.cosinnus_app not in group.get_deactivated_apps() and group.nextcloud_calendar_url
+            ]
+            for group in user_calendar_groups:
+                calendars.append(
+                    {
+                        'space_id': group.pk,
+                        'space_name': group.name,
+                        'space_url': group.get_absolute_url(),
+                        'calendar_url': group.get_user_nextcloud_calendar_url(user),
+                    }
+                )
+            conf['calendars'] = calendars
+        return conf
+
+
+class CosinnusPersonalDashboardPollsWidget(CosinnusPersonalDashboardWidget):
+    """Personal polls widget"""
+
+    id = 'dashboard.polls'
+    cosinnus_app = 'cosinnus_poll'
+    user_data_function = Poll.objects.get_personal_open_polls
+    serializer_class = CosinnusPollSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:poll-open')
+
+
+class CosinnusPersonalDashboardIdeasWidget(CosinnusPersonalDashboardWidget):
+    """Personal ideas widget"""
+
+    id = 'dashboard.ideas'
+    user_data_function = CosinnusIdea.objects.get_personal_items
+    serializer_class = CosinnusIdeaSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:idea-personal')
+
+    def is_enabled(self, user):
+        return settings.COSINNUS_IDEAS_ENABLED
+
+
+class CosinnusPersonalDashboardLikedIdeasWidget(CosinnusPersonalDashboardWidget):
+    """Personal liked ideas widget"""
+
+    id = 'dashboard.liked_ideas'
+    user_data_function = CosinnusIdea.objects.get_personal_liked_items
+    serializer_class = CosinnusIdeaSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:idea-liked')
+
+    def is_enabled(self, user):
+        return settings.COSINNUS_IDEAS_ENABLED
+
+
+class CosinnusPersonalDashboardGettingStartedWidget(CosinnusPersonalDashboardWidget):
+    """Getting started widget"""
+
+    id = 'dashboard.getting_started'
+    user_data_function = get_user_profile_model().get_getting_started_actions
+    serializer_class = CosinnusGettingStartedActionSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:api-getting-started')
+    data_limit = None
+
+
+class CosinnusPersonalDashboardNewsRecommendationsWidget(CosinnusPersonalDashboardWidget):
+    """News recommendations widget"""
+
+    id = 'dashboard.news_recommendations'
+    cosinnus_app = 'cosinnus_note'
+    user_data_function = Note.objects.get_recommendations
+    serializer_class = CosinnusNoteSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:note-recommendations')
+    data_limit = 5
+
+    def get_conf(self, user):
+        conf = super().get_conf(user)
+        if settings.NEWW_FORUM_GROUP_SLUG:
+            forum_group = get_object_or_None(
+                get_cosinnus_group_model(), slug=settings.NEWW_FORUM_GROUP_SLUG, portal=CosinnusPortal.get_current()
+            )
+            if forum_group:
+                conf.update(
+                    {
+                        'forum_post_allowed': check_user_can_post_to_forum_from_dashboard(user),
+                        'forum_name': forum_group.name,
+                        'forum_url': forum_group.get_absolute_url(),
+                    }
+                )
+        return conf
+
+
+class CosinnusPersonalDashboardOfferRecommendationsWidget(CosinnusPersonalDashboardWidget):
+    """Offer recommendations widget"""
+
+    id = 'dashboard.offer_recommendations'
+    cosinnus_app = 'cosinnus_marketplace'
+    user_data_function = Offer.objects.get_recommendations
+    serializer_class = CosinnusOfferSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:offer-recommendations')
+
+
+class CosinnusPersonalDashboardIdeaRecommendationsWidget(CosinnusPersonalDashboardWidget):
+    """Idea recommendations widget"""
+
+    id = 'dashboard.idea_recommendations'
+    user_data_function = CosinnusIdea.objects.get_recommendations
+    serializer_class = CosinnusIdeaSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:idea-recommendations')
+
+    def is_enabled(self, user):
+        return settings.COSINNUS_IDEAS_ENABLED
+
+    def get_conf(self, user):
+        data = super().get_conf(user)
+        data['cta_url'] = get_map_url_with_selected_filter_params(
+            ['ideas'], topics=user.cosinnus_profile.media_tag.topics
+        )
+        return data
+
+
+class CosinnusPersonalDashboardEventRecommendationsWidget(CosinnusPersonalDashboardWidget):
+    """Event recommendations widget"""
+
+    id = 'dashboard.event_recommendations'
+    cosinnus_app = 'cosinnus_event'
+    user_data_function = Event.objects.get_recommendations
+    serializer_class = CosinnusEventSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:event-recommendations')
+
+
+class CosinnusPersonalDashboardGroupRecommendationsWidget(CosinnusPersonalDashboardWidget):
+    """Group recommendations widget"""
+
+    id = 'dashboard.space_recommendations'
+    user_data_function = get_cosinnus_group_model().objects.get_recommendations
+    serializer_class = CosinnusGroupSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:api-group-recommendations')
+
+    def get_conf(self, user):
+        data = super().get_conf(user)
+        data['cta_url'] = get_map_url_with_selected_filter_params(
+            ['groups', 'projects'], topics=user.cosinnus_profile.media_tag.topics
+        )
+        return data
+
+
+class CosinnusPersonalDashboardUserRecommendationsWidget(CosinnusPersonalDashboardWidget):
+    """User recommendations widget"""
+
+    id = 'dashboard.user_recommendations'
+    user_data_function = get_user_profile_model().objects.get_recommendations
+    serializer_class = CosinnusUserProfileRecommendationSerializer
+    api_url = reverse_lazy('cosinnus:frontend-api:api-user-recommendations')
+
+    def get_conf(self, user):
+        data = super().get_conf(user)
+        data['cta_url'] = reverse('cosinnus:user-match') if settings.COSINNUS_ENABLE_USER_MATCH else None
+        return data
+
+
+# list of all known widgets
+PERSONAL_DASHBOARD_WIDGET_CLASSES = [
+    CosinnusPersonalDashboardNewsWidget,
+    CosinnusPersonalDashboardCreateNewWidget,
+    CosinnusPersonalDashboardOffersWidget,
+    CosinnusPersonalDashboardGroupsWidget,
+    CosinnusPersonalDashboardEventPollsWidget,
+    CosinnusPersonalDashboardTasksWidget,
+    CosinnusPersonalDashboardEventsWidget,
+    CosinnusPersonalDashboardPollsWidget,
+    CosinnusPersonalDashboardIdeasWidget,
+    CosinnusPersonalDashboardLikedIdeasWidget,
+    CosinnusPersonalDashboardGettingStartedWidget,
+    CosinnusPersonalDashboardNewsRecommendationsWidget,
+    CosinnusPersonalDashboardOfferRecommendationsWidget,
+    CosinnusPersonalDashboardIdeaRecommendationsWidget,
+    CosinnusPersonalDashboardEventRecommendationsWidget,
+    CosinnusPersonalDashboardGroupRecommendationsWidget,
+    CosinnusPersonalDashboardUserRecommendationsWidget,
+]
+
+# initialized available dashboard widgets
+personal_dashboard_widgets = {}
+
+
+def init_personal_dashboard_widgets():
+    """Initialize dashboard widgets."""
+    global personal_dashboard_widgets
+    for widget_cls in PERSONAL_DASHBOARD_WIDGET_CLASSES:
+        if widget_cls.id not in settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS:
+            # make sure all widgets are present in the widget config setting.
+            raise ImproperlyConfigured(
+                f'Widget "{widget_cls.id}" configuration missing in COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS'
+            )
+
+        if widget_cls.cosinnus_app and widget_cls.cosinnus_app in settings.COSINNUS_DISABLED_COSINNUS_APPS:
+            # widget is disabled because of the disabled consinnus app
+            continue
+
+        # load widget conf considering overrides
+        widget_conf = settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS_OVERRIDES.get(
+            widget_cls.id, settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS[widget_cls.id]
+        )
+
+        if widget_conf['active']:
+            # widget enabled
+            widget = widget_cls(conf=widget_conf['frontend_conf'])
+            personal_dashboard_widgets[widget.id] = widget
+
+
+def get_personal_dashboard_widgets():
+    """Get all available dashboard widgets."""
+    if not personal_dashboard_widgets:
+        init_personal_dashboard_widgets()
+    return personal_dashboard_widgets.values()
+
+
+def get_personal_dashboard_widget_ids():
+    """Get the ids of available dashboard widgest."""
+    if not personal_dashboard_widgets:
+        init_personal_dashboard_widgets()
+    return personal_dashboard_widgets.keys()
+
+
+def get_personal_dashboard_widget(widget_id):
+    """Get dashboard widget by it."""
+    if not personal_dashboard_widgets:
+        init_personal_dashboard_widgets()
+    return personal_dashboard_widgets.get(widget_id)

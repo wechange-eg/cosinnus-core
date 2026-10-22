@@ -33,7 +33,7 @@ from cosinnus.core.registries import app_registry
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.utils.dates import timestamp_from_datetime
 from cosinnus.utils.functions import clean_single_line_text, unique_aware_slugify
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.group import get_cosinnus_group_model, get_default_user_group_ids
 from cosinnus.utils.lanugages import MultiLanguageFieldMagicMixin
 
 logger = logging.getLogger('cosinnus')
@@ -374,6 +374,28 @@ class AttachableObjectModel(models.Model):
                 file_attachments.append(attached_object)
         return file_attachments
 
+    @cached_property
+    def image_attachments(self):
+        """Return the attached objects filtered by image files."""
+        file_attachments = self.file_attachments
+        file_attachments = [
+            attachment
+            for attachment in file_attachments
+            if attachment.model_name == 'cosinnus_file.FileEntry' and attachment.target_object.is_image
+        ]
+        return file_attachments
+
+    @cached_property
+    def non_image_attachments(self):
+        """Return the attached objects filtered by non-image files."""
+        file_attachments = self.file_attachments
+        file_attachments = [
+            attachment
+            for attachment in file_attachments
+            if attachment.model_name != 'cosinnus_file.FileEntry' or not attachment.target_object.is_image
+        ]
+        return file_attachments
+
     def get_attached_objects_hash(self):
         """Returns a hashable tuple of sorted list of ids of all attached objects.
         Usuable to compare equality of attached files to objects."""
@@ -472,6 +494,84 @@ class LastVisitedMixin(object):
         return ContentType.objects.get_for_model(self)
 
 
+class BaseTaggableObjectManager(models.Manager):
+    def get_readable_items(self, user):
+        """Return tagged objects that can be read by the user."""
+        from cosinnus.models import BaseTagObject
+        from cosinnus.utils.permissions import filter_base_taggable_qs_for_blocked_user_content
+
+        queryset = self.prefetch_related('group', 'creator', 'media_tag')
+
+        # filter active groups
+        queryset = queryset.filter(group__is_active=True)
+
+        # exclude groups where app is deactivated
+        queryset = queryset.exclude(group__deactivated_apps__contains=self.model._meta.app_label)
+
+        # get public objects or objects from users groups
+        user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
+        queryset = queryset.filter(
+            Q(group__pk__in=user_group_ids) | Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+        )
+
+        # consider blocked users
+        queryset = filter_base_taggable_qs_for_blocked_user_content(queryset, user)
+        return queryset
+
+    def get_personal_items(self, user):
+        """Returns tagged objects from the user groups, excluding default groups."""
+        from cosinnus.utils.permissions import filter_base_taggable_qs_for_blocked_user_content
+
+        queryset = self.prefetch_related('group', 'creator', 'media_tag')
+
+        # filter active groups
+        queryset = queryset.filter(group__is_active=True)
+
+        # exclude groups where app is deactivated
+        queryset = queryset.exclude(group__deactivated_apps__contains=self.model._meta.app_label)
+
+        # filter by user groups without default groups
+        user_group_ids = get_cosinnus_group_model().objects.get_for_user_without_default_groups_pks(user)
+        queryset = queryset.filter(group__pk__in=user_group_ids)
+
+        # consider blocked users
+        queryset = filter_base_taggable_qs_for_blocked_user_content(queryset, user)
+        return queryset
+
+    def get_recommendations(self, user):
+        from cosinnus.models import BaseTagObject
+        from cosinnus.utils.permissions import filter_base_taggable_qs_for_blocked_user_content
+
+        queryset = self.prefetch_related('group', 'creator', 'media_tag')
+
+        # only active groups
+        queryset = queryset.filter(group__is_active=True)
+
+        # exclude groups where app is deactivated
+        queryset = queryset.exclude(group__deactivated_apps__contains=self.model._meta.app_label)
+
+        # exclude user groups, except default groups
+        user_group_ids = get_cosinnus_group_model().objects.get_for_user_without_default_groups_pks(user)
+        queryset = queryset.exclude(group__pk__in=user_group_ids)
+
+        # filter public items or items from default groups
+        default_group_ids = get_default_user_group_ids()
+        queryset = queryset.filter(
+            Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL) | Q(group__id__in=default_group_ids)
+        )
+
+        # exclude own content
+        queryset = queryset.exclude(creator_id=user.pk)
+
+        # consider blocked users
+        queryset = filter_base_taggable_qs_for_blocked_user_content(queryset, user)
+
+        # order by created date
+        queryset = queryset.order_by('-created')
+
+        return queryset
+
+
 @six.python_2_unicode_compatible
 class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableObjectModel):
     """
@@ -521,6 +621,8 @@ class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableOb
     )
 
     settings = models.JSONField(default=dict, blank=True, null=True, encoder=DjangoJSONEncoder)
+
+    objects = BaseTaggableObjectManager()
 
     class Meta(object):
         abstract = True
@@ -927,8 +1029,7 @@ class LikeableObjectMixin(models.Model):
         return len(self.get_followed_user_ids())
 
     def is_user_liking(self, user):
-        return user.email
-        """ Returns True is the user likes this object, else False. """
+        """Returns True is the user likes this object, else False."""
         return user.id in self.get_liked_user_ids()
 
     def is_user_following(self, user):

@@ -288,7 +288,7 @@ class UserListView(ListView):
         email_first_login_token_to_user(user, threaded=threaded)
 
     def get_queryset(self):
-        qs = super().get_queryset()
+        qs = super().get_queryset().exclude(email__startswith='__deleted_user__')
         if self.request.GET.get('search'):
             search_string = self.request.GET.get('search')
             q_term = (
