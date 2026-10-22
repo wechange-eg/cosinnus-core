@@ -12,6 +12,7 @@ from django.core.mail.message import sanitize_address
 from django.utils.encoding import force_str
 from elasticsearch.exceptions import TransportError
 from haystack.backends.elasticsearch7_backend import Elasticsearch7SearchBackend, Elasticsearch7SearchEngine
+from haystack.backends.elasticsearch_backend import ElasticsearchSearchBackend, ElasticsearchSearchEngine
 from urllib3.exceptions import ConnectionError, ProtocolError
 
 from cosinnus.conf import settings
@@ -154,9 +155,7 @@ def threaded_execution_and_catch_error(f):
     return error_wrapper
 
 
-class RobustElasticSearchBackend(Elasticsearch7SearchBackend):
-    """A robust backend that doesn't crash when no connection is available"""
-
+class CosinnusElasticSearchBackendConfigMixin(object):
     MIN_GRAM = 2
     MAX_NGRAM = 25
 
@@ -203,11 +202,11 @@ class RobustElasticSearchBackend(Elasticsearch7SearchBackend):
             },
         }
 
-        super(RobustElasticSearchBackend, self).__init__(*args, **options)
+        super().__init__(*args, **options)
 
     def build_schema(self, *args, **kwargs):
         """Use the standard search_analyzer for ngram fields, so the search query itself won't be n-gramed"""
-        content_field_name, mapping = super(RobustElasticSearchBackend, self).build_schema(*args, **kwargs)
+        content_field_name, mapping = super().build_schema(*args, **kwargs)
         for _field_name, field_mapping in mapping.items():
             if 'analyzer' in field_mapping and field_mapping['analyzer'] == 'ngram_analyzer':
                 field_mapping['search_analyzer'] = 'standard_search_analyzer'
@@ -220,16 +219,32 @@ class RobustElasticSearchBackend(Elasticsearch7SearchBackend):
 
     @threaded_execution_and_catch_error
     def update(self, *args, **kwargs):
-        super(RobustElasticSearchBackend, self).update(*args, **kwargs)
+        super().update(*args, **kwargs)
 
     @threaded_execution_and_catch_error
     def remove(self, *args, **kwargs):
-        super(RobustElasticSearchBackend, self).remove(*args, **kwargs)
+        super().remove(*args, **kwargs)
 
     @threaded_execution_and_catch_error
     def clear(self, *args, **kwargs):
-        super(RobustElasticSearchBackend, self).clear(*args, **kwargs)
+        super().clear(*args, **kwargs)
 
 
-class RobustElasticSearchEngine(Elasticsearch7SearchEngine):
+class RobustElasticSearch7Backend(Elasticsearch7SearchBackend, CosinnusElasticSearchBackendConfigMixin):
+    """A robust backend that doesn't crash when no connection is available, using Elasticsearch 7"""
+
+
+class RobustElasticSearch7Engine(Elasticsearch7SearchEngine):
+    """Cosinnus Elasticsearch Engine for Elasticsearch 7"""
+
+    backend = RobustElasticSearch7Backend
+
+
+class RobustElasticSearchBackend(ElasticsearchSearchBackend, CosinnusElasticSearchBackendConfigMixin):
+    """A robust backend that doesn't crash when no connection is available, using Elasticsearch 9"""
+
+
+class RobustElasticSearchEngine(ElasticsearchSearchEngine):
+    """Cosinnus Elasticsearch Engine for Elasticsearch 9"""
+
     backend = RobustElasticSearchBackend
