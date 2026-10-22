@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans %}{{ group_type }} {{ group_name }} will be deleted due to inactivity{% endblocktrans %}

@@ -31,11 +31,10 @@ from django.template.loader import render_to_string
 from django.template.response import TemplateResponse
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.decorators import method_decorator
 from django.utils.encoding import force_str
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic import CreateView, ListView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from django_select2.views import NO_ERR_RESP, Select2View
@@ -48,7 +47,6 @@ from cosinnus.core.decorators.views import (
     redirect_to_403,
     redirect_to_error_page,
     redirect_to_not_logged_in,
-    staff_required,
 )
 from cosinnus.core.mail import (
     get_common_mail_context,
@@ -60,7 +58,6 @@ from cosinnus.core.signals import user_logged_in_first_time, userprofile_created
 from cosinnus.forms.user import (
     TermsOfServiceFormFields,
     UserChangeEmailFormWithPasswordValidation,
-    UserChangeForm,
     UserCreationForm,
     UserGroupGuestAccessForm,
     ValidatedPasswordChangeForm,
@@ -338,7 +335,11 @@ class UserSignupTriggerEventsMixin(object):
     def trigger_events_after_user_signup(self, user, request, request_data=None, skip_messages=False):
         """Triggers all kinds of events and signals after a user has signed up and their profile creation
         has been completed. Should be called after
-        `UserSignupFinalizeMixin.finalize_user_object_after_signup`
+          `UserSignupFinalizeMixin.finalize_user_object_after_signup`.
+        Hint: new users are added to the portal default groups (defined in `get_default_user_group_slugs` /
+          `NEWW_DEFAULT_USER_GROUPS`) via the hook `ensure_user_to_default_portal_groups`, after their
+           portal membership is created, and not here!
+
         @param request_data: if the POST data is not contained in `request.POST`, supply it via this arg
         @param skip_messages: if True, will not trigger any user messages. used when this s
             called via API.

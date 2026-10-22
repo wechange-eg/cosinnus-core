@@ -163,6 +163,7 @@ setup(
         'XlsxWriter==1.3.7',
         'django-cors-headers<3.11.0',
         'phonenumbers==8.13.28',
+        'babel==2.18.0',
         # virus file scan validator
         'clamd==1.0.2',
         # requirements for documentation

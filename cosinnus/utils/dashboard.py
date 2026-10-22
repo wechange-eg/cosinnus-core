@@ -367,7 +367,7 @@ class RelatedGroupsWidget(GroupProjectsWidget):
 
     def get_groups(self, group):
         # overriding the base function
-        return group.related_groups.all()
+        return group.get_related_groups_active()
 
     def sanity_check(self, group):
         # overriding the base function

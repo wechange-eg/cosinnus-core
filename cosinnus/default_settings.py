@@ -522,8 +522,14 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'WECHANGE_COSINNUS_CONFERENCES_STREAMING_API_AUTH_PASSWORD', default=None
     )
 
-    # hCaptcha
+    # hCaptcha. if both captcha keys are set in .env, euCaptcha is preferred
     COSINNUS_HCAPTCHA_SECRET_KEY = env('WECHANGE_COSINNUS_HCAPTCHA_SECRET_KEY', default=None)
+
+    # euCaptcha secret key. if both captcha keys are set in .env, euCaptcha is preferred
+    COSINNUS_EUCAPTCHA_SECRET_KEY = env('WECHANGE_COSINNUS_EUCAPTCHA_SECRET_KEY', default=None)
+
+    # the site key required for eucaptcha verification requests alongside the secret key
+    COSINNUS_EUCAPTCHA_SITE_KEY = env('WECHANGE_COSINNUS_EUCAPTCHA_SITE_KEY', default=None)
 
     # Wechange Payments
     PAYMENTS_BETTERPAYMENT_API_KEY = env('WECHANGE_PAYMENTS_BETTERPAYMENT_API_KEY', default='')
@@ -795,6 +801,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'PAGE_SIZE': 20,
         'DEFAULT_AUTHENTICATION_CLASSES': (
             'rest_framework.authentication.SessionAuthentication',
+            'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
             'rest_framework_simplejwt.authentication.JWTAuthentication',
         ),
         'EXCEPTION_HANDLER': 'cosinnus.api_frontend.handlers.exception_handlers.cosinnus_error_code_exception_handler',

@@ -111,9 +111,9 @@ class MainContentViewTest(APILiveServerTestCase):
         self.assertIn('<meta ', response.data['meta'], 'at least one meta item in meta response')
         self.assertIn('rel="apple-touch-icon"', response.data['meta'], 'one rel-link in meta response')
         self.assertEqual(response.data['sub_navigation'], None, 'no subnavigation in dashboard')
-        self.assertEqual(response.data['main_menu']['label'], 'Personal Dashboard')
+        self.assertEqual(response.data['main_menu']['label'], 'Personal Space')
         self.assertEqual(
-            response.data['main_menu']['icon'], 'fa-user', 'main menu button is present and has the user ico'
+            response.data['main_menu']['icon'], 'fa-home', 'main menu button is present and has the user ico'
         )
         self.assertIsNone(response.data['space'], 'no space element without group.')
 
@@ -274,7 +274,8 @@ class MainContentViewTest(APILiveServerTestCase):
         response = self.client.get(self.api_url + f'?{encoded_url_param}')
         self.assertEqual(response.status_code, 200)
         self.assertIn(
-            '<ul class="errorlist"><li>test_field<ul class="errorlist" id="id_test_field_error"><li>This field is required.</li></ul></li></ul>',
+            '<ul class="errorlist"><li>test_field<ul class="errorlist" id="id_test_field_error">'
+            '<li>This field is required.</li></ul></li></ul>',
             response.data['content_html'],
         )
 

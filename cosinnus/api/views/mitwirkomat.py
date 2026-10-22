@@ -136,5 +136,5 @@ if settings.COSINNUS_MITWIRKOMAT_INTEGRATION_ENABLED:
             Renders the csv output
             """
             if request.GET.get('format') == 'csv':
-                response['Content-Disposition'] = 'attachment, filename=exported_mitwirkomat_initiativen.csv'
+                response['Content-Disposition'] = 'attachment; filename="exported_mitwirkomat_initiativen.csv"'
             return super().finalize_response(request, response, *args, **kwargs)

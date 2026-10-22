@@ -3,10 +3,8 @@ import random
 
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse, HttpResponseForbidden
-from oauth2_provider.contrib.rest_framework import OAuth2Authentication
 from oauth2_provider.decorators import protected_resource
 from rest_framework import permissions, viewsets
-from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -94,8 +92,6 @@ class OAuthUserView(APIView):
     """
     Used by Oauth2 authentication (Rocket.Chat) to retrieve user details
     """
-
-    authentication_classes = (OAuth2Authentication, SessionAuthentication)
 
     OAUTH_VIEW_IDENTIFIER = 'cosinnus_rocketchat'
 

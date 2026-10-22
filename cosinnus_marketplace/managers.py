@@ -2,11 +2,12 @@
 from __future__ import unicode_literals
 
 from django.contrib.contenttypes.models import ContentType
-from django.db import models
 from taggit.models import TaggedItem
 
+from cosinnus.models import BaseTaggableObjectManager
 
-class OfferManager(models.Manager):
+
+class OfferManager(BaseTaggableObjectManager):
     def public(self):
         return self.get_queryset().filter(public=True, is_active=True)
 
@@ -22,3 +23,15 @@ class OfferManager(models.Manager):
                 tag_names.append(ti.tag.name)
 
         return tag_names
+
+    def get_personal_items(self, user):
+        queryset = super().get_personal_items(user)
+        # consider only active offers
+        queryset = queryset.filter(is_active=True)
+        return queryset
+
+    def get_recommendations(self, user):
+        queryset = super().get_recommendations(user)
+        # consider only active offers
+        queryset = queryset.filter(is_active=True)
+        return queryset

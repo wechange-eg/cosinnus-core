@@ -18,9 +18,9 @@ UPDATES includes release notes for each version shown to the users with:
 _REDESIGN_FULL_IS_ENABLED = settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
 
 UPDATES = {
-    '2.10.0': {
-        'datetime': datetime(2026, 10, 1, tzinfo=timezone.utc),
-        'title': format_lazy(_('Version {version_number} released'), version_number='2.10.0'),
+    '2.11.0': {
+        'datetime': datetime(2026, 12, 1, tzinfo=timezone.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.11.0'),
         'short_text': _('This update includes a django framework update and several improvements and fixes:'),
         'full_text': [
             _(
@@ -31,6 +31,17 @@ UPDATES = {
                 '- TODO add more!\n',
             )
         ],
+    },
+    '2.10.0': {
+        'datetime': datetime(2026, 11, 14, tzinfo=timezone.utc),
+        'title': _('Personal Dashboard Redesign'),
+        'short_text': _('The fully redesigned personal dashboard has been launched!'),
+        'full_text': _(
+            'The page "For me" offers a more concise view of recent updates from your groups '
+            'and projects. The page "Explore" helps you discover relevant content, groups, and projects '
+            'tailored for you.'
+        ),
+        'display_conditional': _REDESIGN_FULL_IS_ENABLED and settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD,
     },
     '2.9.0': {
         'datetime': datetime(2026, 8, 4, tzinfo=timezone.utc),

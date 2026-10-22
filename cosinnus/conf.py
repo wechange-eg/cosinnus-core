@@ -1172,7 +1172,7 @@ class CosinnusConf(AppConf):
     V3_MENU_SPACES_ADD_FORUM_EVENTS_LINK_LABEL = None
 
     # Map space label in the v3 main navigation. Set to None to exclude the map from the community space.
-    V3_MENU_SPACES_MAP_LABEL = _('Discover')
+    V3_MENU_SPACES_MAP_LABEL = _('Map')
 
     # Enable to add links to paired groups of managed tags of the user cosinnus_profile as community links.
     V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS = True
@@ -1223,6 +1223,35 @@ class CosinnusConf(AppConf):
     # SSO provider infos used in the v3 frontend
     # Example: [{'login_url': '/oidc/keycloak/login/?process=login', 'name': 'Keycloak'}]
     V3_SSO_PROVIDER = []
+
+    # enable v3 user dashboard
+    USE_V3_PERSONAL_DASHBOARD = False
+
+    # v3 dashboard widget config, with the following options:
+    # active: True if the widget is enabled.
+    # frontend_conf: JSON config that is passed to the frontend.
+    V3_PERSONAL_DASHBOARD_WIDGETS = {
+        'dashboard.news': {'active': True, 'frontend_conf': {'x': 100}},
+        'dashboard.create_new': {'active': True, 'frontend_conf': {}},
+        'dashboard.offers': {'active': True, 'frontend_conf': {}},
+        'dashboard.my_spaces': {'active': True, 'frontend_conf': {}},
+        'dashboard.tasks': {'active': True, 'frontend_conf': {}},
+        'dashboard.events': {'active': True, 'frontend_conf': {}},
+        'dashboard.event_polls': {'active': True, 'frontend_conf': {}},
+        'dashboard.polls': {'active': True, 'frontend_conf': {}},
+        'dashboard.ideas': {'active': True, 'frontend_conf': {}},
+        'dashboard.liked_ideas': {'active': True, 'frontend_conf': {}},
+        'dashboard.getting_started': {'active': True, 'frontend_conf': {}},
+        'dashboard.news_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.offer_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.idea_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.event_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.space_recommendations': {'active': True, 'frontend_conf': {}},
+        'dashboard.user_recommendations': {'active': True, 'frontend_conf': {}},
+    }
+
+    # Portal specific overrides of the V3_PERSONAL_DASHBOARD_WIDGETS setting.
+    V3_PERSONAL_DASHBOARD_WIDGETS_OVERRIDES = {}
 
     # default CosinnusPortal logo image url, shown in the top left navigation bar
     # (will be used with a `static()`) call
@@ -1818,14 +1847,27 @@ class CosinnusConf(AppConf):
     # if True, the User Block feature will be enabled
     ENABLE_USER_BLOCK = False
 
-    # whether to require a valid hcaptcha on the signup API endpoint
-    USE_HCAPTCHA = True
+    # whether to require a valid hcaptcha or eucaptcha on the signup API endpoint
+    USE_CAPTCHA = True
 
-    # the secret key for the hcaptcha. set in .env
+    # the secret key for the hCaptcha. set in .env.
+    # if both hCaptcha and euCaptcha keys are set in .env, euCaptcha is preferred
     HCAPTCHA_SECRET_KEY = None
+
+    # the secret key for the euCaptcha. set in .env.
+    # this is activated by setting the key and `USE_CAPTCHA = True`
+    # if both hCaptcha and euCaptcha keys are set in .env, euCaptcha is preferred
+    EUCAPTCHA_SECRET_KEY = None
+
+    # the site key required for eucaptcha verification requests alongside the secret key
+    # read from .env
+    EUCAPTCHA_SITE_KEY = None
 
     # the URL at which to verify the hcaptcha response
     HCAPTCHA_VERIFY_URL = 'https://hcaptcha.com/siteverify'
+
+    # the URL at which to verify the hcaptcha response
+    EUCAPTCHA_VERIFY_URL = 'https://api.eu-captcha.eu/v1/verify'
 
     # a storage for portal settings that are exposed publicy
     # via v3 API endpoint 'api/v3/portal/settings/'
@@ -1834,25 +1876,83 @@ class CosinnusConf(AppConf):
 
     # robots.txt configuration. If True, use a deny-all robots.txt, otherwise serve static/robots.txt.
     DENY_ALL_ROBOTS = False
-    # Number of days before inactive groups and users are automatically deactivated for deletion.
-    # Note: Ignoring leap years to avoid calendar arithmetics as the exact duration is not crucial for the deactivation.
-    INACTIVE_DEACTIVATION_SCHEDULE = 365 * 10  # 10 years
-    INACTIVE_DEACTIVATION_SCHEDULE_TEXT = _('10 years')
-
-    # Notification intervals in days before automatic deactivation of users and groups.
-    # Dictionary with day value and the corresponding user text.
-    INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION = {
-        365: _('1 year'),
-        182: _('6 months'),
-        14: _('2 weeks'),
-        2: _('2 days'),
-    }
 
     # the amount of days before any of the points in time indicated by
     # `INACTIVE_NOTIFICATIONS_BEFORE_DEACTIVATION` or `INACTIVE_DEACTIVATION_SCHEDULE`
     # where `update_group_last_activity()` will actually run instead of skipping the
     # expensive computation.
     INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS = 3
+
+    # Automatically warn inactive users/group admins, then deactivate and schedule deletion after the inactivity limit.
+    # Independent user/group policies.
+    # Required: `days` (positive integer inactivity threshold) and `warnings` (mapping; {} disables warning emails).
+    # Each warning ("days before the inactivity threshold") specifies `subject_template` and `body_template` as a pair,
+    # using core or portal template paths. Missing/incomplete pairs or TemplateSyntaxError raise an error.
+    #
+    # Optional at the top level and per warning:
+    # - `display_unit`: day (default), week, month or year. Babel rounds to this display unit;
+    # - `text`: explicit neutral-period override instead of Babel;
+    # - `relative_text`: explicit relative warning-period override (e.g. "in three weeks") instead of Babel.
+    # None uses Babel; an empty string overrides it.
+    #
+    # Warnings run only on their configured calendar day, without catch-up. Shorter thresholds can deactivate
+    # overdue objects without prior warnings.
+    USER_INACTIVITY_SCHEDULE = {
+        'days': 365 * 10,
+        'display_unit': 'year',
+        'warnings': {
+            365: {
+                'display_unit': 'year',
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
+            182: {
+                'display_unit': 'month',
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
+            14: {
+                'display_unit': 'week',
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
+            2: {
+                'display_unit': 'day',
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
+        },
+    }
+    GROUP_INACTIVITY_SCHEDULE = {
+        'days': 365 * 10,
+        'display_unit': 'year',
+        'warnings': {
+            365: {
+                'display_unit': 'year',
+                'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/group_body.txt',
+            },
+            182: {
+                'display_unit': 'month',
+                'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/group_body.txt',
+            },
+            14: {
+                'display_unit': 'week',
+                'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/group_body.txt',
+            },
+            2: {
+                'display_unit': 'day',
+                'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/group_body.txt',
+            },
+        },
+    }
+
+    # If enabled, inactivity cron jobs only report users and groups that would be notified or deactivated.
+    # Already scheduled deletions are not affected.
+    INACTIVITY_DRY_RUN = False
 
     # enable group permissions in the django admin, including the group admin and the group field in the user admin.
     DJANGO_ADMIN_GROUP_PERMISSIONS_ENABLED = False

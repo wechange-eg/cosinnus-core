@@ -262,7 +262,7 @@
 					</p>
 					
 					{% if SETTINGS.COSINNUS_RELATED_GROUPS_PROJECTS_ENABLED %}
-						{% with related_groups=group.related_groups.all %}
+						{% with related_groups=group.get_related_groups_active %}
 							{% if related_groups %}
 								<p class="transparent">
 									{% trans "Related Projects/Groups" %}: 

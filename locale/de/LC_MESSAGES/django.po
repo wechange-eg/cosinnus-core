@@ -342,13 +342,13 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(group_type)s %(group_name)s will be deactivated %(deactivation_after)s after the last activity and then permanently deleted. This will happen in %(deactivation_in)s.\n"
+"%(group_type)s %(group_name)s will be deactivated %(inactivity_period)s after the last activity and then permanently deleted. This will happen %(relative_warning_period)s.\n"
 "\n"
 "If you do not wish for the group/project to be deactivated, just create some content there.\n"
 "\n"
 "If an earlier deletion is desired, you can delete the group/project under %(delete_group_url)s."
 msgstr ""
-"%(group_type)s %(group_name)s wird nach %(deactivation_after)s seit der letzten Aktivität deaktiviert und dann endgültig gelöscht. Das passiert in %(deactivation_in)s.\n"
+"%(group_type)s %(group_name)s wird %(inactivity_period)s nach der letzten Aktivität deaktiviert und dann endgültig gelöscht. Das passiert %(relative_warning_period)s.\n"
 "\n"
 "Wenn du nicht möchtest, dass die Gruppe/das Projekt gelöscht wird, erstelle einen Inhalt dort.\n"
 "\n"
@@ -1674,9 +1674,6 @@ msgstr "--- NICHTS (Vererbt) ---"
 msgid "1 %(object)s was deleted successfully"
 msgstr "1 %(object)s wurde erfolgreich gelöscht"
 
-msgid "1 year"
-msgstr "1 Jahr"
-
 msgid "1-Column Dashboard Page"
 msgstr "1-spaltige Dashboard Seite"
 
@@ -1701,14 +1698,8 @@ msgstr "1/4 + 1/2 + 1/4"
 msgid "1/4 + 1/4 + 1/2"
 msgstr "1/4 + 1/4 + 1/2"
 
-msgid "10 years"
-msgstr "10 Jahre"
-
-msgid "2 days"
-msgstr "2 Tage"
-
-msgid "2 weeks"
-msgstr "2 Wochen"
+msgid "2 columns of text"
+msgstr "2 Spalten Text"
 
 msgid "2-Column Dashboard Page"
 msgstr "2-spaltige Dashboard Seite"
@@ -1730,9 +1721,6 @@ msgstr "3-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
 
 msgid "4 Random Projects Widget"
 msgstr "4 zufällige Projekte-Widget"
-
-msgid "6 months"
-msgstr "6 Monate"
 
 msgid "8 Random Projects Widget"
 msgstr "8 zufällige Projekte-Widget"
@@ -2259,7 +2247,7 @@ msgid "Add an Address"
 msgstr "Adresse hinzufügen"
 
 msgid "Add button"
-msgstr "Link hinzufügen"
+msgstr "Button hinzufügen"
 
 msgid "Add choice"
 msgstr "Wahlmöglichkeit hinzufügen"
@@ -2480,6 +2468,9 @@ msgstr "Diesen Post auch auf der verbundenen Facebook-Gruppe posten"
 msgid "An account already exists with this e-mail address. To make sure that you are the owner of this account please sign in to that account first, then connect your {} account."
 msgstr "Es existiert bereits ein Konto mit dieser E-Mail-Adresse. Um sicherzustellen, dass du der Eigentümer dieses Kontos bist, melde dich bitte zuerst bei diesem Konto an und verbinde dann dein Konto."
 
+msgid "An announcement is only displayed during the set period."
+msgstr "Eine Ankündigung wird nur während des eingestellten Zeitraums angezeigt."
+
 msgid "An announcement will only appear during its valid-time frame."
 msgstr "Eine Ankündigung erscheint nur während dem angegebenen Zeitrahmen."
 
@@ -2536,6 +2527,9 @@ msgstr "Ankündigung ist aktiviert"
 
 msgid "Announcements"
 msgstr "Ankündigung"
+
+msgid "Announcements created here are displayed to all users at the very top of their Personal Dashboard."
+msgstr "Die hier erstellten Ankündigungen werden allen Benutzer/innen ganz oben auf ihrem Persönlichen Dashboard angezeigt."
 
 msgid "Another export is currently running!"
 msgstr "Ein anderer Export läuft gerade!"
@@ -2706,6 +2700,14 @@ msgstr "Als Administrator/in einer Gruppe oder eines Projekts unterliegt es dein
 msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!"
 msgstr "Als Administrator/in einer Gruppe oder eines Projekts unterliegt es deiner Verantwortung sicherzustellen, dass die Inhalte von Mitgliedern weder Urheberrechte verletzen noch gegen Gesetze verstoßen. Bitte sei dir dessen besonders bewusst wenn du die Sichtbarkeitseinstellung auf öffentlich sichtbar einstellst!"
 
+#, python-format
+msgid "As long as a user is seeing the %(welcome_admin_link)s, no announcement from this list will be displayed."
+msgstr "Solange man als Benutzer/in die %(welcome_admin_link)s angezeigt bekommt, wird keine Ankündigung aus dieser Liste angezeigt."
+
+#, python-format
+msgid "As long as a user is seeing the welcome announcement, no %(announcement_admin_link)s will be displayed."
+msgstr "Solange man als Benutzer/in die Willkommens-Ankündigung angezeigt bekommt, werden keine %(announcement_admin_link)s angezeigt."
+
 msgid "Assign"
 msgstr "Zuweisen"
 
@@ -2782,6 +2784,9 @@ msgstr "Die möglichen Optionen waren"
 
 msgid "Avatar"
 msgstr "Avatar"
+
+msgid "Avatar is generated"
+msgstr "Avatar automatisch generiert"
 
 msgid "Avatar will be deleted once you save."
 msgstr "Bild wird beim speichern gelöscht."
@@ -2969,6 +2974,18 @@ msgstr "Durchsuchen..."
 msgid "Business and Law"
 msgstr "Arbeit und Recht"
 
+msgid "Button"
+msgstr "Button"
+
+msgid "Button Text"
+msgstr "Text des Buttons"
+
+msgid "Button URL"
+msgstr "URL des Buttons"
+
+msgid "Buttons"
+msgstr "Buttons"
+
 msgid ""
 "By clicking on the button below, this conference and all content posted there will be irrevocably deleted.\n"
 "\n"
@@ -3063,6 +3080,9 @@ msgstr "Aufruf zum Handeln - Microsite-Box Titel"
 msgid "Call to Action Button"
 msgstr "Aufruf zum Handeln - Microsite-Box Link"
 
+msgid "Call to Action Buttons active"
+msgstr "Call-to-Action Buttons activ"
+
 msgid "Call to Action Microsite Box active"
 msgstr "Aufruf zum Handeln - Microsite-Box aktiv"
 
@@ -3094,6 +3114,9 @@ msgstr "Captcha"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Categories"
 msgstr "Kategorien"
+
+msgid "Category"
+msgstr "Kategorie"
 
 msgid "Category for the Announcement"
 msgstr "Kategorie für die Ankündigung"
@@ -3985,6 +4008,18 @@ msgstr "Täglich"
 msgid "Dashboard"
 msgstr "Dashboard"
 
+msgid "Dashboard Announcement"
+msgstr "Dashboard-Ankündigung"
+
+msgid "Dashboard Announcement CallToAction Button"
+msgstr "Dashboard-Ankündigung CallToAction Button"
+
+msgid "Dashboard Announcement CallToAction Buttons"
+msgstr "Dashboard-Ankündigung CallToAction Buttons"
+
+msgid "Dashboard Announcements"
+msgstr "Dashboard-Ankündigungen"
+
 msgid "Data"
 msgstr "Daten"
 
@@ -4303,11 +4338,17 @@ msgstr "Diskussionen"
 msgid "Dismiss"
 msgstr "Schließen"
 
+msgid "Display"
+msgstr "Darstellung"
+
 msgid "Display Name"
 msgstr "Anzeigename"
 
 msgid "Display contact form."
 msgstr "Kontaktformular anzeigen."
+
+msgid "Display duration in days"
+msgstr "Anzeigedauer in Tagen"
 
 msgid "Display name"
 msgstr "Anzeigename"
@@ -6936,6 +6977,9 @@ msgstr "Ignorierte/Fehlgeschlagene Einträge"
 msgid "Image"
 msgstr "Bild"
 
+msgid "Image + 1 column of text"
+msgstr "Bild + 1 Spalte Text"
+
 msgid "Image preview"
 msgstr "Bildvorschau"
 
@@ -8076,9 +8120,6 @@ msgstr "Meine Inserate"
 msgid "My Organizations"
 msgstr "Meine Organisationen"
 
-msgid "My Personal Space"
-msgstr "Mein persönlicher Space"
-
 msgid "My Profile"
 msgstr "Mein Profil"
 
@@ -8802,6 +8843,9 @@ msgstr "Nur ich"
 msgid "Only one announcement at a time will ever be shown to a user."
 msgstr "Nur eine Ankündigung wird jeweils dem/r Benutzer/in angezeigt."
 
+msgid "Only one announcement is displayed at a time. If several announcements are active at the same time, users will see the oldest active announcement."
+msgstr "Es wird immer nur eine Ankündigung angezeigt. Wenn mehrere Ankündigungen gleichzeitig aktiv sind, sieht man als Benutzer/in die älteste aktive Ankündigung."
+
 msgid "Only project members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieses Projekts können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
 
@@ -9099,8 +9143,17 @@ msgstr "فارسی"
 msgid "Personal Dashboard"
 msgstr "Persönliches Dashboard"
 
+msgid "Personal Dashboard Announcements"
+msgstr "Dashboard-Ankündigungen"
+
+msgid "Personal Dashboard Redesign"
+msgstr "Redesign des persönlichen Dashboards"
+
 msgid "Personal Message (optional)"
 msgstr "Persönliche Nachricht (optional)"
+
+msgid "Personal Space"
+msgstr "Persönlicher Space"
 
 msgid "Personal info"
 msgstr "Persönliche Informationen"
@@ -10191,6 +10244,9 @@ msgstr "Wähle links eine Seite aus."
 msgid "Select at least one object."
 msgstr "Wählen sie mindestens einen Empfänger aus."
 
+msgid "Select how many days after registration the welcome message should automatically disappear (in case the user does not actively hide it)."
+msgstr "Wähle aus, wie viele Tage nach der Registrierung die Willkommens-Ankündigung automatisch verschwinden soll (für den Fall, dass der/die Benutzer/in sie nicht aktiv wegklickt)."
+
 msgid "Select one of your Facebook pages to connect to"
 msgstr "Wähle eine deiner Facebook Seiten zum Verbinden"
 
@@ -10357,6 +10413,9 @@ msgstr "Registrieren Button anzeigen"
 
 msgid "Show Tokens"
 msgstr "Tokens anzeigen"
+
+msgid "Show a Button"
+msgstr "Zeige einen Button an"
 
 msgid "Show all"
 msgstr "Alle anzeigen"
@@ -10922,11 +10981,20 @@ msgstr "Test email wurde gesendet."
 msgid "Text"
 msgstr "Text"
 
+msgid "Text (1. column)"
+msgstr "Text (1. Spalte)"
+
+msgid "Text (2. column)"
+msgstr "Text (2. Spalte)"
+
 msgid "Text Editor"
 msgstr "Text-Editor"
 
 msgid "Text Topics"
 msgstr "Themen (Freitext)"
+
+msgid "Text of the Button"
+msgstr "Text des Buttons"
 
 msgid "Thank you again for your interest in our services."
 msgstr "Vielen Dank nochmal für dein Interesse an unseren Dienstleistungen."
@@ -11038,6 +11106,9 @@ msgstr "Der Mitwirk-O-Mat ist %(here_link)s veröffentlicht. Nutzer/innen beantw
 msgid "The WE-Cloud is here!"
 msgstr "Die WE-Cloud ist da!"
 
+msgid "The Welcome Announcement was saved successfully."
+msgstr "Die Willkommens-Ankündigung wurde erfolgreich gespeichert."
+
 msgid "The Winner is"
 msgstr "Der Sieger ist"
 
@@ -11079,6 +11150,9 @@ msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für dein Projekt endet na
 #, python-format
 msgid "The booked period for Video Conference Pro for this project has ended on %(end_date)s."
 msgstr "Der gebuchte Zeitraum für Videokonferenz Pro für dein Projekt ist am %(end_date)s abgelaufen."
+
+msgid "The category is displayed as a label."
+msgstr "Die Kategorie wird als Label angezeigt."
 
 msgid "The complete request can only be sent via POST!"
 msgstr "The complete request can only be sent via POST!"
@@ -11225,6 +11299,9 @@ msgstr "Der Export läuft gerade..."
 msgid "The file you uploaded was too large or the file type was not permitted to be uploaded!"
 msgstr "Die von Ihnen hochgeladene Datei war zu groß und der Dateityp war ungültig fürs Upload!"
 
+msgid "The first text column of the announcement."
+msgstr "Erste Text-Spalte der Dashboard-Ankündigung."
+
 msgid "The first uploaded image will be displayed as a wallpaper"
 msgstr "Das erste hochgeladene Bild wird als Hintergrundbild angezeigt"
 
@@ -11274,6 +11351,9 @@ msgstr "Die folgenden Nutzer/innen wurden auf die Warteliste gesetzt: %s"
 
 msgid "The fully redesigned calendar with a mobile-optimized interface has been launched!"
 msgstr "Der komplett neu gestaltete Kalender mit einer optimierten Benutzeroberfläche für mobile Geräte wurde veröffentlicht!"
+
+msgid "The fully redesigned personal dashboard has been launched!"
+msgstr "Das komplett überarbeitete persönliche Dashboard wurde eingeführt!"
 
 msgid "The generated 6-digit code (for example: 123456)"
 msgstr "Der generierte 6-stellige Code (zum Beispiel: 123456)"
@@ -11367,6 +11447,9 @@ msgstr "Das Inserat wurde erfolgreich reaktiviert."
 msgid "The offer you requested is no longer active. Sorry!"
 msgstr "Das Inserat das du angefragt hast ist leider nicht mehr aktiv!"
 
+msgid "The page \"For me\" offers a more concise view of recent updates from your groups and projects. The page \"Explore\" helps you discover relevant content, groups, and projects tailored for you."
+msgstr "Die Seite \"Für mich\" bietet einen Überblick über die relevanten Inhalte aus deinen Gruppen und Projekten. Auf der Seite \"Erkunden\" werden öffentliche Inhalte aus der Community vorgeschlagen, die dich interessieren könnten."
+
 msgid "The page you requested is not available for this event at this time."
 msgstr "Die Seite die du aufgerufen hast ist zu dieser Zeit nicht verfügbar."
 
@@ -11429,6 +11512,9 @@ msgstr "Raum erfolgreich gelöscht."
 
 msgid "The room was saved successfully."
 msgstr "Raum erfolgreich gespeichert."
+
+msgid "The second text column of the announcement."
+msgstr "Zweite Text-Spalte der Dashboard-Ankündigung."
 
 msgid "The selected choice was not found or invalid! Please choose a different value!"
 msgstr "Die gewählte Auswahl wurde nicht gefunden oder ist ungültig! Bitte wähle einen anderen Wert!"
@@ -11801,6 +11887,9 @@ msgstr "Diese Aktion ist nicht direkt verfügbar!"
 
 msgid "This action is not permitted for this poll at this stage!"
 msgstr "Die Aktion ist für diese Umfrage momentan nicht möglich!"
+
+msgid "This announcement will be displayed to new users who have just registered at the very top of their Personal Dashboards."
+msgstr "Diese Ankündigung wird neuen Benutzer/innen, die sich frisch registriert haben, ganz oben auf ihrem Persönlichen Dashboard angezeigt."
 
 msgid "This calendar shows all conferences for the current view, all premium blocks currently booked for conferences, and the total designated premium server capacity."
 msgstr "Dieser Kalendar zeigt all die Tagungen in der aktuellen Ansicht, alle Premium-Blöcke, die momentan für die Tagungen gebucht sind, sowie die gesamte Kapazität der bestimmten Premium-Servers."
@@ -12389,6 +12478,9 @@ msgstr "URL"
 msgid "URL Link"
 msgstr "URL Link"
 
+msgid "URL of the Button"
+msgstr "URL des Buttons"
+
 msgid "Ukrainian--LEAVE-THIS-EMPTY-DO-NOT-TRANSLATE"
 msgstr "Українська"
 
@@ -12801,6 +12893,12 @@ msgstr "Bestätigung für neue Benutzer/innen"
 msgid "Users can filter their results in the Volunteer-O-Matic by distance so that only groups and projects in their area are suggested. For this, the first location you specified in your %(group_settings_label)s is used."
 msgstr "Die Nutzer/innen können ihre Ergebnisse im Mitwirk-O-Mat nach Entfernung filtern, damit nur Gruppen und Projekte in der Nähe vorgeschlagen werden. Hierfür wird der Standort verwendet, den ihr in euren %(group_settings_label)s angegeben habt."
 
+msgid "Users can hide an announcement. It then disappears and is never displayed again. The next time they visit their Personal Dashboard, the next announcement will be displayed, if there is still an active announcement that they have not yet hidden."
+msgstr "Man kann als Benutzer/in eine Ankündigung wegklicken, woraufhin diese verschwindet und nie wieder angezeigt wird. Beim nächsten Besuch des Persönlichen Dashboards wird dann die nächste Ankündigung angezeigt, falls es noch eine aktive Ankündigung gibt, die man noch nicht weggeklickt hat."
+
+msgid "Users can hide the welcome announcement. It then disappears and is never displayed again."
+msgstr "Man kann die Willkommens-Ankündigung als Benutzer/in wegklicken, woraufhin sie verschwindet und nie wieder angezeigt wird."
+
 #, python-format
 msgid "Users in organization %(group)s"
 msgstr "Admins in Organisation %(group)s"
@@ -13139,8 +13237,20 @@ msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
 msgid "Welcome"
 msgstr "Willkommen"
 
+msgid "Welcome Announcement"
+msgstr "Willkommens-Ankündigung"
+
+msgid "Welcome Announcement is enabled"
+msgstr "Willkommens-Ankündigung ist aktiviert."
+
+msgid "Welcome Announcements"
+msgstr "Willkommens-Ankündigungen"
+
 msgid "Welcome Message"
 msgstr "Begrüßungsnachricht"
+
+msgid "Welcome announcement for new users"
+msgstr "Willkommens-Ankündigung für neue Benutzer/innen"
 
 #, python-format
 msgid "Welcome to %(portal_name)s!"
@@ -14367,7 +14477,7 @@ msgstr "Deine E-Mail Adresse wurde erfolgreich geändert:"
 
 #, python-format
 msgid ""
-"Your entire account, profile and personal information will be deactivated in %(deactivation_in)s and then irrevocably deleted.\n"
+"Your entire account, profile and personal information will be deactivated %(relative_warning_period)s and then irrevocably deleted.\n"
 "\n"
 "If you do not wish for you account to be deactivated, just log in once.\n"
 "\n"
@@ -14379,9 +14489,9 @@ msgid ""
 "\n"
 "During this %(deleted_after_days)s-day period after deactivation, the e-mail address of your account is reserved and cannot be used to register a new account."
 msgstr ""
-"Dein gesamtes Benutzerkonto, Profil und persönlichen Daten werden in %(deactivation_in)s deaktiviert und anschließend unwiderruflich gelöscht.\n"
+"Dein Benutzerkonto einschließlich Profil und persönlicher Daten wird %(relative_warning_period)s deaktiviert und anschließend unwiderruflich gelöscht.\n"
 "\n"
-"Wenn du nicht möchtest, dass dein Benutzerkonto deaktiviert wird, melde dich einfach einmal an.\n"
+"Wenn du nicht möchtest, dass dein Benutzerkonto deaktiviert wird, logge dich einfach einmal ein.\n"
 "\n"
 "Deine Pads, Neuigkeiten, hochgeladenen Dateien und sonstigen Inhalte bleiben auf der Website erhalten. Dein Name wird jedoch nicht mehr angezeigt und dein Profil wird nicht mehr mit den Inhalten verknüpft. In Rocket.Chat werden deine Direktnachrichten gelöscht, die Inhalte in Diskussionen und Kanälen bleiben jedoch erhalten. Wenn du dennoch eigene Inhalte löschen möchtest, kannst du dies jetzt tun, indem du die Inhalte auf den entsprechenden Seiten löschst.\n"
 "\n"
@@ -14535,21 +14645,23 @@ msgstr "Dein Passwort wurde erfolgreich gesetzt! Du kannst dich nun mit deiner E
 msgid "Your phone number is only visible for registered users"
 msgstr "Deine Telefonnummer ist nur für registrierte Benutzer/innen sichtbar"
 
+#, python-format
 msgid ""
-"Your platform profile belonging to this email address has been deactivated by us. Your account will be deleted completely in 30 days.\n"
+"Your platform profile belonging to this email address has been deactivated by us. Your account will be deleted completely in %(deleted_after_days)s days.\n"
 "\n"
 "If you want to keep your profile, please contact the portal administrators. Please note that the response time by e-mail may take longer in some cases."
 msgstr ""
-"Das zu dieser E-Mail-Adresse gehörende Profil auf unserer Plattform wurde von uns deaktiviert. Dein Benutzerkonto wird in 30 Tagen vollständig gelöscht.\n"
+"Das zu dieser E-Mail-Adresse gehörende Profil auf unserer Plattform wurde von uns deaktiviert. Dein Benutzerkonto wird in %(deleted_after_days)s Tagen vollständig gelöscht.\n"
 "\n"
 "Wenn du dein Profil behalten möchtest, wende dich bitte an die Portaladministratoren. Bitte beachte, dass die Antwort per E-Mail in manchen Fällen etwas länger dauern kann."
 
+#, python-format
 msgid ""
-"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in 30 days.\n"
+"Your platform profile stored with us under this email has been deactivated by you and was approved for deletion. The profile has been removed from the website and we will delete the account completely in %(deleted_after_days)s days.\n"
 "\n"
 "If this has happened without your knowledge or if you change your mind in the meantime, please contact the portal administrators or the email address given in our imprint. Please note that the response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would like to keep your profile."
 msgstr ""
-"Das bei uns unter dieser E-Mail gespeicherte Profil der Plattform wurde von Dir deaktiviert und zur Löschung freigegeben. Das Profil wurde von der Webseite entfernt und wir werden das Konto in 30 Tagen vollständig löschen. \n"
+"Das bei uns unter dieser E-Mail gespeicherte Profil der Plattform wurde von Dir deaktiviert und zur Löschung freigegeben. Das Profil wurde von der Webseite entfernt und wir werden das Konto in %(deleted_after_days)s Tagen vollständig löschen. \n"
 "\n"
 "Sollte dies ohne Dein Wissen geschehen sein oder falls Du es dir in der Zwischenzeit anders überlegst, hast Du die Möglichkeit Dich zügig an die Portaladministrator/innen bzw. die im Impressum angegebene E-Mail-Adresse zu wenden. Bitte beachte, dass die Reaktionszeit per Mail in manchen Fällen länger dauern kann. Bitte melde Dich daher frühzeitig, falls Du Dein Profil noch weiter behalten möchtest."
 
@@ -14732,6 +14844,9 @@ msgstr "hat ein Inserat erstellt"
 
 msgid "cut"
 msgstr "cut"
+
+msgid "dashboard announcements"
+msgstr "Dashboard-Ankündigungen"
 
 msgid "deactivate"
 msgstr "Deaktivieren"
@@ -15195,6 +15310,9 @@ msgstr "view"
 #. Translators: __INCLUDE_JS_PO__
 msgid "website"
 msgstr "Webseite"
+
+msgid "welcome announcement"
+msgstr "Willkommens-Ankündigung"
 
 msgid "yes"
 msgstr "Ja"
@@ -15948,6 +16066,9 @@ msgstr "Ja"
 #~ msgid "Motivation"
 #~ msgstr "Motivation"
 
+#~ msgid "My Personal Space"
+#~ msgstr "Mein persönlicher Space"
+
 #~ msgid "Name of educational institution"
 #~ msgstr "Name der Bildungseinrichtung"
 
@@ -16261,6 +16382,9 @@ msgstr "Ja"
 
 #~ msgid "The new calendar in groups and projects features enhanced public event sharing and advanced tools for internal scheduling, including recurring events and seamless CalDAV synchronization."
 #~ msgstr "Der neue Kalender bietet in Gruppen und Projekten eine verbesserte Darstellung öffentlicher Veranstaltungen sowie erweiterte Funktionen für interne Termine, inklusive Serienterminen und CalDAV-Synchronisation."
+
+#~ msgid "The redesigned personal dashboard \"For me\" offers a more concise view of recent updates from your groups and projects. The new \"Explore\" dashboard helps you discover relevant content, groups, and projects tailored for you."
+#~ msgstr "Das neu gestaltete persönliche Dashboard „Für mich“ bietet einen präziseren Überblick über die neuesten Updates aus deinen Gruppen und Projekten. Das neue Dashboard „Entdecken“ hilft dir dabei, relevante Inhalte, Gruppen und Projekte zu finden, die zu deinen Interessen passen."
 
 #~ msgid "The start date and time are used for reminder notification emails (if set up). Can span multiple days."
 #~ msgstr "Die Start- und Endzeit werden für Erinnerungs-E-Mails benutzt (wenn eingesetllt). Kann mehrere Tage beinhalten."

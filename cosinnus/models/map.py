@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import datetime
 import re
 from copy import copy
-from zoneinfo import ZoneInfo
+from urllib.parse import quote
 
 from django.db.models import Q
 from django.template.defaultfilters import date as django_date_filter
@@ -14,6 +14,7 @@ from django.utils import timezone
 from django.utils.html import escape
 from django.utils.timezone import now
 from haystack.query import SearchQuerySet
+from zoneinfo import ZoneInfo
 
 from cosinnus.conf import settings
 from cosinnus.forms.search import filter_searchqueryset_for_read_access, get_visible_portal_ids
@@ -1055,3 +1056,24 @@ def filter_event_or_conference_happening_during(from_datetime, to_datetime, sqs)
     # only actual events, no doodles
     sqs = sqs.exclude(Q(event_state__lt=1) | Q(event_state__gt=1))
     return sqs
+
+
+def get_map_url_with_selected_filter_params(selected_search_model_names, topics=None):
+    """
+    Utility function to get the map url with filter parameters with only some filters selected.
+    Additionally accepts topics to add to the url.
+    E.g. get_get_map_selected_filter_params(["groups", "projects"]) returns filter parameters with only groups=true and
+    projects=true and all other search model filters to false.
+    :param selected_search_model_names: List of search model names.
+    :param topics: String with comma separated topics.
+    """
+    search_model_filter = ''
+    for search_model_name in list(SEARCH_MODEL_NAMES_REVERSE):
+        filter_setting = 'true' if search_model_name in selected_search_model_names else 'false'
+        if search_model_filter:
+            search_model_filter += '&'
+        search_model_filter += f'{search_model_name}={filter_setting}'
+    map_url = reverse('cosinnus:map') + f'?{search_model_filter}'
+    if topics:
+        map_url += f'&topics={quote(topics)}'
+    return map_url

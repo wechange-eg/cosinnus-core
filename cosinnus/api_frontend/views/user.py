@@ -5,6 +5,7 @@ from urllib.parse import unquote
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model, login, logout
 from django.contrib.humanize.templatetags.humanize import naturaltime
+from django.contrib.messages import get_messages
 from django.http import Http404
 from django.urls.base import reverse
 from django.utils.encoding import force_str
@@ -14,6 +15,7 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import authentication, serializers, status
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
@@ -29,6 +31,7 @@ from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api.serializers.user import UserSerializer
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
 from cosinnus.api_frontend.serializers.user import (
+    CosinnusGettingStartedActionSerializer,
     CosinnusGlobalUserNotificationSettingSerializer,
     CosinnusGuestLoginSerializer,
     CosinnusHybridUserAdminCreateSerializer,
@@ -36,11 +39,14 @@ from cosinnus.api_frontend.serializers.user import (
     CosinnusHybridUserSerializer,
     CosinnusSetInitialPasswordSerializer,
     CosinnusUserLoginSerializer,
+    CosinnusUserMessageSerializer,
+    CosinnusUserProfileRecommendationSerializer,
     CosinnusUserSignupSerializer,
+    CosinnusUserTosSerializer,
 )
 from cosinnus.conf import settings
 from cosinnus.core.middleware.login_ratelimit_middleware import check_user_login_ratelimit
-from cosinnus.models import CosinnusPortal, GlobalUserNotificationSetting, get_domain_for_portal
+from cosinnus.models import CosinnusPortal, GlobalUserNotificationSetting, get_domain_for_portal, get_user_profile_model
 from cosinnus.models.group import CosinnusGroupInviteToken, UserGroupGuestAccess
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from cosinnus.utils.jwt import get_tokens_for_user
@@ -457,7 +463,7 @@ class SignupView(UserSignupTriggerEventsMixin, SignupApiMixin, APIView):
         # even though `AllowNone` permission classes are set for this case, raise again for dynamic setting test cases
         if not settings.COSINNUS_USER_SIGNUP_ENABLED:
             raise PermissionDenied('Signup is disabled')
-        serializer = CosinnusUserSignupSerializer(data=request.data)
+        serializer = CosinnusUserSignupSerializer(data=request.data, context={'request': request})
         serializer.is_valid(raise_exception=True)
         if UserSignupThrottleBurst in self.throttle_classes:
             # add a throttle point for a successful signup
@@ -1115,3 +1121,83 @@ class UserNotificationSettingView(APIView):
         data = response_serializer.data
 
         return Response(data=data)
+
+
+class CosinnusGettingStartedAPIView(APIView):
+    """
+    Getting started api.
+    Returns getting started actions of GET and allows to dismiss actions on POST.
+    """
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    permission_classes = (IsAuthenticated,)
+
+    @swagger_auto_schema(
+        responses={200: openapi.Response('Getting started actions', CosinnusGettingStartedActionSerializer)}
+    )
+    def get(self, request):
+        actions_data = get_user_profile_model().get_getting_started_actions(request.user)
+        serializer = CosinnusGettingStartedActionSerializer(actions_data, many=True)
+        return Response(serializer.data)
+
+    @swagger_auto_schema(request_body=CosinnusGettingStartedActionSerializer)
+    def post(self, request):
+        serializer = CosinnusGettingStartedActionSerializer(
+            data=request.data,
+            context={'request': request},
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return self.get(request)
+
+
+class CosinnusUserRecommendationsAPIView(ListAPIView):
+    """User recommendations v3 API."""
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    permission_classes = (IsAuthenticated,)
+    serializer_class = CosinnusUserProfileRecommendationSerializer
+
+    def get_queryset(self):
+        return get_user_profile_model().objects.get_recommendations(self.request.user)
+
+
+class CosinnusUserMessagesAPIView(ListAPIView):
+    """API providing Django's user messages. The messages are cleared after reading."""
+
+    serializer_class = CosinnusUserMessageSerializer
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    pagination_class = None
+
+    def get_queryset(self):
+        return get_messages(self.request)
+
+
+class CosinnusUserTosAPIView(GenericAPIView):
+    """API for user ToS confirmation."""
+
+    serializer_class = CosinnusUserTosSerializer
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        serializer = self.get_serializer(request.user)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = self.get_serializer(request.user, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
