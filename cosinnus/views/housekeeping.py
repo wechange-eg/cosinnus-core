@@ -24,6 +24,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_str
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
+from django.utils.text import format_lazy
 from django.utils.timezone import now
 
 from cosinnus.core.mail import (
@@ -106,13 +107,16 @@ def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, 
         preview_context = {}
     else:
         config = settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE
+        combined_trans_string = format_lazy(
+            '[{}/{}]', CosinnusSociety.get_trans().VERBOSE_NAME, CosinnusProject.get_trans().VERBOSE_NAME
+        )
         preview_context = {
             'group': {
                 'name': 'Example group',
                 'slug': 'example-group',
-                'trans': {'VERBOSE_NAME': 'Group/project'},
+                'trans': {'VERBOSE_NAME': combined_trans_string},
             },
-            'group_type': 'Group/project',
+            'group_type': combined_trans_string,
             'group_name': 'Example group',
             'delete_group_url': '#delete_group_url_goes_here',
         }
