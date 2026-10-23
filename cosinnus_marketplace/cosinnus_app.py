@@ -21,7 +21,7 @@ def register():
         _('Marketplace'),
         deactivatable=True,
         active_by_default=active_by_default,
-        activatable_for_groups_only=True,
+        activatable_for_groups_only=False,
     )
     attached_object_registry.register('cosinnus_marketplace.Offer', 'cosinnus_marketplace.utils.renderer.OfferRenderer')
     url_registry.register_urlconf('cosinnus_marketplace', 'cosinnus_marketplace.urls')
