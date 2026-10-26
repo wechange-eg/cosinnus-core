@@ -1595,7 +1595,7 @@ module.exports = ContentControlView.extend({
             this.state.activeFilters['cloudfiles'] = this.options.availableFilterList.cloudfiles ? util.ifundef(urlParams.cloudfiles, this.options.activeFilters.cloudfiles) : false;
         }
         if (COSINNUS_EXCHANGE_EXTERNAL_RESOURCES_ENABLED) {
-            this.state.activeFilters['externalresources'] = this.options.availableFilterList.externalresources ? util.ifundef(urlParams.externalresources, this.options.activeFilters.externalresources) : true;
+            this.state.activeFilters['externalresources'] = this.options.availableFilters.externalresources ? util.ifundef(urlParams.externalresources, this.options.activeFilters.externalresources) : false;
         }
 
         if (cosinnus_active_user) {
