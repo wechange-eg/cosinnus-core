@@ -146,7 +146,7 @@ class CosinnusPersonalDashboardWelcomeAnnouncementSerializer(
     dismissed = serializers.BooleanField(write_only=True)
 
     class Meta:
-        model = UserDashboardAnnouncement
+        model = UserDashboardWelcomeAnnouncement
         fields = (
             'title',
             'display',
