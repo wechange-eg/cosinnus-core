@@ -1234,7 +1234,7 @@ class CosinnusConf(AppConf):
     # active: True if the widget is enabled.
     # frontend_conf: JSON config that is passed to the frontend.
     V3_PERSONAL_DASHBOARD_WIDGETS = {
-        'dashboard.news': {'active': True, 'frontend_conf': {'x': 100}},
+        'dashboard.news': {'active': True, 'frontend_conf': {}},
         'dashboard.create_new': {'active': True, 'frontend_conf': {}},
         'dashboard.offers': {'active': True, 'frontend_conf': {}},
         'dashboard.my_spaces': {'active': True, 'frontend_conf': {}},
