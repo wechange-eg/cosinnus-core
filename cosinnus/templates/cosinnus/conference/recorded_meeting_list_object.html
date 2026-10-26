@@ -18,7 +18,7 @@
 	                    {% trans "Participants" %}: {{ object.participants}}
 	                </span>
                     <a href="{{ object.url }}" target="_blank">
-                        <i>{% trans "Started" %}:</i> {{ object.startTime|date:'SHORT_DATETIME_FORMAT' }}"
+                       {{ object.startTime|date:'SHORT_DATETIME_FORMAT' }} {% trans "o'clock" context "time" %}
                     </a>
                 </div>
             </li>
