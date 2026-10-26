@@ -32,7 +32,13 @@ from cosinnus_poll.models import Poll
 
 
 class CosinnusPersonalDashboardWidget:
-    """Personal dashboard widget instance, as used by the personal dashboard API."""
+    """Personal dashboard widget instance, as used by the personal dashboard API.
+    A widget is shown to a user in the dashboard-API if:
+    1. The widget is enabled for the portal via the "enabled_in_portal" conf variable in V3_PERSONAL_DASHBOARD_WIDGETS.
+    2. The widgets is_enabled functions returns "true", e.g. checks if the widget app is enabled.
+    3. The widget was not deactivated by the user, i.e. is_active returns "true" from the widget settings stored in the
+       user profile.
+    """
 
     # widget id
     id = None
@@ -456,8 +462,8 @@ def init_personal_dashboard_widgets():
             widget_cls.id, settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS[widget_cls.id]
         )
 
-        if widget_conf['active']:
-            # widget enabled
+        if widget_conf['enabled_in_portal']:
+            # widget enabled in portal
             widget = widget_cls(conf=widget_conf['frontend_conf'])
             personal_dashboard_widgets[widget.id] = widget
 
