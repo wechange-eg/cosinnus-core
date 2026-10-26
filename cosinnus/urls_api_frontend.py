@@ -161,7 +161,7 @@ if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
         path('', include(('cosinnus_event.calendar.urls_api_frontend', 'cosinnus'), namespace='calendar-api')),
     ]
 
-if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
+if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD and settings.COSINNUS_V3_FRONTEND_ENABLED:
     urlpatterns += [
         path('api/v3/dashboard/', CosinnusPersonalDashboardAPIView.as_view(), name='api-peronsal-dashboard'),
         path('api/v3/user/getting_started/', CosinnusGettingStartedAPIView.as_view(), name='api-getting-started'),
