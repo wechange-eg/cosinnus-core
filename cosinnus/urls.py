@@ -324,11 +324,6 @@ urlpatterns = [
         housekeeping.create_map_test_entities,
         name='housekeeping-create-map-test-entities',
     ),
-    path(
-        'housekeeping/reset_user_tos_flags/',
-        housekeeping.reset_user_tos_flags,
-        name='housekeeping-reset-user-tos-flags',
-    ),
     path('housekeeping/send_testmail/', housekeeping.send_testmail, name='housekeeping-send-testmail'),
     path('housekeeping/print_testmail/', housekeeping.print_testmail, name='housekeeping-print-testmail'),
     path(
