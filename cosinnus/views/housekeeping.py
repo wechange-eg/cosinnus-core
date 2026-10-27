@@ -21,6 +21,7 @@ from django.db.models import Q
 from django.http.response import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import render
 from django.template.loader import render_to_string
+from django.utils import timezone
 from django.utils.encoding import force_str
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
@@ -79,23 +80,25 @@ def inactivity_preview(request):
     if not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
 
-    user_candidates = get_user_inactivity_notification_candidates()
-    group_candidates = get_group_inactivity_notification_candidates()
-    sections = [
-        _get_inactivity_preview_section('user', user_candidates, request.user),
-        _get_inactivity_preview_section('group', group_candidates, request.user),
-    ]
-    users_due_for_deactivation = get_users_due_for_inactivity_deactivation().order_by('date_joined')
-    groups_due_for_deactivation = get_groups_due_for_inactivity_deactivation()
-    context = {
-        'dry_run': settings.COSINNUS_INACTIVITY_DRY_RUN,
-        'sections': sections,
-        'users_due_for_deactivation': users_due_for_deactivation,
-        'users_due_for_deactivation_count': users_due_for_deactivation.count(),
-        'groups_due_for_deactivation': groups_due_for_deactivation,
-        'groups_due_for_deactivation_count': groups_due_for_deactivation.count(),
-    }
-    return render(request, 'cosinnus/housekeeping/inactivity_preview.html', context)
+    # Match the cron jobs' timezone
+    with timezone.override(timezone.get_default_timezone()):
+        user_candidates = get_user_inactivity_notification_candidates()
+        group_candidates = get_group_inactivity_notification_candidates()
+        sections = [
+            _get_inactivity_preview_section('user', user_candidates, request.user),
+            _get_inactivity_preview_section('group', group_candidates, request.user),
+        ]
+        users_due_for_deactivation = get_users_due_for_inactivity_deactivation().order_by('date_joined')
+        groups_due_for_deactivation = get_groups_due_for_inactivity_deactivation()
+        context = {
+            'dry_run': settings.COSINNUS_INACTIVITY_DRY_RUN,
+            'sections': sections,
+            'users_due_for_deactivation': users_due_for_deactivation,
+            'users_due_for_deactivation_count': users_due_for_deactivation.count(),
+            'groups_due_for_deactivation': groups_due_for_deactivation,
+            'groups_due_for_deactivation_count': groups_due_for_deactivation.count(),
+        }
+        return render(request, 'cosinnus/housekeeping/inactivity_preview.html', context)
 
 
 def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, recipient):
