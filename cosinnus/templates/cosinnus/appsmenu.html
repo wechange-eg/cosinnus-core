@@ -69,7 +69,7 @@
             {% if not group.group_is_conference and group.group_can_access_recorded_meetings and user|can_create_objects_in:group %}
                 <li class="app-main appnavi-listelement fine-space {% if request.path == conference_recorded_meetings_page %}active{% endif %}">
                     <a href="{{ conference_recorded_meetings_page }}">
-                        <i class="fa fa-fw fa-video"></i>
+                        <i class="fa fa-fw fa-play"></i>
                         {% trans "Recorded Meetings" %}
                     </a>
                 </li>

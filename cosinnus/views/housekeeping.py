@@ -24,6 +24,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_str
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
+from django.utils.text import format_lazy
 from django.utils.timezone import now
 
 from cosinnus.core.mail import (
@@ -44,7 +45,6 @@ from cosinnus.models.group import (
 )
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
-from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.templatetags.cosinnus_tags import textfield
@@ -59,7 +59,6 @@ from cosinnus.utils.settings import get_obfuscated_settings_strings
 from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import (
     accept_user_tos_for_portal,
-    filter_active_users,
     is_user_active,
 )
 from cosinnus.views.group_deletion import (
@@ -106,13 +105,16 @@ def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, 
         preview_context = {}
     else:
         config = settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE
+        combined_trans_string = format_lazy(
+            '[{}/{}]', CosinnusSociety.get_trans().VERBOSE_NAME, CosinnusProject.get_trans().VERBOSE_NAME
+        )
         preview_context = {
             'group': {
                 'name': 'Example group',
                 'slug': 'example-group',
-                'trans': {'VERBOSE_NAME': 'Group/project'},
+                'trans': {'VERBOSE_NAME': combined_trans_string},
             },
-            'group_type': 'Group/project',
+            'group_type': combined_trans_string,
             'group_name': 'Example group',
             'delete_group_url': '#delete_group_url_goes_here',
         }
@@ -552,28 +554,6 @@ def create_map_test_entities(request=None, count=1):
         print(('> Created', i + 1, '/', count, 'Projects, Groups, Events and Users'))
 
     return HttpResponse('Done. Created %d Projects, Groups, Events and Users' % count)
-
-
-def reset_user_tos_flags(request=None):
-    if request and not request.user.is_superuser:
-        return HttpResponseForbidden('Not authenticated')
-
-    if not request.GET.get('confirm', False) == '1':
-        active_users = filter_active_users(get_user_model().objects.all())
-        ret = (
-            "********** This will reset all %d active users' ToS accepted flag! Use param ?confirm=1 to delete the "
-            'flags! ***********'
-        ) % active_users.count()
-    else:
-        count = 0
-        active_users = filter_active_users(get_user_model().objects.all())
-        for profile in get_user_profile_model().objects.all().filter(user__in=active_users):
-            profile.tos_accepted = False
-            profile.save(update_fields=['tos_accepted'])
-            count += 1
-        ret = 'Successfully reset the ToS flag for %d users.' % count
-
-    return HttpResponse(ret)
 
 
 def send_testmail(request):

@@ -5,23 +5,20 @@
         <ul class="media-list">
             <li class="media">
                 <a class="pull-left square-date-icon" href="{{ event.get_absolute_url }}">
-                    <i class="fa fa-video"></i>
+                    <i class="fa fa-play"></i>
                 </a>
                 <span class="pull-right fadedown-clickarea">
                     <i class="fa fa-chevron-down"></i>
                 </span>
                 <div class="media-body">
 	                <span class="annotation">
-	                    {% trans "Started" %}: <span class="moment-data-date" data-date="{{ object.startTime|date:'c' }}"></span>
-	                    &nbsp;&nbsp;&nbsp;
-	                    {% trans "Length" %}: {{ object.duration }} 
+	                    {% trans "Length" %}: {{ object.duration }}
                         {% if object.duration == '1' %}{% trans "minute" %}{% else %}{% trans "minutes" %}{% endif %}
 	                    &nbsp;&nbsp;&nbsp;
 	                    {% trans "Participants" %}: {{ object.participants}}
 	                </span>
                     <a href="{{ object.url }}" target="_blank">
-                        {{ object.name }}
-                        <i>({{ object.meetingID }})</i>
+                       {{ object.startTime|date:'SHORT_DATETIME_FORMAT' }} {% trans "o'clock" context "time" %}
                     </a>
                 </div>
             </li>
