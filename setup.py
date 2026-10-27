@@ -88,7 +88,7 @@ setup(
     install_requires=[
         'Django>=5.2.12,<5.3',
         'MarkupSafe==2.1.5',
-        'Pillow==12.3.0',
+        'Pillow==13.0.0',
         'caldav==2.1.2',
         'channels==4.3.2',
         'celery==5.6.2',
