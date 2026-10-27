@@ -133,7 +133,7 @@ setup(
         'easy-thumbnails==2.10.1',
         'elasticsearch==7.17.13',
         'ecdsa==0.18.0',
-        'fcm-django==2.2.1',
+        'fcm-django==3.2.0',
         'geopy==2.4.1',
         'icalendar==7.0.3',
         'jsonfield==3.1.0',
