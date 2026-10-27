@@ -167,6 +167,7 @@ def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, 
     return {
         'kind': kind,
         'days': config['days'],
+        'earliest_activity_date': config.get('earliest_activity_date'),
         'inactivity_durations': inactivity_durations,
         'warnings': warnings,
     }
