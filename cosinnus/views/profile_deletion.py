@@ -1,10 +1,13 @@
 import logging
 import traceback
-from datetime import timedelta
+from datetime import datetime, timedelta
+from typing import Dict
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.db.models import Q
+from django.db.models import Q, QuerySet
+from django.db.models.functions import Coalesce, Greatest
+from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
@@ -23,6 +26,8 @@ from cosinnus.utils.user import is_user_active
 from cosinnus.views.group import mark_group_for_deletion
 
 logger = logging.getLogger('cosinnus')
+
+User = get_user_model()
 
 
 def deactivate_user(user):
@@ -213,21 +218,42 @@ def delete_userprofile(user):
     user.save()
 
 
-def get_user_inactivity_notification_candidates():
-    """Return users due to receive an inactivity warning, grouped by warning stage."""
-    users = get_user_model().objects.filter(is_active=True)
+def get_users_with_effective_last_activity() -> QuerySet[User]:
+    """Annotate effective_last_activity with the configured lower bound.
+
+    - Interpret earliest_activity_date at midnight in settings.TIME_ZONE.
+    - Fall back to last_activity when no earliest_activity_date is set.
+    """
+    # use last_login if set, else date_joined
+    last_activity = Coalesce('last_login', 'date_joined')
+    earliest_activity_date = settings.COSINNUS_USER_INACTIVITY_SCHEDULE.get('earliest_activity_date')
+
+    if not earliest_activity_date:
+        return User.objects.annotate(effective_last_activity=last_activity)
+
+    earliest_activity_at = datetime.fromisoformat(earliest_activity_date)
+    earliest_activity_at = timezone.make_aware(earliest_activity_at, timezone.get_default_timezone())
+
+    effective_last_activity = Greatest(last_activity, earliest_activity_at)
+    return User.objects.annotate(effective_last_activity=effective_last_activity)
+
+
+def get_user_inactivity_notification_candidates() -> Dict[int, QuerySet[User]]:
+    """Return users due to receive an inactivity warning, grouped by warning stage.
+
+    - Accounts for COSINNUS_USER_INACTIVITY_SCHEDULE['earliest_activity_date'].
+    """
+    users = get_users_with_effective_last_activity().filter(is_active=True)
     # exclude superuser, as they are never deleted
     users = users.exclude(is_superuser=True)
     config = settings.COSINNUS_USER_INACTIVITY_SCHEDULE
     candidates = {}
+    today = timezone.localdate()
     for days_before_deactivation in config['warnings']:
         # get users that are notified according to the configured interval
         days_after_last_activity = config['days'] - days_before_deactivation
-        user_last_activity_date = (now() - timedelta(days=days_after_last_activity)).date()
-        inactive_users = users.filter(
-            Q(last_login__date=user_last_activity_date) | Q(last_login=None, date_joined__date=user_last_activity_date)
-        )
-        today = now().date()
+        user_last_activity_date = today - timedelta(days=days_after_last_activity)
+        inactive_users = users.filter(effective_last_activity__date=user_last_activity_date)
         notify_users = inactive_users.filter(
             Q(cosinnus_profile__inactivity_notification_sent_at=None)
             | Q(cosinnus_profile__inactivity_notification_sent_at__date__lt=today)
@@ -236,14 +262,17 @@ def get_user_inactivity_notification_candidates():
     return candidates
 
 
-def get_users_due_for_inactivity_deactivation():
-    """Return users whose configured inactivity period has elapsed."""
-    inactivity_threshold = now() - timedelta(days=settings.COSINNUS_USER_INACTIVITY_SCHEDULE['days'])
-    users = get_user_model().objects.filter(cosinnus_profile__scheduled_for_deletion_at=None)
+def get_users_due_for_inactivity_deactivation() -> QuerySet[User]:
+    """Return users due for inactivity deactivation.
+
+    - Due on and after the calendar date of effective_last_activity plus the configured period.
+    - Accounts for COSINNUS_USER_INACTIVITY_SCHEDULE['earliest_activity_date'].
+    """
+    today = timezone.localdate()
+    inactivity_threshold = today - timedelta(days=settings.COSINNUS_USER_INACTIVITY_SCHEDULE['days'])
+    users = get_users_with_effective_last_activity().filter(cosinnus_profile__scheduled_for_deletion_at=None)
     users = users.exclude(email__startswith='__deleted_user__')  # ignore already deleted user leftover objects
-    users = users.filter(
-        Q(last_login__lt=inactivity_threshold) | Q(last_login=None, date_joined__lt=inactivity_threshold)
-    )
+    users = users.filter(effective_last_activity__date__lte=inactivity_threshold)
     return users.exclude(is_superuser=True)
 
 

@@ -1893,6 +1893,10 @@ class CosinnusConf(AppConf):
     # Each warning ("days before the inactivity threshold") specifies `subject_template` and `body_template` as a pair,
     # using core or portal template paths. Missing/incomplete pairs or TemplateSyntaxError raise an error.
     #
+    # Optional at the top level:
+    # - `earliest_activity_date`: 'YYYY-MM-DD' or None (default) to limit the earliest activity date for
+    #   inactivity computation;
+    #
     # Optional at the top level and per warning:
     # - `display_unit`: day (default), week, month or year. Babel rounds to this display unit;
     # - `text`: explicit neutral-period override instead of Babel;
@@ -1902,6 +1906,7 @@ class CosinnusConf(AppConf):
     # Warnings run only on their configured calendar day, without catch-up. Shorter thresholds can deactivate
     # overdue objects without prior warnings.
     USER_INACTIVITY_SCHEDULE = {
+        'earliest_activity_date': None,
         'days': 365 * 10,
         'display_unit': 'year',
         'warnings': {
@@ -1928,6 +1933,7 @@ class CosinnusConf(AppConf):
         },
     }
     GROUP_INACTIVITY_SCHEDULE = {
+        'earliest_activity_date': None,
         'days': 365 * 10,
         'display_unit': 'year',
         'warnings': {
