@@ -194,9 +194,11 @@ def get_groups_with_effective_last_activity() -> QuerySet:
 
     earliest_activity_at = datetime.fromisoformat(earliest_activity_date)
     earliest_activity_at = timezone.make_aware(earliest_activity_at, timezone.get_default_timezone())
-    effective_last_activity = Greatest('last_activity', earliest_activity_at)
 
-    return groups_with_last_activity.annotate(effective_last_activity=effective_last_activity)
+    groups_with_last_activity = groups_with_last_activity.annotate(
+        effective_last_activity=Greatest('last_activity', earliest_activity_at)
+    )
+    return groups_with_last_activity
 
 
 def get_effective_last_activity(group: Group) -> Optional[datetime]:

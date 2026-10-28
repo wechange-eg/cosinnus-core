@@ -234,8 +234,10 @@ def get_users_with_effective_last_activity() -> QuerySet[User]:
     earliest_activity_at = datetime.fromisoformat(earliest_activity_date)
     earliest_activity_at = timezone.make_aware(earliest_activity_at, timezone.get_default_timezone())
 
-    effective_last_activity = Greatest(last_activity, earliest_activity_at)
-    return User.objects.annotate(effective_last_activity=effective_last_activity)
+    users_with_last_activity = User.objects.annotate(
+        effective_last_activity=Greatest(last_activity, earliest_activity_at)
+    )
+    return users_with_last_activity
 
 
 def get_user_inactivity_notification_candidates() -> Dict[int, QuerySet[User]]:
