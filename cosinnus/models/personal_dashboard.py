@@ -30,9 +30,18 @@ from cosinnus_note.models import Note
 from cosinnus_poll.api_frontend.serializers import CosinnusPollSerializer
 from cosinnus_poll.models import Poll
 
+WIDGET_TYPE_PERSONAL = 'personal'
+WIDGET_TYPE_EXPLORE = 'explore'
+
 
 class CosinnusPersonalDashboardWidget:
-    """Personal dashboard widget instance, as used by the personal dashboard API."""
+    """Personal dashboard widget instance, as used by the personal dashboard API.
+    A widget is shown to a user in the dashboard-API if:
+    1. The widget is enabled for the portal via the "enabled_in_portal" conf variable in V3_PERSONAL_DASHBOARD_WIDGETS.
+    2. The widgets is_enabled functions returns "true", e.g. checks if the widget app is enabled.
+    3. The widget was not deactivated by the user, i.e. is_active returns "true" from the widget settings stored in the
+       user profile.
+    """
 
     # widget id
     id = None
@@ -407,9 +416,6 @@ class CosinnusPersonalDashboardExternalResourcesWidget(CosinnusPersonalDashboard
         )
         return data
 
-    def get_data(self, request):
-        return super().get_data(request)
-
 
 # list of all known widgets
 PERSONAL_DASHBOARD_WIDGET_CLASSES = [
@@ -433,7 +439,7 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardExternalResourcesWidget,
 ]
 
-# initialized available dashboard widgets
+# initialized available dashboard widgets for each type, i.e. {"personal": {...}, "explore": {...}}
 personal_dashboard_widgets = {}
 
 
@@ -441,43 +447,55 @@ def init_personal_dashboard_widgets():
     """Initialize dashboard widgets."""
     global personal_dashboard_widgets
     for widget_cls in PERSONAL_DASHBOARD_WIDGET_CLASSES:
-        if widget_cls.id not in settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS:
+        # get widget type
+        if widget_cls.id in settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS[WIDGET_TYPE_PERSONAL]:
+            widget_type = WIDGET_TYPE_PERSONAL
+        elif widget_cls.id in settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS[WIDGET_TYPE_EXPLORE]:
+            widget_type = WIDGET_TYPE_EXPLORE
+        else:
             # make sure all widgets are present in the widget config setting.
             raise ImproperlyConfigured(
                 f'Widget "{widget_cls.id}" configuration missing in COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS'
             )
 
         if widget_cls.cosinnus_app and widget_cls.cosinnus_app in settings.COSINNUS_DISABLED_COSINNUS_APPS:
-            # widget is disabled because of the disabled consinnus app
+            # widget is disabled because of the disabled cosinnus app
             continue
 
         # load widget conf considering overrides
         widget_conf = settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS_OVERRIDES.get(
-            widget_cls.id, settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS[widget_cls.id]
+            widget_cls.id, settings.COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS[widget_type][widget_cls.id]
         )
 
-        if widget_conf['active']:
-            # widget enabled
+        if widget_conf['enabled_in_portal']:
+            # widget enabled in portal
             widget = widget_cls(conf=widget_conf['frontend_conf'])
-            personal_dashboard_widgets[widget.id] = widget
+            personal_dashboard_widgets.setdefault(widget_type, {})
+            personal_dashboard_widgets[widget_type][widget.id] = widget
 
 
-def get_personal_dashboard_widgets():
+def get_personal_dashboard_widgets(widget_type):
     """Get all available dashboard widgets."""
     if not personal_dashboard_widgets:
         init_personal_dashboard_widgets()
-    return personal_dashboard_widgets.values()
+    return personal_dashboard_widgets[widget_type].values()
 
 
 def get_personal_dashboard_widget_ids():
     """Get the ids of available dashboard widgest."""
     if not personal_dashboard_widgets:
         init_personal_dashboard_widgets()
-    return personal_dashboard_widgets.keys()
+    personal_dashboard_widget_ids = []
+    personal_dashboard_widget_ids.extend(personal_dashboard_widgets[WIDGET_TYPE_PERSONAL].keys())
+    personal_dashboard_widget_ids.extend(personal_dashboard_widgets[WIDGET_TYPE_EXPLORE].keys())
+    return personal_dashboard_widget_ids
 
 
 def get_personal_dashboard_widget(widget_id):
-    """Get dashboard widget by it."""
+    """Get dashboard widget by id."""
     if not personal_dashboard_widgets:
         init_personal_dashboard_widgets()
-    return personal_dashboard_widgets.get(widget_id)
+    personal_dashboard_widget = personal_dashboard_widgets[WIDGET_TYPE_PERSONAL].get(widget_id)
+    if not personal_dashboard_widget:
+        personal_dashboard_widget = personal_dashboard_widgets[WIDGET_TYPE_EXPLORE].get(widget_id)
+    return personal_dashboard_widget

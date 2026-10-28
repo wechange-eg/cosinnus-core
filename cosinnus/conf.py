@@ -1231,27 +1231,31 @@ class CosinnusConf(AppConf):
     USE_V3_PERSONAL_DASHBOARD = False
 
     # v3 dashboard widget config, with the following options:
-    # active: True if the widget is enabled.
+    # enabled_in_portal: True if the widget is enabled.
     # frontend_conf: JSON config that is passed to the frontend.
     V3_PERSONAL_DASHBOARD_WIDGETS = {
-        'dashboard.news': {'active': True, 'frontend_conf': {'x': 100}},
-        'dashboard.create_new': {'active': True, 'frontend_conf': {}},
-        'dashboard.offers': {'active': True, 'frontend_conf': {}},
-        'dashboard.my_spaces': {'active': True, 'frontend_conf': {}},
-        'dashboard.tasks': {'active': True, 'frontend_conf': {}},
-        'dashboard.events': {'active': True, 'frontend_conf': {}},
-        'dashboard.event_polls': {'active': True, 'frontend_conf': {}},
-        'dashboard.polls': {'active': True, 'frontend_conf': {}},
-        'dashboard.ideas': {'active': True, 'frontend_conf': {}},
-        'dashboard.liked_ideas': {'active': True, 'frontend_conf': {}},
-        'dashboard.getting_started': {'active': True, 'frontend_conf': {}},
-        'dashboard.news_recommendations': {'active': True, 'frontend_conf': {}},
-        'dashboard.offer_recommendations': {'active': True, 'frontend_conf': {}},
-        'dashboard.idea_recommendations': {'active': True, 'frontend_conf': {}},
-        'dashboard.event_recommendations': {'active': True, 'frontend_conf': {}},
-        'dashboard.space_recommendations': {'active': True, 'frontend_conf': {}},
-        'dashboard.user_recommendations': {'active': True, 'frontend_conf': {}},
-        'dashboard.external_resources': {'active': True, 'frontend_conf': {}},
+        'personal': {
+            'dashboard.news': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.create_new': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.offers': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.my_spaces': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.tasks': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.events': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.event_polls': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.polls': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.ideas': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.liked_ideas': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.getting_started': {'enabled_in_portal': True, 'frontend_conf': {}},
+        },
+        'explore': {
+            'dashboard.news_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.offer_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.idea_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.event_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.space_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.user_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.external_resources': {'enabled_in_portal': True, 'frontend_conf': {}},
+        },
     }
 
     # Portal specific overrides of the V3_PERSONAL_DASHBOARD_WIDGETS setting.
