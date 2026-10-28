@@ -1157,6 +1157,13 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         with freeze_time('2024-02-13'):
             self.assertIn(self.test_group, get_groups_due_for_inactivity_deactivation())
 
+        # And the group is due way past that date as well if it was forgotten before
+        with freeze_time('2025-01-01'):
+            self.assertIn(self.test_group, get_groups_due_for_inactivity_deactivation())
+            # it will also get deactivated if it had been deactivated already in the past
+            type(self.test_group).objects.filter(pk=self.test_group.pk).update(is_active=False)
+            self.assertIn(self.test_group, get_groups_due_for_inactivity_deactivation())
+
     @override_settings(
         TIME_ZONE='Europe/Berlin',
         COSINNUS_GROUP_INACTIVITY_SCHEDULE={
