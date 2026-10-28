@@ -614,6 +614,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     )
     # this namer prevents exposing the source file in its path
     THUMBNAIL_NAMER = 'easy_thumbnails.namers.hashed'
+    THUMBNAIL_SOURCE_GENERATORS = ('cosinnus.image_source_generators.cosinnus_restricted_pil_image_source_generator',)
 
     EL_PAGINATION_PER_PAGE = 8
     EL_PAGINATION_PREVIOUS_LABEL = '<b>&#9001;</b> Zurück'

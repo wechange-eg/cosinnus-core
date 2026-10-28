@@ -5,7 +5,6 @@ from urllib.parse import unquote
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model, login, logout
 from django.contrib.humanize.templatetags.humanize import naturaltime
-from django.contrib.messages import get_messages
 from django.http import Http404
 from django.urls.base import reverse
 from django.utils.encoding import force_str
@@ -15,7 +14,7 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import authentication, serializers, status
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.generics import GenericAPIView, ListAPIView
+from rest_framework.generics import ListAPIView
 from rest_framework.parsers import FormParser, JSONParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import BrowsableAPIRenderer
@@ -39,10 +38,8 @@ from cosinnus.api_frontend.serializers.user import (
     CosinnusHybridUserSerializer,
     CosinnusSetInitialPasswordSerializer,
     CosinnusUserLoginSerializer,
-    CosinnusUserMessageSerializer,
     CosinnusUserProfileRecommendationSerializer,
     CosinnusUserSignupSerializer,
-    CosinnusUserTosSerializer,
 )
 from cosinnus.conf import settings
 from cosinnus.core.middleware.login_ratelimit_middleware import check_user_login_ratelimit
@@ -1166,38 +1163,3 @@ class CosinnusUserRecommendationsAPIView(ListAPIView):
 
     def get_queryset(self):
         return get_user_profile_model().objects.get_recommendations(self.request.user)
-
-
-class CosinnusUserMessagesAPIView(ListAPIView):
-    """API providing Django's user messages. The messages are cleared after reading."""
-
-    serializer_class = CosinnusUserMessageSerializer
-    renderer_classes = (
-        CosinnusAPIFrontendJSONResponseRenderer,
-        BrowsableAPIRenderer,
-    )
-    pagination_class = None
-
-    def get_queryset(self):
-        return get_messages(self.request)
-
-
-class CosinnusUserTosAPIView(GenericAPIView):
-    """API for user ToS confirmation."""
-
-    serializer_class = CosinnusUserTosSerializer
-    renderer_classes = (
-        CosinnusAPIFrontendJSONResponseRenderer,
-        BrowsableAPIRenderer,
-    )
-    permission_classes = (IsAuthenticated,)
-
-    def get(self, request):
-        serializer = self.get_serializer(request.user)
-        return Response(serializer.data)
-
-    def post(self, request):
-        serializer = self.get_serializer(request.user, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)

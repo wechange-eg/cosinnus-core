@@ -2,11 +2,9 @@ import logging
 
 from rest_framework import serializers
 
-from announcements.models import Announcement
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagType
-from cosinnus.utils.html import sanitize_html
 
 logger = logging.getLogger('cosinnus')
 
@@ -89,29 +87,3 @@ class CosinnusPortalErrorLogSerializer(serializers.Serializer):
                     break
                 ret[key] = str(val).strip()[:1024]
         return ret
-
-
-class CosinnusPortalAnnouncementSerializer(serializers.ModelSerializer):
-    """Announcement serializer."""
-
-    level = serializers.CharField(read_only=True)
-    text = serializers.SerializerMethodField()
-    icon = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Announcement
-        fields = ('level', 'text', 'icon')
-
-    def get_text(self, obj):
-        text = obj.translated_text
-        text = sanitize_html(text)
-        return text
-
-    def get_icon(self, obj):
-        level_icon_map = {
-            'success': 'fa-check',
-            'info': 'fa-info-circle',
-            'warning': 'fa-exclamation-circle',
-            'error': 'fa-exclamation-triangle',
-        }
-        return level_icon_map.get(obj.level)

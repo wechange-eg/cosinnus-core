@@ -60,7 +60,7 @@
         </p>
         <ul>
             <li>Missed warnings are not retried. Shortening inactivity periods can deactivate overdue accounts or groups without prior warning.</li>
-            <li>Counts use stored activity dates; this preview does not refresh Rocket.Chat or Nextcloud activity. Group counts are not email counts and may include groups without admins.</li>
+            <li>Counts use the later of the stored activity date and the configured earliest activity date override. For users, the signup date is used if there is no last login. This preview does not refresh Rocket.Chat or Nextcloud activity. Group counts are not email counts and may include groups without admins.</li>
             <li>Babel rounds durations to the configured unit. Check wording in every language manually; missing language branches are not detected.</li>
             <li>Emails use example data and are shown without the final HTML mail layout.</li>
             <li>Dry run applies only to inactivity warning and deactivation jobs, not to already scheduled deletions or activity updates.</li>
@@ -75,7 +75,7 @@
                 <div>
                     <ul>
                         {% for user in users_due_for_deactivation %}
-                            <li><a href="/admin/auth/user/{{ user.id }}">{{ user.email }}</a> (Signed up: {{ user.date_joined }}, last login: {{ user.last_login }})</li>
+                            <li><a href="/admin/auth/user/{{ user.id }}">{{ user.email }}</a> (Signed up: {{ user.date_joined }}, last login: {{ user.last_login }}, effective activity date: {{ user.effective_last_activity|date:"Y-m-d" }})</li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -87,7 +87,7 @@
                 <div>
                     <ul>
                         {% for group in groups_due_for_deactivation %}
-                            <li><a href="{{ group.get_admin_change_url }}">{{ group.name }}</a> (Members: {{ group.member_count }})</li>
+                            <li><a href="{{ group.get_admin_change_url }}">{{ group.name }}</a> (Members: {{ group.member_count }}, last activity: {{ group.last_activity }}, effective activity date: {{ group.effective_last_activity|date:"Y-m-d" }})</li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -102,6 +102,14 @@
             </h2>
             <p>
                 Deactivation after: {{ section.days }} days
+            </p>
+            <p>
+                Earliest activity date override:
+                {% if section.earliest_activity_date %}
+                    <code>{{ section.earliest_activity_date }}</code>
+                {% else %}
+                    <em>not configured</em>
+                {% endif %}
             </p>
             <table class="duration-table">
                 <caption><strong>Inactivity period</strong></caption>
