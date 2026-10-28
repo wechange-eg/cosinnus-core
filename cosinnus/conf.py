@@ -1230,6 +1230,13 @@ class CosinnusConf(AppConf):
     # enable v3 user dashboard
     USE_V3_PERSONAL_DASHBOARD = False
 
+    # if this is enabled alongside `USE_V3_PERSONAL_DASHBOARD`, the personal dashboard is enabled
+    # but soft-"hidden" in that no redirects happen to it, no navigational elements are shown, but
+    # if navigated directly to its URL, the personal dashboard is fully functional.
+    # Usable as a test-drive for portals that want to preview the dashboard.
+    # Has no effect if `COSINNUS_USE_V3_PERSONAL_DASHBOARD` is not set to True.
+    V3_PERSONAL_DASHBOARD_TEST_PHASE = False
+
     # v3 dashboard widget config, with the following options:
     # enabled_in_portal: True if the widget is enabled.
     # frontend_conf: JSON config that is passed to the frontend.
