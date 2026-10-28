@@ -474,8 +474,12 @@ elif getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(
             name='user-dashboard-api-timeline-filtered',
         ),
         path('dashboard/api/timeline/', user_dashboard.api_timeline, name='user-dashboard-api-timeline'),
-        path('dashboard/api/save_ui_prefs/', ui_prefs.api_ui_prefs, name='user-dashboard-api-ui-prefs'),
     ]
+
+# dashboard urls used outside the v2 / v3 dashboard
+urlpatterns += [
+    path('dashboard/api/save_ui_prefs/', ui_prefs.api_ui_prefs, name='user-dashboard-api-ui-prefs'),
+]
 
 if getattr(settings, 'COSINNUS_USE_V2_NAVBAR', False) or getattr(settings, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False):
     urlpatterns += [
