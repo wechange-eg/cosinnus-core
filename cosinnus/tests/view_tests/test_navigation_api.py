@@ -48,7 +48,11 @@ class SpacesViewTest(APITestCase):
             response.data['personal'],
             {
                 'header': 'Personal Space',
-                'items': [MenuItem('Personal Dashboard', '/dashboard/', 'fa-home', id='PersonalDashboard')],
+                'items': [
+                    MenuItem(
+                        'Personal Dashboard', reverse('cosinnus:user-dashboard'), 'fa-home', id='PersonalDashboard'
+                    )
+                ],
                 'actions': [],
             },
         )
