@@ -176,6 +176,38 @@ class UserManualDeletionTest(TestUserMixin, TestCase):
         send_mail_mock.reset_mock()
 
 
+@override_settings(
+    TIME_ZONE='Europe/Berlin',
+    COSINNUS_USER_INACTIVITY_SCHEDULE={
+        'days': 365 * 10,
+        'earliest_activity_date': None,
+        'display_unit': 'year',
+        'warnings': {
+            365: {
+                'display_unit': 'year',
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
+            182: {
+                'display_unit': 'month',
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
+            14: {
+                'display_unit': 'week',
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
+            2: {
+                'display_unit': 'day',
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
+        },
+    },
+    COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS=30,
+    COSINNUS_INACTIVITY_DRY_RUN=False,
+)
 class UserInactivityDeletionTest(TestUserMixin, TestCase):
     @override_settings(
         COSINNUS_USER_INACTIVITY_SCHEDULE={
@@ -638,24 +670,25 @@ _DEACTIVATION_DAYS = 365 * 10  # 10 years
 _NOTIFICATION_ONE_YEAR_DAYS = 365
 _GROUP_INACTIVITY_SCHEDULE = {
     'days': _DEACTIVATION_DAYS,
+    'display_unit': 'year',
     'warnings': {
         _NOTIFICATION_ONE_YEAR_DAYS: {
-            'text': '1 year',
+            'display_unit': 'year',
             'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
             'body_template': 'cosinnus/mail/inactivity/group_body.txt',
         },
         182: {
-            'text': '6 months',
+            'display_unit': 'month',
             'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
             'body_template': 'cosinnus/mail/inactivity/group_body.txt',
         },
         14: {
-            'text': '2 weeks',
+            'display_unit': 'week',
             'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
             'body_template': 'cosinnus/mail/inactivity/group_body.txt',
         },
         2: {
-            'text': '2 days',
+            'display_unit': 'day',
             'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
             'body_template': 'cosinnus/mail/inactivity/group_body.txt',
         },
@@ -663,6 +696,12 @@ _GROUP_INACTIVITY_SCHEDULE = {
 }
 
 
+@override_settings(
+    TIME_ZONE='Europe/Berlin',
+    COSINNUS_GROUP_INACTIVITY_SCHEDULE=_GROUP_INACTIVITY_SCHEDULE,
+    COSINNUS_GROUP_DELETION_SCHEDULE_DAYS=30,
+    COSINNUS_INACTIVITY_DRY_RUN=False,
+)
 class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
     """Test last activity calculation for groups with the cronjob `UpdateGroupsLastActivity` that should
     only re-calculate group.last_activity very rarely before it becomes relevant.
@@ -986,7 +1025,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
                 inactivity_text = format_inactivity_duration(schedule['days'], schedule, 'en')
                 mail_body = send_mail_mock.call_args.args[2]
                 self.assertIn(f'will be deactivated {inactivity_text} after the last activity', mail_body)
-                self.assertIn(f'This will happen in {warning_text}', mail_body)
+                self.assertIn(f'This will happen in {warning_text}', mail_body, warning_text)
                 send_mail_mock.reset_mock()
 
                 # notification is not send again
