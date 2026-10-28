@@ -1,4 +1,5 @@
 import traceback
+from datetime import datetime
 from functools import wraps
 from typing import Type, Union
 
@@ -122,6 +123,34 @@ def check_settings(app_configs, **kwargs):
 
     if len(settings.NEWW_DEFAULT_USER_GROUPS) == 0:
         errors.append(Warning('NEWW_DEFAULT_USER_GROUPS is empty. Expect UI breakage.', id='cosinnus.W003'))
+
+    # check inactivity schedule `earliest_activity_date` for ValueError: Invalid isoformat string: '...'
+    if settings.COSINNUS_USER_INACTIVITY_SCHEDULE and settings.COSINNUS_USER_INACTIVITY_SCHEDULE.get(
+        'earliest_activity_date'
+    ):
+        try:
+            __ = datetime.fromisoformat(settings.COSINNUS_USER_INACTIVITY_SCHEDULE.get('earliest_activity_date'))
+        except ValueError as e:
+            errors.append(
+                Error(
+                    f'COSINNUS_USER_INACTIVITY_SCHEDULE.earliest_activity_date '
+                    f'is configured to an invalid date string: {e}.',
+                    id='cosinnus.E004',
+                )
+            )
+    if settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE and settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE.get(
+        'earliest_activity_date'
+    ):
+        try:
+            __ = datetime.fromisoformat(settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE.get('earliest_activity_date'))
+        except ValueError as e:
+            errors.append(
+                Error(
+                    f'COSINNUS_GROUP_INACTIVITY_SCHEDULE.earliest_activity_date '
+                    f'is configured to an invalid date string: {e}.',
+                    id='cosinnus.E004',
+                )
+            )
 
     return errors
 
