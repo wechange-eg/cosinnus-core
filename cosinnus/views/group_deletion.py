@@ -1,13 +1,16 @@
 from __future__ import unicode_literals
 
-import datetime
 import logging
 import traceback
+from datetime import datetime, timedelta
+from typing import Dict, Optional
 
 from django.conf import settings
-from django.db.models import Q
+from django.db.models import Q, QuerySet
+from django.db.models.expressions import F
+from django.db.models.functions import Greatest
 from django.urls import reverse
-from django.utils import translation
+from django.utils import timezone, translation
 from django.utils.encoding import force_str
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
@@ -28,6 +31,8 @@ from cosinnus_message.rocket_chat import RocketChatConnection
 
 logger = logging.getLogger('cosinnus')
 
+Group = get_cosinnus_group_model()
+
 
 def mark_group_for_deletion(group, triggered_by_user=None):
     """Schedule group deletion in COSINNUS_GROUP_DELETION_SCHEDULE_DAYS days.
@@ -45,8 +50,11 @@ def mark_group_for_deletion(group, triggered_by_user=None):
 
     if automatic_deletion:
         # ensure last activity threshold has passed
-        last_activity_threshold = now() - datetime.timedelta(days=settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'])
-        if group.last_activity > last_activity_threshold:
+        effective_last_activity = get_effective_last_activity(group)
+        last_activity_threshold = timezone.localdate() - timedelta(
+            days=settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days']
+        )
+        if effective_last_activity is None or timezone.localdate(effective_last_activity) > last_activity_threshold:
             logger.warning(
                 'Automatic group deletion due to inactivity scheduled to early!', extra={'group_id': group.id}
             )
@@ -133,7 +141,7 @@ def mark_group_for_deletion(group, triggered_by_user=None):
         typed_group.remove_index_for_all_group_objects()
 
     # schedule deletion
-    deletion_schedule_time = now() + datetime.timedelta(days=settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS)
+    deletion_schedule_time = now() + timedelta(days=settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS)
     group.scheduled_for_deletion_at = deletion_schedule_time
     if triggered_by_user:
         group.deletion_triggered_by = triggered_by_user
@@ -171,6 +179,47 @@ def delete_group(group):
     group.delete()
 
 
+def get_groups_with_effective_last_activity() -> QuerySet:
+    """Annotate effective_last_activity with the configured lower bound.
+
+    - Interpret earliest_activity_date at midnight in settings.TIME_ZONE.
+    - Fall back to last_activity when no earliest_activity_date is set.
+    - Exclude groups without last_activity.
+    """
+    groups_with_last_activity = Group.objects.exclude(last_activity=None)
+
+    earliest_activity_date = settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE.get('earliest_activity_date')
+    if not earliest_activity_date:
+        return groups_with_last_activity.annotate(effective_last_activity=F('last_activity'))
+
+    earliest_activity_at = datetime.fromisoformat(earliest_activity_date)
+    earliest_activity_at = timezone.make_aware(earliest_activity_at, timezone.get_default_timezone())
+
+    groups_with_last_activity = groups_with_last_activity.annotate(
+        effective_last_activity=Greatest('last_activity', earliest_activity_at)
+    )
+    return groups_with_last_activity
+
+
+def get_effective_last_activity(group: Group) -> Optional[datetime]:
+    """Return the group's effective last activity with the configured lower bound.
+
+    - Interpret earliest_activity_date at midnight in settings.TIME_ZONE.
+    - Fall back to last_activity when no earliest_activity_date is set.
+    - Return None for groups without last_activity.
+    """
+    if group.last_activity is None:
+        return None
+
+    earliest_activity_date = settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE.get('earliest_activity_date')
+    if not earliest_activity_date:
+        return group.last_activity
+
+    earliest_activity_at = datetime.fromisoformat(earliest_activity_date)
+    earliest_activity_at = timezone.make_aware(earliest_activity_at, timezone.get_default_timezone())
+    return max(group.last_activity, earliest_activity_at)
+
+
 def update_group_last_activity(group, force_ignore_compution_window=False):
     """Updates the group activity field.
     - Groups without a last_activity date will always be calculated.
@@ -182,6 +231,7 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
     :param force_ignore_compution_window: Ignore the computation window set with
         `INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS` and do the computation regardless.
     """
+    today = timezone.localdate()
 
     # Ignore forum, events and default user groups
     if group.slug in get_default_portal_group_slugs():
@@ -203,15 +253,16 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
     else:
         # check if we're in a time window for recalculation
         is_within_recalculation_window = False
+        effective_last_activity_day = timezone.localdate(get_effective_last_activity(group))
         for days_of_event in relevance_timepoint_days:
-            a_bit_before_days_of_event = group.last_activity + datetime.timedelta(
+            a_bit_before_days_of_event = effective_last_activity_day + timedelta(
                 days_of_event - settings.COSINNUS_INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS
             )
-            time_of_event = group.last_activity + datetime.timedelta(days_of_event)
-            if a_bit_before_days_of_event <= now() <= time_of_event:
+            time_of_event = effective_last_activity_day + timedelta(days_of_event)
+            if a_bit_before_days_of_event <= today <= time_of_event:
                 is_within_recalculation_window = True
 
-    # Ignore last acitivty computation for groups where last activity not in a timewindow near where *anything* would
+    # Ignore last activity computation for groups where last activity not in a timewindow near where *anything* would
     # happen as a result of the recalculation of the activity date
     if not is_within_recalculation_window and not force_ignore_compution_window:
         return
@@ -253,8 +304,12 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
     last_activity_cutoff_days_from_now = (
         min(relevance_timepoint_days) - settings.COSINNUS_INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS
     )
-    last_activity_cutoff = now() - datetime.timedelta(days=last_activity_cutoff_days_from_now)
-    if group.last_activity > last_activity_cutoff:
+    last_activity_cutoff = today - timedelta(days=last_activity_cutoff_days_from_now)
+
+    # compute effective last activity again to account for possible changes in last_activity
+    effective_last_activity_day = timezone.localdate(get_effective_last_activity(group))
+
+    if effective_last_activity_day > last_activity_cutoff:
         # Abort further computation
         return
 
@@ -289,18 +344,21 @@ def update_group_last_activity(group, force_ignore_compution_window=False):
             )
 
 
-def get_group_inactivity_notification_candidates():
-    """Return groups due for an inactivity warning, grouped by warning stage."""
-    today = now().date()
-    groups = get_cosinnus_group_model().objects.filter(is_active=True).exclude(last_activity=None)
+def get_group_inactivity_notification_candidates() -> Dict[int, QuerySet]:
+    """Return groups due to receive an inactivity warning, grouped by warning stage.
+
+    - Accounts for COSINNUS_GROUP_INACTIVITY_SCHEDULE['earliest_activity_date'].
+    """
+    today = timezone.localdate()
+    groups = get_groups_with_effective_last_activity().filter(is_active=True)
     groups = groups.exclude(slug__in=get_default_portal_group_slugs())
     config = settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE
     candidates = {}
     for days_before_deactivation in config['warnings']:
         # get groups that are notified according to the configured interval
         days_after_last_activity = config['days'] - days_before_deactivation
-        group_last_activity_date = (now() - datetime.timedelta(days=days_after_last_activity)).date()
-        inactive_groups = groups.filter(last_activity__date=group_last_activity_date)
+        group_last_activity_date = today - timedelta(days=days_after_last_activity)
+        inactive_groups = groups.filter(effective_last_activity__date=group_last_activity_date)
         notify_groups = inactive_groups.filter(
             Q(inactivity_notification_sent_at=None) | Q(inactivity_notification_sent_at__date__lt=today)
         )
@@ -308,11 +366,16 @@ def get_group_inactivity_notification_candidates():
     return candidates
 
 
-def get_groups_due_for_inactivity_deactivation():
-    """Return groups whose configured inactivity period has elapsed."""
-    inactivity_threshold = now() - datetime.timedelta(days=settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'])
-    groups = get_cosinnus_group_model().objects.filter(
-        scheduled_for_deletion_at=None, last_activity__lt=inactivity_threshold
+def get_groups_due_for_inactivity_deactivation() -> QuerySet:
+    """Return groups due for inactivity deactivation.
+
+    - Due on and after the calendar date of effective_last_activity plus the configured period.
+    - Accounts for COSINNUS_GROUP_INACTIVITY_SCHEDULE['earliest_activity_date'].
+    """
+    today = timezone.localdate()
+    inactivity_threshold = today - timedelta(days=settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'])
+    groups = get_groups_with_effective_last_activity().filter(
+        scheduled_for_deletion_at=None, effective_last_activity__date__lte=inactivity_threshold
     )
     return groups.exclude(slug__in=get_default_portal_group_slugs())
 

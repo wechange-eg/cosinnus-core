@@ -1897,6 +1897,20 @@ class CosinnusConf(AppConf):
     # Each warning ("days before the inactivity threshold") specifies `subject_template` and `body_template` as a pair,
     # using core or portal template paths. Missing/incomplete pairs or TemplateSyntaxError raise an error.
     #
+    # Optional at the top level:
+    # - `earliest_activity_date`: 'YYYY-MM-DD' or None (default) to limit the earliest activity date for
+    #   inactivity computation. if this is set, all groups/users are treated as if their last activity is
+    #   no older than this date, even if it is further back in the past.
+    #   This can be used to set the deletion target date of a portal to a very recent timepoint, *without*
+    #   suddenly deactivating every user/group who falls behind this point.
+    #   Example: it is 01. Jan 2030 and you set USER_INACTIVITY_SCHEDULE.days = 365, so to 1 year in the past.
+    #   You have a warning set to 182 days, so 6 months before deletion. You have 200 users who have a last activity
+    #   of 3 years ago, so in 2027. These would be instantly deactivated
+    #   once the change goes live on the portal. But if you now set
+    #   USER_INACTIVITY_SCHEDULE.earliest_activity_date = '2029-07-02' and go live with this change, all 200 old users
+    #   will receive the warning on 02. Jan 2030, and will only be deleted on 02. June 2030,
+    #   1 year after the earliest_activity_date.
+    #
     # Optional at the top level and per warning:
     # - `display_unit`: day (default), week, month or year. Babel rounds to this display unit;
     # - `text`: explicit neutral-period override instead of Babel;
@@ -1907,6 +1921,7 @@ class CosinnusConf(AppConf):
     # overdue objects without prior warnings.
     USER_INACTIVITY_SCHEDULE = {
         'days': 365 * 10,
+        'earliest_activity_date': None,
         'display_unit': 'year',
         'warnings': {
             365: {
@@ -1933,6 +1948,7 @@ class CosinnusConf(AppConf):
     }
     GROUP_INACTIVITY_SCHEDULE = {
         'days': 365 * 10,
+        'earliest_activity_date': None,
         'display_unit': 'year',
         'warnings': {
             365: {
