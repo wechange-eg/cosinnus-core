@@ -412,6 +412,7 @@ class CosinnusPersonalDashboardExternalResourcesWidget(CosinnusPersonalDashboard
                 'resource_name': CosinnusExternalResourceTrans.VERBOSE_NAME,
                 'resource_name_plural': CosinnusExternalResourceTrans.VERBOSE_NAME_PLURAL,
                 'resource_icon': CosinnusExternalResourceTrans.ICON,
+                'resource_description': CosinnusExternalResourceTrans.DESCRIPTION,
             }
         )
         return data
