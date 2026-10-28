@@ -40,9 +40,7 @@ from cosinnus.api_frontend.views.portal import (
 from cosinnus.api_frontend.views.tagged import CosinnusGeocodeView
 from cosinnus.api_frontend.views.user import (
     CosinnusGettingStartedAPIView,
-    CosinnusUserMessagesAPIView,
     CosinnusUserRecommendationsAPIView,
-    CosinnusUserTosAPIView,
     GroupInviteTokenView,
     GuestAccessTokenView,
     GuestLoginView,
@@ -85,8 +83,6 @@ urlpatterns += [
         name='api-user-notification-setting',
     ),
     path('api/v3/user/ui_flags/', UserUIFlagsView.as_view(), name='api-user-ui-flags'),
-    path('api/v3/user/messages/', CosinnusUserMessagesAPIView.as_view(), name='api-user-messages'),
-    path('api/v3/user/tos/', CosinnusUserTosAPIView.as_view(), name='api-user-tos'),
     path('api/v3/portal/topics/', PortalTopicsView.as_view(), name='api-portal-topics'),
     path('api/v3/portal/tags/', PortalTagsView.as_view(), name='api-portal-tags'),
     path('api/v3/portal/managed_tags/', PortalManagedTagsView.as_view(), name='api-portal-managed-tags'),

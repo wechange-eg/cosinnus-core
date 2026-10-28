@@ -36,11 +36,7 @@ from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.http import get_ip_from_request
 from cosinnus.utils.logging import log_needs_attention_error
-from cosinnus.utils.user import (
-    accept_user_tos_for_portal,
-    get_locked_profile_visibility_setting_for_user,
-    user_tos_confirmation_required,
-)
+from cosinnus.utils.user import get_locked_profile_visibility_setting_for_user
 from cosinnus.utils.validators import HexColorValidator, validate_username
 
 logger = logging.getLogger('cosinnus')
@@ -660,71 +656,3 @@ class CosinnusUserProfileRecommendationSerializer(serializers.ModelSerializer):
 
     def get_membership_count(self, obj):
         return len(get_cosinnus_group_model().objects.get_for_user_pks(obj.user))
-
-
-class CosinnusUserMessageSerializer(serializers.Serializer):
-    """Serializer for Django's user messages"""
-
-    level = serializers.CharField(source='level_tag')
-    text = serializers.CharField(source='message')
-    icon = serializers.SerializerMethodField()
-
-    def get_icon(self, obj):
-        level_tag_icon_map = {
-            'success': 'fa-check',
-            'info': 'fa-info-circle',
-            'warning': 'fa-exclamation-circle',
-            'error': 'fa-exclamation-triangle',
-        }
-        return level_tag_icon_map.get(obj.level_tag)
-
-
-class CosinnusUserTosSerializer(serializers.ModelSerializer):
-    """User ToS serializer"""
-
-    tos_check = serializers.BooleanField(source='cosinnus_profile.tos_accepted', required=True)
-
-    if settings.COSINNUS_SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK:
-        privacy_policy_check = serializers.BooleanField(source='cosinnus_profile.tos_accepted', required=True)
-
-    if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
-        newsletter_opt_in = serializers.BooleanField(
-            source='cosinnus_profile.settings.newsletter_opt_in', required=False, default=False
-        )
-
-    class Meta:
-        model = get_user_model()
-        fields = ('tos_check',)
-        if settings.COSINNUS_SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK:
-            fields += ('privacy_policy_check',)
-        if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
-            fields += ('newsletter_opt_in',)
-
-    def validate_tos_check(self, value):
-        if value is False:
-            raise serializers.ValidationError('ToS must be accepted.')
-        return value
-
-    def validate_privacy_policy_check(self, value):
-        if value is False:
-            raise serializers.ValidationError('Privacy policy must be accepted.')
-        return value
-
-    def to_representation(self, instance):
-        ret = super().to_representation(instance)
-        if user_tos_confirmation_required(instance):
-            ret['tos_check'] = False
-            ret['privacy_policy_check'] = False
-        return ret
-
-    def update(self, instance, validated_data):
-        # set the newsletter opt-in
-        if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
-            instance.cosinnus_profile.settings['newsletter_opt_in'] = validated_data['cosinnus_profile']['settings'][
-                'newsletter_opt_in'
-            ]
-        # set the user's tos_accepted flag to true and date to now
-        accept_user_tos_for_portal(instance, save=True)
-        # refresh profil for serialization
-        instance.cosinnus_profile.refresh_from_db()
-        return instance

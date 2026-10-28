@@ -1,19 +1,16 @@
 {% load cosinnus_tags %}
-{% if not SETTINGS.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED %}
-    {# in v3 messages are handled by the frontend via the 'api-user-messages' API. #}
-    {% for message in messages %}
-        <div class="alert{% if message.tags %} alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}{% endif %} alert-dismissable">
-            {% if message.tags == 'success' %}
-                <i class="fa fa-check fa-3x"></i>
-            {% elif message.tags == 'info' %}
-                <i class="fa fa-info-circle fa-3x"></i>
-            {% elif message.tags == 'warning' %}
-                <i class="fa fa-exclamation-circle fa-3x"></i>
-            {% elif message.tags == 'error' %}
-                <i class="fa fa-exclamation-triangle fa-3x"></i>
-            {% endif %}
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
-            {{ message|textfield }}
-        </div>
-    {% endfor %}
-{% endif %}
+{% for message in messages %}
+    <div class="alert{% if message.tags %} alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}{% endif %} alert-dismissable">
+        {% if message.tags == 'success' %}
+            <i class="fa fa-check fa-3x"></i>
+        {% elif message.tags == 'info' %}
+            <i class="fa fa-info-circle fa-3x"></i>
+        {% elif message.tags == 'warning' %}
+            <i class="fa fa-exclamation-circle fa-3x"></i>
+        {% elif message.tags == 'error' %}
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+        {% endif %}
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
+        {{ message|textfield }}
+    </div>
+{% endfor %}
