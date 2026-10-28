@@ -28,7 +28,9 @@ UPDATES = {
             'and projects. The page "Explore" helps you discover relevant content, groups, and projects '
             'tailored for you.'
         ),
-        'display_conditional': _REDESIGN_FULL_IS_ENABLED and settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD,
+        'display_conditional': _REDESIGN_FULL_IS_ENABLED
+        and settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD
+        and not settings.COSINNUS_V3_PERSONAL_DASHBOARD_TEST_PHASE,
     },
     '2.9.0': {
         'datetime': datetime(2026, 8, 4, tzinfo=pytz.utc),
