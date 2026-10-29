@@ -1,4 +1,5 @@
 import re
+from unittest import skipIf
 from urllib.parse import urlencode
 
 from django.contrib.auth import get_user_model
@@ -88,8 +89,9 @@ class MainContentViewTest(APILiveServerTestCase):
             'group permissions are reflected in space element.',
         )
 
+    @skipIf(getattr(settings, 'COSINNUS_USE_V3_PERSONAL_DASHBOARD', False), 'depends on v2 dashboard')
     def test_personal_dashboard(self):
-        """Basic test for accessing the personal dashboard."""
+        """Basic test for accessing the v2 personal dashboard."""
         self.client.force_login(self.test_user)
         content_url = '/dashboard/'
         response = self.client.get(self.api_url + f'?url={content_url}')
