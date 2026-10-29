@@ -510,7 +510,8 @@
 	                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.related_groups label=related_label placeholder=related_placeholder large_field=True %}
 	                        {% endif %}
                         {% endif %}
-                        
+
+                        {% block bbb_options %}
                         {% if group_model == "CosinnusConference" and SETTINGS.BBB_PRESET_USER_FORM_FIELDS %}
 	                        {% if form.forms.conference_settings_assignments %}
 				                <div class="cosinnus-field ">
@@ -523,6 +524,7 @@
 				                </div>
 				            {% endif %}
 			            {% endif %}
+                        {% endblock bbb_options %}
                         
 		                {% block managed_tag_field %}
 		                    {% if SETTINGS.COSINNUS_MANAGED_TAGS_ENABLED and SETTINGS.COSINNUS_MANAGED_TAGS_USERS_MAY_ASSIGN_GROUPS %}
