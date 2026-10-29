@@ -287,7 +287,7 @@ class RestrictedUsersTest(APITestCase):
         self.assertEqual(response.status_code, 302, "Admin could accept restricted user's signup request")
         self.assertTrue(
             response.url.startswith(f'/user/{signed_up_test_user.pk}/'),
-            "Admin could accept restricted user's signup request and is redirected to the user\s profile page",
+            "Admin could accept restricted user's signup request and is redirected to the user's profile page",
         )
 
         profile.refresh_from_db()
