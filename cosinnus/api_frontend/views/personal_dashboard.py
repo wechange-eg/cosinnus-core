@@ -34,14 +34,14 @@ class CosinnusPersonalDashboardPersonalWidgetsAPIView(CosinnusPersonalDashboardB
     """An api for the v3 personal dashboard personal widgets."""
 
     def get_queryset(self):
-        return get_personal_dashboard_widgets(widget_type=WIDGET_TYPE_PERSONAL)
+        return get_personal_dashboard_widgets(widget_type=WIDGET_TYPE_PERSONAL, user=self.request.user)
 
 
 class CosinnusPersonalDashboardExploreWidgetsAPIView(CosinnusPersonalDashboardBaseWidgetsAPIView):
     """An api for the v3 personal dashboard explore widgets."""
 
     def get_queryset(self):
-        return get_personal_dashboard_widgets(widget_type=WIDGET_TYPE_EXPLORE)
+        return get_personal_dashboard_widgets(widget_type=WIDGET_TYPE_EXPLORE, user=self.request.user)
 
 
 class CosinnusPersonalDashboardWidgetSettingsAPIView(APIView):

@@ -476,11 +476,13 @@ def init_personal_dashboard_widgets():
             personal_dashboard_widgets[widget_type][widget.id] = widget
 
 
-def get_personal_dashboard_widgets(widget_type):
-    """Get all available dashboard widgets."""
+def get_personal_dashboard_widgets(widget_type, user):
+    """Get dashboard widgets enabled for the user."""
     if not personal_dashboard_widgets:
         init_personal_dashboard_widgets()
-    return personal_dashboard_widgets[widget_type].values()
+    widgets = personal_dashboard_widgets[widget_type].values()
+    widgets = [widget for widget in widgets if widget.is_enabled(user)]
+    return widgets
 
 
 def get_personal_dashboard_widget_ids():
