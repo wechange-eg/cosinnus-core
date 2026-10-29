@@ -318,13 +318,8 @@ class DeckEventsView(DeckSyncedTaskMixin, APIView):
         },
     )
     def post(self, request):
-        # serialize base event to get the event type
-        serializer = deck_serializers.DeckEventSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
         # serialize event
-        event_type = serializer.validated_data['type']
-        serializer = deck_serializers.get_deck_event_serializer(event_type, data=request.data)
+        serializer = deck_serializers.DeckEventSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         event = serializer.validated_data
 
