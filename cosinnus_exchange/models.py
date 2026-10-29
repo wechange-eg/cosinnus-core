@@ -200,6 +200,7 @@ class ExchangeEvent(ExchangeObjectBaseModel):
 class ExchangeExternalResource(ExchangeObjectBaseModel):
     description_detail = models.TextField(blank=True, null=True)
     website_url = models.URLField(blank=True, null=True)
+    organization = models.CharField(blank=True, null=True)
 
     class Meta(object):
         managed = False
@@ -208,3 +209,4 @@ class ExchangeExternalResource(ExchangeObjectBaseModel):
         super(ExchangeExternalResource, self).__init__(**kwargs)
         self.description_detail = kwargs.get('description_detail')
         self.website_url = kwargs.get('website_url')
+        self.organization = kwargs.get('organization')
