@@ -102,8 +102,7 @@ def setup_env(
     payments_pull_remote='origin',
     frontend_pull_branch='main',
     frontend_pull_remote='origin',
-    command_unit_directly=True,
-    new_poetry_binary=False,
+    uses_granian=False,
     uses_celery=False,
 ):
     """
@@ -123,8 +122,6 @@ def setup_env(
     @param frontend_pull_branch: the branch that the frontend repo will be pulled from.
         (see `deployfrontend()` for further explanations)
     @param base_path: if the on-server file location path for the portal is non-default, this argument can override it
-    @param new_poetry_binary DEPRECATED and ignored! used to swap:
-        if True, will use the poetry binary the way the new post Server-Move devops setup requires.
     @uses_celery if True, will add additional tasks to other tasks, like restarting celery on django restart
 
     """
@@ -138,7 +135,7 @@ def setup_env(
     env.path = f'{base_path}/htdocs'
     env.frontend_path = f'{base_path}/frontend'
     env.virtualenv_path = f'{env.path}/.venv'
-    env.cosinnus_src_path = f'{env.virtualenv_path}/src/cosinnus'
+    env.cosinnus_src_path = f'{env.virtualenv_path}/src/cosinnus-core'
     env.payments_src_path = f'{env.virtualenv_path}/src/wechange-payments'
     env.backup_path = f'{base_path}/backups'
     env.maintenance_mode_path = base_path
@@ -156,14 +153,14 @@ def setup_env(
     env.skip_compile_webpack = True
 
     env.lessc_binary = f'{env.cosinnus_src_path}/node_modules/.bin/lessc'
-    if command_unit_directly:
+    if uses_granian:
+        env.reload_command = f'sudo systemctl restart portal-{portal_name}-granian.service'
+        env.stop_command = f'sudo systemctl start portal-{portal_name}-granian.service'
+        env.start_command = f'sudo systemctl stop portal-{portal_name}-granian.service'
+    else:
         env.reload_command = 'sc stop unit.service && sc start unit.service'
         env.stop_command = 'sc stop unit.service'
         env.start_command = 'sc start unit.service'
-    else:
-        env.reload_command = f'sudo /bin/systemctl restart portal-{portal_name}-django.service'
-        env.stop_command = f'sudo /bin/systemctl stop portal-{portal_name}-django.service'
-        env.start_command = f'sudo /bin/systemctl start portal-{portal_name}-django.service'
 
     env.frontend_restart_command = f'sudo /bin/systemctl restart portal-{portal_name}-frontend.service'
     env.status_command = 'sc status unit.service'

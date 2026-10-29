@@ -524,6 +524,7 @@ def _pull_and_update(ctx, fresh_install=False):
             #   after the fresh_install run above. But to always have `hotdeploy` work, even after an installation
             #   that wasn't done with this fab script, we run it here.
             installeditablesourcerepos(ctx)
+            enablegitremoteoncore(ctx)
             # stash changes that might be on the server (so dev changes on the dev server aren't risked to be lost)
             with c.cd(f'{env.cosinnus_src_path}'):
                 c.run('git fetch --all')
