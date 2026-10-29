@@ -132,6 +132,8 @@ class ExchangeAdhocracySerializer(ExchangeSerializerMixin, serializers.Serialize
     description_detail = serializers.SerializerMethodField()
     contact_info = serializers.SerializerMethodField()
     website_url = serializers.URLField(source='contact_url')
+    organization = serializers.URLField(source='organisation')
+
     base_url = None
 
     def __init__(self, *args, **kwargs):
@@ -188,9 +190,9 @@ class ExchangeAdhocracySerializer(ExchangeSerializerMixin, serializers.Serialize
 
     def get_description_detail(self, obj):
         description_detail = ''
-        organisation = obj.get('organisation')
-        if organisation:
-            description_detail += f'<p><strong>Organisation:</strong> {organisation}</p>'
+        organization = obj.get('organisation')
+        if organization:
+            description_detail += f'<p><strong>Organisation:</strong> {organization}</p>'
         participation_time_start = obj.get('dateStart')
         participation_time_end = obj.get('dateEnd')
         if participation_time_start and participation_time_end:
@@ -254,6 +256,7 @@ class ExchangeDipasSerializer(ExchangeSerializerMixin, serializers.Serializer):
     description_detail = serializers.SerializerMethodField()
     contact_info = serializers.SerializerMethodField()
     website_url = serializers.SerializerMethodField()
+    organization = serializers.SerializerMethodField()
 
     # API url with location data
     location_api_url = None
@@ -460,9 +463,9 @@ class ExchangeDipasSerializer(ExchangeSerializerMixin, serializers.Serializer):
 
     def get_description_detail(self, obj):
         description_detail = ''
-        organisation = obj.get('properties', {}).get('owner')
-        if organisation:
-            description_detail += f'<p><strong>Organisation:</strong> {organisation}</p>'
+        organization = self.get_organization(obj)
+        if organization:
+            description_detail += f'<p><strong>Organisation:</strong> {organization}</p>'
         participation_start = obj.get('properties', {}).get('dateStart')
         participation_end = obj.get('properties', {}).get('dateEnd')
         if participation_start and participation_end:
@@ -497,3 +500,6 @@ class ExchangeDipasSerializer(ExchangeSerializerMixin, serializers.Serializer):
         if project_details and project_details.get('projectowner'):
             website_url = project_details.get('projectowner').get('website')
         return website_url
+
+    def get_organization(self, obj):
+        return obj.get('properties', {}).get('owner')

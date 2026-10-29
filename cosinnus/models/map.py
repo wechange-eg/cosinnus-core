@@ -311,6 +311,7 @@ class HaystackMapResult(BaseMapResult):
                     'description_detail': getattr(result, 'description_detail', None),
                     'contact': getattr(result, 'contact', None),
                     'website_url': getattr(result, 'website_url', None),
+                    'organization': getattr(result, 'organization', None),
                 }
             )
 
