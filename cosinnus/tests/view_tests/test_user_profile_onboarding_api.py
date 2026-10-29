@@ -106,7 +106,8 @@ class UserProfileTestView(APITestCase):
         self.assertListEqual(sorted(list(self.user_profile.media_tag.tags.names())), sorted(user_tags))
 
     def test_user_topics(self):
-        user_topics = [1, 2, 3]
+        # attempt giving the user all topics
+        user_topics = list(dict(settings.COSINNUS_TOPIC_CHOICES).keys())
         self.user_data.update({'topics': user_topics})
 
         response = self.client.post(self.user_profile_url, self.user_data, format='json')
