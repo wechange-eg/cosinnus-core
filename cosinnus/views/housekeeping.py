@@ -154,7 +154,7 @@ def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, 
                     'warning_period': warning_period,
                     'relative_warning_period': relative_warning_period,
                     'subject': mail_subject,
-                    'body': mail_content,
+                    'body': textfield(mail_content),
                     'error': error,
                 }
             )
