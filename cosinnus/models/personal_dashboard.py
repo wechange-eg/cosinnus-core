@@ -107,14 +107,15 @@ class CosinnusPersonalDashboardWidget:
         user = request.user
         if self.user_data_function and self.serializer_class and self.is_active(user):
             user_data = self.user_data_function(user)
-            if self.data_limit:
-                # get count handling querysets and object lists
-                user_data_len = len(user_data) if isinstance(user_data, list) else user_data.count()
-                if user_data_len > self.data_limit:
-                    has_more = True
-                user_data = user_data[: self.data_limit]
-            serializer = self.serializer_class(user_data, many=True, context={'request': request})
-            data = serializer.data
+            if user_data:
+                if self.data_limit:
+                    # get count handling querysets and object lists
+                    user_data_len = len(user_data) if isinstance(user_data, list) else user_data.count()
+                    if user_data_len > self.data_limit:
+                        has_more = True
+                    user_data = user_data[: self.data_limit]
+                serializer = self.serializer_class(user_data, many=True, context={'request': request})
+                data = serializer.data
         return data, has_more
 
     def get_conf(self, user):
