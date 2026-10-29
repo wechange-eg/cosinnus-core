@@ -105,7 +105,7 @@ class _UserProfileForm(
         # Note: using _has_changed instead of changed_data, as calling changed_data raises an error in the timezone
         # field.
         if self['avatar']._has_changed() or self.data.get('avatar_clear', 'false') != 'false':
-            # avatar set or deleted, as the genera
+            # Avatar set or deleted. As the generated avatar can only be set via the v3 API we can reset the flag.
             self.instance.is_avatar_generated = False
 
         profile = super(_UserProfileForm, self).save(commit=True)

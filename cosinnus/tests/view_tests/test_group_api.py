@@ -65,16 +65,7 @@ class GroupSettingsAPITest(APITestCase):
     @override_settings(
         COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS=False,
         COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED=False,
-        BBB_PRESET_USER_FORM_FIELDS=[
-            'mic_starts_on',
-            'cam_starts_on',
-            'record_meeting',
-            'waiting_room',
-            'welcome_message',
-        ],
-        BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY=[
-            'record_meeting',
-        ],
+        COSINNUS_PREMIUM_CONFERENCES_ENABLED=True,
     )
     def test_basic_settings(self):
         self.client.force_login(self.test_user)
@@ -107,7 +98,7 @@ class GroupSettingsAPITest(APITestCase):
                         'record_meeting': False,
                         'welcome_message': None,
                     },
-                    'premium_params': ['record_meeting'],
+                    'premium_params': [],
                     'show_guest_access': False,
                 },
             },

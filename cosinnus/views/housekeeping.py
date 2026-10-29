@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function, unicode_literals
 
-import datetime
 import json
 import logging
 import pickle
@@ -10,6 +9,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from builtins import FileNotFoundError, range, str
+from datetime import datetime, timedelta
 from typing import Literal
 
 from annoying.functions import get_object_or_None
@@ -21,6 +21,7 @@ from django.db.models import Q
 from django.http.response import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import render
 from django.template.loader import render_to_string
+from django.utils import timezone
 from django.utils.encoding import force_str
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
@@ -79,23 +80,25 @@ def inactivity_preview(request):
     if not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
 
-    user_candidates = get_user_inactivity_notification_candidates()
-    group_candidates = get_group_inactivity_notification_candidates()
-    sections = [
-        _get_inactivity_preview_section('user', user_candidates, request.user),
-        _get_inactivity_preview_section('group', group_candidates, request.user),
-    ]
-    users_due_for_deactivation = get_users_due_for_inactivity_deactivation().order_by('date_joined')
-    groups_due_for_deactivation = get_groups_due_for_inactivity_deactivation()
-    context = {
-        'dry_run': settings.COSINNUS_INACTIVITY_DRY_RUN,
-        'sections': sections,
-        'users_due_for_deactivation': users_due_for_deactivation,
-        'users_due_for_deactivation_count': users_due_for_deactivation.count(),
-        'groups_due_for_deactivation': groups_due_for_deactivation,
-        'groups_due_for_deactivation_count': groups_due_for_deactivation.count(),
-    }
-    return render(request, 'cosinnus/housekeeping/inactivity_preview.html', context)
+    # Match the cron jobs' timezone
+    with timezone.override(timezone.get_default_timezone()):
+        user_candidates = get_user_inactivity_notification_candidates()
+        group_candidates = get_group_inactivity_notification_candidates()
+        sections = [
+            _get_inactivity_preview_section('user', user_candidates, request.user),
+            _get_inactivity_preview_section('group', group_candidates, request.user),
+        ]
+        users_due_for_deactivation = get_users_due_for_inactivity_deactivation().order_by('date_joined')
+        groups_due_for_deactivation = get_groups_due_for_inactivity_deactivation()
+        context = {
+            'dry_run': settings.COSINNUS_INACTIVITY_DRY_RUN,
+            'sections': sections,
+            'users_due_for_deactivation': users_due_for_deactivation,
+            'users_due_for_deactivation_count': users_due_for_deactivation.count(),
+            'groups_due_for_deactivation': groups_due_for_deactivation,
+            'groups_due_for_deactivation_count': groups_due_for_deactivation.count(),
+        }
+        return render(request, 'cosinnus/housekeeping/inactivity_preview.html', context)
 
 
 def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, recipient):
@@ -164,9 +167,14 @@ def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, 
                 'previews': previews,
             }
         )
+
+    formatted_earliest_activity_date = (
+        config.get('earliest_activity_date') and datetime.fromisoformat(config.get('earliest_activity_date')) or None
+    )
     return {
         'kind': kind,
         'days': config['days'],
+        'earliest_activity_date': formatted_earliest_activity_date,
         'inactivity_durations': inactivity_durations,
         'warnings': warnings,
     }
@@ -532,8 +540,8 @@ def create_map_test_entities(request=None, count=1):
             title='MapEvent #%d' % eventnum,
             note='Test description',
             state=1,
-            from_date=datetime.datetime(2099, 1, 1),
-            to_date=datetime.datetime(2099, 1, 3),
+            from_date=datetime(2099, 1, 1),
+            to_date=datetime(2099, 1, 3),
         )
 
         locproj = CosinnusLocation.objects.create(group=proj)
@@ -898,7 +906,7 @@ def users_online_today(request):
         prints += f'{stat.user_id},<br/>\n'
 
     prints += '<br/>\n<br/>\n<h3>All user IDs that have an online today stat point created yesterday:</h3><br/>'
-    for stat in UserOnlineOnDay.objects.filter(date=now().date() - datetime.timedelta(days=1)):
+    for stat in UserOnlineOnDay.objects.filter(date=now().date() - timedelta(days=1)):
         prints += f'{stat.user_id},<br/>\n'
 
     return HttpResponse(prints)

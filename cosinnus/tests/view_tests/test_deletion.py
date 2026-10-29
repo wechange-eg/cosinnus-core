@@ -176,6 +176,38 @@ class UserManualDeletionTest(TestUserMixin, TestCase):
         send_mail_mock.reset_mock()
 
 
+@override_settings(
+    TIME_ZONE='Europe/Berlin',
+    COSINNUS_USER_INACTIVITY_SCHEDULE={
+        'days': 365 * 10,
+        'earliest_activity_date': None,
+        'display_unit': 'year',
+        'warnings': {
+            365: {
+                'display_unit': 'year',
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
+            182: {
+                'display_unit': 'month',
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
+            14: {
+                'display_unit': 'week',
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
+            2: {
+                'display_unit': 'day',
+                'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+            },
+        },
+    },
+    COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS=30,
+    COSINNUS_INACTIVITY_DRY_RUN=False,
+)
 class UserInactivityDeletionTest(TestUserMixin, TestCase):
     @override_settings(
         COSINNUS_USER_INACTIVITY_SCHEDULE={
@@ -266,13 +298,17 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
         self.test_user.cosinnus_profile.refresh_from_db()
         self.assertIsNone(self.test_user.cosinnus_profile.inactivity_notification_sent_at)
 
+    @override_settings(TIME_ZONE='Europe/Berlin')
     @patch('cosinnus.views.profile_deletion.send_html_mail')
     def test_scheduled_deletion(self, send_mail_mock):
-        last_login = datetime(2014, 1, 1, tzinfo=timezone.utc)
+        last_login = datetime(2014, 1, 1, 18, tzinfo=timezone.utc)
         self.test_user.last_login = last_login
         self.test_user.save()
 
-        deactivation_date = last_login + timedelta(days=settings.COSINNUS_USER_INACTIVITY_SCHEDULE['days'], seconds=1)
+        # The deadline applies to the whole calendar day, before the last login's time of day.
+        deactivation_date = (last_login + timedelta(days=settings.COSINNUS_USER_INACTIVITY_SCHEDULE['days'])).replace(
+            hour=2
+        )
 
         # do not schedule before date
         day_before_deactivation = deactivation_date - timedelta(days=1)
@@ -304,6 +340,77 @@ class UserInactivityDeletionTest(TestUserMixin, TestCase):
             MarkInactiveUsersForDeletion().do()
             self.test_user.cosinnus_profile.refresh_from_db()
             self.assertEqual(self.test_user.cosinnus_profile.scheduled_for_deletion_at, expected_deletion)
+
+    @override_settings(
+        TIME_ZONE='Europe/Berlin',
+        COSINNUS_USER_INACTIVITY_SCHEDULE={
+            'earliest_activity_date': '2024-02-01',
+            'days': 10,
+            'warnings': {
+                3: {
+                    'subject_template': 'cosinnus/mail/inactivity/user_subject.txt',
+                    'body_template': 'cosinnus/mail/inactivity/user_body.txt',
+                },
+            },
+        },
+    )
+    @patch('cosinnus.views.profile_deletion.send_html_mail')
+    def test_earliest_activity_date_shifts_warning_and_deactivation(self, send_mail_mock):
+        last_login = datetime(2021, 1, 1, tzinfo=timezone.utc)
+        self.test_user.last_login = last_login
+        self.test_user.save()
+
+        # February 7, 23:00 in Berlin: neither the February 8 warning nor deactivation is due.
+        with freeze_time('2024-02-07 22:00:00+00:00'):
+            SendUserInactivityNotifications().do()
+            MarkInactiveUsersForDeletion().do()
+            send_mail_mock.assert_not_called()
+
+        # It is already February 8 in Berlin, although the UTC date is still February 7.
+        with freeze_time('2024-02-07 23:30:00+00:00'):
+            SendUserInactivityNotifications().do()
+            send_mail_mock.assert_called_once()
+        send_mail_mock.reset_mock()
+
+        with freeze_time('2024-02-10 22:00:00+00:00'):
+            MarkInactiveUsersForDeletion().do()
+            send_mail_mock.assert_not_called()
+
+        with freeze_time('2024-02-10 23:30:00+00:00'):
+            MarkInactiveUsersForDeletion().do()
+            send_mail_mock.assert_called_once()
+            self.test_user.cosinnus_profile.refresh_from_db()
+            self.assertEqual(
+                self.test_user.cosinnus_profile.scheduled_for_deletion_at,
+                now() + timedelta(days=settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS),
+            )
+
+        self.test_user.refresh_from_db()
+        self.assertFalse(self.test_user.is_active)
+        self.assertEqual(self.test_user.last_login, last_login)
+
+    @override_settings(
+        TIME_ZONE='Europe/Berlin',
+        COSINNUS_USER_INACTIVITY_SCHEDULE={
+            'earliest_activity_date': '2024-02-01',
+            'days': 10,
+            'warnings': {},
+        },
+    )
+    @freeze_time('2024-02-11')
+    def test_inactivity_deactivation_uses_earliest_activity_date(self):
+        old_activity = datetime(2021, 1, 1, tzinfo=timezone.utc)
+        recent_activity = datetime(2024, 2, 3, tzinfo=timezone.utc)
+        for last_login, due in (
+            (old_activity, True),
+            (recent_activity, False),
+        ):
+            with self.subTest(last_login=last_login):
+                self.test_user.last_login = last_login
+                self.test_user.save()
+                self.assertEqual(get_users_due_for_inactivity_deactivation().filter(pk=self.test_user.pk).exists(), due)
+                with freeze_time('2024-02-13'):
+                    self.assertIn(self.test_user, get_users_due_for_inactivity_deactivation())
 
     @override_settings(COSINNUS_INACTIVITY_DRY_RUN=True)
     @patch('cosinnus.views.profile_deletion.send_html_mail')
@@ -563,24 +670,25 @@ _DEACTIVATION_DAYS = 365 * 10  # 10 years
 _NOTIFICATION_ONE_YEAR_DAYS = 365
 _GROUP_INACTIVITY_SCHEDULE = {
     'days': _DEACTIVATION_DAYS,
+    'display_unit': 'year',
     'warnings': {
         _NOTIFICATION_ONE_YEAR_DAYS: {
-            'text': '1 year',
+            'display_unit': 'year',
             'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
             'body_template': 'cosinnus/mail/inactivity/group_body.txt',
         },
         182: {
-            'text': '6 months',
+            'display_unit': 'month',
             'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
             'body_template': 'cosinnus/mail/inactivity/group_body.txt',
         },
         14: {
-            'text': '2 weeks',
+            'display_unit': 'week',
             'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
             'body_template': 'cosinnus/mail/inactivity/group_body.txt',
         },
         2: {
-            'text': '2 days',
+            'display_unit': 'day',
             'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
             'body_template': 'cosinnus/mail/inactivity/group_body.txt',
         },
@@ -588,6 +696,12 @@ _GROUP_INACTIVITY_SCHEDULE = {
 }
 
 
+@override_settings(
+    TIME_ZONE='Europe/Berlin',
+    COSINNUS_GROUP_INACTIVITY_SCHEDULE=_GROUP_INACTIVITY_SCHEDULE,
+    COSINNUS_GROUP_DELETION_SCHEDULE_DAYS=30,
+    COSINNUS_INACTIVITY_DRY_RUN=False,
+)
 class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
     """Test last activity calculation for groups with the cronjob `UpdateGroupsLastActivity` that should
     only re-calculate group.last_activity very rarely before it becomes relevant.
@@ -672,6 +786,43 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
                 activity_time_at_edit,
                 'last_activity was recalculated near notification time and is the time of the edit',
             )
+
+    @override_settings(
+        TIME_ZONE='Europe/Berlin',
+        COSINNUS_GROUP_INACTIVITY_SCHEDULE={
+            'earliest_activity_date': '2024-02-01',
+            'days': 10,
+            'warnings': {},
+        },
+        COSINNUS_INACTIVE_DEACTIVATION_ACTIVITY_COMPUTATION_WINDOW_DAYS=3,
+        COSINNUS_ROCKET_ENABLED=False,
+        COSINNUS_CLOUD_ENABLED=False,
+    )
+    def test_earliest_activity_date_shifts_recalculation_window(self):
+        old_activity = self.initial_activity_time
+        newer_activity = datetime(2024, 2, 5, tzinfo=timezone.utc)
+        # Bypass save hooks so the cron must discover the newer local activity itself.
+        type(self.test_group).objects.filter(pk=self.test_group.pk).update(
+            last_activity=old_activity, last_modified=newer_activity
+        )
+
+        # The configured lower bound makes deactivation due on February 11.
+        # February 7 is before the three-day recalculation window: keep the stored activity.
+        with freeze_time('2024-02-07 12:00:00+00:00'):
+            UpdateGroupsLastActivity().do()
+            self.test_group.refresh_from_db()
+            self.assertEqual(self.test_group.last_activity, old_activity)
+
+        # Recalculate both on the first day of the window (February 8) and on the due date (February 11).
+        # Both dates must discover the newer activity from February 5.
+        for timestamp in ('2024-02-08 12:00:00+00:00', '2024-02-11 12:00:00+00:00'):
+            with self.subTest(timestamp=timestamp), freeze_time(timestamp):
+                # Reset the stored activity so each case independently tests the same window.
+                type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=old_activity)
+                update_message = UpdateGroupsLastActivity().do()
+                self.assertEqual(update_message, 'Last activity of groups updated.')
+                self.test_group.refresh_from_db()
+                self.assertEqual(self.test_group.last_activity, newer_activity)
 
     @override_settings(
         COSINNUS_GROUP_INACTIVITY_SCHEDULE=_GROUP_INACTIVITY_SCHEDULE,
@@ -874,7 +1025,7 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
                 inactivity_text = format_inactivity_duration(schedule['days'], schedule, 'en')
                 mail_body = send_mail_mock.call_args.args[2]
                 self.assertIn(f'will be deactivated {inactivity_text} after the last activity', mail_body)
-                self.assertIn(f'This will happen in {warning_text}', mail_body)
+                self.assertIn(f'This will happen in {warning_text}', mail_body, warning_text)
                 send_mail_mock.reset_mock()
 
                 # notification is not send again
@@ -928,15 +1079,17 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
         self.assertTrue(self.test_group.is_active)
         self.assertIsNone(self.test_group.scheduled_for_deletion_at)
 
+    @override_settings(TIME_ZONE='Europe/Berlin')
     @patch('cosinnus.views.group_deletion.send_html_mail')
     def test_scheduled_deletion(self, send_mail_mock):
-        last_activity = datetime(2014, 1, 1, tzinfo=timezone.utc)
+        last_activity = datetime(2014, 1, 1, 18, tzinfo=timezone.utc)
         self.test_group.last_activity = last_activity
         self.test_group.save()
 
-        deactivation_date = last_activity + timedelta(
-            days=settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'], seconds=1
-        )
+        # The automatic-deletion guard must accept the whole deadline day as well.
+        deactivation_date = (
+            last_activity + timedelta(days=settings.COSINNUS_GROUP_INACTIVITY_SCHEDULE['days'])
+        ).replace(hour=2)
 
         # do not schedule before date
         day_before_deactivation = deactivation_date - timedelta(days=1)
@@ -974,6 +1127,100 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
             MarkInactiveGroupsForDeletion().do()
             self.test_group.refresh_from_db()
             self.assertEqual(self.test_group.scheduled_for_deletion_at, expected_deletion)
+
+    @override_settings(
+        TIME_ZONE='Europe/Berlin',
+        COSINNUS_GROUP_INACTIVITY_SCHEDULE={
+            'earliest_activity_date': '2024-02-01',
+            'days': 10,
+            'warnings': {
+                3: {
+                    'subject_template': 'cosinnus/mail/inactivity/group_subject.txt',
+                    'body_template': 'cosinnus/mail/inactivity/group_body.txt',
+                },
+            },
+        },
+    )
+    @patch('cosinnus.views.group_deletion.send_html_mail')
+    def test_earliest_activity_date_shifts_warning_and_deactivation(self, send_mail_mock):
+        last_activity = datetime(2021, 1, 1, tzinfo=timezone.utc)
+        self.test_group.update_last_activity(last_activity)
+
+        with freeze_time('2024-02-07 22:00:00+00:00'):
+            SendGroupsInactivityNotifications().do()
+            MarkInactiveGroupsForDeletion().do()
+            send_mail_mock.assert_not_called()
+
+        # February 8, 00:30 in Berlin: three days before the February 11 deadline, so send one warning.
+        with freeze_time('2024-02-07 23:30:00+00:00'):
+            SendGroupsInactivityNotifications().do()
+            send_mail_mock.assert_called_once()
+        send_mail_mock.reset_mock()
+
+        # February 10, 23:00 in Berlin: the ten-day period has not reached its due date; send nothing.
+        with freeze_time('2024-02-10 22:00:00+00:00'):
+            MarkInactiveGroupsForDeletion().do()
+            send_mail_mock.assert_not_called()
+
+        # February 11, 00:30 in Berlin: February 1 plus ten days is due.
+        # Deactivate and schedule deletion, send two notifications, and preserve the actual last activity.
+        with freeze_time('2024-02-10 23:30:00+00:00'):
+            MarkInactiveGroupsForDeletion().do()
+            self.assertEqual(send_mail_mock.call_count, 2)
+            self.test_group.refresh_from_db()
+            self.assertFalse(self.test_group.is_active)
+            self.assertEqual(self.test_group.last_activity, last_activity)
+            self.assertEqual(
+                self.test_group.scheduled_for_deletion_at,
+                now() + timedelta(days=settings.COSINNUS_GROUP_DELETION_SCHEDULE_DAYS),
+            )
+
+    @override_settings(
+        TIME_ZONE='Europe/Berlin',
+        COSINNUS_GROUP_INACTIVITY_SCHEDULE={
+            'earliest_activity_date': '2024-02-01',
+            'days': 10,
+            'warnings': {},
+        },
+    )
+    def test_group_is_due_ten_days_after_recent_activity(self):
+        # February 3 is later than the configured lower bound, so it starts the ten-day period.
+        last_activity = datetime(2024, 2, 3, tzinfo=timezone.utc)
+        type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=last_activity)
+
+        # Only eight days have passed: the group is not due yet.
+        with freeze_time('2024-02-11'):
+            self.assertNotIn(self.test_group, get_groups_due_for_inactivity_deactivation())
+
+        # Ten days have passed: the group is due on this calendar date.
+        with freeze_time('2024-02-13'):
+            self.assertIn(self.test_group, get_groups_due_for_inactivity_deactivation())
+
+        # And the group is due way past that date as well if it was forgotten before
+        with freeze_time('2025-01-01'):
+            self.assertIn(self.test_group, get_groups_due_for_inactivity_deactivation())
+            # it will also get deactivated if it had been deactivated already in the past
+            type(self.test_group).objects.filter(pk=self.test_group.pk).update(is_active=False)
+            self.assertIn(self.test_group, get_groups_due_for_inactivity_deactivation())
+
+    @override_settings(
+        TIME_ZONE='Europe/Berlin',
+        COSINNUS_GROUP_INACTIVITY_SCHEDULE={
+            'earliest_activity_date': '2024-02-01',
+            'days': 10,
+            'warnings': {},
+        },
+    )
+    def test_group_without_last_activity_is_excluded(self):
+        type(self.test_group).objects.filter(pk=self.test_group.pk).update(last_activity=None)
+
+        # Even when the lower bound plus ten days is reached, missing activity excludes the group.
+        with freeze_time('2024-02-11'):
+            self.assertNotIn(self.test_group, get_groups_due_for_inactivity_deactivation())
+
+        # Waiting longer does not make a group with unknown activity eligible.
+        with freeze_time('2024-02-13'):
+            self.assertNotIn(self.test_group, get_groups_due_for_inactivity_deactivation())
 
     @override_settings(
         COSINNUS_GROUP_INACTIVITY_SCHEDULE={

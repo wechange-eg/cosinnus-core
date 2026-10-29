@@ -7,6 +7,11 @@ from cosinnus.conf import settings
 from cosinnus.views.map_api import MAP_CONTENT_TYPE_SEARCH_PARAMETERS, map_search_endpoint
 
 
+def _py_to_js_bool(value):
+    """Helper to convert a bool variable to js / url parameter value."""
+    return 'true' if value else 'false'
+
+
 def get_map_url_with_selected_filter_params(
     selected_search_model_names, topics=None, ignore_location=False, exchange=False
 ):
@@ -22,7 +27,7 @@ def get_map_url_with_selected_filter_params(
     """
     search_params = ''
     for parameter in list(MAP_CONTENT_TYPE_SEARCH_PARAMETERS):
-        filter_setting = str(parameter in selected_search_model_names).lower()
+        filter_setting = _py_to_js_bool(parameter in selected_search_model_names)
         if search_params:
             search_params += '&'
         search_params += f'{parameter}={filter_setting}'
@@ -30,9 +35,9 @@ def get_map_url_with_selected_filter_params(
     if topics:
         map_url += f'&topics={quote(topics)}'
     if ignore_location:
-        map_url += f'&ignore_location={str(ignore_location).lower()}'
+        map_url += f'&ignore_location={_py_to_js_bool(ignore_location)}'
     if settings.COSINNUS_EXCHANGE_ENABLED:
-        map_url += f'&exchange={str(exchange).lower()}'
+        map_url += f'&exchange={_py_to_js_bool(exchange)}'
     return map_url
 
 
@@ -78,22 +83,22 @@ def map_search(
     request.user = user
     if query:
         request.GET['q'] = query
-    request.GET['people'] = str(people).lower()
-    request.GET['events'] = str(events).lower()
-    request.GET['projects'] = str(projects).lower()
-    request.GET['groups'] = str(groups).lower()
-    request.GET['ideas'] = str(ideas).lower()
-    request.GET['conferences'] = str(conferences).lower()
-    request.GET['externalresources'] = str(externalresources).lower()
-    request.GET['cloudfiles'] = str(cloudfiles).lower()
-    request.GET['exchange'] = str(exchange).lower()
-    request.GET['ignore_location'] = str(ignore_location).lower()
+    request.GET['people'] = _py_to_js_bool(people)
+    request.GET['events'] = _py_to_js_bool(events)
+    request.GET['projects'] = _py_to_js_bool(projects)
+    request.GET['groups'] = _py_to_js_bool(groups)
+    request.GET['ideas'] = _py_to_js_bool(ideas)
+    request.GET['conferences'] = _py_to_js_bool(conferences)
+    request.GET['externalresources'] = _py_to_js_bool(externalresources)
+    request.GET['cloudfiles'] = _py_to_js_bool(cloudfiles)
+    request.GET['exchange'] = _py_to_js_bool(exchange)
+    request.GET['ignore_location'] = _py_to_js_bool(ignore_location)
     if managed_tags:
         request.GET['managed_tags'] = ','.join(mt.id for mt in managed_tags)
     if limit:
         request.GET['limit'] = str(limit)
     for search_param in search_params:
-        request.GET['search_param'] = str(search_param).lower()
+        request.GET['search_param'] = _py_to_js_bool(search_param)
     response = map_search_endpoint(request, skip_limit_backend=True)
     results = response.data.get('results')
     return results

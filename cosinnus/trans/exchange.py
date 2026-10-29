@@ -13,6 +13,7 @@ class CosinnusExternalResourceTransBase:
     LARGE_ICON = 'images/fa-icons/large/fa-external-link.png'
     VERBOSE_NAME = _('External Resource')
     VERBOSE_NAME_PLURAL = _('External Resources')
+    DESCRIPTION = _('External resource description placeholder.')
 
 
 CosinnusExternalResourceTrans = CosinnusExternalResourceTransBase

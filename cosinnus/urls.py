@@ -416,17 +416,35 @@ if getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
 
 if getattr(settings, 'COSINNUS_USE_V3_PERSONAL_DASHBOARD', False):
     dashboard_url = getattr(settings, 'COSINNUS_V2_DASHBOARD_URL_FRAGMENT', 'dashboard')
+
+    # do not register the v3 dashboard under its regular URL name during the testphase,
+    # as the v2 dashboard URL is still active there and uses that name
+    dashboard_view_name = (
+        'user-dashboard'
+        if not getattr(settings, 'COSINNUS_V3_PERSONAL_DASHBOARD_TEST_PHASE', False)
+        else 'NOTUSEDINTESTPHASE-user-dashboard'
+    )
     urlpatterns += [
-        path('personal/dashboard/', user_dashboard.personal_dashboard_view, name='user-dashboard'),
+        path('personal/dashboard/', user_dashboard.personal_dashboard_view, name=dashboard_view_name),
         path(
             'administration/welcome_announcement/',
             user_dashboard_announcement.user_dashboard_welcome_announcement_edit,
             name='user-dashboard-welcome-announcement-edit',
         ),
-        path(f'{dashboard_url}/', RedirectView.as_view(url='/personal/dashboard/', permanent=False)),
     ]
-elif getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(
-    settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False
+    # skip the redirected URL if the dashboard is only in test phase
+    if not getattr(settings, 'COSINNUS_V3_PERSONAL_DASHBOARD_TEST_PHASE', False):
+        urlpatterns += [
+            path(f'{dashboard_url}/', RedirectView.as_view(url='/personal/dashboard/', permanent=False)),
+        ]
+
+# load the v2 dashboard alongside the v3 dashboard if the v3 dashboard is in test phase
+if (
+    getattr(settings, 'COSINNUS_V3_PERSONAL_DASHBOARD_TEST_PHASE', False)
+    or not getattr(settings, 'COSINNUS_USE_V3_PERSONAL_DASHBOARD', False)
+) and (
+    getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False)
+    or getattr(settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False)
 ):
     dashboard_url = getattr(settings, 'COSINNUS_V2_DASHBOARD_URL_FRAGMENT', 'dashboard')
     if getattr(settings, 'COSINNUS_CLOUD_SEARCH_ENABLED', False):
@@ -474,8 +492,12 @@ elif getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(
             name='user-dashboard-api-timeline-filtered',
         ),
         path('dashboard/api/timeline/', user_dashboard.api_timeline, name='user-dashboard-api-timeline'),
-        path('dashboard/api/save_ui_prefs/', ui_prefs.api_ui_prefs, name='user-dashboard-api-ui-prefs'),
     ]
+
+# dashboard urls used outside the v2 / v3 dashboard
+urlpatterns += [
+    path('dashboard/api/save_ui_prefs/', ui_prefs.api_ui_prefs, name='user-dashboard-api-ui-prefs'),
+]
 
 if getattr(settings, 'COSINNUS_USE_V2_NAVBAR', False) or getattr(settings, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False):
     urlpatterns += [

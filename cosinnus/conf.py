@@ -1227,28 +1227,39 @@ class CosinnusConf(AppConf):
     # enable v3 user dashboard
     USE_V3_PERSONAL_DASHBOARD = False
 
+    # if this is enabled alongside `USE_V3_PERSONAL_DASHBOARD`, the personal dashboard is enabled
+    # but soft-"hidden" in that no redirects happen to it, no navigational elements are shown, but
+    # if navigated directly to its URL, the personal dashboard is fully functional.
+    # Usable as a test-drive for portals that want to preview the dashboard.
+    # Has no effect if `COSINNUS_USE_V3_PERSONAL_DASHBOARD` is not set to True.
+    V3_PERSONAL_DASHBOARD_TEST_PHASE = False
+
     # v3 dashboard widget config, with the following options:
-    # active: True if the widget is enabled.
+    # enabled_in_portal: True if the widget is enabled.
     # frontend_conf: JSON config that is passed to the frontend.
     V3_PERSONAL_DASHBOARD_WIDGETS = {
-        'dashboard.news': {'active': True, 'frontend_conf': {'x': 100}},
-        'dashboard.create_new': {'active': True, 'frontend_conf': {}},
-        'dashboard.offers': {'active': True, 'frontend_conf': {}},
-        'dashboard.my_spaces': {'active': True, 'frontend_conf': {}},
-        'dashboard.tasks': {'active': True, 'frontend_conf': {}},
-        'dashboard.events': {'active': True, 'frontend_conf': {}},
-        'dashboard.event_polls': {'active': True, 'frontend_conf': {}},
-        'dashboard.polls': {'active': True, 'frontend_conf': {}},
-        'dashboard.ideas': {'active': True, 'frontend_conf': {}},
-        'dashboard.liked_ideas': {'active': True, 'frontend_conf': {}},
-        'dashboard.getting_started': {'active': True, 'frontend_conf': {}},
-        'dashboard.news_recommendations': {'active': True, 'frontend_conf': {}},
-        'dashboard.offer_recommendations': {'active': True, 'frontend_conf': {}},
-        'dashboard.idea_recommendations': {'active': True, 'frontend_conf': {}},
-        'dashboard.event_recommendations': {'active': True, 'frontend_conf': {}},
-        'dashboard.space_recommendations': {'active': True, 'frontend_conf': {}},
-        'dashboard.user_recommendations': {'active': True, 'frontend_conf': {}},
-        'dashboard.external_resources': {'active': True, 'frontend_conf': {}},
+        'personal': {
+            'dashboard.news': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.create_new': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.offers': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.my_spaces': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.tasks': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.events': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.event_polls': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.polls': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.ideas': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.liked_ideas': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.getting_started': {'enabled_in_portal': True, 'frontend_conf': {}},
+        },
+        'explore': {
+            'dashboard.news_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.offer_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.idea_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.event_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.space_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.user_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.external_resources': {'enabled_in_portal': True, 'frontend_conf': {}},
+        },
     }
 
     # Portal specific overrides of the V3_PERSONAL_DASHBOARD_WIDGETS setting.
@@ -1890,6 +1901,20 @@ class CosinnusConf(AppConf):
     # Each warning ("days before the inactivity threshold") specifies `subject_template` and `body_template` as a pair,
     # using core or portal template paths. Missing/incomplete pairs or TemplateSyntaxError raise an error.
     #
+    # Optional at the top level:
+    # - `earliest_activity_date`: 'YYYY-MM-DD' or None (default) to limit the earliest activity date for
+    #   inactivity computation. if this is set, all groups/users are treated as if their last activity is
+    #   no older than this date, even if it is further back in the past.
+    #   This can be used to set the deletion target date of a portal to a very recent timepoint, *without*
+    #   suddenly deactivating every user/group who falls behind this point.
+    #   Example: it is 01. Jan 2030 and you set USER_INACTIVITY_SCHEDULE.days = 365, so to 1 year in the past.
+    #   You have a warning set to 182 days, so 6 months before deletion. You have 200 users who have a last activity
+    #   of 3 years ago, so in 2027. These would be instantly deactivated
+    #   once the change goes live on the portal. But if you now set
+    #   USER_INACTIVITY_SCHEDULE.earliest_activity_date = '2029-07-02' and go live with this change, all 200 old users
+    #   will receive the warning on 02. Jan 2030, and will only be deleted on 02. June 2030,
+    #   1 year after the earliest_activity_date.
+    #
     # Optional at the top level and per warning:
     # - `display_unit`: day (default), week, month or year. Babel rounds to this display unit;
     # - `text`: explicit neutral-period override instead of Babel;
@@ -1900,6 +1925,7 @@ class CosinnusConf(AppConf):
     # overdue objects without prior warnings.
     USER_INACTIVITY_SCHEDULE = {
         'days': 365 * 10,
+        'earliest_activity_date': None,
         'display_unit': 'year',
         'warnings': {
             365: {
@@ -1926,6 +1952,7 @@ class CosinnusConf(AppConf):
     }
     GROUP_INACTIVITY_SCHEDULE = {
         'days': 365 * 10,
+        'earliest_activity_date': None,
         'display_unit': 'year',
         'warnings': {
             365: {

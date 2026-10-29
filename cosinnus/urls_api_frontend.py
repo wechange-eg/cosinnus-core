@@ -26,7 +26,13 @@ from cosinnus.api_frontend.views.navigation import (
     VersionHistoryUnreadCountView,
     VersionHistoryView,
 )
-from cosinnus.api_frontend.views.personal_dashboard import CosinnusPersonalDashboardAPIView
+from cosinnus.api_frontend.views.personal_dashboard import (
+    CosinnusPersonalDashboardAnnouncementAPIView,
+    CosinnusPersonalDashboardExploreWidgetsAPIView,
+    CosinnusPersonalDashboardPersonalWidgetsAPIView,
+    CosinnusPersonalDashboardWelcomeAnnouncementAPIView,
+    CosinnusPersonalDashboardWidgetSettingsAPIView,
+)
 from cosinnus.api_frontend.views.portal import (
     PortalErrorLogView,
     PortalManagedTagsView,
@@ -40,9 +46,7 @@ from cosinnus.api_frontend.views.portal import (
 from cosinnus.api_frontend.views.tagged import CosinnusGeocodeView
 from cosinnus.api_frontend.views.user import (
     CosinnusGettingStartedAPIView,
-    CosinnusUserMessagesAPIView,
     CosinnusUserRecommendationsAPIView,
-    CosinnusUserTosAPIView,
     GroupInviteTokenView,
     GuestAccessTokenView,
     GuestLoginView,
@@ -85,8 +89,6 @@ urlpatterns += [
         name='api-user-notification-setting',
     ),
     path('api/v3/user/ui_flags/', UserUIFlagsView.as_view(), name='api-user-ui-flags'),
-    path('api/v3/user/messages/', CosinnusUserMessagesAPIView.as_view(), name='api-user-messages'),
-    path('api/v3/user/tos/', CosinnusUserTosAPIView.as_view(), name='api-user-tos'),
     path('api/v3/portal/topics/', PortalTopicsView.as_view(), name='api-portal-topics'),
     path('api/v3/portal/tags/', PortalTagsView.as_view(), name='api-portal-tags'),
     path('api/v3/portal/managed_tags/', PortalManagedTagsView.as_view(), name='api-portal-managed-tags'),
@@ -161,9 +163,33 @@ if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
         path('', include(('cosinnus_event.calendar.urls_api_frontend', 'cosinnus'), namespace='calendar-api')),
     ]
 
-if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD:
+if settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD and settings.COSINNUS_V3_FRONTEND_ENABLED:
     urlpatterns += [
-        path('api/v3/dashboard/', CosinnusPersonalDashboardAPIView.as_view(), name='api-peronsal-dashboard'),
+        path(
+            'api/v3/dashboard/widgets/personal/',
+            CosinnusPersonalDashboardPersonalWidgetsAPIView.as_view(),
+            name='api-personal-dashboard-personal-widgets',
+        ),
+        path(
+            'api/v3/dashboard/widgets/explore/',
+            CosinnusPersonalDashboardExploreWidgetsAPIView.as_view(),
+            name='api-personal-dashboard-explore-widgets',
+        ),
+        path(
+            'api/v3/dashboard/widgets/settings/',
+            CosinnusPersonalDashboardWidgetSettingsAPIView.as_view(),
+            name='api-personal-dashboard-widgets-settings',
+        ),
+        path(
+            'api/v3/dashboard/announcement/',
+            CosinnusPersonalDashboardAnnouncementAPIView.as_view(),
+            name='api-personal-dashboard-announcement',
+        ),
+        path(
+            'api/v3/dashboard/welcome_announcement/',
+            CosinnusPersonalDashboardWelcomeAnnouncementAPIView.as_view(),
+            name='api-personal-dashboard-welcome-announcement',
+        ),
         path('api/v3/user/getting_started/', CosinnusGettingStartedAPIView.as_view(), name='api-getting-started'),
         path(
             'api/v3/user/recommendations/',

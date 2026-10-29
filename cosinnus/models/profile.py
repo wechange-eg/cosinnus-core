@@ -37,6 +37,7 @@ from cosinnus.conf import settings as cosinnus_settings
 from cosinnus.core import signals
 from cosinnus.core.mail import send_mail_or_fail_threaded
 from cosinnus.dynamic_fields.dynamic_fields import CosinnusDynamicFieldsModelMixin
+from cosinnus.models import BaseTagObject
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagAssignmentModelMixin
 from cosinnus.models.membership import MEMBER_STATUS
@@ -107,10 +108,6 @@ class BaseUserProfileManager(models.Manager):
         raise TypeError('user must be of type int or Model but is %s' % type(user))
 
     def get_recommendations(self, user):
-        from django.contrib.auth import get_user_model
-
-        from cosinnus.utils.permissions import check_user_can_see_user
-
         # prefetch user
         queryset = self.prefetch_related('user')
 
@@ -126,13 +123,8 @@ class BaseUserProfileManager(models.Manager):
         # exclude users without avatar
         queryset = queryset.exclude(avatar='')
 
-        # check visibility
-        users = get_user_model().objects.filter(cosinnus_profile__in=queryset)
-        users = users.prefetch_related('cosinnus_profile', 'cosinnus_profile__media_tag')
-        checked_for_visibility_users = [
-            recommended_user for recommended_user in users if check_user_can_see_user(user, recommended_user)
-        ]
-        queryset = queryset.filter(user_id__in=checked_for_visibility_users)
+        # check visibility for "logged-in"
+        queryset = queryset.filter(media_tag__visibility__gte=BaseTagObject.VISIBILITY_GROUP)
 
         # order by signup date
         queryset = queryset.order_by('-user__date_joined')
