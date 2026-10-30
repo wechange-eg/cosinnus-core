@@ -25,8 +25,9 @@ BASE_FLAGS=(
 #    "--no-obsolete"
     "--detect-aliases"
     "--show-untranslated"
-    "--add-location" "file"
-#    "--no-location"
+#   "--add-location" "file"
+    "--no-location"
+    "--ignore" "wagtailadmin/*"
     "--ignore" "node_modules/*"
 )
 
