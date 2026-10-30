@@ -15,7 +15,7 @@ from oauth2_provider import models as oauth2_provider_models
 
 from cosinnus.core import signals
 from cosinnus.core.mail import send_html_mail
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
+from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership, CosinnusPortal
 from cosinnus.models.membership import MEMBERSHIP_ADMIN, MEMBERSHIP_MANAGER, MEMBERSHIP_MEMBER
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import get_tag_object_model
@@ -52,6 +52,12 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactiv
     if user.email.startswith('__deleted_user__'):
         return
 
+    # add support mail infotext
+    mail_link = '[%(mail)s](mailto:%(mail)s)' % {'mail': CosinnusPortal.get_current().support_email}
+    support_mail_infotext = _('If you have any questions, please contact %(support_mail_link)s.') % {
+        'support_mail_link': mail_link
+    }
+
     deletion_days = settings.COSINNUS_USER_PROFILE_DELETION_SCHEDULE_DAYS
     if triggered_by_self:
         # send a notification email ignoring notification settings for a user triggered deletion
@@ -64,6 +70,8 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactiv
             'response time by e-mail may take longer in some cases. Please contact us as soon as possible if you would '
             'like to keep your profile.'
         ) % {'deleted_after_days': deletion_days}
+        if CosinnusPortal.get_current().support_email:
+            text += '\n\n' + support_mail_infotext
         body_text = textfield(text)
         send_html_mail(user, _('Information about the deletion of your user account'), body_text, threaded=False)
     elif inactivity_deletion and is_user_active(user):
@@ -75,6 +83,8 @@ def deactivate_user_and_mark_for_deletion(user, triggered_by_self=False, inactiv
             'If you want to keep your profile, please contact the portal administrators. Please note that the response '
             'time by e-mail may take longer in some cases.'
         ) % {'deleted_after_days': deletion_days}
+        if CosinnusPortal.get_current().support_email:
+            text += '\n\n' + support_mail_infotext
         body_text = textfield(text)
         # When errors occur when sending the notification for inactivity deletions do not deactivate the user.
         send_html_mail(user, subject, body_text, threaded=False, raise_on_error=True)

@@ -1,5 +1,16 @@
-{% load i18n %}{% blocktrans %}{{ group_type }} {{ group_name }} will be deactivated {{ inactivity_period }} after the last activity and then permanently deleted. This will happen {{ relative_warning_period }}.
+{% load i18n cosinnus_tags %}{% blocktrans %}Hello,
 
-If you do not wish for the group/project to be deactivated, just create some content there.
+{{ group_type }} {{ group_name }} on {{ portal_name }} has been inactive for more than {{ inactivity_period }}. It will therefore be deactivated {{ relative_warning_period }} and then irrevocably deleted along with all its content {{ deleted_after_days }} days after deactivation.
+
+To prevent deactivation, new content (e.g. a news post) must be created in the group or project before the scheduled deactivation.
+
+What happens if you do not take any action to keep the group or project active (e.g. by creating a news post)?
+
+* After deactivation, the group/project will no longer be visible on the platform.
+* Your group/project data will be deleted from our database {{ deleted_after_days }} days after deactivation.
+* After deletion from our database, the deleted group/project data may remain in our backups for up to six months.
 
 If an earlier deletion is desired, you can delete the group/project under {{ delete_group_url }}.{% endblocktrans %}
+{% if support_email %}{% captureas support_mail_link %}<a href="mailto:{{ support_email }}">{{ support_email }}</a>{% endcaptureas %}
+{% blocktrans with support_mail_link=support_mail_link %}If you have any questions or would like to request earlier deletion, please contact {{ support_mail_link }}.{% endblocktrans %}
+{% endif %}
