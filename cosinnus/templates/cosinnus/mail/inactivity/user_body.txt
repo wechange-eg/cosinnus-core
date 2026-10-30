@@ -18,6 +18,6 @@ Your pads, news posts, uploaded files and other published content will remain on
 Your direct messages in Rocket.Chat will be deleted. Your posts in discussions and channels will remain.
 
 If you want to remove your own content, please delete it from the relevant pages before your account is deactivated.{% endblocktrans %}
-{% if support_email %}{% captureas support_mail_link %}<a href="mailto:{{ support_email }}">{{ support_email }}</a>{% endcaptureas %}
+{% if support_email %}{% captureas support_mail_link %}[{{ support_email }}](mailto:{{ support_email }}){% endcaptureas %}
 {% blocktrans with support_mail_link=support_mail_link %}If you have any questions or would like to request earlier deletion, please contact {{ support_mail_link }}.{% endblocktrans %}
 {% endif %}
