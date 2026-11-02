@@ -104,6 +104,7 @@ def setup_env(
     frontend_pull_remote='origin',
     uses_granian=False,
     uses_celery=False,
+    new_unit_commands=None,  # deprecated, not used anymore
 ):
     """
     Sets up the env with all variables needed to run cosinnus
