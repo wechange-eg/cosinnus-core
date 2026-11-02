@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Services Integration &#8212; Cosinnus 2.10.0b documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f0bd290c"></script>
+    <title>Services Integration &#8212; Cosinnus 2.11.0b1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=2b700200"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -18,8 +18,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -42,8 +43,8 @@
 </pre></div>
 </div>
 <p>Optionally you can adjust the cloud URL and admin user name:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_CLOUD_NEXTCLOUD_URL</span> <span class="o">=</span> <span class="s2">&quot;&lt;url&gt;&quot;</span>  <span class="c1"># default: https://cloud.&lt;portal-url&gt;</span>
-<span class="n">COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME</span> <span class="o">=</span> <span class="s2">&quot;&lt;username&gt;&quot;</span>  <span class="c1"># default: admin</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_CLOUD_NEXTCLOUD_URL</span> <span class="o">=</span> <span class="s2">"&lt;url&gt;"</span>  <span class="c1"># default: https://cloud.&lt;portal-url&gt;</span>
+<span class="n">COSINNUS_CLOUD_NEXTCLOUD_ADMIN_USERNAME</span> <span class="o">=</span> <span class="s2">"&lt;username&gt;"</span>  <span class="c1"># default: admin</span>
 </pre></div>
 </div>
 <p>Finally provide the password of the admin in the portal <cite>.env</cite> file:</p>
@@ -61,8 +62,8 @@ integrated on the group dashboard.</p>
 </pre></div>
 </div>
 <p>Optionally you can adjust the cloud URL and admin user name:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_CHAT_BASE_URL</span> <span class="o">=</span> <span class="s2">&quot;&lt;url&gt;&quot;</span>  <span class="c1"># default: https://chat.&lt;portal-url&gt;</span>
-<span class="n">COSINNUS_CHAT_USER</span> <span class="o">=</span> <span class="s2">&quot;&lt;user&gt;&quot;</span>  <span class="c1"># default: &lt;portal-name&gt;-bot</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_CHAT_BASE_URL</span> <span class="o">=</span> <span class="s2">"&lt;url&gt;"</span>  <span class="c1"># default: https://chat.&lt;portal-url&gt;</span>
+<span class="n">COSINNUS_CHAT_USER</span> <span class="o">=</span> <span class="s2">"&lt;user&gt;"</span>  <span class="c1"># default: &lt;portal-name&gt;-bot</span>
 </pre></div>
 </div>
 <p>Finally provide the password of the admin in the portal <cite>.env</cite> file:</p>
@@ -99,8 +100,8 @@ server URL in the portal settings in the Django Admin.</p>
 <section id="etherpad-ethercalc">
 <h2>Etherpad / Ethercalc<a class="headerlink" href="#etherpad-ethercalc" title="Permalink to this heading">¶</a></h2>
 <p>Etherpad and Ethercalc integration is enabled per default. The server urls can be adjusted in the portal settings:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_ETHERPAD_BASE_URL</span> <span class="o">=</span> <span class="s2">&quot;&lt;url&gt;&quot;</span>  <span class="c1"># default: &quot;https://pad.&lt;poral-url&gt;/api&quot;</span>
-<span class="n">COSINNUS_ETHERPAD_ETHERCALC_BASE_URL</span> <span class="o">=</span> <span class="s2">&quot;&lt;url&quot;</span>  <span class="c1"># default: &quot;https://calc.&lt;portal-url&gt;&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COSINNUS_ETHERPAD_BASE_URL</span> <span class="o">=</span> <span class="s2">"&lt;url&gt;"</span>  <span class="c1"># default: "https://pad.&lt;poral-url&gt;/api"</span>
+<span class="n">COSINNUS_ETHERPAD_ETHERCALC_BASE_URL</span> <span class="o">=</span> <span class="s2">"&lt;url"</span>  <span class="c1"># default: "https://calc.&lt;portal-url&gt;"</span>
 </pre></div>
 </div>
 <p>In addition you need to set the API key in the portal <cite>.env</cite> file:</p>
@@ -118,25 +119,25 @@ This is done by adding the groups to the ElasticSearch search index of a portal.
 <span class="n">COSINNUS_EXCHANGE_RUN_EVERY_MINS</span> <span class="o">=</span> <span class="mi">60</span><span class="o">*</span><span class="mi">24</span> <span class="c1"># once a day</span>
 <span class="n">COSINNUS_EXCHANGE_BACKENDS</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span>
-        <span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.backends.ExchangeBackend&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://&lt;other-portal-url&gt;/api/v2/events/&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;other-portal-name&gt;&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.ExchangeEvent&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;serializer&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.serializers.ExchangeEventSerializer&#39;</span><span class="p">,</span>
+        <span class="s1">'backend'</span><span class="p">:</span> <span class="s1">'cosinnus_exchange.backends.ExchangeBackend'</span><span class="p">,</span>
+        <span class="s1">'url'</span><span class="p">:</span> <span class="s1">'https://&lt;other-portal-url&gt;/api/v2/events/'</span><span class="p">,</span>
+        <span class="s1">'source'</span><span class="p">:</span> <span class="s1">'&lt;other-portal-name&gt;'</span><span class="p">,</span>
+        <span class="s1">'model'</span><span class="p">:</span> <span class="s1">'cosinnus_exchange.ExchangeEvent'</span><span class="p">,</span>
+        <span class="s1">'serializer'</span><span class="p">:</span> <span class="s1">'cosinnus_exchange.serializers.ExchangeEventSerializer'</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.backends.ExchangeBackend&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://&lt;other-portal-url&gt;/api/v2/projects/&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;other-portal-name&gt;&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.ExchangeProject&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;serializer&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.serializers.ExchangeGroupSerializer&#39;</span><span class="p">,</span>
+        <span class="s1">'backend'</span><span class="p">:</span> <span class="s1">'cosinnus_exchange.backends.ExchangeBackend'</span><span class="p">,</span>
+        <span class="s1">'url'</span><span class="p">:</span> <span class="s1">'https://&lt;other-portal-url&gt;/api/v2/projects/'</span><span class="p">,</span>
+        <span class="s1">'source'</span><span class="p">:</span> <span class="s1">'&lt;other-portal-name&gt;'</span><span class="p">,</span>
+        <span class="s1">'model'</span><span class="p">:</span> <span class="s1">'cosinnus_exchange.ExchangeProject'</span><span class="p">,</span>
+        <span class="s1">'serializer'</span><span class="p">:</span> <span class="s1">'cosinnus_exchange.serializers.ExchangeGroupSerializer'</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.backends.ExchangeBackend&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://&lt;other-portal-url&gt;/api/v2/groups/&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;other-portal-name&gt;&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.ExchangeSociety&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;serializer&#39;</span><span class="p">:</span> <span class="s1">&#39;cosinnus_exchange.serializers.ExchangeGroupSerializer&#39;</span><span class="p">,</span>
+        <span class="s1">'backend'</span><span class="p">:</span> <span class="s1">'cosinnus_exchange.backends.ExchangeBackend'</span><span class="p">,</span>
+        <span class="s1">'url'</span><span class="p">:</span> <span class="s1">'https://&lt;other-portal-url&gt;/api/v2/groups/'</span><span class="p">,</span>
+        <span class="s1">'source'</span><span class="p">:</span> <span class="s1">'&lt;other-portal-name&gt;'</span><span class="p">,</span>
+        <span class="s1">'model'</span><span class="p">:</span> <span class="s1">'cosinnus_exchange.ExchangeSociety'</span><span class="p">,</span>
+        <span class="s1">'serializer'</span><span class="p">:</span> <span class="s1">'cosinnus_exchange.serializers.ExchangeGroupSerializer'</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">]</span>
 </pre></div>
@@ -217,11 +218,11 @@ This is done by adding the groups to the ElasticSearch search index of a portal.
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2024, wechange eG.
+      &#169;2024, wechange eG.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/services.rst.txt"
