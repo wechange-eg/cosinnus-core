@@ -31,6 +31,8 @@ Examples:
 `fab staging pull restart` (custom execution)
 """
 
+from datetime import datetime
+
 from django.utils.crypto import get_random_string
 
 from cosinnus.utils.fabric.fabric_utils import CosinnusFabricConnection, get_env
@@ -147,6 +149,7 @@ def fulldeploy(_ctx):
 
     env = get_env()
     c = CosinnusFabricConnection(host=env.host)
+
     text = input(
         f'\n     **************   \n\n\tEXTRA\n\n\tWARNING!!!\n\n   ************* \n\nThis will do a complete deploy to the Server """{env.host}""", including a server stop, maintenance banner and DESTROY the poetry virtual env and CREATE IT FROM SCRATCH.\nIf you are sure you want this, type "YES" to continue: '
     )
@@ -157,13 +160,12 @@ def fulldeploy(_ctx):
     check_confirmation()
     maintenanceon(_ctx)
     # move the old poetry.lock and virtualenv, forcing poetry to create them from scratch on install
-    foldername = f'_DELETEME_moved_old_env_{get_random_string(length=6).lower()}'
+    time_string = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
     with c.cd(env.path):
-        c.run(f'mkdir ~/{foldername}')
         c.run('mkdir -p .venv')  # create if not exists
-        c.run(f'mv .venv ~/{foldername}/movedvenv.venv')
+        c.run(f'mv .venv .venv.{time_string}')
         c.run('touch poetry.lock')  # create if not exists
-        c.run(f'mv poetry.lock ~/{foldername}/movedpoetry.lock')
+        c.run(f'mv poetry.lock poetry.lock.{time_string}')
     _pull_and_update(_ctx, fresh_install=True)
     migrate(_ctx)
     restart(_ctx, skip_check=True)
