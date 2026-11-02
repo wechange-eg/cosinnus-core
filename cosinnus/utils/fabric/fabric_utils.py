@@ -156,8 +156,8 @@ def setup_env(
     env.lessc_binary = f'{env.cosinnus_src_path}/node_modules/.bin/lessc'
     if uses_granian:
         env.reload_command = f'sudo systemctl restart portal-{portal_name}-granian.service'
-        env.stop_command = f'sudo systemctl start portal-{portal_name}-granian.service'
-        env.start_command = f'sudo systemctl stop portal-{portal_name}-granian.service'
+        env.stop_command = f'sudo systemctl stop portal-{portal_name}-granian.service'
+        env.start_command = f'sudo systemctl start portal-{portal_name}-granian.service'
     else:
         env.reload_command = 'sc stop unit.service && sc start unit.service'
         env.stop_command = 'sc stop unit.service'
