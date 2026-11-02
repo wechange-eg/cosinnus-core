@@ -1474,6 +1474,12 @@ msgid "- The password requirements have been changed: Now a password must consis
 msgstr ""
 
 msgid ""
+"- Updated the backend codebase to Python 3.12 and the Django framework to version 5 for security fixes and improvements.\n"
+"- Added several database optimisations to improve the loading speed of most pages.\n"
+"- Fixed a bug where event polls where being shown on the map when filtering for an event time range.\n"
+msgstr ""
+
+msgid ""
 "- User accounts with unverified email addresses are no longer shown as \"inactive\" in member lists and their profiles are now always displayed properly.\n"
 "- Images from external servers that are embedded in user-generated text content \n"
 "will no longer be shown directly in-line, but will be displayed as a link that opens the image on click. This is done for security reasons and to prevent unwanted trackable \n"
@@ -1508,55 +1514,10 @@ msgstr ""
 msgid "1 %(object)s was deleted successfully"
 msgstr ""
 
-msgid "1-Column Dashboard Page"
-msgstr ""
-
-msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr ""
-
-msgid "1/2 + 1/2"
-msgstr ""
-
-msgid "1/2 + 1/4 + 1/4"
-msgstr ""
-
-msgid "1/3 + 1/3 + 1/3"
-msgstr ""
-
-msgid "1/3 + 2/3"
-msgstr ""
-
-msgid "1/4 + 1/2 + 1/4"
-msgstr ""
-
-msgid "1/4 + 1/4 + 1/2"
-msgstr ""
-
 msgid "2 columns of text"
 msgstr ""
 
-msgid "2-Column Dashboard Page"
-msgstr ""
-
-msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr ""
-
 msgid "2-factor access only"
-msgstr ""
-
-msgid "2/3 + 1/3"
-msgstr ""
-
-msgid "3-Column Dashboard Page"
-msgstr ""
-
-msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr ""
-
-msgid "4 Random Projects Widget"
-msgstr ""
-
-msgid "8 Random Projects Widget"
 msgstr ""
 
 msgid "<Root folder>"
@@ -2131,9 +2092,6 @@ msgstr ""
 msgid "Add/Edit translations"
 msgstr ""
 
-msgid "Additional Header content"
-msgstr ""
-
 msgid "Additional Recipients"
 msgstr ""
 
@@ -2544,9 +2502,6 @@ msgstr ""
 msgid "Assign"
 msgstr ""
 
-msgid "Assigned Portal"
-msgstr ""
-
 msgid "Assigned To"
 msgstr ""
 
@@ -2560,9 +2515,6 @@ msgid "Assigned to"
 msgstr ""
 
 msgid "Associated Site"
-msgstr ""
-
-msgid "At least one type of Map object must be chosen!"
 msgstr ""
 
 msgid "Attach Images/Files"
@@ -2773,9 +2725,6 @@ msgid "Bookmarks"
 msgstr ""
 
 msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
-msgstr ""
-
-msgid "Bottom content (gray background)"
 msgstr ""
 
 msgid "Browse"
@@ -3436,15 +3385,6 @@ msgctxt "navigation bookmarks header"
 msgid "Content"
 msgstr ""
 
-msgid "Content (center column)"
-msgstr ""
-
-msgid "Content (left column)"
-msgstr ""
-
-msgid "Content (right column)"
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Content from my Groups and Projects"
 msgstr ""
@@ -3733,9 +3673,6 @@ msgid "Create new Project"
 msgstr ""
 
 msgid "Create new User"
-msgstr ""
-
-msgid "Create-Project or Group Button"
 msgstr ""
 
 msgid "Created"
@@ -5062,9 +4999,6 @@ msgstr ""
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr ""
 
-msgid "Extra large (800 x *)"
-msgstr ""
-
 msgid "Facebook Fan-Page link to"
 msgstr ""
 
@@ -5200,9 +5134,6 @@ msgid "Following"
 msgstr ""
 
 msgid "Font-awesome Widget Icon"
-msgstr ""
-
-msgid "Footer"
 msgstr ""
 
 #, python-format
@@ -5453,19 +5384,7 @@ msgstr ""
 msgid "Has Logged In"
 msgstr ""
 
-msgid "Header"
-msgstr ""
-
 msgid "Header Image"
-msgstr ""
-
-msgid "Header Text"
-msgstr ""
-
-msgid "Header Title"
-msgstr ""
-
-msgid "Header image"
 msgstr ""
 
 msgid "Health"
@@ -6263,9 +6182,6 @@ msgstr ""
 msgid "If active, searching will be restricted to the visible map area."
 msgstr ""
 
-msgid "If active, this page will only be visible to non-logged-in users. All others will be redirected to the activities page."
-msgstr ""
-
 msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
 msgstr ""
 
@@ -6802,9 +6718,6 @@ msgstr ""
 msgid "Items you follow"
 msgstr ""
 
-msgid "Jetzt anmelden und mitgestalten"
-msgstr "Join now and collaborate"
-
 msgid "Join"
 msgstr ""
 
@@ -6881,15 +6794,6 @@ msgid "Lactose-free cuisine"
 msgstr ""
 
 msgid "Language"
-msgstr ""
-
-msgid "Large (400 x *)"
-msgstr ""
-
-msgid "Large News Widget"
-msgstr ""
-
-msgid "Larger (500 x *)"
 msgstr ""
 
 msgid "Largest Files"
@@ -6981,15 +6885,6 @@ msgid "Leave guest access and create an account"
 msgstr ""
 
 msgid "Leave video conference"
-msgstr ""
-
-msgid "Left Sidebar"
-msgstr ""
-
-msgid "Left banner (top)"
-msgstr ""
-
-msgid "Left footer"
 msgstr ""
 
 msgid "Legacy Messages Archive"
@@ -7322,15 +7217,6 @@ msgid "Maybe going"
 msgstr ""
 
 msgid "Me"
-msgstr ""
-
-msgid "Medium (300 x *)"
-msgstr ""
-
-msgid "Medium News Widget"
-msgstr ""
-
-msgid "Medium-small (250 x *)"
 msgstr ""
 
 msgid "Meeting"
@@ -8893,9 +8779,6 @@ msgstr ""
 msgid "Portal IDs"
 msgstr ""
 
-msgid "Portal Root Page"
-msgstr ""
-
 msgid "Portal Setting"
 msgstr ""
 
@@ -9055,9 +8938,6 @@ msgstr ""
 msgid "Promote Member"
 msgstr ""
 
-msgid "Proportions"
-msgstr ""
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Protected Content"
 msgstr ""
@@ -9209,9 +9089,6 @@ msgid "Recording %s was successfully deleted."
 msgstr ""
 
 msgid "Redesign Update"
-msgstr ""
-
-msgid "Redirect Logged in Users"
 msgstr ""
 
 msgid "Redirecting you in 3 seconds..."
@@ -9500,12 +9377,6 @@ msgid "Revoke request"
 msgstr ""
 
 msgid "Revoke request for organization"
-msgstr ""
-
-msgid "Right banner (top)"
-msgstr ""
-
-msgid "Right footer"
 msgstr ""
 
 msgid "Rocket.Chat"
@@ -9858,9 +9729,6 @@ msgstr ""
 msgid "Show Microsite Call to Action Box"
 msgstr ""
 
-msgid "Show Register Button"
-msgstr ""
-
 msgid "Show Tokens"
 msgstr ""
 
@@ -9902,9 +9770,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Show more"
-msgstr ""
-
-msgid "Show more Projects"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -9994,34 +9859,13 @@ msgstr ""
 msgid "Signup"
 msgstr ""
 
-msgid "Simple One-Column Page"
-msgstr ""
-
-msgid "Simple One-Column Page (Modular)"
-msgstr ""
-
-msgid "Simple Page with Left Navigation"
-msgstr ""
-
-msgid "Simple Page with Left Navigation (Modular)"
-msgstr ""
-
 msgid "Simple Statistics"
-msgstr ""
-
-msgid "Site Widgets"
 msgstr ""
 
 msgid "Slug"
 msgstr ""
 
 msgid "Slug must not be empty."
-msgstr ""
-
-msgid "Small (200 x *)"
-msgstr ""
-
-msgid "Smaller (150 x *)"
 msgstr ""
 
 msgid "Smallest Files"
@@ -10176,9 +10020,6 @@ msgid "Start %(export_title)s"
 msgstr ""
 
 msgid "Start Datetime"
-msgstr ""
-
-msgid "Start Page (Modular)"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -11512,6 +11353,9 @@ msgstr ""
 msgid "This todo was completed:"
 msgstr ""
 
+msgid "This update includes a django framework update and several improvements and fixes:"
+msgstr ""
+
 msgid "This update includes quality of life updates:"
 msgstr ""
 
@@ -11580,9 +11424,6 @@ msgid "Timeframe to display announcement"
 msgstr ""
 
 msgid "Timeline"
-msgstr ""
-
-msgid "Tiny (50 x *)"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -12327,12 +12168,6 @@ msgstr ""
 msgid "Version {version_number} released"
 msgstr ""
 
-msgid "Very Small (100 x *)"
-msgstr ""
-
-msgid "Very large (650 x *)"
-msgstr ""
-
 msgid "Video"
 msgstr ""
 
@@ -12751,9 +12586,6 @@ msgstr ""
 msgid "Widget-id (example: 744907261810618721) or embed-code (HTML)"
 msgstr ""
 
-msgid "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
-msgstr ""
-
 msgid "Will be displayed as a small first header in the announcement"
 msgstr ""
 
@@ -12838,9 +12670,6 @@ msgid "Write it here"
 msgstr ""
 
 msgid "Wrong file format. Try .jpg, .jpeg, .png, or .gif instead."
-msgstr ""
-
-msgid "XXL (1200 x *)"
 msgstr ""
 
 msgid "Yes"
@@ -14620,6 +14449,9 @@ msgstr ""
 
 #~ msgid "Help other members find you and use your real name."
 #~ msgstr "Help other members find you and use your real name."
+
+#~ msgid "Jetzt anmelden und mitgestalten"
+#~ msgstr "Join now and collaborate"
 
 #~ msgid "Klimaschutz"
 #~ msgstr "Climate Protection"

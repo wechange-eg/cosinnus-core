@@ -1609,6 +1609,15 @@ msgid "- The password requirements have been changed: Now a password must consis
 msgstr "- Die Anforderungen an Passwörtern wurden geändert: Nun muss ein Passwort aus mindestens 12 Zeichen bestehen. Ansonsten gibt es keine weiteren Anforderungen bezüglich der gewählten Zeichen. Passwörter werden weiterhin gegen eine Liste häufig verwendeter Passwörter geprüft.\n"
 
 msgid ""
+"- Updated the backend codebase to Python 3.12 and the Django framework to version 5 for security fixes and improvements.\n"
+"- Added several database optimisations to improve the loading speed of most pages.\n"
+"- Fixed a bug where event polls where being shown on the map when filtering for an event time range.\n"
+msgstr ""
+"- Die Backend-Codebasis wurde auf Python 3.12 und das Django-Framework auf Version 5 aktualisiert, um Sicherheitsupdates und Verbesserungen zu implementieren.\n"
+"- Es wurden mehrere Datenbankoptimierungen vorgenommen, um die Ladegeschwindigkeit der meisten Seiten zu verbessern.\n"
+"- Ein Fehler wurde behoben, durch den bei der Filterung nach einem Zeitbereich für Veranstaltungen auch Terminabstimmungen auf der Karte angezeigt wurden.\n"
+
+msgid ""
 "- User accounts with unverified email addresses are no longer shown as \"inactive\" in member lists and their profiles are now always displayed properly.\n"
 "- Images from external servers that are embedded in user-generated text content \n"
 "will no longer be shown directly in-line, but will be displayed as a link that opens the image on click. This is done for security reasons and to prevent unwanted trackable \n"
@@ -1660,56 +1669,11 @@ msgstr "--- NICHTS (Vererbt) ---"
 msgid "1 %(object)s was deleted successfully"
 msgstr "1 %(object)s wurde erfolgreich gelöscht"
 
-msgid "1-Column Dashboard Page"
-msgstr "1-spaltige Dashboard Seite"
-
-msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr "1-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
-
-msgid "1/2 + 1/2"
-msgstr "1/2 + 1/2"
-
-msgid "1/2 + 1/4 + 1/4"
-msgstr "1/2 + 1/4 + 1/4"
-
-msgid "1/3 + 1/3 + 1/3"
-msgstr "1/3 + 1/3 + 1/3"
-
-msgid "1/3 + 2/3"
-msgstr "1/3 + 2/3"
-
-msgid "1/4 + 1/2 + 1/4"
-msgstr "1/4 + 1/2 + 1/4"
-
-msgid "1/4 + 1/4 + 1/2"
-msgstr "1/4 + 1/4 + 1/2"
-
 msgid "2 columns of text"
 msgstr "2 Spalten Text"
 
-msgid "2-Column Dashboard Page"
-msgstr "2-spaltige Dashboard Seite"
-
-msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr "2-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
-
 msgid "2-factor access only"
 msgstr "Zugriff nur mit 2-Faktor"
-
-msgid "2/3 + 1/3"
-msgstr "2/3 + 1/3"
-
-msgid "3-Column Dashboard Page"
-msgstr "3-spaltige Dashboard Seite"
-
-msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr "3-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
-
-msgid "4 Random Projects Widget"
-msgstr "4 zufällige Projekte-Widget"
-
-msgid "8 Random Projects Widget"
-msgstr "8 zufällige Projekte-Widget"
 
 msgid "<Root folder>"
 msgstr "<Oberster Ordner>"
@@ -2283,9 +2247,6 @@ msgstr "Benutzerkonto hinzufügen"
 msgid "Add/Edit translations"
 msgstr "Übersetzungen hinzufügen / ändern"
 
-msgid "Additional Header content"
-msgstr "Additional Header content"
-
 msgid "Additional Recipients"
 msgstr "Zusätzliche Empfänger"
 
@@ -2697,9 +2658,6 @@ msgstr "Solange man als Benutzer/in die Willkommens-Ankündigung angezeigt bekom
 msgid "Assign"
 msgstr "Zuweisen"
 
-msgid "Assigned Portal"
-msgstr "Zugewiesenes Portal"
-
 msgid "Assigned To"
 msgstr "Zugewiesen an"
 
@@ -2714,9 +2672,6 @@ msgstr "Zugewiesen an"
 
 msgid "Associated Site"
 msgstr "Zugehörige Site"
-
-msgid "At least one type of Map object must be chosen!"
-msgstr "Es muss mindestens ein Typ von Kartenobjekten ausgewählt werden!"
 
 msgid "Attach Images/Files"
 msgstr "Bilder/Dateien anhängen"
@@ -2927,9 +2882,6 @@ msgstr "Merkliste"
 
 msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
 msgstr "Untere Farbe des Farbverlaufs für den Seitenhintergrunds (Hex-Wert, optional mit \"#\")"
-
-msgid "Bottom content (gray background)"
-msgstr "Bottom content (gray background)"
 
 msgid "Browse"
 msgstr "Ansehen"
@@ -3612,15 +3564,6 @@ msgctxt "navigation bookmarks header"
 msgid "Content"
 msgstr "Inhalte"
 
-msgid "Content (center column)"
-msgstr "Inhalt (mittlere Spalte)"
-
-msgid "Content (left column)"
-msgstr "Inhalt (linke Spalte)"
-
-msgid "Content (right column)"
-msgstr "Inhalt (rechte Spalte)"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Content from my Groups and Projects"
 msgstr "Inhalte aus meinen Gruppen und Projekten"
@@ -3917,9 +3860,6 @@ msgstr "Neues Projekt anlegen"
 
 msgid "Create new User"
 msgstr "Benutzerkonto erstellen"
-
-msgid "Create-Project or Group Button"
-msgstr "Projekt oder Gruppe-erstellen Button"
 
 msgid "Created"
 msgstr "Erstellt"
@@ -5252,9 +5192,6 @@ msgstr "Zusätzliches CSS"
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Wird vorgezogen gegenüber sämtlichem anderen CSS."
 
-msgid "Extra large (800 x *)"
-msgstr "Extra large (800 x *)"
-
 msgid "Facebook Fan-Page link to"
 msgstr "Facebook Fan-Seite zum Verbinden"
 
@@ -5391,9 +5328,6 @@ msgstr "Gefolgt"
 
 msgid "Font-awesome Widget Icon"
 msgstr "Font-awesome Widget-Icon"
-
-msgid "Footer"
-msgstr "Footer"
 
 #, python-format
 msgid "For content in the groups that you join automatically (%(group_links)s), I wish to receive email notifications:"
@@ -5644,20 +5578,8 @@ msgstr "Speicherbedarf Projekte"
 msgid "Has Logged In"
 msgstr "Jemals eingeloggt"
 
-msgid "Header"
-msgstr "Kopfzeile (nach Banner)"
-
 msgid "Header Image"
 msgstr "Kopfzeilenbild"
-
-msgid "Header Text"
-msgstr "Kopfzeile (nach Banner)"
-
-msgid "Header Title"
-msgstr "Kopfzeile (nach Banner)"
-
-msgid "Header image"
-msgstr "Header image"
 
 msgid "Health"
 msgstr "Gesundheit"
@@ -6874,9 +6796,6 @@ msgstr "Wenn aktiviert, können neu registrierte Benutzer/innen erst dann Beitr�
 msgid "If active, searching will be restricted to the visible map area."
 msgstr "Wenn aktiv wird die Suche auf die sichtbare Kartenfläche beschränkt."
 
-msgid "If active, this page will only be visible to non-logged-in users. All others will be redirected to the activities page."
-msgstr "Wenn aktiv, sehen diese Seite nur Benutzer/innen die nicht eingeloggt sind. Alle eingeloggten Benutzer/innen werden direkt auf die Aktivitäten-Seite weitergeleitet."
-
 msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
 msgstr "Wenn eine App deaktiviert wird, bleiben ihr Inhalt und die damit verbundenen Daten erhalten, werden aber nicht mehr angezeigt, bis die App wieder aktiviert wird."
 
@@ -7413,9 +7332,6 @@ msgstr "Inhalte aus dieser Gruppe können in jedem Unterprojekt der Gruppe angez
 msgid "Items you follow"
 msgstr "Objekte, denen ich folge"
 
-msgid "Jetzt anmelden und mitgestalten"
-msgstr "Jetzt anmelden und mitgestalten"
-
 msgid "Join"
 msgstr "Beitreten"
 
@@ -7493,15 +7409,6 @@ msgstr "Laktosefreie Verpflegung"
 
 msgid "Language"
 msgstr "Sprache"
-
-msgid "Large (400 x *)"
-msgstr "Large (400 x *)"
-
-msgid "Large News Widget"
-msgstr "Großes Nachrichten Widget"
-
-msgid "Larger (500 x *)"
-msgstr "Larger (500 x *)"
 
 msgid "Largest Files"
 msgstr "Größte Dateien"
@@ -7594,15 +7501,6 @@ msgstr "Gastzugriff beenden und Konto registrieren"
 
 msgid "Leave video conference"
 msgstr "Videokonferenz verlassen"
-
-msgid "Left Sidebar"
-msgstr "Fußzeile links"
-
-msgid "Left banner (top)"
-msgstr "Linkes banner (oben)"
-
-msgid "Left footer"
-msgstr "Fußzeile links"
 
 msgid "Legacy Messages Archive"
 msgstr "Archiv für ältere Nachrichten"
@@ -7935,15 +7833,6 @@ msgstr "Nimmt vielleicht teil"
 
 msgid "Me"
 msgstr "Ich"
-
-msgid "Medium (300 x *)"
-msgstr "Medium (300 x *)"
-
-msgid "Medium News Widget"
-msgstr "Mittelgroßes Nachrichten-Widget"
-
-msgid "Medium-small (250 x *)"
-msgstr "Medium-small (250 x *)"
 
 msgid "Meeting"
 msgstr "Meeting"
@@ -9512,9 +9401,6 @@ msgstr "Portal-Administrator/innen"
 msgid "Portal IDs"
 msgstr "Portal IDs"
 
-msgid "Portal Root Page"
-msgstr "Portal-Root Seite"
-
 msgid "Portal Setting"
 msgstr "Portal-Einstellung"
 
@@ -9674,9 +9560,6 @@ msgstr "Projekte/Gruppen"
 msgid "Promote Member"
 msgstr "Mitglied befördern"
 
-msgid "Proportions"
-msgstr "Proportionen"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Protected Content"
 msgstr "Geschützter Inhalt"
@@ -9830,9 +9713,6 @@ msgstr "Die Aufzeichnung %s wurde erfolgreich gelöscht."
 
 msgid "Redesign Update"
 msgstr "Redesign-Update"
-
-msgid "Redirect Logged in Users"
-msgstr "Eingeloggte Benutzer/innen weiterleiten"
 
 msgid "Redirecting you in 3 seconds..."
 msgstr "Weiterleitung in 3 Sekunden..."
@@ -10122,12 +10002,6 @@ msgstr "Anfrage zurückziehen"
 
 msgid "Revoke request for organization"
 msgstr "Anfrage für Gruppe widerrufen"
-
-msgid "Right banner (top)"
-msgstr "Rechtes banner (oben)"
-
-msgid "Right footer"
-msgstr "Fußzeile rechts"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
@@ -10479,9 +10353,6 @@ msgstr "Zeige die Microsite-Box an"
 msgid "Show Microsite Call to Action Box"
 msgstr "Aufruf zum Handeln - Microsite-Box anzeigen"
 
-msgid "Show Register Button"
-msgstr "Registrieren Button anzeigen"
-
 msgid "Show Tokens"
 msgstr "Tokens anzeigen"
 
@@ -10524,9 +10395,6 @@ msgstr "Große Karte anzeigen"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Show more"
 msgstr "Weitere anzeigen"
-
-msgid "Show more Projects"
-msgstr "Weitere Projekte anzeigen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Show more Projects of this Group"
@@ -10615,35 +10483,14 @@ msgstr "Das Registrieren geht einfach und schnell. Füll einfach diese Felder au
 msgid "Signup"
 msgstr "Registrieren"
 
-msgid "Simple One-Column Page"
-msgstr "Simple einspaltige Seite"
-
-msgid "Simple One-Column Page (Modular)"
-msgstr "Simple einspaltige Seite (Modular)"
-
-msgid "Simple Page with Left Navigation"
-msgstr "Simple Seite mit Navigationsspalte links"
-
-msgid "Simple Page with Left Navigation (Modular)"
-msgstr "Simple Seite mit Navigationsspalte links (Modular)"
-
 msgid "Simple Statistics"
 msgstr "Simple Statistiken"
-
-msgid "Site Widgets"
-msgstr "Site Widgets"
 
 msgid "Slug"
 msgstr "Slug"
 
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
-
-msgid "Small (200 x *)"
-msgstr "Small (200 x *)"
-
-msgid "Smaller (150 x *)"
-msgstr "Smaller (150 x *)"
 
 msgid "Smallest Files"
 msgstr "Kleinste Dateien"
@@ -10798,9 +10645,6 @@ msgstr "%(export_title)s starten"
 
 msgid "Start Datetime"
 msgstr "Anfangsdatum"
-
-msgid "Start Page (Modular)"
-msgstr "Startseite (Modular)"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Start date."
@@ -12195,6 +12039,9 @@ msgstr "Die Gruppe oder das Projekt liegt nicht länger unter der URL die du ein
 msgid "This todo was completed:"
 msgstr "Diese Aufgabe wurde abgeschlossen:"
 
+msgid "This update includes a django framework update and several improvements and fixes:"
+msgstr "Das Update enthält ein Update des Django-Frameworks und weitere Verbesserungen und Bugfixes:"
+
 msgid "This update includes quality of life updates:"
 msgstr "Das Update enthält Verbesserungen zur Benutzerfreundlichkeit:"
 
@@ -12264,9 +12111,6 @@ msgstr "Zeitrahmen, in dem die Ankündigung angezeigt wird"
 
 msgid "Timeline"
 msgstr "Aktivitäten"
-
-msgid "Tiny (50 x *)"
-msgstr "Tiny (50 x *)"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Title"
@@ -13057,12 +12901,6 @@ msgstr "Version 2.4.0 veröffentlicht"
 msgid "Version {version_number} released"
 msgstr "Version {version_number} veröffentlicht"
 
-msgid "Very Small (100 x *)"
-msgstr "Very Small (100 x *)"
-
-msgid "Very large (650 x *)"
-msgstr "Very large (650 x *)"
-
 msgid "Video"
 msgstr "Video"
 
@@ -13481,9 +13319,6 @@ msgstr "Widget-Title"
 msgid "Widget-id (example: 744907261810618721) or embed-code (HTML)"
 msgstr "Feed-ID (Beispiel: 744907261810618721) oder Einbettungs-HTML-Code"
 
-msgid "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
-msgstr "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
-
 msgid "Will be displayed as a small first header in the announcement"
 msgstr "Wird als kleine erste Überschrift in der Ankündigung angezeigt"
 
@@ -13572,9 +13407,6 @@ msgstr "Bitte hier angeben"
 
 msgid "Wrong file format. Try .jpg, .jpeg, .png, or .gif instead."
 msgstr "Falsches Dateiformat. Es werden nur .jpg, .jpeg, .png oder .gif unterstützt."
-
-msgid "XXL (1200 x *)"
-msgstr "XXL (1200 x *)"
 
 msgid "Yes"
 msgstr "Ja"
@@ -15478,6 +15310,51 @@ msgstr "Ja"
 #~ msgid "- Made several small improvements to the user interface and look and feel of the redesigned calendar.\n"
 #~ msgstr "- Es wurden einige kleinere Verbesserungen an der Benutzeroberfläche und der optischen Gestaltung des neu Kalender-Redesigns vorgenommen.\n"
 
+#~ msgid "1-Column Dashboard Page"
+#~ msgstr "1-spaltige Dashboard Seite"
+
+#~ msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+#~ msgstr "1-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
+
+#~ msgid "1/2 + 1/2"
+#~ msgstr "1/2 + 1/2"
+
+#~ msgid "1/2 + 1/4 + 1/4"
+#~ msgstr "1/2 + 1/4 + 1/4"
+
+#~ msgid "1/3 + 1/3 + 1/3"
+#~ msgstr "1/3 + 1/3 + 1/3"
+
+#~ msgid "1/3 + 2/3"
+#~ msgstr "1/3 + 2/3"
+
+#~ msgid "1/4 + 1/2 + 1/4"
+#~ msgstr "1/4 + 1/2 + 1/4"
+
+#~ msgid "1/4 + 1/4 + 1/2"
+#~ msgstr "1/4 + 1/4 + 1/2"
+
+#~ msgid "2-Column Dashboard Page"
+#~ msgstr "2-spaltige Dashboard Seite"
+
+#~ msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+#~ msgstr "2-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
+
+#~ msgid "2/3 + 1/3"
+#~ msgstr "2/3 + 1/3"
+
+#~ msgid "3-Column Dashboard Page"
+#~ msgstr "3-spaltige Dashboard Seite"
+
+#~ msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+#~ msgstr "3-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
+
+#~ msgid "4 Random Projects Widget"
+#~ msgstr "4 zufällige Projekte-Widget"
+
+#~ msgid "8 Random Projects Widget"
+#~ msgstr "8 zufällige Projekte-Widget"
+
 #~ msgid "A user export is in progress. As soon as the export is finished it will be available here."
 #~ msgstr "Der Benutzer/innen-Export wird gerade erstellt.  Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
 
@@ -15507,6 +15384,9 @@ msgstr "Ja"
 
 #~ msgid "Add workshop"
 #~ msgstr "Workshop hinzufügen"
+
+#~ msgid "Additional Header content"
+#~ msgstr "Additional Header content"
 
 #~ msgid "Administrators unknown"
 #~ msgstr "Administrator/innen unbekannt"
@@ -15583,6 +15463,12 @@ msgstr "Ja"
 #~ msgid "Assign someone else"
 #~ msgstr "Jemand anderem zuweisen"
 
+#~ msgid "Assigned Portal"
+#~ msgstr "Zugewiesenes Portal"
+
+#~ msgid "At least one type of Map object must be chosen!"
+#~ msgstr "Es muss mindestens ein Typ von Kartenobjekten ausgewählt werden!"
+
 #~ msgid "Attach existing Files..."
 #~ msgstr "Vorhandene Datei wählen..."
 
@@ -15615,6 +15501,9 @@ msgstr "Ja"
 
 #~ msgid "Bildung"
 #~ msgstr "Bildung"
+
+#~ msgid "Bottom content (gray background)"
+#~ msgstr "Bottom content (gray background)"
 
 #~ msgid "Broadcast"
 #~ msgstr "Rundmail (Alle ProjektMitglieder)"
@@ -15679,6 +15568,15 @@ msgstr "Ja"
 #~ msgid "Configure"
 #~ msgstr "Konfigurieren"
 
+#~ msgid "Content (center column)"
+#~ msgstr "Inhalt (mittlere Spalte)"
+
+#~ msgid "Content (left column)"
+#~ msgstr "Inhalt (linke Spalte)"
+
+#~ msgid "Content (right column)"
+#~ msgstr "Inhalt (rechte Spalte)"
+
 #~ msgid "Cosinnus conference"
 #~ msgstr "Tagung"
 
@@ -15691,6 +15589,9 @@ msgstr "Ja"
 #
 #~ msgid "Create token"
 #~ msgstr "Token erstellen"
+
+#~ msgid "Create-Project or Group Button"
+#~ msgstr "Projekt oder Gruppe-erstellen Button"
 
 #~ msgid "Created by"
 #~ msgstr "Erstellt durch"
@@ -15836,6 +15737,9 @@ msgstr "Ja"
 #~ msgid "External"
 #~ msgstr "Extern"
 
+#~ msgid "Extra large (800 x *)"
+#~ msgstr "Extra large (800 x *)"
+
 #~ msgid "File \"%(filename)s\" could not be deleted."
 #~ msgstr "Datei \"%(filename)s\" konnte nicht gelöscht werden."
 
@@ -15869,6 +15773,9 @@ msgstr "Ja"
 #~ msgid "Follow this link to see the comment:"
 #~ msgstr "Folge diesem Link um zum Kommentar zu gelangen:"
 
+#~ msgid "Footer"
+#~ msgstr "Footer"
+
 #~ msgid "For content that I am following, I wish to receive notification emails"
 #~ msgstr "Für Inhalte, denen ich folge, möchte ich Benachrichtigungs-Emails erhalten"
 
@@ -15892,6 +15799,18 @@ msgstr "Ja"
 
 #~ msgid "Group:"
 #~ msgstr "Gruppe:"
+
+#~ msgid "Header"
+#~ msgstr "Kopfzeile (nach Banner)"
+
+#~ msgid "Header Text"
+#~ msgstr "Kopfzeile (nach Banner)"
+
+#~ msgid "Header Title"
+#~ msgstr "Kopfzeile (nach Banner)"
+
+#~ msgid "Header image"
+#~ msgstr "Header image"
 
 #~ msgid "Hebrew--NATIVE-LANGUAGE"
 #~ msgstr "עברית"
@@ -16010,6 +15929,9 @@ msgstr "Ja"
 #~ msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
 #~ msgstr "Wenn ein Gruppe als Tagung markiert wurde, ist es möglich Accounts für alle Teilnehmer automatisch zu generieren"
 
+#~ msgid "If active, this page will only be visible to non-logged-in users. All others will be redirected to the activities page."
+#~ msgstr "Wenn aktiv, sehen diese Seite nur Benutzer/innen die nicht eingeloggt sind. Alle eingeloggten Benutzer/innen werden direkt auf die Aktivitäten-Seite weitergeleitet."
+
 #~ msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
 #~ msgstr "Wenn aktiviert, können Tagungsveranstalter temporäre Benutzerkonten erstellen, die aktiviert und deaktiviert werden können."
 
@@ -16065,6 +15987,9 @@ msgstr "Ja"
 #~ msgid "Is premium"
 #~ msgstr "Ist Premium"
 
+#~ msgid "Jetzt anmelden und mitgestalten"
+#~ msgstr "Jetzt anmelden und mitgestalten"
+
 #~ msgid "Kalender"
 #~ msgstr "Calendar"
 
@@ -16076,6 +16001,24 @@ msgstr "Ja"
 
 #~ msgid "Kunst und Kultur"
 #~ msgstr "Kunst und Kultur"
+
+#~ msgid "Large (400 x *)"
+#~ msgstr "Large (400 x *)"
+
+#~ msgid "Large News Widget"
+#~ msgstr "Großes Nachrichten Widget"
+
+#~ msgid "Larger (500 x *)"
+#~ msgstr "Larger (500 x *)"
+
+#~ msgid "Left Sidebar"
+#~ msgstr "Fußzeile links"
+
+#~ msgid "Left banner (top)"
+#~ msgstr "Linkes banner (oben)"
+
+#~ msgid "Left footer"
+#~ msgstr "Fußzeile links"
 
 #~ msgid "Location (optional)."
 #~ msgstr "Ort (optional)."
@@ -16097,6 +16040,15 @@ msgstr "Ja"
 
 #~ msgid "Medium"
 #~ msgstr "Mittel"
+
+#~ msgid "Medium (300 x *)"
+#~ msgstr "Medium (300 x *)"
+
+#~ msgid "Medium News Widget"
+#~ msgstr "Mittelgroßes Nachrichten-Widget"
+
+#~ msgid "Medium-small (250 x *)"
+#~ msgstr "Medium-small (250 x *)"
 
 #
 #~ msgid "Message Group"
@@ -16250,6 +16202,9 @@ msgstr "Ja"
 #~ msgid "Polish--NATIVE-LANGUAGE"
 #~ msgstr "Polski"
 
+#~ msgid "Portal Root Page"
+#~ msgstr "Portal-Root Seite"
+
 #~ msgid "Portal administrators"
 #~ msgstr "Portal-Administrator_innen"
 
@@ -16273,6 +16228,9 @@ msgstr "Ja"
 
 #~ msgid "Project/group CSV File"
 #~ msgstr "Projekte/Gruppen CSV-Datei"
+
+#~ msgid "Proportions"
+#~ msgstr "Proportionen"
 
 #~ msgid "Public Group"
 #~ msgstr "Öffentliche Gruppe"
@@ -16298,6 +16256,9 @@ msgstr "Ja"
 #~ msgid "Recording of meetings is only available for premium conferences!"
 #~ msgstr "Aufzeichnung von Meetings ist nur für Premium-Tagungen verfügbar!"
 
+#~ msgid "Redirect Logged in Users"
+#~ msgstr "Eingeloggte Benutzer/innen weiterleiten"
+
 #~ msgid "Reminder emails"
 #~ msgstr "Erinnerungs-E-Mails"
 
@@ -16309,6 +16270,12 @@ msgstr "Ja"
 
 #~ msgid "Retry user export"
 #~ msgstr "Benutzer/innen-Export erneut starten"
+
+#~ msgid "Right banner (top)"
+#~ msgstr "Rechtes banner (oben)"
+
+#~ msgid "Right footer"
+#~ msgstr "Fußzeile rechts"
 
 #~ msgid "Romanian--NATIVE-LANGUAGE"
 #~ msgstr "Română"
@@ -16342,8 +16309,35 @@ msgstr "Ja"
 #~ msgid "Set up your Profile"
 #~ msgstr "Richte dein Profil ein"
 
+#~ msgid "Show Register Button"
+#~ msgstr "Registrieren Button anzeigen"
+
+#~ msgid "Show more Projects"
+#~ msgstr "Weitere Projekte anzeigen"
+
 #~ msgid "Signature list"
 #~ msgstr "Unterschriftenliste"
+
+#~ msgid "Simple One-Column Page"
+#~ msgstr "Simple einspaltige Seite"
+
+#~ msgid "Simple One-Column Page (Modular)"
+#~ msgstr "Simple einspaltige Seite (Modular)"
+
+#~ msgid "Simple Page with Left Navigation"
+#~ msgstr "Simple Seite mit Navigationsspalte links"
+
+#~ msgid "Simple Page with Left Navigation (Modular)"
+#~ msgstr "Simple Seite mit Navigationsspalte links (Modular)"
+
+#~ msgid "Site Widgets"
+#~ msgstr "Site Widgets"
+
+#~ msgid "Small (200 x *)"
+#~ msgstr "Small (200 x *)"
+
+#~ msgid "Smaller (150 x *)"
+#~ msgstr "Smaller (150 x *)"
 
 #~ msgid "Sorry, an error occurred during the user export. Please try again later."
 #~ msgstr "Leider ist bei dem Benutzer/innen-Export ein Fehler aufgetreten. Bitte versuch es später erneut."
@@ -16356,6 +16350,9 @@ msgstr "Ja"
 
 #~ msgid "Spanish--NATIVE-LANGUAGE"
 #~ msgstr "Español"
+
+#~ msgid "Start Page (Modular)"
+#~ msgstr "Startseite (Modular)"
 
 #~ msgid "Start conference and activate user accounts"
 #~ msgstr "Tagung beginnen und Teilnehmerkonten aktivieren"
@@ -16509,6 +16506,9 @@ msgstr "Ja"
 #~ msgid "Timestamp of user export"
 #~ msgstr "Zeitstempel des Benutzer-Exports"
 
+#~ msgid "Tiny (50 x *)"
+#~ msgstr "Tiny (50 x *)"
+
 #~ msgid "TodoEntry"
 #~ msgstr "Aufgabe"
 
@@ -16593,6 +16593,12 @@ msgstr "Ja"
 #~ msgid "User participates in the following workshops:"
 #~ msgstr "Benutzer_in nimmt an folgenden Workshops teil:"
 
+#~ msgid "Very Small (100 x *)"
+#~ msgstr "Very Small (100 x *)"
+
+#~ msgid "Very large (650 x *)"
+#~ msgstr "Very large (650 x *)"
+
 #~ msgid "Video Chat"
 #~ msgstr "Videochat"
 
@@ -16631,6 +16637,9 @@ msgstr "Ja"
 #~ msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
 #~ msgstr "Während wir die Schnittstelle zur Tagungsverwaltung überarbeiten, können nur Portaladministrator_innen Änderungen für Premium-Tagungen vornehmen."
 
+#~ msgid "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
+#~ msgstr "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
+
 #~ msgid "With the Task-Board, we offer your team a kanban style organization tool aimed at personal planning and project organization! As administrator you can activate the task-board for your project/group."
 #~ msgstr "Mit dem Aufgaben-Board bieten wir euerem wir Team ein Organisationswerkzeug im Kanban-Stil für die persönliche Planung und Projektorganisation!  Du kannst als Administrator/in das Aufgaben-Board für dein Projekt/Gruppe aktivieren."
 
@@ -16645,6 +16654,9 @@ msgstr "Ja"
 
 #~ msgid "Write a news post..."
 #~ msgstr "Neue Nachricht..."
+
+#~ msgid "XXL (1200 x *)"
+#~ msgstr "XXL (1200 x *)"
 
 #~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgstr "Du bist dabei diese Tagung zu deaktivieren. Sie und all ihr Inhalt wird auf der Webseite unsichtbar sein."
