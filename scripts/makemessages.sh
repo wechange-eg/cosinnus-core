@@ -7,11 +7,14 @@ set -e
 
 echo ">> Call this script from your wechange directory (the one containing 'manage.py'), "
 echo ">>   like this: '../cosinnus-core/scripts/makemessages.sh'"
+echo ""
+echo "     Hint: If you are experiencing problems, consider deleting the node_modules package and trying again."
 
 # --- Configuration ---
 PROJECT_ROOT=$(pwd)
 MANAGE_PY="$PROJECT_ROOT/manage.py"
 CORE_PATH="$PROJECT_ROOT/../cosinnus-core"
+PAYMENTS_PATH="$PROJECT_ROOT/../wechange-payments"
 
 # Default values as strings for easy comparison in hints
 LOCALE_ARGS="-l de -l en"
@@ -83,14 +86,23 @@ fi
 # --- Execution ---
 
 # 1. Update Project translations
+echo ""
 echo ">> Updating Project translations..."
 python3 "$MANAGE_PY" extendedmakemessages "${BASE_FLAGS[@]}" $SORTING_ARGS $LOCALE_ARGS
 
 # 2. Update Core translations
+echo ""
 echo ">> Updating Cosinnus Core translations..."
 cd "$CORE_PATH"
 python3 "$MANAGE_PY" extendedmakemessages "${BASE_FLAGS[@]}" $SORTING_ARGS $LOCALE_ARGS
 
-echo "   Hint: If there are a lot of errors, consider deleting the node_modules package and trying again."
+# 3. Update Payments translations
+echo ""
+echo ">> Not updating Wechange-Payments translations. Comment this line in/out in makemessages.sh to activate translations for payments!"
+# echo ">> Updating Wechange-Payments translations..."
+# cd "$PAYMENTS_PATH"
+# python3 "$MANAGE_PY" extendedmakemessages "${BASE_FLAGS[@]}" $SORTING_ARGS $LOCALE_ARGS
+
+echo ""
 echo ">> Done."
 

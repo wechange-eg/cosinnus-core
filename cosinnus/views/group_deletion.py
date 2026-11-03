@@ -126,6 +126,15 @@ def mark_group_for_deletion(group, triggered_by_user=None):
                     )
                     % mail_context
                 )
+
+            # add support mail infotext
+            if CosinnusPortal.get_current().support_email:
+                mail_link = '[%(mail)s](mailto:%(mail)s)' % {'mail': CosinnusPortal.get_current().support_email}
+                support_mail_infotext = _('If you have any questions, please contact %(support_mail_link)s.') % {
+                    'support_mail_link': mail_link
+                }
+                mail_content += '\n\n' + support_mail_infotext
+
             html_content = textfield(mail_content)
             # when this is an automatic deletion, we want to raise an exception if the mail fails to send
             send_html_mail(user, mail_subject, html_content, raise_on_error=automatic_deletion)

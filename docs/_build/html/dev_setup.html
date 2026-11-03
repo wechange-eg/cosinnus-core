@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Development Setup &#8212; Cosinnus 2.10.0b documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=f0bd290c"></script>
+    <title>Development Setup &#8212; Cosinnus 2.11.0b1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=2b700200"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -18,8 +18,9 @@
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -50,7 +51,7 @@ creating a new portal based on the <cite>template-portal</cite>.</p>
 <section id="create-postgresql-database">
 <h2>Create PostgreSQL database<a class="headerlink" href="#create-postgresql-database" title="Permalink to this heading">¶</a></h2>
 <p>Create new database in PostgreSQL shell:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">USER</span> <span class="o">&lt;</span><span class="n">DB</span><span class="o">-</span><span class="n">USER</span><span class="o">&gt;</span> <span class="n">WITH</span> <span class="n">PASSWORD</span> <span class="s1">&#39;&lt;DB-PASSWORD&gt;&#39;</span><span class="p">;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">USER</span> <span class="o">&lt;</span><span class="n">DB</span><span class="o">-</span><span class="n">USER</span><span class="o">&gt;</span> <span class="n">WITH</span> <span class="n">PASSWORD</span> <span class="s1">'&lt;DB-PASSWORD&gt;'</span><span class="p">;</span>
 <span class="n">CREATE</span> <span class="n">DATABASE</span> <span class="o">&lt;</span><span class="n">DB</span><span class="o">-</span><span class="n">NAME</span><span class="o">&gt;</span> <span class="n">WITH</span> <span class="n">OWNER</span> <span class="o">&lt;</span><span class="n">DB</span><span class="o">-</span><span class="n">USER</span><span class="o">&gt;</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -89,9 +90,9 @@ creating a new portal based on the <cite>template-portal</cite>.</p>
 </div>
 </li>
 <li><p>Add the following lines to <cite>.bashrc</cite> (for bash):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PYENV_ROOT</span><span class="o">=</span><span class="s2">&quot;$HOME/.pyenv&quot;</span>
-<span class="n">command</span> <span class="o">-</span><span class="n">v</span> <span class="n">pyenv</span> <span class="o">&gt;/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> <span class="o">||</span> <span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="s2">&quot;$PYENV_ROOT/bin:$PATH&quot;</span>
-<span class="nb">eval</span> <span class="s2">&quot;$(pyenv init -)&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PYENV_ROOT</span><span class="o">=</span><span class="s2">"$HOME/.pyenv"</span>
+<span class="n">command</span> <span class="o">-</span><span class="n">v</span> <span class="n">pyenv</span> <span class="o">&gt;/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> <span class="o">||</span> <span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="s2">"$PYENV_ROOT/bin:$PATH"</span>
+<span class="nb">eval</span> <span class="s2">"$(pyenv init -)"</span>
 </pre></div>
 </div>
 </li>
@@ -135,7 +136,7 @@ creating a new portal based on the <cite>template-portal</cite>.</p>
 </div>
 </li>
 <li><p>Link the repos: Change the <cite>cosinnus</cite> dependency in <cite>wechange/pyproject.toml</cite> to:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cosinnus</span> <span class="o">=</span> <span class="p">{</span> <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;../cosinnus-core&quot;</span><span class="p">,</span> <span class="n">develop</span> <span class="o">=</span> <span class="n">true</span> <span class="p">}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cosinnus</span> <span class="o">=</span> <span class="p">{</span> <span class="n">path</span> <span class="o">=</span> <span class="s2">"../cosinnus-core"</span><span class="p">,</span> <span class="n">develop</span> <span class="o">=</span> <span class="n">true</span> <span class="p">}</span>
 </pre></div>
 </div>
 </li>
@@ -399,11 +400,11 @@ frontend or map frontend.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2024, wechange eG.
+      &#169;2024, wechange eG.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="_sources/dev_setup.rst.txt"

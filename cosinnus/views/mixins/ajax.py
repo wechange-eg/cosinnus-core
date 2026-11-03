@@ -22,7 +22,7 @@ def patch_body_json_data(request):
     body = request.body
     encoding = request.encoding or 'utf-8'
     body = force_str(body, encoding=encoding)
-    json_data = json.loads(body, encoding=request.encoding)
+    json_data = json.loads(body)
 
     querydict = QueryDict('', mutable=True)
 

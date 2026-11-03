@@ -154,7 +154,7 @@ def _get_inactivity_preview_section(kind: Literal['user', 'group'], candidates, 
                     'warning_period': warning_period,
                     'relative_warning_period': relative_warning_period,
                     'subject': mail_subject,
-                    'body': mail_content,
+                    'body': textfield(mail_content),
                     'error': error,
                 }
             )
@@ -689,7 +689,8 @@ def print_settings(request):
     if not request:
         return setts
     return HttpResponse(
-        f'Portal {settings.COSINNUS_PORTAL_NAME} is running cosinnus version {settings.COSINNUS_VERSION}. '
+        f'Portal {settings.COSINNUS_PORTAL_NAME} is running cosinnus version {settings.COSINNUS_VERSION}.<br/> '
+        f'Server time is {now()}.<br/><br/>'
         f'Configured settings are:<br/><br/>' + setts
     )
 

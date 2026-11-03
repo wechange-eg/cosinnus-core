@@ -1,7 +1,6 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from unittest.mock import patch
 
-import pytz
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.template.defaultfilters import date
@@ -48,7 +47,11 @@ class SpacesViewTest(APITestCase):
             response.data['personal'],
             {
                 'header': 'Personal Space',
-                'items': [MenuItem('Personal Dashboard', '/dashboard/', 'fa-home', id='PersonalDashboard')],
+                'items': [
+                    MenuItem(
+                        'Personal Dashboard', reverse('cosinnus:user-dashboard'), 'fa-home', id='PersonalDashboard'
+                    )
+                ],
                 'actions': [],
             },
         )
@@ -693,7 +696,7 @@ class MainNavigationViewTest(LanguageMenuTestMixin, APITestCase):
 class VersionHistoryPatchMixin:
     PATCHED_UPDATES = {
         '1': {
-            'datetime': datetime(2000, 1, 1, tzinfo=pytz.utc),
+            'datetime': datetime(2000, 1, 1, tzinfo=timezone.utc),
             'title': 'Test Title',
             'short_text': 'Test Short Description',
             'full_text': 'Test Full Description',

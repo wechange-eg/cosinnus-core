@@ -113,7 +113,7 @@ class OrganizationManager(models.Manager):
                 return []  # We rely on the slug and id maps being up to date
         return []
 
-    def get_pks(self, portal_id=None, force=True):
+    def get_pks(self, portal_id=None, force=False):
         """
         Gets the (pks -> slug) :class:`OrderedDict` from the cache or, if the can has not been filled,
         gets the pks and slugs from the database and fills the cache.
@@ -479,7 +479,7 @@ class CosinnusOrganization(IndexingUtilsMixin, MembersManagerMixin, models.Model
         return getattr(self, key)
 
     def get_absolute_url(self):
-        return get_domain_for_portal(self.portal) + reverse(
+        return get_domain_for_portal(self.portal_id) + reverse(
             'cosinnus:organization-detail', kwargs={'organization': self.slug}
         )
 

@@ -1,4 +1,5 @@
 import re
+from unittest import skipIf
 from urllib.parse import urlencode
 
 from django.contrib.auth import get_user_model
@@ -57,11 +58,11 @@ class MainContentViewTest(APILiveServerTestCase):
         self.assertIn('<div class="x-v3-container', response.data['content_html'], 'Container html is present')
         self.assertIn('<div class="footer"', response.data['footer_html'], 'Footer html is present')
         self.assertTrue(
-            all([re.match('^.*\.js(\?.*)?$', js_item) for js_item in response.data['js_urls']]),
+            all([re.match(r'^.*\.js(\?.*)?$', js_item) for js_item in response.data['js_urls']]),
             'js_urls only contain .js items',
         )
         self.assertTrue(
-            all([re.match('^.*\.css(\?.*)?$', css_item) for css_item in response.data['css_urls']]),
+            all([re.match(r'^.*\.css(\?.*)?$', css_item) for css_item in response.data['css_urls']]),
             'css_urls only contain .css items',
         )
         self.assertIn('var ', response.data['scripts'], 'scripts response contains some JS')
@@ -88,8 +89,9 @@ class MainContentViewTest(APILiveServerTestCase):
             'group permissions are reflected in space element.',
         )
 
+    @skipIf(getattr(settings, 'COSINNUS_USE_V3_PERSONAL_DASHBOARD', False), 'depends on v2 dashboard')
     def test_personal_dashboard(self):
-        """Basic test for accessing the personal dashboard."""
+        """Basic test for accessing the v2 personal dashboard."""
         self.client.force_login(self.test_user)
         content_url = '/dashboard/'
         response = self.client.get(self.api_url + f'?url={content_url}')
@@ -100,11 +102,11 @@ class MainContentViewTest(APILiveServerTestCase):
         self.assertIn('<div class="x-v3-container', response.data['content_html'], 'Container html is present')
         self.assertIn('<div class="footer"', response.data['footer_html'], 'Footer html is present')
         self.assertTrue(
-            all([re.match('^.*\.js(\?.*)?$', js_item) for js_item in response.data['js_urls']]),
+            all([re.match(r'^.*\.js(\?.*)?$', js_item) for js_item in response.data['js_urls']]),
             'js_urls only contain .js items',
         )
         self.assertTrue(
-            all([re.match('^.*\.css(\?.*)?$', css_item) for css_item in response.data['css_urls']]),
+            all([re.match(r'^.*\.css(\?.*)?$', css_item) for css_item in response.data['css_urls']]),
             'css_urls only contain .css items',
         )
         self.assertIn('var ', response.data['scripts'], 'scripts response contains some JS')
@@ -274,7 +276,8 @@ class MainContentViewTest(APILiveServerTestCase):
         response = self.client.get(self.api_url + f'?{encoded_url_param}')
         self.assertEqual(response.status_code, 200)
         self.assertIn(
-            '<ul class="errorlist"><li>test_field<ul class="errorlist"><li>This field is required.</li></ul></li></ul>',
+            '<ul class="errorlist"><li>test_field<ul class="errorlist" id="id_test_field_error">'
+            '<li>This field is required.</li></ul></li></ul>',
             response.data['content_html'],
         )
 

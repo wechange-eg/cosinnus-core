@@ -264,17 +264,28 @@ class CosinnusLogoutView(LogoutView):
         }
 
     def post(self, *args, **kwargs):
-        """Note: the methods are set equal: get = post in `LogoutView`."""
         self.save_context()
         cosinnus_pre_logout_actions(self.request)
         response = super().post(*args, **kwargs)
         cosinnus_post_logout_actions(self.request, response)
         return response
 
-    get = post
-
 
 cosinnus_logout = CosinnusLogoutView.as_view()
+
+
+class CosinnusLogoutDirectView(CosinnusLogoutView):
+    """Just like the regular logout view, except this also allows logouts by GET requests.
+    This is to support redirected chain-logouts for integrated services like when a
+    logout is initiated from within Nextcloud."""
+
+    http_method_names = ['get', 'head', 'post', 'options']
+
+    # set the get and post methods equal
+    get = CosinnusLogoutView.post
+
+
+cosinnus_logout_direct = CosinnusLogoutDirectView.as_view()
 
 
 UNSPECIFIED = object()

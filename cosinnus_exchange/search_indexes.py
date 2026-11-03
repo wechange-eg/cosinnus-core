@@ -111,6 +111,7 @@ class ExchangeExternalResourceIndex(ExchangeIndexMixin, ExchangeFilterIndex, ind
     description_detail = indexes.CharField(stored=True, indexed=False, null=True, model_attr='description_detail')
     contact = indexes.CharField(stored=True, indexed=False, null=True, model_attr='contact_info')
     website_url = indexes.CharField(stored=True, indexed=False, null=True, model_attr='website_url')
+    organization = indexes.CharField(stored=True, indexed=False, null=True, model_attr='organization')
 
     def get_model(self):
         return ExchangeExternalResource

@@ -5,5 +5,11 @@ class CosinnusExternalResourceSerializer(serializers.Serializer):
     """v3 external resource serializer."""
 
     title = serializers.CharField()
-    subtitle = serializers.CharField(source='source')
+    subtitle = serializers.SerializerMethodField()
     url = serializers.URLField()
+
+    def get_subtitle(self, obj):
+        subtitle = obj.get('organization')
+        if not subtitle:
+            subtitle = obj.get('source')
+        return subtitle

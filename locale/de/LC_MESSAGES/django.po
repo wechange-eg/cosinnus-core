@@ -342,20 +342,6 @@ msgstr ""
 
 #, python-format
 msgid ""
-"%(group_type)s %(group_name)s will be deactivated %(inactivity_period)s after the last activity and then permanently deleted. This will happen %(relative_warning_period)s.\n"
-"\n"
-"If you do not wish for the group/project to be deactivated, just create some content there.\n"
-"\n"
-"If an earlier deletion is desired, you can delete the group/project under %(delete_group_url)s."
-msgstr ""
-"%(group_type)s %(group_name)s wird %(inactivity_period)s nach der letzten Aktivität deaktiviert und dann endgültig gelöscht. Das passiert %(relative_warning_period)s.\n"
-"\n"
-"Wenn du nicht möchtest, dass die Gruppe/das Projekt gelöscht wird, erstelle einen Inhalt dort.\n"
-"\n"
-"Wenn eine frühere Löschung gewünscht ist, kann die Gruppe/das Projekt unter %(delete_group_url)s gelöscht werden."
-
-#, python-format
-msgid ""
 "%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since deactivation.\n"
 "\n"
 "The deactivated %(group_type)s will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
@@ -1623,6 +1609,15 @@ msgid "- The password requirements have been changed: Now a password must consis
 msgstr "- Die Anforderungen an Passwörtern wurden geändert: Nun muss ein Passwort aus mindestens 12 Zeichen bestehen. Ansonsten gibt es keine weiteren Anforderungen bezüglich der gewählten Zeichen. Passwörter werden weiterhin gegen eine Liste häufig verwendeter Passwörter geprüft.\n"
 
 msgid ""
+"- Updated the backend codebase to Python 3.12 and the Django framework to version 5 for security fixes and improvements.\n"
+"- Added several database optimisations to improve the loading speed of most pages.\n"
+"- Fixed a bug where event polls where being shown on the map when filtering for an event time range.\n"
+msgstr ""
+"- Die Backend-Codebasis wurde auf Python 3.12 und das Django-Framework auf Version 5 aktualisiert, um Sicherheitsupdates und Verbesserungen zu implementieren.\n"
+"- Es wurden mehrere Datenbankoptimierungen vorgenommen, um die Ladegeschwindigkeit der meisten Seiten zu verbessern.\n"
+"- Ein Fehler wurde behoben, durch den bei der Filterung nach einem Zeitbereich für Veranstaltungen auch Terminabstimmungen auf der Karte angezeigt wurden.\n"
+
+msgid ""
 "- User accounts with unverified email addresses are no longer shown as \"inactive\" in member lists and their profiles are now always displayed properly.\n"
 "- Images from external servers that are embedded in user-generated text content \n"
 "will no longer be shown directly in-line, but will be displayed as a link that opens the image on click. This is done for security reasons and to prevent unwanted trackable \n"
@@ -1674,56 +1669,11 @@ msgstr "--- NICHTS (Vererbt) ---"
 msgid "1 %(object)s was deleted successfully"
 msgstr "1 %(object)s wurde erfolgreich gelöscht"
 
-msgid "1-Column Dashboard Page"
-msgstr "1-spaltige Dashboard Seite"
-
-msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr "1-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
-
-msgid "1/2 + 1/2"
-msgstr "1/2 + 1/2"
-
-msgid "1/2 + 1/4 + 1/4"
-msgstr "1/2 + 1/4 + 1/4"
-
-msgid "1/3 + 1/3 + 1/3"
-msgstr "1/3 + 1/3 + 1/3"
-
-msgid "1/3 + 2/3"
-msgstr "1/3 + 2/3"
-
-msgid "1/4 + 1/2 + 1/4"
-msgstr "1/4 + 1/2 + 1/4"
-
-msgid "1/4 + 1/4 + 1/2"
-msgstr "1/4 + 1/4 + 1/2"
-
 msgid "2 columns of text"
 msgstr "2 Spalten Text"
 
-msgid "2-Column Dashboard Page"
-msgstr "2-spaltige Dashboard Seite"
-
-msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr "2-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
-
 msgid "2-factor access only"
 msgstr "Zugriff nur mit 2-Faktor"
-
-msgid "2/3 + 1/3"
-msgstr "2/3 + 1/3"
-
-msgid "3-Column Dashboard Page"
-msgstr "3-spaltige Dashboard Seite"
-
-msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr "3-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
-
-msgid "4 Random Projects Widget"
-msgstr "4 zufällige Projekte-Widget"
-
-msgid "8 Random Projects Widget"
-msgstr "8 zufällige Projekte-Widget"
 
 msgid "<Root folder>"
 msgstr "<Oberster Ordner>"
@@ -2297,9 +2247,6 @@ msgstr "Benutzerkonto hinzufügen"
 msgid "Add/Edit translations"
 msgstr "Übersetzungen hinzufügen / ändern"
 
-msgid "Additional Header content"
-msgstr "Additional Header content"
-
 msgid "Additional Recipients"
 msgstr "Zusätzliche Empfänger"
 
@@ -2711,9 +2658,6 @@ msgstr "Solange man als Benutzer/in die Willkommens-Ankündigung angezeigt bekom
 msgid "Assign"
 msgstr "Zuweisen"
 
-msgid "Assigned Portal"
-msgstr "Zugewiesenes Portal"
-
 msgid "Assigned To"
 msgstr "Zugewiesen an"
 
@@ -2728,9 +2672,6 @@ msgstr "Zugewiesen an"
 
 msgid "Associated Site"
 msgstr "Zugehörige Site"
-
-msgid "At least one type of Map object must be chosen!"
-msgstr "Es muss mindestens ein Typ von Kartenobjekten ausgewählt werden!"
 
 msgid "Attach Images/Files"
 msgstr "Bilder/Dateien anhängen"
@@ -2941,9 +2882,6 @@ msgstr "Merkliste"
 
 msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
 msgstr "Untere Farbe des Farbverlaufs für den Seitenhintergrunds (Hex-Wert, optional mit \"#\")"
-
-msgid "Bottom content (gray background)"
-msgstr "Bottom content (gray background)"
 
 msgid "Browse"
 msgstr "Ansehen"
@@ -3626,15 +3564,6 @@ msgctxt "navigation bookmarks header"
 msgid "Content"
 msgstr "Inhalte"
 
-msgid "Content (center column)"
-msgstr "Inhalt (mittlere Spalte)"
-
-msgid "Content (left column)"
-msgstr "Inhalt (linke Spalte)"
-
-msgid "Content (right column)"
-msgstr "Inhalt (rechte Spalte)"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Content from my Groups and Projects"
 msgstr "Inhalte aus meinen Gruppen und Projekten"
@@ -3931,9 +3860,6 @@ msgstr "Neues Projekt anlegen"
 
 msgid "Create new User"
 msgstr "Benutzerkonto erstellen"
-
-msgid "Create-Project or Group Button"
-msgstr "Projekt oder Gruppe-erstellen Button"
 
 msgid "Created"
 msgstr "Erstellt"
@@ -5257,14 +5183,14 @@ msgstr "Externe Videokonferenz-URL"
 msgid "External contents"
 msgstr "Externe Inhalte"
 
+msgid "External resource description placeholder."
+msgstr "Platzhalter für Beschreibung der Externen Ressource."
+
 msgid "Extra CSS"
 msgstr "Zusätzliches CSS"
 
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Wird vorgezogen gegenüber sämtlichem anderen CSS."
-
-msgid "Extra large (800 x *)"
-msgstr "Extra large (800 x *)"
 
 msgid "Facebook Fan-Page link to"
 msgstr "Facebook Fan-Seite zum Verbinden"
@@ -5402,9 +5328,6 @@ msgstr "Gefolgt"
 
 msgid "Font-awesome Widget Icon"
 msgstr "Font-awesome Widget-Icon"
-
-msgid "Footer"
-msgstr "Footer"
 
 #, python-format
 msgid "For content in the groups that you join automatically (%(group_links)s), I wish to receive email notifications:"
@@ -5655,20 +5578,8 @@ msgstr "Speicherbedarf Projekte"
 msgid "Has Logged In"
 msgstr "Jemals eingeloggt"
 
-msgid "Header"
-msgstr "Kopfzeile (nach Banner)"
-
 msgid "Header Image"
 msgstr "Kopfzeilenbild"
-
-msgid "Header Text"
-msgstr "Kopfzeile (nach Banner)"
-
-msgid "Header Title"
-msgstr "Kopfzeile (nach Banner)"
-
-msgid "Header image"
-msgstr "Header image"
 
 msgid "Health"
 msgstr "Gesundheit"
@@ -5698,6 +5609,80 @@ msgstr ""
 "\n"
 "Mit besten Grüßen\n"
 "das Team von %(site_name)s"
+
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"%(group_type)s %(group_name)s on %(portal_name)s has been inactive for more than %(inactivity_period)s. It will therefore be deactivated %(relative_warning_period)s and then irrevocably deleted along with all its content %(deleted_after_days)s days after deactivation.\n"
+"\n"
+"To prevent deactivation, new content (e.g. a news post) must be created in the group or project before the scheduled deactivation.\n"
+"\n"
+"What happens if you do not take any action to keep the group or project active (e.g. by creating a news post)?\n"
+"\n"
+"* After deactivation, the group/project will no longer be visible on the platform.\n"
+"* Your group/project data will be deleted from our database %(deleted_after_days)s days after deactivation.\n"
+"* After deletion from our database, the deleted group/project data may remain in our backups for up to six months.\n"
+"\n"
+"If an earlier deletion is desired, you can delete the group/project under %(delete_group_url)s."
+msgstr ""
+"Hallo,\n"
+"\n"
+"%(group_type)s %(group_name)s auf %(portal_name)s ist jetzt mehr als %(inactivity_period)s inaktiv. Sie wird deshalb %(relative_warning_period)s deaktiviert und %(deleted_after_days)s Tage nach Deaktivierung samt aller Inhalte unwiderruflich gelöscht.\n"
+"\n"
+"Wenn du die Deaktivierung wegen Inaktivität verhindern möchtest, erstelle dort einen neuen Inhalt (z. B. Neuigkeit).\n"
+"\n"
+"Was passiert, wenn du nichts unternimmst, um die Gruppe oder das Projekt aktiv zu halten (z. B. indem du eine Neuigkeit erstellst)?\n"
+"\n"
+"* Nach der Deaktivierung ist die Gruppe bzw. das Projekt auf der Plattform nicht mehr sichtbar.\n"
+"* Die Daten deiner Gruppe bzw. deines Projekts werden %(deleted_after_days)s Tage nach der Deaktivierung aus unserer Datenbank gelöscht.\n"
+"* Nach der Löschung aus unserer Datenbank können diese Daten noch bis zu sechs Monate in unseren Sicherungskopien gespeichert bleiben.\n"
+"\n"
+"Ist eine frühere Löschung gewünscht, kann die Gruppe/das Projekt unter %(delete_group_url)s gelöscht werden."
+
+#, python-format
+msgid ""
+"Hello,\n"
+"\n"
+"your account on %(portal_name)s has been inactive for more than %(inactivity_period)s. It will therefore be deactivated %(relative_warning_period)s and then irrevocably deleted %(deleted_after_days)s days after deactivation.\n"
+"\n"
+"If you want to keep your account, log in to the platform before deactivation. This will prevent the scheduled deactivation due to inactivity.\n"
+"\n"
+"What happens if you do not log in?\n"
+"\n"
+"* After deactivation, your profile will no longer be visible on the platform.\n"
+"* Your account and associated profile data will be deleted from our database %(deleted_after_days)s days after deactivation.\n"
+"* During those %(deleted_after_days)s days, your email address will remain reserved for the existing account. You will not be able to use it to register a new account during this period.\n"
+"* After deletion from our database, the deleted account data may remain in our backups for up to six months.\n"
+"\n"
+"What happens to your content?\n"
+"\n"
+"Your pads, news posts, uploaded files and other published content will remain on the platform. The association with your account will be removed: your account name will no longer be displayed alongside that content, and links to your profile will be removed. Personal information you have included in posts or files will not be removed automatically.\n"
+"\n"
+"Your direct messages in Rocket.Chat will be deleted. Your posts in discussions and channels will remain.\n"
+"\n"
+"If you want to remove your own content, please delete it from the relevant pages before your account is deactivated."
+msgstr ""
+"Hallo,\n"
+"\n"
+"dein Benutzerkonto auf %(portal_name)s ist jetzt mehr als %(inactivity_period)s inaktiv. Es wird deshalb %(relative_warning_period)s deaktiviert und %(deleted_after_days)s Tage nach Deaktivierung unwiderruflich gelöscht.\n"
+"\n"
+"Wenn du dein Benutzerkonto behalten möchtest, logge dich vor Deaktivierung auf der Plattform ein. Dadurch verhinderst du die angekündigte Deaktivierung wegen Inaktivität.\n"
+"\n"
+"Was passiert, wenn du dich nicht anmeldest?\n"
+"\n"
+"* Dein Profil ist nach Deaktivierung auf der Plattform nicht mehr sichtbar.\n"
+"* %(deleted_after_days)s Tage nach der Deaktivierung werden dein Benutzerkonto und die zugehörigen Profildaten aus unserer Datenbank gelöscht.\n"
+"* Während dieser %(deleted_after_days)s Tage bleibt deine E-Mail-Adresse für das bestehende Benutzerkonto reserviert. Du kannst damit in dieser Zeit kein neues Benutzerkonto registrieren.\n"
+"* Nach der Löschung aus der Datenbank können die gelöschten Kontodaten noch bis zu sechs Monate in unseren Sicherungskopien gespeichert bleiben.\n"
+"\n"
+"Was passiert mit deinen Inhalten?\n"
+"\n"
+"Deine Pads, Neuigkeiten, hochgeladenen Dateien und sonstigen veröffentlichten Inhalte bleiben auf der Plattform erhalten. Die Zuordnung zu deinem Benutzerkonto wird entfernt: Dein Name wird dort nicht mehr als Name des zugehörigen Kontos angezeigt, und die Verlinkung zu deinem Profil entfällt. Persönliche Angaben, die du selbst in Beiträgen oder Dateien hinterlegt hast, werden dadurch nicht automatisch entfernt.\n"
+"\n"
+"In Rocket.Chat werden deine Direktnachrichten gelöscht. Deine Beiträge in Diskussionen und Kanälen bleiben erhalten.\n"
+"\n"
+"Wenn du eigene Inhalte entfernen möchtest, lösche sie bitte vor der Deaktivierung auf den jeweiligen Seiten."
 
 #, python-format
 msgid ""
@@ -6811,9 +6796,6 @@ msgstr "Wenn aktiviert, können neu registrierte Benutzer/innen erst dann Beitr�
 msgid "If active, searching will be restricted to the visible map area."
 msgstr "Wenn aktiv wird die Suche auf die sichtbare Kartenfläche beschränkt."
 
-msgid "If active, this page will only be visible to non-logged-in users. All others will be redirected to the activities page."
-msgstr "Wenn aktiv, sehen diese Seite nur Benutzer/innen die nicht eingeloggt sind. Alle eingeloggten Benutzer/innen werden direkt auf die Aktivitäten-Seite weitergeleitet."
-
 msgid "If an app is deactivated, its content and associated data will be retained, but will no longer be shown until the app is re-activated."
 msgstr "Wenn eine App deaktiviert wird, bleiben ihr Inhalt und die damit verbundenen Daten erhalten, werden aber nicht mehr angezeigt, bis die App wieder aktiviert wird."
 
@@ -6913,6 +6895,14 @@ msgstr "Falls du keine E-Mail erhältst, stelle bitte sicher dass du die E-Mail-
 
 msgid "If you feel this is unfair, we suggest you contact one of the team's administrators for further information:"
 msgstr "Wenn das Gefühl hast, dass diese Entscheidung ungerechtfertig ist,kontaktiere am besten einen der Projektadminastrator/innen:"
+
+#, python-format
+msgid "If you have any questions or would like to request earlier deletion, please contact %(support_mail_link)s."
+msgstr "Bei Fragen oder wenn du eine frühere Löschung wünschst, wende dich bitte an %(support_mail_link)s."
+
+#, python-format
+msgid "If you have any questions, please contact %(support_mail_link)s."
+msgstr "Bei Fragen wende dich bitte an %(support_mail_link)s."
 
 msgid "If you have changed your mind for some applications later on, you can simply select a different option for those you want to change, and click \"Save\" again. Only the applicants whose application status changed will be notified of the change."
 msgstr "Wenn du es dir später bei einigen Teilnahmeanträgen anders überlegt hast, kannst du einfach eine andere Option für die zu ändernden Teilnahmeanträge auswählen und erneut auf \"Sichern\" klicken. Nur Antragsstellende, deren Teilnameantragsstatus sich geändert hat, werden über die Änderung informiert."
@@ -7342,9 +7332,6 @@ msgstr "Inhalte aus dieser Gruppe können in jedem Unterprojekt der Gruppe angez
 msgid "Items you follow"
 msgstr "Objekte, denen ich folge"
 
-msgid "Jetzt anmelden und mitgestalten"
-msgstr "Jetzt anmelden und mitgestalten"
-
 msgid "Join"
 msgstr "Beitreten"
 
@@ -7422,15 +7409,6 @@ msgstr "Laktosefreie Verpflegung"
 
 msgid "Language"
 msgstr "Sprache"
-
-msgid "Large (400 x *)"
-msgstr "Large (400 x *)"
-
-msgid "Large News Widget"
-msgstr "Großes Nachrichten Widget"
-
-msgid "Larger (500 x *)"
-msgstr "Larger (500 x *)"
 
 msgid "Largest Files"
 msgstr "Größte Dateien"
@@ -7523,15 +7501,6 @@ msgstr "Gastzugriff beenden und Konto registrieren"
 
 msgid "Leave video conference"
 msgstr "Videokonferenz verlassen"
-
-msgid "Left Sidebar"
-msgstr "Fußzeile links"
-
-msgid "Left banner (top)"
-msgstr "Linkes banner (oben)"
-
-msgid "Left footer"
-msgstr "Fußzeile links"
 
 msgid "Legacy Messages Archive"
 msgstr "Archiv für ältere Nachrichten"
@@ -7864,15 +7833,6 @@ msgstr "Nimmt vielleicht teil"
 
 msgid "Me"
 msgstr "Ich"
-
-msgid "Medium (300 x *)"
-msgstr "Medium (300 x *)"
-
-msgid "Medium News Widget"
-msgstr "Mittelgroßes Nachrichten-Widget"
-
-msgid "Medium-small (250 x *)"
-msgstr "Medium-small (250 x *)"
 
 msgid "Meeting"
 msgstr "Meeting"
@@ -9441,9 +9401,6 @@ msgstr "Portal-Administrator/innen"
 msgid "Portal IDs"
 msgstr "Portal IDs"
 
-msgid "Portal Root Page"
-msgstr "Portal-Root Seite"
-
 msgid "Portal Setting"
 msgstr "Portal-Einstellung"
 
@@ -9603,9 +9560,6 @@ msgstr "Projekte/Gruppen"
 msgid "Promote Member"
 msgstr "Mitglied befördern"
 
-msgid "Proportions"
-msgstr "Proportionen"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Protected Content"
 msgstr "Geschützter Inhalt"
@@ -9759,9 +9713,6 @@ msgstr "Die Aufzeichnung %s wurde erfolgreich gelöscht."
 
 msgid "Redesign Update"
 msgstr "Redesign-Update"
-
-msgid "Redirect Logged in Users"
-msgstr "Eingeloggte Benutzer/innen weiterleiten"
 
 msgid "Redirecting you in 3 seconds..."
 msgstr "Weiterleitung in 3 Sekunden..."
@@ -10051,12 +10002,6 @@ msgstr "Anfrage zurückziehen"
 
 msgid "Revoke request for organization"
 msgstr "Anfrage für Gruppe widerrufen"
-
-msgid "Right banner (top)"
-msgstr "Rechtes banner (oben)"
-
-msgid "Right footer"
-msgstr "Fußzeile rechts"
 
 msgid "Rocket.Chat"
 msgstr "Rocket.Chat"
@@ -10408,9 +10353,6 @@ msgstr "Zeige die Microsite-Box an"
 msgid "Show Microsite Call to Action Box"
 msgstr "Aufruf zum Handeln - Microsite-Box anzeigen"
 
-msgid "Show Register Button"
-msgstr "Registrieren Button anzeigen"
-
 msgid "Show Tokens"
 msgstr "Tokens anzeigen"
 
@@ -10453,9 +10395,6 @@ msgstr "Große Karte anzeigen"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Show more"
 msgstr "Weitere anzeigen"
-
-msgid "Show more Projects"
-msgstr "Weitere Projekte anzeigen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Show more Projects of this Group"
@@ -10544,35 +10483,14 @@ msgstr "Das Registrieren geht einfach und schnell. Füll einfach diese Felder au
 msgid "Signup"
 msgstr "Registrieren"
 
-msgid "Simple One-Column Page"
-msgstr "Simple einspaltige Seite"
-
-msgid "Simple One-Column Page (Modular)"
-msgstr "Simple einspaltige Seite (Modular)"
-
-msgid "Simple Page with Left Navigation"
-msgstr "Simple Seite mit Navigationsspalte links"
-
-msgid "Simple Page with Left Navigation (Modular)"
-msgstr "Simple Seite mit Navigationsspalte links (Modular)"
-
 msgid "Simple Statistics"
 msgstr "Simple Statistiken"
-
-msgid "Site Widgets"
-msgstr "Site Widgets"
 
 msgid "Slug"
 msgstr "Slug"
 
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
-
-msgid "Small (200 x *)"
-msgstr "Small (200 x *)"
-
-msgid "Smaller (150 x *)"
-msgstr "Smaller (150 x *)"
 
 msgid "Smallest Files"
 msgstr "Kleinste Dateien"
@@ -10728,9 +10646,6 @@ msgstr "%(export_title)s starten"
 msgid "Start Datetime"
 msgstr "Anfangsdatum"
 
-msgid "Start Page (Modular)"
-msgstr "Startseite (Modular)"
-
 #. Translators: __INCLUDE_JS_PO__
 msgid "Start date."
 msgstr "Anfangsdatum."
@@ -10753,9 +10668,6 @@ msgstr "Start-Zeit"
 
 msgid "Start/join video conference for this event"
 msgstr "Videokonferenz starten/beitreten"
-
-msgid "Started"
-msgstr "Gestartet"
 
 msgid "State"
 msgstr "Status"
@@ -12127,6 +12039,9 @@ msgstr "Die Gruppe oder das Projekt liegt nicht länger unter der URL die du ein
 msgid "This todo was completed:"
 msgstr "Diese Aufgabe wurde abgeschlossen:"
 
+msgid "This update includes a django framework update and several improvements and fixes:"
+msgstr "Das Update enthält ein Update des Django-Frameworks und weitere Verbesserungen und Bugfixes:"
+
 msgid "This update includes quality of life updates:"
 msgstr "Das Update enthält Verbesserungen zur Benutzerfreundlichkeit:"
 
@@ -12196,9 +12111,6 @@ msgstr "Zeitrahmen, in dem die Ankündigung angezeigt wird"
 
 msgid "Timeline"
 msgstr "Aktivitäten"
-
-msgid "Tiny (50 x *)"
-msgstr "Tiny (50 x *)"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Title"
@@ -12989,12 +12901,6 @@ msgstr "Version 2.4.0 veröffentlicht"
 msgid "Version {version_number} released"
 msgstr "Version {version_number} veröffentlicht"
 
-msgid "Very Small (100 x *)"
-msgstr "Very Small (100 x *)"
-
-msgid "Very large (650 x *)"
-msgstr "Very large (650 x *)"
-
 msgid "Video"
 msgstr "Video"
 
@@ -13413,9 +13319,6 @@ msgstr "Widget-Title"
 msgid "Widget-id (example: 744907261810618721) or embed-code (HTML)"
 msgstr "Feed-ID (Beispiel: 744907261810618721) oder Einbettungs-HTML-Code"
 
-msgid "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
-msgstr "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
-
 msgid "Will be displayed as a small first header in the announcement"
 msgstr "Wird als kleine erste Überschrift in der Ankündigung angezeigt"
 
@@ -13504,9 +13407,6 @@ msgstr "Bitte hier angeben"
 
 msgid "Wrong file format. Try .jpg, .jpeg, .png, or .gif instead."
 msgstr "Falsches Dateiformat. Es werden nur .jpg, .jpeg, .png oder .gif unterstützt."
-
-msgid "XXL (1200 x *)"
-msgstr "XXL (1200 x *)"
 
 msgid "Yes"
 msgstr "Ja"
@@ -14475,32 +14375,6 @@ msgstr "Deine E-Mail-Adresse %(email)s wurde erfolgreich bestätigt! Allerdings 
 msgid "Your email address was successfully changed to:"
 msgstr "Deine E-Mail Adresse wurde erfolgreich geändert:"
 
-#, python-format
-msgid ""
-"Your entire account, profile and personal information will be deactivated %(relative_warning_period)s and then irrevocably deleted.\n"
-"\n"
-"If you do not wish for you account to be deactivated, just log in once.\n"
-"\n"
-"Your pads, news, uploaded files and other content will remain on the website. However, your name will no longer be displayed and your profile will no longer be linked to the content. On Rocket Chat, your profile direct messages will be deleted, but content within discussions and channels will remain. If you still want to delete content from yourself, you can do this now by deleting the content on the relevant pages.\n"
-"\n"
-"Your profile will first be deactivated and completely removed from the platform. After deactivation, it will be deleted from our database after %(deleted_after_days)s days and only then permanently.\n"
-"\n"
-"The account may be stored in our backup systems for up to 6 months after deletion. If this is too long for you, please contact the support team of this platform for immediate deletion.\n"
-"\n"
-"During this %(deleted_after_days)s-day period after deactivation, the e-mail address of your account is reserved and cannot be used to register a new account."
-msgstr ""
-"Dein Benutzerkonto einschließlich Profil und persönlicher Daten wird %(relative_warning_period)s deaktiviert und anschließend unwiderruflich gelöscht.\n"
-"\n"
-"Wenn du nicht möchtest, dass dein Benutzerkonto deaktiviert wird, logge dich einfach einmal ein.\n"
-"\n"
-"Deine Pads, Neuigkeiten, hochgeladenen Dateien und sonstigen Inhalte bleiben auf der Website erhalten. Dein Name wird jedoch nicht mehr angezeigt und dein Profil wird nicht mehr mit den Inhalten verknüpft. In Rocket.Chat werden deine Direktnachrichten gelöscht, die Inhalte in Diskussionen und Kanälen bleiben jedoch erhalten. Wenn du dennoch eigene Inhalte löschen möchtest, kannst du dies jetzt tun, indem du die Inhalte auf den entsprechenden Seiten löschst.\n"
-"\n"
-"Dein Profil wird zunächst deaktiviert und vollständig von der Plattform entfernt. Nach der Deaktivierung wird es nach %(deleted_after_days)s Tagen aus unserer Datenbank gelöscht und erst dann endgültig entfernt.\n"
-"\n"
-"Dein Benutzerkonto kann nach der Löschung bis zu 6 Monate lang in unseren Backup-Systemen gespeichert bleiben. Sollte dies zu lange sein, wende dich bitte an den Support dieser Plattform, um eine sofortige Löschung zu veranlassen.\n"
-"\n"
-"In den %(deleted_after_days)s Tagen nach der Deaktivierung bleibt die E-Mail-Adresse deines Benutzerkontos reserviert und kann nicht zur Registrierung eines neuen Benutzerkontos verwendet werden."
-
 msgid "Your entry in the Volunteer-O-Matic links to the microsite of your group. It is therefore best to ensure that this is up-to-date, informative and attractively designed. You can also link to an external website from your microsite."
 msgstr "Euer Eintrag im Mitwirk-O-Mat verlinkt auf die Microsite eurer Gruppe. Daher solltet ihr darauf achten, dass diese aktuell, informativ und ansprechend gestaltet ist. Ihr könnt von eurer Microsite auch auf eine externe Website verlinken."
 
@@ -15350,6 +15224,19 @@ msgstr "Ja"
 #~ "%(group_type)s wird nach %(deleted_after_days)s Tagen endgültig gelöscht. Bis dahin ist eine Reaktivierung durch die Administrator/innen unter %(deactivated_groups_url)s möglich."
 
 #~ msgid ""
+#~ "%(group_type)s %(group_name)s will be deactivated %(inactivity_period)s after the last activity and then permanently deleted. This will happen %(relative_warning_period)s.\n"
+#~ "\n"
+#~ "If you do not wish for the group/project to be deactivated, just create some content there.\n"
+#~ "\n"
+#~ "If an earlier deletion is desired, you can delete the group/project under %(delete_group_url)s."
+#~ msgstr ""
+#~ "%(group_type)s %(group_name)s wird %(inactivity_period)s nach der letzten Aktivität deaktiviert und dann endgültig gelöscht. Das passiert %(relative_warning_period)s.\n"
+#~ "\n"
+#~ "Wenn du nicht möchtest, dass die Gruppe/das Projekt gelöscht wird, erstelle einen Inhalt dort.\n"
+#~ "\n"
+#~ "Wenn eine frühere Löschung gewünscht ist, kann die Gruppe/das Projekt unter %(delete_group_url)s gelöscht werden."
+
+#~ msgid ""
 #~ "%(group_type)s %(group_name)s will be deleted after %(deactivation_after)s since deactivation.\n"
 #~ "\n"
 #~ "The deactivated group/project will be permanently deleted after %(deleted_after_days)s days. Until then, reactivation is possible by the admins under %(deactivated_groups_url)s."
@@ -15423,6 +15310,51 @@ msgstr "Ja"
 #~ msgid "- Made several small improvements to the user interface and look and feel of the redesigned calendar.\n"
 #~ msgstr "- Es wurden einige kleinere Verbesserungen an der Benutzeroberfläche und der optischen Gestaltung des neu Kalender-Redesigns vorgenommen.\n"
 
+#~ msgid "1-Column Dashboard Page"
+#~ msgstr "1-spaltige Dashboard Seite"
+
+#~ msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+#~ msgstr "1-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
+
+#~ msgid "1/2 + 1/2"
+#~ msgstr "1/2 + 1/2"
+
+#~ msgid "1/2 + 1/4 + 1/4"
+#~ msgstr "1/2 + 1/4 + 1/4"
+
+#~ msgid "1/3 + 1/3 + 1/3"
+#~ msgstr "1/3 + 1/3 + 1/3"
+
+#~ msgid "1/3 + 2/3"
+#~ msgstr "1/3 + 2/3"
+
+#~ msgid "1/4 + 1/2 + 1/4"
+#~ msgstr "1/4 + 1/2 + 1/4"
+
+#~ msgid "1/4 + 1/4 + 1/2"
+#~ msgstr "1/4 + 1/4 + 1/2"
+
+#~ msgid "2-Column Dashboard Page"
+#~ msgstr "2-spaltige Dashboard Seite"
+
+#~ msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+#~ msgstr "2-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
+
+#~ msgid "2/3 + 1/3"
+#~ msgstr "2/3 + 1/3"
+
+#~ msgid "3-Column Dashboard Page"
+#~ msgstr "3-spaltige Dashboard Seite"
+
+#~ msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+#~ msgstr "3-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
+
+#~ msgid "4 Random Projects Widget"
+#~ msgstr "4 zufällige Projekte-Widget"
+
+#~ msgid "8 Random Projects Widget"
+#~ msgstr "8 zufällige Projekte-Widget"
+
 #~ msgid "A user export is in progress. As soon as the export is finished it will be available here."
 #~ msgstr "Der Benutzer/innen-Export wird gerade erstellt.  Sobald der Export abgeschlossen ist, wird er hier zum Download bereit stehen."
 
@@ -15452,6 +15384,9 @@ msgstr "Ja"
 
 #~ msgid "Add workshop"
 #~ msgstr "Workshop hinzufügen"
+
+#~ msgid "Additional Header content"
+#~ msgstr "Additional Header content"
 
 #~ msgid "Administrators unknown"
 #~ msgstr "Administrator/innen unbekannt"
@@ -15528,6 +15463,12 @@ msgstr "Ja"
 #~ msgid "Assign someone else"
 #~ msgstr "Jemand anderem zuweisen"
 
+#~ msgid "Assigned Portal"
+#~ msgstr "Zugewiesenes Portal"
+
+#~ msgid "At least one type of Map object must be chosen!"
+#~ msgstr "Es muss mindestens ein Typ von Kartenobjekten ausgewählt werden!"
+
 #~ msgid "Attach existing Files..."
 #~ msgstr "Vorhandene Datei wählen..."
 
@@ -15560,6 +15501,9 @@ msgstr "Ja"
 
 #~ msgid "Bildung"
 #~ msgstr "Bildung"
+
+#~ msgid "Bottom content (gray background)"
+#~ msgstr "Bottom content (gray background)"
 
 #~ msgid "Broadcast"
 #~ msgstr "Rundmail (Alle ProjektMitglieder)"
@@ -15624,6 +15568,15 @@ msgstr "Ja"
 #~ msgid "Configure"
 #~ msgstr "Konfigurieren"
 
+#~ msgid "Content (center column)"
+#~ msgstr "Inhalt (mittlere Spalte)"
+
+#~ msgid "Content (left column)"
+#~ msgstr "Inhalt (linke Spalte)"
+
+#~ msgid "Content (right column)"
+#~ msgstr "Inhalt (rechte Spalte)"
+
 #~ msgid "Cosinnus conference"
 #~ msgstr "Tagung"
 
@@ -15636,6 +15589,9 @@ msgstr "Ja"
 #
 #~ msgid "Create token"
 #~ msgstr "Token erstellen"
+
+#~ msgid "Create-Project or Group Button"
+#~ msgstr "Projekt oder Gruppe-erstellen Button"
 
 #~ msgid "Created by"
 #~ msgstr "Erstellt durch"
@@ -15781,6 +15737,9 @@ msgstr "Ja"
 #~ msgid "External"
 #~ msgstr "Extern"
 
+#~ msgid "Extra large (800 x *)"
+#~ msgstr "Extra large (800 x *)"
+
 #~ msgid "File \"%(filename)s\" could not be deleted."
 #~ msgstr "Datei \"%(filename)s\" konnte nicht gelöscht werden."
 
@@ -15814,6 +15773,9 @@ msgstr "Ja"
 #~ msgid "Follow this link to see the comment:"
 #~ msgstr "Folge diesem Link um zum Kommentar zu gelangen:"
 
+#~ msgid "Footer"
+#~ msgstr "Footer"
+
 #~ msgid "For content that I am following, I wish to receive notification emails"
 #~ msgstr "Für Inhalte, denen ich folge, möchte ich Benachrichtigungs-Emails erhalten"
 
@@ -15837,6 +15799,18 @@ msgstr "Ja"
 
 #~ msgid "Group:"
 #~ msgstr "Gruppe:"
+
+#~ msgid "Header"
+#~ msgstr "Kopfzeile (nach Banner)"
+
+#~ msgid "Header Text"
+#~ msgstr "Kopfzeile (nach Banner)"
+
+#~ msgid "Header Title"
+#~ msgstr "Kopfzeile (nach Banner)"
+
+#~ msgid "Header image"
+#~ msgstr "Header image"
 
 #~ msgid "Hebrew--NATIVE-LANGUAGE"
 #~ msgstr "עברית"
@@ -15955,6 +15929,9 @@ msgstr "Ja"
 #~ msgid "If a group is marked as conference it is possible to auto-generate accounts for workshop participants"
 #~ msgstr "Wenn ein Gruppe als Tagung markiert wurde, ist es möglich Accounts für alle Teilnehmer automatisch zu generieren"
 
+#~ msgid "If active, this page will only be visible to non-logged-in users. All others will be redirected to the activities page."
+#~ msgstr "Wenn aktiv, sehen diese Seite nur Benutzer/innen die nicht eingeloggt sind. Alle eingeloggten Benutzer/innen werden direkt auf die Aktivitäten-Seite weitergeleitet."
+
 #~ msgid "If enabled, conference admins can create temporary user accounts that can be activated and deactivated."
 #~ msgstr "Wenn aktiviert, können Tagungsveranstalter temporäre Benutzerkonten erstellen, die aktiviert und deaktiviert werden können."
 
@@ -16010,6 +15987,9 @@ msgstr "Ja"
 #~ msgid "Is premium"
 #~ msgstr "Ist Premium"
 
+#~ msgid "Jetzt anmelden und mitgestalten"
+#~ msgstr "Jetzt anmelden und mitgestalten"
+
 #~ msgid "Kalender"
 #~ msgstr "Calendar"
 
@@ -16021,6 +16001,24 @@ msgstr "Ja"
 
 #~ msgid "Kunst und Kultur"
 #~ msgstr "Kunst und Kultur"
+
+#~ msgid "Large (400 x *)"
+#~ msgstr "Large (400 x *)"
+
+#~ msgid "Large News Widget"
+#~ msgstr "Großes Nachrichten Widget"
+
+#~ msgid "Larger (500 x *)"
+#~ msgstr "Larger (500 x *)"
+
+#~ msgid "Left Sidebar"
+#~ msgstr "Fußzeile links"
+
+#~ msgid "Left banner (top)"
+#~ msgstr "Linkes banner (oben)"
+
+#~ msgid "Left footer"
+#~ msgstr "Fußzeile links"
 
 #~ msgid "Location (optional)."
 #~ msgstr "Ort (optional)."
@@ -16042,6 +16040,15 @@ msgstr "Ja"
 
 #~ msgid "Medium"
 #~ msgstr "Mittel"
+
+#~ msgid "Medium (300 x *)"
+#~ msgstr "Medium (300 x *)"
+
+#~ msgid "Medium News Widget"
+#~ msgstr "Mittelgroßes Nachrichten-Widget"
+
+#~ msgid "Medium-small (250 x *)"
+#~ msgstr "Medium-small (250 x *)"
 
 #
 #~ msgid "Message Group"
@@ -16195,6 +16202,9 @@ msgstr "Ja"
 #~ msgid "Polish--NATIVE-LANGUAGE"
 #~ msgstr "Polski"
 
+#~ msgid "Portal Root Page"
+#~ msgstr "Portal-Root Seite"
+
 #~ msgid "Portal administrators"
 #~ msgstr "Portal-Administrator_innen"
 
@@ -16218,6 +16228,9 @@ msgstr "Ja"
 
 #~ msgid "Project/group CSV File"
 #~ msgstr "Projekte/Gruppen CSV-Datei"
+
+#~ msgid "Proportions"
+#~ msgstr "Proportionen"
 
 #~ msgid "Public Group"
 #~ msgstr "Öffentliche Gruppe"
@@ -16243,6 +16256,9 @@ msgstr "Ja"
 #~ msgid "Recording of meetings is only available for premium conferences!"
 #~ msgstr "Aufzeichnung von Meetings ist nur für Premium-Tagungen verfügbar!"
 
+#~ msgid "Redirect Logged in Users"
+#~ msgstr "Eingeloggte Benutzer/innen weiterleiten"
+
 #~ msgid "Reminder emails"
 #~ msgstr "Erinnerungs-E-Mails"
 
@@ -16254,6 +16270,12 @@ msgstr "Ja"
 
 #~ msgid "Retry user export"
 #~ msgstr "Benutzer/innen-Export erneut starten"
+
+#~ msgid "Right banner (top)"
+#~ msgstr "Rechtes banner (oben)"
+
+#~ msgid "Right footer"
+#~ msgstr "Fußzeile rechts"
 
 #~ msgid "Romanian--NATIVE-LANGUAGE"
 #~ msgstr "Română"
@@ -16287,8 +16309,35 @@ msgstr "Ja"
 #~ msgid "Set up your Profile"
 #~ msgstr "Richte dein Profil ein"
 
+#~ msgid "Show Register Button"
+#~ msgstr "Registrieren Button anzeigen"
+
+#~ msgid "Show more Projects"
+#~ msgstr "Weitere Projekte anzeigen"
+
 #~ msgid "Signature list"
 #~ msgstr "Unterschriftenliste"
+
+#~ msgid "Simple One-Column Page"
+#~ msgstr "Simple einspaltige Seite"
+
+#~ msgid "Simple One-Column Page (Modular)"
+#~ msgstr "Simple einspaltige Seite (Modular)"
+
+#~ msgid "Simple Page with Left Navigation"
+#~ msgstr "Simple Seite mit Navigationsspalte links"
+
+#~ msgid "Simple Page with Left Navigation (Modular)"
+#~ msgstr "Simple Seite mit Navigationsspalte links (Modular)"
+
+#~ msgid "Site Widgets"
+#~ msgstr "Site Widgets"
+
+#~ msgid "Small (200 x *)"
+#~ msgstr "Small (200 x *)"
+
+#~ msgid "Smaller (150 x *)"
+#~ msgstr "Smaller (150 x *)"
 
 #~ msgid "Sorry, an error occurred during the user export. Please try again later."
 #~ msgstr "Leider ist bei dem Benutzer/innen-Export ein Fehler aufgetreten. Bitte versuch es später erneut."
@@ -16302,6 +16351,9 @@ msgstr "Ja"
 #~ msgid "Spanish--NATIVE-LANGUAGE"
 #~ msgstr "Español"
 
+#~ msgid "Start Page (Modular)"
+#~ msgstr "Startseite (Modular)"
+
 #~ msgid "Start conference and activate user accounts"
 #~ msgstr "Tagung beginnen und Teilnehmerkonten aktivieren"
 
@@ -16313,6 +16365,9 @@ msgstr "Ja"
 
 #~ msgid "Start/join video chat for this event"
 #~ msgstr "Fairmeeting-Videochat starten/beitreten"
+
+#~ msgid "Started"
+#~ msgstr "Gestartet"
 
 #~ msgid "Statistics are only available for conferences with a start- and end-date."
 #~ msgstr "Statistiken sind nur für Konferenzen mit Start- und Enddatum verfügbar."
@@ -16451,6 +16506,9 @@ msgstr "Ja"
 #~ msgid "Timestamp of user export"
 #~ msgstr "Zeitstempel des Benutzer-Exports"
 
+#~ msgid "Tiny (50 x *)"
+#~ msgstr "Tiny (50 x *)"
+
 #~ msgid "TodoEntry"
 #~ msgstr "Aufgabe"
 
@@ -16535,6 +16593,12 @@ msgstr "Ja"
 #~ msgid "User participates in the following workshops:"
 #~ msgstr "Benutzer_in nimmt an folgenden Workshops teil:"
 
+#~ msgid "Very Small (100 x *)"
+#~ msgstr "Very Small (100 x *)"
+
+#~ msgid "Very large (650 x *)"
+#~ msgstr "Very large (650 x *)"
+
 #~ msgid "Video Chat"
 #~ msgstr "Videochat"
 
@@ -16573,6 +16637,9 @@ msgstr "Ja"
 #~ msgid "While we are re-working the conference administration interface, only portal administrators can make changes for premium conferences."
 #~ msgstr "Während wir die Schnittstelle zur Tagungsverwaltung überarbeiten, können nur Portaladministrator_innen Änderungen für Premium-Tagungen vornehmen."
 
+#~ msgid "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
+#~ msgstr "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
+
 #~ msgid "With the Task-Board, we offer your team a kanban style organization tool aimed at personal planning and project organization! As administrator you can activate the task-board for your project/group."
 #~ msgstr "Mit dem Aufgaben-Board bieten wir euerem wir Team ein Organisationswerkzeug im Kanban-Stil für die persönliche Planung und Projektorganisation!  Du kannst als Administrator/in das Aufgaben-Board für dein Projekt/Gruppe aktivieren."
 
@@ -16587,6 +16654,9 @@ msgstr "Ja"
 
 #~ msgid "Write a news post..."
 #~ msgstr "Neue Nachricht..."
+
+#~ msgid "XXL (1200 x *)"
+#~ msgstr "XXL (1200 x *)"
 
 #~ msgid "You are about to deactivate this conference. It and all of its content will be hidden on the website and invisible to everyone, including you."
 #~ msgstr "Du bist dabei diese Tagung zu deaktivieren. Sie und all ihr Inhalt wird auf der Webseite unsichtbar sein."
@@ -16691,6 +16761,31 @@ msgstr "Ja"
 
 #~ msgid "Your account was registered successfully. You will receive an activation email from us in a few minutes. You need to confirm the email address before you can log in."
 #~ msgstr "Das Benutzerkonto wurde erfolgreich registriert. Du wirst innerhalb weniger Minuten einen Bestätigungslink von uns erhalten. Diesen musst du klicken, bevor du dich einloggen kannst."
+
+#~ msgid ""
+#~ "Your entire account, profile and personal information will be deactivated %(relative_warning_period)s and then irrevocably deleted.\n"
+#~ "\n"
+#~ "If you do not wish for you account to be deactivated, just log in once.\n"
+#~ "\n"
+#~ "Your pads, news, uploaded files and other content will remain on the website. However, your name will no longer be displayed and your profile will no longer be linked to the content. On Rocket Chat, your profile direct messages will be deleted, but content within discussions and channels will remain. If you still want to delete content from yourself, you can do this now by deleting the content on the relevant pages.\n"
+#~ "\n"
+#~ "Your profile will first be deactivated and completely removed from the platform. After deactivation, it will be deleted from our database after %(deleted_after_days)s days and only then permanently.\n"
+#~ "\n"
+#~ "The account may be stored in our backup systems for up to 6 months after deletion. If this is too long for you, please contact the support team of this platform for immediate deletion.\n"
+#~ "\n"
+#~ "During this %(deleted_after_days)s-day period after deactivation, the e-mail address of your account is reserved and cannot be used to register a new account."
+#~ msgstr ""
+#~ "Dein Benutzerkonto einschließlich Profil und persönlicher Daten wird %(relative_warning_period)s deaktiviert und anschließend unwiderruflich gelöscht.\n"
+#~ "\n"
+#~ "Wenn du nicht möchtest, dass dein Benutzerkonto deaktiviert wird, logge dich einfach einmal ein.\n"
+#~ "\n"
+#~ "Deine Pads, Neuigkeiten, hochgeladenen Dateien und sonstigen Inhalte bleiben auf der Website erhalten. Dein Name wird jedoch nicht mehr angezeigt und dein Profil wird nicht mehr mit den Inhalten verknüpft. In Rocket.Chat werden deine Direktnachrichten gelöscht, die Inhalte in Diskussionen und Kanälen bleiben jedoch erhalten. Wenn du dennoch eigene Inhalte löschen möchtest, kannst du dies jetzt tun, indem du die Inhalte auf den entsprechenden Seiten löschst.\n"
+#~ "\n"
+#~ "Dein Profil wird zunächst deaktiviert und vollständig von der Plattform entfernt. Nach der Deaktivierung wird es nach %(deleted_after_days)s Tagen aus unserer Datenbank gelöscht und erst dann endgültig entfernt.\n"
+#~ "\n"
+#~ "Dein Benutzerkonto kann nach der Löschung bis zu 6 Monate lang in unseren Backup-Systemen gespeichert bleiben. Sollte dies zu lange sein, wende dich bitte an den Support dieser Plattform, um eine sofortige Löschung zu veranlassen.\n"
+#~ "\n"
+#~ "In den %(deleted_after_days)s Tagen nach der Deaktivierung bleibt die E-Mail-Adresse deines Benutzerkontos reserviert und kann nicht zur Registrierung eines neuen Benutzerkontos verwendet werden."
 
 #~ msgid ""
 #~ "Your entire account, profile and personal information will be deactivated and irrevocably deleted in %(deactivation_in)s.\n"

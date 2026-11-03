@@ -57,7 +57,7 @@ def group_aware_reverse(
             """ We accept a group object and swap it for its slug """
             group = kwargs['group']
             portal_id = group.portal_id
-            domain = get_domain_for_portal(group.portal)
+            domain = get_domain_for_portal(group.portal_id)
             kwargs['group'] = group.slug
         else:
             group = kwargs['group']
@@ -78,16 +78,47 @@ def group_aware_reverse(
     return ('' if skip_domain else domain) + reverse(viewname, urlconf, args, kwargs, current_app)
 
 
-def get_domain_for_portal(portal):
-    """We obtain the protocol from either the DB Portal entry, or, if not set there,
-    from the setting `COSINNUS_SITE_PROTOCOL` or default to 'http'
-    The domain comes from the Portal's Site."""
+def get_domain_for_portal(portal_or_portal_id):
+    """Return the domain for a given portal, or portal's id.
 
-    domain = cache.get(_PORTAL_PROTOCOL_CACHE_KEY % portal.id)
-    if not domain:
-        protocol = portal.protocol or getattr(settings, 'COSINNUS_SITE_PROTOCOL', 'http')
-        domain = '%s://%s' % (protocol, portal.site.domain)
-        cache.set(_PORTAL_PROTOCOL_CACHE_KEY % portal.id, domain)  # 5 minutes is okay here
+    Note: Optimal is to use the portal_id instead of the portal object, especially when deriving it from a group.
+        So supply `group.portal_id` to save a DB hit (unless prefetched), as opposed to `group.portal`.
+        The exception is if you are supplying CosinnusPortal.get_current(), then supplying that is fine.
+
+    We obtain the protocol from either the DB Portal entry, or, if not set there,
+    from the setting `COSINNUS_SITE_PROTOCOL` or default to 'http'
+    The domain comes from the Portal's Site.
+    """
+
+    if not portal_or_portal_id:
+        return ''
+    from cosinnus.models import CosinnusPortal
+
+    portal_id = portal_or_portal_id.id if isinstance(portal_or_portal_id, CosinnusPortal) else portal_or_portal_id
+
+    # fastest case: we got a portal id that we have cached the domain for
+    domain = cache.get(_PORTAL_PROTOCOL_CACHE_KEY % portal_id)
+    if domain:
+        return domain
+
+    # else grab the portal if we only got an id
+    portal = None
+    if isinstance(portal_or_portal_id, int):
+        # we "lucky guess" get the cached current portal, as it is the one we need in 99% of the cases
+        current_portal = CosinnusPortal.get_current()
+        if portal_or_portal_id == current_portal.id:
+            portal = current_portal
+        else:
+            portal = CosinnusPortal.get(id=portal_or_portal_id)
+    elif isinstance(portal_or_portal_id, CosinnusPortal):
+        portal = portal_or_portal_id
+    else:
+        return ''
+
+    # and cache the domain for it
+    protocol = portal.protocol or getattr(settings, 'COSINNUS_SITE_PROTOCOL', 'http')
+    domain = '%s://%s' % (protocol, portal.site.domain)
+    cache.set(_PORTAL_PROTOCOL_CACHE_KEY % portal.id, domain)  # 5 minutes is okay here
     return domain
 
 

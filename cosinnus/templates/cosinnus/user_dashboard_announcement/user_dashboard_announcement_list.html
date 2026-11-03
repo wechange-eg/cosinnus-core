@@ -69,6 +69,15 @@
         {% endif %}
     </div>
 
+    {% if SETTINGS.COSINNUS_USE_V3_PERSONAL_DASHBOARD and SETTINGS.COSINNUS_V3_PERSONAL_DASHBOARD_TEST_PHASE %}
+        {% comment %}
+            During the Dashboard Test phase we will show the advanced announcement form,
+            but the old announcements are still active how a banner explaining this fact and warn the admin user.
+        {% endcomment %}
+
+        {% include 'cosinnus/user_dashboard_announcement/announcements_personal_dashboard_testphase_warning.html' %}
+    {% endif %}
+
     <button type="button" href="{% url "cosinnus:user-dashboard-announcement-create" %}" class="btn btn-emphasized btn-autosize" title="{% trans "Create Announcement" %}">
         <ul class="media-list">
             <li class="media">

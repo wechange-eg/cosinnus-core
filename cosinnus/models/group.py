@@ -39,6 +39,7 @@ from django.utils.crypto import get_random_string
 from django.utils.functional import cached_property
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
+from django_prometheus.models import ExportModelOperationsMixin
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from easy_thumbnails.files import get_thumbnailer
 from osm_field.fields import LatitudeField, LongitudeField, OSMField
@@ -237,7 +238,7 @@ class CosinnusGroupManager(models.Manager):
             )
         return slugs
 
-    def get_pks(self, portal_id=None, force=True):
+    def get_pks(self, portal_id=None, force=False):
         """
         Gets all group pks from the cache or, if the can has not been filled,
         gets the pks and slugs from the database and fills the cache.
@@ -934,6 +935,7 @@ class CosinnusPortal(BBBRoomMixin, MembersManagerMixin, TranslateableFieldsModel
 
 @six.python_2_unicode_compatible
 class CosinnusBaseGroup(
+    ExportModelOperationsMixin('CosinnusGroup'),
     HumanizedEventTimeMixin,
     TranslateableFieldsModelMixin,
     LastVisitedMixin,
@@ -2489,7 +2491,9 @@ class CosinnusGroupInviteToken(models.Model):
         self._token = self.token
 
     def get_absolute_url(self):
-        return get_domain_for_portal(self.portal) + reverse('cosinnus:group-invite-token', kwargs={'token': self.token})
+        return get_domain_for_portal(self.portal_id) + reverse(
+            'cosinnus:group-invite-token', kwargs={'token': self.token}
+        )
 
 
 class CosinnusPermanentRedirect(models.Model):

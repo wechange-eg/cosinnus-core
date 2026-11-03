@@ -11,6 +11,8 @@ from django.template.loader import render_to_string
 from django.utils import translation
 from django.utils.encoding import force_str
 
+from cosinnus.models import CosinnusPortal
+
 INACTIVITY_DURATION_UNITS = ('day', 'week', 'month', 'year')
 
 
@@ -71,7 +73,7 @@ def render_inactivity_mail(
         days_before_deactivation, warning, language, add_direction=True
     )
     # Keep the inactivity period neutral so templates can place it relative to the last activity.
-    inactivity_period = format_inactivity_duration(config['days'], config, language)
+    inactivity_period = format_inactivity_duration(config['days'] - days_before_deactivation, config, language)
 
     template_context = dict(
         context or {},
@@ -83,6 +85,8 @@ def render_inactivity_mail(
         relative_warning_period=relative_warning_period,
         inactivity_days=config['days'],
         inactivity_period=inactivity_period,
+        support_email=CosinnusPortal.get_current().support_email,
+        portal_name=CosinnusPortal.get_current().name,
     )
 
     with translation.override(language):

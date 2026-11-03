@@ -12,6 +12,7 @@ from django.db.models.fields import DateField
 from django.db.models.functions.datetime import TruncBase, TruncDay, TruncMonth, TruncWeek, TruncYear
 from django.http import HttpResponseRedirect
 from django.utils.formats import localize
+from django.utils.timezone import now, get_default_timezone
 from django.utils.translation import gettext as _
 from django.views.generic.edit import FormView
 
@@ -261,6 +262,8 @@ def _get_statistics(from_date: datetime, to_date: datetime) -> list:
     """
     define metrics to be gathered as list items using helper functions
     - params from_date and to_date are datetime objects to make filtering querysets easier
+    @param from_date: timezone aware datetime
+    @param to_date: timezone aware datetime
     :return: list of metric-data as dicts
     """
 
@@ -469,8 +472,8 @@ class SimpleStatisticsView(RequirePortalManagerMixin, FormView):
     def dispatch(self, request, *args, **kwargs):
         # add default date range if none is given
         if request.method == 'GET' and ('from' not in request.GET or 'to' not in request.GET):
-            date_to = datetime.now().replace(hour=23, minute=59)
-            date_from = (datetime.now() - timedelta(days=DATE_RANGE_DEFAULT_PAST_DAYS)).replace(hour=0, minute=0)
+            date_to = now().replace(hour=23, minute=59)
+            date_from = (now() - timedelta(days=DATE_RANGE_DEFAULT_PAST_DAYS)).replace(hour=0, minute=0)
 
             parameters = request.GET.copy()
             parameters['to'] = date_to.strftime(self.DATE_FORMAT)
@@ -499,6 +502,14 @@ class SimpleStatisticsView(RequirePortalManagerMixin, FormView):
             # include all objects in filter queries with datetime-fields
             from_date: datetime = context['form'].initial['from_date']
             to_date: datetime = context['form'].initial['to_date']
+            
+            # convert request param datetimes to default server timezone aware datetimes
+            # Note: we're not using user profile timezones so the statistics are output as the same for every user,
+            #   to avoid confusion
+            tz = get_default_timezone()
+            from_date = from_date.astimezone(tz)
+            to_date = to_date.astimezone(tz)
+            
             context.update({'statistics': _get_statistics(from_date, to_date)})
         return context
 

@@ -105,7 +105,7 @@ class IdeaManager(models.Manager):
                 return []  # We rely on the slug and id maps being up to date
         return []
 
-    def get_pks(self, portal_id=None, force=True):
+    def get_pks(self, portal_id=None, force=False):
         """
         Gets the (pks -> slug) :class:`OrderedDict` from the cache or, if the can has not been filled,
         gets the pks and slugs from the database and fills the cache.
@@ -386,7 +386,7 @@ class CosinnusIdea(IndexingUtilsMixin, LikeableObjectMixin, models.Model):
 
     def get_absolute_url(self):
         item_id = '%d.ideas.%s' % (self.portal_id, self.slug)
-        return get_domain_for_portal(self.portal) + reverse('cosinnus:map') + '?item=' + item_id
+        return get_domain_for_portal(self.portal_id) + reverse('cosinnus:map') + '?item=' + item_id
 
     def get_edit_url(self):
         return reverse('cosinnus:idea-edit', kwargs={'slug': self.slug})

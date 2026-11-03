@@ -1,7 +1,6 @@
 # ruff: noqa: E501
-from datetime import datetime
+from datetime import datetime, timezone
 
-import pytz
 from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
 
@@ -19,8 +18,21 @@ UPDATES includes release notes for each version shown to the users with:
 _REDESIGN_FULL_IS_ENABLED = settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED
 
 UPDATES = {
+    '2.11.0': {
+        'datetime': datetime(2026, 12, 1, tzinfo=timezone.utc),
+        'title': format_lazy(_('Version {version_number} released'), version_number='2.11.0'),
+        'short_text': _('This update includes a django framework update and several improvements and fixes:'),
+        'full_text': [
+            _(
+                '- Updated the backend codebase to Python 3.12 and the Django framework to version 5 for security '
+                'fixes and improvements.\n'
+                '- Added several database optimisations to improve the loading speed of most pages.\n'
+                '- Fixed a bug where event polls where being shown on the map when filtering for an event time range.\n'
+            )
+        ],
+    },
     '2.10.0': {
-        'datetime': datetime(2026, 11, 14, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 11, 14, tzinfo=timezone.utc),
         'title': _('Personal Dashboard Redesign'),
         'short_text': _('The fully redesigned personal dashboard has been launched!'),
         'full_text': _(
@@ -28,10 +40,12 @@ UPDATES = {
             'and projects. The page "Explore" helps you discover relevant content, groups, and projects '
             'tailored for you.'
         ),
-        'display_conditional': _REDESIGN_FULL_IS_ENABLED and settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD,
+        'display_conditional': _REDESIGN_FULL_IS_ENABLED
+        and settings.COSINNUS_USE_V3_PERSONAL_DASHBOARD
+        and not settings.COSINNUS_V3_PERSONAL_DASHBOARD_TEST_PHASE,
     },
     '2.9.0': {
-        'datetime': datetime(2026, 8, 4, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 8, 4, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.9.0'),
         'short_text': _('This update includes several features and bugfixes:'),
         'full_text': [
@@ -51,7 +65,7 @@ UPDATES = {
         ],
     },
     '2.8.0-calendar': {
-        'datetime': datetime(2026, 6, 30, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 6, 30, tzinfo=timezone.utc),
         'title': _('Calendar Redesign'),
         'short_text': _('The fully redesigned calendar with a mobile-optimized interface has been launched!'),
         'full_text': _(
@@ -61,7 +75,7 @@ UPDATES = {
         'display_conditional': _REDESIGN_FULL_IS_ENABLED and settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED,
     },
     '2.8.0': {
-        'datetime': datetime(2026, 6, 29, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 6, 29, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.8.0'),
         'short_text': _('This update includes several features and bugfixes:'),
         'full_text': [
@@ -107,7 +121,7 @@ UPDATES = {
         ],
     },
     '2.7.12': {
-        'datetime': datetime(2026, 4, 26, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 4, 26, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.12'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
@@ -119,7 +133,7 @@ UPDATES = {
         'display_conditional': settings.COSINNUS_CLOUD_ENABLED,
     },
     '2.7.10': {
-        'datetime': datetime(2026, 3, 31, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 3, 31, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.10'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
@@ -138,7 +152,7 @@ UPDATES = {
         ],
     },
     '2.7.9': {
-        'datetime': datetime(2026, 3, 21, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 3, 21, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.9'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
@@ -147,7 +161,7 @@ UPDATES = {
         'display_conditional': settings.COSINNUS_CLOUD_ENABLED,
     },
     '2.7.8': {
-        'datetime': datetime(2026, 3, 5, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 3, 5, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.8'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
@@ -158,7 +172,7 @@ UPDATES = {
         ],
     },
     '2.7.7': {
-        'datetime': datetime(2026, 3, 4, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 3, 4, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.7'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
@@ -166,7 +180,7 @@ UPDATES = {
         ],
     },
     '2.7.6': {
-        'datetime': datetime(2026, 2, 26, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 2, 26, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.6'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
@@ -177,7 +191,7 @@ UPDATES = {
         ],
     },
     '2.7.3': {
-        'datetime': datetime(2026, 1, 21, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 1, 21, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.3'),
         'short_text': _('This update includes small bugfixes:'),
         'full_text': [
@@ -188,7 +202,7 @@ UPDATES = {
         ],
     },
     '2.7.2': {
-        'datetime': datetime(2026, 1, 15, tzinfo=pytz.utc),
+        'datetime': datetime(2026, 1, 15, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.2'),
         'short_text': _('This update includes quality of life updates:'),
         'full_text': [
@@ -196,7 +210,7 @@ UPDATES = {
         ],
     },
     '2.7.0': {
-        'datetime': datetime(2025, 12, 10, tzinfo=pytz.utc),
+        'datetime': datetime(2025, 12, 10, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.7.0'),
         'short_text': _('This update includes security updates and small bugfixes:'),
         'full_text': [
@@ -215,7 +229,7 @@ UPDATES = {
         ],
     },
     '2.6.0': {
-        'datetime': datetime(2025, 10, 13, tzinfo=pytz.utc),
+        'datetime': datetime(2025, 10, 13, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.6.0'),
         'short_text': _('This update includes several features and bugfixes:'),
         'full_text': [
@@ -249,7 +263,7 @@ UPDATES = {
         ],
     },
     '2.5.0': {
-        'datetime': datetime(2025, 7, 16, tzinfo=pytz.utc),
+        'datetime': datetime(2025, 7, 16, tzinfo=timezone.utc),
         'title': format_lazy(_('Version {version_number} released'), version_number='2.5.0'),
         'short_text': _('This update includes several bugfixes:'),
         'full_text': [
@@ -282,13 +296,13 @@ UPDATES = {
         ],
     },
     '2.4.0': {
-        'datetime': datetime(2025, 5, 7, tzinfo=pytz.utc),
+        'datetime': datetime(2025, 5, 7, tzinfo=timezone.utc),
         'title': _('Version 2.4.0 released'),
         'short_text': _('This update provides several small bugfixes and stability improvements.'),
         'full_text': None,
     },
     '2.3.0': {
-        'datetime': datetime(2025, 4, 1, tzinfo=pytz.utc),
+        'datetime': datetime(2025, 4, 1, tzinfo=timezone.utc),
         'title': _('Version 2.3.0 released'),
         'short_text': (
             _(
@@ -300,7 +314,7 @@ UPDATES = {
         'full_text': None,
     },
     'Redesign': {
-        'datetime': datetime(2024, 12, 2, tzinfo=pytz.utc),
+        'datetime': datetime(2024, 12, 2, tzinfo=timezone.utc),
         'title': _('Redesign Update'),
         'short_text': _('The redesign has been launched across the platform!'),
         'full_text': _(
@@ -312,7 +326,7 @@ UPDATES = {
         'display_conditional': _REDESIGN_FULL_IS_ENABLED,
     },
     '2.2.5': {
-        'datetime': datetime(2024, 12, 1, tzinfo=pytz.utc),
+        'datetime': datetime(2024, 12, 1, tzinfo=timezone.utc),
         'title': _('Version 2.2.5 released'),
         'short_text': _('This update includes several bugfixes:'),
         'full_text': _(
@@ -326,7 +340,7 @@ UPDATES = {
         'display_conditional': _REDESIGN_FULL_IS_ENABLED,
     },
     '2.2.0': {
-        'datetime': datetime(2024, 11, 13, tzinfo=pytz.utc),
+        'datetime': datetime(2024, 11, 13, tzinfo=timezone.utc),
         'title': _('Version 2.2.0 released'),
         'short_text': _('This update includes several features and bugfixes:'),
         'full_text': _(
@@ -337,7 +351,7 @@ UPDATES = {
         'display_conditional': _REDESIGN_FULL_IS_ENABLED,
     },
     '2.1.0': {
-        'datetime': datetime(2024, 10, 14, tzinfo=pytz.utc),
+        'datetime': datetime(2024, 10, 14, tzinfo=timezone.utc),
         'title': _('Version 2.1.0 released'),
         'short_text': _('This update includes several features and bugfixes:'),
         'full_text': _(
@@ -350,7 +364,7 @@ UPDATES = {
         ),
     },
     '2.0.0': {
-        'datetime': datetime(2024, 6, 5, tzinfo=pytz.utc),
+        'datetime': datetime(2024, 6, 5, tzinfo=timezone.utc),
         'title': _('Version 2.0.0 released'),
         'short_text': _('This update includes several features and bugfixes:'),
         'full_text': _(
@@ -372,7 +386,7 @@ UPDATES = {
         ),
     },
     '1.20.4': {
-        'datetime': datetime(2024, 5, 6, tzinfo=pytz.utc),
+        'datetime': datetime(2024, 5, 6, tzinfo=timezone.utc),
         'title': _('Version 1.20.4 released'),
         'short_text': _('This update includes several bugfixes:'),
         'full_text': _(
@@ -387,7 +401,7 @@ UPDATES = {
         ),
     },
     '1.20.2': {
-        'datetime': datetime(2024, 4, 18, tzinfo=pytz.utc),
+        'datetime': datetime(2024, 4, 18, tzinfo=timezone.utc),
         'title': _('Version 1.20.2 released'),
         'short_text': _('This update includes several bugfixes:'),
         'full_text': _(
@@ -396,7 +410,7 @@ UPDATES = {
         ),
     },
     '1.20.1': {
-        'datetime': datetime(2024, 4, 11, tzinfo=pytz.utc),
+        'datetime': datetime(2024, 4, 11, tzinfo=timezone.utc),
         'title': _('Version 1.20.1 released'),
         'short_text': _('This update includes several bugfixes:'),
         'full_text': _(
@@ -405,7 +419,7 @@ UPDATES = {
         ),
     },
     '1.20.0': {
-        'datetime': datetime(2024, 4, 3, tzinfo=pytz.utc),
+        'datetime': datetime(2024, 4, 3, tzinfo=timezone.utc),
         'title': _('Version 1.20.0 released'),
         'short_text': _('Includes Django update, conference improvements and more.'),
         'full_text': _(
@@ -423,7 +437,7 @@ UPDATES = {
         ),
     },
     '1.19.6': {
-        'datetime': datetime(2024, 1, 18, tzinfo=pytz.utc),
+        'datetime': datetime(2024, 1, 18, tzinfo=timezone.utc),
         'title': _('Version 1.19.6 released'),
         'short_text': _('This update includes several bugfixes:'),
         'full_text': _(
@@ -436,7 +450,7 @@ UPDATES = {
         ),
     },
     '1.19.0': {
-        'datetime': datetime(2023, 11, 27, tzinfo=pytz.utc),
+        'datetime': datetime(2023, 11, 27, tzinfo=timezone.utc),
         'title': _('Version 1.19.0 released'),
         'short_text': _('Includes further settings for conferences, RocketChat integration improvements and more.'),
         'full_text': _(
@@ -451,7 +465,7 @@ UPDATES = {
         ),
     },
     '1.18.0': {
-        'datetime': datetime(2023, 10, 23, tzinfo=pytz.utc),
+        'datetime': datetime(2023, 10, 23, tzinfo=timezone.utc),
         'title': _('Version 1.18.0 released'),
         'short_text': _(
             'Includes the "What\'s New" feature, a quick way to copy conference invitations, a security update, and more.'
@@ -470,7 +484,7 @@ UPDATES = {
         ),
     },
     '1.17.1': {
-        'datetime': datetime(2023, 9, 13, tzinfo=pytz.utc),
+        'datetime': datetime(2023, 9, 13, tzinfo=timezone.utc),
         'title': _('Version 1.17.1 released'),
         'short_text': _('Includes dynamic registration form and dynamic options for participation for conferences.'),
         'full_text': _(

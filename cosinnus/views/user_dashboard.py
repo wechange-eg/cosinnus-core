@@ -208,6 +208,7 @@ class MyGroupsClusteredMixin(object):
             societies = sorted(societies, key=sort_key_strcoll_attr('name'))
 
         # sort projects into their societies clusters, society clusters are always displayed first
+        managed_tags = user.cosinnus_profile.get_managed_tags()
         for society in societies:
             if society.slug in get_default_user_group_slugs():
                 continue
@@ -217,7 +218,6 @@ class MyGroupsClusteredMixin(object):
                 settings.COSINNUS_V3_FRONTEND_ENABLED
                 and settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS
             ):
-                managed_tags = user.cosinnus_profile.get_managed_tags()
                 paired_groups = [tag.paired_group for tag in managed_tags if tag.paired_group]
                 if society in paired_groups:
                     continue
@@ -227,7 +227,7 @@ class MyGroupsClusteredMixin(object):
             items_projects = []
             for i in range(len(projects) - 1, -1, -1):
                 project = projects[i]
-                if project.parent == society:
+                if project.parent_id == society.id:
                     items_projects.insert(0, DashboardItem(project))  # prepend because of reversed order
                     projects.pop(i)
                     project_dt = group_last_visited.get(project.id, default_date)
