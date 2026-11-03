@@ -438,7 +438,7 @@ class MainContentView(LanguageMenuItemMixin, APIView):
             del request_headers['Content-Length']
         session.headers.update(request_headers)
         session.cookies.update(request.COOKIES)
-        response = session.get(v3_exempted_url, allow_redirects=allow_redirects)
+        response = session.get(v3_exempted_url, allow_redirects=allow_redirects, timeout=(2, 5))
         for history_response in response.history:
             response.cookies.update(history_response.cookies)
         return response
