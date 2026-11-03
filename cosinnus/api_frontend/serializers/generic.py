@@ -31,7 +31,9 @@ class CosinnusCreatorSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         """Check view permissions for creator."""
         user = self.context['request'].user
-        if not user or (not user.is_authenticated and instance.media_tag.visibility != BaseTagObject.VISIBILITY_ALL):
+        if not user or (
+            not user.is_authenticated and instance.cosinnus_profile.media_tag.visibility != BaseTagObject.VISIBILITY_ALL
+        ):
             # creator is hidden for unauthenticated users unless the visibility is set to all.
             return None
         return super().to_representation(instance)
