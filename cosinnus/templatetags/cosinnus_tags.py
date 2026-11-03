@@ -44,14 +44,13 @@ from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 from django_otp import user_has_device
 from six.moves.urllib.parse import parse_qsl
-from wagtail.core.templatetags.wagtailcore_tags import richtext
 
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
 from cosinnus.core.registries.group_models import UnsupportedGroupTypeError, group_model_registry
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField, CommaSeparatedSelect2MultipleWidget
-from cosinnus.models import UserBlock
-from cosinnus.models.conference import CosinnusConferenceApplication
+from cosinnus.models import MEMBERSHIP_PENDING, UserBlock
+from cosinnus.models.conference import APPLICATION_STATES_PENDING, CosinnusConferenceApplication
 from cosinnus.models.group import (
     CosinnusGroup,
     CosinnusGroupManager,
@@ -514,8 +513,12 @@ def cosinnus_menu_v2(context, template='cosinnus/v2/navbar/navbar.html', request
         membership_requests = []
         membership_requests_count = 0
         admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(request.user)
-        admined_groups = get_cosinnus_group_model().objects.get_cached(pks=admined_group_ids)
-        for admined_group in admined_groups:
+        admined_groups_with_membership_requests = (
+            get_cosinnus_group_model()
+            .objects.filter(pk__in=admined_group_ids, memberships__status=MEMBERSHIP_PENDING)
+            .distinct()
+        )
+        for admined_group in admined_groups_with_membership_requests:
             pending_ids = CosinnusGroupMembership.objects.get_pendings(group=admined_group)
             if len(pending_ids) > 0:
                 membership_request_item = DashboardItem()
@@ -534,21 +537,26 @@ def cosinnus_menu_v2(context, template='cosinnus/v2/navbar/navbar.html', request
 
         conference_application_requests = []
         conference_application_requests_count = 0
-        admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(request.user)
-        admined_groups = get_cosinnus_group_model().objects.get_cached(pks=admined_group_ids)
-        for admined_group in admined_groups:
-            pending_ids = CosinnusConferenceApplication.objects.pending_current().filter(conference=admined_group)
-            if len(pending_ids) > 0:
-                conference_application_request_item = DashboardItem()
-                conference_application_request_item['icon'] = (
-                    'fa-sitemap' if admined_group.type == get_cosinnus_group_model().TYPE_CONFERENCE else 'fa-group'
-                )
-                conference_application_request_item['text'] = escape('%s (%d)' % (admined_group.name, len(pending_ids)))
-                conference_application_request_item['url'] = group_aware_reverse(
-                    'cosinnus:conference:participation-management-applications', kwargs={'group': admined_group}
-                )
-                conference_application_requests.append(conference_application_request_item)
-                conference_application_requests_count += len(pending_ids)
+        if settings.COSINNUS_CONFERENCES_ENABLED:
+            admined_group_ids = get_cosinnus_group_model().objects.get_for_user_group_admin_pks(request.user)
+            admined_groups_with_conference_applications = CosinnusConference.objects.filter(
+                pk__in=admined_group_ids, conference_applications__status__in=APPLICATION_STATES_PENDING
+            ).distinct()
+            for admined_group in admined_groups_with_conference_applications:
+                pending_ids = CosinnusConferenceApplication.objects.pending_current().filter(conference=admined_group)
+                if len(pending_ids) > 0:
+                    conference_application_request_item = DashboardItem()
+                    conference_application_request_item['icon'] = (
+                        'fa-sitemap' if admined_group.type == get_cosinnus_group_model().TYPE_CONFERENCE else 'fa-group'
+                    )
+                    conference_application_request_item['text'] = escape(
+                        '%s (%d)' % (admined_group.name, len(pending_ids))
+                    )
+                    conference_application_request_item['url'] = group_aware_reverse(
+                        'cosinnus:conference:participation-management-applications', kwargs={'group': admined_group}
+                    )
+                    conference_application_requests.append(conference_application_request_item)
+                    conference_application_requests_count += len(pending_ids)
         context['conference_requests_json_encoded'] = _escape_quotes(_json.dumps(conference_application_requests))
         context['conference_requests_count'] = conference_application_requests_count
 
@@ -1231,15 +1239,6 @@ def tag_group_filtered(tag_object, group='None'):
             tag_object.topics = ','.join([top for top in tag_object.topics.split(',') if top not in group_topics])
         """
     return tag_object
-
-
-@register.filter
-def richtext_or_stream(value):
-    """A safer alternative to the wagtail filter |richtext, which will render a richtext if it got passed one,
-    or just render a streamfield with its innate function if it is one such."""
-    if value and isinstance(value, six.string_types):
-        return richtext(value)
-    return value
 
 
 @register.filter

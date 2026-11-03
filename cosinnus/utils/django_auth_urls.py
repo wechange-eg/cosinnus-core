@@ -20,7 +20,9 @@ if not is_integrated_portal():
 
     urlpatterns = [
         path('login/', common.cosinnus_login, name='login'),
-        path('logout/', common.cosinnus_logout, {'next_page': '/'}, name='logout'),
+        path('logout/', common.cosinnus_logout_direct, {'next_page': '/'}, name='logout'),
+        # if we no longer want to support GET-logouts, use this url definition instead:
+        # path('logout/', common.cosinnus_logout, {'next_page': '/'}, name='logout'),
     ]
 
     # password change URLs are disabled for SSO-Portals
@@ -91,7 +93,7 @@ if not is_integrated_portal():
                             name='password_set_initial',
                         ),
                         re_path(
-                            '(?P<token>[0-9A-Za-z_\-]+)/?$',
+                            r'(?P<token>[0-9A-Za-z_\-]+)/?$',
                             SetInitialPasswordView.as_view(
                                 template_name='cosinnus/registration/password_set_initial_form.html'
                             ),

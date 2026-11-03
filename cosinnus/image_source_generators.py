@@ -28,7 +28,7 @@ def cosinnus_restricted_pil_image_source_generator(source, exif_orientation=True
         return
     source = BytesIO(source.read())
 
-    image = Image.open(source, formats=['JPEG', 'PNG', 'BMP', 'GIF'])
+    image = Image.open(source, formats=['JPEG', 'PNG'])
     # Fully load the image now to catch any problems with the image contents.
     try:
         ImageFile.LOAD_TRUNCATED_IMAGES = True

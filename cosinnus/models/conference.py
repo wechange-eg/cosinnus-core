@@ -253,10 +253,10 @@ class CosinnusConferenceSettings(models.Model):
             # find and return conference settings if attached to our current object
             conference_settings = None
             try:
-                conference_settings = obj.conference_settings_assignments.all()[0]
+                conference_settings = obj.conference_settings_assignments.first()
             except Exception as e:
                 if settings.DEBUG:
-                    logger.warn(f'DEBUG warning: {type(obj)} has no conference_settings_assignments. {e}')
+                    logger.warning(f'DEBUG warning: {type(obj)}:{obj.pk} has no conference_settings_assignments. {e}')
             if conference_settings:
                 setting_obj = conference_settings
 
@@ -981,6 +981,8 @@ APPLICATION_WAITLIST = 3
 APPLICATION_ACCEPTED = 4
 APPLICATION_DECLINED = 5
 
+APPLICATION_STATES_PENDING = [APPLICATION_SUBMITTED, APPLICATION_WAITLIST]
+
 APPLICATION_STATES = [
     (APPLICATION_INVALID, pgettext_lazy('a conference application status', 'Invalid')),
     (APPLICATION_SUBMITTED, pgettext_lazy('a conference application status', 'Submitted')),
@@ -1022,7 +1024,7 @@ class CosinnusConferenceApplicationQuerySet(models.QuerySet):
     def pending_current(self):
         """Returns all pending applications with conference to_date in the future"""
         now = timezone.now()
-        pending = [APPLICATION_SUBMITTED, APPLICATION_WAITLIST]
+        pending = APPLICATION_STATES_PENDING
         return (
             self.active()
             .filter(conference__to_date__gte=now)

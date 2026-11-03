@@ -11,10 +11,13 @@ from django.http import HttpResponseRedirect
 from django.http.response import Http404
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.utils.timezone import now
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
 
+from cosinnus.conf import settings
 from cosinnus.core.decorators.views import redirect_to_error_page
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.permissions import check_user_blocks_user, check_user_can_see_user
@@ -22,18 +25,7 @@ from cosinnus.utils.urls import group_aware_reverse, safe_redirect
 from cosinnus_message.rocket_chat import RocketChatConnection, RocketChatDownException, is_rocket_down
 from postman.models import Message
 from postman.views import ConversationView, MessageView, _get_referer, csrf_protect_m, login_required_m
-
 from .forms import ContactMessageForm
-
-try:
-    from django.utils.timezone import now  # Django 1.4 aware datetimes
-except ImportError:
-    from datetime import datetime
-
-    now = datetime.now
-from django.utils.translation import gettext_lazy as _
-
-from cosinnus.conf import settings
 
 User = get_user_model()
 

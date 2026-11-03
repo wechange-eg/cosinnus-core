@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus.views package &#8212; Cosinnus 2.10.0b documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f0bd290c"></script>
+    <title>cosinnus.views package &#8212; Cosinnus 2.11.0b1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=2b700200"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -18,8 +18,9 @@
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -880,10 +881,10 @@ It is reset to <code class="docutils literal notranslate"><span class="pre">None
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">results</span> <span class="pre">=</span> <span class="pre">[(id1,</span> <span class="pre">text1),</span> <span class="pre">(id2,</span> <span class="pre">text2),</span> <span class="pre">...]</span></code></p>
 <p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;nil&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">'nil'</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">[</span>
-    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Value label1&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;Value label2&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Value label1'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">'Value label2'</span><span class="p">),</span>
     <span class="p">])</span>
 </pre></div>
 </div>
@@ -1511,6 +1512,26 @@ For email-verified-locked portals, refuse the login for users who haven’t got 
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="cosinnus.views.common.CosinnusLogoutDirectView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.common.</span></span><span class="sig-name descname"><span class="pre">CosinnusLogoutDirectView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.common.CosinnusLogoutDirectView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#cosinnus.views.common.CosinnusLogoutView" title="cosinnus.views.common.CosinnusLogoutView"><code class="xref py py-class docutils literal notranslate"><span class="pre">CosinnusLogoutView</span></code></a></p>
+<p>Just like the regular logout view, except this also allows logouts by GET requests.
+This is to support redirected chain-logouts for integrated services like when a
+logout is initiated from within Nextcloud.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cosinnus.views.common.CosinnusLogoutDirectView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.common.CosinnusLogoutDirectView.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logout may be done via POST.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.common.CosinnusLogoutDirectView.http_method_names">
+<span class="sig-name descname"><span class="pre">http_method_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['get',</span> <span class="pre">'head',</span> <span class="pre">'post',</span> <span class="pre">'options']</span></em><a class="headerlink" href="#cosinnus.views.common.CosinnusLogoutDirectView.http_method_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.views.common.CosinnusLogoutView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.common.</span></span><span class="sig-name descname"><span class="pre">CosinnusLogoutView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.common.CosinnusLogoutView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LogoutView</span></code></p>
@@ -1524,12 +1545,6 @@ JS queries or redirects to log out from other services.</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.views.common.CosinnusLogoutView.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.common.CosinnusLogoutView.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Note: the methods are set equal: get = post in <cite>LogoutView</cite>.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.common.CosinnusLogoutView.get_context_data">
 <span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.common.CosinnusLogoutView.get_context_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -1537,7 +1552,7 @@ JS queries or redirects to log out from other services.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.common.CosinnusLogoutView.post">
 <span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.common.CosinnusLogoutView.post" title="Permalink to this definition">¶</a></dt>
-<dd><p>Note: the methods are set equal: get = post in <cite>LogoutView</cite>.</p>
+<dd><p>Logout may be done via POST.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1721,6 +1736,14 @@ If a LikeObject existed, and either like is False, and the model has the <cite>N
 (this seems to only clear the value of the cookie and not completely delete it!).
 Will redirect to a “you have been logged out” page, that may perform additional
 JS queries or redirects to log out from other services.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.views.common.cosinnus_logout_direct">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.views.common.</span></span><span class="sig-name descname"><span class="pre">cosinnus_logout_direct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.common.cosinnus_logout_direct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the regular logout view, except this also allows logouts by GET requests.
+This is to support redirected chain-logouts for integrated services like when a
+logout is initiated from within Nextcloud.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -2697,7 +2720,7 @@ so that data changed in those forms are reflected in the updated group object</p
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.views.group.GroupDeleteView">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.group.</span></span><span class="sig-name descname"><span class="pre">GroupDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.group.GroupDeleteView" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.group.</span></span><span class="sig-name descname"><span class="pre">GroupDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.group.GroupDeleteView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cosinnus.views.group.SamePortalGroupMixin" title="cosinnus.views.group.SamePortalGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamePortalGroupMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.ajax.AjaxableFormMixin" title="cosinnus.views.mixins.ajax.AjaxableFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">AjaxableFormMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireAdminMixin" title="cosinnus.views.mixins.group.RequireAdminMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireAdminMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteView</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.group.GroupDeleteView.dispatch">
@@ -2875,10 +2898,10 @@ It is reset to <code class="docutils literal notranslate"><span class="pre">None
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">results</span> <span class="pre">=</span> <span class="pre">[(id1,</span> <span class="pre">text1),</span> <span class="pre">(id2,</span> <span class="pre">text2),</span> <span class="pre">...]</span></code></p>
 <p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;nil&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">'nil'</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">[</span>
-    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Value label1&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;Value label2&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Value label1'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">'Value label2'</span><span class="p">),</span>
     <span class="p">])</span>
 </pre></div>
 </div>
@@ -2934,6 +2957,11 @@ It is reset to <code class="docutils literal notranslate"><span class="pre">None
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.views.group.GroupListMineDeactivatedView.paginate_by">
 <span class="sig-name descname"><span class="pre">paginate_by</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.views.group.GroupListMineDeactivatedView.paginate_by" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="cosinnus.views.group.GroupListMineDeactivatedView.paginator_class">
+<span class="sig-name descname"><span class="pre">paginator_class</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#cosinnus.views.group.GroupListMineDeactivatedView.paginator_class" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -3142,10 +3170,10 @@ It is reset to <code class="docutils literal notranslate"><span class="pre">None
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">results</span> <span class="pre">=</span> <span class="pre">[(id1,</span> <span class="pre">text1),</span> <span class="pre">(id2,</span> <span class="pre">text2),</span> <span class="pre">...]</span></code></p>
 <p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;nil&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">'nil'</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">[</span>
-    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Value label1&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;Value label2&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Value label1'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">'Value label2'</span><span class="p">),</span>
     <span class="p">])</span>
 </pre></div>
 </div>
@@ -3344,7 +3372,7 @@ Subclasses can override this to return any object.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.views.group.GroupUserDeleteView">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.group.</span></span><span class="sig-name descname"><span class="pre">GroupUserDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.group.GroupUserDeleteView" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.group.</span></span><span class="sig-name descname"><span class="pre">GroupUserDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.group.GroupUserDeleteView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.ajax.AjaxableFormMixin" title="cosinnus.views.mixins.ajax.AjaxableFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">AjaxableFormMixin</span></code></a>, <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireAdminMixin" title="cosinnus.views.mixins.group.RequireAdminMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireAdminMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteView</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.group.GroupUserDeleteView.form_valid">
@@ -3760,10 +3788,10 @@ It is reset to <code class="docutils literal notranslate"><span class="pre">None
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">results</span> <span class="pre">=</span> <span class="pre">[(id1,</span> <span class="pre">text1),</span> <span class="pre">(id2,</span> <span class="pre">text2),</span> <span class="pre">...]</span></code></p>
 <p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;nil&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">'nil'</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">[</span>
-    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Value label1&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;Value label2&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Value label1'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">'Value label2'</span><span class="p">),</span>
     <span class="p">])</span>
 </pre></div>
 </div>
@@ -4264,6 +4292,12 @@ who want to receive the newsletter</p>
 <dd></dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="cosinnus.views.housekeeping.inactivity_preview">
+<span class="sig-prename descclassname"><span class="pre">cosinnus.views.housekeeping.</span></span><span class="sig-name descname"><span class="pre">inactivity_preview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.housekeeping.inactivity_preview" title="Permalink to this definition">¶</a></dt>
+<dd><p>Preview current inactivity candidates and all configured warning emails.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.housekeeping.move_group_content">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.housekeeping.</span></span><span class="sig-name descname"><span class="pre">move_group_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fromgroup</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">togroup</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.housekeeping.move_group_content" title="Permalink to this definition">¶</a></dt>
 <dd><p>access to function for moving group content from one group to another</p>
@@ -4328,11 +4362,6 @@ Will ignore any setting with the tag #internal in its comments.</p>
 <dd><p>Resets all CosinnusGroup Dashboard Widget Configurations to their default
 by deleting and recreating them.</p>
 </dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cosinnus.views.housekeeping.reset_user_tos_flags">
-<span class="sig-prename descclassname"><span class="pre">cosinnus.views.housekeeping.</span></span><span class="sig-name descname"><span class="pre">reset_user_tos_flags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.housekeeping.reset_user_tos_flags" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.housekeeping.send_testmail">
@@ -4434,7 +4463,7 @@ by deleting and recreating them.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.views.idea.IdeaDeleteView">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.idea.</span></span><span class="sig-name descname"><span class="pre">IdeaDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.idea.IdeaDeleteView" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.idea.</span></span><span class="sig-name descname"><span class="pre">IdeaDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.idea.IdeaDeleteView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireWriteGrouplessMixin" title="cosinnus.views.mixins.group.RequireWriteGrouplessMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireWriteGrouplessMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.group.SamePortalGroupMixin" title="cosinnus.views.group.SamePortalGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamePortalGroupMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">AjaxFormsDeleteViewMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteView</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.idea.IdeaDeleteView.get_success_url">
@@ -4936,7 +4965,7 @@ Note: you <em>can</em> in principle block inactive users! (Leaving this function
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.views.profile.UserProfileDeleteView">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.profile.</span></span><span class="sig-name descname"><span class="pre">UserProfileDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.profile.UserProfileDeleteView" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.profile.</span></span><span class="sig-name descname"><span class="pre">UserProfileDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.profile.UserProfileDeleteView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.avatar.AvatarFormMixin" title="cosinnus.views.mixins.avatar.AvatarFormMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">AvatarFormMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.profile.UserProfileObjectMixin" title="cosinnus.views.profile.UserProfileObjectMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserProfileObjectMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteView</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.profile.UserProfileDeleteView.dispatch">
@@ -5323,10 +5352,10 @@ It is reset to <code class="docutils literal notranslate"><span class="pre">None
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">results</span> <span class="pre">=</span> <span class="pre">[(id1,</span> <span class="pre">text1),</span> <span class="pre">(id2,</span> <span class="pre">text2),</span> <span class="pre">...]</span></code></p>
 <p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;nil&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">'nil'</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">[</span>
-    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Value label1&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;Value label2&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Value label1'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">'Value label2'</span><span class="p">),</span>
     <span class="p">])</span>
 </pre></div>
 </div>
@@ -5399,10 +5428,10 @@ It is reset to <code class="docutils literal notranslate"><span class="pre">None
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">results</span> <span class="pre">=</span> <span class="pre">[(id1,</span> <span class="pre">text1),</span> <span class="pre">(id2,</span> <span class="pre">text2),</span> <span class="pre">...]</span></code></p>
 <p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;nil&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">'nil'</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">[</span>
-    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Value label1&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;Value label2&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Value label1'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">'Value label2'</span><span class="p">),</span>
     <span class="p">])</span>
 </pre></div>
 </div>
@@ -5444,10 +5473,10 @@ It is reset to <code class="docutils literal notranslate"><span class="pre">None
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">results</span> <span class="pre">=</span> <span class="pre">[(id1,</span> <span class="pre">text1),</span> <span class="pre">(id2,</span> <span class="pre">text2),</span> <span class="pre">...]</span></code></p>
 <p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;nil&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">'nil'</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">[</span>
-    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Value label1&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;Value label2&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Value label1'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">'Value label2'</span><span class="p">),</span>
     <span class="p">])</span>
 </pre></div>
 </div>
@@ -5489,10 +5518,10 @@ It is reset to <code class="docutils literal notranslate"><span class="pre">None
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">results</span> <span class="pre">=</span> <span class="pre">[(id1,</span> <span class="pre">text1),</span> <span class="pre">(id2,</span> <span class="pre">text2),</span> <span class="pre">...]</span></code></p>
 <p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;nil&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">'nil'</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">[</span>
-    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Value label1&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;Value label2&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Value label1'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">'Value label2'</span><span class="p">),</span>
     <span class="p">])</span>
 </pre></div>
 </div>
@@ -5555,10 +5584,10 @@ It is reset to <code class="docutils literal notranslate"><span class="pre">None
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">results</span> <span class="pre">=</span> <span class="pre">[(id1,</span> <span class="pre">text1),</span> <span class="pre">(id2,</span> <span class="pre">text2),</span> <span class="pre">...]</span></code></p>
 <p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;nil&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">'nil'</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">[</span>
-    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Value label1&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;Value label2&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Value label1'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">'Value label2'</span><span class="p">),</span>
     <span class="p">])</span>
 </pre></div>
 </div>
@@ -5873,7 +5902,7 @@ the global notification setting and the userprofile visibility setting.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.views.user.CosinnusPasswordResetForm">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">CosinnusPasswordResetForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.CosinnusPasswordResetForm" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">CosinnusPasswordResetForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bound_field_class=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.CosinnusPasswordResetForm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PasswordResetForm</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus.views.user.CosinnusPasswordResetForm.base_fields">
@@ -6193,44 +6222,6 @@ password to that view.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserDetailView">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">UserDetailView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.UserDetailView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">DetailView</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserDetailView.dispatch">
-<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.UserDetailView.dispatch" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserDetailView.get_context_data">
-<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.UserDetailView.get_context_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Insert the single object into the context dict.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserDetailView.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus.views.user.UserDetailView.model" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserDetailView.slug_field">
-<span class="sig-name descname"><span class="pre">slug_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'username'</span></em><a class="headerlink" href="#cosinnus.views.user.UserDetailView.slug_field" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserDetailView.slug_url_kwarg">
-<span class="sig-name descname"><span class="pre">slug_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'username'</span></em><a class="headerlink" href="#cosinnus.views.user.UserDetailView.slug_url_kwarg" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserDetailView.template_name">
-<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus/user/userprofile_detail.html'</span></em><a class="headerlink" href="#cosinnus.views.user.UserDetailView.template_name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.views.user.UserListMapView">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">UserListMapView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.UserListMapView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cosinnus.views.user.UserListView" title="cosinnus.views.user.UserListView"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserListView</span></code></a></p>
@@ -6342,10 +6333,10 @@ It is reset to <code class="docutils literal notranslate"><span class="pre">None
 </div>
 <p>Where <code class="docutils literal notranslate"><span class="pre">results</span> <span class="pre">=</span> <span class="pre">[(id1,</span> <span class="pre">text1),</span> <span class="pre">(id2,</span> <span class="pre">text2),</span> <span class="pre">...]</span></code></p>
 <p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;nil&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">'nil'</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">[</span>
-    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Value label1&#39;</span><span class="p">),</span>
-    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;Value label2&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Value label1'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">'Value label2'</span><span class="p">),</span>
     <span class="p">])</span>
 </pre></div>
 </div>
@@ -6380,65 +6371,24 @@ used by <cite>UserCreateView</cite> and <cite>SignupView</cite></p>
 <dt class="sig sig-object py" id="cosinnus.views.user.UserSignupTriggerEventsMixin.trigger_events_after_user_signup">
 <span class="sig-name descname"><span class="pre">trigger_events_after_user_signup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_messages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.UserSignupTriggerEventsMixin.trigger_events_after_user_signup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Triggers all kinds of events and signals after a user has signed up and their profile creation
-has been completed. Should be called after
-<cite>UserSignupFinalizeMixin.finalize_user_object_after_signup</cite>
-&#64;param request_data: if the POST data is not contained in <cite>request.POST</cite>, supply it via this arg
+has been completed. Should be called after</p>
+<blockquote>
+<div><p><cite>UserSignupFinalizeMixin.finalize_user_object_after_signup</cite>.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Hint: new users are added to the portal default groups (defined in <cite>get_default_user_group_slugs</cite> /</dt><dd><dl class="simple">
+<dt><cite>NEWW_DEFAULT_USER_GROUPS</cite>) via the hook <cite>ensure_user_to_default_portal_groups</cite>, after their</dt><dd><p>portal membership is created, and not here!</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>&#64;param request_data: if the POST data is not contained in <cite>request.POST</cite>, supply it via this arg
 &#64;param skip_messages: if True, will not trigger any user messages. used when this s</p>
 <blockquote>
 <div><p>called via API.</p>
 </div></blockquote>
 <p>&#64;return: None or an alternate return redirect URL</p>
 </dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserUpdateView">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">UserUpdateView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.UserUpdateView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UpdateView</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserUpdateView.dispatch">
-<span class="sig-name descname"><span class="pre">dispatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.UserUpdateView.dispatch" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserUpdateView.form_class">
-<span class="sig-name descname"><span class="pre">form_class</span></span><a class="headerlink" href="#cosinnus.views.user.UserUpdateView.form_class" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference internal" href="cosinnus.forms.html#cosinnus.forms.user.UserChangeForm" title="cosinnus.forms.user.UserChangeForm"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserChangeForm</span></code></a></p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserUpdateView.get_context_data">
-<span class="sig-name descname"><span class="pre">get_context_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.UserUpdateView.get_context_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Insert the form into the context dict.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserUpdateView.get_success_url">
-<span class="sig-name descname"><span class="pre">get_success_url</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.UserUpdateView.get_success_url" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the URL to redirect to after processing a valid form.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserUpdateView.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#cosinnus.views.user.UserUpdateView.model" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserUpdateView.slug_field">
-<span class="sig-name descname"><span class="pre">slug_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'username'</span></em><a class="headerlink" href="#cosinnus.views.user.UserUpdateView.slug_field" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserUpdateView.slug_url_kwarg">
-<span class="sig-name descname"><span class="pre">slug_url_kwarg</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'username'</span></em><a class="headerlink" href="#cosinnus.views.user.UserUpdateView.slug_url_kwarg" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="cosinnus.views.user.UserUpdateView.template_name">
-<span class="sig-name descname"><span class="pre">template_name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cosinnus/registration/signup.html'</span></em><a class="headerlink" href="#cosinnus.views.user.UserUpdateView.template_name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 
@@ -6660,11 +6610,6 @@ Returens {} if no user is logged in this session.</p>
 <dd></dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cosinnus.views.user.user_detail">
-<span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">user_detail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.user_detail" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.user.user_list">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">user_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.user_list" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -6672,11 +6617,6 @@ Returens {} if no user is logged in this session.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="cosinnus.views.user.user_list_map">
 <span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">user_list_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.user_list_map" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cosinnus.views.user.user_update">
-<span class="sig-prename descclassname"><span class="pre">cosinnus.views.user.</span></span><span class="sig-name descname"><span class="pre">user_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user.user_update" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
@@ -7237,7 +7177,7 @@ TODO: use clever caching</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementDeleteView">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard_announcement.</span></span><span class="sig-name descname"><span class="pre">UserDashboardAnnouncementDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementDeleteView" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_dashboard_announcement.</span></span><span class="sig-name descname"><span class="pre">UserDashboardAnnouncementDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementDeleteView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireSuperuserMixin" title="cosinnus.views.mixins.group.RequireSuperuserMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireSuperuserMixin</span></code></a>, <a class="reference internal" href="#cosinnus.views.user_dashboard_announcement.SamePortalGroupMixin" title="cosinnus.views.user_dashboard_announcement.SamePortalGroupMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamePortalGroupMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteView</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.user_dashboard_announcement.UserDashboardAnnouncementDeleteView.get_success_url">
@@ -7422,7 +7362,7 @@ TODO: use clever caching</p>
 <span id="cosinnus-views-user-import-module"></span><h2>cosinnus.views.user_import module<a class="headerlink" href="#module-cosinnus.views.user_import" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus.views.user_import.ArchivedCosinnusUserImportDeleteView">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_import.</span></span><span class="sig-name descname"><span class="pre">ArchivedCosinnusUserImportDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_import.ArchivedCosinnusUserImportDeleteView" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus.views.user_import.</span></span><span class="sig-name descname"><span class="pre">ArchivedCosinnusUserImportDeleteView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus.views.user_import.ArchivedCosinnusUserImportDeleteView" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="cosinnus.views.mixins.html#cosinnus.views.mixins.group.RequireSuperuserMixin" title="cosinnus.views.mixins.group.RequireSuperuserMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequireSuperuserMixin</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DeleteView</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cosinnus.views.user_import.ArchivedCosinnusUserImportDeleteView.get_success_url">
@@ -7887,11 +7827,11 @@ template rendered with the given context.</p>
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2024, wechange eG.
+      &#169;2024, wechange eG.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="../_sources/refs/cosinnus.views.rst.txt"

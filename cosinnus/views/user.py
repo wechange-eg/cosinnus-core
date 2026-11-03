@@ -31,11 +31,10 @@ from django.template.loader import render_to_string
 from django.template.response import TemplateResponse
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.decorators import method_decorator
 from django.utils.encoding import force_str
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic import CreateView, ListView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from django_select2.views import NO_ERR_RESP, Select2View
@@ -48,7 +47,6 @@ from cosinnus.core.decorators.views import (
     redirect_to_403,
     redirect_to_error_page,
     redirect_to_not_logged_in,
-    staff_required,
 )
 from cosinnus.core.mail import (
     get_common_mail_context,
@@ -60,7 +58,6 @@ from cosinnus.core.signals import user_logged_in_first_time, userprofile_created
 from cosinnus.forms.user import (
     TermsOfServiceFormFields,
     UserChangeEmailFormWithPasswordValidation,
-    UserChangeForm,
     UserCreationForm,
     UserGroupGuestAccessForm,
     ValidatedPasswordChangeForm,
@@ -1045,52 +1042,6 @@ def verifiy_user_email(request, email_verification_param):
             % {'email': user.email},
         )
         return redirect(redirect_url)
-
-
-class UserDetailView(DetailView):
-    model = USER_MODEL
-    slug_field = 'username'
-    slug_url_kwarg = 'username'
-    template_name = 'cosinnus/user/userprofile_detail.html'
-
-    @method_decorator(staff_required)
-    def dispatch(self, *args, **kwargs):
-        return super(UserDetailView, self).dispatch(*args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(UserDetailView, self).get_context_data(**kwargs)
-
-        profile = context['user'].cosinnus_profile
-        context['profile'] = profile
-        context['optional_fields'] = profile.get_optional_fields()
-
-        return context
-
-
-user_detail = UserDetailView.as_view()
-
-
-class UserUpdateView(UpdateView):
-    form_class = UserChangeForm
-    model = USER_MODEL
-    slug_field = 'username'
-    slug_url_kwarg = 'username'
-    template_name = 'cosinnus/registration/signup.html'
-
-    @method_decorator(staff_required)
-    def dispatch(self, *args, **kwargs):
-        return super(UserUpdateView, self).dispatch(*args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(UserUpdateView, self).get_context_data(**kwargs)
-        context['submit_label'] = _('Save')
-        return context
-
-    def get_success_url(self):
-        return reverse('cosinnus:profile-detail', kwargs={'username': self.object.username})
-
-
-user_update = UserUpdateView.as_view()
 
 
 class CosinnusPasswordChangeView(PasswordChangeView):

@@ -2,11 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import wagtail.images.blocks
-import wagtail.core.fields
-import wagtail.core.blocks
-import cosinnus.models.wagtail_models
-from django.conf import settings
 import django.core.validators
 from cosinnus.utils.migrations import attach_swappable_dependencies
 

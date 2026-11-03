@@ -11,6 +11,6 @@ What happens if you do not take any action to keep the group or project active (
 * After deletion from our database, the deleted group/project data may remain in our backups for up to six months.
 
 If an earlier deletion is desired, you can delete the group/project under {{ delete_group_url }}.{% endblocktrans %}
-{% if support_email %}{% captureas support_mail_link %}<a href="mailto:{{ support_email }}">{{ support_email }}</a>{% endcaptureas %}
+{% if support_email %}{% captureas support_mail_link %}[{{ support_email }}](mailto:{{ support_email }}){% endcaptureas %}
 {% blocktrans with support_mail_link=support_mail_link %}If you have any questions or would like to request earlier deletion, please contact {{ support_mail_link }}.{% endblocktrans %}
 {% endif %}

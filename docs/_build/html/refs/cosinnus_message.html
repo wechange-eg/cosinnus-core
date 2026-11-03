@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>cosinnus_message package &#8212; Cosinnus 2.10.0b documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f0bd290c"></script>
+    <title>cosinnus_message package &#8212; Cosinnus 2.11.0b1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=2b700200"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -18,8 +18,9 @@
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
+
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
 
   </head><body>
   
@@ -348,7 +349,7 @@ These are settings used by default in cosinnus apps, such as avatar dimensions, 
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_message.cron.ProcessDirectReplyMails.schedule">
-<span class="sig-name descname"><span class="pre">schedule</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django_cron.Schedule</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_message.cron.ProcessDirectReplyMails.schedule" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">schedule</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django_cron.core.Schedule</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#cosinnus_message.cron.ProcessDirectReplyMails.schedule" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -419,7 +420,7 @@ if has_more == False, the receiving widget will assume no further data can be lo
 <span id="cosinnus-message-forms-module"></span><h2>cosinnus_message.forms module<a class="headerlink" href="#module-cosinnus_message.forms" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="cosinnus_message.forms.ContactMessageForm">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.forms.</span></span><span class="sig-name descname"><span class="pre">ContactMessageForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.forms.ContactMessageForm" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cosinnus_message.forms.</span></span><span class="sig-name descname"><span class="pre">ContactMessageForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bound_field_class=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cosinnus_message.forms.ContactMessageForm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Form</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_message.forms.ContactMessageForm.base_fields">
@@ -571,8 +572,8 @@ association with the field named ‘__all__’.</p>
 <span class="sig-name descname"><span class="pre">mailbox_ptr</span></span><a class="headerlink" href="#cosinnus_message.models.CosinnusMailbox.mailbox_ptr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accessor to the related object on the forward side of a one-to-one relation.</p>
 <p>In the example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Restaurant</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-    <span class="n">place</span> <span class="o">=</span> <span class="n">OneToOneField</span><span class="p">(</span><span class="n">Place</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;restaurant&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Restaurant</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="n">OneToOneField</span><span class="p">(</span><span class="n">Place</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">'restaurant'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Restaurant.place</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardOneToOneDescriptor</span></code> instance.</p>
@@ -594,8 +595,8 @@ association with the field named ‘__all__’.</p>
 <dd><p>Accessor to the related object on the forward side of a many-to-one or
 one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <p>In the example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">'children'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
@@ -613,7 +614,7 @@ one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
 <span id="cosinnus-message-postman-urls-module"></span><h2>cosinnus_message.postman_urls module<a class="headerlink" href="#module-cosinnus_message.postman_urls" title="Permalink to this heading">¶</a></h2>
 <p>If the default usage of the views suits you, simply use a line like
 this one in your root URLconf to set up the default URLs:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^messages/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;postman.urls&#39;</span><span class="p">)),</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="sa">r</span><span class="s1">'^messages/'</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">'postman.urls'</span><span class="p">)),</span>
 </pre></div>
 </div>
 <p>Otherwise you may customize the behavior by passing extra parameters.</p>
@@ -621,7 +622,7 @@ this one in your root URLconf to set up the default URLs:</p>
 <h3>Recipients Max<a class="headerlink" href="#recipients-max" title="Permalink to this heading">¶</a></h3>
 <p>Views supporting the parameter are: <code class="docutils literal notranslate"><span class="pre">WriteView</span></code>, <code class="docutils literal notranslate"><span class="pre">ReplyView</span></code>.
 Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_write&#39;</span><span class="p">),</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="nb">max</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">'postman_write'</span><span class="p">),</span>
 </pre></div>
 </div>
 <p>See also the <code class="docutils literal notranslate"><span class="pre">POSTMAN_DISALLOW_MULTIRECIPIENTS</span></code> setting</p>
@@ -630,12 +631,12 @@ Example:</p>
 <h3>User filter<a class="headerlink" href="#user-filter" title="Permalink to this heading">¶</a></h3>
 <p>Views supporting a user filter are: <code class="docutils literal notranslate"><span class="pre">WriteView</span></code>, <code class="docutils literal notranslate"><span class="pre">ReplyView</span></code>.
 Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_user_filter</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_user_filter</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">get_profile</span><span class="p">()</span><span class="o">.</span><span class="n">is_absent</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;is away&quot;</span>
+        <span class="k">return</span> <span class="s2">"is away"</span>
     <span class="k">return</span> <span class="kc">None</span>
 <span class="o">...</span>
-<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">user_filter</span><span class="o">=</span><span class="n">my_user_filter</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_write&#39;</span><span class="p">),</span>
+<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">user_filter</span><span class="o">=</span><span class="n">my_user_filter</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">'postman_write'</span><span class="p">),</span>
 </pre></div>
 </div>
 <p>function interface:
@@ -646,12 +647,12 @@ Out: None, False, ‘’, ‘a reason’, or ValidationError</p>
 <h3>Exchange filter<a class="headerlink" href="#exchange-filter" title="Permalink to this heading">¶</a></h3>
 <p>Views supporting an exchange filter are: <code class="docutils literal notranslate"><span class="pre">WriteView</span></code>, <code class="docutils literal notranslate"><span class="pre">ReplyView</span></code>.
 Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_exchange_filter</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">recipient</span><span class="p">,</span> <span class="n">recipients_list</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_exchange_filter</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">recipient</span><span class="p">,</span> <span class="n">recipients_list</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">recipient</span><span class="o">.</span><span class="n">relationships</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">RelationshipStatus</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">blocking</span><span class="p">()):</span>
-        <span class="k">return</span> <span class="s2">&quot;has blacklisted you&quot;</span>
+        <span class="k">return</span> <span class="s2">"has blacklisted you"</span>
     <span class="k">return</span> <span class="kc">None</span>
 <span class="o">...</span>
-<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">exchange_filter</span><span class="o">=</span><span class="n">my_exchange_filter</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_write&#39;</span><span class="p">),</span>
+<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">exchange_filter</span><span class="o">=</span><span class="n">my_exchange_filter</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">'postman_write'</span><span class="p">),</span>
 </pre></div>
 </div>
 <p>function interface:
@@ -667,9 +668,9 @@ In:</p>
 <h3>Auto-complete field<a class="headerlink" href="#auto-complete-field" title="Permalink to this heading">¶</a></h3>
 <p>Views supporting an auto-complete parameter are: <code class="docutils literal notranslate"><span class="pre">WriteView</span></code>, <code class="docutils literal notranslate"><span class="pre">ReplyView</span></code>.
 Examples:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">autocomplete_channels</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="s1">&#39;anonymous_ac&#39;</span><span class="p">)),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_write&#39;</span><span class="p">),</span>
-<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">autocomplete_channels</span><span class="o">=</span><span class="s1">&#39;write_ac&#39;</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_write&#39;</span><span class="p">),</span>
-<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">autocomplete_channel</span><span class="o">=</span><span class="s1">&#39;reply_ac&#39;</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_reply&#39;</span><span class="p">),</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">autocomplete_channels</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="s1">'anonymous_ac'</span><span class="p">)),</span> <span class="n">name</span><span class="o">=</span><span class="s1">'postman_write'</span><span class="p">),</span>
+<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">autocomplete_channels</span><span class="o">=</span><span class="s1">'write_ac'</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">'postman_write'</span><span class="p">),</span>
+<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">autocomplete_channel</span><span class="o">=</span><span class="s1">'reply_ac'</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">'postman_reply'</span><span class="p">),</span>
 </pre></div>
 </div>
 </section>
@@ -677,16 +678,16 @@ Examples:</p>
 <h3>Auto moderators<a class="headerlink" href="#auto-moderators" title="Permalink to this heading">¶</a></h3>
 <p>Views supporting an <code class="docutils literal notranslate"><span class="pre">auto-moderators</span></code> parameter are: <code class="docutils literal notranslate"><span class="pre">WriteView</span></code>, <code class="docutils literal notranslate"><span class="pre">ReplyView</span></code>.
 Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mod1</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mod1</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
     <span class="c1"># ...</span>
     <span class="k">return</span> <span class="kc">None</span>
-<span class="k">def</span> <span class="nf">mod2</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mod2</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
     <span class="c1"># ...</span>
     <span class="k">return</span> <span class="kc">None</span>
-<span class="n">mod2</span><span class="o">.</span><span class="n">default_reason</span> <span class="o">=</span> <span class="s1">&#39;mod2 default reason&#39;</span>
+<span class="n">mod2</span><span class="o">.</span><span class="n">default_reason</span> <span class="o">=</span> <span class="s1">'mod2 default reason'</span>
 <span class="o">...</span>
-<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">auto_moderators</span><span class="o">=</span><span class="p">(</span><span class="n">mod1</span><span class="p">,</span> <span class="n">mod2</span><span class="p">)),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_write&#39;</span><span class="p">),</span>
-<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">auto_moderators</span><span class="o">=</span><span class="n">mod1</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;postman_reply&#39;</span><span class="p">),</span>
+<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">auto_moderators</span><span class="o">=</span><span class="p">(</span><span class="n">mod1</span><span class="p">,</span> <span class="n">mod2</span><span class="p">)),</span> <span class="n">name</span><span class="o">=</span><span class="s1">'postman_write'</span><span class="p">),</span>
+<span class="o">...</span><span class="n">View</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">auto_moderators</span><span class="o">=</span><span class="n">mod1</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">'postman_reply'</span><span class="p">),</span>
 </pre></div>
 </div>
 <p>function interface:
@@ -1340,7 +1341,7 @@ Will not create new users.
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_message.views.DeleteView.field_value">
-<span class="sig-name descname"><span class="pre">field_value</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">datetime.datetime(2026,</span> <span class="pre">10,</span> <span class="pre">7,</span> <span class="pre">10,</span> <span class="pre">28,</span> <span class="pre">37,</span> <span class="pre">112483,</span> <span class="pre">tzinfo=datetime.timezone.utc)</span></em><a class="headerlink" href="#cosinnus_message.views.DeleteView.field_value" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">field_value</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">datetime.datetime(2026,</span> <span class="pre">11,</span> <span class="pre">2,</span> <span class="pre">16,</span> <span class="pre">30,</span> <span class="pre">16,</span> <span class="pre">485106,</span> <span class="pre">tzinfo=datetime.timezone.utc)</span></em><a class="headerlink" href="#cosinnus_message.views.DeleteView.field_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1357,7 +1358,7 @@ Will not create new users.
 <p>Mark messages/conversations as read.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cosinnus_message.views.MarkAsReadView.field_value">
-<span class="sig-name descname"><span class="pre">field_value</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">datetime.datetime(2026,</span> <span class="pre">10,</span> <span class="pre">7,</span> <span class="pre">10,</span> <span class="pre">28,</span> <span class="pre">37,</span> <span class="pre">112498,</span> <span class="pre">tzinfo=datetime.timezone.utc)</span></em><a class="headerlink" href="#cosinnus_message.views.MarkAsReadView.field_value" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">field_value</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">datetime.datetime(2026,</span> <span class="pre">11,</span> <span class="pre">2,</span> <span class="pre">16,</span> <span class="pre">30,</span> <span class="pre">16,</span> <span class="pre">485126,</span> <span class="pre">tzinfo=datetime.timezone.utc)</span></em><a class="headerlink" href="#cosinnus_message.views.MarkAsReadView.field_value" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1633,11 +1634,11 @@ creates a new private group with group admins if not
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2024, wechange eG.
+      &#169;2024, wechange eG.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |
       <a href="../_sources/refs/cosinnus_message.rst.txt"

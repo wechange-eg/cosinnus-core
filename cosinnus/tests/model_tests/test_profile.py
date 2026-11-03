@@ -3,10 +3,10 @@ from __future__ import unicode_literals
 
 import datetime
 
-import pytz
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.utils.encoding import force_str
+from zoneinfo import ZoneInfo
 
 from cosinnus.models import CosinnusPortal
 from cosinnus.models.profile import get_user_profile_model
@@ -65,14 +65,14 @@ class DefaultUserProfileTest(TestCase):
     def test_get_optional_fieldnames(self):
         optional = UserProfile.get_optional_fieldnames()
         expected_optional_fieldnames = {
-            'language',
-            'translations',
-            'timezone',
             'avatar',
-            'website',
-            'may_be_contacted',
-            'dynamic_fields',
             'description',
+            'dynamic_fields',
+            'language',
+            'may_be_contacted',
+            'timezone',
+            'translations',
+            'website',
         }
         self.assertEqual(set(optional), expected_optional_fieldnames)
 
@@ -81,7 +81,7 @@ class DefaultUserProfileTest(TestCase):
         optional = user.cosinnus_profile.get_optional_fields()
         expected_optional_fields = [
             {'name': 'Language', 'value': 'de'},
-            {'name': 'timezone', 'value': pytz.timezone('Europe/Berlin')},
+            {'name': 'timezone', 'value': ZoneInfo('Europe/Berlin')},
         ]
         self.assertEqual(optional, expected_optional_fields)
 

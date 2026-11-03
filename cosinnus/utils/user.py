@@ -6,7 +6,6 @@ import hashlib
 import logging
 import random
 
-import pytz
 import six
 from dateutil import parser
 from django.apps import apps
@@ -419,7 +418,7 @@ def get_user_tos_accepted_date(user):
     if portal_dict_or_date is None:
         if check_user_has_accepted_any_tos(user):
             # if user has accepted some ToS, but we don't know when, set it to in the past for this portal
-            portal_dict_or_date = {str(portal.id): datetime.datetime(1999, 1, 1, 13, 37, 0, 0, pytz.utc)}
+            portal_dict_or_date = {str(portal.id): datetime.datetime(1999, 1, 1, 13, 37, 0, 0, datetime.timezone.utc)}
             user.cosinnus_profile.settings['tos_accepted_date'] = portal_dict_or_date
             user.cosinnus_profile.save(update_fields=['settings'])
             portal_dict_or_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
@@ -438,7 +437,7 @@ def get_user_tos_accepted_date(user):
             datetime_or_none = parser.parse(datetime_or_none)
         # we had a phase where we had unaware default datetimes saved, so backport-make them aware
         if is_naive(datetime_or_none):
-            datetime_or_none = pytz.utc.localize(datetime_or_none)
+            datetime_or_none = datetime_or_none.replace(tzinfo=datetime.timezone.utc)
     return datetime_or_none
 
 

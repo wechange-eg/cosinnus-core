@@ -25,6 +25,7 @@ from django.utils.translation import gettext_lazy as _
 
 from cosinnus import VERSION as COSINNUS_VERSION
 
+# TODO: remove after update
 # `django.core.exceptions.ImproperlyConfigured:
 #   PASSWORD_RESET_TIMEOUT_DAYS/PASSWORD_RESET_TIMEOUT are mutually exclusive.`
 # because django.conf.global_settings is being imported directly to be able to modify pre-existing default values.
@@ -32,6 +33,7 @@ from cosinnus import VERSION as COSINNUS_VERSION
 if 'PASSWORD_RESET_TIMEOUT_DAYS' in globals():
     del globals()['PASSWORD_RESET_TIMEOUT_DAYS']
 
+# TODO: remove after update
 # DEFAULT_FILE_STORAGE/STATICFILES_STORAGE are deprecated and mutually exclusive with STORAGES.
 if 'DEFAULT_FILE_STORAGE' in globals():
     del globals()['DEFAULT_FILE_STORAGE']
@@ -115,14 +117,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # Example: "http://media.lawrence.com/static/"
     STATIC_URL = '/static/'
 
-    # List of finder classes that know how to find static files in
-    # various locations
-    STATICFILES_FINDERS = (
-        'django.contrib.staticfiles.finders.FileSystemFinder',
-        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-        'compressor.finders.CompressorFinder',
-    )
-
     ROOT_URLCONF = 'config.urls'
 
     """ --------------- DJANGO-SPECIFICS ---------------- """
@@ -139,7 +133,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # Hosts/domain names that are valid for this site; required if DEBUG is False
     ALLOWED_HOSTS = env.list('WECHANGE_ALLOWED_HOSTS', default=['.' + project_settings['COSINNUS_PORTAL_URL']])
     DATABASES = {
-        'default': env.db('WECHANGE_DATABASE_URL'),
+        'default': env.db('WECHANGE_DATABASE_URL', engine='django_prometheus.db.backends.postgresql'),
     }
     ADMIN_URL = env('WECHANGE_ADMIN_URL', default='admin/')
 
@@ -149,6 +143,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
     MIDDLEWARE = [
+        'django_prometheus.middleware.PrometheusBeforeMiddleware',
         'django.middleware.common.CommonMiddleware',
         # enable this middleware to prevent all cookies for non-logged in users. this breaks
         # language switching while not logged in!
@@ -163,7 +158,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.core.middleware.cosinnus_middleware.UserOTPMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
-        'wagtail.contrib.redirects.middleware.RedirectMiddleware',
         'allauth.account.middleware.AccountMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.ConditionalRedirectMiddleware',
@@ -176,6 +170,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'cosinnus.core.middleware.frontend_middleware.FrontendMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.ExternalEmailLinkRedirectNoticeMiddleware',
         'cosinnus.core.middleware.cosinnus_middleware.DeprecatedAppMiddleware',
+        'django_prometheus.middleware.PrometheusAfterMiddleware',
     ]
 
     TEMPLATES = [
@@ -225,6 +220,9 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # Make build_absolute_uri use "https" behind the proxy. E.g. this is needed for the OpenID auto-discovery view.
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+    # Django 6.0 ready: make URLFields use HTTPS
+    FORMS_URLFIELD_ASSUME_HTTPS = True
+
     """ --------------- SESSION/COOKIES ---------------- """
 
     # use session storage for CSRF instead of cookie
@@ -261,9 +259,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # If you set this to False, Django will make some optimizations so as not
     # to load the internationalization machinery.
     USE_I18N = True
-    # If you set this to False, Django will not format dates, numbers and
-    # calendars according to the current locale.
-    USE_L10N = True
     # If you set this to False, Django will not use timezone-aware datetimes.
     USE_TZ = True
 
@@ -279,6 +274,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         'django.contrib.sessions',
         'django.contrib.sites',
         'django.contrib.staticfiles',
+        'django_prometheus',
         'suit_overextends',
         'suit',
         'django.contrib.admin',
@@ -319,23 +315,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     INSTALLED_APPS += project_settings.get('EXTRA_COSINNUS_APPS', [])
 
     INSTALLED_APPS += [
-        # haystack needs to precede wagtail because wagtail idiotically overrides haystack's mmanagement commands
         'haystack',
-        # wagtail
-        'wagtail_overextends',
-        'compressor',
-        'modelcluster',
-        'wagtail.core',
-        'wagtail.admin',
-        'wagtail.documents',
-        'wagtail.snippets',
-        'wagtail.users',
-        'wagtail.images',
-        'wagtail.embeds',
-        'wagtail.search',
-        'wagtail.sites',
-        'wagtail.contrib.redirects',
-        'wagtail.contrib.forms',
         'announcements',
         'ajax_forms',
         # 'django_extensions',
@@ -438,7 +418,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     # memcached
     CACHES = {
         'default': {
-            'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+            'BACKEND': 'django_prometheus.cache.backends.memcached.PyMemcacheCache',
             'LOCATION': env(
                 'WECHANGE_MEMCACHED_LOCATION',
                 default=f'unix:/srv/http/{project_settings["COSINNUS_PORTAL_URL"]}/run/memcached.socket',
@@ -493,6 +473,9 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
         env('WECHANGE_COSINNUS_CLOUD_PASSWORD', default=''),
     )
     COSINNUS_CLOUD_NEXTCLOUD_API_TOKEN = env('WECHANGE_COSINNUS_CLOUD_API_TOKEN', default='')
+
+    # prometheus
+    PROMETHEUS_METRIC_NAMESPACE = f'portal_{project_settings["COSINNUS_PORTAL_NAME"]}'
 
     """ --------------- EXTERNAL SERVICES  ---------------- """
 
@@ -608,8 +591,7 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
     THUMBNAIL_PROCESSORS = (
         'easy_thumbnails.processors.colorspace',
         'easy_thumbnails.processors.autocrop',
-        # 'easy_thumbnails.processors.scale_and_crop',
-        'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+        'easy_thumbnails.processors.scale_and_crop',
         'easy_thumbnails.processors.filters',
     )
     # this namer prevents exposing the source file in its path
@@ -624,10 +606,6 @@ def define_cosinnus_base_settings(project_settings, project_base_path):
 
     # detect testing mode
     TESTING = 'test' in sys.argv
-
-    # wagtail
-    WAGTAIL_SITE_NAME = 'Wechange'
-    WAGTAIL_ENABLE_UPDATE_CHECK = False
 
     """ Default non-cosinnus specific settings i.e. for third-party apps.
 

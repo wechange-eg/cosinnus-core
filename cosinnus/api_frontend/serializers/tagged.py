@@ -44,7 +44,7 @@ class CosinnusMediaTagSerializerMixin:
         # save tags
         tags = media_tag_data.get('tags', None)
         if tags:
-            media_tag.tags.set(*tags, clear=True)
+            media_tag.tags.set(tags, clear=True)
 
         # save location
         if 'location' in media_tag_data:

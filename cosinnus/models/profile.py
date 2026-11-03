@@ -29,6 +29,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import pgettext_lazy
 from django_countries.fields import CountryField
+from django_prometheus.models import ExportModelOperationsMixin
 from timezone_field import TimeZoneField
 
 from cosinnus.conf import settings
@@ -133,6 +134,7 @@ class BaseUserProfileManager(models.Manager):
 
 @six.python_2_unicode_compatible
 class BaseUserProfile(
+    ExportModelOperationsMixin('UserProfile'),
     IndexingUtilsMixin,
     FacebookIntegrationUserProfileMixin,
     CosinnusDynamicFieldsModelMixin,
@@ -266,9 +268,7 @@ class BaseUserProfile(
 
     objects = BaseUserProfileManager()
 
-    # These fields will not be changed upon `_UserProfileForm` changes via the profile edit view.
-    # Any fields not included in this list and not included in the HTML template form will be reverted
-    # to their modelfield defaults when the user profile edit view is POSTed.
+    # These fields will not be included in `get_optional_fields()` and `get_optional_fieldnames()`.
     SKIP_FIELDS = [
         'id',
         'user',
@@ -278,6 +278,8 @@ class BaseUserProfile(
         'settings',
         'managed_tag_assignments',
         'likes',
+        'inactivity_notification_sent_at',
+        'scheduled_for_deletion_at',
         'deletion_triggered_by_self',
         '_is_guest',
         'guest_access_object',
