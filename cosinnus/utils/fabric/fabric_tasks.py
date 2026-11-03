@@ -116,6 +116,21 @@ def diffbase(_ctx):
 
 
 @task
+def delayrebuildindex(_ctx):
+    """This delays a no-input-required rebuild_index command to the server, to be run in 8h.
+    All output is logged to '~/rebuild_index_03_nov_26.log'.
+    Do not invoke this multiple times after another, or kill the sleeping processes on the server if you need to.
+    The double demonized wrapper is so fabric continues execution and doesn't wait for shell output to finish."""
+    env = get_env()
+    c = CosinnusFabricConnection(host=env.host)
+    with c.cd(env.path):
+        c.run(
+            """(nohup sh -c 'sleep 8h && echo "y" | ~/htdocs/.venv/bin/python ~/htdocs/manage.py rebuild_index' > ~/rebuild_index_03_nov_26.log 2>&1 < /dev/null &) &""",
+            pty=False,
+        )  # noqa
+
+
+@task
 def diffcore(_ctx):
     """Prints out the diff of cosinnus-core - basically the changes that would happen if hotdeploy would be executed
     right now.
