@@ -3,7 +3,7 @@ import logging
 import re
 from copy import copy
 from http.cookiejar import CookieJar
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlunparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -258,10 +258,19 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         self.django_request = copy(request._request)
         if not self.url:
             raise ValidationError('Missing required parameter: url')
+
         if not self.url.startswith('http'):
+            # prepend URLs without a scheme with a '/' so it gets treated as a local URL,
+            # even if it isn't - in that case, the resulting and returned 404 or similar error is fine
             if not self.url.startswith('/'):
                 self.url = '/' + self.url
             self.url = CosinnusPortal.get_current().get_domain() + self.url
+        elif self.url.startswith('http'):
+            # strip URL domain and replace with ours, we never want to parse external content
+            parsed = urlparse(self.url)
+            self.url = CosinnusPortal.get_current().get_domain() + urlunparse(
+                ('', '', parsed.path, parsed.params, parsed.query, parsed.fragment)
+            )
 
         # check if the target URL is one exempted for v3 frontend resolution - we do not accept those
         _parsed = urlparse(self.url)
