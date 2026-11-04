@@ -33,7 +33,7 @@ from cosinnus.utils.context_processors import email_verified as email_verified_c
 from cosinnus.utils.functions import clean_single_line_text, is_number, uniquify_list
 from cosinnus.utils.http import add_url_param, remove_url_param
 from cosinnus.utils.permissions import check_object_read_access, check_ug_admin, check_ug_membership
-from cosinnus.utils.urls import check_url_v3_everywhere_exempt
+from cosinnus.utils.urls import check_url_main_content_blocked, check_url_v3_everywhere_exempt
 
 logger = logging.getLogger('cosinnus')
 
@@ -443,6 +443,17 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         v3_exempted_url = add_url_param(url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
         request_headers = dict(request.headers)
         request_headers.pop('Content-Length', None)
+
+        # if the url is a blocked pattern,
+        # return a properly constructed but fake 404 response without actually resolving the url
+        if check_url_main_content_blocked(self.url):
+            # Create an empty response object
+            response = requests.Response()
+            response.status_code = 404
+            response.reason = 'Not Found'
+            response.url = self.url
+            response._content = b'404 Not Found: URL pattern blocked by v3 main content: ' + self.url.encode('utf-8')
+            return response
 
         # run the URL resolution inside a session to add and retrieve cookies throughout redirects
         with requests.Session() as session:

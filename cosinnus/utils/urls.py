@@ -202,9 +202,6 @@ def check_url_v3_everywhere_exempt(url_path, request):
         - the request is an AJAX request
         - the request contains the `EL_PAGINATION_PAGE_LABEL` GET param
     Returns False if not."""
-    request_uri = request.build_absolute_uri()
-    request_tokens = request_uri.split('/')
-
     # always consider AJAX requests v3 exempt
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return True
@@ -221,4 +218,14 @@ def check_url_v3_everywhere_exempt(url_path, request):
     # special case check for letting /profile/setup/ hit the redirect defined in urls.py
     if settings.COSINNUS_DISABLE_V3_PROFILE_SETUP_VIEWS and re.match('^/setup/profile', url_path):
         return True
+    return False
+
+
+def check_url_main_content_blocked(url):
+    """Check if url_path is in blocked patterns for v3 main content URLs, meaning they will never be resolved and
+    always return a 404 response"""
+    url_path = urllib.parse.urlparse(url).path
+    for url_pattern in settings.COSINNUS_V3_FRONTEND_EVERYWHERE_URL_PATTERN_BLOCKS:
+        if re.match(url_pattern, url_path):
+            return True
     return False
