@@ -3,7 +3,7 @@ import logging
 import re
 from copy import copy
 from http.cookiejar import CookieJar
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlunparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -33,7 +33,7 @@ from cosinnus.utils.context_processors import email_verified as email_verified_c
 from cosinnus.utils.functions import clean_single_line_text, is_number, uniquify_list
 from cosinnus.utils.http import add_url_param, remove_url_param
 from cosinnus.utils.permissions import check_object_read_access, check_ug_admin, check_ug_membership
-from cosinnus.utils.urls import check_url_v3_everywhere_exempt
+from cosinnus.utils.urls import check_url_main_content_blocked, check_url_v3_everywhere_exempt
 
 logger = logging.getLogger('cosinnus')
 
@@ -258,10 +258,19 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         self.django_request = copy(request._request)
         if not self.url:
             raise ValidationError('Missing required parameter: url')
+
         if not self.url.startswith('http'):
+            # prepend URLs without a scheme with a '/' so it gets treated as a local URL,
+            # even if it isn't - in that case, the resulting and returned 404 or similar error is fine
             if not self.url.startswith('/'):
                 self.url = '/' + self.url
             self.url = CosinnusPortal.get_current().get_domain() + self.url
+        elif self.url.startswith('http'):
+            # strip URL domain and replace with ours, we never want to parse external content
+            parsed = urlparse(self.url)
+            self.url = CosinnusPortal.get_current().get_domain() + urlunparse(
+                ('', '', parsed.path, parsed.params, parsed.query, parsed.fragment)
+            )
 
         # check if the target URL is one exempted for v3 frontend resolution - we do not accept those
         _parsed = urlparse(self.url)
@@ -432,15 +441,28 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         Cookies from all redirect steps are passed along collectively."""
         # add the v3-exempt parameter to the URL so we do not actually parse the v3-served response
         v3_exempted_url = add_url_param(url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
-        session = requests.Session()
         request_headers = dict(request.headers)
-        if 'Content-Length' in request_headers:
-            del request_headers['Content-Length']
-        session.headers.update(request_headers)
-        session.cookies.update(request.COOKIES)
-        response = session.get(v3_exempted_url, allow_redirects=allow_redirects)
-        for history_response in response.history:
-            response.cookies.update(history_response.cookies)
+        request_headers.pop('Content-Length', None)
+
+        # if the url is a blocked pattern,
+        # return a properly constructed but fake 404 response without actually resolving the url
+        if check_url_main_content_blocked(self.url):
+            # Create an empty response object
+            response = requests.Response()
+            response.status_code = 404
+            response.reason = 'Not Found'
+            response.url = self.url
+            response._content = b'404 Not Found: URL pattern blocked by v3 main content: ' + self.url.encode('utf-8')
+            return response
+
+        # run the URL resolution inside a session to add and retrieve cookies throughout redirects
+        with requests.Session() as session:
+            session.headers.update(request_headers)
+            session.cookies.update(request.COOKIES)
+            # use a timeout of 10s connect, 5m read as an upper bound, to prevent infinite request cycles or deadlocks
+            response = session.get(v3_exempted_url, allow_redirects=allow_redirects, timeout=(10, 300))
+            for history_response in response.history:
+                response.cookies.update(history_response.cookies)
         return response
 
     def _transform_request_to_resolved(self, request, url):

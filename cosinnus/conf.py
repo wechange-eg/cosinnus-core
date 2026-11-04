@@ -1147,6 +1147,14 @@ class CosinnusConf(AppConf):
         r'^/administration/model_export/.*/download/',
     ] + NEVER_REDIRECT_URLS  # any other defined never-to-redirect-urls
 
+    # For v3 main content URLs, URLs matching these patterns will never be resolved and always return a 404 response.
+    # Add URL fragements here that should never be attempted to be resolved through the main content to save
+    # processing power or prevent redirect loops
+    V3_FRONTEND_EVERYWHERE_URL_PATTERN_BLOCKS = [
+        r'^/_next/*',
+        r'^/cms/*',
+    ]
+
     # List of language codes supported by the v3 frontend. The portal language selection from LANGUAGES is restricted
     # to these. If None or empty list, defaults to using the `LANGUAGES` dict keys
     V3_FRONTEND_SUPPORTED_LANGUAGES = []
