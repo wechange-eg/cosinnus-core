@@ -432,15 +432,17 @@ class MainContentView(LanguageMenuItemMixin, APIView):
         Cookies from all redirect steps are passed along collectively."""
         # add the v3-exempt parameter to the URL so we do not actually parse the v3-served response
         v3_exempted_url = add_url_param(url, FrontendMiddleware.param_key_exempt, FrontendMiddleware.param_value_exempt)
-        session = requests.Session()
         request_headers = dict(request.headers)
-        if 'Content-Length' in request_headers:
-            del request_headers['Content-Length']
-        session.headers.update(request_headers)
-        session.cookies.update(request.COOKIES)
-        response = session.get(v3_exempted_url, allow_redirects=allow_redirects, timeout=(2, 5))
-        for history_response in response.history:
-            response.cookies.update(history_response.cookies)
+        request_headers.pop('Content-Length', None)
+
+        # run the URL resolution inside a session to add and retrieve cookies throughout redirects
+        with requests.Session() as session:
+            session.headers.update(request_headers)
+            session.cookies.update(request.COOKIES)
+            # use a timeout of 10s connect, 5m read as an upper bound, to prevent infinite request cycles or deadlocks
+            response = session.get(v3_exempted_url, allow_redirects=allow_redirects, timeout=(10, 300))
+            for history_response in response.history:
+                response.cookies.update(history_response.cookies)
         return response
 
     def _transform_request_to_resolved(self, request, url):
