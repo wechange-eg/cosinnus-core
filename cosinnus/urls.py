@@ -414,6 +414,17 @@ if getattr(settings, 'COSINNUS_PLATFORM_ADMIN_CAN_EDIT_PROFILES', False):
         path('administration/users/<int:pk>/edit/', administration.user_update, name='administration-user-update'),
     ]
 
+
+if getattr(settings, 'COSINNUS_CLOUD_ENABLED', False):
+    urlpatterns += [
+        path(
+            'administration/nextcloud/group_quota/<int:group_pk>/',
+            administration.nextcloud_group_quota,
+            name='administration-nextcloud-group-quota',
+        ),
+    ]
+
+
 if getattr(settings, 'COSINNUS_USE_V3_PERSONAL_DASHBOARD', False):
     dashboard_url = getattr(settings, 'COSINNUS_V2_DASHBOARD_URL_FRAGMENT', 'dashboard')
 
