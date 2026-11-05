@@ -85,3 +85,9 @@ class UserAdminForm(forms.ModelForm):
         else:
             user = super().save()
         return user
+
+
+class NextcloudGroupFolderQuotaForm(forms.Form):
+    """Form for nextcloud group folder quota."""
+
+    quota = forms.IntegerField(label=_('Quota (in GB)'))

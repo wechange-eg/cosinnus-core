@@ -2280,6 +2280,12 @@ msgstr ""
 msgid "An error occurred during the migration. Some events might not have been migrated."
 msgstr ""
 
+msgid "An error occurred receiving the current group quota: "
+msgstr ""
+
+msgid "An error occurred setting the group quota: "
+msgstr ""
+
 msgid "An error occurred while attempting to login via your social network account."
 msgstr ""
 
@@ -2907,6 +2913,9 @@ msgid "Change of Terms of Services and Privacy Policy"
 msgstr ""
 
 msgid "Change password"
+msgstr ""
+
+msgid "Change the NextCloud quota of group/project:"
 msgstr ""
 
 msgid "Change your email address"
@@ -5325,6 +5334,18 @@ msgstr ""
 msgid "Group administrator"
 msgstr ""
 
+msgid "Group does not exist."
+msgstr ""
+
+msgid "Group does not have a NextCloud folder."
+msgstr ""
+
+msgid "Group folder quota is disabled in the portal."
+msgstr ""
+
+msgid "Group folder quota is unlimited in the portal."
+msgstr ""
+
 msgid "Group for Mitwirk-O-Mat Settings"
 msgstr ""
 
@@ -7661,6 +7682,15 @@ msgstr ""
 msgid "Next week"
 msgstr ""
 
+msgid "NextCloud Group Quota"
+msgstr ""
+
+msgid "NextCloud Quota"
+msgstr ""
+
+msgid "NextCloud is disabled in the portal."
+msgstr ""
+
 msgid "Nextcloud Deck Board ID"
 msgstr ""
 
@@ -9002,6 +9032,9 @@ msgid "Quick Join"
 msgstr ""
 
 msgid "Quick Search"
+msgstr ""
+
+msgid "Quota (in GB)"
 msgstr ""
 
 msgid "ROOT"

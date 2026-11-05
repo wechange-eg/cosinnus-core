@@ -2436,6 +2436,12 @@ msgstr "Bei der Migration ist ein Fehler aufgetreten. Manche Boards wurden nicht
 msgid "An error occurred during the migration. Some events might not have been migrated."
 msgstr "Bei der Migration ist ein Fehler aufgetreten. Möglicherweise wurden einige Veranstaltungen nicht migriert."
 
+msgid "An error occurred receiving the current group quota: "
+msgstr "Bei Laden der aktuellen Guppen-Quota ist ein Fehler aufgetreten."
+
+msgid "An error occurred setting the group quota: "
+msgstr "Beim Setzen der Gruppen ist ein Fehler aufgetreten: "
+
 msgid "An error occurred while attempting to login via your social network account."
 msgstr "Beim Versuch, sich über dein soziales Netzwerkkonto anzumelden, ist ein Fehler aufgetreten."
 
@@ -3086,6 +3092,9 @@ msgstr "Änderung unserer Datenschutz-/und Nutzungsbedingungen"
 
 msgid "Change password"
 msgstr "Passwort ändern"
+
+msgid "Change the NextCloud quota of group/project:"
+msgstr "Ändern der NextCloud Quota von Gruppe/Projekt:"
 
 msgid "Change your email address"
 msgstr "Deine E-Mail Adresse ändern"
@@ -5517,6 +5526,18 @@ msgstr "Gruppenmenü"
 
 msgid "Group administrator"
 msgstr "Gruppen-Administrator/in"
+
+msgid "Group does not exist."
+msgstr "Gruppe existiert nicht."
+
+msgid "Group does not have a NextCloud folder."
+msgstr "Gruppe hat keinen NextCloud Ordner."
+
+msgid "Group folder quota is disabled in the portal."
+msgstr "Gruppen Ordner-Quota ist deaktiviert auf dem Portal."
+
+msgid "Group folder quota is unlimited in the portal."
+msgstr "Gruppen Ordner-Quota ist uneingeschränkt auf dem Portal."
 
 msgid "Group for Mitwirk-O-Mat Settings"
 msgstr "Gruppe für Mitwirk-O-Mat Settings"
@@ -8280,6 +8301,15 @@ msgstr "Nächsten Monat"
 msgid "Next week"
 msgstr "Nächste Woche"
 
+msgid "NextCloud Group Quota"
+msgstr "NextCloud Gruppen-Quota"
+
+msgid "NextCloud Quota"
+msgstr "NextCloud Quota"
+
+msgid "NextCloud is disabled in the portal."
+msgstr "NextCloud ist deaktiviert auf dem Portal."
+
 msgid "Nextcloud Deck Board ID"
 msgstr "Nextcloud Deck Board-ID"
 
@@ -9625,6 +9655,9 @@ msgstr "Schnellstart"
 
 msgid "Quick Search"
 msgstr "Schnellsuche"
+
+msgid "Quota (in GB)"
+msgstr "Quota (in GB)"
 
 msgid "ROOT"
 msgstr "WURZEL"

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
+
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
@@ -15,7 +17,7 @@ from django.urls import reverse_lazy
 from django.urls.base import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, FormView, UpdateView
 from django.views.generic.list import ListView
 
 from cosinnus.conf import settings
@@ -23,6 +25,7 @@ from cosinnus.core.mail import send_html_mail
 from cosinnus.forms.administration import (
     NewsletterForGroupsForm,
     NewsletterForManagedTagsForm,
+    NextcloudGroupFolderQuotaForm,
     UserAdminForm,
     UserWelcomeEmailForm,
 )
@@ -32,14 +35,19 @@ from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagA
 from cosinnus.models.newsletter import GroupsNewsletter, Newsletter
 from cosinnus.models.profile import PROFILE_SETTING_LOGIN_TOKEN_SENT, get_user_profile_model
 from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.html import render_html_with_variables
 from cosinnus.utils.http import is_ajax
 from cosinnus.utils.permissions import check_user_can_receive_emails, check_user_superuser
 from cosinnus.utils.threading import CosinnusWorkerThread
 from cosinnus.utils.user import check_user_has_accepted_any_tos
-from cosinnus.views.mixins.group import RequirePortalManagerMixin
+from cosinnus.views.mixins.group import RequirePortalManagerMixin, RequireSuperuserMixin
 from cosinnus.views.profile import UserProfileUpdateView
 from cosinnus.views.user import _send_user_welcome_email_if_enabled, email_first_login_token_to_user
+from cosinnus_cloud.utils.cosinnus import is_cloud_enabled_for_group
+from cosinnus_cloud.utils.nextcloud import get_groupfolder_quota, set_groupfolder_quota
+
+logger = logging.getLogger('cosinnus')
 
 
 class AdministrationView(RequirePortalManagerMixin, TemplateView):
@@ -466,3 +474,108 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 
 
 user_add = UserCreateView.as_view()
+
+
+class NextcloudGroupQuotaView(RequireSuperuserMixin, FormView):
+    form_class = NextcloudGroupFolderQuotaForm
+    template_name = 'cosinnus/administration/nextcloud_groupfolder_quota.html'
+
+    group = None
+    can_set_quota = False
+    quota = None
+
+    def dispatch(self, request, *args, **kwargs):
+        self.group = self._get_group(kwargs['group_pk'])
+        if self.group:
+            self.can_set_quota = self._check_can_set_quota()
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        if self.group and self.can_set_quota:
+            self.quota = self._get_quota()
+        return super().get(request, *args, **kwargs)
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['quota'] = self.quota
+        return initial
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['can_set_quota'] = self.can_set_quota and self.quota is not None
+        context['group'] = self.group
+        return context
+
+    def form_valid(self, form):
+        if self.group:
+            self._set_quota(form.cleaned_data['quota'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('cosinnus:administration-nextcloud-group-quota', kwargs={'group_pk': self.group.pk})
+
+    def _get_group(self, group_pk):
+        group = get_cosinnus_group_model().objects.filter(pk=group_pk).first()
+        if not group:
+            messages.error(self.request, _('Group does not exist.'))
+        return group
+
+    def _check_can_set_quota(self):
+        """Check if quota can be set."""
+
+        # check if nextcloud is enabled
+        if not settings.COSINNUS_CLOUD_ENABLED:
+            messages.warning(self.request, _('NextCloud is disabled in the portal.'))
+            return False
+
+        # check if quota is enabled
+        if not settings.COSINNUS_CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA:
+            messages.warning(self.request, _('Group folder quota is disabled in the portal.'))
+            return False
+
+        # check if quota is unlimited
+        if settings.COSINNUS_CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA == -3:
+            messages.warning(self.request, _('Group folder quota is unlimited in the portal.'))
+            return False
+
+        # check nextcloud group settings
+        group_cloud_enabled = (
+            is_cloud_enabled_for_group(self.group)
+            and self.group.nextcloud_groupfolder_name
+            and self.group.nextcloud_groupfolder_id
+        )
+        if not group_cloud_enabled:
+            messages.error(self.request, _('Group does not have a NextCloud folder.'))
+            return False
+        return True
+
+    def _get_quota(self):
+        """Get group folder quota and convert to GB."""
+        quota = None
+        # get current quota
+        try:
+            # get quota
+            quota = get_groupfolder_quota(self.group.nextcloud_groupfolder_id)
+            # convert quota in bytes to GB
+            quota = int(quota / 1024 / 1024 / 1024)
+        except Exception as e:
+            logger.warning('NextCould: Could not get group folder quota.', extra={'group': self.group, 'exception': e})
+            error_msg = _('An error occurred receiving the current group quota: ') + str(e)
+            messages.error(self.request, error_msg)
+        return quota
+
+    def _set_quota(self, quota):
+        """Set group folder quota.
+        :param quota: Quota in GB.
+        """
+        # covert GB in bytes
+        quota = int(quota * 1024 * 1024 * 1024)
+        try:
+            set_groupfolder_quota(self.group.nextcloud_groupfolder_id, quota)
+        except Exception as e:
+            logger.warning('NextCould: Could not set group folder quota.', extra={'group': self.group, 'exception': e})
+            error_msg = _('An error occurred setting the group quota: ') + str(e)
+            messages.error(self.request, error_msg)
+
+
+nextcloud_group_quota = NextcloudGroupQuotaView.as_view()
