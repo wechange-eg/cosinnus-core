@@ -503,7 +503,7 @@ class NextcloudGroupQuotaView(RequireSuperuserMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['can_set_quota'] = self.can_set_quota and self.quota is not None
-        context['group'] = self.group
+        context['group_name'] = self.group.name
         return context
 
     def form_valid(self, form):
