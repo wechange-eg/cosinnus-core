@@ -449,6 +449,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
         ]
     if settings.COSINNUS_CONFERENCES_ENABLED:
         inlines = [CosinnusConferenceSettingsInline]
+    change_form_template = 'admin/cosinnusgroup/change_form.html'
 
     ALL_TYPES_CLASSES = [CosinnusProject, CosinnusSociety, CosinnusConference]
 

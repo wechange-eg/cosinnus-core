@@ -341,22 +341,12 @@ def create_group_folder(name: str, group_id: str, group, raise_on_existing_name=
     # assign our group access to the groupfolder
     add_group_access_for_folder(group_id, folder_id)
 
-    # set the quota for the group folder, in bytes, unless the quota is the
-    # default (-3 for "unlimited")
-    if (
-        settings.COSINNUS_CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA
-        and settings.COSINNUS_CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA != -3
-    ):
-        latest_response = _response_or_raise(
-            requests.post(
-                f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/apps/groupfolders/folders/{folder_id}/quota',
-                headers=HEADERS,
-                auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
-                data={'quota': settings.COSINNUS_CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA},
-            )
-        )
+    # set the quota for the group folder, if configured
+    latest_response = set_groupfolder_quota(folder_id)
+    if latest_response:
+        response = latest_response
 
-    return latest_response
+    return response
 
 
 def rename_group_folder(folder_id: int, new_name: str):
@@ -412,6 +402,46 @@ def get_groupfolder_groups(folder_id: int):
         if groups and isinstance(groups, dict):
             groupfolder_groups = groups.keys()
     return groupfolder_groups
+
+
+def get_groupfolder_quota(folder_id: int):
+    """Retrieves a group folder quota for a given id (int)"""
+    response = _response_or_raise(
+        requests.get(
+            f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/apps/groupfolders/folders/{folder_id}',
+            headers=HEADERS,
+            auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
+        )
+    )
+    return response.data and response.data.get('quota', None) or None
+
+
+def set_groupfolder_quota(folder_id: int, quota=None):
+    """
+     Set the quota for the group folder, in bytes, unless the quota is the default (-3 for "unlimited").
+     :param folder_id: group folder id
+     :param quota: quota in byte
+    .
+    :param folder_id: group folder id
+    :param quota: quota in bytes
+     es
+    """
+    response = None
+    if (
+        settings.COSINNUS_CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA
+        and settings.COSINNUS_CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA != -3
+    ):
+        if not quota:
+            quota = settings.COSINNUS_CLOUD_NEXTCLOUD_GROUPFOLDER_QUOTA
+        response = _response_or_raise(
+            requests.post(
+                f'{settings.COSINNUS_CLOUD_NEXTCLOUD_URL}/apps/groupfolders/folders/{folder_id}/quota',
+                headers=HEADERS,
+                auth=settings.COSINNUS_CLOUD_NEXTCLOUD_AUTH,
+                data={'quota': quota},
+            )
+        )
+    return response
 
 
 def add_group_access_for_folder(group_id: str, folder_id: int) -> bool:
