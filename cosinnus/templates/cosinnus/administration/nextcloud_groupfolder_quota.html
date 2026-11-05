@@ -34,7 +34,7 @@
 
                 <p class="transparent">
                     {% trans "Change the NextCloud quota of group/project:" %}
-                    <strong>{{ group.name }}</strong>
+                    <strong>{{ group_name }}</strong>
                 </p>
 
                 {% include 'cosinnus/fields/default_field.html' with field=form.quota label=form.quota.label large_field=True %}
