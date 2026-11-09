@@ -2915,7 +2915,7 @@ msgstr ""
 msgid "Change password"
 msgstr ""
 
-msgid "Change the NextCloud quota of group/project:"
+msgid "Change the Nextcloud quota of group/project:"
 msgstr ""
 
 msgid "Change your email address"
@@ -5337,7 +5337,7 @@ msgstr ""
 msgid "Group does not exist."
 msgstr ""
 
-msgid "Group does not have a NextCloud folder."
+msgid "Group does not have a Nextcloud folder."
 msgstr ""
 
 msgid "Group folder quota is disabled in the portal."
@@ -7682,15 +7682,6 @@ msgstr ""
 msgid "Next week"
 msgstr ""
 
-msgid "NextCloud Group Quota"
-msgstr ""
-
-msgid "NextCloud Quota"
-msgstr ""
-
-msgid "NextCloud is disabled in the portal."
-msgstr ""
-
 msgid "Nextcloud Deck Board ID"
 msgstr ""
 
@@ -7715,10 +7706,19 @@ msgstr ""
 msgid "Nextcloud Group ID"
 msgstr ""
 
+msgid "Nextcloud Group Quota"
+msgstr ""
+
 msgid "Nextcloud Groupfolder ID"
 msgstr ""
 
 msgid "Nextcloud Groupfolder Name"
+msgstr ""
+
+msgid "Nextcloud Quota"
+msgstr ""
+
+msgid "Nextcloud is disabled in the portal."
 msgstr ""
 
 msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
