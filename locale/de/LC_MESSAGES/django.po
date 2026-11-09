@@ -3093,8 +3093,8 @@ msgstr "Änderung unserer Datenschutz-/und Nutzungsbedingungen"
 msgid "Change password"
 msgstr "Passwort ändern"
 
-msgid "Change the NextCloud quota of group/project:"
-msgstr "Ändern der NextCloud Quota von Gruppe/Projekt:"
+msgid "Change the Nextcloud quota of group/project:"
+msgstr "Ändern der Nextcloud Quota von Gruppe/Projekt:"
 
 msgid "Change your email address"
 msgstr "Deine E-Mail Adresse ändern"
@@ -5530,8 +5530,8 @@ msgstr "Gruppen-Administrator/in"
 msgid "Group does not exist."
 msgstr "Gruppe existiert nicht."
 
-msgid "Group does not have a NextCloud folder."
-msgstr "Gruppe hat keinen NextCloud Ordner."
+msgid "Group does not have a Nextcloud folder."
+msgstr "Gruppe hat keinen Nextcloud Ordner."
 
 msgid "Group folder quota is disabled in the portal."
 msgstr "Gruppen Ordner-Quota ist deaktiviert auf dem Portal."
@@ -8301,15 +8301,6 @@ msgstr "Nächsten Monat"
 msgid "Next week"
 msgstr "Nächste Woche"
 
-msgid "NextCloud Group Quota"
-msgstr "NextCloud Gruppen-Quota"
-
-msgid "NextCloud Quota"
-msgstr "NextCloud Quota"
-
-msgid "NextCloud is disabled in the portal."
-msgstr "NextCloud ist deaktiviert auf dem Portal."
-
 msgid "Nextcloud Deck Board ID"
 msgstr "Nextcloud Deck Board-ID"
 
@@ -8334,11 +8325,20 @@ msgstr "Nextcloud Gruppenkalendar CalDAV URL"
 msgid "Nextcloud Group ID"
 msgstr "Nextcloud Gruppen-ID"
 
+msgid "Nextcloud Group Quota"
+msgstr "Nextcloud Gruppen-Quota"
+
 msgid "Nextcloud Groupfolder ID"
 msgstr "Nextcloud Gruppenordner-ID"
 
 msgid "Nextcloud Groupfolder Name"
 msgstr "Nextcloud Gruppenordner-Name"
+
+msgid "Nextcloud Quota"
+msgstr "Nextcloud Quota"
+
+msgid "Nextcloud is disabled in the portal."
+msgstr "Nextcloud ist deaktiviert auf dem Portal."
 
 msgid "Nextcloud: Fix missing Nextcloud folder membership for users"
 msgstr "Nextcloud: Fehlende Nextcloud-Gruppenordnerzugehörigkeiten für Benutzer/innen beheben"
@@ -15550,6 +15550,9 @@ msgstr "Ja"
 #~ msgid "Can't find workshop with slug '{}'"
 #~ msgstr "Ein Workshop mit dem Slug '{}' existiert nicht."
 
+#~ msgid "Change the NextCloud quota of group/project:"
+#~ msgstr "Ändern der NextCloud Quota von Gruppe/Projekt:"
+
 #~ msgid "Check this to generate an invite token which allows a registered user to become a member of the conference directly."
 #~ msgstr "Wähle dies aus, um ein Einladungstoken zu erstellen, mit dem jeder der Tagung direkt beitreten kann."
 
@@ -15829,6 +15832,9 @@ msgstr "Ja"
 
 #~ msgid "Go to chat"
 #~ msgstr "Zur Chat-App"
+
+#~ msgid "Group does not have a NextCloud folder."
+#~ msgstr "Gruppe hat keinen NextCloud Ordner."
 
 #~ msgid "Group:"
 #~ msgstr "Gruppe:"
@@ -16166,6 +16172,15 @@ msgstr "Ja"
 
 #~ msgid "Newsletter sent."
 #~ msgstr "Der Newsletter wurde abgeschickt."
+
+#~ msgid "NextCloud Group Quota"
+#~ msgstr "NextCloud Gruppen-Quota"
+
+#~ msgid "NextCloud Quota"
+#~ msgstr "NextCloud Quota"
+
+#~ msgid "NextCloud is disabled in the portal."
+#~ msgstr "NextCloud ist deaktiviert auf dem Portal."
 
 #~ msgctxt "answer to \"i wish to receive rocketchat notification emails:\""
 #~ msgid "No E-Mails for RocketChat messages"

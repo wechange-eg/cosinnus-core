@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags %}
 
-{% block page_title %}{% trans "NextCloud Group Quota" %} - {% trans "Edit" %}{% endblock %}
+{% block page_title %}{% trans "Nextcloud Group Quota" %} - {% trans "Edit" %}{% endblock %}
 
 {% block leftnav %}
 	{% include 'cosinnus/administration/leftnav.html' %}
@@ -9,7 +9,7 @@
 
 {% block breadcrumb %}
     <li><a href="{% url 'cosinnus:administration' %}">{% trans "Administration" %}</a></li>
-    <li class="active">{% trans "NextCloud Group Quota" %}</li>
+    <li class="active">{% trans "Nextcloud Group Quota" %}</li>
 {% endblock %}
 
 
@@ -30,10 +30,10 @@
             <!-- a box with semi transparent background -->
             <div class="content-box">
 
-                <h2>{% trans "NextCloud Group Quota" %}</h2>
+                <h2>{% trans "Nextcloud Group Quota" %}</h2>
 
                 <p class="transparent">
-                    {% trans "Change the NextCloud quota of group/project:" %}
+                    {% trans "Change the Nextcloud quota of group/project:" %}
                     <strong>{{ group_name }}</strong>
                 </p>
 

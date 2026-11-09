@@ -525,7 +525,7 @@ class NextcloudGroupQuotaView(RequireSuperuserMixin, FormView):
 
         # check if nextcloud is enabled
         if not settings.COSINNUS_CLOUD_ENABLED:
-            messages.warning(self.request, _('NextCloud is disabled in the portal.'))
+            messages.warning(self.request, _('Nextcloud is disabled in the portal.'))
             return False
 
         # check if quota is enabled
@@ -545,7 +545,7 @@ class NextcloudGroupQuotaView(RequireSuperuserMixin, FormView):
             and self.group.nextcloud_groupfolder_id
         )
         if not group_cloud_enabled:
-            messages.error(self.request, _('Group does not have a NextCloud folder.'))
+            messages.error(self.request, _('Group does not have a Nextloud folder.'))
             return False
         return True
 
