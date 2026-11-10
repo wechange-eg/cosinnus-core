@@ -1,6 +1,9 @@
+import datetime
+
 from annoying.functions import get_object_or_None
 from django.core.exceptions import ImproperlyConfigured
 from django.urls import reverse, reverse_lazy
+from django.utils.timezone import now
 
 from cosinnus.api_frontend.serializers.group import CosinnusGroupSerializer
 from cosinnus.api_frontend.serializers.idea import CosinnusIdeaSerializer
@@ -13,6 +16,7 @@ from cosinnus.models import get_user_profile_model
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.profile import PROFILE_SETTING_PERSONAL_DASHBOARD_WIDGETS
+from cosinnus.templatetags.cosinnus_tags import textfield_with_html
 from cosinnus.trans.exchange import CosinnusExternalResourceTrans
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.map import get_map_url_with_selected_filter_params
@@ -299,6 +303,95 @@ class CosinnusPersonalDashboardGettingStartedWidget(CosinnusPersonalDashboardWid
     data_limit = None
 
 
+class CosinnusPersonalDashboardPaylCampaignWidget(CosinnusPersonalDashboardWidget):
+    """PAYL campaign widget.
+    Should be configured via COSINNUS_V3_PERSONAL_DASHBOARD_WIDGETS_OVERRIDES for a portal.
+    Example config:
+        'conf': {
+            'campaign_start': datetime.date(2026,11,1),
+            'campaign_end': datetime.date(2027,1,31),
+            'subscription_goal': 1000,
+            'title': _('Campaign title'),
+            'icon': 'bx-donate-heart',
+            'not_contributing': {
+                'content': _('Content for not contributing users'),
+                'cta': {
+                    'label': _('Count me in!'),
+                    'url': '/account/contribution/payment/',
+                }
+            },
+            'contributing': {
+                'content': _('Content for not contributing user'),
+                'cta': None, # no cta button
+            },
+        }
+    Notes:
+        - cta is optional
+        - content can be markdown or HTML
+
+    The widget adds for following config values for the frontend:
+
+            'user_is_contributing': None,  # Flag indicating if the current user is contributing
+            'subscription_count': None, # count of active subscriptions
+            'progress_percent': None,  # Percentage of goal reached
+
+    This widget is reusable for multiple campaigns:
+      - It is active only during the time period between compain_start and end
+      - If a use hides/deactivated the widget the deaktivation date is saved
+      - If the widget is reconfigured with a new time period it will be active again for a user
+    """
+
+    id = 'dashboard.payl_campaign'
+
+    def is_enabled(self, user):
+        """Check if payments is enabled and the campaign is active."""
+        return (
+            settings.COSINNUS_PAYMENTS_ENABLED
+            and self.conf['campaign_start'] <= now().date() <= self.conf['campaign_end']
+        )
+
+    def is_active(self, user):
+        """Check if the current campaign is widget is hidden."""
+        widget_settings = self._get_widget_settings(user.cosinnus_profile)
+        hidden_date = widget_settings.get('hidden_date', None)
+        if hidden_date:
+            hidden_date = datetime.date.fromisoformat(hidden_date)
+            if self.conf['campaign_start'] <= hidden_date <= self.conf['campaign_end']:
+                # active campaign hidden
+                return False
+        return True
+
+    def set_active(self, user, active):
+        """Hide the current campaign widget."""
+        hidden_date = now().date().isoformat() if active is False else None
+        self._set_widget_setting(user.cosinnus_profile, 'hidden_date', hidden_date)
+
+    def get_conf(self, user):
+        from wechange_payments.models import Subscription
+
+        conf = super().get_conf(user)
+        if self.is_active(user):
+            # check if the user is contributing
+            current_subscription = Subscription.get_current_for_user(user)
+            if current_subscription and current_subscription.amount > 0:
+                # user already contibuting
+                conf['user_is_contributing'] = True
+            else:
+                # user not contributing
+                conf['user_is_contributing'] = False
+
+            # set progress
+            subscription_count = Subscription.objects.filter(state__in=Subscription.ACTIVE_STATES, amount__gt=0).count()
+            conf['subscription_count'] = subscription_count
+            conf['progress_percent'] = int(subscription_count / conf['subscription_goal'] * 100)
+
+        # handle markdown / html content
+        conf['contributing']['content'] = textfield_with_html(str(conf['contributing']['content']))
+        conf['not_contributing']['content'] = textfield_with_html(str(conf['not_contributing']['content']))
+
+        return conf
+
+
 class CosinnusPersonalDashboardNewsRecommendationsWidget(CosinnusPersonalDashboardWidget):
     """News recommendations widget"""
 
@@ -432,6 +525,7 @@ PERSONAL_DASHBOARD_WIDGET_CLASSES = [
     CosinnusPersonalDashboardIdeasWidget,
     CosinnusPersonalDashboardLikedIdeasWidget,
     CosinnusPersonalDashboardGettingStartedWidget,
+    CosinnusPersonalDashboardPaylCampaignWidget,
     CosinnusPersonalDashboardNewsRecommendationsWidget,
     CosinnusPersonalDashboardOfferRecommendationsWidget,
     CosinnusPersonalDashboardIdeaRecommendationsWidget,
@@ -471,7 +565,7 @@ def init_personal_dashboard_widgets():
 
         if widget_conf['enabled_in_portal']:
             # widget enabled in portal
-            widget = widget_cls(conf=widget_conf['frontend_conf'])
+            widget = widget_cls(conf=widget_conf['conf'])
             personal_dashboard_widgets.setdefault(widget_type, {})
             personal_dashboard_widgets[widget_type][widget.id] = widget
 

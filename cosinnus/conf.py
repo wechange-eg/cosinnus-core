@@ -1244,29 +1244,30 @@ class CosinnusConf(AppConf):
 
     # v3 dashboard widget config, with the following options:
     # enabled_in_portal: True if the widget is enabled.
-    # frontend_conf: JSON config that is passed to the frontend.
+    # conf: JSON config passed to frontned, can be processed via get_conf of the widget class
     V3_PERSONAL_DASHBOARD_WIDGETS = {
         'personal': {
-            'dashboard.news': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.create_new': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.offers': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.my_spaces': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.tasks': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.events': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.event_polls': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.polls': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.ideas': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.liked_ideas': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.getting_started': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.news': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.create_new': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.offers': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.my_spaces': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.tasks': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.events': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.event_polls': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.polls': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.ideas': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.liked_ideas': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.getting_started': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.payl_campaign': {'enabled_in_portal': False, 'conf': {}},
         },
         'explore': {
-            'dashboard.news_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.offer_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.idea_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.event_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.space_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.user_recommendations': {'enabled_in_portal': True, 'frontend_conf': {}},
-            'dashboard.external_resources': {'enabled_in_portal': True, 'frontend_conf': {}},
+            'dashboard.news_recommendations': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.offer_recommendations': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.idea_recommendations': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.event_recommendations': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.space_recommendations': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.user_recommendations': {'enabled_in_portal': True, 'conf': {}},
+            'dashboard.external_resources': {'enabled_in_portal': True, 'conf': {}},
         },
     }
 
