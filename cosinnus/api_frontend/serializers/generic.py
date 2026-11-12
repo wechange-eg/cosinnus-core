@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from cosinnus.models import BaseTagObject
+from cosinnus.templatetags.cosinnus_tags import textfield_with_html
 
 
 class CosinnusCreatorSerializer(serializers.ModelSerializer):
@@ -37,3 +38,29 @@ class CosinnusCreatorSerializer(serializers.ModelSerializer):
             # creator is hidden for unauthenticated users unless the visibility is set to all.
             return None
         return super().to_representation(instance)
+
+
+class CosinnusButtonSerializer(serializers.Serializer):
+    """Generic button serializer"""
+
+    label = serializers.CharField()
+    url = serializers.URLField()
+
+
+class CosinnusPopupSerializer(serializers.Serializer):
+    """Generic user popup serializer."""
+
+    id = serializers.CharField()
+    header = serializers.CharField()
+    text = serializers.CharField()
+    primary_button = CosinnusButtonSerializer(required=False)
+    secondary_button = CosinnusButtonSerializer(required=False)
+    close_button_label = serializers.CharField(required=False, allow_null=True)
+    close_url = serializers.URLField(required=False)
+    show_on_url_patterns = serializers.ListField(required=False, child=serializers.CharField())
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        # render Markdown or sanitize HTML
+        ret['text'] = textfield_with_html(ret['text'])
+        return ret
