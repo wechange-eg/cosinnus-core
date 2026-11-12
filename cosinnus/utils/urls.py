@@ -153,6 +153,18 @@ def safe_redirect(url, request, return_none_if_unsafe=False):
     return url
 
 
+def get_next_redirect_param(request):
+    """
+    Return the request a url next parameter for a request.
+    Removing the "apicontent" parameter and encoding for url.
+    """
+    from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
+
+    next_url = request.get_full_path()
+    next_url = remove_url_param(next_url, FrontendMiddleware.param_key_exempt)
+    return urlencode(next_url)
+
+
 def urlEncodeNonAscii(b):
     return re.sub('[\x80-\xff]', lambda c: '%%%02x' % ord(c.group(0)), b)
 

@@ -200,7 +200,7 @@ def get_email_not_verified_announcement_context(request):
     """Get an announcement context if the user email needs verification.
     :return: Dict with title and level
     """
-    context = None
+    context = {}
     portal = CosinnusPortal.get_current()
     user = request.user
     if (
@@ -233,7 +233,7 @@ def get_user_guest_announcement_context(request):
     """Get an announcement context for guest us.
     :return: Dict with title and level
     """
-    context = None
+    context = {}
     user = request.user
     if user.is_authenticated and user.is_guest and request.path != reverse('cosinnus:guest-user-not-allowed'):
         msg = _('You are currently using the platform with a guest account provided to you by a link.')
@@ -254,12 +254,10 @@ def email_verified(request):
         # in v3 the announcements are shown in the frontend provided by the 'api-portal-settings' API.
         return context
 
-    email_not_verified_announcement = get_email_not_verified_announcement_context(request)
-    if email_not_verified_announcement:
-        context['email_not_verified_announcement'] = email_not_verified_announcement
+    # add email not verified announcement
+    context['email_not_verified_announcement'] = get_email_not_verified_announcement_context(request)
 
-    user_guest_announcement = get_user_guest_announcement_context(request)
-    if user_guest_announcement:
-        context['user_guest_announcement'] = user_guest_announcement
+    # add guest user announcement context
+    context['user_guest_announcement'] = get_user_guest_announcement_context(request)
 
     return context
