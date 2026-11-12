@@ -1681,6 +1681,11 @@ class CosinnusConf(AppConf):
     # example: ['restrictedtagslug1,tag2', 'tag3']
     MANAGED_TAGS_ADMIN_APPROVAL_EMAIL_DIRECT_ASSIGN = []
 
+    # Consider managed tags groups default groups (community groups).
+    # If True, the content of the managed tags groups is included in the explore dashboard widgets.
+    # If False, the content is included in the for-me/personal dashboard widgets
+    MANAGED_TAGS_GROUPS_ARE_DEFAULT_GROUPS = True
+
     # if True, enables `tag` function in the group/project settins, files, todos, events, etc.
     TAGS_ENABLED = True
 
