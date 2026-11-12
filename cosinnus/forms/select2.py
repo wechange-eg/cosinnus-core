@@ -41,7 +41,8 @@ class CommaSeparatedSelect2MultipleChoiceField(forms.MultipleChoiceField):
         a list like the normal MultipleChoiceField does.
         We filter out empty choices though, to support clearing the field.
         """
-        value = ','.join([elem for elem in value.split(',') if get_int_or_None(elem) is not None])
+        if value:
+            value = ','.join([elem for elem in value.split(',') if get_int_or_None(elem) is not None])
         return value
 
     def validate(self, value):
