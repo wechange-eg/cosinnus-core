@@ -21,14 +21,24 @@ from rest_framework.throttling import UserRateThrottle
 from rest_framework.views import APIView
 from taggit.models import Tag
 
+from announcements.models import Announcement
 from cosinnus import VERSION as COSINNUS_VERSION
 from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResponseRenderer
-from cosinnus.api_frontend.serializers.portal import CosinnusManagedTagSerializer, CosinnusPortalErrorLogSerializer
+from cosinnus.api_frontend.serializers.generic import CosinnusPopupSerializer
+from cosinnus.api_frontend.serializers.portal import (
+    CosinnusManagedTagSerializer,
+    CosinnusPortalAnnouncementSerializer,
+    CosinnusPortalErrorLogSerializer,
+)
 from cosinnus.conf import settings
 from cosinnus.dynamic_fields import dynamic_fields
 from cosinnus.dynamic_fields.dynamic_formfields import EXTRA_FIELD_TYPE_FORMFIELD_GENERATORS
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.managed_tags import MANAGED_TAG_LABELS, CosinnusManagedTag
+from cosinnus.utils.context_processors import (
+    get_email_not_verified_announcement_context,
+    get_user_guest_announcement_context,
+)
 from cosinnus.utils.functions import clean_single_line_text, is_number, update_dict_recursive
 from cosinnus.utils.user import get_locked_profile_visibility_setting_for_user
 from cosinnus.views.common import SwitchLanguageView
@@ -442,6 +452,11 @@ class PortalSettingsView(APIView):
     Note: This API is also used to set the CSRF-Cookie, as it is always loaded by the frontend, i.e. the frontend must
     call this API, before attempting a posting on any other v3 API.
 
+    This API also includes user popups if COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED is true:
+    - To allow previews all popups are included in the cached "popups" setting, serialized with
+      CosinnusPopupSerializer. Each Popup has an ID.
+    - The setting "show_popups" is not cached an lists all popup-IDs that should be shown to the user.
+
     A full example string for manually configuarable settings that aren't dynamically taken from the portal config:
 
     {
@@ -593,6 +608,11 @@ class PortalSettingsView(APIView):
             }
         )
 
+        # get announcements
+        settings_dict['announcements'] = self._get_user_announcements(request)
+        # which user popups are show for the user
+        if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
+            settings_dict['show_popups'] = self._show_user_popups(request)
         response = Response(settings_dict)
         # set language cookie if not present
         if settings.LANGUAGE_COOKIE_NAME not in request.COOKIES:
@@ -614,6 +634,7 @@ class PortalSettingsView(APIView):
             'portalName': settings.COSINNUS_PORTAL_NAME,
             'portalDisplayName': settings.COSINNUS_BASE_PAGE_TITLE_TRANS,
             'hasNewsletter': settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN,
+            'privacyPolicyCheckRequired': settings.COSINNUS_SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK,
             'links': {
                 'privacyPolicy': privacy_policy_url,
                 'termsOfUse': terms_of_use_url,
@@ -637,6 +658,9 @@ class PortalSettingsView(APIView):
             # "theme": {"color": "blue", "loginImage": {"variant": "contained"}},
             #    ("loginImage" ist optional, values: "covering|contained", defaults zu covering)
         }
+        # add popups if handled by frontend
+        if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
+            settings_dict['popups'] = self._get_user_popups(request)
         field_overrides = self._build_field_overrides_dict()
         if field_overrides:
             settings_dict['fieldOverrides'] = field_overrides
@@ -731,6 +755,63 @@ class PortalSettingsView(APIView):
                 'description': _('fields.managed_tags.description'),
             }
         return field_overrides
+
+    def _get_user_announcements(self, request):
+        """Get announcements"""
+        announcements = list(Announcement.objects.active())
+
+        # check extra email-verified user announcement
+        email_not_verified_announcement_context = get_email_not_verified_announcement_context(request)
+        if email_not_verified_announcement_context:
+            # create temporary announcement for serialization
+            announcements.append(Announcement(**email_not_verified_announcement_context))
+
+        # check guest user announcement
+        user_guest_announcement_context = get_user_guest_announcement_context(request)
+        if user_guest_announcement_context:
+            # create temporary announcement for serialization
+            announcements.append(Announcement(**user_guest_announcement_context))
+
+        # serialize announcements
+        serialized_announcements = CosinnusPortalAnnouncementSerializer(announcements, many=True).data
+        return serialized_announcements
+
+    def _get_user_popups(self, request):
+        """Get user popups serialized with CosinnusPopupSerializer."""
+        user_popups = []
+        if request.user.is_authenticated and (
+            settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY
+        ):
+            payment_popup = self._get_payments_popup(request)
+            user_popups.append(payment_popup)
+        return user_popups
+
+    def _get_payments_popup(self, request):
+        """Get payment popup."""
+        from wechange_payments.utils import popup
+
+        popup_data = popup.get_v3_popup_data(request)
+        serialized_popup_data = CosinnusPopupSerializer(popup_data).data
+        return serialized_popup_data
+
+    def _show_user_popups(self, request):
+        """Returns a list of popup-IDs that should be shown to the request user."""
+        show_popup_ids = []
+        user = request.user
+        if (
+            settings.COSINNUS_PAYMENTS_ENABLED
+            and user.is_authenticated
+            and not user.is_guest
+            or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY
+            and user.is_superuser
+        ):
+            # payment is enabled for the user
+            from wechange_payments.utils import popup
+
+            if popup.show_payment_popup(request):
+                popup_data = popup.get_v3_popup_data(request)
+                show_popup_ids.append(popup_data['id'])
+        return show_popup_ids
 
     @classmethod
     def clear_cache(cls):

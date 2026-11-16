@@ -6,7 +6,6 @@ import logging
 import re
 from builtins import object
 from functools import partial as curry
-from django.utils.timezone import now
 
 from annoying.functions import get_object_or_None
 from django.apps import apps
@@ -26,6 +25,7 @@ from django.utils.deprecation import MiddlewareMixin
 from django.utils.encoding import force_str
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.safestring import mark_safe
+from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from django_otp import user_has_device
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -38,7 +38,8 @@ from cosinnus.core.registries import app_registry
 from cosinnus.models import UserOnlineOnDay
 from cosinnus.utils.http import remove_url_param
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership, check_user_superuser
-from cosinnus.utils.urls import group_aware_reverse, redirect_next_or
+from cosinnus.utils.urls import get_next_redirect_param, group_aware_reverse, redirect_next_or
+from cosinnus.utils.user import user_tos_confirmation_required
 from cosinnus.views.user import send_user_email_to_verify
 
 logger = logging.getLogger('cosinnus')
@@ -695,8 +696,22 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
         if request.path.startswith('/api-auth/login'):
             return redirect('login')
         if request.path.startswith('/api-auth/logout'):
-            # TODO: does not work after logout with get is deprecated.
             return redirect('logout')
+
+        # redirect to v3 ToS page if needed
+        if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
+            tos_url = reverse('cosinnus:v3-frontend-account-tos')
+            # paths that are allowed without accepted tos, including the tos URL and API, but also navigation APIs
+            # that are used on the frontend ToS page.
+            paths_allowed_without_tos = [tos_url, reverse('cosinnus:frontend-api:api-user-tos'), '/api/v3/navigation/']
+            if (
+                request.user.is_authenticated
+                and user_tos_confirmation_required(request.user)
+                and not any(request.path.startswith(path) for path in paths_allowed_without_tos)
+            ):
+                next_url = get_next_redirect_param(request)
+                redirect_url = f'{tos_url}?v=3&next={next_url}'
+                return redirect(redirect_url)
 
         if user.is_authenticated:
             # hiding login and signup pages for logged in users

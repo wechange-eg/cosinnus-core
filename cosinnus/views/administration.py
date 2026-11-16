@@ -545,7 +545,7 @@ class NextcloudGroupQuotaView(RequireSuperuserMixin, FormView):
             and self.group.nextcloud_groupfolder_id
         )
         if not group_cloud_enabled:
-            messages.error(self.request, _('Group does not have a Nextloud folder.'))
+            messages.error(self.request, _('Group does not have a Nextcloud folder.'))
             return False
         return True
 

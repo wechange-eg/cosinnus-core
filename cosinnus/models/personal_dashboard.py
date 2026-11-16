@@ -318,11 +318,13 @@ class CosinnusPersonalDashboardPaylCampaignWidget(CosinnusPersonalDashboardWidge
                 'cta': {
                     'label': _('Count me in!'),
                     'url': '/account/contribution/payment/',
-                }
+                },
+                'show_progress': True,
             },
             'contributing': {
                 'content': _('Content for not contributing user'),
                 'cta': None, # no cta button
+                'show_progress': False,
             },
         }
     Notes:

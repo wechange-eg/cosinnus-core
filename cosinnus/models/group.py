@@ -503,7 +503,10 @@ class CosinnusGroupManager(models.Manager):
         return queryset
 
     def get_for_user_without_default_groups(self, user):
-        """Returns list of groups where the user is member or admin excluding default and manged tags groups."""
+        """
+        Returns list of groups where the user is member or admin excluding default groups.
+        Manged tags groups are excluded depending on the COSINNUS_MANAGED_TAGS_GROUPS_ARE_DEFAULT_GROUPS setting.
+        """
         # get user groups
         user_groups = self.get_for_user(user)
 
@@ -511,14 +514,12 @@ class CosinnusGroupManager(models.Manager):
         default_user_group_ids = get_default_user_group_ids()
         user_groups = [group for group in user_groups if group.id not in default_user_group_ids]
 
-        # ignore managed tags groups
-        if (
-            settings.COSINNUS_V3_FRONTEND_ENABLED
-            and settings.COSINNUS_V3_MENU_SPACES_COMMUNITY_LINKS_FROM_MANAGED_TAG_GROUPS
-        ):
+        # ignore managed tags groups if they are considers default groups
+        if settings.COSINNUS_MANAGED_TAGS_GROUPS_ARE_DEFAULT_GROUPS:
             managed_tags = user.cosinnus_profile.get_managed_tags()
             paired_groups_ids = [tag.paired_group.id for tag in managed_tags if tag.paired_group]
             user_groups = [group for group in user_groups if group.id not in paired_groups_ids]
+
         return user_groups
 
     def get_for_user_without_default_groups_pks(self, user):
@@ -526,13 +527,22 @@ class CosinnusGroupManager(models.Manager):
 
     def get_personal_items(self, user):
         """
-        Returns user groups, excluding default groups, ordered by last visit.
+        Returns user groups, excluding default groups and managed tag groups, ordered by last visit.
         Based on MyGroupsClusteredMixin.
         """
         from cosinnus.models import LastVisitedObject
 
-        # get user groups excluding default groups
-        user_groups = self.get_for_user_without_default_groups(user)
+        # get user groups
+        user_groups = self.get_for_user(user)
+
+        # exclude default groups
+        default_user_group_ids = get_default_user_group_ids()
+        user_groups = [group for group in user_groups if group.id not in default_user_group_ids]
+
+        # exclude managed tag groups
+        managed_tags = user.cosinnus_profile.get_managed_tags()
+        paired_groups_ids = [tag.paired_group.id for tag in managed_tags if tag.paired_group]
+        user_groups = [group for group in user_groups if group.id not in paired_groups_ids]
 
         # consider only projects and groups
         user_groups = [
@@ -559,8 +569,17 @@ class CosinnusGroupManager(models.Manager):
         queryset = self.filter(is_active=True)
 
         # exclude user groups
-        user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
+        user_group_ids = self.get_for_user_pks(user)
         queryset = queryset.exclude(pk__in=user_group_ids)
+
+        # exclude default groups
+        default_user_group_ids = get_default_user_group_ids()
+        queryset = queryset.exclude(pk__in=default_user_group_ids)
+
+        # exclude managed tag groups
+        managed_tags = user.cosinnus_profile.get_managed_tags()
+        paired_groups_ids = [tag.paired_group.id for tag in managed_tags if tag.paired_group]
+        queryset = queryset.exclude(pk__in=paired_groups_ids)
 
         # exclude groups without description
         queryset = queryset.exclude(description=None).exclude(description='')
