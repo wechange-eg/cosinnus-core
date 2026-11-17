@@ -248,6 +248,9 @@ def generate_api_dict_for_dynamic_field(field_name, field_definition_dict, field
                 field_name, field_options
             )
             choices = getattr(formfield, 'choices', None)
+            if choices:
+                # make sure choices are a list and not a dict
+                choices = [choice for choice in choices]
     # remove the empty choice from choices for multiple fields, as our frontend doesn't need it
     if choices and field_options.multiple is True:
         choices = [(k, v) for (k, v) in choices if k]
