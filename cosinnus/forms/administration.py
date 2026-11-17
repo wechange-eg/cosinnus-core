@@ -85,3 +85,12 @@ class UserAdminForm(forms.ModelForm):
         else:
             user = super().save()
         return user
+
+
+class NextcloudGroupFolderQuotaForm(forms.Form):
+    """
+    Form for nextcloud group folder quota.
+    Special values below 1, like default and unlimited, are not allowed in the form.
+    """
+
+    quota = forms.IntegerField(label=_('Quota (in GB)'), min_value=1)
