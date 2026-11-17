@@ -453,9 +453,10 @@ class PortalSettingsView(APIView):
     call this API, before attempting a posting on any other v3 API.
 
     This API also includes user popups if COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED is true:
+    - Popups are available only for authenticated users and cached separately per user.
     - To allow previews all popups are included in the cached "popups" setting, serialized with
       CosinnusPopupSerializer. Each Popup has an ID.
-    - The setting "show_popups" is not cached an lists all popup-IDs that should be shown to the user.
+    - The setting "show_popups" is not cached and lists all popup-IDs that should be shown to the user.
 
     A full example string for manually configuarable settings that aren't dynamically taken from the portal config:
 
@@ -564,6 +565,7 @@ class PortalSettingsView(APIView):
     )
 
     PORTAL_SETTINGS_BY_LANGUAGE_CACHE_KEY = 'cosinnus/core/portal/portalsettings/%s'  # key is language code
+    USER_POPUPS_BY_LANGUAGE_CACHE_KEY = 'cosinnus/core/portal/userpopups/%s/%s'  # key are language code, user-id
     CACHE_TIMEOUT_DEV = 30  # 30 seconds for dev servers
     CACHE_TIMEOUT = 30 * 60  # 30 minutes for production servers
 
@@ -610,8 +612,9 @@ class PortalSettingsView(APIView):
 
         # get announcements
         settings_dict['announcements'] = self._get_user_announcements(request)
-        # which user popups are show for the user
+        # add popups if handled by frontend
         if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
+            settings_dict['popups'] = self._get_user_popups(request)
             settings_dict['show_popups'] = self._show_user_popups(request)
         response = Response(settings_dict)
         # set language cookie if not present
@@ -658,9 +661,6 @@ class PortalSettingsView(APIView):
             # "theme": {"color": "blue", "loginImage": {"variant": "contained"}},
             #    ("loginImage" ist optional, values: "covering|contained", defaults zu covering)
         }
-        # add popups if handled by frontend
-        if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
-            settings_dict['popups'] = self._get_user_popups(request)
         field_overrides = self._build_field_overrides_dict()
         if field_overrides:
             settings_dict['fieldOverrides'] = field_overrides
@@ -777,13 +777,24 @@ class PortalSettingsView(APIView):
         return serialized_announcements
 
     def _get_user_popups(self, request):
-        """Get user popups serialized with CosinnusPopupSerializer."""
-        user_popups = []
-        if request.user.is_authenticated and (
-            settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY
-        ):
-            payment_popup = self._get_payments_popup(request)
-            user_popups.append(payment_popup)
+        """
+        Get user popups serialized with CosinnusPopupSerializer for authenticated user.
+        The user popups are cached separately per user.
+        """
+        if not request.user.is_authenticated:
+            return []
+        current_language = get_language()
+        user_popups = cache.get(self.USER_POPUPS_BY_LANGUAGE_CACHE_KEY % (current_language, request.user.pk))
+        if not user_popups:
+            user_popups = []
+            if settings.COSINNUS_PAYMENTS_ENABLED or settings.COSINNUS_PAYMENTS_ENABLED_ADMIN_ONLY:
+                payment_popup = self._get_payments_popup(request)
+                user_popups.append(payment_popup)
+
+            timeout = self.CACHE_TIMEOUT_DEV if settings.COSINNUS_IS_TEST_SERVER else self.CACHE_TIMEOUT
+            cache.set(
+                self.USER_POPUPS_BY_LANGUAGE_CACHE_KEY % (current_language, request.user.pk), user_popups, timeout
+            )
         return user_popups
 
     def _get_payments_popup(self, request):
@@ -796,6 +807,8 @@ class PortalSettingsView(APIView):
 
     def _show_user_popups(self, request):
         """Returns a list of popup-IDs that should be shown to the request user."""
+        if not request.user.is_authenticated:
+            return []
         show_popup_ids = []
         user = request.user
         if (
