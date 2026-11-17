@@ -699,7 +699,7 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
             return redirect('logout')
 
         # redirect to v3 ToS page if needed
-        if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
+        if settings.COSINNUS_V3_FRONTEND_ENABLED and settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
             tos_url = reverse('cosinnus:v3-frontend-account-tos')
             # paths that are allowed without accepted tos, including the tos URL and API, but also navigation APIs
             # that are used on the frontend ToS page.
