@@ -684,9 +684,6 @@ class CosinnusUserTosSerializer(serializers.ModelSerializer):
 
     tos_check = serializers.BooleanField(source='cosinnus_profile.tos_accepted', required=True)
 
-    if settings.COSINNUS_SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK:
-        privacy_policy_check = serializers.BooleanField(source='cosinnus_profile.tos_accepted', required=True)
-
     if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
         newsletter_opt_in = serializers.BooleanField(
             source='cosinnus_profile.settings.newsletter_opt_in', required=False, default=False
@@ -695,8 +692,6 @@ class CosinnusUserTosSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ('tos_check',)
-        if settings.COSINNUS_SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK:
-            fields += ('privacy_policy_check',)
         if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
             fields += ('newsletter_opt_in',)
 
@@ -705,16 +700,10 @@ class CosinnusUserTosSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('ToS must be accepted.')
         return value
 
-    def validate_privacy_policy_check(self, value):
-        if value is False:
-            raise serializers.ValidationError('Privacy policy must be accepted.')
-        return value
-
     def to_representation(self, instance):
         ret = super().to_representation(instance)
         if user_tos_confirmation_required(instance):
             ret['tos_check'] = False
-            ret['privacy_policy_check'] = False
         return ret
 
     def update(self, instance, validated_data):

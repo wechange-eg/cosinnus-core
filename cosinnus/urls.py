@@ -833,13 +833,14 @@ if settings.COSINNUS_V3_FRONTEND_ENABLED:
             ),
         ]
 
-    urlpatterns += [
-        path(
-            'account/tos/',
-            TemplateView.as_view(template_name='premium_info_page.html'),
-            name='v3-frontend-account-tos',
-        ),
-    ]
+    if settings.COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED:
+        urlpatterns += [
+            path(
+                'account/tos/',
+                TemplateView.as_view(template_name='premium_info_page.html'),
+                name='v3-frontend-account-tos',
+            ),
+        ]
 
 
 if getattr(settings, 'COSINNUS_EMPTY_FILE_DOWNLOAD_NAME', None):
