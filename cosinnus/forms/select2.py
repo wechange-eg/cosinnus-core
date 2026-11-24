@@ -43,6 +43,8 @@ class CommaSeparatedSelect2MultipleChoiceField(forms.MultipleChoiceField):
         """
         if value:
             value = ','.join([elem for elem in value.split(',') if get_int_or_None(elem) is not None])
+        else:
+            value = ''
         return value
 
     def validate(self, value):
