@@ -94,13 +94,14 @@ class CosinnusPortalErrorLogSerializer(serializers.Serializer):
 class CosinnusPortalAnnouncementSerializer(serializers.ModelSerializer):
     """Announcement serializer."""
 
+    id = serializers.IntegerField(read_only=True)
     level = serializers.CharField(read_only=True)
-    text = serializers.SerializerMethodField()
-    icon = serializers.SerializerMethodField()
+    text = serializers.SerializerMethodField(read_only=True)
+    icon = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Announcement
-        fields = ('level', 'text', 'icon')
+        fields = ('id', 'level', 'text', 'icon')
 
     def get_text(self, obj):
         text = obj.translated_text
@@ -115,3 +116,15 @@ class CosinnusPortalAnnouncementSerializer(serializers.ModelSerializer):
             'error': 'fa-exclamation-triangle',
         }
         return level_icon_map.get(obj.level)
+
+
+class CosinnusPortalAnnouncementDismissSerializer(serializers.Serializer):
+    """Serializer used to dismiss announcements by id."""
+
+    id = serializers.IntegerField()
+
+    def save(self, **kwargs):
+        request = self.context['request']
+        announcement = Announcement.objects.filter(pk=self.validated_data['id']).first()
+        if announcement:
+            announcement.dismiss_for_session(request)

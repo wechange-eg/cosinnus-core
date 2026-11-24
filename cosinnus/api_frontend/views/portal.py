@@ -27,6 +27,7 @@ from cosinnus.api_frontend.handlers.renderers import CosinnusAPIFrontendJSONResp
 from cosinnus.api_frontend.serializers.generic import CosinnusPopupSerializer
 from cosinnus.api_frontend.serializers.portal import (
     CosinnusManagedTagSerializer,
+    CosinnusPortalAnnouncementDismissSerializer,
     CosinnusPortalAnnouncementSerializer,
     CosinnusPortalErrorLogSerializer,
 )
@@ -757,7 +758,7 @@ class PortalSettingsView(APIView):
 
     def _get_user_announcements(self, request):
         """Get announcements"""
-        announcements = list(Announcement.objects.active())
+        announcements = list(Announcement.objects.active_for_session(request))
 
         # check extra email-verified user announcement
         email_not_verified_announcement_context = get_email_not_verified_announcement_context(request)
@@ -900,4 +901,27 @@ class PortalErrorLogView(GenericAPIView):
             scope.set_tag('service', 'frontend')
             # log the error with a searchable message prefix
             sentry_sdk.capture_message(f'Frontend: {data["message"]}', level='error')
+        return Response(data={})
+
+
+class PortalAnnouncementDismissView(GenericAPIView):
+    """Dismiss announcements for the current user session."""
+
+    serializer_class = CosinnusPortalAnnouncementDismissSerializer
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+
+    @swagger_auto_schema(
+        operation_description="""Dismiss a portal announcement for the current user session.""",
+        request_body=CosinnusPortalAnnouncementDismissSerializer,
+        responses={
+            '200': openapi.Response(description='No data will be included in the response.'),
+        },
+    )
+    def post(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
         return Response(data={})
