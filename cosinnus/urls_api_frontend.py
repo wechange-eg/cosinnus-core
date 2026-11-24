@@ -34,6 +34,7 @@ from cosinnus.api_frontend.views.personal_dashboard import (
     CosinnusPersonalDashboardWidgetSettingsAPIView,
 )
 from cosinnus.api_frontend.views.portal import (
+    PortalAnnouncementDismissView,
     PortalErrorLogView,
     PortalManagedTagsView,
     PortalSettingsView,
@@ -113,6 +114,11 @@ urlpatterns += [
     ),
     path('api/v3/portal/settings/', PortalSettingsView.as_view(), name='api-portal-settings'),
     path('api/v3/portal/errorlog/', PortalErrorLogView.as_view(), name='api-portal-errorlog'),
+    path(
+        'api/v3/portal/announcements/dismiss/',
+        PortalAnnouncementDismissView.as_view(),
+        name='api-portal-announcements-dismiss',
+    ),
     path('api/v3/content/main/', MainContentView.as_view(), name='api-content-main'),
     path('api/v3/navigation/main/', MainNavigationView.as_view(), name='api-navigation-main'),
     path('api/v3/navigation/spaces/', SpacesView.as_view(), name='api-navigation-spaces'),
