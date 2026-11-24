@@ -30,7 +30,7 @@ class CosinnusOfferViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     def personal(self, request):
         """Return personal offers for user."""
         queryset = Offer.objects.get_personal_items(request.user)
-        return self.list_action_response(request, queryset)
+        return self.list_action_response(request, CosinnusOfferSerializer, queryset)
 
     @action(
         detail=False,
@@ -40,4 +40,4 @@ class CosinnusOfferViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     def recommendations(self, request):
         """Return recommendations for user."""
         queryset = Offer.objects.get_recommendations(request.user)
-        return self.list_action_response(request, queryset)
+        return self.list_action_response(request, CosinnusOfferSerializer, queryset)

@@ -31,7 +31,7 @@ class CosinnusEventPollViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     def open(self, request):
         """Return open polls where the user has not voted yet."""
         queryset = Event.objects.get_personal_open_polls(request.user)
-        return self.list_action_response(request, queryset)
+        return self.list_action_response(request, CosinnusEventPollSerializer, queryset)
 
 
 class CosinnusEventViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
@@ -61,7 +61,7 @@ class CosinnusEventViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
         queryset = queryset.filter(
             from_date__date__gte=query_params['from_date'], to_date__date__lte=query_params['to_date']
         )
-        return self.list_action_response(request, queryset)
+        return self.list_action_response(request, CosinnusEventSerializer, queryset)
 
     @action(
         detail=False,
@@ -71,4 +71,4 @@ class CosinnusEventViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     def recommendations(self, request):
         """Return user public event recommendations."""
         queryset = Event.objects.get_recommendations(request.user)
-        return self.list_action_response(request, queryset)
+        return self.list_action_response(request, CosinnusEventSerializer, queryset)

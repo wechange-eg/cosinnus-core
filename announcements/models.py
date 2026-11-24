@@ -33,6 +33,8 @@ class Announcement(models.Model):
 
     objects = AnnouncementManager()
 
+    SESSION_DISMISSED_KEY = 'announcements_dismissed'
+
     class Meta:
         verbose_name = _('Announcement')
         verbose_name_plural = _('Announcements')
@@ -56,3 +58,10 @@ class Announcement(models.Model):
     @property
     def translated_text(self):
         return self._get_translated_field('text')
+
+    def dismiss_for_session(self, request):
+        """Dismiss the announcement by storing the id in a session object."""
+        dismissed_announcements = request.session.get(self.SESSION_DISMISSED_KEY, [])
+        dismissed_announcements.append(self.pk)
+        dismissed_announcements = sorted(dismissed_announcements)
+        request.session[self.SESSION_DISMISSED_KEY] = dismissed_announcements
