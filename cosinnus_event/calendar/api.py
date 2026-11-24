@@ -35,7 +35,6 @@ from cosinnus_event.calendar.serializers import (
     CosinnusCalendarEventReflectSerializer,
     CosinnusCalendarEventSerializer,
     CosinnusCalendarListSerializer,
-    CosinnusCalendarSyncedEventListSerializer,
     CosinnusCalendarSyncedEventSerializer,
     CosinnusCalendarSynceRequiredSerializer,
     CosinnusEventDateRangeQueryParameterSerializer,
@@ -90,19 +89,9 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     date_range_params = None
 
     def get_serializer_class(self):
-        """Get serializer based on viewset action."""
-        action_serializers = {
-            'list': CosinnusCalendarListSerializer,
-            'attendance': CosinnusCalendarEventAttendanceSerializer,
-            'attach_file': CosinnusAttachFileSerializer,
-            'delete_attached_file': CosinnusDeleteAttachedFileSerializer,
-            'bbb_room': CosinnusCalendarEventBBBRoomSerializer,
-            'bbb_room_urls': CosinnusCalendarBBBRoomUrlsSerializer,
-            'bookmark': CosinnusTagObjectBookmarkSerializer,
-            'reflections': CosinnusCalendarEventReflectSerializer,
-        }
-        if self.action in action_serializers:
-            return action_serializers[self.action]
+        """Use different serializer for list action."""
+        if self.action == 'list':
+            return CosinnusCalendarListSerializer
         return self.serializer_class
 
     def get_serializer_context(self):
@@ -140,6 +129,11 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
             raise NotFound()
         return event
 
+    @swagger_auto_schema(method='get', responses={'200': CosinnusCalendarEventAttendanceSerializer})
+    @swagger_auto_schema(
+        method='post',
+        request_body=CosinnusCalendarEventAttendanceSerializer,
+    )
     @action(
         detail=True,
         methods=['get', 'post'],
@@ -151,8 +145,9 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
         Note: Implemented as extra action and not a field in the event serializer, because of different permissions.
               Users with only read permissions to the event should be able to set it.
         """
-        return self.detail_action_response(request)
+        return self.detail_action_response(request, CosinnusCalendarEventAttendanceSerializer)
 
+    @swagger_auto_schema(request_body=CosinnusAttachFileSerializer)
     @action(
         detail=True,
         methods=['post'],
@@ -161,8 +156,9 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     )
     def attach_file(self, request, group_id, pk=None):
         """Action to upload an attachment for an event."""
-        return self.detail_action_response(request)
+        return self.detail_action_response(request, CosinnusDeleteAttachedFileSerializer)
 
+    @swagger_auto_schema(request_body=CosinnusAttachFileSerializer)
     @action(
         detail=True,
         methods=['post'],
@@ -170,8 +166,13 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     )
     def delete_attached_file(self, request, group_id, pk=None):
         """Action to delete an attachment."""
-        return self.detail_action_response(request)
+        return self.detail_action_response(request, CosinnusDeleteAttachedFileSerializer)
 
+    @swagger_auto_schema(method='get', responses={'200': CosinnusCalendarEventBBBRoomSerializer})
+    @swagger_auto_schema(
+        methods=['patch', 'post'],
+        request_body=CosinnusCalendarEventBBBRoomSerializer,
+    )
     @action(
         detail=True,
         methods=['get', 'patch', 'post'],
@@ -179,8 +180,9 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     )
     def bbb_room(self, request, group_id, pk=None):
         """BBB Room and conference settings API."""
-        return self.detail_action_response(request, partial=True)
+        return self.detail_action_response(request, CosinnusCalendarEventBBBRoomSerializer, partial=True)
 
+    @swagger_auto_schema(responses={'200': CosinnusCalendarBBBRoomUrlsSerializer})
     @action(
         detail=True,
         methods=['get'],
@@ -188,8 +190,13 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     )
     def bbb_room_urls(self, request, group_id, pk=None):
         """API for BBB room Urls, used for periodic pull during BBB room creation"""
-        return self.detail_action_response(request)
+        return self.detail_action_response(request, CosinnusCalendarBBBRoomUrlsSerializer)
 
+    @swagger_auto_schema(method='get', responses={'200': CosinnusTagObjectBookmarkSerializer})
+    @swagger_auto_schema(
+        method='post',
+        request_body=CosinnusTagObjectBookmarkSerializer,
+    )
     @action(
         detail=True,
         methods=['get', 'post'],
@@ -197,8 +204,13 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     )
     def bookmark(self, request, group_id, pk=None):
         """API to bookmark the event."""
-        return self.detail_action_response(request)
+        return self.detail_action_response(request, CosinnusTagObjectBookmarkSerializer)
 
+    @swagger_auto_schema(method='get', responses={'200': CosinnusCalendarEventReflectSerializer})
+    @swagger_auto_schema(
+        methods=['patch', 'post'],
+        request_body=CosinnusCalendarEventReflectSerializer,
+    )
     @action(
         detail=True,
         methods=['get', 'patch', 'post'],
@@ -206,7 +218,7 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     )
     def reflections(self, request, group_id, pk=None):
         """API to handle event reflection in user groups"""
-        return self.detail_action_response(request)
+        return self.detail_action_response(request, CosinnusCalendarEventReflectSerializer)
 
 
 class CosinnusCalendarSyncedEventsViewSet(
@@ -233,19 +245,6 @@ class CosinnusCalendarSyncedEventsViewSet(
     data_range_params_required = False
 
     group = None
-
-    def get_serializer_class(self):
-        """Get serializer based on viewset action."""
-        action_serializers = {
-            'list': CosinnusCalendarSyncedEventListSerializer,
-            'attendance': CosinnusCalendarEventAttendanceSerializer,
-            'bbb_room': CosinnusCalendarEventBBBRoomSerializer,
-            'bbb_room_urls': CosinnusCalendarBBBRoomUrlsSerializer,
-            'sync_required': CosinnusCalendarSynceRequiredSerializer,
-        }
-        if self.action in action_serializers:
-            return action_serializers[self.action]
-        return self.serializer_class
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
@@ -285,6 +284,11 @@ class CosinnusCalendarSyncedEventsViewSet(
             raise NotFound()
         return event
 
+    @swagger_auto_schema(method='get', responses={'200': CosinnusCalendarEventAttendanceSerializer})
+    @swagger_auto_schema(
+        method='post',
+        request_body=CosinnusCalendarEventAttendanceSerializer,
+    )
     @action(
         detail=True,
         methods=['get', 'post'],
@@ -296,8 +300,13 @@ class CosinnusCalendarSyncedEventsViewSet(
         Note: Implemented as extra action and not a field in the event serializer, because of different permissions.
               Users with only read permissions to the event should be able to set it.
         """
-        return self.detail_action_response(request)
+        return self.detail_action_response(request, CosinnusCalendarEventAttendanceSerializer)
 
+    @swagger_auto_schema(method='get', responses={'200': CosinnusCalendarEventBBBRoomSerializer})
+    @swagger_auto_schema(
+        methods=['patch', 'post'],
+        request_body=CosinnusCalendarEventBBBRoomSerializer,
+    )
     @action(
         detail=True,
         methods=['get', 'patch', 'post'],
@@ -305,8 +314,9 @@ class CosinnusCalendarSyncedEventsViewSet(
     )
     def bbb_room(self, request, group_id, nextcloud_calendar_uid):
         """BBB Room and conference settings API."""
-        return self.detail_action_response(request, partial=True)
+        return self.detail_action_response(request, CosinnusCalendarEventBBBRoomSerializer, partial=True)
 
+    @swagger_auto_schema(responses={'200': CosinnusCalendarBBBRoomUrlsSerializer})
     @action(
         detail=True,
         methods=['get'],
@@ -314,8 +324,9 @@ class CosinnusCalendarSyncedEventsViewSet(
     )
     def bbb_room_urls(self, request, group_id, nextcloud_calendar_uid):
         """API for BBB room Urls, used for periodic pull during BBB room creation"""
-        return self.detail_action_response(request)
+        return self.detail_action_response(request, CosinnusCalendarBBBRoomUrlsSerializer)
 
+    @swagger_auto_schema(methods=['post', 'put'], request_body=CosinnusCalendarSynceRequiredSerializer)
     @action(
         detail=False,
         methods=['post', 'put'],
@@ -323,11 +334,8 @@ class CosinnusCalendarSyncedEventsViewSet(
     )
     def sync_required(self, request, group_id):
         """API to inform the Backend that a Caldav sync is required due to changes to internal events."""
-        # TODO: remove unused feature, if ctag sync works
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
+        # TODO: unused feature, keeping as there is an issue open for this.
+        return self.detail_action_response(request, CosinnusCalendarSynceRequiredSerializer)
 
 
 class CalendarRepairMembershipView(APIView):

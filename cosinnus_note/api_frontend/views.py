@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import mixins, viewsets
 from rest_framework.decorators import action
 from rest_framework.parsers import MultiPartParser
@@ -47,20 +48,6 @@ class CosinnusNoteViewSet(
         queryset = Note.objects.get_readable_items(user)
         return queryset
 
-    def get_serializer_class(self):
-        """Get serializer based on viewset action."""
-        action_serializers = {
-            'forum_post': CosinnusNoteForumPostSerializer,
-            'like': CosinnusTagObjectLikeSerializer,
-            'comment': CosinnusNoteCommentSerializer,
-            'delete_comment': CosinnusDeleteNoteCommentSerializer,
-            'attach_file': CosinnusAttachFileSerializer,
-            'delete_attached_file': CosinnusDeleteAttachedFileSerializer,
-        }
-        if self.action in action_serializers:
-            return action_serializers[self.action]
-        return self.serializer_class
-
     @action(
         detail=False,
         methods=['get'],
@@ -69,7 +56,7 @@ class CosinnusNoteViewSet(
     def personal(self, request):
         """Return personal notes for user."""
         queryset = Note.objects.get_personal_items(request.user)
-        return self.list_action_response(request, queryset)
+        return self.list_action_response(request, CosinnusNoteSerializer, queryset)
 
     @action(
         detail=False,
@@ -79,8 +66,9 @@ class CosinnusNoteViewSet(
     def recommendations(self, request):
         """Return recommendations for user."""
         queryset = Note.objects.get_recommendations(request.user)
-        return self.list_action_response(request, queryset)
+        return self.list_action_response(request, CosinnusNoteSerializer, queryset)
 
+    @swagger_auto_schema(request_body=CosinnusNoteForumPostSerializer)
     @action(
         detail=False,
         methods=['post'],
@@ -88,8 +76,9 @@ class CosinnusNoteViewSet(
     )
     def forum_post(self, request):
         """Create a forum group post."""
-        return self.list_action_response(request)
+        return self.list_action_response(request, CosinnusNoteForumPostSerializer)
 
+    @swagger_auto_schema(request_body=CosinnusTagObjectLikeSerializer)
     @action(
         detail=True,
         methods=['post'],
@@ -97,8 +86,11 @@ class CosinnusNoteViewSet(
     )
     def like(self, request, pk):
         """Like / unlike a note."""
-        return self.detail_action_response(request, use_base_serializer_for_response=True)
+        return self.detail_action_response(
+            request, CosinnusTagObjectLikeSerializer, response_serializer=CosinnusNoteSerializer
+        )
 
+    @swagger_auto_schema(request_body=CosinnusNoteCommentSerializer)
     @action(
         detail=True,
         methods=['post'],
@@ -106,8 +98,11 @@ class CosinnusNoteViewSet(
     )
     def comment(self, request, pk):
         """Comment a note."""
-        return self.detail_action_response(request, use_base_serializer_for_response=True)
+        return self.detail_action_response(
+            request, CosinnusNoteCommentSerializer, response_serializer=CosinnusNoteSerializer
+        )
 
+    @swagger_auto_schema(request_body=CosinnusDeleteNoteCommentSerializer)
     @action(
         detail=True,
         methods=['post'],
@@ -115,8 +110,11 @@ class CosinnusNoteViewSet(
     )
     def delete_comment(self, request, pk):
         """Delete a note comment."""
-        return self.detail_action_response(request, use_base_serializer_for_response=True)
+        return self.detail_action_response(
+            request, CosinnusDeleteNoteCommentSerializer, response_serializer=CosinnusNoteSerializer
+        )
 
+    @swagger_auto_schema(request_body=CosinnusAttachFileSerializer)
     @action(
         detail=True,
         methods=['post'],
@@ -125,8 +123,11 @@ class CosinnusNoteViewSet(
     )
     def attach_file(self, request, pk=None):
         """Action to upload an attachment for a note."""
-        return self.detail_action_response(request, use_base_serializer_for_response=True)
+        return self.detail_action_response(
+            request, CosinnusAttachFileSerializer, response_serializer=CosinnusNoteSerializer
+        )
 
+    @swagger_auto_schema(request_body=CosinnusDeleteAttachedFileSerializer)
     @action(
         detail=True,
         methods=['post'],
@@ -134,4 +135,6 @@ class CosinnusNoteViewSet(
     )
     def delete_attached_file(self, request, pk=None):
         """Action to delete an attachment."""
-        return self.detail_action_response(request, use_base_serializer_for_response=True)
+        return self.detail_action_response(
+            request, CosinnusDeleteAttachedFileSerializer, response_serializer=CosinnusNoteSerializer
+        )

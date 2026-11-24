@@ -30,7 +30,7 @@ class CosinnusIdeaViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     def personal(self, request):
         """Return personal ideas."""
         queryset = CosinnusIdea.objects.get_personal_items(request.user)
-        return self.list_action_response(request, queryset)
+        return self.list_action_response(request, CosinnusIdeaSerializer, queryset)
 
     @action(
         detail=False,
@@ -40,7 +40,7 @@ class CosinnusIdeaViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     def liked(self, request):
         """Return liked ideas."""
         queryset = CosinnusIdea.objects.get_personal_liked_items(request.user)
-        return self.list_action_response(request, queryset)
+        return self.list_action_response(request, CosinnusIdeaSerializer, queryset)
 
     @action(
         detail=False,
@@ -50,4 +50,4 @@ class CosinnusIdeaViewSet(ViewSetActionMixin, viewsets.GenericViewSet):
     def recommendations(self, request):
         """Return recommended ideas."""
         queryset = CosinnusIdea.objects.get_recommendations(request.user)
-        return self.list_action_response(request, queryset)
+        return self.list_action_response(request, CosinnusIdeaSerializer, queryset)
