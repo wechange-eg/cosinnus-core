@@ -6,7 +6,7 @@ from announcements.models import Announcement
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.managed_tags import CosinnusManagedTag, CosinnusManagedTagType
-from cosinnus.utils.html import sanitize_html
+from cosinnus.templatetags.cosinnus_tags import textfield_with_html
 
 logger = logging.getLogger('cosinnus')
 
@@ -105,7 +105,7 @@ class CosinnusPortalAnnouncementSerializer(serializers.ModelSerializer):
 
     def get_text(self, obj):
         text = obj.translated_text
-        text = sanitize_html(text)
+        text = textfield_with_html(text)
         return text
 
     def get_icon(self, obj):
