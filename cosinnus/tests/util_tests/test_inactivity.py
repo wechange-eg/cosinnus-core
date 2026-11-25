@@ -4,7 +4,7 @@ from unittest import mock
 from babel import UnknownLocaleError
 from django.core.exceptions import ImproperlyConfigured
 from django.template import TemplateDoesNotExist, TemplateSyntaxError
-from django.test import SimpleTestCase, override_settings
+from django.test import SimpleTestCase, TestCase, override_settings
 from django.utils import translation
 from django.utils.translation import gettext_lazy
 
@@ -60,7 +60,7 @@ class InactivityDurationTest(SimpleTestCase):
             self.assertEqual(translation.get_language(), 'en')
 
 
-class InactivityMailTemplateTest(SimpleTestCase):
+class InactivityMailTemplateTest(TestCase):
     # A minimal test user suffices.
     test_user = SimpleNamespace()
 
@@ -109,9 +109,10 @@ class InactivityMailTemplateTest(SimpleTestCase):
             for kind in ('user', 'group'):
                 for error in (TemplateDoesNotExist('missing'), TemplateSyntaxError('invalid')):
                     with self.subTest(kind=kind, error=type(error).__name__):
-                        with mock.patch(
-                            'cosinnus.utils.inactivity.render_to_string', side_effect=error
-                        ), self.assertRaises(type(error)):
+                        with (
+                            mock.patch('cosinnus.utils.inactivity.render_to_string', side_effect=error),
+                            self.assertRaises(type(error)),
+                        ):
                             render_inactivity_mail(kind, self.test_user, 14, {})
 
     @override_settings(

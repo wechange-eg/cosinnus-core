@@ -13,12 +13,11 @@ from cosinnus.conf import settings
 from cosinnus.core.middleware.frontend_middleware import FrontendMiddleware
 from cosinnus.models.group_extra import CosinnusSociety
 from cosinnus.models.membership import MEMBERSHIP_MEMBER
+from cosinnus.tests.factories import ActiveUserFactory
 from cosinnus.tests.view_tests.views import MainContentFormTestView
 from cosinnus.utils.urls import group_aware_reverse
 
 User = get_user_model()
-
-TEST_USER_DATA = {'username': '1', 'email': 'testuser@example.com', 'first_name': 'Test', 'last_name': 'User'}
 
 
 @override_settings(COSINNUS_V3_FRONTEND_ENABLED=True, COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED=True)
@@ -41,7 +40,7 @@ class MainContentViewTest(APILiveServerTestCase):
         site.domain = f'{self.host}:{self.server_thread.port}'
         site.save()
         self.domain = f'http://{site.domain}'
-        self.test_user = User.objects.create(**TEST_USER_DATA)
+        self.test_user = ActiveUserFactory()
         self.test_user_profile = self.test_user.cosinnus_profile
         self.test_group = CosinnusSociety.objects.create(name='Test Group')
         self.test_group.memberships.create(user=self.test_user, status=MEMBERSHIP_MEMBER)

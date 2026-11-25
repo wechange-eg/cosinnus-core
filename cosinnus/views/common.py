@@ -577,3 +577,12 @@ class RobotsTextView(View):
 
 
 robots_text = RobotsTextView.as_view()
+
+
+class FrontendPageView(TemplateView):
+    """Placeholder for a v3 frontend page showing page not found error."""
+
+    template_name = 'cosinnus/common/404.html'
+
+
+frontend_page = FrontendPageView.as_view()
