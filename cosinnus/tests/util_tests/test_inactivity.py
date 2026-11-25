@@ -88,7 +88,9 @@ class InactivityMailTemplateTest(TestCase):
                     self.assertEqual(call.args[1]['deleted_after_days'], expected_days)
                     self.assertEqual(call.args[1]['warning_period'], '14 days')
                     self.assertEqual(call.args[1]['relative_warning_period'], 'in 14 days')
-                    self.assertEqual(call.args[1]['inactivity_period'], '365 days' if kind == 'user' else '730 days')
+                    self.assertEqual(
+                        call.args[1]['inactivity_period'], f'{365 - 14} days' if kind == 'user' else f'{730 - 14} days'
+                    )
 
     def test_rendering_errors_are_raised_for_users_and_groups(self):
         config = {

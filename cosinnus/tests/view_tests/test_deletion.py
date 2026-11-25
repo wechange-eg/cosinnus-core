@@ -52,20 +52,26 @@ def create_active_test_user(username='user'):
 
 class InactivityNotificationCronTest(SimpleTestCase):
     def test_user_notification_failure_is_logged_as_critical(self):
-        with patch(
-            'cosinnus.cron.send_user_inactivity_deactivation_notifications',
-            side_effect=RuntimeError('Mail delivery failed'),
-        ), self.assertLogs('cosinnus', level='CRITICAL') as logs:
+        with (
+            patch(
+                'cosinnus.cron.send_user_inactivity_deactivation_notifications',
+                side_effect=RuntimeError('Mail delivery failed'),
+            ),
+            self.assertLogs('cosinnus', level='CRITICAL') as logs,
+        ):
             result = SendUserInactivityNotifications().do()
 
         self.assertEqual(result, 'An error occurred during cron job execution.')
         self.assertIn('Sending user inactivity notifications failed.', logs.output[0])
 
     def test_group_notification_failure_is_logged_as_critical(self):
-        with patch(
-            'cosinnus.cron.send_group_inactivity_deactivation_notifications',
-            side_effect=RuntimeError('Mail delivery failed'),
-        ), self.assertLogs('cosinnus', level='CRITICAL') as logs:
+        with (
+            patch(
+                'cosinnus.cron.send_group_inactivity_deactivation_notifications',
+                side_effect=RuntimeError('Mail delivery failed'),
+            ),
+            self.assertLogs('cosinnus', level='CRITICAL') as logs,
+        ):
             result = SendGroupsInactivityNotifications().do()
 
         self.assertEqual(result, 'An error occurred during cron job execution.')
@@ -1022,10 +1028,12 @@ class GroupInactivityDeletionTest(TestGroupMixin, TestCase):
 
                 # make sure placeholders are filled in mail content
                 warning_text = format_inactivity_duration(days_before_deactivation, warning_config, 'en')
-                inactivity_text = format_inactivity_duration(schedule['days'], schedule, 'en')
+                inactivity_text = format_inactivity_duration(
+                    schedule['days'] - days_before_deactivation, schedule, 'en'
+                )
                 mail_body = send_mail_mock.call_args.args[2]
-                self.assertIn(f'will be deactivated {inactivity_text} after the last activity', mail_body)
-                self.assertIn(f'This will happen in {warning_text}', mail_body, warning_text)
+                self.assertIn(f'has been inactive for more than {inactivity_text}.', mail_body)
+                self.assertIn(f'It will therefore be deactivated in {warning_text}', mail_body, warning_text)
                 send_mail_mock.reset_mock()
 
                 # notification is not send again
