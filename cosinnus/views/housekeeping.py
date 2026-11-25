@@ -767,6 +767,9 @@ def newsletter_users(
             check_user_can_receive_emails(user)
             and user.cosinnus_profile.settings.get('newsletter_opt_in', False) is True
         ):
+            # never generate out mails that are not verified
+            if not user.cosinnus_profile.email_verified:
+                continue
             if never_logged_in_only or is_user_active(user):
                 row = [
                     user.email,
