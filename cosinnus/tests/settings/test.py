@@ -68,6 +68,7 @@ COSINNUS_ELASTIC_BACKEND_RUN_THREADED = False
 
 # turn off V3 Frontend to disable redirects on requests
 COSINNUS_V3_FRONTEND_ENABLED = False
+COSINNUS_V3_FRONTEND_EVERYWHERE_ENABLED = False
 
 # Add dummy opencage key, as the API calls are mocked.
 COSINNUS_GEOCODE_OPENCAGE_KEY = 'dummy-test-key'

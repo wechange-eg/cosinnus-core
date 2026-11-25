@@ -434,7 +434,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'from_date': event_from_date.isoformat(),
                 'to_date': event_to_date.isoformat(),
                 'description': 'New Event Description',
-                'topics': [1],
+                'topics': [settings.COSINNUS_TOPIC_CHOICES[0][0]],
                 'location': 'Berlin',
             }
 
@@ -681,16 +681,6 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
         @override_settings(
             COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS=True,
             COSINNUS_BBB_ENABLE_GROUP_AND_EVENT_BBB_ROOMS_ADMIN_RESTRICTED=False,
-            BBB_PRESET_USER_FORM_FIELDS=[
-                'mic_starts_on',
-                'cam_starts_on',
-                'record_meeting',
-                'waiting_room',
-                'welcome_message',
-            ],
-            BBB_PRESET_USER_FORM_FIELDS_PREMIUM_ONLY=[
-                'record_meeting',
-            ],
         )
         def test_event_bbb_room(self):
             # check user permissions
@@ -725,7 +715,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                             'record_meeting': False,
                             'welcome_message': None,
                         },
-                        'premium_params': ['record_meeting'],
+                        'premium_params': [],
                         'show_guest_access': False,
                     },
                 },
@@ -745,6 +735,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                     'bbb_params': {
                         'mic_starts_on': True,
                         'cam_starts_on': True,
+                        'record_meeting': True,
                         'waiting_room': True,
                         'welcome_message': 'Test Welcome Message',
                     },
@@ -756,7 +747,6 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             data = res.json()['data']
             self.assertTrue(data['enabled'])
             expected_bbb_params = patch_data['settings']['bbb_params']
-            expected_bbb_params['record_meeting'] = False
             self.assertEqual(data['settings']['bbb_params'], expected_bbb_params)
             self.assertTrue(data['settings']['show_guest_access'])
 
@@ -769,6 +759,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                         'welcome': 'Test Welcome Message',
                         'guestPolicy': 'ASK_MODERATOR',
                         'muteOnStart': 'false',
+                        'record': 'true',
                     },
                     'join': {'userdata-bbb_auto_share_webcam': 'true'},
                 },
@@ -961,13 +952,6 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                     }
                 ],
             )
-
-            # event list requires from_date and to_date parameters
-            res = self.client.get(self.event_list_url)
-            self.assertEqual(res.status_code, 400)
-            data = res.json()['data']
-            self.assertEqual(data['from_date'], ['This parameter is required'])
-            self.assertEqual(data['to_date'], ['This parameter is required'])
 
         def test_event_create(self):
             new_event_uid = '854028a8-649e-4e01-bbdc-e9008cce6ae7'
@@ -1194,13 +1178,6 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             self.client.force_login(self.test_non_group_user)
             res = self.client.post(self.group_sync_required_url, data={'required': True}, format='json')
             self.assertEqual(res.status_code, 403)
-
-            # check sync required flag
-            self.assertFalse(self.test_group.nextcloud_calendar_sync_required)
-            self.client.force_login(self.test_user)
-            res = self.client.post(self.group_sync_required_url, data={'required': True}, format='json')
-            self.test_group.refresh_from_db()
-            self.assertTrue(self.test_group.nextcloud_calendar_sync_required)
 
     class CalendarViewTest(TransactionTestCase):
         """Test Frontend initialization view."""

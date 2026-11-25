@@ -35,6 +35,7 @@ from cosinnus_event.calendar.serializers import (
     CosinnusCalendarEventReflectSerializer,
     CosinnusCalendarEventSerializer,
     CosinnusCalendarListSerializer,
+    CosinnusCalendarSyncedEventListSerializer,
     CosinnusCalendarSyncedEventSerializer,
     CosinnusCalendarSynceRequiredSerializer,
     CosinnusEventDateRangeQueryParameterSerializer,
@@ -246,6 +247,12 @@ class CosinnusCalendarSyncedEventsViewSet(
 
     group = None
 
+    def get_serializer_class(self):
+        """Use different serializer for list action."""
+        if self.action == 'list':
+            return CosinnusCalendarSyncedEventListSerializer
+        return self.serializer_class
+
     def get_serializer_context(self):
         context = super().get_serializer_context()
         context['group'] = self.group
@@ -335,7 +342,8 @@ class CosinnusCalendarSyncedEventsViewSet(
     def sync_required(self, request, group_id):
         """API to inform the Backend that a Caldav sync is required due to changes to internal events."""
         # TODO: unused feature, keeping as there is an issue open for this.
-        return self.detail_action_response(request, CosinnusCalendarSynceRequiredSerializer)
+        # return self.detail_action_response(request, CosinnusCalendarSynceRequiredSerializer)
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class CalendarRepairMembershipView(APIView):
