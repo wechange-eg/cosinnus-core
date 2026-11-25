@@ -2,9 +2,9 @@
 <div class="announcement {% if announcement.level %} alert-{% if announcement.level == 'error' %}danger{% else %}{{ announcement.level }}{% endif %}{% endif %} alert-dismissable">
     <i class="fa fa-info-circle fa-2x"></i>
     {% if announcement.translated_text %}
-        {{ announcement.translated_text|textfield }}
+        {{ announcement.translated_text|textfield_with_html }}
     {% else %}
-        {{ announcement.text|safe }}
+        {{ announcement.text|textfield_with_html }}
     {% endif %}
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
 </div>
