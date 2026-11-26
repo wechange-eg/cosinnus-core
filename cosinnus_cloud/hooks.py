@@ -233,7 +233,7 @@ def generate_group_nextcloud_field(group, field, save=True, force_generate=False
 
     setattr(group, field, unique_name)
     if save is True:
-        group.save(update_fields=[field])
+        group.save(update_fields=nextcloud.NEXTCLOUD_UPDATE_FIELDS)
     return unique_name
 
 
@@ -253,7 +253,7 @@ def initialize_nextcloud_for_group(group, send_initialized_signal=True, check_re
     try:
         # we need to only update these fields, as otherwise we could get save conflicts
         # if this method is called during group creation (m2m race conditions)
-        group.save(update_fields=['nextcloud_group_id'])
+        group.save(update_fields=nextcloud.NEXTCLOUD_UPDATE_FIELDS)
     except DatabaseError as e:
         # we ignore save errors if the field values were unchanged
         if 'did not affect any rows' not in str(e):
@@ -285,7 +285,7 @@ def initialize_nextcloud_for_group(group, send_initialized_signal=True, check_re
         try:
             # we need to only update these field, as otherwise we could get save conflicts
             # if this method is called during group creation (m2m race conditions)
-            group.save(update_fields=['nextcloud_groupfolder_name'])
+            group.save(update_fields=nextcloud.NEXTCLOUD_UPDATE_FIELDS)
         except DatabaseError as e:
             # we ignore save errors if the field values were unchanged
             if 'did not affect any rows' not in str(e):
