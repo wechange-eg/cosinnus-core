@@ -97,53 +97,62 @@
 		            {% include 'cosinnus/common/attached_images_gallery.html' with object=object max_images=3 %}
 		        {% endif %}
 	           
-	
-	        <div class="etherpad-iframe">
-	            <iframe src="{{ etherpad.get_pad_url }}" width="100%" height="100%"></iframe>
-	        </div>
-	
-            <button type="button" class="btn btn-small w100 btn-emphasized btn-autosize fullscreen-leave-button fullscreen-toggle mobile-hidden">
-                <ul class="media-list">
-                    <li class="media">
-                        <span class="pull-left">
-                            <i class="fa fa-compress"></i>
-                        </span>
-                        <div class="media-body">
-                            {% trans "Leave Fullscreen" %}
-                        </div>
-                    </li>
-                </ul>
-            </button>
-            <button type="button" class="btn w100 btn-small btn-emphasized btn-autosize fullscreen-leave-button mobile-only" href="{{ object.get_absolute_url }}">
-                <ul class="media-list">
-                    <li class="media">
-                        <span class="pull-left">
-                            <i class="fa fa-reply"></i>
-                        </span>
-                        <div class="media-body">
-                            {% trans "Back" %}
-                        </div>
-                    </li>
-                </ul>
-            </button>
-            
-            <!-- Safari can only scroll with the extra CSS, but non-safari browser can't scroll with it, so add it dynamically. -->
-            <script type="text/javascript">
-            	var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
-				var is_safari = navigator.userAgent.indexOf("Safari") > -1;
-				function isSafariBrowser(){
-				    if (is_safari){
-				        if (is_chrome)  // Chrome seems to have both Chrome and Safari userAgents
-				            return false;
-				        else
-				            return true;
-				    }
-				    return false;
-				}
-				if (isSafariBrowser()){
-				    $('.etherpad-iframe').css('overflow-y', 'scroll').css('-webkit-overflow-scrolling', 'touch');
-				}
-            </script>
+
+            {% if object.type == 1 %}
+                {# Ethercalc has been disabled, show a message instead of the iframe #}
+                <p>
+                    <i class="fa fa-info-circle"></i>
+                    {% trans "You can no longer edit EtherCalc spreadsheets. Please use the buttons below to download the spreadsheet as a CSV or Excel file." %}
+                </p>
+            {% else %}
+                <div class="etherpad-iframe">
+                    <iframe src="{{ etherpad.get_pad_url }}" width="100%" height="100%"></iframe>
+                </div>
+
+                <button type="button" class="btn btn-small w100 btn-emphasized btn-autosize fullscreen-leave-button fullscreen-toggle mobile-hidden">
+                    <ul class="media-list">
+                        <li class="media">
+                            <span class="pull-left">
+                                <i class="fa fa-compress"></i>
+                            </span>
+                            <div class="media-body">
+                                {% trans "Leave Fullscreen" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                <button type="button" class="btn w100 btn-small btn-emphasized btn-autosize fullscreen-leave-button mobile-only" href="{{ object.get_absolute_url }}">
+                    <ul class="media-list">
+                        <li class="media">
+                            <span class="pull-left">
+                                <i class="fa fa-reply"></i>
+                            </span>
+                            <div class="media-body">
+                                {% trans "Back" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+
+                <!-- Safari can only scroll with the extra CSS, but non-safari browser can't scroll with it, so add it dynamically. -->
+                <script type="text/javascript">
+                    var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+                    var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+                    function isSafariBrowser(){
+                        if (is_safari){
+                            if (is_chrome)  // Chrome seems to have both Chrome and Safari userAgents
+                                return false;
+                            else
+                                return true;
+                        }
+                        return false;
+                    }
+                    if (isSafariBrowser()){
+                        $('.etherpad-iframe').css('overflow-y', 'scroll').css('-webkit-overflow-scrolling', 'touch');
+                    }
+                </script>
+
+            {% endif %}
 	    
 	    </div><!-- content-box -->
 	    
