@@ -25,7 +25,7 @@ class UpcomingEvents(MixReflectedObjectsMixin, DashboardWidget):
     app_name = 'event'
     form_class = UpcomingEventsForm
     model = Event
-    title = _('Upcoming Events')
+    title = _('Upcoming Events') if not settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED else _('Calendar')
     user_model_attr = None  # No filtering on user page
     widget_name = 'upcoming'
     widget_template_name = 'cosinnus_event/widgets/event_widget.html'
