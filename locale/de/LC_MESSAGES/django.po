@@ -13797,6 +13797,9 @@ msgstr ""
 "Tabellen können hier nicht mehr erstellt werden, da die Funktion technisch veraltet ist.\n"
 "Bestehende Tabellen können aber noch geöffnet und bearbeitet werden."
 
+msgid "You can no longer edit EtherCalc spreadsheets. Please use the buttons below to download the spreadsheet as a CSV or Excel file."
+msgstr "Die Bearbeitung von EtherCalc-Tabellen ist nicht mehr möglich. Bitte lade die Tabelle über die untenstehenden Buttons als CSV oder als Excel-Datei herunter."
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr "Du kannst Dateien und Bilder nur anhängen, wenn du Mitglied im Forum bist. Du kannst hier beitreten:"
 

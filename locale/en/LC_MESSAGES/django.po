@@ -13059,6 +13059,9 @@ msgid ""
 "However, you can still open and edit existing spreadsheets."
 msgstr ""
 
+msgid "You can no longer edit EtherCalc spreadsheets. Please use the buttons below to download the spreadsheet as a CSV or Excel file."
+msgstr ""
+
 msgid "You can only attach files and pictures to messages if you are a member of the forum. You can join it here:"
 msgstr ""
 
