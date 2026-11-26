@@ -20,7 +20,7 @@ from cosinnus.models.tagged import BaseTagObject
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus_cloud.hooks import get_nc_user_id
 from cosinnus_event.calendar.nextcloud_caldav import NextcloudCaldavConnection
-from cosinnus_event.models import Event
+from cosinnus_event.models import Event, EventAttendance
 
 if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
     initialize_cosinnus_after_startup()
@@ -360,7 +360,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                         'title': self.test_event.title,
                         'from_date': self.test_event.from_date.astimezone(self.tz).isoformat(),
                         'to_date': self.test_event.to_date.astimezone(self.tz).isoformat(),
-                        'attending': False,
+                        'attending': None,
                         'space': self.test_group.id,
                         'space_name': self.test_group.name,
                         'space_url': self.test_group.get_absolute_url(),
@@ -399,7 +399,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 'location_type': None,
                 'external_video_conference_url': None,
                 'ical_url': self.test_event.get_feed_url(),
-                'attending': False,
+                'attending': None,
                 'attendances': [],
                 'attendances_count': 0,
                 'bookmarked': False,
@@ -560,10 +560,14 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
 
             # all logged-in users can set attendance for events
             self.client.force_login(self.test_non_group_user)
-            res = self.client.post(self.event_attendance_url, data={'attending': True}, format='json')
+            res = self.client.post(
+                self.event_attendance_url, data={'attending': EventAttendance.ATTENDANCE_GOING}, format='json'
+            )
             self.assertEqual(res.status_code, 200)
             self.client.force_login(self.test_user)
-            res = self.client.post(self.event_attendance_url, data={'attending': True}, format='json')
+            res = self.client.post(
+                self.event_attendance_url, data={'attending': EventAttendance.ATTENDANCE_MAYBE_GOING}, format='json'
+            )
             self.assertEqual(res.status_code, 200)
 
             # check attending in detail api
@@ -571,14 +575,14 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             res = self.client.get(self.event_detail_url)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
-            self.assertEqual(data['attending'], True)
+            self.assertEqual(data['attending'], EventAttendance.ATTENDANCE_GOING)
 
             # check attending in list api
             self.client.force_login(self.test_user)
             res = self.client.get(self.event_list_url_with_params)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
-            self.assertEqual(data[0]['attending'], True)
+            self.assertEqual(data[0]['attending'], EventAttendance.ATTENDANCE_MAYBE_GOING)
 
             # check attendance readable by event creator
             res = self.client.get(self.event_detail_url)
@@ -588,25 +592,27 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 data['attendances'],
                 [
                     {
+                        'attending': EventAttendance.ATTENDANCE_GOING,
                         'name': self.test_non_group_user.cosinnus_profile.get_full_name(),
                         'avatar': self.test_non_group_user.cosinnus_profile.get_avatar_thumbnail_url(),
                         'profile_url': self.test_non_group_user.cosinnus_profile.get_absolute_url(),
                     },
                     {
+                        'attending': EventAttendance.ATTENDANCE_MAYBE_GOING,
                         'name': self.test_user.cosinnus_profile.get_full_name(),
                         'avatar': self.test_user.cosinnus_profile.get_avatar_thumbnail_url(),
                         'profile_url': self.test_user.cosinnus_profile.get_absolute_url(),
                     },
                 ],
             )
-            self.assertEqual(data['attendances_count'], 2)
+            self.assertEqual(data['attendances_count'], 1)
 
             # check attendance readable by admin
             self.client.force_login(self.test_admin)
             res = self.client.get(self.event_detail_url)
             data = res.json()['data']
             self.assertEqual(len(data['attendances']), 2)
-            self.assertEqual(data['attendances_count'], 2)
+            self.assertEqual(data['attendances_count'], 1)
 
             # check attendance not readable by group users
             self.client.force_login(self.test_second_group_user)
@@ -622,10 +628,14 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
 
             # remove attendance
             self.client.force_login(self.test_non_group_user)
-            res = self.client.post(self.event_attendance_url, data={'attending': False}, format='json')
+            res = self.client.post(self.event_attendance_url, data={'attending': None}, format='json')
             self.assertEqual(res.status_code, 200)
+
+            # set to not going
             self.client.force_login(self.test_user)
-            res = self.client.post(self.event_attendance_url, data={'attending': False}, format='json')
+            res = self.client.post(
+                self.event_attendance_url, data={'attending': EventAttendance.ATTENDANCE_NOT_GOING}, format='json'
+            )
             self.assertEqual(res.status_code, 200)
 
             # check removed attending
@@ -633,21 +643,31 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             res = self.client.get(self.event_detail_url)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
-            self.assertEqual(data['attending'], False)
+            self.assertEqual(data['attending'], None)
 
             # check attending in list api
             self.client.force_login(self.test_user)
             res = self.client.get(self.event_list_url_with_params)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
-            self.assertEqual(data[0]['attending'], False)
+            self.assertEqual(data[0]['attending'], EventAttendance.ATTENDANCE_NOT_GOING)
 
             # check removed attendances
             self.client.force_login(self.test_user)
             res = self.client.get(self.event_detail_url)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
-            self.assertEqual(data['attendances'], [])
+            self.assertEqual(
+                data['attendances'],
+                [
+                    {
+                        'attending': EventAttendance.ATTENDANCE_NOT_GOING,
+                        'name': self.test_user.cosinnus_profile.get_full_name(),
+                        'avatar': self.test_user.cosinnus_profile.get_avatar_thumbnail_url(),
+                        'profile_url': self.test_user.cosinnus_profile.get_absolute_url(),
+                    }
+                ],
+            )
             self.assertEqual(data['attendances_count'], 0)
 
         def test_event_bookmark(self):
@@ -948,7 +968,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 [
                     {
                         'uid': self.test_event.nextcloud_calendar_uid,
-                        'attending': False,
+                        'attending': None,
                     }
                 ],
             )
@@ -1004,7 +1024,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                     'bbb_url': None,
                     'bbb_guest_url': None,
                     'external_video_conference_url': None,
-                    'attending': False,
+                    'attending': None,
                     'attendances': [],
                     'attendances_count': 0,
                 },
@@ -1051,7 +1071,9 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
 
             # group users can set attendance for events
             self.client.force_login(self.test_second_group_user)
-            res = self.client.post(self.event_attendance_url, data={'attending': True}, format='json')
+            res = self.client.post(
+                self.event_attendance_url, data={'attending': EventAttendance.ATTENDANCE_GOING}, format='json'
+            )
             self.assertEqual(res.status_code, 200)
 
             # check attendance
@@ -1063,6 +1085,7 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
                 data['attendances'],
                 [
                     {
+                        'attending': EventAttendance.ATTENDANCE_GOING,
                         'name': self.test_second_group_user.cosinnus_profile.get_full_name(),
                         'avatar': self.test_second_group_user.cosinnus_profile.get_avatar_thumbnail_url(),
                         'profile_url': self.test_second_group_user.cosinnus_profile.get_absolute_url(),
@@ -1077,14 +1100,26 @@ if getattr(settings, 'COSINNUS_EVENT_V3_CALENDAR_ENABLED', False):
             data = res.json()['data']
             self.assertTrue(data[0]['attending'])
 
-            # unset attendance
-            res = self.client.post(self.event_attendance_url, data={'attending': False}, format='json')
+            # set attendance to not going
+            res = self.client.post(
+                self.event_attendance_url, data={'attending': EventAttendance.ATTENDANCE_NOT_GOING}, format='json'
+            )
             self.assertEqual(res.status_code, 200)
             res = self.client.get(self.event_detail_url)
             self.assertEqual(res.status_code, 200)
             data = res.json()['data']
             self.assertFalse(data['attending'])
-            self.assertEqual(data['attendances'], [])
+            self.assertEqual(
+                data['attendances'],
+                [
+                    {
+                        'attending': EventAttendance.ATTENDANCE_NOT_GOING,
+                        'name': self.test_second_group_user.cosinnus_profile.get_full_name(),
+                        'avatar': self.test_second_group_user.cosinnus_profile.get_avatar_thumbnail_url(),
+                        'profile_url': self.test_second_group_user.cosinnus_profile.get_absolute_url(),
+                    },
+                ],
+            )
             self.assertEqual(data['attendances_count'], 0)
 
         @override_settings(

@@ -52,10 +52,13 @@ class AttendingSerializerMixin:
     """Mixin for the attending and attendances_count method field."""
 
     def get_attending(self, obj):
+        attending_state = None
         user = self.context['request'].user
-        if not user.is_authenticated:
-            return False
-        return obj.attendances.filter(user=user, state=EventAttendance.ATTENDANCE_GOING).exists()
+        if user.is_authenticated:
+            attendance = obj.attendances.filter(user=user).first()
+            if attendance:
+                attending_state = attendance.state
+        return attending_state
 
     def get_attendances_count(self, obj):
         return obj.attendances.filter(state=EventAttendance.ATTENDANCE_GOING).count()
@@ -83,25 +86,18 @@ class CosinnusCalendarListSerializer(AttendingSerializerMixin, serializers.Model
         )
 
 
-class CalendarPublicEventAttendancesListSerializer(serializers.ListSerializer):
-    """A custom list serializer used to filter event attendances by going state."""
-
-    def to_representation(self, data):
-        data = data.filter(state=EventAttendance.ATTENDANCE_GOING)
-        return super().to_representation(data)
-
-
-class CosinnusCalendarEventAttendancesSerializer(serializers.ModelSerializer):
+class CosinnusCalendarEventAttendanceReadSerializer(serializers.ModelSerializer):
     """Readonly serializer to list the attendees of an event."""
 
+    attending = serializers.IntegerField(source='state')
     name = serializers.CharField(source='user.cosinnus_profile.get_full_name', read_only=True)
     avatar = serializers.URLField(source='user.cosinnus_profile.get_avatar_thumbnail_url', read_only=True)
     profile_url = serializers.URLField(source='user.cosinnus_profile.get_absolute_url', read_only=True)
 
     class Meta:
         model = EventAttendance
-        list_serializer_class = CalendarPublicEventAttendancesListSerializer
         fields = (
+            'attending',
             'name',
             'avatar',
             'profile_url',
@@ -209,7 +205,7 @@ class CosinnusCalendarEventSerializer(
 
     ical_url = serializers.SerializerMethodField()
 
-    attendances = CosinnusCalendarEventAttendancesSerializer(many=True, read_only=True)
+    attendances = CosinnusCalendarEventAttendanceReadSerializer(many=True, read_only=True)
     attendances_count = serializers.SerializerMethodField()
     bookmarked = serializers.SerializerMethodField()
 
@@ -322,40 +318,37 @@ class CosinnusCalendarEventSerializer(
         return {}
 
 
-class CosinnusCalendarEventAttendanceSerializer(serializers.Serializer):
+class CosinnusCalendarEventAttendanceWriteSerializer(serializers.Serializer):
     """Serializer for the post data of the attendance viewset action."""
 
-    attending = serializers.BooleanField(required=True)
+    attending = serializers.IntegerField(min_value=0, max_value=2, allow_null=True)
 
     def to_representation(self, instance):
         user = self.context['request'].user
-        attending = (
-            instance.attendances.filter(user=user, state=EventAttendance.ATTENDANCE_GOING).exists()
-            if user.is_authenticated
-            else False
-        )
+        attending_state = None
+        attendance = instance.attendances.filter(user=user).first()
+        if attendance:
+            attending_state = attendance.state
         return {
-            'attending': attending,
+            'attending': attending_state,
         }
 
     def update(self, instance, validated_data):
         user = self.context['request'].user
-        attending = validated_data['attending']
+        attending_state = validated_data['attending']
         user_attendance = instance.attendances.filter(user=user).first()
-        if attending:
-            # user is attending
+        if attending_state is not None:
+            # set actual state
             if user_attendance:
-                if user_attendance.state != EventAttendance.ATTENDANCE_GOING:
-                    # set state to "going" of existing event attendance
-                    user_attendance.state = EventAttendance.ATTENDANCE_GOING
-                    user_attendance.save()
+                # set state of existing event attendance
+                user_attendance.state = attending_state
+                user_attendance.save()
             else:
                 # no event attendance exists, create a new one
-                instance.attendances.create(user=user, state=EventAttendance.ATTENDANCE_GOING)
-        elif user_attendance and user_attendance.state != EventAttendance.ATTENDANCE_NOT_GOING:
-            # user not attending, but event attendance exists, set state to "not going"
-            user_attendance.state = EventAttendance.ATTENDANCE_NOT_GOING
-            user_attendance.save()
+                instance.attendances.create(user=user, state=attending_state)
+        elif user_attendance:
+            # remove attendance for "not selected" option
+            user_attendance.delete()
         return instance
 
 
@@ -558,7 +551,7 @@ class CosinnusCalendarSyncedEventSerializer(
         source='nextcloud_calendar_uid',
     )
     attending = serializers.SerializerMethodField()
-    attendances = CosinnusCalendarEventAttendancesSerializer(many=True, read_only=True)
+    attendances = CosinnusCalendarEventAttendanceReadSerializer(many=True, read_only=True)
     attendances_count = serializers.SerializerMethodField()
     bbb_url = serializers.SerializerMethodField()
     bbb_guest_url = serializers.SerializerMethodField()

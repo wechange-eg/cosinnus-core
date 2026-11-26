@@ -30,7 +30,7 @@ from cosinnus_event.calendar.nextcloud_caldav import NextcloudCaldavConnection
 from cosinnus_event.calendar.permissions import CosinnusCalendarPermissions
 from cosinnus_event.calendar.serializers import (
     CosinnusCalendarBBBRoomUrlsSerializer,
-    CosinnusCalendarEventAttendanceSerializer,
+    CosinnusCalendarEventAttendanceWriteSerializer,
     CosinnusCalendarEventBBBRoomSerializer,
     CosinnusCalendarEventReflectSerializer,
     CosinnusCalendarEventSerializer,
@@ -130,10 +130,10 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
             raise NotFound()
         return event
 
-    @swagger_auto_schema(method='get', responses={'200': CosinnusCalendarEventAttendanceSerializer})
+    @swagger_auto_schema(method='get', responses={'200': CosinnusCalendarEventAttendanceWriteSerializer})
     @swagger_auto_schema(
         method='post',
-        request_body=CosinnusCalendarEventAttendanceSerializer,
+        request_body=CosinnusCalendarEventAttendanceWriteSerializer,
     )
     @action(
         detail=True,
@@ -143,10 +143,11 @@ class CosinnusCalendarViewSet(ViewSetActionMixin, CosinnusCalendarListDateRangeQ
     def attendance(self, request, group_id, pk=None):
         """
         Set event attendance for request user.
+        The states are: null: "not selected", 0: "not going", 1: "maybe going", 2: "going"
         Note: Implemented as extra action and not a field in the event serializer, because of different permissions.
               Users with only read permissions to the event should be able to set it.
         """
-        return self.detail_action_response(request, CosinnusCalendarEventAttendanceSerializer)
+        return self.detail_action_response(request, CosinnusCalendarEventAttendanceWriteSerializer)
 
     @swagger_auto_schema(request_body=CosinnusAttachFileSerializer)
     @action(
@@ -291,10 +292,10 @@ class CosinnusCalendarSyncedEventsViewSet(
             raise NotFound()
         return event
 
-    @swagger_auto_schema(method='get', responses={'200': CosinnusCalendarEventAttendanceSerializer})
+    @swagger_auto_schema(method='get', responses={'200': CosinnusCalendarEventAttendanceWriteSerializer})
     @swagger_auto_schema(
         method='post',
-        request_body=CosinnusCalendarEventAttendanceSerializer,
+        request_body=CosinnusCalendarEventAttendanceWriteSerializer,
     )
     @action(
         detail=True,
@@ -304,10 +305,11 @@ class CosinnusCalendarSyncedEventsViewSet(
     def attendance(self, request, group_id, nextcloud_calendar_uid):
         """
         Set event attendance for request user.
+        The states are: null: "not selected", 0: "not going", 1: "maybe going", 2: "going"
         Note: Implemented as extra action and not a field in the event serializer, because of different permissions.
               Users with only read permissions to the event should be able to set it.
         """
-        return self.detail_action_response(request, CosinnusCalendarEventAttendanceSerializer)
+        return self.detail_action_response(request, CosinnusCalendarEventAttendanceWriteSerializer)
 
     @swagger_auto_schema(method='get', responses={'200': CosinnusCalendarEventBBBRoomSerializer})
     @swagger_auto_schema(
