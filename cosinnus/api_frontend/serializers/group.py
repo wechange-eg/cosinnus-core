@@ -30,6 +30,7 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
 
     # Events app settings
     events_calendar_url = serializers.SerializerMethodField()
+    events_nextcloud_calendar_url = serializers.SerializerMethodField()
     events_ical_url = serializers.SerializerMethodField()
     events_publish_url = serializers.SerializerMethodField()
     events_event_message = serializers.SerializerMethodField()
@@ -50,6 +51,7 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
             'bbb_premium',
             'bbb_premium_booking_url',
             'events_calendar_url',
+            'events_nextcloud_calendar_url',
             'events_ical_url',
             'events_publish_url',
             'events_event_message',
@@ -88,6 +90,13 @@ class CosinnusGroupSettingsSerializer(serializers.ModelSerializer):
         if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
             calendar_url = group_aware_reverse('cosinnus:event:calendar', kwargs={'group': obj})
         return calendar_url
+
+    def get_events_nextcloud_calendar_url(self, obj):
+        user = self.context['request'].user
+        nextcloud_calender_url = None
+        if settings.COSINNUS_EVENT_V3_CALENDAR_ENABLED:
+            nextcloud_calender_url = obj.get_user_nextcloud_calendar_url(user)
+        return nextcloud_calender_url
 
     def get_events_ical_url(self, obj):
         """Returns the group calendar public event ical feed."""

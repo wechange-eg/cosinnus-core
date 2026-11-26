@@ -9,6 +9,7 @@ from cosinnus.api_frontend.views.feedback import CosinnusReportView
 from cosinnus.api_frontend.views.group import (
     CosinnusGroupPersonalView,
     CosinnusGroupRecommendationsView,
+    CosinnusGroupSettingsListView,
     CosinnusGroupSettingsView,
 )
 from cosinnus.api_frontend.views.idea import CosinnusIdeaViewSet
@@ -143,6 +144,7 @@ urlpatterns += [
         name='api-navigation-unread-version-history',
     ),
     path('api/v3/spaces/<int:group_id>/settings/', CosinnusGroupSettingsView.as_view(), name='api-group-settings'),
+    path('api/v3/spaces/settings/', CosinnusGroupSettingsListView.as_view(), name='api-group-settings-list'),
     path(
         'api/v3/report/event/', CosinnusReportView.as_view(model_name='cosinnus_event.Event'), name='api-report-event'
     ),

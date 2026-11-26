@@ -35,6 +35,23 @@ class CosinnusGroupSettingsView(APIView):
         return Response(serializer.data)
 
 
+class CosinnusGroupSettingsListView(ListAPIView):
+    """An endpoint that returns configured settings/properties for all user groups."""
+
+    renderer_classes = (
+        CosinnusAPIFrontendJSONResponseRenderer,
+        BrowsableAPIRenderer,
+    )
+    permission_classes = (IsAuthenticated,)
+    serializer_class = CosinnusGroupSettingsSerializer
+    pagination_class = None
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = get_cosinnus_group_model().objects.get_for_user(user)
+        return queryset
+
+
 class CosinnusGroupPersonalView(ListAPIView):
     """API to list personal user groups sorted by visit."""
 
